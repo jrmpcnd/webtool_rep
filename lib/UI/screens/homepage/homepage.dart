@@ -23,6 +23,19 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: kTertiaryColor5,
             child: ListView(
               children: [
+                DrawerHeader(
+                  child: Row(
+                    children: const [
+                      Expanded(
+                        child: Image(
+                          height: 100.0,
+                          width: 100.0,
+                          image: AssetImage("assets/icons/kplus.png"),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
                 Sidemenu(
                   icon: Icons.access_time_filled_rounded,
                   title: "dashboard",
@@ -155,7 +168,7 @@ class _HomePageState extends State<HomePage> {
         Column(
           children: [
             Contains(
-              child: [],
+              child: [Text(title1)],
             ),
             Contains(
               child: [],
