@@ -3,23 +3,22 @@ import 'package:flutter/material.dart';
 class Listtile extends StatelessWidget {
   Color? color;
   String? title;
-  VoidCallback? onPressed;
+  VoidCallback? onTap;
   Listtile({
     this.color,
     this.title,
-    this.onPressed,
+    this.onTap,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: TextButton(
-          onPressed: onPressed,
-          child: Text(
-            title!,
-            style: TextStyle(color: color),
-          )),
+      title: Text(
+        title!,
+        style: TextStyle(color: color),
+      ),
+      onTap: onTap,
     );
   }
 }
