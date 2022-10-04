@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
                     title: "dashboard",
                     child: [
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                         onPressed: () {
                           setState(() {
@@ -56,6 +57,7 @@ class _HomePageState extends State<HomePage> {
                     title: "Profile",
                     child: [
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       )
                     ],
@@ -65,6 +67,7 @@ class _HomePageState extends State<HomePage> {
                     title: "dashboard",
                     child: [
                       Listtile(
+                        color: Colors.black,
                         title: "rare",
                         onPressed: () {
                           setState(() {
@@ -79,6 +82,7 @@ class _HomePageState extends State<HomePage> {
                     title: "dashboard",
                     child: [
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       )
                     ],
@@ -88,12 +92,15 @@ class _HomePageState extends State<HomePage> {
                     title: "dashboard",
                     child: [
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       ),
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       ),
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       )
                     ],
@@ -103,6 +110,7 @@ class _HomePageState extends State<HomePage> {
                     title: "dashboard",
                     child: [
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       )
                     ],
@@ -112,6 +120,7 @@ class _HomePageState extends State<HomePage> {
                     title: "dashboard",
                     child: [
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       )
                     ],
@@ -121,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                     title: "dashboard",
                     child: [
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       )
                     ],
@@ -130,6 +140,7 @@ class _HomePageState extends State<HomePage> {
                     title: "dashboard",
                     child: [
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       )
                     ],
@@ -139,6 +150,7 @@ class _HomePageState extends State<HomePage> {
                     title: "dashboard",
                     child: [
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       )
                     ],
@@ -148,6 +160,7 @@ class _HomePageState extends State<HomePage> {
                     title: "dashboard",
                     child: [
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       )
                     ],
@@ -157,9 +170,11 @@ class _HomePageState extends State<HomePage> {
                     title: "dashboard",
                     child: [
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       ),
                       Listtile(
+                        color: Colors.black,
                         title: "rerer",
                       )
                     ],

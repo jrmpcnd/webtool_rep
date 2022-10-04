@@ -25,7 +25,10 @@ class _SidemenuState extends State<Sidemenu> {
       iconColor: Colors.black,
       textColor: Colors.black,
       leading: widget.icon != null ? Icon(widget.icon!) : null,
-      title: Text(widget.title!),
+      title: Text(
+        widget.title!,
+        style: const TextStyle(color: Colors.black),
+      ),
       children: widget.child!,
     );
   }
