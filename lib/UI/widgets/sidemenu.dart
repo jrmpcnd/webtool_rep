@@ -21,8 +21,14 @@ class _SidemenuState extends State<Sidemenu> {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+      collapsedIconColor: Colors.black,
+      iconColor: Colors.black,
+      textColor: Colors.black,
       leading: widget.icon != null ? Icon(widget.icon!) : null,
-      title: Text(widget.title!),
+      title: Text(
+        widget.title!,
+        style: const TextStyle(color: Colors.black),
+      ),
       children: widget.child!,
     );
   }
