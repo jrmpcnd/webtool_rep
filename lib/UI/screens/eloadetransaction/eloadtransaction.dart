@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../utils/spacing.dart';
 
-class Registerclient extends StatefulWidget {
-  const Registerclient({Key? key}) : super(key: key);
+class eLoadtransaction extends StatefulWidget {
+  const eLoadtransaction({Key? key}) : super(key: key);
 
   @override
-  State<Registerclient> createState() => _RegisterclientState();
+  State<eLoadtransaction> createState() => _eLoadtransactionState();
 }
 
-class _RegisterclientState extends State<Registerclient> {
+class _eLoadtransactionState extends State<eLoadtransaction> {
   late WebViewController controller;
 
   @override

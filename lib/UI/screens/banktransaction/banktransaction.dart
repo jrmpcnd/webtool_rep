@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../utils/spacing.dart';
 
-class Registerclient extends StatefulWidget {
-  const Registerclient({Key? key}) : super(key: key);
+class Banktransaction extends StatefulWidget {
+  const Banktransaction({Key? key}) : super(key: key);
 
   @override
-  State<Registerclient> createState() => _RegisterclientState();
+  State<Banktransaction> createState() => _BanktransactionState();
 }
 
-class _RegisterclientState extends State<Registerclient> {
+class _BanktransactionState extends State<Banktransaction> {
   late WebViewController controller;
 
   @override
@@ -21,7 +21,7 @@ class _RegisterclientState extends State<Registerclient> {
           height: 650,
           child: WebView(
             initialUrl:
-                'https://datastudio.google.com/embed/reporting/158dd32f-abd9-4a58-90bc-831f718c4ac9/page/6XIeC',
+                'https://flutter.dev/?gclid=EAIaIQobChMIosO9jL7K-gIV0RxyCh1g-QvIEAAYASAAEgJA4vD_BwE&gclsrc=aw.ds',
             javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: (controller) {
               this.controller = controller;
