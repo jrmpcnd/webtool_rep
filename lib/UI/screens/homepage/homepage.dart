@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:webtool_rep/UI/screens/activeclient/activeclient.dart';
-import 'package:webtool_rep/UI/screens/banktransaction/banktransaction.dart';
-import 'package:webtool_rep/UI/screens/clienttransaction/clienttransaction.dart';
-import 'package:webtool_rep/UI/screens/eloadetransaction/eloadtransaction.dart';
-import 'package:webtool_rep/UI/screens/registerclient/registerclient.dart';
 import 'package:webtool_rep/UI/widgets/header.dart';
 import '../../../UI/utils/constant.dart';
 import '../../../UI/widgets/contains.dart';
 import '../../../UI/widgets/listTile.dart';
 import '../../../UI/widgets/sidemenu.dart';
 import '../../utils/responsive.dart';
+import '../administration/usermanagement/usermanagement.dart';
+import '../dashboard/activeclient/activeclient.dart';
+import '../dashboard/banktransaction/banktransaction.dart';
+import '../dashboard/clienttransaction/clienttransaction.dart';
+import '../dashboard/eloadetransaction/eloadtransaction.dart';
+import '../dashboard/registerclient/registerclient.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -118,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               setState(() {
                                 title = "User Management";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Usermanagement()];
                               });
                             },
                           ),
@@ -147,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Sidemenu(
-                        icon: Icons.abc_rounded,
+                        icon: Icons.person_add_alt_outlined,
                         title: "Enrollment",
                         child: [
                           Listtile(
@@ -164,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Sidemenu(
-                        icon: Icons.abc_rounded,
+                        icon: Icons.monitor_outlined,
                         title: "Monitoring",
                         child: [
                           Listtile(
@@ -313,7 +314,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Sidemenu(
-                        icon: Icons.abc_rounded,
+                        icon: Icons.settings_outlined,
                         title: "Utilities",
                         child: [
                           Listtile(
@@ -539,7 +540,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Sidemenu(
-                        icon: Icons.abc_rounded,
+                        icon: Icons.phone_outlined,
                         title: "Customer Service",
                         child: [
                           Listtile(
@@ -589,7 +590,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Sidemenu(
-                        icon: Icons.abc_rounded,
+                        icon: Icons.newspaper_outlined,
                         title: "Report",
                         child: [
                           Listtile(

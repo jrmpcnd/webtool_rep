@@ -22,6 +22,13 @@ class _HeaderState extends State<Header> {
         Row(
           children: [
             if (!Responsive.isDesktop(context)) horizontalSpaceTiny,
+            // IconButton(
+            //   icon: const Icon(
+            //     Icons.menu,
+            //     color: kBlackColor,
+            //   ),
+            //   onPressed: viewModel.controlMenu,
+            // ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,

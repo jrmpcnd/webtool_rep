@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import '../../utils/spacing.dart';
+import '../../../utils/spacing.dart';
 
 class Banktransaction extends StatefulWidget {
   const Banktransaction({Key? key}) : super(key: key);
