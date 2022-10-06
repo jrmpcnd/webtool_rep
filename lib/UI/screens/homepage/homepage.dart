@@ -72,10 +72,9 @@ class _HomePageState extends State<HomePage> {
                             icon: Icons.people,
                             title: "Client Transaction",
                             onTap: () {
-                              // setState(() {
-                              //   title1 = "Hello";
-                              // });
-                              title = "Client Transaction";
+                              setState(() {
+                                title = "Client Transaction";
+                              });
                             },
                           ),
                           Listtile(
@@ -83,10 +82,9 @@ class _HomePageState extends State<HomePage> {
                             icon: Icons.people,
                             title: "eLoad Transaction",
                             onTap: () {
-                              // setState(() {
-                              //   title1 = "Hello";
-                              // });
-                              title = "eLoad Transaction";
+                              setState(() {
+                                title = "eLoad Transaction";
+                              });
                             },
                           ),
                           Listtile(
@@ -94,10 +92,9 @@ class _HomePageState extends State<HomePage> {
                             icon: Icons.people,
                             title: "Bank Transaction",
                             onTap: () {
-                              // setState(() {
-                              //   title1 = "Hello";
-                              // });
-                              title = "Bank Transaction";
+                              setState(() {
+                                title = "Bank Transaction";
+                              });
                             },
                           ),
                         ],
