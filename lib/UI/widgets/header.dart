@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/screens/homepage/homepage.dart';
 import '../utils/constant.dart';
 import '../utils/edge_insect.dart';
 import '../utils/responsive.dart';
@@ -16,6 +17,7 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
+    bool tappedYes = false;
     final height = MediaQuery.of(context).size.height * 0.40;
     return Column(
       children: [
@@ -44,7 +46,7 @@ class _HeaderState extends State<Header> {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  'Dashboard',
+                  "Dashboard",
                   style: kHeading3TextStyle,
                 ),
               ],
@@ -66,24 +68,25 @@ class _HeaderState extends State<Header> {
                   itemBuilder: (context) => [
                     const PopupMenuItem(
                       child: ListTile(
-                        leading: Icon(Icons.lock),
+                        leading: Icon(Icons.lock_outline),
                         title: Text('Change Password'),
                       ),
                     ),
                     PopupMenuItem(
                       child: ListTile(
-                        leading: const Icon(Icons.logout),
+                        leading: const Icon(Icons.logout_outlined),
                         title: const Text('Logout'),
-                        onTap: () {
-                          AlertDialog alert = const AlertDialog(
-                            title: Text('Are you sure you want to Logout?'),
+                        onTap: () async {
+                          final action = await AlertDialogs.yesCancelDialog(
+                            context,
+                            'Logout?',
+                            'Are you sure you want to Logout?',
                           );
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return alert;
-                            },
-                          );
+                          if (action == DialogsAction.yes) {
+                            setState(() => tappedYes = true);
+                          } else {
+                            setState(() => tappedYes = false);
+                          }
                         },
                       ),
                     ),
@@ -125,5 +128,53 @@ class _HeaderState extends State<Header> {
         ),
       ],
     );
+  }
+}
+
+enum DialogsAction { yes, cancel }
+
+class AlertDialogs {
+  static Future<DialogsAction> yesCancelDialog(
+    BuildContext context,
+    String title,
+    String body,
+  ) async {
+    final action = await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          title: Text(title),
+          content: Text(body),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(DialogsAction.cancel),
+              child: Text(
+                'Cancel',
+                style: kHeading2TextStyle.copyWith(
+                  color: kWhiteColor,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const HomePage(),
+                ),
+              ),
+              child: Text(
+                'Logout',
+                style: kHeading2TextStyle.copyWith(
+                  color: kWhiteColor,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+    return (action != null) ? action : DialogsAction.cancel;
   }
 }

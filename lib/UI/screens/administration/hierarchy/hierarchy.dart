@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../widgets/containers.dart';
 
-class Usermanagement extends StatefulWidget {
-  const Usermanagement({Key? key}) : super(key: key);
+class Hierarchy extends StatefulWidget {
+  const Hierarchy({Key? key}) : super(key: key);
 
   @override
-  State<Usermanagement> createState() => _UsermanagementState();
+  State<Hierarchy> createState() => _HierarchyState();
 }
 
-class _UsermanagementState extends State<Usermanagement> {
+class _HierarchyState extends State<Hierarchy> {
   @override
   Widget build(BuildContext context) {
     return Container(

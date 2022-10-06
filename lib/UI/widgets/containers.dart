@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../utils/spacing.dart';
 
-class container extends StatelessWidget {
-  const container({
-    Key? key,
-  }) : super(key: key);
+class Containers extends StatelessWidget {
+  Containers({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

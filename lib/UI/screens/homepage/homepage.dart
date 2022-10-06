@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/screens/administration/rolemanagement/rolemanagement.dart';
+import 'package:webtool_rep/UI/widgets/containers.dart';
 import 'package:webtool_rep/UI/widgets/header.dart';
 import '../../../UI/utils/constant.dart';
 import '../../../UI/widgets/contains.dart';
 import '../../../UI/widgets/listTile.dart';
 import '../../../UI/widgets/sidemenu.dart';
 import '../../utils/responsive.dart';
+import '../administration/hierarchy/hierarchy.dart';
 import '../administration/usermanagement/usermanagement.dart';
 import '../dashboard/activeclient/activeclient.dart';
 import '../dashboard/banktransaction/banktransaction.dart';
@@ -130,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               setState(() {
                                 title = "Role Management";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Rolemanagement()];
                               });
                             },
                           ),
@@ -141,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               setState(() {
                                 title = "Hierarchy";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Hierarchy()];
                               });
                             },
                           ),
