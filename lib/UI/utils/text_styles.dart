@@ -25,7 +25,7 @@ TextStyle kHeading3TextStyle = GoogleFonts.poppins(
 
 TextStyle kSubtitleTextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.w600,
-  fontSize: 16,
+  fontSize: 14,
   height: 1.5,
   color: kBlackColor,
 );

@@ -25,6 +25,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Widget> homewidget = [];
   String title = "Dashboard";
+  String header = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +61,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Register Client",
                             onTap: () {
                               setState(() {
+                                header = "Dashboard";
                                 title = "Register Client";
                                 homewidget = [const Registerclient()];
                               });
@@ -71,6 +73,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Active Client",
                             onTap: () {
                               setState(() {
+                                header = "Dashboard";
                                 title = "Active Client";
                                 homewidget = [const Activeclient()];
                               });
@@ -82,6 +85,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Client Transaction",
                             onTap: () {
                               setState(() {
+                                header = "Dashboard";
                                 title = "Client Transaction";
                                 homewidget = [const Clienttransaction()];
                               });
@@ -93,6 +97,7 @@ class _HomePageState extends State<HomePage> {
                             title: "eLoad Transaction",
                             onTap: () {
                               setState(() {
+                                header = "Dashboard";
                                 title = "eLoad Transaction";
                                 homewidget = [const eLoadtransaction()];
                               });
@@ -104,6 +109,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Bank Transaction",
                             onTap: () {
                               setState(() {
+                                header = "Dashboard";
                                 title = "Bank Transaction";
                                 homewidget = [const Banktransaction()];
                               });
@@ -121,6 +127,7 @@ class _HomePageState extends State<HomePage> {
                             title: "User Management",
                             onTap: () {
                               setState(() {
+                                header = "Administration";
                                 title = "User Management";
                                 homewidget = [const Usermanagement()];
                               });
@@ -881,7 +888,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(20.0),
               child: ListView(
                 children: [
-                  Header(title: title),
+                  Header(header: header, title: title),
                   Contains(
                     child: homewidget,
                   )

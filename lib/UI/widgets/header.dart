@@ -7,7 +7,8 @@ import '../utils/text_styles.dart';
 
 class Header extends StatefulWidget {
   String? title = "";
-  Header({Key? key, this.title}) : super(key: key);
+  String? header = "";
+  Header({Key? key, this.title, this.header}) : super(key: key);
 
   @override
   State<Header> createState() => _HeaderState();
@@ -37,7 +38,7 @@ class _HeaderState extends State<Header> {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  'Dashboard',
+                  widget.header!,
                   style: kHeading3TextStyle,
                 ),
               ],

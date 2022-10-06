@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/text_styles.dart';
+
 class Listtile extends StatelessWidget {
   IconData? icon;
   Color? color;
@@ -24,10 +26,7 @@ class Listtile extends StatelessWidget {
           : null,
       title: Text(
         title!,
-        style: TextStyle(
-          color: color,
-          fontSize: 14.0,
-        ),
+        style: kSubtitleTextStyle,
       ),
       onTap: onTap,
     );
