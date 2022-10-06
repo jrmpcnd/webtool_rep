@@ -24,7 +24,10 @@ class Listtile extends StatelessWidget {
           : null,
       title: Text(
         title!,
-        style: TextStyle(color: color),
+        style: TextStyle(
+          color: color,
+          fontSize: 14.0,
+        ),
       ),
       onTap: onTap,
     );

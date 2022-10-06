@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                         child: [
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.account_circle_outlined,
                             title: "Register Client",
                             onTap: () {
                               setState(() {
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.check_circle_outline_outlined,
                             title: "Active Client",
                             onTap: () {
                               setState(() {
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.receipt_long_outlined,
                             title: "Client Transaction",
                             onTap: () {
                               setState(() {
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.receipt_outlined,
                             title: "eLoad Transaction",
                             onTap: () {
                               setState(() {
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.account_balance_outlined,
                             title: "Bank Transaction",
                             onTap: () {
                               setState(() {

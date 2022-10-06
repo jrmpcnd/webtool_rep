@@ -19,3 +19,4 @@ const Color kWhiteColor = Color(0xFFFFFFFF);
 const Color kBlackColor = Color(0xFF000000);
 const Color kLightGreenColor = Color(0xFFE9FCF8);
 const Color kLightPurpleColor = Color(0xFFF2E9FC);
+const Color kLightPurpleColor1 = Color(0xFF0f853e);
