@@ -232,16 +232,12 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Column(
+              child: ListView(
                 children: [
                   Header(title: title),
                   SingleChildScrollView(
-                    child: Row(
-                      children: [
-                        Contains(
-                          child: homewidget,
-                        ),
-                      ],
+                    child: Contains(
+                      child: homewidget,
                     ),
                   )
                 ],

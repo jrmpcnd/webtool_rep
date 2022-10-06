@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../utils/responsive.dart';
+import '../../utils/spacing.dart';
 
 class Registerclient extends StatefulWidget {
   const Registerclient({Key? key}) : super(key: key);
@@ -17,22 +17,19 @@ class _RegisterclientState extends State<Registerclient> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(
-          child: SingleChildScrollView(
-            child: Container(
-              height: 650,
-              child: WebView(
-                initialUrl:
-                    'https://datastudio.google.com/embed/reporting/158dd32f-abd9-4a58-90bc-831f718c4ac9/page/6XIeC',
-                javascriptMode: JavascriptMode.unrestricted,
-                onWebViewCreated: (controller) {
-                  this.controller = controller;
-                },
-                onPageStarted: (url) {
-                  print('Webtools: $url');
-                },
-              ),
-            ),
+        verticalSpaceRegular,
+        Container(
+          height: 550,
+          child: WebView(
+            initialUrl:
+                'https://datastudio.google.com/embed/reporting/158dd32f-abd9-4a58-90bc-831f718c4ac9/page/6XIeC',
+            javascriptMode: JavascriptMode.unrestricted,
+            onWebViewCreated: (controller) {
+              this.controller = controller;
+            },
+            onPageStarted: (url) {
+              print('New website: $url');
+            },
           ),
         ),
       ],

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'UI/screens/homepage/homepage.dart';
 import 'UI/utils/constant.dart';
+import 'UI/utils/web_webview.dart';
 
 void main() {
+  WebViewWebImplementation();
   runApp(const MyApp());
 }
 
