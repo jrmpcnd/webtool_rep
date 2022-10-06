@@ -1,6 +1,6 @@
-import 'package:bank_dashboard/ui/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'constant.dart';
 
 TextStyle kHeading1TextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.bold,

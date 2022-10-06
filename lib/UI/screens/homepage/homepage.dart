@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/screens/registerclient/registerclient.dart';
+import 'package:webtool_rep/UI/widgets/header.dart';
 import '../../../UI/utils/constant.dart';
 import '../../../UI/widgets/contains.dart';
 import '../../../UI/widgets/listTile.dart';
@@ -13,188 +15,244 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String title1 = "";
+  List<Widget> homewidget = [];
+  String title = "Dashboard";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Row(
-      children: [
-        if (Responsive.isDesktop(context))
-          Container(
-            width: 250.0,
-            child: Drawer(
-                backgroundColor: kTertiaryColor5,
-                child: ListView(
-                  children: [
-                    DrawerHeader(
-                      child: Row(
-                        children: const [
-                          Expanded(
-                            child: Image(
-                              height: 100.0,
-                              width: 100.0,
-                              image: AssetImage("assets/icons/kplus.png"),
-                            ),
+      body: Row(
+        children: [
+          if (Responsive.isDesktop(context))
+            SizedBox(
+              width: 250.0,
+              child: Drawer(
+                  backgroundColor: kTertiaryColor5,
+                  child: ListView(
+                    children: [
+                      DrawerHeader(
+                        child: Row(
+                          children: const [
+                            Expanded(
+                              child: Image(
+                                height: 100.0,
+                                width: 100.0,
+                                image: AssetImage("assets/icons/kplus.png"),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Sidemenu(
+                        icon: Icons.access_time_filled_rounded,
+                        title: "Dashboard",
+                        child: [
+                          Listtile(
+                            color: Colors.black,
+                            icon: Icons.people,
+                            title: "Register Client",
+                            onTap: () {
+                              setState(() {
+                                title = "Register Client";
+                                homewidget = [const Registerclient()];
+                              });
+                            },
+                          ),
+                          Listtile(
+                            color: Colors.black,
+                            icon: Icons.people,
+                            title: "Active Client",
+                            onTap: () {
+                              setState(() {
+                                title = "Active Client";
+                              });
+                            },
+                          ),
+                          Listtile(
+                            color: Colors.black,
+                            icon: Icons.people,
+                            title: "Client Transaction",
+                            onTap: () {
+                              // setState(() {
+                              //   title1 = "Hello";
+                              // });
+                              title = "Client Transaction";
+                            },
+                          ),
+                          Listtile(
+                            color: Colors.black,
+                            icon: Icons.people,
+                            title: "eLoad Transaction",
+                            onTap: () {
+                              // setState(() {
+                              //   title1 = "Hello";
+                              // });
+                              title = "eLoad Transaction";
+                            },
+                          ),
+                          Listtile(
+                            color: Colors.black,
+                            icon: Icons.people,
+                            title: "Bank Transaction",
+                            onTap: () {
+                              // setState(() {
+                              //   title1 = "Hello";
+                              // });
+                              title = "Bank Transaction";
+                            },
+                          ),
+                        ],
+                      ),
+                      Sidemenu(
+                        icon: Icons.confirmation_num_sharp,
+                        title: "Profile",
+                        child: [
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
                           )
                         ],
                       ),
-                    ),
-                    Sidemenu(
-                      icon: Icons.access_time_filled_rounded,
-                      title: "dashboard",
-                      child: [
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                          onTap: () {
-                            setState(() {
-                              title1 = "Hello";
-                            });
-                          },
-                        )
-                      ],
-                    ),
-                    Sidemenu(
-                      icon: Icons.confirmation_num_sharp,
-                      title: "Profile",
-                      child: [
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        )
-                      ],
-                    ),
-                    Sidemenu(
-                      icon: Icons.abc_rounded,
-                      title: "dashboard",
-                      child: [
-                        Listtile(
-                          color: Colors.black,
-                          title: "rare",
-                          onTap: () {
-                            setState(() {
-                              title1 = "hey";
-                            });
-                          },
-                        )
-                      ],
-                    ),
-                    Sidemenu(
-                      icon: Icons.abc_rounded,
-                      title: "dashboard",
-                      child: [
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        )
-                      ],
-                    ),
-                    Sidemenu(
-                      icon: Icons.abc_rounded,
-                      title: "dashboard",
-                      child: [
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        ),
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        ),
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        )
-                      ],
-                    ),
-                    Sidemenu(
-                      icon: Icons.abc_rounded,
-                      title: "dashboard",
-                      child: [
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        )
-                      ],
-                    ),
-                    Sidemenu(
-                      icon: Icons.abc_rounded,
-                      title: "dashboard",
-                      child: [
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        )
-                      ],
-                    ),
-                    Sidemenu(
-                      icon: Icons.abc_rounded,
-                      title: "dashboard",
-                      child: [
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        )
-                      ],
-                    ),
-                    Sidemenu(
-                      icon: Icons.abc_rounded,
-                      title: "dashboard",
-                      child: [
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        )
-                      ],
-                    ),
-                    Sidemenu(
-                      icon: Icons.abc_rounded,
-                      title: "dashboard",
-                      child: [
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        )
-                      ],
-                    ),
-                    Sidemenu(
-                      icon: Icons.abc_rounded,
-                      title: "dashboard",
-                      child: [
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        )
-                      ],
-                    ),
-                    Sidemenu(
-                      icon: Icons.abc_rounded,
-                      title: "dashboard",
-                      child: [
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        ),
-                        Listtile(
-                          color: Colors.black,
-                          title: "rerer",
-                        )
-                      ],
-                    ),
-                  ],
-                )),
-          ),
-        Column(
-          children: [
-            Contains(
-              child: [Text(title1)],
+                      Sidemenu(
+                        icon: Icons.abc_rounded,
+                        title: "dashboard",
+                        child: [
+                          Listtile(
+                            color: Colors.black,
+                            title: "rare",
+                            onTap: () {
+                              // setState(() {
+                              //   title1 = "hey";
+                              // });
+                            },
+                          )
+                        ],
+                      ),
+                      Sidemenu(
+                        icon: Icons.abc_rounded,
+                        title: "dashboard",
+                        child: [
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
+                          )
+                        ],
+                      ),
+                      Sidemenu(
+                        icon: Icons.abc_rounded,
+                        title: "dashboard",
+                        child: [
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
+                          ),
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
+                          ),
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
+                          )
+                        ],
+                      ),
+                      Sidemenu(
+                        icon: Icons.abc_rounded,
+                        title: "dashboard",
+                        child: [
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
+                          )
+                        ],
+                      ),
+                      Sidemenu(
+                        icon: Icons.abc_rounded,
+                        title: "dashboard",
+                        child: [
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
+                          )
+                        ],
+                      ),
+                      Sidemenu(
+                        icon: Icons.abc_rounded,
+                        title: "dashboard",
+                        child: [
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
+                          )
+                        ],
+                      ),
+                      Sidemenu(
+                        icon: Icons.abc_rounded,
+                        title: "dashboard",
+                        child: [
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
+                          )
+                        ],
+                      ),
+                      Sidemenu(
+                        icon: Icons.abc_rounded,
+                        title: "dashboard",
+                        child: [
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
+                          )
+                        ],
+                      ),
+                      Sidemenu(
+                        icon: Icons.abc_rounded,
+                        title: "dashboard",
+                        child: [
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
+                          )
+                        ],
+                      ),
+                      Sidemenu(
+                        icon: Icons.abc_rounded,
+                        title: "dashboard",
+                        child: [
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
+                          ),
+                          Listtile(
+                            color: Colors.black,
+                            title: "rerer",
+                          )
+                        ],
+                      ),
+                    ],
+                  )),
             ),
-            Contains(
-              child: [],
-            )
-          ],
-        )
-      ],
-    ));
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  Header(title: title),
+                  SingleChildScrollView(
+                    child: Row(
+                      children: [
+                        Contains(
+                          child: homewidget,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
