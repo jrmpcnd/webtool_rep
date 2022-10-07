@@ -43,7 +43,7 @@ class _RolemanagementState extends State<Rolemanagement> {
                           offset: Offset(0, 3)),
                     ],
                   ),
-                  height: 200.0,
+                  height: 150.0,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,7 +129,7 @@ class _RolemanagementState extends State<Rolemanagement> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of users', style: kTinyBoldTextStyle),
+                        Text('List of Roles', style: kTinyBoldTextStyle),
                       ],
                     ),
                   ),

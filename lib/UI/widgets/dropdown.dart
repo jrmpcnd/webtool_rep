@@ -2,25 +2,26 @@ import 'package:flutter/material.dart';
 
 import '../utils/constant.dart';
 
-class Dropdown extends StatefulWidget {
-  const Dropdown({Key? key}) : super(key: key);
+class dropdowns extends StatefulWidget {
+  String? dropdown = "";
+  dropdowns({Key? key, this.dropdown}) : super(key: key);
 
   @override
-  State<Dropdown> createState() => _DropdownState();
+  State<dropdowns> createState() => _dropdownsState();
 }
 
-class _DropdownState extends State<Dropdown> {
+class _dropdownsState extends State<dropdowns> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 35.0,
       width: 450.0,
       child: DropdownButtonFormField(
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           hintStyle: TextStyle(color: kBlackColor),
           labelStyle: TextStyle(fontSize: 12.0),
           contentPadding: EdgeInsets.only(left: 10.0),
-          hintText: '--Select Status--',
+          hintText: widget.dropdown,
           enabledBorder:
               OutlineInputBorder(borderSide: BorderSide(color: kBlackColor)),
           focusedBorder:

@@ -123,7 +123,7 @@ class _UsermanagementState extends State<Usermanagement> {
                               verticalSpaceTiny,
                               const elevatedbuttonpopup(),
                               verticalSpaceTiny,
-                              const Dropdown(),
+                              dropdowns(dropdown: "--User Status--"),
                               verticalSpaceMedium,
                             ],
                           ),
@@ -157,7 +157,7 @@ class _UsermanagementState extends State<Usermanagement> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of users', style: kTinyBoldTextStyle),
+                        Text('List of Users', style: kTinyBoldTextStyle),
                       ],
                     ),
                   ),

@@ -50,9 +50,9 @@ class _HierarchyState extends State<Hierarchy> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Dropdown(),
+                          dropdowns(dropdown: "--Institution--"),
                           verticalSpaceTiny,
-                          const Dropdown(),
+                          dropdowns(dropdown: "--Unit--"),
                           verticalSpaceSmall,
                           Row(
                             children: [
@@ -108,9 +108,9 @@ class _HierarchyState extends State<Hierarchy> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              const Dropdown(),
+                              dropdowns(dropdown: "--Branch--"),
                               verticalSpaceTiny,
-                              const Dropdown(),
+                              dropdowns(dropdown: "--Center--"),
                               verticalSpaceSmall,
                               Row(
                                 children: [
@@ -128,7 +128,7 @@ class _HierarchyState extends State<Hierarchy> {
                                         size: 20.0,
                                       ),
                                       label: Text(
-                                        'Search',
+                                        'Delete',
                                         style: kSmallRegularTextStyle,
                                       ),
                                     ),
@@ -167,7 +167,7 @@ class _HierarchyState extends State<Hierarchy> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of users', style: kTinyBoldTextStyle),
+                        Text('List of Hierarchy', style: kTinyBoldTextStyle),
                       ],
                     ),
                   ),
