@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/text_styles.dart';
+
 class Sidemenu extends StatefulWidget {
   String? title;
   String? sub;
@@ -27,7 +29,7 @@ class _SidemenuState extends State<Sidemenu> {
       leading: widget.icon != null ? Icon(widget.icon!) : null,
       title: Text(
         widget.title!,
-        style: const TextStyle(color: Colors.black),
+        style: kSubtitleRegularTextStyle,
       ),
       children: widget.child!,
     );

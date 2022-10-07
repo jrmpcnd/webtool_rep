@@ -24,13 +24,13 @@ TextStyle kHeading3TextStyle = GoogleFonts.poppins(
 );
 
 TextStyle kSubtitleTextStyle = GoogleFonts.poppins(
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.normal,
   fontSize: 14,
   height: 1.5,
   color: kBlackColor,
 );
 TextStyle kSubtitleRegularTextStyle = GoogleFonts.poppins(
-  fontWeight: FontWeight.normal,
+  fontWeight: FontWeight.w500,
   fontSize: 16,
   height: 1.5,
   color: kBlackColor,

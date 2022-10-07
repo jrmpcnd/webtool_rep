@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/screens/administration/rolemanagement/rolemanagement.dart';
-import 'package:webtool_rep/UI/widgets/containers.dart';
 import 'package:webtool_rep/UI/widgets/header.dart';
 import '../../../UI/utils/constant.dart';
 import '../../../UI/widgets/contains.dart';
@@ -25,7 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Widget> homewidget = [];
   String title = "Dashboard";
-  String header = "";
+  String header = "Home";
   @override
   Widget build(BuildContext context) {
     return Scaffold(

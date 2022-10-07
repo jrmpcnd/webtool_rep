@@ -68,17 +68,17 @@ class _HeaderState extends State<Header> {
                       child: ListTile(
                         leading: const Icon(Icons.logout),
                         title: const Text('Logout'),
-                        onTap: () {
-                          AlertDialog alert = const AlertDialog(
-                            title: Text('Are you sure you want to Logout?'),
-                          );
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return alert;
-                            },
-                          );
-                        },
+                        // onTap: () {
+                        //   AlertDialog alert = const AlertDialog(
+                        //     title: Text('Are you sure you want to Logout?'),
+                        //   );
+                        //   showDialog(
+                        //     context: context,
+                        //     builder: (BuildContext context) {
+                        //       return alert;
+                        //     },
+                        //   );
+                        // },
                       ),
                     ),
                   ],
