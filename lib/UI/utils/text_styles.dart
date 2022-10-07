@@ -36,39 +36,39 @@ TextStyle kSubtitleRegularTextStyle = GoogleFonts.poppins(
   color: kBlackColor,
 );
 TextStyle kBodyRegularTextStyle = GoogleFonts.poppins(
-  fontWeight: FontWeight.normal,
+  fontWeight: FontWeight.w400,
   fontSize: 12,
   height: 1.5,
   color: kBlackColor,
 );
 TextStyle kBodyTextStyle = GoogleFonts.poppins(
-  fontWeight: FontWeight.w600,
-  fontSize: 12,
+  fontWeight: FontWeight.bold,
+  fontSize: 15,
   height: 1.5,
   color: kBlackColor,
 );
 
 TextStyle kSmallBoldTextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.w600,
-  fontSize: 10,
+  fontSize: 15,
   height: 1.5,
-  color: kBlackColor,
+  color: kWhiteColor,
 );
 TextStyle kSmallRegularTextStyle = GoogleFonts.poppins(
-  fontWeight: FontWeight.normal,
-  fontSize: 10,
+  fontWeight: FontWeight.w500,
+  fontSize: 12,
   height: 1.5,
-  color: kBlackColor,
+  color: kWhiteColor,
 );
 TextStyle kTinyBoldTextStyle = GoogleFonts.poppins(
-  fontWeight: FontWeight.w600,
-  fontSize: 8,
+  fontWeight: FontWeight.w500,
+  fontSize: 18,
   height: 1.5,
   color: kBlackColor,
 );
 TextStyle kTinyRegularTextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.normal,
-  fontSize: 8,
+  fontSize: 16,
   height: 1.5,
-  color: kBlackColor,
+  color: kWhiteColor,
 );

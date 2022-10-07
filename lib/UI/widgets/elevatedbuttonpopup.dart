@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/constant.dart';
 import '../utils/spacing.dart';
+import '../utils/text_styles.dart';
 
 class elevatedbuttonpopup extends StatelessWidget {
   const elevatedbuttonpopup({
@@ -10,12 +11,12 @@ class elevatedbuttonpopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 30,
-      width: 450,
+      height: 35.0,
+      width: 450.0,
       child: ElevatedButton.icon(
         style: ButtonStyle(
           alignment: Alignment.centerLeft,
-          backgroundColor: MaterialStateProperty.all(Colors.grey),
+          backgroundColor: MaterialStateProperty.all(kSecondaryColor3),
         ),
         onPressed: () {
           showDialog(
@@ -23,7 +24,7 @@ class elevatedbuttonpopup extends StatelessWidget {
             builder: (alert) => AlertDialog(
               title: const Text(
                 'Branch',
-                style: TextStyle(color: Colors.grey),
+                style: TextStyle(color: Colors.green),
               ),
               actions: <Widget>[
                 const SizedBox(
@@ -99,8 +100,8 @@ class elevatedbuttonpopup extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 100, //
-                        height: 30,
+                        width: 100.0, //
+                        height: 35.0,
                         child: ElevatedButton.icon(
                           onPressed: () => Navigator.pop(context),
                           style: ButtonStyle(
@@ -123,8 +124,8 @@ class elevatedbuttonpopup extends StatelessWidget {
             ),
           );
         },
-        icon: Icon(Icons.search),
-        label: Text("Branch"),
+        icon: const Icon(Icons.search, color: kWhiteColor),
+        label: Text("Branch", style: kTinyRegularTextStyle),
       ),
     );
   }

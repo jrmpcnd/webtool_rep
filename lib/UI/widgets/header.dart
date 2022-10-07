@@ -17,7 +17,7 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height * 0.40;
+    final height = MediaQuery.of(context).size.height * 0.50;
     return Column(
       children: [
         Row(
@@ -64,10 +64,10 @@ class _HeaderState extends State<Header> {
                         title: Text('Change Password'),
                       ),
                     ),
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       child: ListTile(
-                        leading: const Icon(Icons.logout),
-                        title: const Text('Logout'),
+                        leading: Icon(Icons.logout),
+                        title: Text('Logout'),
                         // onTap: () {
                         //   AlertDialog alert = const AlertDialog(
                         //     title: Text('Are you sure you want to Logout?'),
@@ -111,6 +111,35 @@ class _HeaderState extends State<Header> {
                         ),
                       ),
                     ],
+                  ),
+                  Container(
+                    height: 50.0,
+                    width: 230.0,
+                    padding: kEdgeInsetsHorizontalNormal,
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(5)),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: kLightPurpleColor1),
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          const Icon(Icons.add, size: 30.0),
+                          Column(
+                            children: [
+                              Text('Add New User',
+                                  style: kBodyTextStyle.copyWith(
+                                      color: kWhiteColor)),
+                              Text(
+                                'Add New User Data',
+                                style: kBodyRegularTextStyle.copyWith(
+                                    color: kWhiteColor),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),

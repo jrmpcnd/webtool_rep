@@ -13,13 +13,13 @@ class _DropdownState extends State<Dropdown> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 30,
-      width: 450,
+      height: 35.0,
+      width: 450.0,
       child: DropdownButtonFormField(
         decoration: const InputDecoration(
           hintStyle: TextStyle(color: kBlackColor),
-          labelStyle: TextStyle(fontSize: 12),
-          contentPadding: EdgeInsets.only(left: 10),
+          labelStyle: TextStyle(fontSize: 12.0),
+          contentPadding: EdgeInsets.only(left: 10.0),
           hintText: '--Select Status--',
           enabledBorder:
               OutlineInputBorder(borderSide: BorderSide(color: kBlackColor)),

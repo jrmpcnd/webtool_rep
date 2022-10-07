@@ -9,14 +9,14 @@ class textfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 30,
-      width: 450,
+      height: 35.0,
+      width: 450.0,
       child: TextField(
         style: const TextStyle(color: kBlackColor),
         decoration: InputDecoration(
-          labelStyle: const TextStyle(fontSize: 12),
+          labelStyle: const TextStyle(fontSize: 12.0),
           hintStyle: const TextStyle(color: kBlackColor),
-          contentPadding: const EdgeInsets.only(left: 10),
+          contentPadding: const EdgeInsets.only(left: 10.0),
           border: const OutlineInputBorder(),
           hintText: hintext!,
           enabledBorder: const OutlineInputBorder(
