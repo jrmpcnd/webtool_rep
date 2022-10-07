@@ -29,6 +29,7 @@ class _DropdownState extends State<Dropdown> {
         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
         isDense: true,
         isExpanded: true,
+        iconEnabledColor: kBlackColor,
         style: const TextStyle(fontSize: 16.5),
         items: const [
           DropdownMenuItem(value: "", child: Text("--Select Status--")),

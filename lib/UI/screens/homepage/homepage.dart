@@ -25,6 +25,10 @@ class _HomePageState extends State<HomePage> {
   List<Widget> homewidget = [];
   String title = "Dashboard";
   String header = "Home";
+  String addbutton = "";
+  String subaddbutton = "";
+  String uploadbutton = "";
+  String subuploadbutton = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +64,10 @@ class _HomePageState extends State<HomePage> {
                             title: "Register Client",
                             onTap: () {
                               setState(() {
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
                                 header = "Dashboard";
                                 title = "Register Client";
                                 homewidget = [const Registerclient()];
@@ -72,6 +80,10 @@ class _HomePageState extends State<HomePage> {
                             title: "Active Client",
                             onTap: () {
                               setState(() {
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
                                 header = "Dashboard";
                                 title = "Active Client";
                                 homewidget = [const Activeclient()];
@@ -84,6 +96,10 @@ class _HomePageState extends State<HomePage> {
                             title: "Client Transaction",
                             onTap: () {
                               setState(() {
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
                                 header = "Dashboard";
                                 title = "Client Transaction";
                                 homewidget = [const Clienttransaction()];
@@ -96,6 +112,10 @@ class _HomePageState extends State<HomePage> {
                             title: "eLoad Transaction",
                             onTap: () {
                               setState(() {
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
                                 header = "Dashboard";
                                 title = "eLoad Transaction";
                                 homewidget = [const eLoadtransaction()];
@@ -108,6 +128,10 @@ class _HomePageState extends State<HomePage> {
                             title: "Bank Transaction",
                             onTap: () {
                               setState(() {
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
                                 header = "Dashboard";
                                 title = "Bank Transaction";
                                 homewidget = [const Banktransaction()];
@@ -126,6 +150,10 @@ class _HomePageState extends State<HomePage> {
                             title: "User Management",
                             onTap: () {
                               setState(() {
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New User";
+                                subaddbutton = "Add New User Data";
                                 header = "Administration";
                                 title = "User Management";
                                 homewidget = [const Usermanagement()];
@@ -138,6 +166,11 @@ class _HomePageState extends State<HomePage> {
                             title: "Role Management",
                             onTap: () {
                               setState(() {
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Role";
+                                subaddbutton = "Add New Role Data";
+                                header = "Administration";
                                 title = "Role Management";
                                 homewidget = [const Rolemanagement()];
                               });
@@ -149,6 +182,11 @@ class _HomePageState extends State<HomePage> {
                             title: "Hierarchy",
                             onTap: () {
                               setState(() {
+                                uploadbutton = "Upload";
+                                subuploadbutton = "Upload Hierarchy Data";
+                                addbutton = "New Hierarchy";
+                                subaddbutton = "Add New Hierarchy Data";
+                                header = "Administration";
                                 title = "Hierarchy";
                                 homewidget = [const Hierarchy()];
                               });
@@ -887,7 +925,14 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(20.0),
               child: ListView(
                 children: [
-                  Header(header: header, title: title),
+                  Header(
+                    header: header,
+                    title: title,
+                    addbutton: addbutton,
+                    subaddbutton: subaddbutton,
+                    uploadbutton: uploadbutton,
+                    subuploadbutton: subuploadbutton,
+                  ),
                   Contains(
                     child: homewidget,
                   )

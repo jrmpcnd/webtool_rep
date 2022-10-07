@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/widgets/uploadbutton.dart';
 import '../utils/constant.dart';
 import '../utils/edge_insect.dart';
 import '../utils/responsive.dart';
 import '../utils/spacing.dart';
 import '../utils/text_styles.dart';
+import 'addbutton.dart';
 
 class Header extends StatefulWidget {
   String? title = "";
   String? header = "";
-  Header({Key? key, this.title, this.header}) : super(key: key);
+  String? addbutton = "";
+  String? subaddbutton = "";
+  String? uploadbutton = "";
+  String? subuploadbutton = "";
+  Header({
+    Key? key,
+    this.title,
+    this.header,
+    this.addbutton,
+    this.subaddbutton,
+    this.uploadbutton,
+    this.subuploadbutton,
+  }) : super(key: key);
 
   @override
   State<Header> createState() => _HeaderState();
@@ -112,34 +126,23 @@ class _HeaderState extends State<Header> {
                       ),
                     ],
                   ),
-                  Container(
-                    height: 50.0,
-                    width: 230.0,
-                    padding: kEdgeInsetsHorizontalNormal,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(5)),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: kLightPurpleColor1),
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          const Icon(Icons.add, size: 30.0),
-                          Column(
-                            children: [
-                              Text('Add New User',
-                                  style: kBodyTextStyle.copyWith(
-                                      color: kWhiteColor)),
-                              Text(
-                                'Add New User Data',
-                                style: kBodyRegularTextStyle.copyWith(
-                                    color: kWhiteColor),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                  Row(
+                    children: [
+                      widget.uploadbutton! != "" ||
+                              widget.subuploadbutton! != ""
+                          ? Uploadbutton(
+                              uploadbutton: widget.uploadbutton,
+                              subuploadbutton: widget.subuploadbutton,
+                            )
+                          : Container(),
+                      horizontalSpaceSmall,
+                      widget.addbutton! != "" || widget.subaddbutton! != ""
+                          ? Addbutton(
+                              addbutton: widget.addbutton,
+                              subaddbutton: widget.subaddbutton,
+                            )
+                          : Container(),
+                    ],
                   ),
                 ],
               ),

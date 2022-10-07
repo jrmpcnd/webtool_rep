@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../utils/constant.dart';
-import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
@@ -241,57 +240,128 @@ class _UsermanagementState extends State<Usermanagement> {
                         ),
                       ]),
                       TableRow(children: [
-                        Column(children: [Text('Sample 1')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
+                        Column(children: [
+                          Text(
+                            'Sample 1',
+                            style: kBodyRegularTextStyle.copyWith(
+                                color: kBlackColor),
+                          )
+                        ]),
+                        Column(children: [
+                          Text(
+                            'Samplel',
+                            style: kBodyRegularTextStyle.copyWith(
+                                color: kBlackColor),
+                          )
+                        ]),
+                        Column(children: [
+                          Text(
+                            'Sample',
+                            style: kBodyRegularTextStyle.copyWith(
+                                color: kBlackColor),
+                          )
+                        ]),
+                        Column(children: [
+                          Text(
+                            'Sample',
+                            style: kBodyRegularTextStyle.copyWith(
+                                color: kBlackColor),
+                          )
+                        ]),
+                        Column(children: [
+                          Text(
+                            'Sample',
+                            style: kBodyRegularTextStyle.copyWith(
+                                color: kBlackColor),
+                          )
+                        ]),
+                        Column(children: [
+                          Text(
+                            'Sample',
+                            style: kBodyRegularTextStyle.copyWith(
+                                color: kBlackColor),
+                          )
+                        ]),
                         Column(children: [
                           IconButton(
-                            icon: Icon(
+                            icon: const Icon(
+                              Icons.check_circle_outline_outlined,
+                              size: 15.0,
+                              color: kOrangeColor1,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ]),
+                        Column(children: [
+                          IconButton(
+                            icon: const Icon(
                               Icons.edit,
-                              size: 20.0,
-                              color: Colors.orange[500],
+                              size: 15.0,
+                              color: kOrangeColor1,
                             ),
                             onPressed: () {},
                           ),
                         ]),
                       ]),
                       TableRow(children: [
-                        Column(children: [Text('Sample 2')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('sample')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
+                        Column(children: [
+                          Text(
+                            'Sample 2',
+                            style: kBodyRegularTextStyle.copyWith(
+                                color: kBlackColor),
+                          )
+                        ]),
+                        Column(children: [
+                          Text(
+                            'Sample',
+                            style: kBodyRegularTextStyle.copyWith(
+                                color: kBlackColor),
+                          )
+                        ]),
+                        Column(children: [
+                          Text(
+                            'Sample',
+                            style: kBodyRegularTextStyle.copyWith(
+                                color: kBlackColor),
+                          )
+                        ]),
+                        Column(children: [
+                          Text(
+                            'sample',
+                            style: kBodyRegularTextStyle.copyWith(
+                                color: kBlackColor),
+                          )
+                        ]),
+                        Column(children: [
+                          Text(
+                            'Sample',
+                            style: kBodyRegularTextStyle.copyWith(
+                                color: kBlackColor),
+                          )
+                        ]),
+                        Column(children: [
+                          Text(
+                            'Sample',
+                            style: kBodyRegularTextStyle.copyWith(
+                                color: kBlackColor),
+                          )
+                        ]),
                         Column(children: [
                           IconButton(
-                            icon: Icon(
-                              Icons.edit,
-                              size: 20.0,
-                              color: Colors.orange[500],
+                            icon: const Icon(
+                              Icons.check_circle_outline_outlined,
+                              size: 15.0,
+                              color: kOrangeColor1,
                             ),
                             onPressed: () {},
                           ),
                         ]),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [Text('Sample 3')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
-                        Column(children: [Text('Sample')]),
                         Column(children: [
                           IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.edit,
-                              size: 20.0,
-                              color: Colors.orange[500],
+                              size: 15.0,
+                              color: kOrangeColor1,
                             ),
                             onPressed: () {},
                           ),
