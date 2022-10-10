@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/screens/administration/rolemanagement/rolemanagement.dart';
 import 'package:webtool_rep/UI/widgets/header.dart';
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   String subaddbutton = "";
   String uploadbutton = "";
   String subuploadbutton = "";
+  IconData? icon = Icons.home;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +66,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Register Client",
                             onTap: () {
                               setState(() {
+                                icon = CupertinoIcons.cube;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "";
@@ -80,6 +83,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Active Client",
                             onTap: () {
                               setState(() {
+                                icon = CupertinoIcons.cube;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "";
@@ -96,6 +100,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Client Transaction",
                             onTap: () {
                               setState(() {
+                                icon = CupertinoIcons.cube;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "";
@@ -112,6 +117,7 @@ class _HomePageState extends State<HomePage> {
                             title: "eLoad Transaction",
                             onTap: () {
                               setState(() {
+                                icon = CupertinoIcons.cube;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "";
@@ -128,6 +134,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Bank Transaction",
                             onTap: () {
                               setState(() {
+                                icon = CupertinoIcons.cube;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "";
@@ -150,6 +157,7 @@ class _HomePageState extends State<HomePage> {
                             title: "User Management",
                             onTap: () {
                               setState(() {
+                                icon = CupertinoIcons.person_crop_square;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "New User";
@@ -926,6 +934,7 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 children: [
                   Header(
+                    icon: icon,
                     header: header,
                     title: title,
                     addbutton: addbutton,

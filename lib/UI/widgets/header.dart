@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/widgets/uploadbutton.dart';
 import '../utils/constant.dart';
@@ -8,6 +9,7 @@ import '../utils/text_styles.dart';
 import 'addbutton.dart';
 
 class Header extends StatefulWidget {
+  IconData? icon;
   String? title = "";
   String? header = "";
   String? addbutton = "";
@@ -16,6 +18,7 @@ class Header extends StatefulWidget {
   String? subuploadbutton = "";
   Header({
     Key? key,
+    this.icon,
     this.title,
     this.header,
     this.addbutton,
@@ -118,11 +121,19 @@ class _HeaderState extends State<Header> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        widget.title!,
-                        style: kHeading1TextStyle.copyWith(
-                          color: kWhiteColor,
-                        ),
+                      Row(
+                        children: [
+                          Icon(
+                            widget.icon!,
+                          ),
+                          horizontalSpaceSmall,
+                          Text(
+                            widget.title!,
+                            style: kHeading1TextStyle.copyWith(
+                              color: kWhiteColor,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
