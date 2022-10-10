@@ -72,3 +72,16 @@ TextStyle kTinyRegularTextStyle = GoogleFonts.poppins(
   height: 1.5,
   color: kWhiteColor,
 );
+TextStyle kBodyTextStyleDashboard = GoogleFonts.poppins(
+  fontWeight: FontWeight.bold,
+  fontSize: 24,
+  height: 1.5,
+  color: kWhiteColor,
+);
+
+TextStyle kBodyTextStyleDashboardLarge = GoogleFonts.poppins(
+  fontWeight: FontWeight.bold,
+  fontSize: 50,
+  height: 1.5,
+  color: kWhiteColor,
+);

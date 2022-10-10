@@ -14,6 +14,9 @@ import '../dashboard/banktransaction/banktransaction.dart';
 import '../dashboard/clienttransaction/clienttransaction.dart';
 import '../dashboard/eloadetransaction/eloadtransaction.dart';
 import '../dashboard/registerclient/registerclient.dart';
+import '../enrollment/clientlistforregistration/clientlistforregistration.dart';
+import '../monitoring/clientprofile/clientprofile.dart';
+import '../monitoring/remittancedashboard/remittancedashboard.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -157,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                             title: "User Management",
                             onTap: () {
                               setState(() {
-                                icon = CupertinoIcons.person_crop_square;
+                                icon = Icons.perm_identity;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "New User";
@@ -174,6 +177,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Role Management",
                             onTap: () {
                               setState(() {
+                                icon = CupertinoIcons.person_3;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "New Role";
@@ -190,6 +194,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Hierarchy",
                             onTap: () {
                               setState(() {
+                                icon = Icons.lan_outlined;
                                 uploadbutton = "Upload";
                                 subuploadbutton = "Upload Hierarchy Data";
                                 addbutton = "New Hierarchy";
@@ -212,8 +217,16 @@ class _HomePageState extends State<HomePage> {
                             title: "Client List for Registration",
                             onTap: () {
                               setState(() {
+                                icon = Icons.menu;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Enrollment";
                                 title = "Client List for Registration";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [
+                                  const Clientlistforregistration()
+                                ];
                               });
                             },
                           ),
@@ -229,8 +242,14 @@ class _HomePageState extends State<HomePage> {
                             title: "Client Profile",
                             onTap: () {
                               setState(() {
+                                icon = Icons.menu;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
                                 title = "Client Profile";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Clientprofile()];
                               });
                             },
                           ),
@@ -240,8 +259,14 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Dashboard",
                             onTap: () {
                               setState(() {
+                                icon = Icons.menu;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
                                 title = "Remittance Dashboard";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Remittancedashboard()];
                               });
                             },
                           ),

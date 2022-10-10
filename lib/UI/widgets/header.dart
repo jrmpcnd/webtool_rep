@@ -125,6 +125,7 @@ class _HeaderState extends State<Header> {
                         children: [
                           Icon(
                             widget.icon!,
+                            size: 28.0,
                           ),
                           horizontalSpaceSmall,
                           Text(

@@ -3,16 +3,21 @@ import '../utils/constant.dart';
 import '../utils/spacing.dart';
 import '../utils/text_styles.dart';
 
-class elevatedbuttonpopup extends StatelessWidget {
-  const elevatedbuttonpopup({
-    Key? key,
-  }) : super(key: key);
+class elevatedbuttonpopup extends StatefulWidget {
+  String? label = "";
+  double? width;
+  elevatedbuttonpopup({Key? key, this.label, this.width}) : super(key: key);
 
+  @override
+  State<elevatedbuttonpopup> createState() => _elevatedbuttonpopupState();
+}
+
+class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 35.0,
-      width: 450.0,
+      width: widget.width,
       child: ElevatedButton.icon(
         style: ButtonStyle(
           alignment: Alignment.centerLeft,
@@ -125,7 +130,7 @@ class elevatedbuttonpopup extends StatelessWidget {
           );
         },
         icon: const Icon(Icons.search, color: kWhiteColor),
-        label: Text("Branch", style: kTinyRegularTextStyle),
+        label: Text(widget.label!, style: kTinyRegularTextStyle),
       ),
     );
   }

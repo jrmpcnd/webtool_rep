@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import '../utils/constant.dart';
 
 class textfield extends StatelessWidget {
+  TextEditingController? controller;
   String? hintext = "";
-  textfield({Key? key, this.hintext}) : super(key: key);
+  textfield({Key? key, this.hintext, this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +12,7 @@ class textfield extends StatelessWidget {
       height: 35.0,
       width: 450.0,
       child: TextField(
+        controller: controller,
         style: const TextStyle(color: kBlackColor),
         decoration: InputDecoration(
           labelStyle: const TextStyle(fontSize: 12.0),

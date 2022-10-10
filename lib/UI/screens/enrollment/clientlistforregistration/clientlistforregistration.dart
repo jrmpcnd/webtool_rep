@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:webtool_rep/UI/widgets/dropdown.dart';
+import 'package:intl/intl.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
+import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
-class Usermanagement extends StatefulWidget {
-  const Usermanagement({Key? key}) : super(key: key);
+class Clientlistforregistration extends StatefulWidget {
+  const Clientlistforregistration({Key? key}) : super(key: key);
 
   @override
-  State<Usermanagement> createState() => _UsermanagementState();
+  State<Clientlistforregistration> createState() =>
+      _ClientlistforregistrationState();
 }
 
-class _UsermanagementState extends State<Usermanagement> {
+class _ClientlistforregistrationState extends State<Clientlistforregistration> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,7 +45,7 @@ class _UsermanagementState extends State<Usermanagement> {
                           offset: Offset(0, 3)),
                     ],
                   ),
-                  height: 200.0,
+                  height: 320.0,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,17 +55,41 @@ class _UsermanagementState extends State<Usermanagement> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           textfield(
-                            hintext: "First Name",
+                            hintext: "CID",
                           ),
                           verticalSpaceTiny,
-                          textfield(
-                            hintext: "Middle Name",
-                          ),
+                          elevatedbuttonpopup(label: "Branch", width: 450.0),
+                          verticalSpaceTiny,
+                          elevatedbuttonpopup(label: "Unit", width: 450.0),
                           verticalSpaceTiny,
                           textfield(
-                            hintext: "Last Name",
+                            hintext: "Mobile Number",
                           ),
-                          verticalSpaceSmall,
+                          verticalSpaceTiny,
+                          Row(
+                            children: [
+                              Column(
+                                children: [
+                                  elevatedbuttonpopup(
+                                      label: "Enroll Date Start", width: 200.0),
+                                  verticalSpaceTiny,
+                                  elevatedbuttonpopup(
+                                      label: "Activate Start", width: 200.0),
+                                ],
+                              ),
+                              horizontalSpaceLarge,
+                              Column(
+                                children: [
+                                  elevatedbuttonpopup(
+                                      label: "Enroll Date End", width: 200.0),
+                                  verticalSpaceTiny,
+                                  elevatedbuttonpopup(
+                                      label: "Activate End", width: 200.0),
+                                ],
+                              ),
+                            ],
+                          ),
+                          verticalSpaceRegular,
                           Row(
                             children: [
                               SizedBox(
@@ -117,15 +143,17 @@ class _UsermanagementState extends State<Usermanagement> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              textfield(
-                                hintext: "User Name",
-                              ),
-                              verticalSpaceTiny,
                               elevatedbuttonpopup(
-                                  label: "Branch", width: 450.0),
+                                  label: "Center", width: 450.0),
                               verticalSpaceTiny,
-                              dropdowns(dropdown: "--User Status--"),
-                              verticalSpaceMedium,
+                              dropdowns(dropdown: "--Account Status--"),
+                              verticalSpaceTiny,
+                              dropdowns(dropdown: "--SMS Status--"),
+                              verticalSpaceTiny,
+                              textfield(
+                                hintext: "Account Number",
+                              ),
+                              verticalSpaceMassive,
                             ],
                           ),
                         ],
