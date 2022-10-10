@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/screens/administration/rolemanagement/rolemanagement.dart';
+import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/transactionforconfirmation.dart';
 import 'package:webtool_rep/UI/widgets/header.dart';
 import '../../../UI/utils/constant.dart';
 import '../../../UI/widgets/contains.dart';
@@ -259,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Dashboard",
                             onTap: () {
                               setState(() {
-                                icon = Icons.menu;
+                                icon = Icons.content_copy_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "";
@@ -276,8 +277,16 @@ class _HomePageState extends State<HomePage> {
                             title: "Transaction for Confirmation",
                             onTap: () {
                               setState(() {
+                                icon = Icons.mobile_friendly_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
                                 title = "Transaction for Confirmation";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [
+                                  const Transactionforconfirmation()
+                                ];
                               });
                             },
                           ),
