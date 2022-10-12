@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
-import '../../../utils/responsive.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 

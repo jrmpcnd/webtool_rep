@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/screens/administration/rolemanagement/rolemanagement.dart';
+import 'package:webtool_rep/UI/screens/monitoring/slfrequest/slfrequest.dart';
+import 'package:webtool_rep/UI/screens/monitoring/smslogs/smslogs.dart';
 import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/transactionforconfirmation.dart';
+import 'package:webtool_rep/UI/screens/monitoring/transactionlog/transactionlog.dart';
 import 'package:webtool_rep/UI/widgets/header.dart';
 import '../../../UI/utils/constant.dart';
 import '../../../UI/widgets/contains.dart';
@@ -17,6 +20,8 @@ import '../dashboard/eloadetransaction/eloadtransaction.dart';
 import '../dashboard/registerclient/registerclient.dart';
 import '../enrollment/clientlistforregistration/clientlistforregistration.dart';
 import '../monitoring/clientprofile/clientprofile.dart';
+import '../monitoring/operationdashboard/operationdashboard.dart';
+import '../monitoring/remitancetransactionlog/remittancetransactionlog.dart';
 import '../monitoring/remittancedashboard/remittancedashboard.dart';
 
 class HomePage extends StatefulWidget {
@@ -234,7 +239,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Sidemenu(
-                        icon: Icons.monitor_outlined,
+                        icon: Icons.person_outline,
                         title: "Monitoring",
                         child: [
                           Listtile(
@@ -243,7 +248,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Client Profile",
                             onTap: () {
                               setState(() {
-                                icon = Icons.menu;
+                                icon = Icons.person_outline;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "";
@@ -256,7 +261,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Remittance Dashboard",
                             onTap: () {
                               setState(() {
@@ -273,7 +278,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.mobile_friendly_outlined,
                             title: "Transaction for Confirmation",
                             onTap: () {
                               setState(() {
@@ -292,56 +297,86 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.money_outlined,
                             title: "Remittance Transaction Log",
                             onTap: () {
                               setState(() {
+                                icon = Icons.content_copy_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
                                 title = "Remittance Transaction Log";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Remittancetransactionlog()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.email_outlined,
                             title: "SMS Logs",
                             onTap: () {
                               setState(() {
+                                icon = Icons.email_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
                                 title = "SMS Logs";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Smslogs()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.archive_outlined,
                             title: "SLF Request",
                             onTap: () {
                               setState(() {
+                                icon = Icons.archive_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
                                 title = "SLF Request";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Slfrequest()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Transaction Log",
                             onTap: () {
                               setState(() {
+                                icon = Icons.list_alt_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
                                 title = "Transaction Log";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Transactionlog()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Operation Dashboard",
                             onTap: () {
                               setState(() {
+                                icon = Icons.list_alt_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
                                 title = "Operation Dashboard";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Operationdashboard()];
                               });
                             },
                           ),

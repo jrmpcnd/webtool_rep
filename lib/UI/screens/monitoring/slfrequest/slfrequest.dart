@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -7,16 +6,14 @@ import '../../../utils/text_styles.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
-class Transactionforconfirmation extends StatefulWidget {
-  const Transactionforconfirmation({Key? key}) : super(key: key);
+class Slfrequest extends StatefulWidget {
+  const Slfrequest({Key? key}) : super(key: key);
 
   @override
-  State<Transactionforconfirmation> createState() =>
-      _TransactionforconfirmationState();
+  State<Slfrequest> createState() => _SlfrequestState();
 }
 
-class _TransactionforconfirmationState
-    extends State<Transactionforconfirmation> {
+class _SlfrequestState extends State<Slfrequest> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,9 +55,8 @@ class _TransactionforconfirmationState
                             hintext: "CID",
                           ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Transaction--"),
-                          verticalSpaceTiny,
-                          dropdowns(dropdown: "--Status--"),
+                          elevatedbuttonpopup(
+                              label: "Branch Name", width: 450.0),
                           verticalSpaceSmall,
                           Row(
                             children: [
@@ -114,22 +110,52 @@ class _TransactionforconfirmationState
                         children: [
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               elevatedbuttonpopup(
-                                  label: "Branch", width: 450.0),
-                              verticalSpaceTiny,
-                              Column(
+                                  label: "Request Date", width: 450.0),
+                              verticalSpaceLarge,
+                              Row(
                                 children: [
-                                  Row(
-                                    children: [
-                                      elevatedbuttonpopup(
-                                          label: "Date Start", width: 200.0),
-                                      horizontalSpaceLarge,
-                                      elevatedbuttonpopup(
-                                          label: "Date End", width: 200.0),
-                                    ],
+                                  SizedBox(
+                                    width: 100.0,
+                                    height: 35.0,
+                                    child: ElevatedButton.icon(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  kPrimaryColor)),
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        size: 20.0,
+                                      ),
+                                      label: Text(
+                                        'Rejected',
+                                        style: kSmallRegularTextStyle,
+                                      ),
+                                    ),
                                   ),
-                                  verticalSpaceXLarge,
+                                  horizontalSpaceTiny,
+                                  SizedBox(
+                                    width: 100.0,
+                                    height: 35.0,
+                                    child: ElevatedButton.icon(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  kLightPurpleColor1)),
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.check_circle_outline,
+                                        size: 20.0,
+                                      ),
+                                      label: Text(
+                                        'Confirm',
+                                        style: kSmallRegularTextStyle,
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -164,7 +190,7 @@ class _TransactionforconfirmationState
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of Users', style: kTinyBoldTextStyle),
+                        Text('List of Hierarchy', style: kTinyBoldTextStyle),
                       ],
                     ),
                   ),

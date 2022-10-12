@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
+import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
-class Transactionforconfirmation extends StatefulWidget {
-  const Transactionforconfirmation({Key? key}) : super(key: key);
+class Smslogs extends StatefulWidget {
+  const Smslogs({Key? key}) : super(key: key);
 
   @override
-  State<Transactionforconfirmation> createState() =>
-      _TransactionforconfirmationState();
+  State<Smslogs> createState() => _SmslogsState();
 }
 
-class _TransactionforconfirmationState
-    extends State<Transactionforconfirmation> {
+class _SmslogsState extends State<Smslogs> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +43,7 @@ class _TransactionforconfirmationState
                           offset: Offset(0, 3)),
                     ],
                   ),
-                  height: 200.0,
+                  height: 280.0,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,9 +56,27 @@ class _TransactionforconfirmationState
                             hintext: "CID",
                           ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Transaction--"),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  elevatedbuttonpopup(
+                                      label: "Enroll Date Start", width: 200.0),
+                                  horizontalSpaceLarge,
+                                  elevatedbuttonpopup(
+                                      label: "Enroll Date End", width: 200.0),
+                                ],
+                              ),
+                            ],
+                          ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Status--"),
+                          textfield(
+                            hintext: "Mobile Number",
+                          ),
+                          verticalSpaceTiny,
+                          dropdowns(dropdown: "--Message Type--"),
+                          verticalSpaceTiny,
+                          dropdowns(dropdown: "--SMS Status--"),
                           verticalSpaceSmall,
                           Row(
                             children: [
@@ -102,35 +118,6 @@ class _TransactionforconfirmationState
                                     style: kSmallRegularTextStyle,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      horizontalSpaceMedium,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              elevatedbuttonpopup(
-                                  label: "Branch", width: 450.0),
-                              verticalSpaceTiny,
-                              Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      elevatedbuttonpopup(
-                                          label: "Date Start", width: 200.0),
-                                      horizontalSpaceLarge,
-                                      elevatedbuttonpopup(
-                                          label: "Date End", width: 200.0),
-                                    ],
-                                  ),
-                                  verticalSpaceXLarge,
-                                ],
                               ),
                             ],
                           ),

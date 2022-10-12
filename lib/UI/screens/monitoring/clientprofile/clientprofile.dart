@@ -244,14 +244,14 @@ class _ClientprofileState extends State<Clientprofile> {
                               ),
                             ],
                           ),
-                          SizedBox(width: 50),
+                          horizontalSpaceLarge,
                           const Text(
                             'AGENT:',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(width: 5),
+                          horizontalSpaceTiny,
                           Transform.scale(
                             scale: 1,
                             child: Switch(
@@ -263,14 +263,13 @@ class _ClientprofileState extends State<Clientprofile> {
                               inactiveTrackColor: Colors.red,
                             ),
                           ),
-                          SizedBox(width: 200),
                           const Text(
                             'ENABLE:',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(width: 5),
+                          horizontalSpaceTiny,
                           Transform.scale(
                             scale: 1,
                             child: Switch(
@@ -282,14 +281,13 @@ class _ClientprofileState extends State<Clientprofile> {
                               inactiveTrackColor: Colors.red,
                             ),
                           ),
-                          SizedBox(width: 200),
                           const Text(
                             'MERCHANT:',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(width: 5),
+                          horizontalSpaceTiny,
                           Transform.scale(
                             scale: 1,
                             child: Switch(
@@ -324,7 +322,7 @@ class _ClientprofileState extends State<Clientprofile> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 5,
                             blurRadius: 7,
-                            offset: Offset(0, 3)),
+                            offset: const Offset(0, 3)),
                       ],
                     ),
                     width: 500.0,

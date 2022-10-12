@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
+import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
-class Transactionforconfirmation extends StatefulWidget {
-  const Transactionforconfirmation({Key? key}) : super(key: key);
+class Transactionlog extends StatefulWidget {
+  const Transactionlog({Key? key}) : super(key: key);
 
   @override
-  State<Transactionforconfirmation> createState() =>
-      _TransactionforconfirmationState();
+  State<Transactionlog> createState() => _TransactionlogState();
 }
 
-class _TransactionforconfirmationState
-    extends State<Transactionforconfirmation> {
+class _TransactionlogState extends State<Transactionlog> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +43,7 @@ class _TransactionforconfirmationState
                           offset: Offset(0, 3)),
                     ],
                   ),
-                  height: 200.0,
+                  height: 280.0,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,10 +53,18 @@ class _TransactionforconfirmationState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           textfield(
-                            hintext: "CID",
+                            hintext: "Core ID",
                           ),
                           verticalSpaceTiny,
                           dropdowns(dropdown: "--Transaction--"),
+                          verticalSpaceTiny,
+                          textfield(
+                            hintext: "Source CID",
+                          ),
+                          verticalSpaceTiny,
+                          textfield(
+                            hintext: "Source Account",
+                          ),
                           verticalSpaceTiny,
                           dropdowns(dropdown: "--Status--"),
                           verticalSpaceSmall,
@@ -114,9 +120,11 @@ class _TransactionforconfirmationState
                         children: [
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              elevatedbuttonpopup(
-                                  label: "Branch", width: 450.0),
+                              textfield(
+                                hintext: "Mobile ID",
+                              ),
                               verticalSpaceTiny,
                               Column(
                                 children: [
@@ -129,9 +137,17 @@ class _TransactionforconfirmationState
                                           label: "Date End", width: 200.0),
                                     ],
                                   ),
-                                  verticalSpaceXLarge,
                                 ],
                               ),
+                              verticalSpaceTiny,
+                              textfield(
+                                hintext: "Target CID",
+                              ),
+                              verticalSpaceTiny,
+                              textfield(
+                                hintext: "Target Amount",
+                              ),
+                              verticalSpaceXLarge,
                             ],
                           ),
                         ],
@@ -164,7 +180,7 @@ class _TransactionforconfirmationState
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of Users', style: kTinyBoldTextStyle),
+                        Text('List of Hierarchy', style: kTinyBoldTextStyle),
                       ],
                     ),
                   ),

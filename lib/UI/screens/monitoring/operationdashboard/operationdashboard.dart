@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
-import '../../../widgets/textfield.dart';
 
-class Transactionforconfirmation extends StatefulWidget {
-  const Transactionforconfirmation({Key? key}) : super(key: key);
+class Operationdashboard extends StatefulWidget {
+  const Operationdashboard({Key? key}) : super(key: key);
 
   @override
-  State<Transactionforconfirmation> createState() =>
-      _TransactionforconfirmationState();
+  State<Operationdashboard> createState() => _OperationdashboardState();
 }
 
-class _TransactionforconfirmationState
-    extends State<Transactionforconfirmation> {
+class _OperationdashboardState extends State<Operationdashboard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +41,7 @@ class _TransactionforconfirmationState
                           offset: Offset(0, 3)),
                     ],
                   ),
-                  height: 200.0,
+                  height: 250.0,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,13 +50,80 @@ class _TransactionforconfirmationState
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          textfield(
-                            hintext: "CID",
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  elevatedbuttonpopup(
+                                      label: "Date Start", width: 200.0),
+                                  horizontalSpaceLarge,
+                                  elevatedbuttonpopup(
+                                      label: "Date End", width: 200.0),
+                                ],
+                              ),
+                            ],
                           ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Transaction--"),
+                          elevatedbuttonpopup(
+                              label: "Branch Name", width: 450.0),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Status--"),
+                          Row(
+                            children: [
+                              SizedBox(
+                                child: Text(
+                                  'Count Member',
+                                  style: kSmallTextStyle,
+                                ),
+                              ),
+                              horizontalSpaceSLarge,
+                              const SizedBox(
+                                height: 30,
+                                width: 150,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                      labelStyle: TextStyle(fontSize: 12),
+                                      contentPadding: EdgeInsets.only(left: 10),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: kBlackColor)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: kBlackColor)),
+                                      hintText: '0',
+                                      hintStyle: TextStyle(color: kBlackColor)),
+                                ),
+                              ),
+                            ],
+                          ),
+                          verticalSpaceTiny,
+                          Row(
+                            children: [
+                              SizedBox(
+                                child: Text(
+                                  'Count Non Member',
+                                  style: kSmallTextStyle,
+                                ),
+                              ),
+                              horizontalSpaceSmallest,
+                              const SizedBox(
+                                height: 30,
+                                width: 150,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                      labelStyle: TextStyle(fontSize: 12),
+                                      contentPadding: EdgeInsets.only(left: 10),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: kBlackColor)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: kBlackColor)),
+                                      hintText: '0',
+                                      hintStyle: TextStyle(color: kBlackColor)),
+                                ),
+                              ),
+                            ],
+                          ),
                           verticalSpaceSmall,
                           Row(
                             children: [
@@ -107,35 +170,6 @@ class _TransactionforconfirmationState
                           ),
                         ],
                       ),
-                      horizontalSpaceMedium,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              elevatedbuttonpopup(
-                                  label: "Branch", width: 450.0),
-                              verticalSpaceTiny,
-                              Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      elevatedbuttonpopup(
-                                          label: "Date Start", width: 200.0),
-                                      horizontalSpaceLarge,
-                                      elevatedbuttonpopup(
-                                          label: "Date End", width: 200.0),
-                                    ],
-                                  ),
-                                  verticalSpaceXLarge,
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 ),
@@ -164,7 +198,7 @@ class _TransactionforconfirmationState
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of Users', style: kTinyBoldTextStyle),
+                        Text('List of Hierarchy', style: kTinyBoldTextStyle),
                       ],
                     ),
                   ),

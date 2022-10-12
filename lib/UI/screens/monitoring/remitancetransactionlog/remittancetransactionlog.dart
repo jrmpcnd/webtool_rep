@@ -7,16 +7,15 @@ import '../../../utils/text_styles.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
-class Transactionforconfirmation extends StatefulWidget {
-  const Transactionforconfirmation({Key? key}) : super(key: key);
+class Remittancetransactionlog extends StatefulWidget {
+  const Remittancetransactionlog({Key? key}) : super(key: key);
 
   @override
-  State<Transactionforconfirmation> createState() =>
-      _TransactionforconfirmationState();
+  State<Remittancetransactionlog> createState() =>
+      _RemittancetransactionlogState();
 }
 
-class _TransactionforconfirmationState
-    extends State<Transactionforconfirmation> {
+class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -54,13 +53,27 @@ class _TransactionforconfirmationState
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          textfield(
-                            hintext: "CID",
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  elevatedbuttonpopup(
+                                      label: "Start Send Date", width: 200.0),
+                                  horizontalSpaceLarge,
+                                  elevatedbuttonpopup(
+                                      label: "End Send Date", width: 200.0),
+                                ],
+                              ),
+                            ],
                           ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Transaction--"),
+                          textfield(
+                            hintext: "Sender Mobile Number",
+                          ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Status--"),
+                          textfield(
+                            hintext: "Mobile Reference",
+                          ),
                           verticalSpaceSmall,
                           Row(
                             children: [
@@ -115,23 +128,14 @@ class _TransactionforconfirmationState
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              elevatedbuttonpopup(
-                                  label: "Branch", width: 450.0),
+                              dropdowns(dropdown: "--Status--"),
                               verticalSpaceTiny,
-                              Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      elevatedbuttonpopup(
-                                          label: "Date Start", width: 200.0),
-                                      horizontalSpaceLarge,
-                                      elevatedbuttonpopup(
-                                          label: "Date End", width: 200.0),
-                                    ],
-                                  ),
-                                  verticalSpaceXLarge,
-                                ],
-                              ),
+                              elevatedbuttonpopup(
+                                  label: "Source Branch", width: 450.0),
+                              verticalSpaceTiny,
+                              elevatedbuttonpopup(
+                                  label: "Target Branch", width: 450.0),
+                              verticalSpaceMedium,
                             ],
                           ),
                         ],
