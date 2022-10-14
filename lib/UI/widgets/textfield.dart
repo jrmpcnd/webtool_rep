@@ -21,7 +21,7 @@ class _textfieldState extends State<textfield> {
         style: const TextStyle(color: kBlackColor),
         decoration: InputDecoration(
           labelStyle: const TextStyle(fontSize: 12.0),
-          hintStyle: const TextStyle(color: kBlackColor),
+          hintStyle: const TextStyle(color: kSecondaryColor2),
           contentPadding: const EdgeInsets.only(left: 10.0),
           border: const OutlineInputBorder(),
           hintText: widget.hintext!,

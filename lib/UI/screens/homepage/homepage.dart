@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:webtool_rep/UI/screens/administration/rolemanagement/rolemanagement.dart';
-import 'package:webtool_rep/UI/screens/monitoring/slfrequest/slfrequest.dart';
-import 'package:webtool_rep/UI/screens/monitoring/smslogs/smslogs.dart';
-import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/transactionforconfirmation.dart';
-import 'package:webtool_rep/UI/screens/monitoring/transactionlog/transactionlog.dart';
+import 'package:webtool_rep/UI/screens/administration/rolemanagement/role_management.dart';
+import 'package:webtool_rep/UI/screens/monitoring/agentdashboard/agent_dashboard.dart';
+import 'package:webtool_rep/UI/screens/monitoring/authorizedresetpassword/authorized_reset_password.dart';
+import 'package:webtool_rep/UI/screens/monitoring/failedenrollment/failed_enrollment.dart';
+import 'package:webtool_rep/UI/screens/monitoring/listofagent/list_of_agent.dart';
+import 'package:webtool_rep/UI/screens/monitoring/listofuseddevice/list_of_used_device.dart';
+import 'package:webtool_rep/UI/screens/monitoring/slfrequest/slf_request.dart';
+import 'package:webtool_rep/UI/screens/monitoring/smslogs/sms_logs.dart';
+import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/transaction_for_confirmation.dart';
+import 'package:webtool_rep/UI/screens/monitoring/transactionlog/transaction_log.dart';
 import 'package:webtool_rep/UI/widgets/header.dart';
 import '../../../UI/utils/constant.dart';
 import '../../../UI/widgets/contains.dart';
@@ -12,17 +17,21 @@ import '../../../UI/widgets/listTile.dart';
 import '../../../UI/widgets/sidemenu.dart';
 import '../../utils/responsive.dart';
 import '../administration/hierarchy/hierarchy.dart';
-import '../administration/usermanagement/usermanagement.dart';
-import '../dashboard/activeclient/activeclient.dart';
-import '../dashboard/banktransaction/banktransaction.dart';
-import '../dashboard/clienttransaction/clienttransaction.dart';
-import '../dashboard/eloadetransaction/eloadtransaction.dart';
-import '../dashboard/registerclient/registerclient.dart';
-import '../enrollment/clientlistforregistration/clientlistforregistration.dart';
-import '../monitoring/clientprofile/clientprofile.dart';
-import '../monitoring/operationdashboard/operationdashboard.dart';
-import '../monitoring/remitancetransactionlog/remittancetransactionlog.dart';
-import '../monitoring/remittancedashboard/remittancedashboard.dart';
+import '../administration/usermanagement/user_management.dart';
+import '../customerservice/broadcastmessage/broadcast_message.dart';
+import '../customerservice/csrdashboard/csr_dashboard.dart';
+import '../customerservice/csrhotline/csr_hotline.dart';
+import '../customerservice/typeofconcern/type_of_concern.dart';
+import '../dashboard/activeclient/active_client.dart';
+import '../dashboard/banktransaction/bank_transaction.dart';
+import '../dashboard/clienttransaction/client_transaction.dart';
+import '../dashboard/eloadetransaction/eload_transaction.dart';
+import '../dashboard/registerclient/register_client.dart';
+import '../enrollment/clientlistforregistration/client_list_for_registration.dart';
+import '../monitoring/clientprofile/client_profile.dart';
+import '../monitoring/operationdashboard/operation_dashboard.dart';
+import '../monitoring/remitancetransactionlog/remittance_transaction_log.dart';
+import '../monitoring/remittancedashboard/remittance_dashboard.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -162,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                         child: [
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.person_outline,
                             title: "User Management",
                             onTap: () {
                               setState(() {
@@ -179,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Role Management",
                             onTap: () {
                               setState(() {
@@ -196,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.lan_outlined,
                             title: "Hierarchy",
                             onTap: () {
                               setState(() {
@@ -382,56 +391,86 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
-                            title: "Authorized Reset Password",
+                            icon: Icons.content_copy_outlined,
+                            title: "Authorized Reset Password and MPIN",
                             onTap: () {
                               setState(() {
-                                title = "Authorized Reset Password";
-                                // homewidget = [const Banktransaction()];
+                                icon = Icons.list_alt_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
+                                title = "Authorized Reset Password and MPIN";
+                                homewidget = [const Authorizedresetpassword()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Agent Dashboard",
                             onTap: () {
                               setState(() {
+                                icon = Icons.list_alt_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
                                 title = "Agent Dashboard";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Agentdashboard()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.smartphone_outlined,
                             title: "List of Used Device ID",
                             onTap: () {
                               setState(() {
+                                icon = Icons.smartphone_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
                                 title = "List of Used Device ID";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Listofuseddevice()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
-                            title: "Failed Enrollment",
+                            icon: Icons.list_outlined,
+                            title: "Failed Enrollment List",
                             onTap: () {
                               setState(() {
-                                title = "Failed Enrollment";
-                                // homewidget = [const Banktransaction()];
+                                icon = Icons.list_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
+                                title = "Failed Enrollment List";
+                                homewidget = [const Failedenrollment()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: CupertinoIcons.cube,
                             title: "List of Agent",
                             onTap: () {
                               setState(() {
+                                icon = Icons.list_alt_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Monitoring";
                                 title = "List of Agent";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Listofagent()];
                               });
                             },
                           ),
@@ -669,45 +708,69 @@ class _HomePageState extends State<HomePage> {
                         child: [
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.phone_outlined,
                             title: "CSR Dashboard",
                             onTap: () {
                               setState(() {
+                                icon = Icons.list_alt_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New CS Dashboard";
+                                subaddbutton = "Add New CS Dashboard";
+                                header = "Customer Service";
                                 title = "CSR Dashboard";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Csrdashboard()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.email_outlined,
                             title: "Broadcast Message",
                             onTap: () {
                               setState(() {
+                                icon = Icons.list_alt_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Message";
+                                subaddbutton = "Add New Dashboard";
+                                header = "Customer Service";
                                 title = "Broadcast Message";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Broadcastmessage()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.star_outline,
                             title: "Type of Concern",
                             onTap: () {
                               setState(() {
+                                icon = Icons.list_alt_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Concern";
+                                subaddbutton = "Add New Type Concern";
+                                header = "Customer Service";
                                 title = "Type of Concern";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Typeofconcern()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.phone_outlined,
                             title: "CSR Hotline",
                             onTap: () {
                               setState(() {
+                                icon = Icons.list_alt_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New CSR Hotline";
+                                subaddbutton = "Add New Data";
+                                header = "Customer Service";
                                 title = "CSR Hotline";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Csrhotline()];
                               });
                             },
                           ),

@@ -17,14 +17,14 @@ class _dropdownsState extends State<dropdowns> {
       width: 450.0,
       child: DropdownButtonFormField(
         decoration: InputDecoration(
-          hintStyle: TextStyle(color: kBlackColor),
-          labelStyle: TextStyle(fontSize: 12.0),
-          contentPadding: EdgeInsets.only(left: 10.0),
+          hintStyle: const TextStyle(color: kSecondaryColor2),
+          labelStyle: const TextStyle(fontSize: 12.0),
+          contentPadding: const EdgeInsets.only(left: 10.0),
           hintText: widget.dropdown,
-          enabledBorder:
-              OutlineInputBorder(borderSide: BorderSide(color: kBlackColor)),
-          focusedBorder:
-              OutlineInputBorder(borderSide: BorderSide(color: kBlackColor)),
+          enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: kBlackColor)),
+          focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: kBlackColor)),
         ),
         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
         isDense: true,

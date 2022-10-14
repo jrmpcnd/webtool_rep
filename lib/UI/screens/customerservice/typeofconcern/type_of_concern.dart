@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -8,15 +7,14 @@ import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
-class Clientlistforregistration extends StatefulWidget {
-  const Clientlistforregistration({Key? key}) : super(key: key);
+class Typeofconcern extends StatefulWidget {
+  const Typeofconcern({Key? key}) : super(key: key);
 
   @override
-  State<Clientlistforregistration> createState() =>
-      _ClientlistforregistrationState();
+  State<Typeofconcern> createState() => _TypeofconcernState();
 }
 
-class _ClientlistforregistrationState extends State<Clientlistforregistration> {
+class _TypeofconcernState extends State<Typeofconcern> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +43,7 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                           offset: Offset(0, 3)),
                     ],
                   ),
-                  height: 320.0,
+                  height: 150.0,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,41 +53,11 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           textfield(
-                            hintext: "CID",
+                            hintext: "Subject",
                           ),
                           verticalSpaceTiny,
-                          elevatedbuttonpopup(label: "Branch", width: 450.0),
-                          verticalSpaceTiny,
-                          elevatedbuttonpopup(label: "Unit", width: 450.0),
-                          verticalSpaceTiny,
-                          textfield(
-                            hintext: "Mobile Number",
-                          ),
-                          verticalSpaceTiny,
-                          Row(
-                            children: [
-                              Column(
-                                children: [
-                                  elevatedbuttonpopup(
-                                      label: "Enroll Date Start", width: 200.0),
-                                  verticalSpaceTiny,
-                                  elevatedbuttonpopup(
-                                      label: "Activate Start", width: 200.0),
-                                ],
-                              ),
-                              horizontalSpaceLarge,
-                              Column(
-                                children: [
-                                  elevatedbuttonpopup(
-                                      label: "Enroll Date End", width: 200.0),
-                                  verticalSpaceTiny,
-                                  elevatedbuttonpopup(
-                                      label: "Activate End", width: 200.0),
-                                ],
-                              ),
-                            ],
-                          ),
-                          verticalSpaceRegular,
+                          dropdowns(dropdown: "--Complexity Level--"),
+                          verticalSpaceSmall,
                           Row(
                             children: [
                               SizedBox(
@@ -131,29 +99,26 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      horizontalSpaceMedium,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              elevatedbuttonpopup(
-                                  label: "Center", width: 450.0),
-                              verticalSpaceTiny,
-                              dropdowns(dropdown: "--Account Status--"),
-                              verticalSpaceTiny,
-                              dropdowns(dropdown: "--SMS Status--"),
-                              verticalSpaceTiny,
-                              textfield(
-                                hintext: "Account Number",
+                              horizontalSpaceLargest,
+                              SizedBox(
+                                width: 100.0,
+                                height: 35.0,
+                                child: ElevatedButton.icon(
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              kPrimaryColor)),
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    size: 20.0,
+                                  ),
+                                  label: Text(
+                                    'Delete',
+                                    style: kSmallRegularTextStyle,
+                                  ),
+                                ),
                               ),
-                              verticalSpaceMassive,
                             ],
                           ),
                         ],

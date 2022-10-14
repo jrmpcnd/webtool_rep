@@ -77,7 +77,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_lints:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_lints
       url: "https://pub.dartlang.org"
@@ -260,7 +260,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.3"
+    version: "6.0.4"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -322,6 +322,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  web_date_picker:
+    dependency: "direct main"
+    description:
+      name: web_date_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0+3"
   webview_flutter:
     dependency: "direct main"
     description:
