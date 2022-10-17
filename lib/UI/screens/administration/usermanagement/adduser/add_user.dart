@@ -16,11 +16,14 @@ class _AddusersState extends State<Addusers> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: kEdgeInsetsVerticalNormal,
+      padding: kEdgeInsetsAllNormal,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
@@ -41,7 +44,7 @@ class _AddusersState extends State<Addusers> {
                     ],
                   ),
                   height: 600.0,
-                  width: 550.0,
+                  width: 450.0,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,42 +53,52 @@ class _AddusersState extends State<Addusers> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("User Name", style: kHeading2TextStyle),
+                          Row(
+                            children: [
+                              const Icon(Icons.person_outline,
+                                  color: kBlackColor),
+                              horizontalSpaceTiny,
+                              Text('Account Details',
+                                  style: kTinyBoldTextStyle),
+                            ],
+                          ),
+                          verticalSpaceTiny,
+                          Text("User Name :", style: kHeading2TextStyle),
                           textfield(
                             hintext: "",
                           ),
                           verticalSpaceTiny,
-                          Text("Given Name", style: kHeading2TextStyle),
+                          Text("Given Name :", style: kHeading2TextStyle),
                           textfield(
                             hintext: "",
                           ),
                           verticalSpaceTiny,
-                          Text("Middle Name", style: kHeading2TextStyle),
+                          Text("Middle Name :", style: kHeading2TextStyle),
                           textfield(
                             hintext: "",
                           ),
                           verticalSpaceTiny,
-                          Text("Last Name", style: kHeading2TextStyle),
+                          Text("Last Name :", style: kHeading2TextStyle),
                           textfield(
                             hintext: "",
                           ),
                           verticalSpaceTiny,
-                          Text("Email", style: kHeading2TextStyle),
+                          Text("Email :", style: kHeading2TextStyle),
                           textfield(
                             hintext: "",
                           ),
                           verticalSpaceTiny,
-                          Text("Mobile no.", style: kHeading2TextStyle),
+                          Text("Mobile no. :", style: kHeading2TextStyle),
                           textfield(
                             hintext: "",
                           ),
                           verticalSpaceTiny,
-                          Text("User Status", style: kHeading2TextStyle),
+                          Text("User Status :", style: kHeading2TextStyle),
                           textfield(
                             hintext: "",
                           ),
                           verticalSpaceTiny,
-                          Text("Concurrent User Status",
+                          Text("Concurrent User Status :",
                               style: kHeading2TextStyle),
                           textfield(
                             hintext: "",
@@ -120,8 +133,8 @@ class _AddusersState extends State<Addusers> {
                             offset: const Offset(0, 3)),
                       ],
                     ),
-                    height: 600.0,
-                    width: 550.0,
+                    height: 900.0,
+                    width: 650.0,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -161,6 +174,32 @@ class _AddusersState extends State<Addusers> {
                             ),
                             verticalSpaceTiny,
                             Text("User Status", style: kHeading2TextStyle),
+                            textfield(
+                              hintext: "",
+                            ),
+                            verticalSpaceTiny,
+                            Text("Concurrent User Status",
+                                style: kHeading2TextStyle),
+                            textfield(
+                              hintext: "",
+                            ),
+                            verticalSpaceTiny,
+                            Text("Given Name", style: kHeading2TextStyle),
+                            textfield(
+                              hintext: "",
+                            ),
+                            verticalSpaceTiny,
+                            Text("Middle Name", style: kHeading2TextStyle),
+                            textfield(
+                              hintext: "",
+                            ),
+                            verticalSpaceTiny,
+                            Text("Last Name", style: kHeading2TextStyle),
+                            textfield(
+                              hintext: "",
+                            ),
+                            verticalSpaceTiny,
+                            Text("Email", style: kHeading2TextStyle),
                             textfield(
                               hintext: "",
                             ),

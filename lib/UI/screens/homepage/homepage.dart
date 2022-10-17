@@ -194,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                                     addicon = Icons.save_outlined;
                                     header = "Administration  >  Create / Edit";
                                     addbutton = "Save";
-                                    subaddbutton = "Save User Data";
+                                    subaddbutton = "Save All User Data";
                                     title = "Create / Edit";
                                     homewidget = [const Addusers()];
                                   });
@@ -289,6 +289,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Client Profile",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.person_outline;
                                 uploadbutton = "";
@@ -307,6 +308,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Dashboard",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.content_copy_outlined;
                                 uploadbutton = "";
@@ -325,6 +327,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Transaction for Confirmation",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.mobile_friendly_outlined;
                                 uploadbutton = "";
@@ -345,6 +348,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Transaction Log",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.content_copy_outlined;
                                 uploadbutton = "";
@@ -363,6 +367,7 @@ class _HomePageState extends State<HomePage> {
                             title: "SMS Logs",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.email_outlined;
                                 uploadbutton = "";
@@ -381,6 +386,7 @@ class _HomePageState extends State<HomePage> {
                             title: "SLF Request",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.archive_outlined;
                                 uploadbutton = "";
@@ -399,6 +405,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Transaction Log",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
@@ -417,6 +424,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Operation Dashboard",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
@@ -435,6 +443,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Authorized Reset Password and MPIN",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
@@ -453,6 +462,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Agent Dashboard",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
@@ -471,6 +481,7 @@ class _HomePageState extends State<HomePage> {
                             title: "List of Used Device ID",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.smartphone_outlined;
                                 uploadbutton = "";
@@ -489,6 +500,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Failed Enrollment List",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.list_outlined;
                                 uploadbutton = "";
@@ -507,6 +519,7 @@ class _HomePageState extends State<HomePage> {
                             title: "List of Agent",
                             onTap: () {
                               setState(() {
+                                addicon = null;
                                 onPress = null;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";

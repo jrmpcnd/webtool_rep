@@ -14,7 +14,7 @@ class _dropdownsState extends State<dropdowns> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 35.0,
-      width: 450.0,
+      width: 400.0,
       child: DropdownButtonFormField(
         decoration: InputDecoration(
           hintStyle: const TextStyle(color: kSecondaryColor2),

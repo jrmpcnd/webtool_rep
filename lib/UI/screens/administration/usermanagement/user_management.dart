@@ -123,7 +123,7 @@ class _UsermanagementState extends State<Usermanagement> {
                               ),
                               verticalSpaceTiny,
                               elevatedbuttonpopup(
-                                  label: "Branch", width: 450.0),
+                                  label: "Branch", width: 400.0),
                               verticalSpaceTiny,
                               dropdowns(dropdown: "--User Status--"),
                               verticalSpaceMedium,

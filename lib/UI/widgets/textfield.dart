@@ -16,7 +16,7 @@ class _textfieldState extends State<textfield> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 35.0,
-      width: 450.0,
+      width: 400.0,
       child: TextField(
         controller: widget.controller,
         style: kTextStyle,
