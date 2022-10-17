@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/screens/administration/rolemanagement/role_management.dart';
+import 'package:webtool_rep/UI/screens/administration/usermanagement/adduser/add_user.dart';
 import 'package:webtool_rep/UI/screens/monitoring/agentdashboard/agent_dashboard.dart';
 import 'package:webtool_rep/UI/screens/monitoring/authorizedresetpassword/authorized_reset_password.dart';
 import 'package:webtool_rep/UI/screens/monitoring/failedenrollment/failed_enrollment.dart';
@@ -49,6 +50,7 @@ class _HomePageState extends State<HomePage> {
   String uploadbutton = "";
   String subuploadbutton = "";
   IconData? icon = Icons.home;
+  VoidCallback? onPresss;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -175,6 +177,11 @@ class _HomePageState extends State<HomePage> {
                             title: "User Management",
                             onTap: () {
                               setState(() {
+                                onPresss = () {
+                                  setState(() {
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
                                 icon = Icons.perm_identity;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -1066,14 +1073,14 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 children: [
                   Header(
-                    icon: icon,
-                    header: header,
-                    title: title,
-                    addbutton: addbutton,
-                    subaddbutton: subaddbutton,
-                    uploadbutton: uploadbutton,
-                    subuploadbutton: subuploadbutton,
-                  ),
+                      icon: icon,
+                      header: header,
+                      title: title,
+                      addbutton: addbutton,
+                      subaddbutton: subaddbutton,
+                      uploadbutton: uploadbutton,
+                      subuploadbutton: subuploadbutton,
+                      onPress: onPresss),
                   Contains(
                     child: homewidget,
                   )

@@ -21,7 +21,7 @@ class _RegisterclientState extends State<Registerclient> {
           height: 650,
           child: WebView(
             initialUrl:
-                'https://datastudio.google.com/embed/reporting/158dd32f-abd9-4a58-90bc-831f718c4ac9/page/6XIeC',
+                'https://datastudio.google.com/embed/reporting/0598f97f-4906-4961-a881-a12ec75bde3d/page/GzUdC',
             javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: (controller) {
               this.controller = controller;

@@ -20,7 +20,8 @@ class _ActiveclientState extends State<Activeclient> {
         Container(
           height: 650,
           child: WebView(
-            initialUrl: 'https://datastudio.google.com',
+            initialUrl:
+                'https://datastudio.google.com/embed/reporting/d483b67a-c8a3-4c96-9e8d-048f86f4db59/page/GzUdC',
             javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: (controller) {
               this.controller = controller;

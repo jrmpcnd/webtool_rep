@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../utils/text_styles.dart';
 
 class Listtile extends StatelessWidget {

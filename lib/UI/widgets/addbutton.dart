@@ -5,7 +5,9 @@ import '../utils/text_styles.dart';
 class Addbutton extends StatefulWidget {
   String? addbutton = "";
   String? subaddbutton = "";
-  Addbutton({Key? key, this.addbutton, this.subaddbutton}) : super(key: key);
+  VoidCallback? onPress;
+  Addbutton({Key? key, this.addbutton, this.subaddbutton, this.onPress})
+      : super(key: key);
 
   @override
   State<Addbutton> createState() => _AddbuttonState();
@@ -20,7 +22,7 @@ class _AddbuttonState extends State<Addbutton> {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(backgroundColor: kLightPurpleColor1),
-        onPressed: () {},
+        onPressed: widget.onPress!,
         child: Row(
           children: [
             const Icon(Icons.add_outlined, size: 30.0),
