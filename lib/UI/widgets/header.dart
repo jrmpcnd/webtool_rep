@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/widgets/uploadbutton.dart';
-import '../screens/administration/rolemanagement/role_management.dart';
 import '../utils/constant.dart';
 import '../utils/edge_insect.dart';
 import '../utils/responsive.dart';
@@ -11,6 +10,7 @@ import 'addbutton.dart';
 
 class Header extends StatefulWidget {
   IconData? icon;
+  IconData? addicon;
   String? title = "";
   String? header = "";
   String? addbutton = "";
@@ -23,6 +23,7 @@ class Header extends StatefulWidget {
     this.icon,
     this.title,
     this.header,
+    this.addicon,
     this.addbutton,
     this.subaddbutton,
     this.uploadbutton,
@@ -153,11 +154,13 @@ class _HeaderState extends State<Header> {
                       horizontalSpaceSmall,
                       widget.addbutton! != "" ||
                               widget.subaddbutton! != "" ||
-                              widget.onPress != null
+                              widget.onPress != null ||
+                              widget.addicon != null
                           ? Addbutton(
                               subaddbutton: widget.subaddbutton,
                               addbutton: widget.addbutton,
                               onPress: widget.onPress,
+                              addicon: widget.addicon,
                             )
                           : Container(),
                     ],

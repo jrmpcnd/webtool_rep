@@ -49,8 +49,9 @@ class _HomePageState extends State<HomePage> {
   String subaddbutton = "";
   String uploadbutton = "";
   String subuploadbutton = "";
-  IconData? icon = Icons.home;
-  VoidCallback? onPresss;
+  IconData? icon = Icons.home_outlined;
+  IconData? addicon;
+  VoidCallback? onPress;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,6 +87,8 @@ class _HomePageState extends State<HomePage> {
                             title: "Register Client",
                             onTap: () {
                               setState(() {
+                                addicon = null;
+                                onPress = null;
                                 icon = CupertinoIcons.cube;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -103,6 +106,8 @@ class _HomePageState extends State<HomePage> {
                             title: "Active Client",
                             onTap: () {
                               setState(() {
+                                addicon = null;
+                                onPress = null;
                                 icon = CupertinoIcons.cube;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -120,6 +125,8 @@ class _HomePageState extends State<HomePage> {
                             title: "Client Transaction",
                             onTap: () {
                               setState(() {
+                                addicon = null;
+                                onPress = null;
                                 icon = CupertinoIcons.cube;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -137,6 +144,8 @@ class _HomePageState extends State<HomePage> {
                             title: "eLoad Transaction",
                             onTap: () {
                               setState(() {
+                                addicon = null;
+                                onPress = null;
                                 icon = CupertinoIcons.cube;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -154,6 +163,8 @@ class _HomePageState extends State<HomePage> {
                             title: "Bank Transaction",
                             onTap: () {
                               setState(() {
+                                addicon = null;
+                                onPress = null;
                                 icon = CupertinoIcons.cube;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -177,12 +188,19 @@ class _HomePageState extends State<HomePage> {
                             title: "User Management",
                             onTap: () {
                               setState(() {
-                                onPresss = () {
+                                onPress = () {
                                   setState(() {
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Administration  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save User Data";
+                                    title = "Create / Edit";
                                     homewidget = [const Addusers()];
                                   });
                                 };
                                 icon = Icons.perm_identity;
+                                addicon = Icons.add_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "New User";
@@ -199,7 +217,10 @@ class _HomePageState extends State<HomePage> {
                             title: "Role Management",
                             onTap: () {
                               setState(() {
+                                onPress = () {};
+                                addicon = Icons.add_outlined;
                                 icon = CupertinoIcons.person_3;
+                                addicon = Icons.add_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "New Role";
@@ -216,6 +237,8 @@ class _HomePageState extends State<HomePage> {
                             title: "Hierarchy",
                             onTap: () {
                               setState(() {
+                                onPress = () {};
+                                addicon = Icons.add_outlined;
                                 icon = Icons.lan_outlined;
                                 uploadbutton = "Upload";
                                 subuploadbutton = "Upload Hierarchy Data";
@@ -239,6 +262,8 @@ class _HomePageState extends State<HomePage> {
                             title: "Client List for Registration",
                             onTap: () {
                               setState(() {
+                                onPress = null;
+                                addicon = null;
                                 icon = Icons.menu;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -264,6 +289,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Client Profile",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.person_outline;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -281,6 +307,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Dashboard",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.content_copy_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -298,6 +325,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Transaction for Confirmation",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.mobile_friendly_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -317,6 +345,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Transaction Log",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.content_copy_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -334,6 +363,7 @@ class _HomePageState extends State<HomePage> {
                             title: "SMS Logs",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.email_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -351,6 +381,7 @@ class _HomePageState extends State<HomePage> {
                             title: "SLF Request",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.archive_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -368,6 +399,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Transaction Log",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -385,6 +417,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Operation Dashboard",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -402,6 +435,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Authorized Reset Password and MPIN",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -419,6 +453,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Agent Dashboard",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -436,6 +471,7 @@ class _HomePageState extends State<HomePage> {
                             title: "List of Used Device ID",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.smartphone_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -453,6 +489,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Failed Enrollment List",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.list_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -470,6 +507,7 @@ class _HomePageState extends State<HomePage> {
                             title: "List of Agent",
                             onTap: () {
                               setState(() {
+                                onPress = null;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -719,6 +757,8 @@ class _HomePageState extends State<HomePage> {
                             title: "CSR Dashboard",
                             onTap: () {
                               setState(() {
+                                onPress = () {};
+                                addicon = Icons.add_outlined;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -736,6 +776,8 @@ class _HomePageState extends State<HomePage> {
                             title: "Broadcast Message",
                             onTap: () {
                               setState(() {
+                                onPress = () {};
+                                addicon = Icons.add_outlined;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -753,6 +795,8 @@ class _HomePageState extends State<HomePage> {
                             title: "Type of Concern",
                             onTap: () {
                               setState(() {
+                                onPress = () {};
+                                addicon = Icons.add_outlined;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -770,6 +814,8 @@ class _HomePageState extends State<HomePage> {
                             title: "CSR Hotline",
                             onTap: () {
                               setState(() {
+                                onPress = () {};
+                                addicon = Icons.add_outlined;
                                 icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -1075,12 +1121,13 @@ class _HomePageState extends State<HomePage> {
                   Header(
                       icon: icon,
                       header: header,
+                      addicon: addicon,
                       title: title,
                       addbutton: addbutton,
                       subaddbutton: subaddbutton,
                       uploadbutton: uploadbutton,
                       subuploadbutton: subuploadbutton,
-                      onPress: onPresss),
+                      onPress: onPress),
                   Contains(
                     child: homewidget,
                   )

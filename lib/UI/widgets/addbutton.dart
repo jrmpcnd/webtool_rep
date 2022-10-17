@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import '../utils/constant.dart';
+import '../utils/spacing.dart';
 import '../utils/text_styles.dart';
 
 class Addbutton extends StatefulWidget {
+  IconData? addicon;
   String? addbutton = "";
   String? subaddbutton = "";
   VoidCallback? onPress;
-  Addbutton({Key? key, this.addbutton, this.subaddbutton, this.onPress})
+  Addbutton(
+      {Key? key, this.addicon, this.addbutton, this.subaddbutton, this.onPress})
       : super(key: key);
 
   @override
@@ -24,8 +27,12 @@ class _AddbuttonState extends State<Addbutton> {
         style: ElevatedButton.styleFrom(backgroundColor: kLightPurpleColor1),
         onPressed: widget.onPress!,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Icon(Icons.add_outlined, size: 30.0),
+            Icon(
+              widget.addicon!,
+              size: 30.0,
+            ),
             Column(
               children: [
                 Text(widget.addbutton!,

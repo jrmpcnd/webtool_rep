@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const Widget horizontalSpaceSuperTiny = SizedBox(width: 2.0);
 const Widget horizontalSpaceTiny = SizedBox(width: 5.0);
 const Widget horizontalSpaceXTiny = SizedBox(width: 8.0);
 const Widget horizontalSpaceSmall = SizedBox(width: 10.0);
@@ -12,6 +13,7 @@ const Widget horizontalSpaceLarges = SizedBox(width: 100.0);
 const Widget horizontalSpaceLargest = SizedBox(width: 145.0);
 const Widget horizontalSpaceXLarge = SizedBox(width: 150.0);
 
+const Widget verticalSpaceSuperTiny = SizedBox(height: 2.0);
 const Widget verticalSpaceTiny = SizedBox(height: 5.0);
 const Widget verticalSpaceXTiny = SizedBox(height: 8.0);
 const Widget verticalSpaceSmall = SizedBox(height: 10.0);

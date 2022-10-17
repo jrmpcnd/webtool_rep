@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/constant.dart';
+import '../utils/text_styles.dart';
 
 class textfield extends StatefulWidget {
   TextEditingController? controller;
@@ -18,7 +19,7 @@ class _textfieldState extends State<textfield> {
       width: 450.0,
       child: TextField(
         controller: widget.controller,
-        style: const TextStyle(color: kBlackColor),
+        style: kTextStyle,
         decoration: InputDecoration(
           labelStyle: const TextStyle(fontSize: 12.0),
           hintStyle: const TextStyle(color: kSecondaryColor2),
