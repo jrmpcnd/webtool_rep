@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/screens/administration/hierarchy/addhierarchy/add_hierarchy.dart';
+import 'package:webtool_rep/UI/screens/administration/rolemanagement/addroles/add_roles.dart';
 import 'package:webtool_rep/UI/screens/administration/rolemanagement/role_management.dart';
 import 'package:webtool_rep/UI/screens/administration/usermanagement/adduser/add_user.dart';
+import 'package:webtool_rep/UI/screens/customerservice/csrdashboard/addcsrdashboard/add_csrdashboard.dart';
+import 'package:webtool_rep/UI/screens/homepage/main_dashboard.dart';
+import 'package:webtool_rep/UI/screens/login/change_password.dart';
 import 'package:webtool_rep/UI/screens/monitoring/agentdashboard/agent_dashboard.dart';
 import 'package:webtool_rep/UI/screens/monitoring/authorizedresetpassword/authorized_reset_password.dart';
 import 'package:webtool_rep/UI/screens/monitoring/failedenrollment/failed_enrollment.dart';
@@ -42,7 +47,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Widget> homewidget = [];
+  List<Widget> homewidget = [const Maindashboard()];
   String title = "Dashboard";
   String header = "Home";
   String addbutton = "";
@@ -52,6 +57,7 @@ class _HomePageState extends State<HomePage> {
   IconData? icon = Icons.home_outlined;
   IconData? addicon;
   VoidCallback? onPress;
+  VoidCallback? onTaps;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,6 +93,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Register Client",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = CupertinoIcons.cube;
@@ -106,6 +119,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Active Client",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = CupertinoIcons.cube;
@@ -125,6 +145,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Client Transaction",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = CupertinoIcons.cube;
@@ -144,6 +171,13 @@ class _HomePageState extends State<HomePage> {
                             title: "eLoad Transaction",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = CupertinoIcons.cube;
@@ -163,6 +197,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Bank Transaction",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = CupertinoIcons.cube;
@@ -188,6 +229,13 @@ class _HomePageState extends State<HomePage> {
                             title: "User Management",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 onPress = () {
                                   setState(() {
                                     icon = Icons.add_outlined;
@@ -217,7 +265,24 @@ class _HomePageState extends State<HomePage> {
                             title: "Role Management",
                             onTap: () {
                               setState(() {
-                                onPress = () {};
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Administration  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save All Roles";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addroles()];
+                                  });
+                                };
                                 addicon = Icons.add_outlined;
                                 icon = CupertinoIcons.person_3;
                                 addicon = Icons.add_outlined;
@@ -237,7 +302,24 @@ class _HomePageState extends State<HomePage> {
                             title: "Hierarchy",
                             onTap: () {
                               setState(() {
-                                onPress = () {};
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Administration  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Hierarchy";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addhierarchy()];
+                                  });
+                                };
                                 addicon = Icons.add_outlined;
                                 icon = Icons.lan_outlined;
                                 uploadbutton = "Upload";
@@ -262,6 +344,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Client List for Registration",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 onPress = null;
                                 addicon = null;
                                 icon = Icons.menu;
@@ -289,6 +378,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Client Profile",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.person_outline;
@@ -308,6 +404,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Dashboard",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.content_copy_outlined;
@@ -327,6 +430,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Transaction for Confirmation",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.mobile_friendly_outlined;
@@ -348,6 +458,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Transaction Log",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.content_copy_outlined;
@@ -367,6 +484,13 @@ class _HomePageState extends State<HomePage> {
                             title: "SMS Logs",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.email_outlined;
@@ -386,6 +510,13 @@ class _HomePageState extends State<HomePage> {
                             title: "SLF Request",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.archive_outlined;
@@ -405,6 +536,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Transaction Log",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.list_alt_outlined;
@@ -424,6 +562,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Operation Dashboard",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.list_alt_outlined;
@@ -443,6 +588,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Authorized Reset Password and MPIN",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.list_alt_outlined;
@@ -462,6 +614,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Agent Dashboard",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.list_alt_outlined;
@@ -481,6 +640,13 @@ class _HomePageState extends State<HomePage> {
                             title: "List of Used Device ID",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.smartphone_outlined;
@@ -500,6 +666,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Failed Enrollment List",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.list_outlined;
@@ -519,6 +692,13 @@ class _HomePageState extends State<HomePage> {
                             title: "List of Agent",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 addicon = null;
                                 onPress = null;
                                 icon = Icons.list_alt_outlined;
@@ -766,13 +946,31 @@ class _HomePageState extends State<HomePage> {
                         child: [
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.phone_outlined,
+                            icon: Icons.person_outline,
                             title: "CSR Dashboard",
                             onTap: () {
                               setState(() {
-                                onPress = () {};
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header =
+                                        "Customer Service  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save All User Data";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addcsrdashboard()];
+                                  });
+                                };
+                                icon = Icons.perm_identity;
                                 addicon = Icons.add_outlined;
-                                icon = Icons.list_alt_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
                                 addbutton = "New CS Dashboard";
@@ -789,6 +987,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Broadcast Message",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 onPress = () {};
                                 addicon = Icons.add_outlined;
                                 icon = Icons.list_alt_outlined;
@@ -808,6 +1013,13 @@ class _HomePageState extends State<HomePage> {
                             title: "Type of Concern",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 onPress = () {};
                                 addicon = Icons.add_outlined;
                                 icon = Icons.list_alt_outlined;
@@ -827,6 +1039,13 @@ class _HomePageState extends State<HomePage> {
                             title: "CSR Hotline",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
                                 onPress = () {};
                                 addicon = Icons.add_outlined;
                                 icon = Icons.list_alt_outlined;
@@ -1132,15 +1351,17 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 children: [
                   Header(
-                      icon: icon,
-                      header: header,
-                      addicon: addicon,
-                      title: title,
-                      addbutton: addbutton,
-                      subaddbutton: subaddbutton,
-                      uploadbutton: uploadbutton,
-                      subuploadbutton: subuploadbutton,
-                      onPress: onPress),
+                    icon: icon,
+                    header: header,
+                    addicon: addicon,
+                    title: title,
+                    addbutton: addbutton,
+                    subaddbutton: subaddbutton,
+                    uploadbutton: uploadbutton,
+                    subuploadbutton: subuploadbutton,
+                    onPress: onPress,
+                    onTaps: onTaps,
+                  ),
                   Contains(
                     child: homewidget,
                   )

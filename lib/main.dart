@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webtool_rep/core/providers/cardprovider.dart';
 import 'UI/screens/homepage/homepage.dart';
+import 'UI/screens/login/login_screen.dart';
 import 'UI/utils/constant.dart';
 import 'UI/utils/web_webview.dart';
 
@@ -13,8 +14,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -27,10 +26,10 @@ class MyApp extends StatelessWidget {
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: kWhiteColor,
             textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-                .apply(bodyColor: Colors.white),
+                .apply(bodyColor: kWhiteColor),
             canvasColor: kSecondaryColor2,
           ),
-          home: HomePage()),
+          home: Loginpage()),
     );
   }
 }

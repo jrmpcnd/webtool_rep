@@ -23,6 +23,13 @@ TextStyle kTextStyle = GoogleFonts.poppins(
   color: kBlackColor,
 );
 
+TextStyle kHintStyle = GoogleFonts.poppins(
+  fontWeight: FontWeight.normal,
+  fontSize: 16,
+  height: 1.5,
+  color: kSecondaryColor2,
+);
+
 TextStyle kHeading3TextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.w600,
   fontSize: 18,

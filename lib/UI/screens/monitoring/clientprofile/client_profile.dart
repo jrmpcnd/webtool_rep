@@ -95,7 +95,7 @@ class _ClientprofileState extends State<Clientprofile> {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 5,
                           blurRadius: 7,
-                          offset: Offset(0, 3)),
+                          offset: const Offset(0, 3)),
                     ],
                   ),
                   height: 250.0,
@@ -186,13 +186,14 @@ class _ClientprofileState extends State<Clientprofile> {
                                 ),
                               ),
                               verticalSpaceTiny,
-                              SizedBox(
+                              Container(
                                 height: 35.0,
                                 width: 300.0,
-                                child: ElevatedButton(
+                                child: ElevatedButton.icon(
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: kTertiaryColor),
-                                  child: const Text('Unrestricted'),
+                                  icon: const Icon(Icons.lock_open_outlined),
+                                  label: const Text('Unrestricted'),
                                   onPressed: () {
                                     setState(() {});
                                   },

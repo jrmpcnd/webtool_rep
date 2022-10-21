@@ -5,7 +5,9 @@ import '../utils/text_styles.dart';
 class textfield extends StatefulWidget {
   TextEditingController? controller;
   String? hintext = "";
-  textfield({Key? key, this.hintext, this.controller}) : super(key: key);
+  Widget? suffixIcon;
+  textfield({Key? key, this.hintext, this.controller, this.suffixIcon})
+      : super(key: key);
 
   @override
   State<textfield> createState() => _textfieldState();
@@ -21,6 +23,7 @@ class _textfieldState extends State<textfield> {
         controller: widget.controller,
         style: kTextStyle,
         decoration: InputDecoration(
+          suffixIcon: widget.suffixIcon,
           labelStyle: const TextStyle(fontSize: 12.0),
           hintStyle: const TextStyle(color: kSecondaryColor2),
           contentPadding: const EdgeInsets.only(left: 10.0),

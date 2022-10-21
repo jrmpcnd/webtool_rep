@@ -95,7 +95,7 @@ class _BroadcastmessageState extends State<Broadcastmessage> {
                                   ),
                                 ),
                               ),
-                              horizontalSpaceLargest,
+                              horizontalSpaceMLarge,
                               SizedBox(
                                 width: 100.0,
                                 height: 35.0,

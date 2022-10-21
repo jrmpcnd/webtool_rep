@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
@@ -57,11 +58,15 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                             children: [
                               Row(
                                 children: [
-                                  elevatedbuttonpopup(
-                                      label: "Start Send Date", width: 200.0),
-                                  horizontalSpaceLarge,
-                                  elevatedbuttonpopup(
-                                      label: "End Send Date", width: 200.0),
+                                  WebDatePicker(
+                                    hinttext: "Date Start",
+                                    onChange: (value) {},
+                                  ),
+                                  horizontalSpaceRegular,
+                                  WebDatePicker(
+                                    hinttext: "Date End",
+                                    onChange: (value) {},
+                                  ),
                                 ],
                               ),
                             ],
@@ -131,10 +136,10 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                               dropdowns(dropdown: "--Status--"),
                               verticalSpaceTiny,
                               elevatedbuttonpopup(
-                                  label: "Source Branch", width: 450.0),
+                                  label: "Source Branch", width: 400.0),
                               verticalSpaceTiny,
                               elevatedbuttonpopup(
-                                  label: "Target Branch", width: 450.0),
+                                  label: "Target Branch", width: 400.0),
                               verticalSpaceMedium,
                             ],
                           ),

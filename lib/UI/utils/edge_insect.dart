@@ -21,6 +21,8 @@ EdgeInsetsGeometry get kEdgeInsetsAllTiny => const EdgeInsets.all(6.0);
 
 EdgeInsetsGeometry get kEdgeInsetsAllSmall => const EdgeInsets.all(8.0);
 
+EdgeInsetsGeometry get kEdgeInsetsAllSNormal => const EdgeInsets.all(10.0);
+
 EdgeInsetsGeometry get kEdgeInsetsAllNormal => const EdgeInsets.all(12.0);
 
 EdgeInsetsGeometry get kEdgeInsetsAllLarge => const EdgeInsets.all(24.0);

@@ -59,9 +59,9 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                             hintext: "CID",
                           ),
                           verticalSpaceTiny,
-                          elevatedbuttonpopup(label: "Branch", width: 450.0),
+                          elevatedbuttonpopup(label: "Branch", width: 400.0),
                           verticalSpaceTiny,
-                          elevatedbuttonpopup(label: "Unit", width: 450.0),
+                          elevatedbuttonpopup(label: "Unit", width: 400.0),
                           verticalSpaceTiny,
                           textfield(
                             hintext: "Mobile Number",
@@ -82,7 +82,7 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                                   ),
                                 ],
                               ),
-                              horizontalSpaceLarge,
+                              horizontalSpaceRegular,
                               Column(
                                 children: [
                                   WebDatePicker(
@@ -153,7 +153,7 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               elevatedbuttonpopup(
-                                  label: "Center", width: 450.0),
+                                  label: "Center", width: 400.0),
                               verticalSpaceTiny,
                               dropdowns(dropdown: "--Account Status--"),
                               verticalSpaceTiny,
@@ -170,7 +170,6 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                     ],
                   ),
                 ),
-                verticalSpaceRegular,
                 Container(
                   decoration: BoxDecoration(
                     color: kTertiaryColor5,

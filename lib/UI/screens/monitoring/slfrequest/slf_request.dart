@@ -56,7 +56,7 @@ class _SlfrequestState extends State<Slfrequest> {
                           ),
                           verticalSpaceTiny,
                           elevatedbuttonpopup(
-                              label: "Branch Name", width: 450.0),
+                              label: "Branch Name", width: 400.0),
                           verticalSpaceSmall,
                           Row(
                             children: [
@@ -113,7 +113,7 @@ class _SlfrequestState extends State<Slfrequest> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               elevatedbuttonpopup(
-                                  label: "Request Date", width: 450.0),
+                                  label: "Request Date", width: 400.0),
                               verticalSpaceLarge,
                               Row(
                                 children: [

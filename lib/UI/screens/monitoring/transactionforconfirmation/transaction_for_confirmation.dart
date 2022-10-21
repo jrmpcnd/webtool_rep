@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
@@ -116,17 +117,21 @@ class _TransactionforconfirmationState
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               elevatedbuttonpopup(
-                                  label: "Branch", width: 450.0),
+                                  label: "Branch", width: 400.0),
                               verticalSpaceTiny,
                               Column(
                                 children: [
                                   Row(
                                     children: [
-                                      elevatedbuttonpopup(
-                                          label: "Date Start", width: 200.0),
-                                      horizontalSpaceLarge,
-                                      elevatedbuttonpopup(
-                                          label: "Date End", width: 200.0),
+                                      WebDatePicker(
+                                        hinttext: "Date Start",
+                                        onChange: (value) {},
+                                      ),
+                                      horizontalSpaceRegular,
+                                      WebDatePicker(
+                                        hinttext: "Date End",
+                                        onChange: (value) {},
+                                      ),
                                     ],
                                   ),
                                   verticalSpaceXLarge,

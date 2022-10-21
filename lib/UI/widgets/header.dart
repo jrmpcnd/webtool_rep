@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/screens/login/login_screen.dart';
 import 'package:webtool_rep/UI/widgets/uploadbutton.dart';
 import '../utils/constant.dart';
 import '../utils/edge_insect.dart';
@@ -18,6 +19,7 @@ class Header extends StatefulWidget {
   String? uploadbutton = "";
   String? subuploadbutton = "";
   VoidCallback? onPress;
+  VoidCallback? onTaps;
   Header({
     Key? key,
     this.icon,
@@ -29,6 +31,7 @@ class Header extends StatefulWidget {
     this.uploadbutton,
     this.subuploadbutton,
     this.onPress,
+    this.onTaps,
   }) : super(key: key);
 
   @override
@@ -65,7 +68,7 @@ class _HeaderState extends State<Header> {
               ],
             ),
             const Spacer(),
-            Container(
+            SizedBox(
               height: 50.0,
               width: 50.0,
               child: InkWell(
@@ -79,16 +82,25 @@ class _HeaderState extends State<Header> {
                     backgroundImage: AssetImage('assets/images/admin.png'),
                   ),
                   itemBuilder: (context) => [
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       child: ListTile(
-                        leading: Icon(Icons.lock),
-                        title: Text('Change Password'),
+                        leading: const Icon(Icons.lock),
+                        title: const Text('Change Password'),
+                        onTap: widget.onTaps,
                       ),
                     ),
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       child: ListTile(
-                        leading: Icon(Icons.logout),
-                        title: Text('Logout'),
+                        leading: const Icon(Icons.logout),
+                        title: const Text('Logout'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Loginpage(),
+                            ),
+                          );
+                        },
                         // onTap: () {
                         //   AlertDialog alert = const AlertDialog(
                         //     title: Text('Are you sure you want to Logout?'),

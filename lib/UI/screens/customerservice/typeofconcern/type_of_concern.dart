@@ -99,7 +99,7 @@ class _TypeofconcernState extends State<Typeofconcern> {
                                   ),
                                 ),
                               ),
-                              horizontalSpaceLargest,
+                              horizontalSpaceMLarge,
                               SizedBox(
                                 width: 100.0,
                                 height: 35.0,
