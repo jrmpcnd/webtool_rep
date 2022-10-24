@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
@@ -9,15 +8,14 @@ import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
-class Clientlistforregistration extends StatefulWidget {
-  const Clientlistforregistration({Key? key}) : super(key: key);
+class Webtoolusereport extends StatefulWidget {
+  const Webtoolusereport({Key? key}) : super(key: key);
 
   @override
-  State<Clientlistforregistration> createState() =>
-      _ClientlistforregistrationState();
+  State<Webtoolusereport> createState() => _WebtoolusereportState();
 }
 
-class _ClientlistforregistrationState extends State<Clientlistforregistration> {
+class _WebtoolusereportState extends State<Webtoolusereport> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,29 +53,17 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          textfield(
-                            hintext: "CID",
-                          ),
-                          verticalSpaceTiny,
-                          elevatedbuttonpopup(label: "Branch", width: 400.0),
-                          verticalSpaceTiny,
-                          elevatedbuttonpopup(label: "Unit", width: 400.0),
-                          verticalSpaceTiny,
-                          textfield(
-                            hintext: "Mobile Number",
-                          ),
-                          verticalSpaceTiny,
                           Row(
                             children: [
                               Column(
                                 children: [
                                   WebDatePicker(
-                                    hinttext: "Enroll Date Start",
+                                    hinttext: "Submitted Date Start",
                                     onChange: (value) {},
                                   ),
                                   verticalSpaceTiny,
                                   WebDatePicker(
-                                    hinttext: "Activate Date Start",
+                                    hinttext: "Completed Date Start",
                                     onChange: (value) {},
                                   ),
                                 ],
@@ -86,7 +72,7 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                               Column(
                                 children: [
                                   WebDatePicker(
-                                    hinttext: "Enroll Date End",
+                                    hinttext: "Submitted Date End",
                                     onChange: (value) {},
                                   ),
                                   verticalSpaceTiny,
@@ -98,7 +84,11 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                               ),
                             ],
                           ),
-                          verticalSpaceRegular,
+                          verticalSpaceTiny,
+                          textfield(
+                            hintext: "CID",
+                          ),
+                          verticalSpaceXRegular,
                           Row(
                             children: [
                               SizedBox(
@@ -152,17 +142,18 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              verticalSpaceTiny,
+                              textfield(
+                                hintext: "Report ID",
+                              ),
+                              verticalSpaceTiny,
                               elevatedbuttonpopup(
                                   label: "Center", width: 400.0),
                               verticalSpaceTiny,
-                              dropdowns(dropdown: "--Account Status--"),
-                              verticalSpaceTiny,
-                              dropdowns(dropdown: "--SMS Status--"),
-                              verticalSpaceTiny,
                               textfield(
-                                hintext: "Account Number",
+                                hintext: "Username",
                               ),
-                              verticalSpaceMassive,
+                              verticalSpaceLarge,
                             ],
                           ),
                         ],
@@ -170,7 +161,7 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                     ],
                   ),
                 ),
-                verticalSpaceRegular,
+                verticalSpaceXRegular,
                 Container(
                   decoration: BoxDecoration(
                     color: kTertiaryColor5,

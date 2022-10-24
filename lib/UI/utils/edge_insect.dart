@@ -27,4 +27,6 @@ EdgeInsetsGeometry get kEdgeInsetsAllNormal => const EdgeInsets.all(12.0);
 
 EdgeInsetsGeometry get kEdgeInsetsAllLarge => const EdgeInsets.all(24.0);
 
+EdgeInsetsGeometry get kEdgeInsetsAllLargest => const EdgeInsets.all(50.0);
+
 const defaultPadding = 16.0;

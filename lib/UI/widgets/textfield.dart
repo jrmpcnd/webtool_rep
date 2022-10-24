@@ -6,8 +6,15 @@ class textfield extends StatefulWidget {
   TextEditingController? controller;
   String? hintext = "";
   Widget? suffixIcon;
-  textfield({Key? key, this.hintext, this.controller, this.suffixIcon})
-      : super(key: key);
+  double? width;
+
+  textfield({
+    Key? key,
+    this.hintext,
+    this.controller,
+    this.suffixIcon,
+    this.width = 400,
+  }) : super(key: key);
 
   @override
   State<textfield> createState() => _textfieldState();
@@ -18,7 +25,7 @@ class _textfieldState extends State<textfield> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 35.0,
-      width: 400.0,
+      width: widget.width,
       child: TextField(
         controller: widget.controller,
         style: kTextStyle,

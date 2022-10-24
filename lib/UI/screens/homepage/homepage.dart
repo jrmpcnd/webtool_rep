@@ -16,6 +16,7 @@ import 'package:webtool_rep/UI/screens/monitoring/slfrequest/slf_request.dart';
 import 'package:webtool_rep/UI/screens/monitoring/smslogs/sms_logs.dart';
 import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/transaction_for_confirmation.dart';
 import 'package:webtool_rep/UI/screens/monitoring/transactionlog/transaction_log.dart';
+import 'package:webtool_rep/UI/screens/reports/webtooluserreport/webtooluser_report.dart';
 import 'package:webtool_rep/UI/widgets/header.dart';
 import '../../../UI/utils/constant.dart';
 import '../../../UI/widgets/contains.dart';
@@ -238,6 +239,19 @@ class _HomePageState extends State<HomePage> {
                                 };
                                 onPress = () {
                                   setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.perm_identity;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New User";
+                                        subaddbutton = "Add New User Data";
+                                        header = "Administration";
+                                        title = "User Management";
+                                        homewidget = [const Usermanagement()];
+                                      });
+                                    };
                                     icon = Icons.add_outlined;
                                     addicon = Icons.save_outlined;
                                     header = "Administration  >  Create / Edit";
@@ -274,6 +288,20 @@ class _HomePageState extends State<HomePage> {
                                 };
                                 onPress = () {
                                   setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = CupertinoIcons.person_3;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Role";
+                                        subaddbutton = "Add New Role Data";
+                                        header = "Administration";
+                                        title = "Role Management";
+                                        homewidget = [const Rolemanagement()];
+                                      });
+                                    };
                                     icon = Icons.add_outlined;
                                     addicon = Icons.save_outlined;
                                     header = "Administration  >  Create / Edit";
@@ -311,6 +339,20 @@ class _HomePageState extends State<HomePage> {
                                 };
                                 onPress = () {
                                   setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.lan_outlined;
+                                        uploadbutton = "Upload";
+                                        subuploadbutton =
+                                            "Upload Hierarchy Data";
+                                        addbutton = "New Hierarchy";
+                                        subaddbutton = "Add New Hierarchy Data";
+                                        header = "Administration";
+                                        title = "Hierarchy";
+                                        homewidget = [const Hierarchy()];
+                                      });
+                                    };
                                     icon = Icons.add_outlined;
                                     addicon = Icons.save_outlined;
                                     header = "Administration  >  Create / Edit";
@@ -1071,8 +1113,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Web Tool User Listing",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Client Profile";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = null;
+                                addicon = null;
+                                icon = Icons.menu;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Reports";
                                 title = "Web Tool User Listing";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Webtoolusereport()];
                               });
                             },
                           ),

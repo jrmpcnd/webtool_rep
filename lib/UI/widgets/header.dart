@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:webtool_rep/UI/screens/login/login_screen.dart';
+import 'package:webtool_rep/UI/widgets/searchlist.dart';
 import 'package:webtool_rep/UI/widgets/uploadbutton.dart';
 import '../utils/constant.dart';
 import '../utils/edge_insect.dart';
@@ -39,6 +41,7 @@ class Header extends StatefulWidget {
 }
 
 class _HeaderState extends State<Header> {
+  String? userSelected;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height * 0.50;
@@ -68,6 +71,90 @@ class _HeaderState extends State<Header> {
               ],
             ),
             const Spacer(),
+            SizedBox(
+                height: 40.0,
+                width: 300.0,
+                child: TypeAheadField(
+                  noItemsFoundBuilder: (context) => const SizedBox(
+                    height: 50.0,
+                    child: Center(
+                      child: Text(
+                        'No Item Found',
+                        style: TextStyle(color: kBlackColor),
+                      ),
+                    ),
+                  ),
+                  suggestionsBoxDecoration: const SuggestionsBoxDecoration(
+                      color: Colors.white,
+                      elevation: 4.0,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      )),
+                  debounceDuration: const Duration(milliseconds: 400),
+                  textFieldConfiguration: TextFieldConfiguration(
+                    style: const TextStyle(color: kBlackColor),
+                    decoration: InputDecoration(
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                        15.0,
+                      )),
+                      enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15.0),
+                          ),
+                          borderSide: BorderSide(color: kBlackColor)),
+                      hintText: userSelected ?? "Search...",
+                      contentPadding: const EdgeInsets.only(top: 4, left: 10),
+                      hintStyle:
+                          const TextStyle(color: kBlackColor, fontSize: 14),
+                      suffixIcon: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.search, color: kBlackColor),
+                      ),
+                    ),
+                  ),
+                  suggestionsCallback: (value) {
+                    return StateService.getSuggestions(value);
+                  },
+                  itemBuilder: (context, String suggestion) {
+                    return Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Icon(
+                          Icons.search_outlined,
+                          color: kBlackColor,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Text(
+                              style: const TextStyle(color: kBlackColor),
+                              suggestion,
+                              maxLines: 1,
+                              // style: TextStyle(color: Colors.red),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        )
+                      ],
+                    );
+                  },
+                  onSuggestionSelected: (String suggestion) {
+                    setState(() {
+                      userSelected = suggestion;
+                    });
+                  },
+                )),
+            horizontalSpaceRegular,
             SizedBox(
               height: 50.0,
               width: 50.0,
