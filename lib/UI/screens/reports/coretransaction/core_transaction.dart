@@ -8,14 +8,14 @@ import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
-class Webtoolusereport extends StatefulWidget {
-  const Webtoolusereport({Key? key}) : super(key: key);
+class Coretransaction extends StatefulWidget {
+  const Coretransaction({Key? key}) : super(key: key);
 
   @override
-  State<Webtoolusereport> createState() => _WebtoolusereportState();
+  State<Coretransaction> createState() => _CoretransactionState();
 }
 
-class _WebtoolusereportState extends State<Webtoolusereport> {
+class _CoretransactionState extends State<Coretransaction> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +44,7 @@ class _WebtoolusereportState extends State<Webtoolusereport> {
                           offset: Offset(0, 3)),
                     ],
                   ),
-                  height: 200.0,
+                  height: 150.0,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,34 +58,20 @@ class _WebtoolusereportState extends State<Webtoolusereport> {
                               Row(
                                 children: [
                                   WebDatePicker(
-                                    hinttext: "Submitted Date Start",
+                                    width: 300.0,
+                                    hinttext: "Date Start",
                                     onChange: (value) {},
                                   ),
                                   horizontalSpaceRegular,
                                   WebDatePicker(
-                                    hinttext: "Submitted Date End",
-                                    onChange: (value) {},
-                                  ),
-                                ],
-                              ),
-                              verticalSpaceTiny,
-                              Row(
-                                children: [
-                                  WebDatePicker(
-                                    hinttext: "Completed Date Start",
-                                    onChange: (value) {},
-                                  ),
-                                  horizontalSpaceRegular,
-                                  WebDatePicker(
-                                    hinttext: "Completed Date End",
+                                    width: 300.0,
+                                    hinttext: "Date End",
                                     onChange: (value) {},
                                   ),
                                 ],
                               ),
                             ],
                           ),
-                          verticalSpaceTiny,
-                          dropdowns(dropdown: "--Status--"),
                           verticalSpaceSmall,
                           Row(
                             children: [
@@ -108,49 +94,6 @@ class _WebtoolusereportState extends State<Webtoolusereport> {
                                   ),
                                 ),
                               ),
-                              horizontalSpaceTiny,
-                              SizedBox(
-                                width: 100.0,
-                                height: 35.0,
-                                child: ElevatedButton.icon(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kSecondaryColor2)),
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.refresh,
-                                    size: 20.0,
-                                  ),
-                                  label: Text(
-                                    'Reset',
-                                    style: kSmallRegularTextStyle,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      horizontalSpaceMedium,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              textfield(
-                                hintext: "Report ID",
-                              ),
-                              verticalSpaceTiny,
-                              elevatedbuttonpopup(
-                                  label: "Source Branch", width: 400.0),
-                              verticalSpaceTiny,
-                              textfield(
-                                hintext: "Username",
-                              ),
-                              verticalSpaceMedium,
                             ],
                           ),
                         ],

@@ -16,6 +16,7 @@ import 'package:webtool_rep/UI/screens/monitoring/slfrequest/slf_request.dart';
 import 'package:webtool_rep/UI/screens/monitoring/smslogs/sms_logs.dart';
 import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/transaction_for_confirmation.dart';
 import 'package:webtool_rep/UI/screens/monitoring/transactionlog/transaction_log.dart';
+import 'package:webtool_rep/UI/screens/reports/resendsmsactivation/resend_sms_activation.dart';
 import 'package:webtool_rep/UI/screens/reports/webtooluserreport/webtooluser_report.dart';
 import 'package:webtool_rep/UI/widgets/header.dart';
 import '../../../UI/utils/constant.dart';
@@ -39,6 +40,28 @@ import '../monitoring/clientprofile/client_profile.dart';
 import '../monitoring/operationdashboard/operation_dashboard.dart';
 import '../monitoring/remitancetransactionlog/remittance_transaction_log.dart';
 import '../monitoring/remittancedashboard/remittance_dashboard.dart';
+import '../reports/Remittancesent/remittance_sent.dart';
+import '../reports/accountstatusreport/account_status_report.dart';
+import '../reports/activatedmerchant/activated_merchant.dart';
+import '../reports/activityhistory/activity_history.dart';
+import '../reports/coretransaction/core_transaction.dart';
+import '../reports/csdashboard/cs_dashboard.dart';
+import '../reports/deactivatedmerchant/deactivated_merchant.dart';
+import '../reports/failedenrollmentreport/failed_enrollment_report.dart';
+import '../reports/igaterecentiliation/igate_recentiliation.dart';
+import '../reports/listofagentreport/list_of_agent_report.dart';
+import '../reports/loginlogout/login_logout.dart';
+import '../reports/mpinchangepassword/mpin_change_password.dart';
+import '../reports/reconnccm/reconn_ccm.dart';
+import '../reports/registerclients/register_clients.dart';
+import '../reports/remittancecancelled/remittance_cancelled.dart';
+import '../reports/remittanceclaimed/Remittance_claimed.dart';
+import '../reports/smslogreport/sms_log_report.dart';
+import '../reports/suspicioustransactio/suspicious_transaction.dart';
+import '../reports/transactionlog/transaction_log.dart';
+import '../reports/useddeviceid/used_device_id.dart';
+import '../reports/useractivitylogs/user_activity_logs.dart';
+import '../reports/validtransaction/valid_transaction.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -1109,280 +1132,1176 @@ class _HomePageState extends State<HomePage> {
                         child: [
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
-                            title: "Web Tool User Listing",
+                            icon: Icons.content_copy_outlined,
+                            title: "Webtool User Listing",
                             onTap: () {
                               setState(() {
                                 onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
+                                    header = "Webtool User Listing";
                                     title = "Change Password";
                                     homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = null;
-                                addicon = null;
-                                icon = Icons.menu;
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Webtool User Listing";
+                                        homewidget = [const Webtoolusereport()];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
                                 header = "Reports";
-                                title = "Web Tool User Listing";
+                                title = "Webtool User Listing";
                                 homewidget = [const Webtoolusereport()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Transaction Logs",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Transaction Logs";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Transaction Logs";
+                                        homewidget = [const Transactionlogs()];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "Transaction Logs";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Transactionlogs()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Remittance Sent",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Remittance Sent";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Remittance Sent";
+                                        homewidget = [const Remittancesent()];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "Remittance Sent";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Remittancesent()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Remittance Claimed",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Remittance Claimed";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Remittance Claimed";
+                                        homewidget = [
+                                          const Remittanceclaimed()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "Remittance Claimed";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Remittanceclaimed()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Remittance Cancelled",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Remittance Cancelled";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Remittance Cancelled";
+                                        homewidget = [
+                                          const Remittancecancelled()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "Remittance Cancelled";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Remittancecancelled()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Activity History",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Activity History";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Activity History";
+                                        homewidget = [const Activityhistory()];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "Activity History";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Activityhistory()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
-                            title: "MPIN Password Change",
+                            icon: Icons.content_copy_outlined,
+                            title: "MPIN Change - Password",
                             onTap: () {
                               setState(() {
-                                title = "MPIN Password Change";
-                                // homewidget = [const Banktransaction()];
+                                onTaps = () {
+                                  setState(() {
+                                    header = "MPIN Change - Password";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "MPIN Change - Password";
+                                        homewidget = [
+                                          const MPINchangepassword()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
+                                title = "MPIN Change - Password";
+                                homewidget = [const MPINchangepassword()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
-                            title: "Resend SMS Activation ",
+                            icon: Icons.content_copy_outlined,
+                            title: "Resend SMS Activation",
                             onTap: () {
                               setState(() {
-                                title = "Resend SMS Activation ";
-                                // homewidget = [const Banktransaction()];
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Resend SMS Activation";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Resend SMS Activation";
+                                        homewidget = [
+                                          const Resendsmsactivation()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
+                                title = "Resend SMS Activation";
+                                homewidget = [const Resendsmsactivation()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
-                            title: "Login Logout",
+                            icon: Icons.content_copy_outlined,
+                            title: "Login - Logout",
                             onTap: () {
                               setState(() {
-                                title = "Login Logout";
-                                // homewidget = [const Banktransaction()];
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Login - Logout";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Login - Logout";
+                                        homewidget = [const Loginlogout()];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
+                                title = "Login - Logout";
+                                homewidget = [const Loginlogout()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "User Activity Logs",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "User Activity Logs";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "User Activity Logs";
+                                        homewidget = [const Useractivitylogs()];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "User Activity Logs";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Useractivitylogs()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Suspicious Transaction",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Suspicious Transaction";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Suspicious Transaction";
+                                        homewidget = [
+                                          const Suspicioustransaction()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "Suspicious Transaction";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Suspicioustransaction()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
-                            title: "Registered Clients",
+                            icon: Icons.content_copy_outlined,
+                            title: "Register Clients",
                             onTap: () {
                               setState(() {
-                                title = "Registered Clients";
-                                // homewidget = [const Banktransaction()];
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Register Clients";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Register Clients";
+                                        homewidget = [const Registerclients()];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
+                                title = "Register Clients";
+                                homewidget = [const Registerclients()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Valid Transaction",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Valid Transaction";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Valid Transaction";
+                                        homewidget = [const Validtransaction()];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "Valid Transaction";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Validtransaction()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "CS Dashboard",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "CS Dashboard";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "CS Dashboard";
+                                        homewidget = [const CSdashboard()];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "CS Dashboard";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const CSdashboard()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
-                            title: "Recon CCM",
+                            icon: Icons.content_copy_outlined,
+                            title: "Reconn CCM",
                             onTap: () {
                               setState(() {
-                                title = "Recon CCM";
-                                // homewidget = [const Banktransaction()];
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Reconn CCM";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Reconn CCM";
+                                        homewidget = [const Reconnccm()];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
+                                title = "Reconn CCM";
+                                homewidget = [const Reconnccm()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "SMS Log Report",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "SMS Log Report";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "SMS Log Report";
+                                        homewidget = [const Smslogreport()];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "SMS Log Report";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Smslogreport()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Account Status Report",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Account Status Report";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Account Status Report";
+                                        homewidget = [
+                                          const Accountstatusreport()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "Account Status Report";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Accountstatusreport()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "List of Agent Report",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "List of Agent Report";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "List of Agent Report";
+                                        homewidget = [
+                                          const Listofagentreport()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "List of Agent Report";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Listofagentreport()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Igate Recentiliation",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Igate Recentiliation";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Igate Recentiliation";
+                                        homewidget = [
+                                          const Igaterecentiliation()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "Igate Recentiliation";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Igaterecentiliation()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
-                            title: "Activity Merchant",
+                            icon: Icons.content_copy_outlined,
+                            title: "Activated Merchant",
                             onTap: () {
                               setState(() {
-                                title = "Activity Merchant";
-                                // homewidget = [const Banktransaction()];
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Activated Merchant";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Activated Merchant";
+                                        homewidget = [
+                                          const Activatedmerchant()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
+                                title = "Activated Merchant";
+                                homewidget = [const Activatedmerchant()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Deactivated Merchant",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Deactivated Merchant";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Activated Merchant";
+                                        homewidget = [
+                                          const Deactivatedmerchant()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "Deactivated Merchant";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Deactivatedmerchant()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Used Device ID",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Used Device ID";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Used Device ID";
+                                        homewidget = [const Useddeviceid()];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "Used Device ID";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Useddeviceid()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Failed Enrollment Report",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Failed Enrollment Report";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        icon = Icons.content_copy_outlined;
+                                        addicon = Icons.report_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Report";
+                                        subaddbutton = "Generate Reports";
+                                        header = "Reports";
+                                        title = "Failed Enrollment Report";
+                                        homewidget = [
+                                          const Failedenrollmentreport()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.report_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Report  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Report";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addusers()];
+                                  });
+                                };
+                                icon = Icons.content_copy_outlined;
+                                addicon = Icons.report_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Report";
+                                subaddbutton = "Generate Reports";
+                                header = "Reports";
                                 title = "Failed Enrollment Report";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Failedenrollmentreport()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.content_copy_outlined,
                             title: "Core Transaction",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Core Transaction";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = null;
+                                addicon = null;
+                                icon = Icons.content_copy_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "";
+                                subaddbutton = "";
+                                header = "Enrollment";
                                 title = "Core Transaction";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Coretransaction()];
                               });
                             },
                           ),

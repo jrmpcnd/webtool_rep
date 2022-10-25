@@ -8,14 +8,14 @@ import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
-class Webtoolusereport extends StatefulWidget {
-  const Webtoolusereport({Key? key}) : super(key: key);
+class MPINchangepassword extends StatefulWidget {
+  const MPINchangepassword({Key? key}) : super(key: key);
 
   @override
-  State<Webtoolusereport> createState() => _WebtoolusereportState();
+  State<MPINchangepassword> createState() => _MPINchangepasswordState();
 }
 
-class _WebtoolusereportState extends State<Webtoolusereport> {
+class _MPINchangepasswordState extends State<MPINchangepassword> {
   @override
   Widget build(BuildContext context) {
     return Container(

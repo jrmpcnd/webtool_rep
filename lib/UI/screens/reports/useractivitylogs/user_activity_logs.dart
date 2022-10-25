@@ -8,14 +8,14 @@ import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
-class Webtoolusereport extends StatefulWidget {
-  const Webtoolusereport({Key? key}) : super(key: key);
+class Useractivitylogs extends StatefulWidget {
+  const Useractivitylogs({Key? key}) : super(key: key);
 
   @override
-  State<Webtoolusereport> createState() => _WebtoolusereportState();
+  State<Useractivitylogs> createState() => _UseractivitylogsState();
 }
 
-class _WebtoolusereportState extends State<Webtoolusereport> {
+class _UseractivitylogsState extends State<Useractivitylogs> {
   @override
   Widget build(BuildContext context) {
     return Container(
