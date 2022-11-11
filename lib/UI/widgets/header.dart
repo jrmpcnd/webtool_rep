@@ -158,51 +158,48 @@ class _HeaderState extends State<Header> {
             SizedBox(
               height: 50.0,
               width: 50.0,
-              child: InkWell(
-                onTap: () {},
-                child: PopupMenuButton(
-                  tooltip: 'Profile Menu',
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0)),
-                  child: const CircleAvatar(
-                    radius: 15,
-                    backgroundImage: AssetImage('assets/images/admin.png'),
-                  ),
-                  itemBuilder: (context) => [
-                    PopupMenuItem(
-                      child: ListTile(
-                        leading: const Icon(Icons.lock),
-                        title: const Text('Change Password'),
-                        onTap: widget.onTaps,
-                      ),
-                    ),
-                    PopupMenuItem(
-                      child: ListTile(
-                        leading: const Icon(Icons.logout),
-                        title: const Text('Logout'),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Loginpage(),
-                            ),
-                          );
-                        },
-                        // onTap: () {
-                        //   AlertDialog alert = const AlertDialog(
-                        //     title: Text('Are you sure you want to Logout?'),
-                        //   );
-                        //   showDialog(
-                        //     context: context,
-                        //     builder: (BuildContext context) {
-                        //       return alert;
-                        //     },
-                        //   );
-                        // },
-                      ),
-                    ),
-                  ],
+              child: PopupMenuButton(
+                tooltip: 'Profile Menu',
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0)),
+                child: const CircleAvatar(
+                  radius: 15,
+                  backgroundImage: AssetImage('assets/images/admin.png'),
                 ),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    child: ListTile(
+                      leading: const Icon(Icons.lock),
+                      title: const Text('Change Password'),
+                      onTap: widget.onTaps,
+                    ),
+                  ),
+                  PopupMenuItem(
+                    child: ListTile(
+                      leading: const Icon(Icons.logout),
+                      title: const Text('Logout'),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Loginpage(),
+                          ),
+                        );
+                      },
+                      // onTap: () {
+                      //   AlertDialog alert = const AlertDialog(
+                      //     title: Text('Are you sure you want to Logout?'),
+                      //   );
+                      //   showDialog(
+                      //     context: context,
+                      //     builder: (BuildContext context) {
+                      //       return alert;
+                      //     },
+                      //   );
+                      // },
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -243,14 +240,6 @@ class _HeaderState extends State<Header> {
                   ),
                   Row(
                     children: [
-                      widget.uploadbutton! != "" ||
-                              widget.subuploadbutton! != ""
-                          ? Uploadbutton(
-                              uploadbutton: widget.uploadbutton,
-                              subuploadbutton: widget.subuploadbutton,
-                            )
-                          : Container(),
-                      horizontalSpaceSmall,
                       widget.addbutton! != "" ||
                               widget.subaddbutton! != "" ||
                               widget.onPress != null ||
@@ -260,6 +249,14 @@ class _HeaderState extends State<Header> {
                               addbutton: widget.addbutton,
                               onPress: widget.onPress,
                               addicon: widget.addicon,
+                            )
+                          : Container(),
+                      horizontalSpaceSmall,
+                      widget.uploadbutton! != "" ||
+                              widget.subuploadbutton! != ""
+                          ? Uploadbutton(
+                              uploadbutton: widget.uploadbutton,
+                              subuploadbutton: widget.subuploadbutton,
                             )
                           : Container(),
                     ],

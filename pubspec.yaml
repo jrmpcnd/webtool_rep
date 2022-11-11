@@ -23,6 +23,11 @@ dependencies:
   flutter_lints: ^2.0.0
   web_date_picker: ^1.0.0+3
   flutter_typeahead: ^4.1.1
+  auto_size_widget: ^0.0.4
+  file_picker_desktop: ^1.1.1
+  image_picker: ^0.8.6
+  file_picker: ^4.6.1
+  http: ^0.13.5
 
 
 dev_dependencies:

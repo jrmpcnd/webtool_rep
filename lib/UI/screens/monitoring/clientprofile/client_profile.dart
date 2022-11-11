@@ -164,9 +164,7 @@ class _ClientprofileState extends State<Clientprofile> {
                                     if (clientnameController.text ==
                                         clientname.clientname.toString()) {
                                       setState(() {
-                                        print('debug');
                                         vis = !vis;
-                                        print(vis);
                                       });
                                     }
                                   },
@@ -345,7 +343,7 @@ class _ClientprofileState extends State<Clientprofile> {
                             ],
                           ),
                           const Text(
-                            '1012-0000-31200565',
+                            '1012 -0000 -31200565',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 30,

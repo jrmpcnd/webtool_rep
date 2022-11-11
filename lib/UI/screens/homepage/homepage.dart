@@ -18,6 +18,25 @@ import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/tra
 import 'package:webtool_rep/UI/screens/monitoring/transactionlog/transaction_log.dart';
 import 'package:webtool_rep/UI/screens/reports/resendsmsactivation/resend_sms_activation.dart';
 import 'package:webtool_rep/UI/screens/reports/webtooluserreport/webtooluser_report.dart';
+import 'package:webtool_rep/UI/screens/utilities/banklist/addbanklist/addbank_list.dart';
+import 'package:webtool_rep/UI/screens/utilities/banklist/bank_list.dart';
+import 'package:webtool_rep/UI/screens/utilities/banknews/addbanknews/addbank_news.dart';
+import 'package:webtool_rep/UI/screens/utilities/commissionsetup/addcommissionsetup/addcommission_setup.dart';
+import 'package:webtool_rep/UI/screens/utilities/commissionsetup/commission_setup.dart';
+import 'package:webtool_rep/UI/screens/utilities/dcmlocation/dcm_location.dart';
+import 'package:webtool_rep/UI/screens/utilities/feestructure/addstructure/add_structure.dart';
+import 'package:webtool_rep/UI/screens/utilities/feestructure/free_structure.dart';
+import 'package:webtool_rep/UI/screens/utilities/institution/addinstitution/addinstitution.dart';
+import 'package:webtool_rep/UI/screens/utilities/institution/institution.dart';
+import 'package:webtool_rep/UI/screens/utilities/loadproduct/addloadproduct/addload_product.dart';
+import 'package:webtool_rep/UI/screens/utilities/loadproduct/load_product.dart';
+import 'package:webtool_rep/UI/screens/utilities/parameter/addparameter/add_parameter.dart';
+import 'package:webtool_rep/UI/screens/utilities/parameter/parameter.dart';
+import 'package:webtool_rep/UI/screens/utilities/partner/partner.dart';
+import 'package:webtool_rep/UI/screens/utilities/productcategory/product_category.dart';
+import 'package:webtool_rep/UI/screens/utilities/producttype/product_type.dart';
+import 'package:webtool_rep/UI/screens/utilities/splashscreen/addsplashscreen/addsplash_screen.dart';
+import 'package:webtool_rep/UI/screens/utilities/splashscreen/splash_screen.dart';
 import 'package:webtool_rep/UI/widgets/header.dart';
 import '../../../UI/utils/constant.dart';
 import '../../../UI/widgets/contains.dart';
@@ -62,6 +81,25 @@ import '../reports/transactionlog/transaction_log.dart';
 import '../reports/useddeviceid/used_device_id.dart';
 import '../reports/useractivitylogs/user_activity_logs.dart';
 import '../reports/validtransaction/valid_transaction.dart';
+import '../utilities/banknews/bank_news.dart';
+import '../utilities/billerproduct/addbillerproduct/addbiller_product.dart';
+import '../utilities/billerproduct/biller_product.dart';
+import '../utilities/branch/addbranch/addbranch.dart';
+import '../utilities/branch/branch.dart';
+import '../utilities/center/addcenter/addcenter.dart';
+import '../utilities/center/center.dart';
+import '../utilities/dcmlocation/adddcmlocation/add_dcmlocation.dart';
+import '../utilities/partner/addpartner/addpartner.dart';
+import '../utilities/productandservices/addproductandservices/addproduct_and_services.dart';
+import '../utilities/productandservices/product_and_services.dart';
+import '../utilities/productcategory/addproductcategory/addproduct_category.dart';
+import '../utilities/producttype/addproducttype/addproduct_type.dart';
+import '../utilities/provider/addprovider/addprovider.dart';
+import '../utilities/provider/providers.dart';
+import '../utilities/servicedowntime/addservice_downtime/addservice_downtime.dart';
+import '../utilities/servicedowntime/service_downtime.dart';
+import '../utilities/unit/addunit/addunit.dart';
+import '../utilities/unit/unit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -314,7 +352,7 @@ class _HomePageState extends State<HomePage> {
                                     onPress = () {
                                       setState(() {
                                         addicon = Icons.add_outlined;
-                                        icon = CupertinoIcons.person_3;
+                                        icon = Icons.people_outline;
                                         addicon = Icons.add_outlined;
                                         uploadbutton = "";
                                         subuploadbutton = "";
@@ -335,7 +373,7 @@ class _HomePageState extends State<HomePage> {
                                   });
                                 };
                                 addicon = Icons.add_outlined;
-                                icon = CupertinoIcons.person_3;
+                                icon = Icons.people_outline;
                                 addicon = Icons.add_outlined;
                                 uploadbutton = "";
                                 subuploadbutton = "";
@@ -378,6 +416,8 @@ class _HomePageState extends State<HomePage> {
                                     };
                                     icon = Icons.add_outlined;
                                     addicon = Icons.save_outlined;
+                                    uploadbutton = "";
+                                    subuploadbutton = "";
                                     header = "Administration  >  Create / Edit";
                                     addbutton = "Save";
                                     subaddbutton = "Save Hierarchy";
@@ -785,221 +825,983 @@ class _HomePageState extends State<HomePage> {
                         child: [
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Fee Structure",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Fee Structure";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Fee Structure";
+                                        subaddbutton = "Add New Fee Structure";
+                                        header = "Utilities";
+                                        title = "Fee Structure";
+                                        homewidget = [const Feestructure()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Fee Structure";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addstructure()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Fee Structure";
+                                subaddbutton = "Add New Fee Structure";
+                                header = "Utilities";
                                 title = "Fee Structure";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Feestructure()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
-                            title: "List of Agent",
-                            onTap: () {
-                              setState(() {
-                                title = "List of Agent";
-                                // homewidget = [const Banktransaction()];
-                              });
-                            },
-                          ),
-                          Listtile(
-                            color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Parameter",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Parameter";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Parameter";
+                                        subaddbutton = "Add New Parameter";
+                                        header = "Utilities";
+                                        title = "Parameter";
+                                        homewidget = [const Parameters()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Parameter";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addparameters()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Parameter";
+                                subaddbutton = "Add New Parameter";
+                                header = "Utilities";
                                 title = "Parameter";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Parameters()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "DCM Location",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "DCM Location";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New DCM Location";
+                                        subaddbutton = "Add New DCM Location";
+                                        header = "Utilities";
+                                        title = "DCM Location";
+                                        homewidget = [const Dcmlocation()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save DCM Location";
+                                    title = "Create / Edit";
+                                    homewidget = [const Adddcmlocation()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New DCM Location";
+                                subaddbutton = "Add New DCM Location";
+                                header = "Utilities";
                                 title = "DCM Location";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Dcmlocation()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Bank News",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Bank News";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Bank News";
+                                        subaddbutton = "Add New Bank News";
+                                        header = "Utilities";
+                                        title = "Bank News";
+                                        homewidget = [const Banknews()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Bank News";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addbanknews()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Bank News";
+                                subaddbutton = "Add New Bank News";
+                                header = "Utilities";
                                 title = "Bank News";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Banknews()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
-                            title: "Products and Services",
+                            icon: Icons.people_outline,
+                            title: "Product and Services",
                             onTap: () {
                               setState(() {
-                                title = "Products and Services";
-                                // homewidget = [const Banktransaction()];
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Product and Services";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Product";
+                                        subaddbutton =
+                                            "Add New Product & Services";
+                                        header = "Utilities";
+                                        title = "Product and Services";
+                                        homewidget = [
+                                          const Productandservices()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Product & Services";
+                                    title = "Create / Edit";
+                                    homewidget = [
+                                      const Addproductandservices()
+                                    ];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Product";
+                                subaddbutton = "Add Product & Services";
+                                header = "Utilities";
+                                title = "Product and Services";
+                                homewidget = [const Productandservices()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
-                            title: "Service Downtime",
+                            icon: Icons.people_outline,
+                            title: "Service DownTime",
                             onTap: () {
                               setState(() {
-                                title = "Service Downtime";
-                                // homewidget = [const Banktransaction()];
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Service DownTime";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Service";
+                                        subaddbutton =
+                                            "Add New ServiceDownTime";
+                                        header = "Utilities";
+                                        title = "Product and Services";
+                                        homewidget = [
+                                          const Productandservices()
+                                        ];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save ServiceDownTime";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addservicedowntime()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Service";
+                                subaddbutton = "Add ServiceDownTime";
+                                header = "Utilities";
+                                title = "Service DownTime";
+                                homewidget = [const Servicedowntime()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Institution",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Institution";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Institution";
+                                        subaddbutton = "Add New Institution";
+                                        header = "Utilities";
+                                        title = "Institution";
+                                        homewidget = [const Institution()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Institution";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addinstitution()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Institution";
+                                subaddbutton = "Add Institution";
+                                header = "Utilities";
                                 title = "Institution";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Institution()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Branch",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Branch";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Branch";
+                                        subaddbutton = "Add New Branch";
+                                        header = "Utilities";
+                                        title = "Branch";
+                                        homewidget = [const Branch()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Branch";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addbranch()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Branch";
+                                subaddbutton = "Add Branch";
+                                header = "Utilities";
                                 title = "Branch";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Branch()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Unit",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Unit";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Unit";
+                                        subaddbutton = "Add New Unit";
+                                        header = "Utilities";
+                                        title = "Unit";
+                                        homewidget = [const Unit()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Unit";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addunit()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Unit";
+                                subaddbutton = "Add Unit";
+                                header = "Utilities";
                                 title = "Unit";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Unit()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Center",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Center";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Center";
+                                        subaddbutton = "Add New Center";
+                                        header = "Utilities";
+                                        title = "Center";
+                                        homewidget = [const Centers()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Center";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addcenters()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Unit";
+                                subaddbutton = "Add Center";
+                                header = "Utilities";
                                 title = "Center";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Centers()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Provider",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Provider";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Provider";
+                                        subaddbutton = "Add New Provider";
+                                        header = "Utilities";
+                                        title = "Provider";
+                                        homewidget = [const Providers()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Provider";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addproviders()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Provider";
+                                subaddbutton = "Add Provider";
+                                header = "Utilities";
                                 title = "Provider";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Providers()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Product Type",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Product Type";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Product Type";
+                                        subaddbutton = "Add New Product Type";
+                                        header = "Utilities";
+                                        title = "Product Type";
+                                        homewidget = [const Producttype()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Product Type";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addproducttype()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Product Type";
+                                subaddbutton = "Add Product Type";
+                                header = "Utilities";
                                 title = "Product Type";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Producttype()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Product Category",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Product Category";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Product";
+                                        subaddbutton = "Add Product Category";
+                                        header = "Utilities";
+                                        title = "Product Category";
+                                        homewidget = [const Productcategory()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Product Category";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addproductcategory()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Product";
+                                subaddbutton = "Add Product Category";
+                                header = "Utilities";
                                 title = "Product Category";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Productcategory()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Biller Product",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    uploadbutton = "";
+                                    subuploadbutton = "";
+                                    header = "Biller Product";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        uploadbutton = "Download";
+                                        subuploadbutton =
+                                            "Download Biller Product";
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        addbutton = "New Biller Product";
+                                        subaddbutton = "Add Biller Product";
+                                        header = "Utilities";
+                                        title = "Biller Product";
+                                        homewidget = [const Billerproduct()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    uploadbutton = "";
+                                    subuploadbutton = "";
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Biller Product";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addbillerproduct()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                addbutton = "New Biller Product";
+                                subaddbutton = "Add Biller Product";
+                                uploadbutton = "Download";
+                                subuploadbutton = "Download Biller Product";
+                                header = "Utilities";
                                 title = "Biller Product";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Billerproduct()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Load Product",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Load Product";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Load Product";
+                                        subaddbutton = "Add Load Product";
+                                        header = "Utilities";
+                                        title = "Load Product";
+                                        homewidget = [const Loadproduct()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Load Product";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addloadproduct()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Load Product";
+                                subaddbutton = "Add Load Product";
+                                header = "Utilities";
                                 title = "Load Product";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Loadproduct()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Commission Setup",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Commission Setup";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Commission";
+                                        subaddbutton = "Add Commission Setup";
+                                        header = "Utilities";
+                                        title = "Commission Setup";
+                                        homewidget = [const Commissionsetup()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Commission Setup";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addcommission()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Commission";
+                                subaddbutton = "Add Commission Setup";
+                                header = "Utilities";
                                 title = "Commission Setup";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Commissionsetup()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "IBFT Bank List",
                             onTap: () {
                               setState(() {
-                                title = "IBFT Bank List";
-                                // homewidget = [const Banktransaction()];
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Bank List";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Bank List";
+                                        subaddbutton = "Add Bank List";
+                                        header = "Utilities";
+                                        title = "Bank List";
+                                        homewidget = [const Banklist()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Bank List";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addbanklist()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Bank List";
+                                subaddbutton = "Add Bank List";
+                                header = "Utilities";
+                                title = "Bank List";
+                                homewidget = [const Banklist()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Partner",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Partner";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Partner";
+                                        subaddbutton = "Add Partner";
+                                        header = "Utilities";
+                                        title = "Partner";
+                                        homewidget = [const Partner()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Partner";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addpartner()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Partner";
+                                subaddbutton = "Add Partner";
+                                header = "Utilities";
                                 title = "Partner";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Partner()];
                               });
                             },
                           ),
                           Listtile(
                             color: Colors.black,
-                            icon: Icons.dashboard,
+                            icon: Icons.people_outline,
                             title: "Splash Screen",
                             onTap: () {
                               setState(() {
+                                onTaps = () {
+                                  setState(() {
+                                    header = "Splash Screen";
+                                    title = "Change Password";
+                                    homewidget = [const Changepassword()];
+                                  });
+                                };
+                                onPress = () {
+                                  setState(() {
+                                    onPress = () {
+                                      setState(() {
+                                        addicon = Icons.add_outlined;
+                                        icon = Icons.people_outline;
+                                        addicon = Icons.add_outlined;
+                                        uploadbutton = "";
+                                        subuploadbutton = "";
+                                        addbutton = "New Splash Screen";
+                                        subaddbutton = "Add Splash Screen";
+                                        header = "Utilities";
+                                        title = "Splash Screen";
+                                        homewidget = [const Splashscreen()];
+                                      });
+                                    };
+                                    icon = Icons.add_outlined;
+                                    addicon = Icons.save_outlined;
+                                    header = "Utilities  >  Create / Edit";
+                                    addbutton = "Save";
+                                    subaddbutton = "Save Splash Screen";
+                                    title = "Create / Edit";
+                                    homewidget = [const Addsplashscreen()];
+                                  });
+                                };
+                                addicon = Icons.add_outlined;
+                                icon = Icons.people_outline;
+                                addicon = Icons.add_outlined;
+                                uploadbutton = "";
+                                subuploadbutton = "";
+                                addbutton = "New Splash Screen";
+                                subaddbutton = "Add Splash Screen";
+                                header = "Utilities";
                                 title = "Splash Screen";
-                                // homewidget = [const Banktransaction()];
+                                homewidget = [const Splashscreen()];
                               });
                             },
                           ),
@@ -2096,7 +2898,6 @@ class _HomePageState extends State<HomePage> {
                                       setState(() {
                                         icon = Icons.content_copy_outlined;
                                         addicon = Icons.report_outlined;
-                                        uploadbutton = "";
                                         subuploadbutton = "";
                                         addbutton = "New Report";
                                         subaddbutton = "Generate Reports";
@@ -2312,7 +3113,6 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               setState(() {
                                 title = "ECPay Reconciliation";
-                                // homewidget = [const Banktransaction()];
                               });
                             },
                           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:webtool_rep/UI/utils/responsive.dart';
 import '../../utils/constant.dart';
+import '../../utils/spacing.dart';
 import 'card_login_page.dart';
 
 class Loginpage extends StatefulWidget {
@@ -47,7 +48,7 @@ class _LoginpageState extends State<Loginpage> {
                   children: [
                     SizedBox(height: 250),
                     buildCard(),
-                    SizedBox(height: 30),
+                    verticalSpaceXXRegular,
                     Row(
                       children: [
                         Text(
@@ -59,7 +60,7 @@ class _LoginpageState extends State<Loginpage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 150),
+                    verticalSpaceXMassive,
                   ],
                 ),
               ],
@@ -68,12 +69,12 @@ class _LoginpageState extends State<Loginpage> {
               child: Center(
                 child: Column(
                   children: [
-                    SizedBox(height: 20),
+                    verticalSpaceXRegular,
                     Image.asset(
                       'assets/images/kplus.png',
                       width: 400.0,
                     ),
-                    SizedBox(height: 15),
+                    verticalSpaceSmallest,
                     Text(
                       'Use your registered username and password to sign in.\nTo have an account or have some problems,\nplease contact our support team.',
                       style: GoogleFonts.roboto(
@@ -81,14 +82,14 @@ class _LoginpageState extends State<Loginpage> {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 50),
-                    buildCard(),
-                    SizedBox(height: 50),
+                    verticalSpaceLarge,
+                    const buildCard(),
+                    verticalSpaceLarge,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '©CARD Bank | Version 1.0. build 20150704.1727',
+                          '©CARD Bank | Version 2.0. build 20150704.1727',
                           style: GoogleFonts.roboto(
                             fontSize: 16,
                             color: Colors.black,
@@ -96,7 +97,7 @@ class _LoginpageState extends State<Loginpage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 100),
+                    verticalSpaceXXLarge,
                   ],
                 ),
               ),

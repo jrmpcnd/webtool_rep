@@ -27,6 +27,7 @@ class _RolemanagementState extends State<Rolemanagement> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
+                  padding: kEdgeInsetsAllNormal,
                   decoration: BoxDecoration(
                     color: kTertiaryColor5,
                     borderRadius: const BorderRadius.only(
@@ -43,13 +44,13 @@ class _RolemanagementState extends State<Rolemanagement> {
                           offset: Offset(0, 3)),
                     ],
                   ),
-                  height: 150.0,
+                  height: 110.0,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           textfield(

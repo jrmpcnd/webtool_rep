@@ -3,6 +3,7 @@ import '../../../../utils/constant.dart';
 import '../../../../utils/edge_insect.dart';
 import '../../../../utils/spacing.dart';
 import '../../../../utils/text_styles.dart';
+import '../../../../widgets/dropdown.dart';
 import '../../../../widgets/textfield.dart';
 
 class Addusers extends StatefulWidget {
@@ -503,6 +504,93 @@ class _AddusersState extends State<Addusers> {
                         ),
                       ],
                     ),
+                  ),
+                  verticalSpaceSmall,
+                  Container(
+                    decoration: BoxDecoration(
+                      color: kTertiaryColor5,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3)),
+                      ],
+                    ),
+                    alignment: Alignment.centerLeft,
+                    height: 30.0,
+                    width: 650.0,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.lan_outlined, color: kBlackColor),
+                          Text('Structure', style: kTinyBoldTextStyle),
+                        ],
+                      ),
+                    ),
+                  ),
+                  verticalSpaceTiny,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: kTertiaryColor5,
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: const Offset(0, 3)),
+                          ],
+                        ),
+                        width: 650.0,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: kEdgeInsetsAllNormal,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text("Institution", style: kTextStyle),
+                                        horizontalSpaceMedium,
+                                        dropdowns(
+                                            dropdown: "--CARD Bank Inc.--"),
+                                      ],
+                                    ),
+                                    verticalSpaceSmall,
+                                    Row(
+                                      children: [
+                                        Text("Branch", style: kTextStyle),
+                                        horizontalSpaceSLarge,
+                                        dropdowns(dropdown: "--Non Selected--"),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
