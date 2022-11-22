@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/functions.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
 class Institution extends StatefulWidget {
@@ -16,6 +14,15 @@ class Institution extends StatefulWidget {
 }
 
 class _InstitutionState extends State<Institution> {
+  TextEditingController institution_code_controller = TextEditingController();
+  TextEditingController institution_desc_controller = TextEditingController();
+
+  @override
+  void initState() {
+    Institution_Function.insti(insti_code: '', insti_desc: '');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,10 +58,12 @@ class _InstitutionState extends State<Institution> {
                     children: [
                       textfield(
                         hintext: "Code",
+                        controller: institution_code_controller,
                       ),
                       verticalSpaceTiny,
                       textfield(
                         hintext: "Description",
+                        controller: institution_desc_controller,
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -70,7 +79,14 @@ class _InstitutionState extends State<Institution> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Institution_Function.insti(
+                                      insti_code:
+                                          institution_code_controller.text,
+                                      insti_desc:
+                                          institution_desc_controller.text,
+                                    );
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,

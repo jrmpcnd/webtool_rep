@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webtool_rep/UI/utils/functions.dart';
 
 import '../../../../core/providers/cardprovider.dart';
 import '../../../utils/constant.dart';
@@ -15,6 +16,8 @@ class Clientprofile extends StatefulWidget {
 }
 
 class _ClientprofileState extends State<Clientprofile> {
+  TextEditingController clientidController = TextEditingController();
+  TextEditingController clientmobileController = TextEditingController();
   TextEditingController clientnameController = TextEditingController();
   var vis = false;
   bool isSwitched1 = false;
@@ -108,23 +111,47 @@ class _ClientprofileState extends State<Clientprofile> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           textfield(
+                            textInputAction: TextInputAction.go,
+                            controller: clientidController,
                             hintext: "Customer I.D.",
+                            onEditingComplete: () {
+                              Clientprofile_Function.profile(
+                                cid: clientidController.text,
+                              );
+                            },
                           ),
                           verticalSpaceTiny,
                           textfield(
+                            textInputAction: TextInputAction.go,
                             controller: clientnameController,
                             hintext: "User Name",
+                            onEditingComplete: () {
+                              Clientprofile_Function.profile(
+                                username: clientnameController.text,
+                              );
+                            },
                           ),
                           verticalSpaceTiny,
                           textfield(
+                            textInputAction: TextInputAction.done,
+                            controller: clientmobileController,
                             hintext: "Mobile No.",
+                            onEditingComplete: () {
+                              Clientprofile_Function.profile(
+                                mobile: clientmobileController.text,
+                              );
+                            },
                           ),
                           verticalSpaceTiny,
                           textfield(
+                            mousecursor: SystemMouseCursors.forbidden,
+                            readonly: true,
                             hintext: "Full Name",
                           ),
                           verticalSpaceTiny,
                           textfield(
+                            mousecursor: SystemMouseCursors.forbidden,
+                            readonly: true,
                             hintext: "Birthday",
                           ),
                         ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/utils/functions.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -15,6 +16,7 @@ class Banknews extends StatefulWidget {
 }
 
 class _BanknewsState extends State<Banknews> {
+  TextEditingController bank_newscontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,6 +52,7 @@ class _BanknewsState extends State<Banknews> {
                     children: [
                       textfield(
                         hintext: "Topic",
+                        controller: bank_newscontroller,
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -65,7 +68,11 @@ class _BanknewsState extends State<Banknews> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Banknews_Function.news(
+                                        search_banknews:
+                                            bank_newscontroller.text);
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,

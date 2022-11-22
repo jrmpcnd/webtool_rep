@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/functions.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
 class Providers extends StatefulWidget {
@@ -16,6 +14,15 @@ class Providers extends StatefulWidget {
 }
 
 class _ProvidersState extends State<Providers> {
+  TextEditingController provider_code_controller = TextEditingController();
+  TextEditingController provider_desc_controller = TextEditingController();
+
+  @override
+  void initState() {
+    Provider_Function.provider(provider_code: '', provider_desc: '');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,10 +58,12 @@ class _ProvidersState extends State<Providers> {
                     children: [
                       textfield(
                         hintext: "Code",
+                        controller: provider_code_controller,
                       ),
                       verticalSpaceTiny,
                       textfield(
                         hintext: "Description",
+                        controller: provider_desc_controller,
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -70,7 +79,14 @@ class _ProvidersState extends State<Providers> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Provider_Function.provider(
+                                      provider_code:
+                                          provider_code_controller.text,
+                                      provider_desc:
+                                          provider_desc_controller.text,
+                                    );
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,

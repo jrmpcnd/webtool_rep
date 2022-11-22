@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../utils/spacing.dart';
@@ -17,7 +19,7 @@ class _RegisterclientState extends State<Registerclient> {
     return Column(
       children: [
         verticalSpaceRegular,
-        Container(
+        SizedBox(
           height: 650,
           child: WebView(
             initialUrl:
@@ -26,9 +28,7 @@ class _RegisterclientState extends State<Registerclient> {
             onWebViewCreated: (controller) {
               this.controller = controller;
             },
-            onPageStarted: (url) {
-              print('New website: $url');
-            },
+            onPageStarted: (url) {},
           ),
         ),
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/utils/functions.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
@@ -16,6 +17,13 @@ class Usermanagement extends StatefulWidget {
 }
 
 class _UsermanagementState extends State<Usermanagement> {
+  TextEditingController branchname_controller = TextEditingController();
+  TextEditingController fname_controller = TextEditingController();
+  TextEditingController lname_controller = TextEditingController();
+  TextEditingController mname_controller = TextEditingController();
+  TextEditingController stat_controller = TextEditingController();
+  TextEditingController uname_controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,14 +63,17 @@ class _UsermanagementState extends State<Usermanagement> {
                         children: [
                           textfield(
                             hintext: "First Name",
+                            controller: fname_controller,
                           ),
                           verticalSpaceTiny,
                           textfield(
                             hintext: "Middle Name",
+                            controller: mname_controller,
                           ),
                           verticalSpaceTiny,
                           textfield(
                             hintext: "Last Name",
+                            controller: lname_controller,
                           ),
                           verticalSpaceSmall,
                           Row(
@@ -75,7 +86,13 @@ class _UsermanagementState extends State<Usermanagement> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Usermanagement_Function.user(
+                                        fname: fname_controller.text,
+                                        mname: mname_controller.text,
+                                        lname: lname_controller.text,
+                                        user_login: uname_controller.text);
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -120,12 +137,33 @@ class _UsermanagementState extends State<Usermanagement> {
                             children: [
                               textfield(
                                 hintext: "User Name",
+                                controller: uname_controller,
                               ),
                               verticalSpaceTiny,
                               elevatedbuttonpopup(
                                   label: "Branch", width: 400.0),
                               verticalSpaceTiny,
-                              dropdowns(dropdown: "--User Status--"),
+                              dropdowns(
+                                dropdown: "--User Status--",
+                                items: [
+                                  DropdownMenuItem(
+                                      onTap: () {},
+                                      value: "",
+                                      child: Text("--Select Status--")),
+                                  DropdownMenuItem(
+                                      onTap: () {},
+                                      value: "Active",
+                                      child: Text("Active")),
+                                  DropdownMenuItem(
+                                      onTap: () {},
+                                      value: "Inactive",
+                                      child: Text("Inactive")),
+                                  DropdownMenuItem(
+                                      onTap: () {},
+                                      value: "Lock",
+                                      child: Text("Lock")),
+                                ],
+                              ),
                               verticalSpaceMedium,
                             ],
                           ),

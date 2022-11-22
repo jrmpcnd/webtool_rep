@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/functions.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
 class Centers extends StatefulWidget {
@@ -16,6 +14,15 @@ class Centers extends StatefulWidget {
 }
 
 class _CentersState extends State<Centers> {
+  TextEditingController center_code_controller = TextEditingController();
+  TextEditingController center_desc_controller = TextEditingController();
+
+  @override
+  void initState() {
+    Center_Function.center(center_code: '', center_desc: '');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,10 +58,12 @@ class _CentersState extends State<Centers> {
                     children: [
                       textfield(
                         hintext: "Code",
+                        controller: center_code_controller,
                       ),
                       verticalSpaceTiny,
                       textfield(
                         hintext: "Description",
+                        controller: center_desc_controller,
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -70,7 +79,12 @@ class _CentersState extends State<Centers> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Center_Function.center(
+                                      center_code: center_code_controller.text,
+                                      center_desc: center_desc_controller.text,
+                                    );
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,

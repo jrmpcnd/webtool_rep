@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/utils/functions.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
 class Rolemanagement extends StatefulWidget {
@@ -15,6 +14,13 @@ class Rolemanagement extends StatefulWidget {
 }
 
 class _RolemanagementState extends State<Rolemanagement> {
+  TextEditingController role_namecontroller = TextEditingController();
+  @override
+  void initState() {
+    Rolemanagement_Function.role(role_name: '');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,6 +61,7 @@ class _RolemanagementState extends State<Rolemanagement> {
                         children: [
                           textfield(
                             hintext: "Role Name",
+                            controller: role_namecontroller,
                           ),
                           verticalSpaceSmall,
                           Row(
@@ -67,7 +74,10 @@ class _RolemanagementState extends State<Rolemanagement> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Rolemanagement_Function.role(
+                                        role_name: role_namecontroller.text);
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,

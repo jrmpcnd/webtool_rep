@@ -8,6 +8,8 @@ class textfield extends StatefulWidget {
   TextEditingController? controller;
   TextInputType? keyboardtype;
   MouseCursor? mousecursor;
+  void Function()? onEditingComplete;
+  TextInputAction? textInputAction;
   String? hintext = "";
   Widget? suffixIcon;
   bool? readonly;
@@ -16,6 +18,7 @@ class textfield extends StatefulWidget {
   textfield({
     Key? key,
     this.readonly = false,
+    this.textInputAction,
     this.inputformatters,
     this.keyboardtype,
     this.width = 400,
@@ -23,6 +26,7 @@ class textfield extends StatefulWidget {
     this.suffixIcon,
     this.controller,
     this.hintext,
+    this.onEditingComplete,
   }) : super(key: key);
 
   @override
@@ -36,6 +40,8 @@ class _textfieldState extends State<textfield> {
       height: 35.0,
       width: widget.width,
       child: TextFormField(
+        onEditingComplete: widget.onEditingComplete,
+        textInputAction: widget.textInputAction,
         readOnly: widget.readonly!,
         controller: widget.controller,
         mouseCursor: widget.mousecursor,

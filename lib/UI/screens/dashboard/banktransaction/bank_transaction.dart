@@ -17,7 +17,7 @@ class _BanktransactionState extends State<Banktransaction> {
     return Column(
       children: [
         verticalSpaceRegular,
-        Container(
+        SizedBox(
           height: 650,
           child: WebView(
             initialUrl:
@@ -26,9 +26,7 @@ class _BanktransactionState extends State<Banktransaction> {
             onWebViewCreated: (controller) {
               this.controller = controller;
             },
-            onPageStarted: (url) {
-              print('New website: $url');
-            },
+            onPageStarted: (url) {},
           ),
         ),
       ],

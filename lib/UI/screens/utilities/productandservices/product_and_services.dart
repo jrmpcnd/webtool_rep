@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/utils/functions.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
 class Productandservices extends StatefulWidget {
@@ -15,6 +14,7 @@ class Productandservices extends StatefulWidget {
 }
 
 class _ProductandservicesState extends State<Productandservices> {
+  TextEditingController product_servicescontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,6 +50,7 @@ class _ProductandservicesState extends State<Productandservices> {
                     children: [
                       textfield(
                         hintext: "Name",
+                        controller: product_servicescontroller,
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -65,7 +66,11 @@ class _ProductandservicesState extends State<Productandservices> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Productandservices_Function.product(
+                                        search_productservices:
+                                            product_servicescontroller.text);
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,

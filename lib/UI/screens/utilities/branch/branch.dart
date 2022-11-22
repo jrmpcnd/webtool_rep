@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/functions.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
 class Branch extends StatefulWidget {
@@ -16,6 +14,15 @@ class Branch extends StatefulWidget {
 }
 
 class _BranchState extends State<Branch> {
+  TextEditingController branch_code_controller = TextEditingController();
+  TextEditingController branch_desc_controller = TextEditingController();
+
+  @override
+  void initState() {
+    Branch_Function.branch(branch_code: '', branch_desc: '');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +49,7 @@ class _BranchState extends State<Branch> {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 5,
                           blurRadius: 7,
-                          offset: Offset(0, 3)),
+                          offset: const Offset(0, 3)),
                     ],
                   ),
                   height: 150.0,
@@ -51,10 +58,12 @@ class _BranchState extends State<Branch> {
                     children: [
                       textfield(
                         hintext: "Code",
+                        controller: branch_code_controller,
                       ),
                       verticalSpaceTiny,
                       textfield(
                         hintext: "Description",
+                        controller: branch_desc_controller,
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -70,7 +79,12 @@ class _BranchState extends State<Branch> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Branch_Function.branch(
+                                      branch_code: branch_code_controller.text,
+                                      branch_desc: branch_desc_controller.text,
+                                    );
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,

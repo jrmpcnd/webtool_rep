@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/functions.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
 class Unit extends StatefulWidget {
@@ -16,6 +14,15 @@ class Unit extends StatefulWidget {
 }
 
 class _UnitState extends State<Unit> {
+  TextEditingController unit_code_controller = TextEditingController();
+  TextEditingController unit_desc_controller = TextEditingController();
+
+  @override
+  void initState() {
+    Unit_Function.unit(unit_code: '', unit_desc: '');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,10 +58,12 @@ class _UnitState extends State<Unit> {
                     children: [
                       textfield(
                         hintext: "Code",
+                        controller: unit_code_controller,
                       ),
                       verticalSpaceTiny,
                       textfield(
                         hintext: "Description",
+                        controller: unit_desc_controller,
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -70,7 +79,12 @@ class _UnitState extends State<Unit> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Unit_Function.unit(
+                                      unit_code: unit_code_controller.text,
+                                      unit_desc: unit_desc_controller.text,
+                                    );
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import '../utils/constant.dart';
 
 class dropdowns extends StatefulWidget {
+  List<DropdownMenuItem<String>>? items;
   String? dropdown = "";
-  dropdowns({Key? key, this.dropdown}) : super(key: key);
+  VoidCallback? ontap;
+  dropdowns({Key? key, this.dropdown, this.ontap, this.items})
+      : super(key: key);
 
   @override
   State<dropdowns> createState() => _dropdownsState();
@@ -16,6 +19,7 @@ class _dropdownsState extends State<dropdowns> {
       height: 35.0,
       width: 400.0,
       child: DropdownButtonFormField(
+        onTap: widget.ontap,
         decoration: InputDecoration(
           hintStyle: const TextStyle(color: kSecondaryColor2),
           labelStyle: const TextStyle(fontSize: 12.0),
@@ -32,12 +36,7 @@ class _dropdownsState extends State<dropdowns> {
         iconEnabledColor: kBlackColor,
         style: const TextStyle(fontSize: 16.5),
         itemHeight: 50.0,
-        items: const [
-          DropdownMenuItem(value: "", child: Text("--Select Status--")),
-          DropdownMenuItem(value: "Sample 1", child: Text("Sample 1")),
-          DropdownMenuItem(value: "Sample 2", child: Text("Sample 2")),
-          DropdownMenuItem(value: "Sample 3", child: Text("Sample 3")),
-        ],
+        items: widget.items,
         onChanged: (newValue) {
           setState(() {});
         },
