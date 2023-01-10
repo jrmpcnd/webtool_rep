@@ -232,35 +232,35 @@ class _RolemanagementState extends State<Rolemanagement> {
                         ]),
                         Column(children: [
                           Text(
-                            'Samplel',
+                            'Samplel2',
                             style: kBodyRegularTextStyle.copyWith(
                                 color: kBlackColor),
                           )
                         ]),
                         Column(children: [
                           Text(
-                            'Sample',
+                            'Sample3',
                             style: kBodyRegularTextStyle.copyWith(
                                 color: kBlackColor),
                           )
                         ]),
                         Column(children: [
                           Text(
-                            'Sample',
+                            'Sample4',
                             style: kBodyRegularTextStyle.copyWith(
                                 color: kBlackColor),
                           )
                         ]),
                         Column(children: [
                           Text(
-                            'Sample',
+                            'Sample5',
                             style: kBodyRegularTextStyle.copyWith(
                                 color: kBlackColor),
                           )
                         ]),
                         Column(children: [
                           Text(
-                            'Sample',
+                            'Sample6',
                             style: kBodyRegularTextStyle.copyWith(
                                 color: kBlackColor),
                           )

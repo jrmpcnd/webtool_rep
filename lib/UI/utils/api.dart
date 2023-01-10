@@ -14,7 +14,7 @@ class Usermanagement_Api {
   ) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://192.168.0.148:1111/get_usermanagement/'),
+          Uri.parse('http://10.21.0.66:1111/get_usermanagement/'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },

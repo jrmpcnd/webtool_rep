@@ -296,42 +296,42 @@ class _BroadcastmessageState extends State<Broadcastmessage> {
                       TableRow(children: [
                         Column(children: [
                           Text(
-                            'Sample 2',
+                            'Sample 1',
                             style: kBodyRegularTextStyle.copyWith(
                                 color: kBlackColor),
                           )
                         ]),
                         Column(children: [
                           Text(
-                            'Sample',
+                            'Sample2',
                             style: kBodyRegularTextStyle.copyWith(
                                 color: kBlackColor),
                           )
                         ]),
                         Column(children: [
                           Text(
-                            'Sample',
+                            'Sample3',
                             style: kBodyRegularTextStyle.copyWith(
                                 color: kBlackColor),
                           )
                         ]),
                         Column(children: [
                           Text(
-                            'sample',
+                            'sample4',
                             style: kBodyRegularTextStyle.copyWith(
                                 color: kBlackColor),
                           )
                         ]),
                         Column(children: [
                           Text(
-                            'Sample',
+                            'Sample5',
                             style: kBodyRegularTextStyle.copyWith(
                                 color: kBlackColor),
                           )
                         ]),
                         Column(children: [
                           Text(
-                            'Sample',
+                            'Sample6',
                             style: kBodyRegularTextStyle.copyWith(
                                 color: kBlackColor),
                           )

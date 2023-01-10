@@ -25,6 +25,12 @@ class _UsermanagementState extends State<Usermanagement> {
   TextEditingController uname_controller = TextEditingController();
 
   @override
+  void initState() {
+    Usermanagement_Function.user(user_login: '');
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: kEdgeInsetsVerticalNormal,
