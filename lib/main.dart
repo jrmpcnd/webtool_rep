@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Cardprovider()),
       ],
       child: MaterialApp(
-          debugShowCheckedModeBanner: false,
           title: 'Konek2CARD PLUS Webtool',
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: kWhiteColor,
