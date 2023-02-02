@@ -25,19 +25,21 @@ class _buildCardState extends State<buildCard> {
       elevation: 10,
       child: Container(
         width: 430,
-        height: 300,
+        height: 250,
         padding: kEdgeInsetsAllSNormal,
         child: Column(
           children: [
             SizedBox(height: 30.0),
             Container(
+              height: 60,
               padding: kEdgeInsetsAllSNormal,
               child: TextField(
                 style: kTextStyle,
                 autocorrect: true,
                 decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.only(left: 10.0),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(0.0),
                   ),
                   prefixIcon: const Icon(
                     Icons.person_outline,
@@ -55,14 +57,16 @@ class _buildCardState extends State<buildCard> {
               ),
             ),
             Container(
+              height: 60,
               padding: kEdgeInsetsAllSNormal,
               child: TextField(
                 style: kTextStyle,
                 obscureText: _isObscure,
                 autocorrect: true,
                 decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.only(left: 10.0),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(0.0),
                   ),
                   prefixIcon: const Icon(
                     Icons.lock_outline,
@@ -94,35 +98,36 @@ class _buildCardState extends State<buildCard> {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         top: 9.0, bottom: 15.0, left: 9.0, right: 9.0),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(kDarkGreenColor),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
+                    child: Container(
+                      height: 40,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(kDarkGreenColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(3.0),
+                            ),
                           ),
                         ),
-                      ),
-                      child: Padding(
-                        padding: kEdgeInsetsAllNormal,
-                        child: Text(
-                          'Log In',
-                          style: GoogleFonts.roboto(
-                              fontSize: 22,
-                              color: kWhiteColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomePage(),
+                        child: Padding(
+                          padding: kEdgeInsetsAllTiny,
+                          child: Text(
+                            'Log In',
+                            style: GoogleFonts.roboto(
+                                fontSize: 18, color: kWhiteColor),
                           ),
-                        );
-                      },
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
