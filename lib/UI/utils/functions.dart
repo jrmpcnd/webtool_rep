@@ -56,6 +56,14 @@ class Hierarchy_Function {
 // }
 
 // Monitoring
+class Transacconfirm_function{
+  static void news({String branch_desc = '',cid = '',status = '',trans_date = '',trans_desc = ''}) async{
+    transacconfirm_Api api = transacconfirm_Api();
+    http.Response getParamReturn = await api.news(branch_desc,cid,status,trans_date,trans_desc);
+    print(getParamReturn.statusCode);
+    print(getParamReturn.body);
+  }
+}
 class Banknews_Function {
   static void news({String search_banknews = ''}) async {
     Banknews_Api api = Banknews_Api();
@@ -175,3 +183,14 @@ class Productandservices_Function {
     print(getParamReturn.body);
   }
 }
+
+
+//Dropdown Api
+
+// class DropdownFunctions{
+//   Future<http.Response> dropdownList() async{
+//     DropdownAPI dropdownAPI = DropdownAPI();
+//     http.Response response = await dropdownAPI.getCategory();
+//     return response;
+// }
+// }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
+import 'package:webtool_rep/UI/utils/functions.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
@@ -7,6 +9,7 @@ import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
+import 'package:http/http.dart' as http;
 
 class Transactionforconfirmation extends StatefulWidget {
   const Transactionforconfirmation({Key? key}) : super(key: key);
@@ -18,7 +21,28 @@ class Transactionforconfirmation extends StatefulWidget {
 
 class _TransactionforconfirmationState
     extends State<Transactionforconfirmation> {
+  List<String> res = [];
+  String init = '';
+  TextEditingController transac_controller = TextEditingController();
+  DropdownAPI dropdownFunction = DropdownAPI();
   @override
+  void initState() {
+    getList();
+   Transacconfirm_function.news(branch_desc:'',cid: '',status:  '',trans_date: '',trans_desc: '');
+    super.initState();
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownFunction.getCategory();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_transaction_logs_status_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
   Widget build(BuildContext context) {
     return Container(
       padding: kEdgeInsetsVerticalNormal,
@@ -57,9 +81,15 @@ class _TransactionforconfirmationState
                         children: [
                           textfield(
                             hintext: "CID",
+                            controller: transac_controller,
                           ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Transaction--"),
+                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init = value.toString();
+                            });
+                          },),
+                          // dropdowns(dropdown: "--Transaction--", items: res.map((e) {return DropdownMenuItem(value: e, child: Text(e));}).toList()),
                           verticalSpaceTiny,
                           dropdowns(dropdown: "--Status--"),
                           verticalSpaceSmall,

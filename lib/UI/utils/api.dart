@@ -95,6 +95,29 @@ class Clientlist_Api {
 }
 
 // Monitoring API
+class transacconfirm_Api {
+  Future<http.Response> news(String branch_desc,cid,status,trans_date,trans_desc) async {
+    http.Response getResponse = await http
+        .post(
+      Uri.parse('http://10.21.0.74:1234/get_transconfirmation'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'branch_desc': branch_desc,
+          'cid': cid,
+          'status': status,
+          'trans_date': trans_date,
+          'trans_desc':trans_desc,
+        },
+      ),
+    )
+        .timeout(const Duration(minutes: 1));
+    return getResponse;
+  }
+}
+
 class Banknews_Api {
   Future<http.Response> news(String searchBankNews) async {
     http.Response getResponse = await http
@@ -113,6 +136,7 @@ class Banknews_Api {
     return getResponse;
   }
 }
+
 
 class Clientprofile_Api {
   Future<http.Response> profile(
@@ -297,3 +321,26 @@ class Broadcastmessage_Api {
     return getResponse;
   }
 }
+
+
+//API Dropdown
+class DropdownAPI{
+  Future<List> getCategory() async {
+    List res = [];
+    http.Response response = await http.get(Uri.parse('http://10.21.0.74:1234/get_transaction_logs_status_dropdown'));
+
+    print(response.statusCode);
+
+    if (response.statusCode == 201) {
+      var jsonData = await jsonDecode(response.body)['data'];
+      res = jsonData;
+      print(jsonDecode(response.body)['data']);
+      return res;
+
+    } else {
+      throw 'connection error';
+    }
+  }
+
+}
+
