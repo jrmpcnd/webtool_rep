@@ -858,6 +858,363 @@ class FailedEnrollment_Status_Report_Api{
     }
   }
 }
+class IGate_Recentiliation_Status_Report_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class ListofAgent_Status_Report_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Login_Logout_Status_Report_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Mpin_Status_Report_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Reconn_Status_Report_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class RegisterClient_Status_Report_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Remmittance_Cancelled_Status_Report_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Remmittance_Claimed_Status_Report_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Remmittance_Sent_Status_Report_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class ResentSms_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class SmsLogs_ReSport_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Suspicious_Transaction_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Transaction_Logs_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Used_Device_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class User_Activity_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Valid_Transaction_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class WebtoolUser_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
