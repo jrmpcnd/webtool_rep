@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/utils/functions.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
+import '../../../utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -16,21 +17,44 @@ class Usermanagement extends StatefulWidget {
   State<Usermanagement> createState() => _UsermanagementState();
 }
 
+
 class _UsermanagementState extends State<Usermanagement> {
+  Um_userstatus_Api Umstatus = Um_userstatus_Api();
+  List<String> res = [];
+  String init = '';
   TextEditingController branchname_controller = TextEditingController();
   TextEditingController fname_controller = TextEditingController();
   TextEditingController lname_controller = TextEditingController();
   TextEditingController mname_controller = TextEditingController();
   TextEditingController stat_controller = TextEditingController();
   TextEditingController uname_controller = TextEditingController();
+  TextEditingController Umstatus_controller = TextEditingController();
+
+
+
+
 
   @override
   void initState() {
     Usermanagement_Function.user(user_login: '');
+    getList();
     super.initState();
+  }
+  getList()async{
+    List<dynamic> dlist = await Umstatus.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_um_userstatus_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
   }
 
   @override
+
   Widget build(BuildContext context) {
     return Container(
       padding: kEdgeInsetsVerticalNormal,
@@ -149,27 +173,11 @@ class _UsermanagementState extends State<Usermanagement> {
                               elevatedbuttonpopup(
                                   label: "Branch", width: 400.0),
                               verticalSpaceTiny,
-                              dropdowns(
-                                dropdown: "--User Status--",
-                                items: [
-                                  DropdownMenuItem(
-                                      onTap: () {},
-                                      value: "",
-                                      child: Text("--Select Status--")),
-                                  DropdownMenuItem(
-                                      onTap: () {},
-                                      value: "Active",
-                                      child: Text("Active")),
-                                  DropdownMenuItem(
-                                      onTap: () {},
-                                      value: "Inactive",
-                                      child: Text("Inactive")),
-                                  DropdownMenuItem(
-                                      onTap: () {},
-                                      value: "Lock",
-                                      child: Text("Lock")),
-                                ],
-                              ),
+                              DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e),);}).toList(), onChanged: (value) {
+                                setState(() {
+                                  init = value.toString();
+                                });
+                              },),
                               verticalSpaceMedium,
                             ],
                           ),

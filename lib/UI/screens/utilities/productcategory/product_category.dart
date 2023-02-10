@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/tables.dart';
 import '../../../widgets/textfield.dart';
 
@@ -17,6 +15,41 @@ class Productcategory extends StatefulWidget {
 }
 
 class _ProductcategoryState extends State<Productcategory> {
+  List<String> res = [];
+  List<String> res2 = [];
+  String init = '';
+  String init2 = '';
+  ProductCategory_Api dropdownFunction = ProductCategory_Api();
+  ProductCategory_ProductType_Api dropdownStatus = ProductCategory_ProductType_Api();
+  void initState() {
+    getList();
+    getCategory();
+  }
+    getList()async{
+      List<dynamic> dlist = await dropdownFunction.getUserstatus();
+      for(var i in dlist){
+        setState(() {
+          res.add(i['get_pt_provider_dropdown']);
+        });
+      }
+      setState(() {
+        init = res[0];
+      });
+      print("safgsdgsdgsdfgde $res");
+    }
+  getCategory()async{
+    List<dynamic> dlist = await dropdownStatus.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res2.add(i['get_pc_producttype_dropdown']);
+      });
+    }
+    setState(() {
+      init2 = res2[0];
+    });
+    print("safgsdgsdgsdfgde $res2");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -116,9 +149,17 @@ class _ProductcategoryState extends State<Productcategory> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              dropdowns(dropdown: "--Provider--"),
+                              DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                                setState(() {
+                                  init = value.toString();
+                                });
+                              },),
                               verticalSpaceTiny,
-                              dropdowns(dropdown: "--Product Type--"),
+                              DropdownButton(value: init2,items: res2.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                                setState(() {
+                                  init2 = value.toString();
+                                });
+                              },),
                               verticalSpaceSmall,
                               Row(
                                 children: [

@@ -9,7 +9,6 @@ import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
-import 'package:http/http.dart' as http;
 
 class Transactionforconfirmation extends StatefulWidget {
   const Transactionforconfirmation({Key? key}) : super(key: key);
@@ -22,15 +21,20 @@ class Transactionforconfirmation extends StatefulWidget {
 class _TransactionforconfirmationState
     extends State<Transactionforconfirmation> {
   List<String> res = [];
+  List<String> res2 = [];
   String init = '';
+  String init2 = '';
   TextEditingController transac_controller = TextEditingController();
-  DropdownAPI dropdownFunction = DropdownAPI();
+  TransactionConfirm_API dropdownFunction = TransactionConfirm_API();
+  TransactionStatus_Api dropdownstatus = TransactionStatus_Api();
   @override
   void initState() {
     getList();
+    getStatus();
    Transacconfirm_function.news(branch_desc:'',cid: '',status:  '',trans_date: '',trans_desc: '');
     super.initState();
   }
+
   getList()async{
     List<dynamic> dlist = await dropdownFunction.getCategory();
     for(var i in dlist){
@@ -42,6 +46,18 @@ class _TransactionforconfirmationState
       init = res[0];
     });
     print("safgsdgsdgsdfgde $res");
+  }
+  getStatus()async{
+    List<dynamic> dlist = await dropdownstatus.getStatus();
+    for(var i in dlist){
+      setState(() {
+        res2.add(i['get_tfc_status_dropdown']);
+      });
+    }
+    setState(() {
+      init2 = res2[0];
+    });
+    print("safgsdgsdgsdfgde $res2");
   }
   Widget build(BuildContext context) {
     return Container(
@@ -84,14 +100,18 @@ class _TransactionforconfirmationState
                             controller: transac_controller,
                           ),
                           verticalSpaceTiny,
-                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e),);}).toList(), onChanged: (value) {
+                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
                             setState(() {
                               init = value.toString();
                             });
                           },),
                           // dropdowns(dropdown: "--Transaction--", items: res.map((e) {return DropdownMenuItem(value: e, child: Text(e));}).toList()),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Status--"),
+                          DropdownButton(value: init2,items: res2.map((e) {return DropdownMenuItem(value: e,child: Text(e,style: TextStyle(color: Colors.black),),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init2 = value.toString();
+                            });
+                          },),
                           verticalSpaceSmall,
                           Row(
                             children: [

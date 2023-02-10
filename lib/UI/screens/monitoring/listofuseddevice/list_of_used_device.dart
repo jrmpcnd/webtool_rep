@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
@@ -16,6 +17,41 @@ class Listofuseddevice extends StatefulWidget {
 }
 
 class _ListofuseddeviceState extends State<Listofuseddevice> {
+  List<String> res = [];
+  List<String> res2 = [];
+  String init = '';
+  String init2 = '';
+  ListofUseDevice_Api dropdownFunction = ListofUseDevice_Api();
+  ListofUseDeviceStatus_Api dropdownStatus = ListofUseDeviceStatus_Api();
+  void initState() {
+    getList();
+    getCathegory();
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownFunction.getStatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_lud_clientype_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
+  getCathegory()async{
+    List<dynamic> dlist = await dropdownStatus.getStatus();
+    for(var i in dlist){
+      setState(() {
+        res2.add(i['get_lud_status_dropdown']);
+      });
+    }
+    setState(() {
+      init2 = res2[0];
+    });
+    print("safgsdgsdgsdfgde $res2");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -75,7 +111,11 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
                             hintext: "CIF Number",
                           ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Client Type--"),
+                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init = value.toString();
+                            });
+                          },),
                           verticalSpaceSmall,
                           Row(
                             children: [
@@ -138,7 +178,12 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
                                 hintext: "Mobile Number",
                               ),
                               verticalSpaceTiny,
-                              dropdowns(dropdown: "--Status--"),
+                              DropdownButton(value: init2,items: res2.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                                setState(() {
+                                  init2 = value.toString();
+                                });
+                              },),
+
                               verticalSpaceMedium,
                             ],
                           ),

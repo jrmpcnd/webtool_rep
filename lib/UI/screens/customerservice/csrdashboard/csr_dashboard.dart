@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -15,6 +16,41 @@ class Csrdashboard extends StatefulWidget {
 }
 
 class _CsrdashboardState extends State<Csrdashboard> {
+  List<String> res = [];
+  List<String> res2 = [];
+  String init = '';
+  String init2 = '';
+  CSR_Dashboard_Concern_Api dropdownFunction = CSR_Dashboard_Concern_Api();
+  CSR_Dashboard_Status_Api dropdownStatus = CSR_Dashboard_Status_Api();
+  @override
+  void initState() {
+    getList();
+    getCategory();
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownFunction.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_cs_concern_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
+  getCategory()async{
+    List<dynamic> dlist = await dropdownStatus.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res2.add(i['get_cs_status_dropdown']);
+      });
+    }
+    setState(() {
+      init2 = res2[0];
+    });
+    print("safgsdgsdgsdfgde $res2");
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -132,9 +168,17 @@ class _CsrdashboardState extends State<Csrdashboard> {
                                 ],
                               ),
                               verticalSpaceTiny,
-                              dropdowns(dropdown: "--Concern--"),
+                              DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                                setState(() {
+                                  init = value.toString();
+                                });
+                              },),
                               verticalSpaceTiny,
-                              dropdowns(dropdown: "--Status--"),
+                              DropdownButton(value: init2,items: res2.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                                setState(() {
+                                  init2 = value.toString();
+                                });
+                              },),
                               verticalSpaceMedium,
                             ],
                           ),

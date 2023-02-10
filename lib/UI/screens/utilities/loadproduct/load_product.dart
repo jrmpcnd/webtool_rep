@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -17,6 +18,25 @@ class Loadproduct extends StatefulWidget {
 }
 
 class _LoadproductState extends State<Loadproduct> {
+  List<String> res = [];
+  String init = '';
+  @override
+  void initState() {
+    getList();
+  }
+  LoadProduct_Api dropdownFunction = LoadProduct_Api();
+  getList()async{
+    List<dynamic> dlist = await dropdownFunction.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_lp_productcategory_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,7 +78,11 @@ class _LoadproductState extends State<Loadproduct> {
                         hintext: "Load Product Name",
                       ),
                       verticalSpaceTiny,
-                      dropdowns(dropdown: "--Product Category--"),
+                      DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                        setState(() {
+                          init = value.toString();
+                        });
+                      },),
                       verticalSpaceSmall,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

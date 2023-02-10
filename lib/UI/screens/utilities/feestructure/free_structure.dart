@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -13,6 +14,25 @@ class Feestructure extends StatefulWidget {
 }
 
 class _FeestructureState extends State<Feestructure> {
+  List<String> res = [];
+  String init = '';
+  FeeStructure_Api dropdownFunction = FeeStructure_Api();
+  void initState() {
+    getList();
+
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownFunction.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_fs_transaction_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,12 +62,16 @@ class _FeestructureState extends State<Feestructure> {
                           offset: Offset(0, 3)),
                     ],
                   ),
-                  height: 110.0,
+                  height: 200.0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      dropdowns(
-                        dropdown: "--Transaction--",
+                    DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                    setState(() {
+                      init = value.toString();
+                    });
+                  },),
+
                         // items: [
                         //   DropdownMenuItem(
                         //       onTap: () {},
@@ -104,8 +128,8 @@ class _FeestructureState extends State<Feestructure> {
                         //   DropdownMenuItem(
                         //       onTap: () {}, value: "IBFT", child: Text("IBFT")),
                         // ],
-                      ),
-                      verticalSpaceSmall,
+
+                      verticalSpaceMedium,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

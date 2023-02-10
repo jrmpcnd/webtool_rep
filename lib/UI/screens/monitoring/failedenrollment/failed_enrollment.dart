@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
@@ -16,6 +17,26 @@ class Failedenrollment extends StatefulWidget {
 }
 
 class _FailedenrollmentState extends State<Failedenrollment> {
+  List<String> res = [];
+  String init = '';
+FieldEnrollmentList_Api dropdownFunction = FieldEnrollmentList_Api();
+  void initState() {
+    getList();
+
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownFunction.getStatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_fel_clienttype_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -75,7 +96,11 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                             hintext: "Birthday",
                           ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Client Type--"),
+                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init = value.toString();
+                            });
+                          },),
                           verticalSpaceSmall,
                           Row(
                             children: [

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/tables.dart';
 import '../../../widgets/textfield.dart';
 
@@ -15,8 +14,25 @@ class Partner extends StatefulWidget {
   @override
   State<Partner> createState() => _PartnerState();
 }
-
 class _PartnerState extends State<Partner> {
+  List<String> res = [];
+  String init = '';
+  Partner_Api dropdownFunction = Partner_Api();
+  void initState() {
+    getList();
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownFunction.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_p_status_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -120,7 +136,11 @@ class _PartnerState extends State<Partner> {
                                 hintext: "Partner Name",
                               ),
                               verticalSpaceTiny,
-                              dropdowns(dropdown: "--Status--"),
+                              DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                                setState(() {
+                                  init = value.toString();
+                                });
+                              },),
                               verticalSpaceSmall,
                               Row(
                                 children: [

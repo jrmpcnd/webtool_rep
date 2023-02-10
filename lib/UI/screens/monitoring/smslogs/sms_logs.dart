@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
+import '../../../utils/api.dart';
+import '../../../utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -16,6 +19,40 @@ class Smslogs extends StatefulWidget {
 }
 
 class _SmslogsState extends State<Smslogs> {
+  List<String> res = [];
+  List<String> res2 = [];
+  String init = '';
+  String init2 = '';
+  SMSLogs_Api dropdownStatus = SMSLogs_Api();
+  SMSLogsStatus_Api dropdownLogs = SMSLogsStatus_Api();
+  void initState() {
+    getList();
+    getCategory();
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownStatus.getStatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_sms_logs_smstype_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
+  getCategory()async{
+    List<dynamic> dlist = await dropdownLogs.getStatus();
+    for(var i in dlist){
+      setState(() {
+        res2.add(i['get_sms_logs_smsstatus_dropdown']);
+      });
+    }
+    setState(() {
+      init2 = res2[0];
+    });
+    print("safgsdgsdgsdfgde $res2");
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,9 +116,19 @@ class _SmslogsState extends State<Smslogs> {
                             hintext: "Mobile Number",
                           ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Message Type--"),
+                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init = value.toString();
+                            });
+                          },),
+
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--SMS Status--"),
+                          DropdownButton(value: init2,items: res2.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init2 = value.toString();
+                            });
+                          },),
+
                           verticalSpaceSmall,
                           Row(
                             children: [

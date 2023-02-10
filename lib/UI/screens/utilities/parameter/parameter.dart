@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
 class Parameters extends StatefulWidget {
@@ -15,6 +15,25 @@ class Parameters extends StatefulWidget {
 }
 
 class _ParametersState extends State<Parameters> {
+  List<String> res = [];
+  String init = '';
+  Parameter_Api  dropdownFunction = Parameter_Api();
+  void initState() {
+    getList();
+
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownFunction.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_pc_parametertype_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +63,7 @@ class _ParametersState extends State<Parameters> {
                           offset: Offset(0, 3)),
                     ],
                   ),
-                  height: 150.0,
+                  height: 200,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +72,11 @@ class _ParametersState extends State<Parameters> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          dropdowns(dropdown: "--Transaction--"),
+                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init = value.toString();
+                            });
+                          },),
                           verticalSpaceTiny,
                           textfield(
                             hintext: "Parameter Name",

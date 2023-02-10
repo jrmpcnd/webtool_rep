@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
 class Typeofconcern extends StatefulWidget {
@@ -15,6 +14,25 @@ class Typeofconcern extends StatefulWidget {
 }
 
 class _TypeofconcernState extends State<Typeofconcern> {
+  List<String> res = [];
+  String init = '';
+  CSR_TypeofConcern_Api dropdownFunction = CSR_TypeofConcern_Api();
+  @override
+  void initState() {
+    getList();
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownFunction.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_toc_complexity_level_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,7 +74,11 @@ class _TypeofconcernState extends State<Typeofconcern> {
                             hintext: "Subject",
                           ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Complexity Level--"),
+                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init = value.toString();
+                            });
+                          },),
                           verticalSpaceSmall,
                           Row(
                             children: [

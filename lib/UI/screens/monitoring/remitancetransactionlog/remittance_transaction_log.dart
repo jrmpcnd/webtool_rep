@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
+import '../../../utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -17,6 +18,24 @@ class Remittancetransactionlog extends StatefulWidget {
 }
 
 class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
+  List<String> res = [];
+  String init = '';
+  Remittancelog_Api dropdownStatus = Remittancelog_Api();
+  void initState() {
+    getList();
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownStatus.getStatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_rtl_status_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -133,7 +152,12 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              dropdowns(dropdown: "--Status--"),
+                              DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                                setState(() {
+                                  init = value.toString();
+                                });
+                              },),
+
                               verticalSpaceTiny,
                               elevatedbuttonpopup(
                                   label: "Source Branch", width: 400.0),

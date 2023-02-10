@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -16,6 +17,42 @@ class Transactionlog extends StatefulWidget {
 }
 
 class _TransactionlogState extends State<Transactionlog> {
+  List<String> res = [];
+  List<String> res2 = [];
+  String init = '';
+  String init2 = '';
+  TransactionLogs_Api dropdownStatus = TransactionLogs_Api();
+  TransactionLogsStatus_Api dropdownFunction = TransactionLogsStatus_Api();
+
+  void initState() {
+    getList();
+    getCategory();
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownStatus.getStatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_transaction_logs_transaction_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
+  getCategory()async{
+    List<dynamic> dlist = await dropdownFunction.getStatus();
+    for(var i in dlist){
+      setState(() {
+        res2.add(i['get_transaction_logs_status_dropdown']);
+      });
+    }
+    setState(() {
+      init2 = res2[0];
+    });
+    print("safgsdgsdgsdfgde $res2");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,7 +94,12 @@ class _TransactionlogState extends State<Transactionlog> {
                             hintext: "Core ID",
                           ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Transaction--"),
+                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init = value.toString();
+                            });
+                          },),
+
                           verticalSpaceTiny,
                           textfield(
                             hintext: "Source CID",
@@ -67,7 +109,11 @@ class _TransactionlogState extends State<Transactionlog> {
                             hintext: "Source Account",
                           ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Status--"),
+                          DropdownButton(value: init2,items: res2.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init2 = value.toString();
+                            });
+                          },),
                           verticalSpaceSmall,
                           Row(
                             children: [
