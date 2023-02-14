@@ -19,7 +19,7 @@ class _LoginpageState extends State<Loginpage> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/background.png"),
+            image: AssetImage("assets/images/mobilebg.png"),
             fit: BoxFit.cover,
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -13,6 +14,81 @@ class Hierarchy extends StatefulWidget {
 }
 
 class _HierarchyState extends State<Hierarchy> {
+  List<String> res = [];
+  List<String> res2 = [];
+  List<String> res3 = [];
+  List<String> res4 = [];
+
+
+  String init = '';
+  String init2 = '';
+  String init3 = '';
+  String init4 = '';
+
+
+
+  Hierarchy_Institution_Api dropdownInsti = Hierarchy_Institution_Api();
+  Hierarchy_Unit_Api dropdownUnit = Hierarchy_Unit_Api();
+  Hierarchy_Branch_Api dropdownBranch = Hierarchy_Branch_Api();
+  Hierarchy_Center_Api dropdownCenter = Hierarchy_Center_Api();
+  @override
+  void initState() {
+    getList();
+    getUnit();
+    getBranch();
+    getCenter();
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownInsti.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['insti_desc']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
+  getUnit()async{
+    List<dynamic> dlist = await dropdownUnit.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res2.add(i['unit_desc']);
+      });
+    }
+    setState(() {
+      init2 = res2[0];
+    });
+    print("safgsdgsdgsdfgde $res2");
+  }
+  getBranch()async{
+    List<dynamic> dlist = await dropdownBranch.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res3.add(i['branch_desc']);
+      });
+    }
+    setState(() {
+      init3 = res3[0];
+    });
+    print("safgsdgsdgsdfgde $res3");
+  }
+  getCenter()async{
+    List<dynamic> dlist = await dropdownCenter.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res4.add(i['center_desc']);
+      });
+    }
+    setState(() {
+      init4 = res4[0];
+    });
+    print("safgsdgsdgsdfgde $res4");
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,15 +126,19 @@ class _HierarchyState extends State<Hierarchy> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          dropdowns(
-                            dropdown: "--Institution--",
-                            ontap: () {},
-                          ),
+                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init = value.toString();
+                            });
+                          },),
+
                           verticalSpaceTiny,
-                          dropdowns(
-                            dropdown: "--Unit--",
-                            ontap: () {},
-                          ),
+                          DropdownButton(value: init2,items: res2.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init2 = value.toString();
+                            });
+                          },),
+
                           verticalSpaceSmall,
                           Row(
                             children: [
@@ -114,15 +194,19 @@ class _HierarchyState extends State<Hierarchy> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              dropdowns(
-                                dropdown: "--Branch--",
-                                ontap: () {},
-                              ),
+                              DropdownButton(value: init3,items: res3.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                                setState(() {
+                                  init3 = value.toString();
+                                });
+                              },),
+
                               verticalSpaceTiny,
-                              dropdowns(
-                                dropdown: "--Center--",
-                                ontap: () {},
-                              ),
+                              DropdownButton(value: init4,items: res4.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                                setState(() {
+                                  init4 = value.toString();
+                                });
+                              },),
+
                               verticalSpaceSmall,
                               Row(
                                 children: [

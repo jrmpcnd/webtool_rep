@@ -512,6 +512,91 @@ class Um_userstatus_Api{
     }
   }
 }
+class Hierarchy_Institution_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_hierarchy_insti_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Hierarchy_Unit_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_hierarchy_unit_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Hierarchy_Branch_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_hierarchy_branch_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+class Hierarchy_Center_Api{
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_hierarchy_center_dropdown'), );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    }catch (e){
+      throw e.toString();
+    }
+  }
+}
+
+
+
+
+
 //Utilities
 class FeeStructure_Api{
   Future<List> getUserstatus() async {
