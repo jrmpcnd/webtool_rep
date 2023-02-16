@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'model.dart';
 
 // Administration API
 class Usermanagement_Api {
@@ -36,24 +37,59 @@ class Usermanagement_Api {
   }
 }
 
-class Rolemanagement_Api {
-  Future<http.Response> role(String role_name) async {
-    http.Response getResponse = await http
-        .post(
-          Uri.parse('http://192.168.0.148:1111/get_rolesmanagement/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'role_name': role_name,
-            },
-          ),
-        )
-        .timeout(const Duration(minutes: 1));
-    return getResponse;
+class HttpPush {
+  Future<http.Response> pushHttp() async {
+    http.Response response = await http.post(
+      Uri.parse('http://10.21.0.74:1234/get_rolesmanagement/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{"role_name": ""},
+      ),
+    );
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      print(response.body);
+      return response;
+    } else {
+      return response;
+    }
   }
 }
+
+class HttpParse {
+  Future<SavedAccounts> profile() async {
+    HttpPush httpPush = HttpPush();
+    http.Response res = await httpPush.pushHttp();
+    print("-------->>>>>>>>>>${jsonDecode(res.body).length}");
+
+    var inq = SavedAccounts.fromJson(jsonDecode(res.body));
+
+    return inq;
+    //inq.add(inv);
+  }
+}
+// class Rolemanagement_Api {
+//   Future<http.Response> role(String role_name) async {
+//     http.Response getResponse = await http
+//         .post(
+//           Uri.parse('http://192.168.0.148:1111/get_rolesmanagement/'),
+//           headers: <String, String>{
+//             'Content-Type': 'application/json; charset=UTF-8',
+//           },
+//           body: jsonEncode(
+//             <String, String>{
+//               'role_name': role_name,
+//             },
+//           ),
+//         )
+//         .timeout(const Duration(minutes: 1));
+//     return getResponse;
+//   }
+// }
 
 class Hierarchy_Api {
   Future<http.Response> inquire(String searchBankNews) async {
@@ -96,23 +132,24 @@ class Clientlist_Api {
 
 // Monitoring API
 class transacconfirm_Api {
-  Future<http.Response> news(String branch_desc,cid,status,trans_date,trans_desc) async {
+  Future<http.Response> news(
+      String branch_desc, cid, status, trans_date, trans_desc) async {
     http.Response getResponse = await http
         .post(
-      Uri.parse('http://10.21.0.74:1234/get_transconfirmation'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(
-        <String, String>{
-          'branch_desc': branch_desc,
-          'cid': cid,
-          'status': status,
-          'trans_date': trans_date,
-          'trans_desc':trans_desc,
-        },
-      ),
-    )
+          Uri.parse('http://10.21.0.74:1234/get_transconfirmation'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(
+            <String, String>{
+              'branch_desc': branch_desc,
+              'cid': cid,
+              'status': status,
+              'trans_date': trans_date,
+              'trans_desc': trans_desc,
+            },
+          ),
+        )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
@@ -136,7 +173,6 @@ class Banknews_Api {
     return getResponse;
   }
 }
-
 
 class Clientprofile_Api {
   Future<http.Response> profile(
@@ -282,6 +318,7 @@ class Provider_Api {
     return getResponse;
   }
 }
+
 class Productandservices_Api {
   Future<http.Response> product(String search_productservices) async {
     http.Response getResponse = await http
@@ -300,6 +337,7 @@ class Productandservices_Api {
     return getResponse;
   }
 }
+
 //Customer Service API
 class Broadcastmessage_Api {
   Future<http.Response> customers(String search_productservices) async {
@@ -319,185 +357,187 @@ class Broadcastmessage_Api {
     return getResponse;
   }
 }
+
 //API Dropdown
 //Monitoring
-class TransactionConfirm_API{
+class TransactionConfirm_API {
   Future<List> getCategory() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse('http://10.21.0.74:1234/get_transaction_logs_status_dropdown'));
+    http.Response response = await http.get(Uri.parse(
+        'http://10.21.0.74:1234/get_transaction_logs_status_dropdown'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
       res = jsonData;
       print(jsonDecode(response.body)['data']);
       return res;
-
     } else {
       throw 'connection error';
     }
   }
-
 }
-class TransactionStatus_Api{
+
+class TransactionStatus_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse('http://10.21.0.74:1234/get_tfc_status_dropdown/'));
+    http.Response response = await http
+        .get(Uri.parse('http://10.21.0.74:1234/get_tfc_status_dropdown/'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
       res = jsonData;
       print(jsonDecode(response.body)['data']);
       return res;
-
     } else {
       throw 'connection error';
     }
   }
-
 }
-class Remittancelog_Api{
+
+class Remittancelog_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse('http://10.21.0.74:1234/get_rtl_status_dropdown/'));
+    http.Response response = await http
+        .get(Uri.parse('http://10.21.0.74:1234/get_rtl_status_dropdown/'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
       res = jsonData;
       print(jsonDecode(response.body)['data']);
       return res;
-
     } else {
       throw 'connection error';
     }
   }
-
 }
-class SMSLogs_Api{
+
+class SMSLogs_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse('http://10.21.0.74:1234/get_sms_logs_smstype_dropdown/'));
+    http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_sms_logs_smstype_dropdown/'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
       res = jsonData;
       print(jsonDecode(response.body)['data']);
       return res;
-
     } else {
       throw 'connection error';
     }
   }
-
 }
-class SMSLogsStatus_Api{
+
+class SMSLogsStatus_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse('http://10.21.0.74:1234/get_sms_logs_smsstatus_dropdown/'));
+    http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_sms_logs_smsstatus_dropdown/'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
       res = jsonData;
       print(jsonDecode(response.body)['data']);
       return res;
-
     } else {
       throw 'connection error';
     }
   }
-
 }
-class TransactionLogs_Api{
+
+class TransactionLogs_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse('http://10.21.0.74:1234/get_transaction_logs_transaction_dropdown/'));
+    http.Response response = await http.get(Uri.parse(
+        'http://10.21.0.74:1234/get_transaction_logs_transaction_dropdown/'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
       res = jsonData;
       print(jsonDecode(response.body)['data']);
       return res;
-
     } else {
       throw 'connection error';
     }
   }
-
 }
-class TransactionLogsStatus_Api{
+
+class TransactionLogsStatus_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse('http://10.21.0.74:1234/get_transaction_logs_status_dropdown'));
+    http.Response response = await http.get(Uri.parse(
+        'http://10.21.0.74:1234/get_transaction_logs_status_dropdown'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
       res = jsonData;
       print(jsonDecode(response.body)['data']);
       return res;
-
     } else {
       throw 'connection error';
     }
   }
-
 }
-class ListofUseDevice_Api{
+
+class ListofUseDevice_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse('http://10.21.0.74:1234/get_lud_clientype_dropdown'));
+    http.Response response = await http
+        .get(Uri.parse('http://10.21.0.74:1234/get_lud_clientype_dropdown'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
       res = jsonData;
       print(jsonDecode(response.body)['data']);
       return res;
-
     } else {
       throw 'connection error';
     }
   }
-
 }
-class ListofUseDeviceStatus_Api{
+
+class ListofUseDeviceStatus_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse('http://10.21.0.74:1234/get_lud_status_dropdown'));
+    http.Response response = await http
+        .get(Uri.parse('http://10.21.0.74:1234/get_lud_status_dropdown'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
       res = jsonData;
       print(jsonDecode(response.body)['data']);
       return res;
-
     } else {
       throw 'connection error';
     }
   }
-
 }
-class FieldEnrollmentList_Api{
+
+class FieldEnrollmentList_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse('http://10.21.0.74:1234/get_fel_clienttype_dropdown'));
+    http.Response response = await http
+        .get(Uri.parse('http://10.21.0.74:1234/get_fel_clienttype_dropdown'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
       res = jsonData;
       print(jsonDecode(response.body)['data']);
       return res;
-
     } else {
       throw 'connection error';
     }
   }
-
 }
+
 //Administration
-class Um_userstatus_Api{
+class Um_userstatus_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-          Uri.parse('http://10.21.0.74:1234/get_um_userstatus_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_um_userstatus_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -507,18 +547,20 @@ class Um_userstatus_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
+
 //Utilities
-class FeeStructure_Api{
+class FeeStructure_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_fs_transaction_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_fs_transaction_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -528,17 +570,19 @@ class FeeStructure_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-class Parameter_Api{
+
+class Parameter_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_pc_parametertype_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_pc_parametertype_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -548,17 +592,19 @@ class Parameter_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-class ProductType_Api{
+
+class ProductType_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_pt_provider_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_pt_provider_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -568,17 +614,19 @@ class ProductType_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-class ProductCategory_Api{
+
+class ProductCategory_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_pt_provider_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_pt_provider_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -588,17 +636,19 @@ class ProductCategory_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-class ProductCategory_ProductType_Api{
+
+class ProductCategory_ProductType_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_pc_producttype_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_pc_producttype_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -608,17 +658,19 @@ class ProductCategory_ProductType_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-class BillerProduct_Api{
+
+class BillerProduct_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_pt_provider_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_pt_provider_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -628,17 +680,19 @@ class BillerProduct_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-class BillerProduct_Category_Api{
+
+class BillerProduct_Category_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_bp_productcategory_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_bp_productcategory_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -648,17 +702,19 @@ class BillerProduct_Category_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-class LoadProduct_Api{
+
+class LoadProduct_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_lp_productcategory_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_lp_productcategory_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -668,17 +724,19 @@ class LoadProduct_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-class Partner_Api{
+
+class Partner_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_p_status_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_p_status_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -688,19 +746,20 @@ class Partner_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
 
 //Customer Service
-class CSR_Dashboard_Concern_Api{
+class CSR_Dashboard_Concern_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_cs_concern_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_cs_concern_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -710,38 +769,19 @@ class CSR_Dashboard_Concern_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
-      throw e.toString();
-    }
-  }
-}
-class CSR_Dashboard_Status_Api{
-  Future<List> getUserstatus() async {
-    try {
-      List res = [];
-      http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_cs_status_dropdown'), );
-      print(response.statusCode);
-      if (response.statusCode == 200) {
-        var jsonData = await jsonDecode(response.body)['data'];
-        res = jsonData;
-        print(jsonDecode(response.body)['data']);
-        return res;
-      } else {
-        throw 'connection error';
-      }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
 
-class CSR_TypeofConcern_Api{
+class CSR_Dashboard_Status_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_toc_complexity_level_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_cs_status_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -751,19 +791,42 @@ class CSR_TypeofConcern_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+}
+
+class CSR_TypeofConcern_Api {
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('http://10.21.0.74:1234/get_toc_complexity_level_dropdown'),
+      );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    } catch (e) {
       throw e.toString();
     }
   }
 }
 //Reports Screen
 
-class Account_Status_Report_Api{
+class Account_Status_Report_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -773,17 +836,19 @@ class Account_Status_Report_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-class ActiveatedMarchant_Status_Report_Api{
+
+class ActiveatedMarchant_Status_Report_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -793,17 +858,19 @@ class ActiveatedMarchant_Status_Report_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-class Activity_History_Status_Report_Api{
+
+class Activity_History_Status_Report_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -813,17 +880,19 @@ class Activity_History_Status_Report_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-class CS_Dashboard_Status_Report_Api{
+
+class CS_Dashboard_Status_Report_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -833,17 +902,19 @@ class CS_Dashboard_Status_Report_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-class FailedEnrollment_Status_Report_Api{
+
+class FailedEnrollment_Status_Report_Api {
   Future<List> getUserstatus() async {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'), );
+        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+      );
       print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
@@ -853,24 +924,8 @@ class FailedEnrollment_Status_Report_Api{
       } else {
         throw 'connection error';
       }
-    }catch (e){
+    } catch (e) {
       throw e.toString();
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

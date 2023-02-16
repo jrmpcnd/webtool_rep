@@ -69,6 +69,20 @@ TextStyle kSmallBoldTextStyle = GoogleFonts.poppins(
   color: kWhiteColor,
 );
 
+TextStyle kLargeBoldTextStyle = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  fontSize: 18,
+  height: 1.5,
+  color: kWhiteColor,
+);
+
+TextStyle kXLargeBoldTextStyle = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  fontSize: 24,
+  height: 1.5,
+  color: kWhiteColor,
+);
+
 TextStyle kSmallTextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.w600,
   fontSize: 15,

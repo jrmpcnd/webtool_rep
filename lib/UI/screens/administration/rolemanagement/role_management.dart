@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:webtool_rep/UI/utils/functions.dart';
-import '../../../utils/constant.dart';
-import '../../../utils/edge_insect.dart';
-import '../../../utils/spacing.dart';
-import '../../../utils/text_styles.dart';
-import '../../../widgets/textfield.dart';
+import 'package:provider/provider.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
+import 'package:webtool_rep/UI/utils/constant.dart';
+import 'package:webtool_rep/UI/utils/edge_insect.dart';
+import 'package:webtool_rep/UI/utils/model.dart';
+import 'package:webtool_rep/UI/utils/text_styles.dart';
+import 'package:webtool_rep/core/providers/data_provider.dart';
 
 class Rolemanagement extends StatefulWidget {
   const Rolemanagement({Key? key}) : super(key: key);
@@ -14,350 +15,274 @@ class Rolemanagement extends StatefulWidget {
 }
 
 class _RolemanagementState extends State<Rolemanagement> {
-  TextEditingController role_namecontroller = TextEditingController();
+  TextEditingController controller = TextEditingController();
+  bool static = false;
+  bool isLoaded = false;
+  Future<void> wait() async {
+    final shared = Provider.of<Prov>(context, listen: false);
+    shared.inqq.clear();
+    HttpParse httpParse = HttpParse();
+    var res = await httpParse.profile();
+    if (res.data!.isNotEmpty) {
+      print(res.data!.length);
+      print(res.data![0].toJson().length);
+      setState(() {
+        shared.inqq.add(SavedAccounts.fromJson(res.toJson()));
+        isLoaded = true;
+      });
+      for (var i in res.data!) {
+        shared.inqqq.add(Data.fromJson(i.toJson()));
+      }
+    }
+    for (var i in shared.inqqq) {
+      print(i.toJson());
+    }
+  }
+
   @override
   void initState() {
-    Rolemanagement_Function.role(role_name: '');
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      wait();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final shared = Provider.of<Prov>(context);
+    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data2 = MyData2();
+    final key = new GlobalKey<PaginatedDataTableState>();
+    ScrollController scrollController = ScrollController();
     return Container(
       padding: kEdgeInsetsVerticalNormal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: kEdgeInsetsAllNormal,
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 500,
+                child: TextFormField(
+                  style: TextStyle(color: kBlackColor),
+                  decoration: const InputDecoration(
+                    hintText: 'Search',
+                    border: OutlineInputBorder(),
+                    labelStyle: TextStyle(fontSize: 12.0),
+                    contentPadding: EdgeInsets.only(left: 10.0),
+                    hintStyle: TextStyle(color: kSecondaryColor2),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kBlackColor),
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3)),
-                    ],
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kBlackColor),
+                    ),
                   ),
-                  height: 110.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          textfield(
-                            hintext: "Role Name",
-                            controller: role_namecontroller,
-                          ),
-                          verticalSpaceSmall,
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 100.0,
-                                height: 35.0,
-                                child: ElevatedButton.icon(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kPrimaryColor)),
-                                  onPressed: () {
-                                    Rolemanagement_Function.role(
-                                        role_name: role_namecontroller.text);
-                                  },
-                                  icon: const Icon(
-                                    Icons.search,
-                                    size: 20.0,
-                                  ),
-                                  label: Text(
-                                    'Search',
-                                    style: kSmallRegularTextStyle,
-                                  ),
-                                ),
-                              ),
-                              horizontalSpaceTiny,
-                              SizedBox(
-                                width: 100.0,
-                                height: 35.0,
-                                child: ElevatedButton.icon(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kSecondaryColor2)),
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.refresh,
-                                    size: 20.0,
-                                  ),
-                                  label: Text(
-                                    'Reset',
-                                    style: kSmallRegularTextStyle,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  textInputAction: TextInputAction.go,
+                  controller: controller,
+                  onChanged: (value) {
+                    setState(() {
+                      isLoaded = false;
+                    });
+                    try {
+                      if (controller.text.isNotEmpty) {
+                        shared.inqqq.clear();
+                        for (var i in shared.inqq[0].data!) {
+                          print(i.toJson());
+                          print(i.role_name
+                              ?.toLowerCase()
+                              .contains(controller.text.toLowerCase()));
+                          if (i.toJson().isNotEmpty) {
+                            if (i.role_name!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase()) ||
+                                i.role_desc!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())) {
+                              debugPrint(i.role_name);
+                              setState(() {
+                                shared.inqqq.add(Data(
+                                    role_name: i.role_name,
+                                    role_desc: i.role_desc,
+                                    role_id: i.role_id));
+                              });
+                              if (shared.inqqq.isNotEmpty) {
+                                setState(() {
+                                  isLoaded = true;
+                                });
+                              }
+                            }
+                          }
+                        }
+                      } else if (controller.text == '') {
+                        shared.inqqq.clear();
+                        setState(() {
+                          shared.inqqq.addAll(shared.inqq[0].data!);
+                        });
+                      }
+                      debugPrint(shared.inqqq[0].toJson().toString());
+                    } catch (e) {
+                      shared.inqqq.clear();
+                    }
+                  },
+                  onEditingComplete: () async {
+                    setState(() {
+                      isLoaded = false;
+                    });
+                    try {
+                      if (controller.text.isNotEmpty) {
+                        shared.inqqq.clear();
+                        for (var i in shared.inqq[0].data!) {
+                          print(i.toJson());
+                          print(i.role_name
+                              ?.toLowerCase()
+                              .contains(controller.text.toLowerCase()));
+                          if (i.toJson().isNotEmpty) {
+                            if (i.role_name!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase()) ||
+                                i.role_desc!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())) {
+                              debugPrint(i.role_name);
+                              setState(() {
+                                key.currentState?.pageTo(0);
+                                shared.inqqq.add(Data(
+                                    role_name: i.role_name,
+                                    role_desc: i.role_desc,
+                                    role_id: i.role_id));
+                              });
+                              if (shared.inqqq.isNotEmpty) {
+                                setState(() {
+                                  isLoaded = true;
+                                });
+                              }
+                            }
+                          }
+                        }
+                      } else if (controller.text == '') {
+                        shared.inqqq.clear();
+                        setState(() {
+                          shared.inqqq.addAll(shared.inqq[0].data!);
+                        });
+                      }
+                      debugPrint(shared.inqqq[0].toJson().toString());
+                    } catch (e) {
+                      shared.inqqq.clear();
+                    }
+                  },
                 ),
-                verticalSpaceRegular,
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  alignment: Alignment.centerLeft,
-                  width: double.infinity,
-                  height: 30.0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of Roles', style: kTinyBoldTextStyle),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3)),
-                    ],
-                  ),
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: Table(
-                    children: [
-                      TableRow(children: [
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('User Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Given Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Middle Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Last Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Branch', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Role', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Status', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Action', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 1',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Samplel2',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample3',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample4',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample5',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample6',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 2',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
+          Container(
+              width: double.infinity,
+              padding: kEdgeInsetsVerticalNormal,
+              child: PaginatedDataTable(
+                key: key,
+                arrowHeadColor: kWhiteColor,
+                columns: [
+                  DataColumn(
+                      label: Text('Role Name', style: kLargeBoldTextStyle)),
+                  DataColumn(
+                      label: Text('Role Desc', style: kLargeBoldTextStyle))
+                ],
+                source: shared.inqqq.isNotEmpty ? data : data2,
+                rowsPerPage: 8,
+                showFirstLastButtons: true,
+                header: Text('List of Role', style: kXLargeBoldTextStyle),
+              )),
+          // SafeArea(
+          //   child: TextButton(
+          //     onPressed: () async {
+          //       setState(() {});
+          //       shared.inqqq.sort((a, b) => a.role_name
+          //           .toString()
+          //           .toLowerCase()
+          //           .compareTo(b.role_name.toString().toLowerCase()));
+          //     },
+          //     child: const Text('Role name ascending'),
+          //   ),
+          // ),
+          // SafeArea(
+          //   child: TextButton(
+          //     onPressed: () async {
+          //       setState(() {});
+          //       shared.inqqq.sort((a, b) => b.role_name
+          //           .toString()
+          //           .toLowerCase()
+          //           .compareTo(a.role_name.toString().toLowerCase()));
+          //       //print(shared.inqq.sort());
+          //     },
+          //     child: const Text('Role name descending'),
+          //   ),
+          // ),
+          // SafeArea(
+          //   child: TextButton(
+          //     onPressed: () async {
+          //       setState(() {});
+          //       shared.inqqq.sort((a, b) => a.role_desc
+          //           .toString()
+          //           .toLowerCase()
+          //           .compareTo(b.role_desc.toString().toLowerCase()));
+          //     },
+          //     child: const Text('Role desc ascending'),
+          //   ),
+          // ),
+          // SafeArea(
+          //   child: TextButton(
+          //     onPressed: () async {
+          //       setState(() {});
+          //       shared.inqqq.sort((a, b) => b.role_desc
+          //           .toString()
+          //           .toLowerCase()
+          //           .compareTo(a.role_desc.toString().toLowerCase()));
+          //     },
+          //     child: const Text('Role desc descending'),
+          //   ),
+          // )
         ],
       ),
     );
+  }
+}
+
+class MyData extends DataTableSource {
+  Prov shared;
+  MyData({required this.shared});
+
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => shared.inqqq.length;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(SizedBox(
+          width: 500, child: Text(shared.inqqq[index].role_name.toString()))),
+      DataCell(SizedBox(
+          width: 500, child: Text(shared.inqqq[index].role_desc.toString())))
+    ]);
+  }
+}
+
+class MyData2 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(
+          SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
+      DataCell(SizedBox(child: Text('')))
+    ]);
   }
 }

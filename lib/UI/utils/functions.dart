@@ -27,23 +27,23 @@ class Usermanagement_Function {
   }
 }
 
-class Rolemanagement_Function {
-  static void role({String role_name = ''}) async {
-    Rolemanagement_Api api = Rolemanagement_Api();
-    http.Response getParamReturn = await api.role(role_name);
-    print(getParamReturn.statusCode);
-    print(getParamReturn.body);
-  }
-}
+// class Rolemanagement_Function {
+//   static void role({String role_name = ''}) async {
+//     Rolemanagement_Api api = Rolemanagement_Api();
+//     http.Response getParamReturn = await api.role(role_name);
+//     print(getParamReturn.statusCode);
+//     print(getParamReturn.body);
+//   }
+// }
 
-class Hierarchy_Function {
-  static void role({String search_role = ''}) async {
-    Rolemanagement_Api api = Rolemanagement_Api();
-    http.Response getParamReturn = await api.role(search_role);
-    print(getParamReturn.statusCode);
-    print(getParamReturn.body);
-  }
-}
+// class Hierarchy_Function {
+//   static void role({String search_role = ''}) async {
+//     Rolemanagement_Api api = Rolemanagement_Api();
+//     http.Response getParamReturn = await api.role(search_role);
+//     print(getParamReturn.statusCode);
+//     print(getParamReturn.body);
+//   }
+// }
 
 // Enrollment
 // class Clientlist_Function {
@@ -56,14 +56,21 @@ class Hierarchy_Function {
 // }
 
 // Monitoring
-class Transacconfirm_function{
-  static void news({String branch_desc = '',cid = '',status = '',trans_date = '',trans_desc = ''}) async{
+class Transacconfirm_function {
+  static void news(
+      {String branch_desc = '',
+      cid = '',
+      status = '',
+      trans_date = '',
+      trans_desc = ''}) async {
     transacconfirm_Api api = transacconfirm_Api();
-    http.Response getParamReturn = await api.news(branch_desc,cid,status,trans_date,trans_desc);
+    http.Response getParamReturn =
+        await api.news(branch_desc, cid, status, trans_date, trans_desc);
     print(getParamReturn.statusCode);
     print(getParamReturn.body);
   }
 }
+
 class Banknews_Function {
   static void news({String search_banknews = ''}) async {
     Banknews_Api api = Banknews_Api();
@@ -183,7 +190,6 @@ class Productandservices_Function {
     print(getParamReturn.body);
   }
 }
-
 
 //Dropdown Api
 
