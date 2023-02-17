@@ -119,11 +119,13 @@ class _RolemanagementState extends State<Rolemanagement> {
                         shared.role_data.clear();
                         setState(() {
                           shared.role_data.addAll(shared.role[0].data!);
+                          isLoaded = true;
                         });
                       }
                       debugPrint(shared.role_data[0].toJson().toString());
                     } catch (e) {
                       shared.role_data.clear();
+                      isLoaded = true;
                     }
                   },
                   onEditingComplete: () async {
