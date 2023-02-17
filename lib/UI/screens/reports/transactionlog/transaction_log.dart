@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import '../../../utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -16,6 +17,25 @@ class Transactionlogs extends StatefulWidget {
 }
 
 class _TransactionlogsState extends State<Transactionlogs> {
+  List<String> res = [];
+  String init = '';
+  Transaction_Logs_Api dropdownFunction = Transaction_Logs_Api();
+  @override
+  void initState() {
+    getList();
+  }
+  getList()async{
+    List<dynamic> dlist = await dropdownFunction.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_report_status_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -85,7 +105,11 @@ class _TransactionlogsState extends State<Transactionlogs> {
                             ],
                           ),
                           verticalSpaceTiny,
-                          dropdowns(dropdown: "--Status--"),
+                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                            setState(() {
+                              init = value.toString();
+                            });
+                          },),
                           verticalSpaceSmall,
                           Row(
                             children: [

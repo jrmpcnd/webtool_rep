@@ -7,7 +7,7 @@ class Listtile extends StatelessWidget {
   String? title;
   VoidCallback? onTap;
   Listtile({
-    this.icon,
+   this.icon,
     this.color,
     this.title,
     this.onTap,
@@ -24,6 +24,8 @@ class Listtile extends StatelessWidget {
             )
           : null,
       title: Text(
+
+
         title!,
         style: kSubtitleTextStyle,
       ),

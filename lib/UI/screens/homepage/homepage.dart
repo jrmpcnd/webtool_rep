@@ -150,6 +150,7 @@ class _HomePageState extends State<HomePage> {
                         title: "Dashboard",
                         child: [
                           Listtile(
+
                             color: Colors.black,
                             icon: Icons.account_circle_outlined,
                             title: "Register Client",
