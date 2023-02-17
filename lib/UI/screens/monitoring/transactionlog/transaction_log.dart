@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
+import 'package:webtool_rep/core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
+import '../../../utils/model.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
+import '../../administration/hierarchy/hierarchy.dart';
 
 class Transactionlog extends StatefulWidget {
   const Transactionlog({Key? key}) : super(key: key);
@@ -18,13 +22,42 @@ class Transactionlog extends StatefulWidget {
 
 class _TransactionlogState extends State<Transactionlog> {
   List<String> res = [];
+  List<String> res3 = [];
   List<String> res2 = [];
   String init = '';
   String init2 = '';
   TransactionLogs_Api dropdownStatus = TransactionLogs_Api();
   TransactionLogsStatus_Api dropdownFunction = TransactionLogsStatus_Api();
+  TextEditingController controller = TextEditingController();
 
+  bool static = false;
+  bool isLoaded = false;
+  Future<void> wait() async {
+    final shared = Provider.of<TransactionProv>(context, listen: false);
+    shared.inqq.clear();
+    TransacLogParse_Api TransactParse = TransacLogParse_Api();
+    var res = await TransactParse.profile();
+    if (res.data!.isNotEmpty) {
+      print(res.data!.length);
+      print(res.toJson());
+      print(res.data![0].toJson().length);
+      setState(() {
+        // shared.inqq.add(Data2.fromJson(res.toJson()));
+        shared.inqq.add(T_SavedAccounts.fromJson(res.toJson()));
+        isLoaded = true;
+      });
+      for (var i in res.data!) {
+        // shared.inqqq.add(Data.fromJson(i.toJson()));
+        shared.inqqq.add(Data2.fromJson(i.toJson()));
+
+      }
+    }
+    for (var i in shared.inqqq) {
+      print(i.toJson());
+    }
+  }
   void initState() {
+    wait();
     getList();
     getCategory();
   }
@@ -55,6 +88,12 @@ class _TransactionlogState extends State<Transactionlog> {
 
   @override
   Widget build(BuildContext context) {
+    final shared = Provider.of<TransactionProv>(context);
+    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data2 = MyData2();
+    final DataTableSource data3 = MyData3();
+    final key = new GlobalKey<PaginatedDataTableState>();
+    ScrollController scrollController = ScrollController();
     return Container(
       padding: kEdgeInsetsVerticalNormal,
       child: Row(
@@ -207,242 +246,177 @@ class _TransactionlogState extends State<Transactionlog> {
                   ),
                 ),
                 verticalSpaceRegular,
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  alignment: Alignment.centerLeft,
-                  width: double.infinity,
-                  height: 30.0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of Hierarchy', style: kTinyBoldTextStyle),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3)),
-                    ],
-                  ),
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: Table(
+                Column(children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TableRow(children: [
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('User Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Given Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Middle Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Last Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Branch', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Role', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Status', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Action', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 1',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Samplel',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 2',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
+                      // Container(
+                      //   width: 500,
+                      //   child: TextFormField(
+                      //     style: TextStyle(color: kBlackColor),
+                      //     decoration: const InputDecoration(
+                      //       hintText: 'Search',
+                      //       border: OutlineInputBorder(),
+                      //       labelStyle: TextStyle(fontSize: 12.0),
+                      //       contentPadding: EdgeInsets.only(left: 10.0),
+                      //       hintStyle: TextStyle(color: kSecondaryColor2),
+                      //       enabledBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(color: kBlackColor),
+                      //       ),
+                      //       focusedBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(color: kBlackColor),
+                      //       ),
+                      //     ),
+                      //     textInputAction: TextInputAction.go,
+                      //     controller: controller,
+                      //     onChanged: (value) {
+                      //       setState(() {
+                      //         isLoaded = false;
+                      //       });
+                      //       try {
+                      //         if (controller.text.isNotEmpty) {
+                      //           shared.inqqq.clear();
+                      //           for (var i in shared.inqq[0].data!) {
+                      //             print(i.toJson());
+                      //             print(i.branch_code
+                      //                 ?.toLowerCase()
+                      //                 .contains(controller.text.toLowerCase()));
+                      //             if (i.toJson().isNotEmpty) {
+                      //               if (i.center_desc!
+                      //                   .toLowerCase()
+                      //                   .contains(controller.text.toLowerCase()) ||
+                      //                   i.branch_code!
+                      //                       .toLowerCase()
+                      //                       .contains(controller.text.toLowerCase())) {
+                      //                 debugPrint(i.center_desc);
+                      //                 setState(() {
+                      //                   shared.inqqq.add(Data1(
+                      //                       // role_name: i.role_name,
+                      //                   ));
+                      //                 });
+                      //                 if (shared.inqqq.isNotEmpty) {
+                      //                   setState(() {
+                      //                     isLoaded = true;
+                      //                   });
+                      //                 }
+                      //               }
+                      //             }
+                      //           }
+                      //         } else if (controller.text == '') {
+                      //           shared.inqqq.clear();
+                      //           setState(() {
+                      //             shared.inqqq.addAll(shared.inqq[0].data!);
+                      //           });
+                      //         }
+                      //         debugPrint(shared.inqqq[0].toJson().toString());
+                      //       } catch (e) {
+                      //         shared.inqqq.clear();
+                      //       }
+                      //     },
+                      //     onEditingComplete: () async {
+                      //       setState(() {
+                      //         isLoaded = false;
+                      //       });
+                      //       try {
+                      //         if (controller.text.isNotEmpty) {
+                      //           shared.inqqq.clear();
+                      //           for (var i in shared.inqq[0].data!) {
+                      //             print(i.toJson());
+                      //             print(i.unit_desc
+                      //                 ?.toLowerCase()
+                      //                 .contains(controller.text.toLowerCase()));
+                      //             if (i.toJson().isNotEmpty) {
+                      //               if (i.branch_desc!
+                      //                   .toLowerCase()
+                      //                   .contains(controller.text.toLowerCase()) ||
+                      //                   i.center_desc!
+                      //                       .toLowerCase()
+                      //                       .contains(controller.text.toLowerCase())) {
+                      //                 debugPrint(i.branch_code);
+                      //                 setState(() {
+                      //                   key.currentState?.pageTo(0);
+                      //                   shared.inqqq.add(Data1(
+                      //                     branch_code: i.branch_code,
+                      //                     center_desc: i.center_desc,
+                      //                     unit_desc: i.unit_desc,
+                      //
+                      //                       ));
+                      //                 });
+                      //                 if (shared.inqqq.isNotEmpty) {
+                      //                   setState(() {
+                      //                     isLoaded = true;
+                      //                   });
+                      //                 }
+                      //               }
+                      //             }
+                      //           }
+                      //         } else if (controller.text == '') {
+                      //           shared.inqqq.clear();
+                      //           setState(() {
+                      //             shared.inqqq.addAll(shared.inqq[0].data!);
+                      //           });
+                      //         }
+                      //         debugPrint(shared.inqqq[0].toJson().toString());
+                      //       } catch (e) {
+                      //         shared.inqqq.clear();
+                      //       }
+                      //     },
+                      //   ),
+                      // ),
                     ],
                   ),
+                  Container(
+                      width: double.infinity,
+                      padding: kEdgeInsetsVerticalNormal,
+                      child: PaginatedDataTable(
+                        key: key,
+                        arrowHeadColor: kWhiteColor,
+                        columns: [
+                          DataColumn(
+                              label: Text('Mobile Ref ID', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Core Ref ID', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Remittance Ref ID', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Sender (GivenName\nMiddleName\nSurName', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Receiver (GivenName\nMiddleName\nSurName', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Amount', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Sender Mobile Number', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Date&Time Send', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Source Branch\n(Processed By)', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Processed By Full Name\n(Member,Non-Member,Agent)', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Date&Time\nReceive', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Target Branch\n(Disbursed By)', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Disbursed By\nFullName\n(Agent,Mbo,Teller/Branch Teller)', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Date&Time Cancelled', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Cancelled By Fullname\n(Member,Non-Member,Agent)', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Status\n(Sent/Claimed/Cancelled)', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Core Ref ID\n(Claimed/Cancelled)', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Mobile Ref ID\n(Claimed/Cancelled)', style: kLargeBoldTextStyle)),
+
+                        ],
+                        source: isLoaded ? shared.inqqq.isNotEmpty ? data : data2 : data3,
+                        rowsPerPage: 8,
+                        showFirstLastButtons: true,
+                        header: Text('List of Role', style: kXLargeBoldTextStyle),
+                      )),
+
+                ],
                 ),
               ],
             ),
@@ -450,5 +424,154 @@ class _TransactionlogState extends State<Transactionlog> {
         ],
       ),
     );
+  }
+}
+class MyData extends DataTableSource {
+  TransactionProv shared;
+  MyData({required this.shared});
+
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => shared.inqqq.length;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].mobileRefno.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].coreRefno.toString()))),
+
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].sourceBranch.toString()))),
+
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].sourceCid.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].sourceClientType.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].sourceAccountType.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].sourceAccount.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].sourceName.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].targetBranch.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].targetCid.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].bankName.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].targetClientType.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].targetAccountType.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].targetAccount.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].targetName.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].transTypeCode.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].amount.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.inqqq[index].transAmountFee.toString()))),
+
+    ]);
+  }
+}
+
+class MyData2 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(
+          SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+    ]);
+  }
+}
+
+class MyData3 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(
+          SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+
+    ]);
   }
 }

@@ -72,6 +72,78 @@ class HttpParse {
     //inq.add(inv);
   }
 }
+class HierarchyPush_Api {
+  Future<http.Response> pushHttp() async {
+    http.Response response = await http.post(
+      Uri.parse('http://10.21.0.74:1234/get_hierarchy'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{"branch_desc": "","center_desc": "","inst_desc": "","unit_desc": ""},
+      ),
+    );
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      print(response.body);
+      return response;
+    } else {
+      return response;
+    }
+  }
+}
+
+class HierarchyParse_Api {
+  Future<H_SavedAccounts> profile() async {
+    HierarchyPush_Api HierarchyPush = HierarchyPush_Api();
+    http.Response res = await HierarchyPush.pushHttp();
+    print("-------->>>>>>>>>>${jsonDecode(res.body).length}");
+    print("-------->>>>>>>>>>${jsonDecode(res.body)}");
+
+    var inq = H_SavedAccounts.fromJson(jsonDecode(res.body));
+
+    return inq;
+    //inq.add(inv);
+  }
+}
+class TransacLogPush_Api {
+  Future<http.Response> pushHttp() async {
+    http.Response response = await http.post(
+      Uri.parse('http://10.21.0.74:1234/get_transactionlog'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{"branch_desc": "","center_desc": "","inst_desc": "","unit_desc": ""},
+      ),
+    );
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      print(response.body);
+      return response;
+    } else {
+      return response;
+    }
+  }
+}
+
+class TransacLogParse_Api {
+  Future<T_SavedAccounts> profile() async {
+    TransacLogPush_Api transacLogPush_Api = TransacLogPush_Api();
+    http.Response res = await transacLogPush_Api.pushHttp();
+    print("-------->>>>>>>>>>${jsonDecode(res.body).length}");
+    print("-------->>>>>>>>>>${jsonDecode(res.body)}");
+
+    var inq = T_SavedAccounts.fromJson(jsonDecode(res.body));
+
+    return inq;
+    //inq.add(inv);
+  }
+}
 // class Rolemanagement_Api {
 //   Future<http.Response> role(String role_name) async {
 //     http.Response getResponse = await http
@@ -95,20 +167,22 @@ class Hierarchy_Api {
   Future<http.Response> inquire(String searchBankNews) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://192.168.0.148:1111/get_banknews/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'search_banknews': searchBankNews,
-            },
-          ),
-        )
+      Uri.parse('http://192.168.0.148:1111/get_banknews/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'search_banknews': searchBankNews,
+        },
+      ),
+    )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
 }
+
+
 
 // Enrollment API
 class Clientlist_Api {
@@ -446,6 +520,7 @@ class SMSLogsStatus_Api {
 }
 
 class TransactionLogs_Api {
+
   Future<List> getStatus() async {
     List res = [];
     http.Response response = await http.get(Uri.parse(
@@ -552,8 +627,7 @@ class Um_userstatus_Api {
     }
   }
 }
-<<<<<<< HEAD
-=======
+
 class Hierarchy_Institution_Api{
   Future<List> getUserstatus() async {
     try {
@@ -638,7 +712,6 @@ class Hierarchy_Center_Api{
 
 
 
->>>>>>> 8390bc4cdced0d710846fef69e2b165a1a78aa0e
 
 //Utilities
 class FeeStructure_Api {
@@ -1016,8 +1089,7 @@ class FailedEnrollment_Status_Report_Api {
     }
   }
 }
-<<<<<<< HEAD
-=======
+
 class IGate_Recentiliation_Status_Report_Api{
   Future<List> getUserstatus() async {
     try {
@@ -1391,4 +1463,3 @@ class WebtoolUser_Api{
 
 
 
->>>>>>> 8390bc4cdced0d710846fef69e2b165a1a78aa0e
