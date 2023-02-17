@@ -2,30 +2,30 @@ import 'package:http/http.dart' as http;
 import 'api.dart';
 
 // Administrator
-class Usermanagement_Function {
-  static void user({
-    String fname = '',
-    String mname = '',
-    String lname = '',
-    String user_login = '',
-    String branch_names = '',
-    String check_status = '',
-    String roles = '',
-  }) async {
-    Usermanagement_Api api = Usermanagement_Api();
-    http.Response getParamReturn = await api.user(
-      fname,
-      mname,
-      lname,
-      user_login,
-      branch_names,
-      check_status,
-      roles,
-    );
-    print(getParamReturn.statusCode);
-    print(getParamReturn.body);
-  }
-}
+// class Usermanagement_Function {
+//   static void user({
+//     String fname = '',
+//     String mname = '',
+//     String lname = '',
+//     String user_login = '',
+//     String branch_names = '',
+//     String check_status = '',
+//     String roles = '',
+//   }) async {
+//     Usermanagement_Api api = Usermanagement_Api();
+//     http.Response getParamReturn = await api.user(
+//       fname,
+//       mname,
+//       lname,
+//       user_login,
+//       branch_names,
+//       check_status,
+//       roles,
+//     );
+//     print(getParamReturn.statusCode);
+//     print(getParamReturn.body);
+//   }
+// }
 
 // class Rolemanagement_Function {
 //   static void role({String role_name = ''}) async {
