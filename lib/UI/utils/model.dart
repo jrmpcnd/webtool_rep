@@ -1,15 +1,20 @@
+<<<<<<< HEAD
 import 'dart:convert';
 
 import 'package:webtool_rep/UI/utils/api.dart';
 
 class SavedAccounts {
+=======
+//Administration
+class Role_Management {
+>>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
   String? retCode;
   String? message;
   List<Data>? data;
 
-  SavedAccounts({this.retCode, this.message, this.data});
+  Role_Management({this.retCode, this.message, this.data});
 
-  SavedAccounts.fromJson(Map<String, dynamic> json) {
+  Role_Management.fromJson(Map<String, dynamic> json) {
     retCode = json['retCode'];
     message = json['message'];
     if (json['data'] != null) {
@@ -54,6 +59,7 @@ class Data {
   }
 }
 
+<<<<<<< HEAD
 class H_SavedAccounts {
   String? retCode;
   String? message;
@@ -68,13 +74,33 @@ class H_SavedAccounts {
       data = <Data1>[];
       json['data'].forEach((v) {
         data!.add(new Data1.fromJson(v));
+=======
+class User_Management {
+  String? retcode;
+  String? message;
+  List<Data2>? data;
+
+  User_Management({this.retcode, this.message, this.data});
+
+  User_Management.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data2>[];
+      json['data'].forEach((v) {
+        data!.add(new Data2.fromJson(v));
+>>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+<<<<<<< HEAD
     data['retCode'] = this.retCode;
+=======
+    data['retcode'] = this.retcode;
+>>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
     data['message'] = this.message;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
@@ -83,6 +109,7 @@ class H_SavedAccounts {
   }
 }
 
+<<<<<<< HEAD
 class Data1 {
   String? branch_code;
   String? branch_desc;
@@ -132,13 +159,79 @@ class T_SavedAccounts {
       data = <Data2>[];
       json['data'].forEach((v) {
         data!.add(new Data2.fromJson(v));
+=======
+class Data2 {
+  String? userId;
+  String? userLogin;
+  String? givenName;
+  String? middleName;
+  String? lastName;
+  String? branchNames;
+  String? roles;
+  String? checkStatus;
+
+  Data2(
+      {this.userId,
+      this.userLogin,
+      this.givenName,
+      this.middleName,
+      this.lastName,
+      this.branchNames,
+      this.roles,
+      this.checkStatus});
+
+  Data2.fromJson(Map<String, dynamic> json) {
+    userId = json['user_id'];
+    userLogin = json['user_login'];
+    givenName = json['given_name'];
+    middleName = json['middle_name'];
+    lastName = json['last_name'];
+    branchNames = json['branch_names'];
+    roles = json['roles'];
+    checkStatus = json['check_status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['user_id'] = this.userId;
+    data['user_login'] = this.userLogin;
+    data['given_name'] = this.givenName;
+    data['middle_name'] = this.middleName;
+    data['last_name'] = this.lastName;
+    data['branch_names'] = this.branchNames;
+    data['roles'] = this.roles;
+    data['check_status'] = this.checkStatus;
+    return data;
+  }
+}
+//Monitoring
+
+class Transaction_Confirmation {
+  String? retcode;
+  String? message;
+  List<Data3>? data;
+
+  Transaction_Confirmation({this.retcode, this.message, this.data});
+
+  Transaction_Confirmation.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data3>[];
+      json['data'].forEach((v) {
+        data!.add(new Data3.fromJson(v));
+>>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+<<<<<<< HEAD
     data['retCode'] = this.retCode;
+=======
+    data['retcode'] = this.retcode;
+>>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
     data['message'] = this.message;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
@@ -147,6 +240,7 @@ class T_SavedAccounts {
   }
 }
 
+<<<<<<< HEAD
 class Data2 {
   String? agentFeature;
   String? agentIncome;
@@ -238,10 +332,51 @@ class Data2 {
     transDate = json['trans_date'];
     transLog = json['trans_log'];
     transTypeCode = json['trans_type_code'];
+=======
+class Data3 {
+  String? suspiciousId;
+  String? transDate;
+  String? transDesc;
+  String? clientMobileNo;
+  String? cid;
+  String? clientName;
+  String? branchDesc;
+  String? unitDesc;
+  String? centerDesc;
+  String? note;
+  String? status;
+
+  Data3(
+      {this.suspiciousId,
+      this.transDate,
+      this.transDesc,
+      this.clientMobileNo,
+      this.cid,
+      this.clientName,
+      this.branchDesc,
+      this.unitDesc,
+      this.centerDesc,
+      this.note,
+      this.status});
+
+  Data3.fromJson(Map<String, dynamic> json) {
+    suspiciousId = json['suspicious_id'];
+    transDate = json['trans_date'];
+    transDesc = json['trans_desc'];
+    clientMobileNo = json['client_mobile_no'];
+    cid = json['cid'];
+    clientName = json['client_name'];
+    branchDesc = json['branch_desc'];
+    unitDesc = json['unit_desc'];
+    centerDesc = json['center_desc'];
+    note = json['note'];
+    status = json['status'];
+>>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+<<<<<<< HEAD
     data['agent_feature'] = this.agentFeature;
     data['agent_income'] = this.agentIncome;
     data['amount'] = this.amount;
@@ -274,3 +409,93 @@ class Data2 {
     return data;
   }
 }
+=======
+    data['suspicious_id'] = this.suspiciousId;
+    data['trans_date'] = this.transDate;
+    data['trans_desc'] = this.transDesc;
+    data['client_mobile_no'] = this.clientMobileNo;
+    data['cid'] = this.cid;
+    data['client_name'] = this.clientName;
+    data['branch_desc'] = this.branchDesc;
+    data['unit_desc'] = this.unitDesc;
+    data['center_desc'] = this.centerDesc;
+    data['note'] = this.note;
+    data['status'] = this.status;
+    return data;
+  }
+}
+
+class Sms_Logs {
+  String? retcode;
+  String? message;
+  List<Data5>? data;
+
+  Sms_Logs({this.retcode, this.message, this.data});
+
+  Sms_Logs.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data5>[];
+      json['data'].forEach((v) {
+        data!.add(new Data5.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data5 {
+  String? msgId;
+  String? msgSentDate;
+  String? msisdn;
+  String? cid;
+  String? name;
+  String? msgCommand;
+  String? activity;
+  String? msgStatus;
+
+  Data5(
+      {this.msgId,
+      this.msgSentDate,
+      this.msisdn,
+      this.cid,
+      this.name,
+      this.msgCommand,
+      this.activity,
+      this.msgStatus});
+
+  Data5.fromJson(Map<String, dynamic> json) {
+    msgId = json['msg_id'];
+    msgSentDate = json['msg_sent_date'];
+    msisdn = json['msisdn'];
+    cid = json['cid'];
+    name = json['name'];
+    msgCommand = json['msg_command'];
+    activity = json['activity'];
+    msgStatus = json['msg_status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['msg_id'] = this.msgId;
+    data['msg_sent_date'] = this.msgSentDate;
+    data['msisdn'] = this.msisdn;
+    data['cid'] = this.cid;
+    data['name'] = this.name;
+    data['msg_command'] = this.msgCommand;
+    data['activity'] = this.activity;
+    data['msg_status'] = this.msgStatus;
+    return data;
+  }
+}
+>>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f

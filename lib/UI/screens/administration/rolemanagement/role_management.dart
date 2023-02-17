@@ -20,21 +20,21 @@ class _RolemanagementState extends State<Rolemanagement> {
   bool isLoaded = false;
   Future<void> wait() async {
     final shared = Provider.of<Prov>(context, listen: false);
-    shared.inqq.clear();
-    HttpParse httpParse = HttpParse();
+    shared.role.clear();
+    Role_Parse httpParse = Role_Parse();
     var res = await httpParse.profile();
     if (res.data!.isNotEmpty) {
       print(res.data!.length);
       print(res.data![0].toJson().length);
       setState(() {
-        shared.inqq.add(SavedAccounts.fromJson(res.toJson()));
+        shared.role.add(Role_Management.fromJson(res.toJson()));
         isLoaded = true;
       });
       for (var i in res.data!) {
-        shared.inqqq.add(Data.fromJson(i.toJson()));
+        shared.role_data.add(Data.fromJson(i.toJson()));
       }
     }
-    for (var i in shared.inqqq) {
+    for (var i in shared.role_data) {
       print(i.toJson());
     }
   }
@@ -52,6 +52,7 @@ class _RolemanagementState extends State<Rolemanagement> {
     final shared = Provider.of<Prov>(context);
     final DataTableSource data = MyData(shared: shared);
     final DataTableSource data2 = MyData2();
+    final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
     ScrollController scrollController = ScrollController();
     return Container(
@@ -86,8 +87,8 @@ class _RolemanagementState extends State<Rolemanagement> {
                     });
                     try {
                       if (controller.text.isNotEmpty) {
-                        shared.inqqq.clear();
-                        for (var i in shared.inqq[0].data!) {
+                        shared.role_data.clear();
+                        for (var i in shared.role[0].data!) {
                           print(i.toJson());
                           print(i.role_name
                               ?.toLowerCase()
@@ -101,12 +102,12 @@ class _RolemanagementState extends State<Rolemanagement> {
                                     .contains(controller.text.toLowerCase())) {
                               debugPrint(i.role_name);
                               setState(() {
-                                shared.inqqq.add(Data(
+                                shared.role_data.add(Data(
                                     role_name: i.role_name,
                                     role_desc: i.role_desc,
                                     role_id: i.role_id));
                               });
-                              if (shared.inqqq.isNotEmpty) {
+                              if (shared.role_data.isNotEmpty) {
                                 setState(() {
                                   isLoaded = true;
                                 });
@@ -115,14 +116,14 @@ class _RolemanagementState extends State<Rolemanagement> {
                           }
                         }
                       } else if (controller.text == '') {
-                        shared.inqqq.clear();
+                        shared.role_data.clear();
                         setState(() {
-                          shared.inqqq.addAll(shared.inqq[0].data!);
+                          shared.role_data.addAll(shared.role[0].data!);
                         });
                       }
-                      debugPrint(shared.inqqq[0].toJson().toString());
+                      debugPrint(shared.role_data[0].toJson().toString());
                     } catch (e) {
-                      shared.inqqq.clear();
+                      shared.role_data.clear();
                     }
                   },
                   onEditingComplete: () async {
@@ -131,8 +132,8 @@ class _RolemanagementState extends State<Rolemanagement> {
                     });
                     try {
                       if (controller.text.isNotEmpty) {
-                        shared.inqqq.clear();
-                        for (var i in shared.inqq[0].data!) {
+                        shared.role_data.clear();
+                        for (var i in shared.role[0].data!) {
                           print(i.toJson());
                           print(i.role_name
                               ?.toLowerCase()
@@ -147,12 +148,12 @@ class _RolemanagementState extends State<Rolemanagement> {
                               debugPrint(i.role_name);
                               setState(() {
                                 key.currentState?.pageTo(0);
-                                shared.inqqq.add(Data(
+                                shared.role_data.add(Data(
                                     role_name: i.role_name,
                                     role_desc: i.role_desc,
                                     role_id: i.role_id));
                               });
-                              if (shared.inqqq.isNotEmpty) {
+                              if (shared.role_data.isNotEmpty) {
                                 setState(() {
                                   isLoaded = true;
                                 });
@@ -161,14 +162,14 @@ class _RolemanagementState extends State<Rolemanagement> {
                           }
                         }
                       } else if (controller.text == '') {
-                        shared.inqqq.clear();
+                        shared.role_data.clear();
                         setState(() {
-                          shared.inqqq.addAll(shared.inqq[0].data!);
+                          shared.role_data.addAll(shared.role[0].data!);
                         });
                       }
-                      debugPrint(shared.inqqq[0].toJson().toString());
+                      debugPrint(shared.role_data[0].toJson().toString());
                     } catch (e) {
-                      shared.inqqq.clear();
+                      shared.role_data.clear();
                     }
                   },
                 ),
@@ -187,7 +188,11 @@ class _RolemanagementState extends State<Rolemanagement> {
                   DataColumn(
                       label: Text('Role Desc', style: kLargeBoldTextStyle))
                 ],
-                source: shared.inqqq.isNotEmpty ? data : data2,
+                source: isLoaded
+                    ? shared.role_data.isNotEmpty
+                        ? data
+                        : data2
+                    : data3,
                 rowsPerPage: 8,
                 showFirstLastButtons: true,
                 header: Text('List of Role', style: kXLargeBoldTextStyle),
@@ -254,7 +259,7 @@ class MyData extends DataTableSource {
   @override
   bool get isRowCountApproximate => false;
   @override
-  int get rowCount => shared.inqqq.length;
+  int get rowCount => shared.role_data.length;
   @override
   int get selectedRowCount => 0;
   @override
@@ -262,9 +267,11 @@ class MyData extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(
-          width: 500, child: Text(shared.inqqq[index].role_name.toString()))),
+          width: 500,
+          child: Text(shared.role_data[index].role_name.toString()))),
       DataCell(SizedBox(
-          width: 500, child: Text(shared.inqqq[index].role_desc.toString())))
+          width: 500,
+          child: Text(shared.role_data[index].role_desc.toString())))
     ]);
   }
 }
@@ -283,6 +290,23 @@ class MyData2 extends DataTableSource {
       DataCell(
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text('')))
+    ]);
+  }
+}
+
+class MyData3 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(SizedBox(child: Text('Loading Please wait!'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
     ]);
   }
 }

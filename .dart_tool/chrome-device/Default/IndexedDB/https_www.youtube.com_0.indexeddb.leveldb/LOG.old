@@ -1,3 +1,8 @@
-2023/02/13-09:46:55.873 1da07 Reusing MANIFEST /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.hiXld2/flutter_tools_chrome_device.dXdVqB/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/02/13-09:46:55.873 1da07 Recovering log #7
-2023/02/13-09:46:55.873 1da07 Reusing old log /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.hiXld2/flutter_tools_chrome_device.dXdVqB/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/000007.log 
+2023/02/17-11:20:03.167 1a373 Reusing MANIFEST /private/var/folders/d9/4wmr_rjn12n53ksxf2kh6s8c0000gp/T/flutter_tools.Yo4j4S/flutter_tools_chrome_device.dBiw2s/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/02/17-11:20:03.167 1a373 Recovering log #4
+2023/02/17-11:20:03.167 1a373 Level-0 table #7: started
+2023/02/17-11:20:03.186 1a373 Level-0 table #7: 4497 bytes OK
+2023/02/17-11:20:03.186 1a373 Recovering log #7
+2023/02/17-11:20:03.187 1a373 Reusing old log /private/var/folders/d9/4wmr_rjn12n53ksxf2kh6s8c0000gp/T/flutter_tools.Yo4j4S/flutter_tools_chrome_device.dBiw2s/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/000007.log 
+2023/02/17-11:20:03.222 1a373 Delete type=0 #4
+2023/02/17-11:20:03.222 1a373 Delete type=2 #9

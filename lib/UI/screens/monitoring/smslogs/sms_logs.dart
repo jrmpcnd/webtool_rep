@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:web_date_picker/web_date_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
-import '../../../utils/api.dart';
-import '../../../utils/api.dart';
+import '../../../../core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
-import '../../../utils/spacing.dart';
+import '../../../utils/model.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
-import '../../../widgets/textfield.dart';
 
 class Smslogs extends StatefulWidget {
   const Smslogs({Key? key}) : super(key: key);
@@ -19,408 +15,154 @@ class Smslogs extends StatefulWidget {
 }
 
 class _SmslogsState extends State<Smslogs> {
-  List<String> res = [];
-  List<String> res2 = [];
-  String init = '';
-  String init2 = '';
-  SMSLogs_Api dropdownStatus = SMSLogs_Api();
-  SMSLogsStatus_Api dropdownLogs = SMSLogsStatus_Api();
-  void initState() {
-    getList();
-    getCategory();
-  }
-  getList()async{
-    List<dynamic> dlist = await dropdownStatus.getStatus();
-    for(var i in dlist){
+  TextEditingController controller = TextEditingController();
+  bool static = false;
+  bool isLoaded = false;
+  Future<void> wait() async {
+    final shared5 = Provider.of<Prov5>(context, listen: false);
+    shared5.sms.clear();
+    SmsParse httpParse5 = SmsParse();
+    var res5 = await httpParse5.profile5();
+    if (res5.data!.isNotEmpty) {
+      print(res5.data!.length);
+      print(res5.data![0].toJson().length);
       setState(() {
-        res.add(i['get_sms_logs_smstype_dropdown']);
+        shared5.sms.add(Sms_Logs.fromJson(res5.toJson()));
+        isLoaded = true;
       });
+      for (var i in res5.data!) {
+        setState(() {});
+        shared5.sms_data.add(Data5.fromJson(i.toJson()));
+      }
     }
-    setState(() {
-      init = res[0];
-    });
-    print("safgsdgsdgsdfgde $res");
-  }
-  getCategory()async{
-    List<dynamic> dlist = await dropdownLogs.getStatus();
-    for(var i in dlist){
-      setState(() {
-        res2.add(i['get_sms_logs_smsstatus_dropdown']);
-      });
+    for (var i in shared5.sms_data) {
+      print(i.toJson());
     }
-    setState(() {
-      init2 = res2[0];
-    });
-    print("safgsdgsdgsdfgde $res2");
   }
+
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      wait();
+    });
+  }
+
   Widget build(BuildContext context) {
+    final shared = Provider.of<Prov5>(context);
+    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data2 = MyData2();
+    final DataTableSource data3 = MyData3();
+    final key = new GlobalKey<PaginatedDataTableState>();
+    ScrollController scrollController = ScrollController();
     return Container(
-      padding: kEdgeInsetsVerticalNormal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  height: 280.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          textfield(
-                            hintext: "CID",
-                          ),
-                          verticalSpaceTiny,
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  WebDatePicker(
-                                    hinttext: "Date Start",
-                                    onChange: (value) {},
-                                  ),
-                                  horizontalSpaceRegular,
-                                  WebDatePicker(
-                                    hinttext: "Date End",
-                                    onChange: (value) {},
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          verticalSpaceTiny,
-                          textfield(
-                            hintext: "Mobile Number",
-                          ),
-                          verticalSpaceTiny,
-                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                            setState(() {
-                              init = value.toString();
-                            });
-                          },),
+        width: double.infinity,
+        padding: kEdgeInsetsVerticalNormal,
+        child: PaginatedDataTable(
+          key: key,
+          dataRowHeight: 100,
+          arrowHeadColor: kWhiteColor,
+          columns: [
+            DataColumn(label: Text('ID', style: kLargeBoldTextStyle)),
+            DataColumn(label: Text('Date Time', style: kLargeBoldTextStyle)),
+            DataColumn(label: Text('Mobile No.', style: kLargeBoldTextStyle)),
+            DataColumn(label: Text('CID', style: kLargeBoldTextStyle)),
+            DataColumn(label: Text('Name', style: kLargeBoldTextStyle)),
+            DataColumn(label: Text('Message', style: kLargeBoldTextStyle)),
+            DataColumn(label: Text('Message Type', style: kLargeBoldTextStyle)),
+            DataColumn(label: Text('Status', style: kLargeBoldTextStyle)),
+          ],
+          source: isLoaded
+              ? shared.sms_data.isNotEmpty
+                  ? data
+                  : data2
+              : data3,
+          rowsPerPage: 8,
+          showFirstLastButtons: true,
+          header: Text('List of Sms Logs', style: kXLargeBoldTextStyle),
+        ));
+  }
+}
 
-                          verticalSpaceTiny,
-                          DropdownButton(value: init2,items: res2.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                            setState(() {
-                              init2 = value.toString();
-                            });
-                          },),
+class MyData extends DataTableSource {
+  Prov5 shared;
+  MyData({required this.shared});
 
-                          verticalSpaceSmall,
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 100.0,
-                                height: 35.0,
-                                child: ElevatedButton.icon(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kPrimaryColor)),
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.search,
-                                    size: 20.0,
-                                  ),
-                                  label: Text(
-                                    'Search',
-                                    style: kSmallRegularTextStyle,
-                                  ),
-                                ),
-                              ),
-                              horizontalSpaceTiny,
-                              SizedBox(
-                                width: 100.0,
-                                height: 35.0,
-                                child: ElevatedButton.icon(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kSecondaryColor2)),
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.refresh,
-                                    size: 20.0,
-                                  ),
-                                  label: Text(
-                                    'Reset',
-                                    style: kSmallRegularTextStyle,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                verticalSpaceRegular,
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  alignment: Alignment.centerLeft,
-                  width: double.infinity,
-                  height: 30.0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of Users', style: kTinyBoldTextStyle),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3)),
-                    ],
-                  ),
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: Table(
-                    children: [
-                      TableRow(children: [
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('User Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Given Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Middle Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Last Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Branch', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Role', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Status', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Action', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 1',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Samplel',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 2',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => shared.sms_data.length;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(SizedBox(
+          width: 50, child: Text(shared.sms_data[index].msgId.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.sms_data[index].msgSentDate.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.sms_data[index].msisdn.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.sms_data[index].cid.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.sms_data[index].name.toString()))),
+      DataCell(SizedBox(
+          width: 500,
+          child: Text(shared.sms_data[index].msgCommand.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.sms_data[index].activity.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.sms_data[index].msgStatus.toString())))
+    ]);
+  }
+}
+
+class MyData2 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(
+          SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text('')))
+    ]);
+  }
+}
+
+class MyData3 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(SizedBox(child: Text('Loading Please wait!'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator())))
+    ]);
   }
 }
