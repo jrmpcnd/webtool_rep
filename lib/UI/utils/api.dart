@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'model.dart';
 
+//Administration
 class User_Push {
   Future<http.Response> pushHttp2() async {
     http.Response response2 = await http.post(
@@ -77,22 +78,91 @@ class Role_Parse {
   }
 }
 
-class Hierarchy_Api {
-  Future<http.Response> inquire(String searchBankNews) async {
-    http.Response getResponse = await http
-        .post(
-          Uri.parse('http://192.168.0.148:1111/get_banknews/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'search_banknews': searchBankNews,
-            },
-          ),
-        )
-        .timeout(const Duration(minutes: 1));
-    return getResponse;
+//Monitoring
+
+class Tconfirmation_Push {
+  Future<http.Response> pushHttp3() async {
+    http.Response response3 = await http.post(
+      Uri.parse('http://10.21.0.74:1234/get_transconfirmation/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "branch_desc": "",
+          "center_desc": "",
+          "cid": "",
+          "client_mobile_no": "",
+          "client_name": "",
+          "note": "",
+          "status": "",
+          "trans_date": "",
+          "trans_desc": "",
+          "unit_desc": ""
+        },
+      ),
+    );
+    if (response3.statusCode == 200) {
+      print(response3.statusCode);
+      print(response3.body);
+      return response3;
+    } else {
+      return response3;
+    }
+  }
+}
+
+class TconfirmationParse {
+  Future<Transaction_Confirmation> profile3() async {
+    Tconfirmation_Push httpPush3 = Tconfirmation_Push();
+    http.Response res3 = await httpPush3.pushHttp3();
+    print("-------->>>>>>>>>>${jsonDecode(res3.body).length}");
+    var Confirmation = Transaction_Confirmation.fromJson(jsonDecode(res3.body));
+    return Confirmation;
+  }
+}
+
+class Sms_Push {
+  Future<http.Response> pushHttp5() async {
+    http.Response response5 = await http.post(
+      Uri.parse('http://10.21.0.74:1234/get_smslog/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "activity": "",
+          "cid": "",
+          "msg_command": "",
+          "msg_id": "",
+          "msg_sent_date": "",
+          "msg_status": "",
+          "msisdn": "",
+          "name": ""
+        },
+      ),
+    );
+    if (response5.statusCode == 200) {
+      print(response5.statusCode);
+      print(response5.body);
+      return response5;
+    } else {
+      return response5;
+    }
+  }
+}
+
+class SmsParse {
+  Future<Sms_Logs> profile5() async {
+    Sms_Push httpPush5 = Sms_Push();
+    http.Response res5 = await httpPush5.pushHttp5();
+    print("-------->>>>>>>>>>${jsonDecode(res5.body).length}");
+    var sms = Sms_Logs.fromJson(jsonDecode(res5.body));
+    return sms;
   }
 }
 
