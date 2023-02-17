@@ -85,6 +85,7 @@ class _RolemanagementState extends State<Rolemanagement> {
                     setState(() {
                       isLoaded = false;
                     });
+                    //
                     try {
                       if (controller.text.isNotEmpty) {
                         shared.role_data.clear();
