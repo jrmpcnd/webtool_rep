@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webtool_rep/core/providers/Provider.dart';
 import 'package:webtool_rep/core/providers/cardprovider.dart';
 import 'package:webtool_rep/core/providers/data_provider.dart';
 import 'UI/screens/homepage/homepage.dart';
@@ -21,6 +22,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => Cardprovider()),
         ChangeNotifierProvider(create: (context) => Prov()),
+        ChangeNotifierProvider(create: (context) => H_Prov()),
+
         ChangeNotifierProvider(create: (context) => Prov1()),
         ChangeNotifierProvider(create: (context) => Prov3()),
         ChangeNotifierProvider(create: (context) => Prov5()),

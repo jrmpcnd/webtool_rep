@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../../core/providers/Provider.dart';
 import '../../../utils/api.dart';
+import '../../../utils/api2.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
+
+import '../../../utils/model2.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
+
 
 class Hierarchy extends StatefulWidget {
   const Hierarchy({Key? key}) : super(key: key);
@@ -27,12 +32,37 @@ class _HierarchyState extends State<Hierarchy> {
 
 
 
+  TextEditingController controller = TextEditingController();
   Hierarchy_Institution_Api dropdownInsti = Hierarchy_Institution_Api();
   Hierarchy_Unit_Api dropdownUnit = Hierarchy_Unit_Api();
   Hierarchy_Branch_Api dropdownBranch = Hierarchy_Branch_Api();
   Hierarchy_Center_Api dropdownCenter = Hierarchy_Center_Api();
+  bool static = false;
+  bool isLoaded = false;
+  Future<void> wait() async {
+    final shared = Provider.of<H_Prov>(context, listen: false);
+    shared.Hierarchy.clear();
+    HierarchyParse_Api HierarchyParse = HierarchyParse_Api();
+    var res = await HierarchyParse.profile3();
+    if (res.data!.isNotEmpty) {
+      print(res.data!.length);
+      setState(() {
+        shared.Hierarchy.add(Hierarchy_Api.fromJson(res.toJson()));
+        isLoaded = true;
+      });
+      for (var i in res.data!) {
+        // shared.inqqq.add(Data.fromJson(i.toJson()));
+        shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()));
+
+      }
+    }
+    for (var i in shared.Hierarchy_data) {
+      print(i.toJson());
+    }
+  }
   @override
   void initState() {
+    wait();
     getList();
     getUnit();
     getBranch();
@@ -91,6 +121,12 @@ class _HierarchyState extends State<Hierarchy> {
 
   @override
   Widget build(BuildContext context) {
+    final shared = Provider.of<H_Prov>(context);
+    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data2 = MyData2();
+    final DataTableSource data3 = MyData3();
+    final key = new GlobalKey<PaginatedDataTableState>();
+    ScrollController scrollController = ScrollController();
     return Container(
       padding: kEdgeInsetsVerticalNormal,
       child: Row(
@@ -148,8 +184,8 @@ class _HierarchyState extends State<Hierarchy> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kPrimaryColor)),
+                                      MaterialStateProperty.all(
+                                          kPrimaryColor)),
                                   onPressed: () {},
                                   icon: const Icon(
                                     Icons.search,
@@ -168,8 +204,8 @@ class _HierarchyState extends State<Hierarchy> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kSecondaryColor2)),
+                                      MaterialStateProperty.all(
+                                          kSecondaryColor2)),
                                   onPressed: () {},
                                   icon: const Icon(
                                     Icons.refresh,
@@ -216,8 +252,8 @@ class _HierarchyState extends State<Hierarchy> {
                                     child: ElevatedButton.icon(
                                       style: ButtonStyle(
                                           backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  kPrimaryColor)),
+                                          MaterialStateProperty.all(
+                                              kPrimaryColor)),
                                       onPressed: () {},
                                       icon: const Icon(
                                         Icons.delete,
@@ -239,242 +275,153 @@ class _HierarchyState extends State<Hierarchy> {
                   ),
                 ),
                 verticalSpaceRegular,
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  alignment: Alignment.centerLeft,
-                  width: double.infinity,
-                  height: 30.0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of Hierarchy', style: kTinyBoldTextStyle),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3)),
-                    ],
-                  ),
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: Table(
+                Column(children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TableRow(children: [
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('User Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Given Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Middle Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Last Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Branch', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Role', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Status', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Action', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 1',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Samplel',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 2',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
+                      // Container(
+                      //   width: 500,
+                      //   child: TextFormField(
+                      //     style: TextStyle(color: kBlackColor),
+                      //     decoration: const InputDecoration(
+                      //       hintText: 'Search',
+                      //       border: OutlineInputBorder(),
+                      //       labelStyle: TextStyle(fontSize: 12.0),
+                      //       contentPadding: EdgeInsets.only(left: 10.0),
+                      //       hintStyle: TextStyle(color: kSecondaryColor2),
+                      //       enabledBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(color: kBlackColor),
+                      //       ),
+                      //       focusedBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(color: kBlackColor),
+                      //       ),
+                      //     ),
+                      //     textInputAction: TextInputAction.go,
+                      //     controller: controller,
+                      //     onChanged: (value) {
+                      //       setState(() {
+                      //         isLoaded = false;
+                      //       });
+                      //       try {
+                      //         if (controller.text.isNotEmpty) {
+                      //           shared.inqqq.clear();
+                      //           for (var i in shared.inqq[0].data!) {
+                      //             print(i.toJson());
+                      //             print(i.branch_code
+                      //                 ?.toLowerCase()
+                      //                 .contains(controller.text.toLowerCase()));
+                      //             if (i.toJson().isNotEmpty) {
+                      //               if (i.center_desc!
+                      //                   .toLowerCase()
+                      //                   .contains(controller.text.toLowerCase()) ||
+                      //                   i.branch_code!
+                      //                       .toLowerCase()
+                      //                       .contains(controller.text.toLowerCase())) {
+                      //                 debugPrint(i.center_desc);
+                      //                 setState(() {
+                      //                   shared.inqqq.add(Data1(
+                      //                       // role_name: i.role_name,
+                      //                   ));
+                      //                 });
+                      //                 if (shared.inqqq.isNotEmpty) {
+                      //                   setState(() {
+                      //                     isLoaded = true;
+                      //                   });
+                      //                 }
+                      //               }
+                      //             }
+                      //           }
+                      //         } else if (controller.text == '') {
+                      //           shared.inqqq.clear();
+                      //           setState(() {
+                      //             shared.inqqq.addAll(shared.inqq[0].data!);
+                      //           });
+                      //         }
+                      //         debugPrint(shared.inqqq[0].toJson().toString());
+                      //       } catch (e) {
+                      //         shared.inqqq.clear();
+                      //       }
+                      //     },
+                      //     onEditingComplete: () async {
+                      //       setState(() {
+                      //         isLoaded = false;
+                      //       });
+                      //       try {
+                      //         if (controller.text.isNotEmpty) {
+                      //           shared.inqqq.clear();
+                      //           for (var i in shared.inqq[0].data!) {
+                      //             print(i.toJson());
+                      //             print(i.unit_desc
+                      //                 ?.toLowerCase()
+                      //                 .contains(controller.text.toLowerCase()));
+                      //             if (i.toJson().isNotEmpty) {
+                      //               if (i.branch_desc!
+                      //                   .toLowerCase()
+                      //                   .contains(controller.text.toLowerCase()) ||
+                      //                   i.center_desc!
+                      //                       .toLowerCase()
+                      //                       .contains(controller.text.toLowerCase())) {
+                      //                 debugPrint(i.branch_code);
+                      //                 setState(() {
+                      //                   key.currentState?.pageTo(0);
+                      //                   shared.inqqq.add(Data1(
+                      //                     branch_code: i.branch_code,
+                      //                     center_desc: i.center_desc,
+                      //                     unit_desc: i.unit_desc,
+                      //
+                      //                       ));
+                      //                 });
+                      //                 if (shared.inqqq.isNotEmpty) {
+                      //                   setState(() {
+                      //                     isLoaded = true;
+                      //                   });
+                      //                 }
+                      //               }
+                      //             }
+                      //           }
+                      //         } else if (controller.text == '') {
+                      //           shared.inqqq.clear();
+                      //           setState(() {
+                      //             shared.inqqq.addAll(shared.inqq[0].data!);
+                      //           });
+                      //         }
+                      //         debugPrint(shared.inqqq[0].toJson().toString());
+                      //       } catch (e) {
+                      //         shared.inqqq.clear();
+                      //       }
+                      //     },
+                      //   ),
+                      // ),
                     ],
                   ),
+                  Container(
+                    width: double.infinity,
+                    padding: kEdgeInsetsVerticalNormal,
+                    child: PaginatedDataTable(
+                      key: key,
+                      arrowHeadColor: kWhiteColor,
+                      columns: [
+                        DataColumn(
+                            label: Text('Branch Code', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Branch Name', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Unit Code', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Unit Name', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Center Code', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Center Name', style: kLargeBoldTextStyle)),
+                      ],
+                      source: isLoaded ? shared.Hierarchy_data.isNotEmpty ? data : data2 : data3,
+                      rowsPerPage: 8,
+                      showFirstLastButtons: true,
+                      header: Text('List of Role', style: kXLargeBoldTextStyle),
+                    ),
+                  ),
+
+                ],
                 ),
               ],
             ),
@@ -482,5 +429,82 @@ class _HierarchyState extends State<Hierarchy> {
         ],
       ),
     );
+  }
+}
+class MyData extends DataTableSource {
+  H_Prov shared;
+  MyData({required this.shared});
+
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => shared.Hierarchy_data.length;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Hierarchy_data[index].branchCode.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Hierarchy_data[index].branchDesc.toString()))),
+
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Hierarchy_data[index].unitCode.toString()))),
+
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Hierarchy_data[index].unitDesc.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Hierarchy_data[index].centerCode.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Hierarchy_data[index].centerDesc.toString()))),
+
+    ]);
+  }
+}
+
+class MyData2 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(
+          SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+    ]);
+  }
+}
+
+class MyData3 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(
+          SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+    ]);
   }
 }
