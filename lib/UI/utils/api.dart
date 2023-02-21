@@ -10,7 +10,7 @@ class User_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
       },
       body: jsonEncode(
         <String, String>{
@@ -50,7 +50,7 @@ class Role_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
       },
       body: jsonEncode(
         <String, String>{"role_name": ""},
@@ -72,33 +72,6 @@ class Role_Parse {
     http.Response res = await httpPush.pushHttp();
     print("-------->>>>>>>>>>${jsonDecode(res.body).length}");
 
-<<<<<<< HEAD
-    var inq = SavedAccounts.fromJson(jsonDecode(res.body));
-
-    return inq;
-    //inq.add(inv);
-  }
-}
-class HierarchyPush_Api {
-  Future<http.Response> pushHttp() async {
-    http.Response response = await http.post(
-      Uri.parse('http://10.21.0.74:1234/get_hierarchy'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
-      },
-      body: jsonEncode(
-        <String, String>{"branch_desc": "","center_desc": "","inst_desc": "","unit_desc": ""},
-      ),
-    );
-    if (response.statusCode == 200) {
-      print(response.statusCode);
-      print(response.body);
-      return response;
-    } else {
-      return response;
-=======
     var Rmanagement = Role_Management.fromJson(jsonDecode(res.body));
 
     return Rmanagement;
@@ -114,7 +87,7 @@ class Tconfirmation_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
       },
       body: jsonEncode(
         <String, String>{
@@ -137,45 +110,10 @@ class Tconfirmation_Push {
       return response3;
     } else {
       return response3;
->>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
     }
   }
 }
 
-<<<<<<< HEAD
-class HierarchyParse_Api {
-  Future<H_SavedAccounts> profile() async {
-    HierarchyPush_Api HierarchyPush = HierarchyPush_Api();
-    http.Response res = await HierarchyPush.pushHttp();
-    print("-------->>>>>>>>>>${jsonDecode(res.body).length}");
-    print("-------->>>>>>>>>>${jsonDecode(res.body)}");
-
-    var inq = H_SavedAccounts.fromJson(jsonDecode(res.body));
-
-    return inq;
-    //inq.add(inv);
-  }
-}
-class TransacLogPush_Api {
-  Future<http.Response> pushHttp() async {
-    http.Response response = await http.post(
-      Uri.parse('http://10.21.0.74:1234/get_transactionlog'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
-      },
-      body: jsonEncode(
-        <String, String>{"branch_desc": "","center_desc": "","inst_desc": "","unit_desc": ""},
-      ),
-    );
-    if (response.statusCode == 200) {
-      print(response.statusCode);
-      print(response.body);
-      return response;
-    } else {
-      return response;
-=======
 class TconfirmationParse {
   Future<Transaction_Confirmation> profile3() async {
     Tconfirmation_Push httpPush3 = Tconfirmation_Push();
@@ -193,7 +131,7 @@ class Sms_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
       },
       body: jsonEncode(
         <String, String>{
@@ -214,45 +152,23 @@ class Sms_Push {
       return response5;
     } else {
       return response5;
->>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
     }
   }
 }
+// comment
 
-<<<<<<< HEAD
-class TransacLogParse_Api {
-  Future<T_SavedAccounts> profile() async {
-    TransacLogPush_Api transacLogPush_Api = TransacLogPush_Api();
-    http.Response res = await transacLogPush_Api.pushHttp();
-    print("-------->>>>>>>>>>${jsonDecode(res.body).length}");
-    print("-------->>>>>>>>>>${jsonDecode(res.body)}");
-
-    var inq = T_SavedAccounts.fromJson(jsonDecode(res.body));
-
-    return inq;
-    //inq.add(inv);
+class SmsParse {
+  Future<Sms_Logs> profile5() async {
+    Sms_Push httpPush5 = Sms_Push();
+    http.Response res5 = await httpPush5.pushHttp5();
+    print("-------->>>>>>>>>>${jsonDecode(res5.body).length}");
+    var sms = Sms_Logs.fromJson(jsonDecode(res5.body));
+    return sms;
   }
 }
-// class Rolemanagement_Api {
-//   Future<http.Response> role(String role_name) async {
-//     http.Response getResponse = await http
-//         .post(
-//           Uri.parse('http://192.168.0.148:1111/get_rolesmanagement/'),
-//           headers: <String, String>{
-//             'Content-Type': 'application/json; charset=UTF-8',
-//           },
-//           body: jsonEncode(
-//             <String, String>{
-//               'role_name': role_name,
-//             },
-//           ),
-//         )
-//         .timeout(const Duration(minutes: 1));
-//     return getResponse;
-//   }
-// }
 
-class Hierarchy_Api {
+// Enrollment API
+class Clientlist_Api {
   Future<http.Response> inquire(String searchBankNews) async {
     http.Response getResponse = await http
         .post(
@@ -268,37 +184,6 @@ class Hierarchy_Api {
     )
         .timeout(const Duration(minutes: 1));
     return getResponse;
-=======
-class SmsParse {
-  Future<Sms_Logs> profile5() async {
-    Sms_Push httpPush5 = Sms_Push();
-    http.Response res5 = await httpPush5.pushHttp5();
-    print("-------->>>>>>>>>>${jsonDecode(res5.body).length}");
-    var sms = Sms_Logs.fromJson(jsonDecode(res5.body));
-    return sms;
->>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
-  }
-}
-
-
-
-// Enrollment API
-class Clientlist_Api {
-  Future<http.Response> inquire(String searchBankNews) async {
-    http.Response getResponse = await http
-        .post(
-          Uri.parse('http://192.168.0.148:1111/get_banknews/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'search_banknews': searchBankNews,
-            },
-          ),
-        )
-        .timeout(const Duration(minutes: 1));
-    return getResponse;
   }
 }
 
@@ -308,20 +193,20 @@ class transacconfirm_Api {
       String branch_desc, cid, status, trans_date, trans_desc) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://10.21.0.74:1234/get_transconfirmation'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'branch_desc': branch_desc,
-              'cid': cid,
-              'status': status,
-              'trans_date': trans_date,
-              'trans_desc': trans_desc,
-            },
-          ),
-        )
+      Uri.parse('http://10.21.0.74:1234/get_transconfirmation'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'branch_desc': branch_desc,
+          'cid': cid,
+          'status': status,
+          'trans_date': trans_date,
+          'trans_desc': trans_desc,
+        },
+      ),
+    )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
@@ -331,41 +216,42 @@ class Banknews_Api {
   Future<http.Response> news(String searchBankNews) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://192.168.0.148:1111/get_banknews/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'search_banknews': searchBankNews,
-            },
-          ),
-        )
+      Uri.parse('http://192.168.0.148:1111/get_banknews/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'search_banknews': searchBankNews,
+        },
+      ),
+    )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
 }
 
-class Clientprofile_Api {
+class Clientprofile_Api
+{
   Future<http.Response> profile(
-    String cid,
-    username,
-    mobile,
-  ) async {
+      String cid,
+      username,
+      mobile,
+      ) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://192.168.0.148:1111/get_clientprofile/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'cid': cid,
-              'username': username,
-              'mobile': mobile,
-            },
-          ),
-        )
+      Uri.parse('http://192.168.0.148:1111/get_clientprofile/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'cid': cid,
+          'username': username,
+          'mobile': mobile,
+        },
+      ),
+    )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
@@ -376,16 +262,16 @@ class Feestructure_Api {
   Future<http.Response> fee(String search_feestructure) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://192.168.0.148:1111/get_feestructure/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'search_feestructure': search_feestructure,
-            },
-          ),
-        )
+      Uri.parse('http://192.168.0.148:1111/get_feestructure/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'search_feestructure': search_feestructure,
+        },
+      ),
+    )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
@@ -395,17 +281,17 @@ class Institution_Api {
   Future<http.Response> insti(String insti_code, insti_desc) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://192.168.0.148:1111/get_insti/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'inst_code': insti_code,
-              'inst_desc': insti_desc,
-            },
-          ),
-        )
+      Uri.parse('http://192.168.0.148:1111/get_insti/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'inst_code': insti_code,
+          'inst_desc': insti_desc,
+        },
+      ),
+    )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
@@ -415,17 +301,17 @@ class Branch_Api {
   Future<http.Response> branch(String branch_code, branch_desc) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://192.168.0.148:1111/get_branch/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'branch_code': branch_code,
-              'branch_desc': branch_desc,
-            },
-          ),
-        )
+      Uri.parse('http://192.168.0.148:1111/get_branch/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'branch_code': branch_code,
+          'branch_desc': branch_desc,
+        },
+      ),
+    )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
@@ -435,17 +321,17 @@ class Unit_Api {
   Future<http.Response> unit(String unit_code, unit_desc) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://192.168.0.148:1111/get_unit/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'unit_code': unit_code,
-              'unit_desc': unit_desc,
-            },
-          ),
-        )
+      Uri.parse('http://192.168.0.148:1111/get_unit/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'unit_code': unit_code,
+          'unit_desc': unit_desc,
+        },
+      ),
+    )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
@@ -455,17 +341,17 @@ class Center_Api {
   Future<http.Response> center(String center_code, center_desc) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://192.168.0.148:1111/get_center/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'center_code': center_code,
-              'center_desc': center_desc,
-            },
-          ),
-        )
+      Uri.parse('http://192.168.0.148:1111/get_center/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'center_code': center_code,
+          'center_desc': center_desc,
+        },
+      ),
+    )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
@@ -475,17 +361,17 @@ class Provider_Api {
   Future<http.Response> provider(String provider_code, provider_desc) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://192.168.0.148:1111/get_provider/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'provider_code': provider_code,
-              'provider_desc': provider_desc,
-            },
-          ),
-        )
+      Uri.parse('http://192.168.0.148:1111/get_provider/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'provider_code': provider_code,
+          'provider_desc': provider_desc,
+        },
+      ),
+    )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
@@ -495,16 +381,16 @@ class Productandservices_Api {
   Future<http.Response> product(String search_productservices) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://192.168.0.148:1111/get_productservices/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'search_productservices': search_productservices,
-            },
-          ),
-        )
+      Uri.parse('http://192.168.0.148:1111/get_productservices/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'search_productservices': search_productservices,
+        },
+      ),
+    )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
@@ -515,16 +401,16 @@ class Broadcastmessage_Api {
   Future<http.Response> customers(String search_productservices) async {
     http.Response getResponse = await http
         .post(
-          Uri.parse('http://192.168.0.148:1111/get_productservices/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(
-            <String, String>{
-              'search_productservices': search_productservices,
-            },
-          ),
-        )
+      Uri.parse('http://192.168.0.148:1111/get_productservices/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'search_productservices': search_productservices,
+        },
+      ),
+    )
         .timeout(const Duration(minutes: 1));
     return getResponse;
   }
@@ -589,11 +475,10 @@ class SMSLogs_Api {
     http.Response response = await http.get(
         Uri.parse('http://10.21.0.74:1234/get_sms_logs_smstype_dropdown/'));
     print(response.statusCode);
-    if (response.statusCode == 200) {
-      var jsonData = await jsonDecode(response.body)['data'];
-      res = jsonData;
-      print(jsonDecode(response.body)['data']);
-      return res;
+    if (response.statusCode == 200) {var jsonData = await jsonDecode(response.body)['data'];
+    res = jsonData;
+    print(jsonDecode(response.body)['data']);
+    return res;
     } else {
       throw 'connection error';
     }
@@ -618,7 +503,6 @@ class SMSLogsStatus_Api {
 }
 
 class TransactionLogs_Api {
-
   Future<List> getStatus() async {
     List res = [];
     http.Response response = await http.get(Uri.parse(
@@ -726,11 +610,7 @@ class Um_userstatus_Api {
   }
 }
 
-<<<<<<< HEAD
-class Hierarchy_Institution_Api{
-=======
 class Hierarchy_Institution_Api {
->>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
   Future<List> getUserstatus() async {
     try {
       List res = [];
@@ -818,13 +698,6 @@ class Hierarchy_Center_Api {
   }
 }
 
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
 //Utilities
 class FeeStructure_Api {
   Future<List> getUserstatus() async {
@@ -859,7 +732,8 @@ class Parameter_Api {
       if (response.statusCode == 200) {
         var jsonData = await jsonDecode(response.body)['data'];
         res = jsonData;
-        print(jsonDecode(response.body)['data']);
+        print(jsonDecode(
+            response.body)['data']);
         return res;
       } else {
         throw 'connection error';
@@ -1202,11 +1076,7 @@ class FailedEnrollment_Status_Report_Api {
   }
 }
 
-<<<<<<< HEAD
-class IGate_Recentiliation_Status_Report_Api{
-=======
 class IGate_Recentiliation_Status_Report_Api {
->>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
   Future<List> getUserstatus() async {
     try {
       List res = [];
@@ -1396,12 +1266,12 @@ class Remmittance_Sent_Status_Report_Api {
         print(jsonDecode(response.body)['data']);
         return res;
       } else {
-        throw 'connection error';
-      }
-    } catch (e) {
-      throw e.toString();
+    throw 'connection error';
     }
+  } catch (e) {
+  throw e.toString();
   }
+}
 }
 
 class ResentSms_Api {
@@ -1579,39 +1449,3 @@ class WebtoolUser_Api {
     }
   }
 }
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f

@@ -32,32 +32,32 @@ class _TransactionlogState extends State<Transactionlog> {
 
   bool static = false;
   bool isLoaded = false;
-  Future<void> wait() async {
-    final shared = Provider.of<TransactionProv>(context, listen: false);
-    shared.inqq.clear();
-    TransacLogParse_Api TransactParse = TransacLogParse_Api();
-    var res = await TransactParse.profile();
-    if (res.data!.isNotEmpty) {
-      print(res.data!.length);
-      print(res.toJson());
-      print(res.data![0].toJson().length);
-      setState(() {
-        // shared.inqq.add(Data2.fromJson(res.toJson()));
-        shared.inqq.add(T_SavedAccounts.fromJson(res.toJson()));
-        isLoaded = true;
-      });
-      for (var i in res.data!) {
-        // shared.inqqq.add(Data.fromJson(i.toJson()));
-        shared.inqqq.add(Data2.fromJson(i.toJson()));
-
-      }
-    }
-    for (var i in shared.inqqq) {
-      print(i.toJson());
-    }
-  }
+  // Future<void> wait() async {
+  //   final shared = Provider.of<TransactionProv>(context, listen: false);
+  //   shared.inqq.clear();
+  //   TransacLogParse_Api TransactParse = TransacLogParse_Api();
+  //   var res = await TransactParse.profile();
+  //   if (res.data!.isNotEmpty) {
+  //     print(res.data!.length);
+  //     print(res.toJson());
+  //     print(res.data![0].toJson().length);
+  //     setState(() {
+  //       // shared.inqq.add(Data2.fromJson(res.toJson()));
+  //       shared.inqq.add(T_SavedAccounts.fromJson(res.toJson()));
+  //       isLoaded = true;
+  //     });
+  //     for (var i in res.data!) {
+  //       // shared.inqqq.add(Data.fromJson(i.toJson()));
+  //       shared.inqqq.add(Data2.fromJson(i.toJson()));
+  //
+  //     }
+  //   }
+  //   for (var i in shared.inqqq) {
+  //     print(i.toJson());
+  //   }
+  // }
   void initState() {
-    wait();
+    // wait();
     getList();
     getCategory();
   }
@@ -89,7 +89,7 @@ class _TransactionlogState extends State<Transactionlog> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<TransactionProv>(context);
-    final DataTableSource data = MyData(shared: shared);
+    // final DataTableSource data = MyData(shared: shared);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -368,53 +368,54 @@ class _TransactionlogState extends State<Transactionlog> {
                   Container(
                       width: double.infinity,
                       padding: kEdgeInsetsVerticalNormal,
-                      child: PaginatedDataTable(
-                        key: key,
-                        arrowHeadColor: kWhiteColor,
-                        columns: [
-                          DataColumn(
-                              label: Text('Mobile Ref ID', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Core Ref ID', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Remittance Ref ID', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Sender (GivenName\nMiddleName\nSurName', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Receiver (GivenName\nMiddleName\nSurName', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Amount', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Sender Mobile Number', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Date&Time Send', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Source Branch\n(Processed By)', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Processed By Full Name\n(Member,Non-Member,Agent)', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Date&Time\nReceive', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Target Branch\n(Disbursed By)', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Disbursed By\nFullName\n(Agent,Mbo,Teller/Branch Teller)', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Date&Time Cancelled', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Cancelled By Fullname\n(Member,Non-Member,Agent)', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Status\n(Sent/Claimed/Cancelled)', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Core Ref ID\n(Claimed/Cancelled)', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Mobile Ref ID\n(Claimed/Cancelled)', style: kLargeBoldTextStyle)),
-
-                        ],
-                        source: isLoaded ? shared.inqqq.isNotEmpty ? data : data2 : data3,
-                        rowsPerPage: 8,
-                        showFirstLastButtons: true,
-                        header: Text('List of Role', style: kXLargeBoldTextStyle),
-                      )),
+                      // child: PaginatedDataTable(
+                      //   key: key,
+                      //   arrowHeadColor: kWhiteColor,
+                      //   columns: [
+                      //     DataColumn(
+                      //         label: Text('Mobile Ref ID', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Core Ref ID', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Remittance Ref ID', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Sender (GivenName\nMiddleName\nSurName', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Receiver (GivenName\nMiddleName\nSurName', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Amount', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Sender Mobile Number', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Date&Time Send', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Source Branch\n(Processed By)', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Processed By Full Name\n(Member,Non-Member,Agent)', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Date&Time\nReceive', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Target Branch\n(Disbursed By)', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Disbursed By\nFullName\n(Agent,Mbo,Teller/Branch Teller)', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Date&Time Cancelled', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Cancelled By Fullname\n(Member,Non-Member,Agent)', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Status\n(Sent/Claimed/Cancelled)', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Core Ref ID\n(Claimed/Cancelled)', style: kLargeBoldTextStyle)),
+                      //     DataColumn(
+                      //         label: Text('Mobile Ref ID\n(Claimed/Cancelled)', style: kLargeBoldTextStyle)),
+                      //
+                      //   ],
+                      //   source: isLoaded ? shared.inqqq.isNotEmpty ? data : data2 : data3,
+                      //   rowsPerPage: 8,
+                      //   showFirstLastButtons: true,
+                      //   header: Text('List of Role', style: kXLargeBoldTextStyle),
+                      // ),
+                  ),
 
                 ],
                 ),
@@ -426,62 +427,62 @@ class _TransactionlogState extends State<Transactionlog> {
     );
   }
 }
-class MyData extends DataTableSource {
-  TransactionProv shared;
-  MyData({required this.shared});
-
-  @override
-  bool get isRowCountApproximate => false;
-  @override
-  int get rowCount => shared.inqqq.length;
-  @override
-  int get selectedRowCount => 0;
-  @override
-  DataRow getRow(int index) {
-    debugPrint(index.toString());
-    return DataRow(cells: [
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].mobileRefno.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].coreRefno.toString()))),
-
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].sourceBranch.toString()))),
-
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].sourceCid.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].sourceClientType.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].sourceAccountType.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].sourceAccount.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].sourceName.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].targetBranch.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].targetCid.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].bankName.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].targetClientType.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].targetAccountType.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].targetAccount.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].targetName.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].transTypeCode.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].amount.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].transAmountFee.toString()))),
-
-    ]);
-  }
-}
+// class MyData extends DataTableSource {
+//   TransactionProv shared;
+//   MyData({required this.shared});
+//
+//   @override
+//   bool get isRowCountApproximate => false;
+//   @override
+//   // int get rowCount => shared.inqqq.length;
+//   @override
+//   int get selectedRowCount => 0;
+//   @override
+//   // DataRow getRow(int index) {
+//   //   debugPrint(index.toString());
+//   //   // return DataRow(cells: [
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].mobileRefno.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].coreRefno.toString()))),
+//   //   //
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].sourceBranch.toString()))),
+//   //   //
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].sourceCid.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].sourceClientType.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].sourceAccountType.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].sourceAccount.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].sourceName.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].targetBranch.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].targetCid.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].bankName.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].targetClientType.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].targetAccountType.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].targetAccount.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].targetName.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].transTypeCode.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].amount.toString()))),
+//   //   //   DataCell(SizedBox(
+//   //   //       width: 100, child: Text(shared.inqqq[index].transAmountFee.toString()))),
+//   //   //
+//   //   // ]);
+//   // }
+// }
 
 class MyData2 extends DataTableSource {
   @override

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../core/providers/data_provider.dart';
+import 'package:webtool_rep/UI/utils/model2.dart';
+import '../../../../core/providers/Provider.dart';
+import '../../../utils/API2.dart';
 import '../../../utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
-import '../../../utils/model.dart';
+
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../rolemanagement/role_management.dart';
+
 
 class Hierarchy extends StatefulWidget {
   const Hierarchy({Key? key}) : super(key: key);
@@ -40,23 +41,22 @@ class _HierarchyState extends State<Hierarchy> {
   bool isLoaded = false;
   Future<void> wait() async {
     final shared = Provider.of<H_Prov>(context, listen: false);
-    shared.inqq.clear();
+    shared.Hierarchy.clear();
     HierarchyParse_Api HierarchyParse = HierarchyParse_Api();
-    var res = await HierarchyParse.profile();
+    var res = await HierarchyParse.profile3();
     if (res.data!.isNotEmpty) {
       print(res.data!.length);
-      print(res.data![0].toJson().length);
       setState(() {
-        shared.inqq.add(H_SavedAccounts.fromJson(res.toJson()));
+        shared.Hierarchy.add(Hierarchy_Api.fromJson(res.toJson()));
         isLoaded = true;
       });
       for (var i in res.data!) {
         // shared.inqqq.add(Data.fromJson(i.toJson()));
-      shared.inqqq.add(Data1.fromJson(i.toJson()));
+      shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()));
 
       }
     }
-    for (var i in shared.inqqq) {
+    for (var i in shared.Hierarchy_data) {
       print(i.toJson());
     }
   }
@@ -414,11 +414,12 @@ class _HierarchyState extends State<Hierarchy> {
                           DataColumn(
                               label: Text('Center Name', style: kLargeBoldTextStyle)),
                         ],
-                        source: isLoaded ? shared.inqqq.isNotEmpty ? data : data2 : data3,
+                        source: isLoaded ? shared.Hierarchy_data.isNotEmpty ? data : data2 : data3,
                         rowsPerPage: 8,
                         showFirstLastButtons: true,
                         header: Text('List of Role', style: kXLargeBoldTextStyle),
-                      )),
+                      ),
+                  ),
 
                 ],
                 ),
@@ -437,7 +438,7 @@ class MyData extends DataTableSource {
   @override
   bool get isRowCountApproximate => false;
   @override
-  int get rowCount => shared.inqqq.length;
+  int get rowCount => shared.Hierarchy_data.length;
   @override
   int get selectedRowCount => 0;
   @override
@@ -445,19 +446,19 @@ class MyData extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].branch_code.toString()))),
+          width: 100, child: Text(shared.Hierarchy_data[index].branchCode.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].branch_desc.toString()))),
+          width: 100, child: Text(shared.Hierarchy_data[index].branchDesc.toString()))),
 
       DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].unit_code.toString()))),
+          width: 100, child: Text(shared.Hierarchy_data[index].unitCode.toString()))),
 
       DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].unit_desc.toString()))),
+          width: 100, child: Text(shared.Hierarchy_data[index].unitDesc.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].center_code.toString()))),
+          width: 100, child: Text(shared.Hierarchy_data[index].centerCode.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.inqqq[index].center_desc.toString()))),
+          width: 100, child: Text(shared.Hierarchy_data[index].centerDesc.toString()))),
 
     ]);
   }

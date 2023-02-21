@@ -7,6 +7,8 @@ import 'package:webtool_rep/UI/utils/model.dart';
 import 'package:webtool_rep/UI/utils/text_styles.dart';
 import 'package:webtool_rep/core/providers/data_provider.dart';
 
+import '../../monitoring/smslogs/sms_logs.dart';
+
 class Rolemanagement extends StatefulWidget {
   const Rolemanagement({Key? key}) : super(key: key);
 
@@ -56,126 +58,129 @@ class _RolemanagementState extends State<Rolemanagement> {
     final key = new GlobalKey<PaginatedDataTableState>();
     ScrollController scrollController = ScrollController();
     return Container(
-      padding: kEdgeInsetsVerticalNormal,
-      child: Column(
+        padding: kEdgeInsetsVerticalNormal,
+        child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 500,
-                child: TextFormField(
-                  style: TextStyle(color: kBlackColor),
-                  decoration: const InputDecoration(
-                    hintText: 'Search',
-                    border: OutlineInputBorder(),
-                    labelStyle: TextStyle(fontSize: 12.0),
-                    contentPadding: EdgeInsets.only(left: 10.0),
-                    hintStyle: TextStyle(color: kSecondaryColor2),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: kBlackColor),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: kBlackColor),
-                    ),
-                  ),
-                  textInputAction: TextInputAction.go,
-                  controller: controller,
-                  onChanged: (value) {
-                    setState(() {
-                      isLoaded = false;
-                    });
-                    try {
-                      if (controller.text.isNotEmpty) {
-                        shared.role_data.clear();
-                        for (var i in shared.role[0].data!) {
-                          print(i.toJson());
-                          print(i.role_name
-                              ?.toLowerCase()
-                              .contains(controller.text.toLowerCase()));
-                          if (i.toJson().isNotEmpty) {
-                            if (i.role_name!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase()) ||
-                                i.role_desc!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase())) {
-                              debugPrint(i.role_name);
-                              setState(() {
-                                shared.role_data.add(Data(
-                                    role_name: i.role_name,
-                                    role_desc: i.role_desc,
-                                    role_id: i.role_id));
-                              });
-                              if (shared.role_data.isNotEmpty) {
-                                setState(() {
-                                  isLoaded = true;
-                                });
-                              }
-                            }
-                          }
-                        }
-                      } else if (controller.text == '') {
-                        shared.role_data.clear();
-                        setState(() {
-                          shared.role_data.addAll(shared.role[0].data!);
-                        });
-                      }
-                      debugPrint(shared.role_data[0].toJson().toString());
-                    } catch (e) {
-                      shared.role_data.clear();
-                    }
-                  },
-                  onEditingComplete: () async {
-                    setState(() {
-                      isLoaded = false;
-                    });
-                    try {
-                      if (controller.text.isNotEmpty) {
-                        shared.role_data.clear();
-                        for (var i in shared.role[0].data!) {
-                          print(i.toJson());
-                          print(i.role_name
-                              ?.toLowerCase()
-                              .contains(controller.text.toLowerCase()));
-                          if (i.toJson().isNotEmpty) {
-                            if (i.role_name!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase()) ||
-                                i.role_desc!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase())) {
-                              debugPrint(i.role_name);
-                              setState(() {
-                                key.currentState?.pageTo(0);
-                                shared.role_data.add(Data(
-                                    role_name: i.role_name,
-                                    role_desc: i.role_desc,
-                                    role_id: i.role_id));
-                              });
-                              if (shared.role_data.isNotEmpty) {
-                                setState(() {
-                                  isLoaded = true;
-                                });
-                              }
-                            }
-                          }
-                        }
-                      } else if (controller.text == '') {
-                        shared.role_data.clear();
-                        setState(() {
-                          shared.role_data.addAll(shared.role[0].data!);
-                        });
-                      }
-                      debugPrint(shared.role_data[0].toJson().toString());
-                    } catch (e) {
-                      shared.role_data.clear();
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
+        Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+        Container(
+        width: 500,
+        child: TextFormField(
+        style: TextStyle(color: kBlackColor),
+    decoration: const InputDecoration(
+    hintText: 'Search',
+    border: OutlineInputBorder(),
+    labelStyle: TextStyle(fontSize: 12.0),
+    contentPadding: EdgeInsets.only(left: 10.0),
+    hintStyle: TextStyle(color: kSecondaryColor2),
+    enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kBlackColor),
+    ),
+    focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kBlackColor),
+    ),
+    ),
+    textInputAction: TextInputAction.go,
+    controller: controller,
+    onChanged: (value) {
+    setState(() {
+    isLoaded = false;
+    });
+    //
+    try {
+    if (controller.text.isNotEmpty) {
+    shared.role_data.clear();
+    for (var i in shared.role[0].data!) {
+    print(i.toJson());
+    print(i.role_name
+        ?.toLowerCase()
+        .contains(controller.text.toLowerCase()));
+    if (i.toJson().isNotEmpty) {
+    if (i.role_name!
+        .toLowerCase()
+        .contains(controller.text.toLowerCase()) ||
+    i.role_desc!
+        .toLowerCase()
+        .contains(controller.text.toLowerCase())) {
+    debugPrint(i.role_name);
+    setState(() {
+    shared.role_data.add(Data(
+    role_name: i.role_name,
+    role_desc: i.role_desc,
+    role_id: i.role_id));
+    });
+    if (shared.role_data.isNotEmpty) {
+    setState(() {
+    isLoaded = true;
+    });
+    }
+    }
+    }
+    }
+    } else if (controller.text == '') {
+    shared.role_data.clear();
+    setState(() {
+    shared.role_data.addAll(shared.role[0].data!);
+    isLoaded = true;
+    });
+    }
+    debugPrint(shared.role_data[0].toJson().toString());
+    } catch (e) {
+    shared.role_data.clear();
+    isLoaded = true;
+    }
+    },
+    onEditingComplete: () async {
+    setState(() {
+    isLoaded = false;
+    });
+    try {
+    if (controller.text.isNotEmpty) {
+    shared.role_data.clear();
+    for (var i in shared.role[0].data!) {
+    print(i.toJson());
+    print(i.role_name
+        ?.toLowerCase()
+        .contains(controller.text.toLowerCase()));
+    if (i.toJson().isNotEmpty) {
+    if (i.role_name!
+        .toLowerCase()
+        .contains(controller.text.toLowerCase()) ||
+    i.role_desc!
+        .toLowerCase()
+        .contains(controller.text.toLowerCase())) {
+    debugPrint(i.role_name);
+    setState(() {
+    key.currentState?.pageTo(0);
+    shared.role_data.add(Data(
+    role_name: i.role_name,
+    role_desc: i.role_desc,
+    role_id: i.role_id));
+    });
+    if (shared.role_data.isNotEmpty) {
+    setState(() {
+    isLoaded = true;
+    });
+    }
+    }
+    }
+    }
+    } else if (controller.text == '') {
+    shared.role_data.clear();
+    setState(() {
+      shared.role_data.addAll(shared.role[0].data!);
+    });
+    }
+    debugPrint(shared.role_data[0].toJson().toString());
+    } catch (e) {
+      shared.role_data.clear();
+    }
+    },
+        ),
+        ),
+        ],
+        ),
           Container(
               width: double.infinity,
               padding: kEdgeInsetsVerticalNormal,
@@ -190,8 +195,8 @@ class _RolemanagementState extends State<Rolemanagement> {
                 ],
                 source: isLoaded
                     ? shared.role_data.isNotEmpty
-                        ? data
-                        : data2
+                    ? data
+                    : data2
                     : data3,
                 rowsPerPage: 8,
                 showFirstLastButtons: true,
@@ -247,7 +252,7 @@ class _RolemanagementState extends State<Rolemanagement> {
           //   ),
           // )
         ],
-      ),
+        ),
     );
   }
 }

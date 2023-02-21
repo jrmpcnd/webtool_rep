@@ -59,13 +59,13 @@ import 'api.dart';
 class Transacconfirm_function {
   static void news(
       {String branch_desc = '',
-      cid = '',
-      status = '',
-      trans_date = '',
-      trans_desc = ''}) async {
+        cid = '',
+        status = '',
+        trans_date = '',
+        trans_desc = ''}) async {
     transacconfirm_Api api = transacconfirm_Api();
     http.Response getParamReturn =
-        await api.news(branch_desc, cid, status, trans_date, trans_desc);
+    await api.news(branch_desc, cid, status, trans_date, trans_desc);
     print(getParamReturn.statusCode);
     print(getParamReturn.body);
   }

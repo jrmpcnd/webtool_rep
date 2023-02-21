@@ -77,8 +77,8 @@ class _UnitState extends State<Unit> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kPrimaryColor)),
+                                      MaterialStateProperty.all(
+                                          kPrimaryColor)),
                                   onPressed: () {
                                     Unit_Function.unit(
                                       unit_code: unit_code_controller.text,
@@ -102,8 +102,8 @@ class _UnitState extends State<Unit> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kSecondaryColor2)),
+                                      MaterialStateProperty.all(
+                                          kSecondaryColor2)),
                                   onPressed: () {},
                                   icon: const Icon(
                                     Icons.refresh,
@@ -123,7 +123,7 @@ class _UnitState extends State<Unit> {
                             child: ElevatedButton.icon(
                               style: ButtonStyle(
                                   backgroundColor:
-                                      MaterialStateProperty.all(kPrimaryColor)),
+                                  MaterialStateProperty.all(kPrimaryColor)),
                               onPressed: () {},
                               icon: const Icon(
                                 Icons.delete_outline,

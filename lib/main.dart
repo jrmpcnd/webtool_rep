@@ -7,6 +7,7 @@ import 'UI/screens/homepage/homepage.dart';
 import 'UI/screens/login/login_screen.dart';
 import 'UI/utils/constant.dart';
 import 'UI/utils/web_webview.dart';
+import 'core/providers/Provider.dart';
 
 void main() {
   WebViewWebImplementation();
@@ -21,16 +22,12 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => Cardprovider()),
         ChangeNotifierProvider(create: (context) => Prov()),
-<<<<<<< HEAD
         ChangeNotifierProvider(create: (context) => H_Prov()),
         ChangeNotifierProvider(create: (context) => TransactionProv()),
-
-
-=======
         ChangeNotifierProvider(create: (context) => Prov1()),
         ChangeNotifierProvider(create: (context) => Prov3()),
         ChangeNotifierProvider(create: (context) => Prov5()),
->>>>>>> 9fa2b3595e78db18e6142bf365b96394b619ce3f
+
       ],
       child: MaterialApp(
           title: 'Konek2CARD PLUS Webtool',
