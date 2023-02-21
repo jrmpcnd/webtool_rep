@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Cardprovider()),
         ChangeNotifierProvider(create: (context) => Prov()),
         ChangeNotifierProvider(create: (context) => H_Prov()),
-
+        ChangeNotifierProvider(create: (context) => Remittance_L()),
         ChangeNotifierProvider(create: (context) => Prov1()),
         ChangeNotifierProvider(create: (context) => Prov3()),
         ChangeNotifierProvider(create: (context) => Prov5()),

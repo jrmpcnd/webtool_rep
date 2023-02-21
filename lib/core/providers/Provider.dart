@@ -24,3 +24,10 @@ class H_Prov extends ChangeNotifier {
   List<H_SaveAccount> Hierarchy_data = [];
   bool search = false;
 }
+
+class Remittance_L extends ChangeNotifier {
+  String RemittanceL_button = 'Click here';
+  List<RemittanceLog_Api> RemittanceLog = [];
+  List<Remittance_Log> Remittance_data = [];
+  bool search = false;
+}

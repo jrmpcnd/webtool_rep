@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
-import 'package:webtool_rep/UI/widgets/dropdown.dart';
+import 'package:webtool_rep/core/providers/Provider.dart';
 import '../../../utils/api.dart';
+import '../../../utils/api2.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
+import '../../../utils/model2.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
@@ -20,8 +23,35 @@ class Remittancetransactionlog extends StatefulWidget {
 class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
   List<String> res = [];
   String init = '';
+
+
+  TextEditingController controller = TextEditingController();
   Remittancelog_Api dropdownStatus = Remittancelog_Api();
+  bool static = false;
+  bool isLoaded = false;
+  Future<void> wait() async {
+    final shared = Provider.of<Remittance_L>(context, listen: false);
+    shared.RemittanceLog.clear();
+    RemittanceL_Parse remittance = RemittanceL_Parse();
+    var res = await remittance.profile6();
+    if (res.data!.isNotEmpty) {
+      print(res.data!.length);
+      setState(() {
+        shared.RemittanceLog.add(RemittanceLog_Api.fromJson(res.toJson()));
+        isLoaded = true;
+      });
+      for (var i in res.data!) {
+        // shared.inqqq.add(Data.fromJson(i.toJson()));
+        shared.Remittance_data.add(Remittance_Log.fromJson(i.toJson()));
+
+      }
+    }
+    for (var i in shared.Remittance_data) {
+      print(i.toJson());
+    }
+  }
   void initState() {
+    wait();
     getList();
   }
   getList()async{
@@ -38,6 +68,12 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
   }
   @override
   Widget build(BuildContext context) {
+    final shared = Provider.of<Remittance_L>(context);
+    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data2 = MyData2();
+    final DataTableSource data3 = MyData3();
+    final key = new GlobalKey<PaginatedDataTableState>();
+    ScrollController scrollController = ScrollController();
     return Container(
       padding: kEdgeInsetsVerticalNormal,
       child: Row(
@@ -174,240 +210,54 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                 ),
                 verticalSpaceRegular,
                 Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  alignment: Alignment.centerLeft,
                   width: double.infinity,
-                  height: 30.0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of Users', style: kTinyBoldTextStyle),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3)),
+                  padding: kEdgeInsetsVerticalNormal,
+                  child: PaginatedDataTable(
+                    key: key,
+                    arrowHeadColor: kWhiteColor,
+                    columns: [
+                      DataColumn(
+                          label: Text('Mobile Ref ID \n(sent)', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Core Ref ID \n(sent)', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Remittance Ref ID', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Sender\n(GivenName\nMiddleName\nSureName)', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Receiver\n(GivenName\nMiddleName\nSureName)', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Amount', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Sender Mobile Number', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Date&Time\nSent', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Source Branch \n(Processed By)', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Processed By Fullname\n(Member/NonMember/Agent', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Date&Time\n(Receive)', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Target Branch\n(Disbursed By)', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Disbursed By Fullname(Agent/MBO\nTeller/Branch Teller)', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Date&Time\nCancelled', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Cancelled By Fullname\n(Member/Non-Member/Agent', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Status', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Core Ref ID\n(Claimed/Cancelled)', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Mobile Ref ID\n(Claimed/Cancelled)', style: kLargeBoldTextStyle)),
+
                     ],
-                  ),
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: Table(
-                    children: [
-                      TableRow(children: [
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('User Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Given Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Middle Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Last Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Branch', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Role', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Status', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Action', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 1',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Samplel',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 2',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                    ],
+                    source: isLoaded ? shared.Remittance_data.isNotEmpty ? data : data2 : data3,
+                    rowsPerPage: 8,
+                    showFirstLastButtons: true,
+                    header: Text('List of Role', style: kXLargeBoldTextStyle),
                   ),
                 ),
               ],
@@ -416,5 +266,155 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
         ],
       ),
     );
+  }
+}
+
+class MyData extends DataTableSource {
+  Remittance_L shared;
+  MyData({required this.shared});
+
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => shared.Remittance_data.length;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].sentMobileRefId.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].sentCoreRefId.toString()))),
+
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].referenceNumberRefID.toString()))),
+
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].senderName.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].receiverName.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].amount.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].senderMobileNumber.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].createdDate.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].sourceBranch.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].processedByFullname.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].createdDate.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].targetBranch.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].disbursedByFullname.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].cancelledDate.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].cancelledByFullname.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].status.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].claimedMobileRefId.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Remittance_data[index].claimedMobileRefId.toString()))),
+
+    ]);
+  }
+}
+
+class MyData2 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(
+          SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+    ]);
+  }
+}
+
+class MyData3 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(
+          SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+
+    ]);
   }
 }
