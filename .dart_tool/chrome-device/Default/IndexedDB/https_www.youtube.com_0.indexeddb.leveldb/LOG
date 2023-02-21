@@ -1,3 +1,15 @@
-2023/02/17-11:20:12.796 1a373 Reusing MANIFEST /private/var/folders/d9/4wmr_rjn12n53ksxf2kh6s8c0000gp/T/flutter_tools.Yo4j4S/flutter_tools_chrome_device.dBiw2s/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/02/17-11:20:12.796 1a373 Recovering log #7
-2023/02/17-11:20:12.797 1a373 Reusing old log /private/var/folders/d9/4wmr_rjn12n53ksxf2kh6s8c0000gp/T/flutter_tools.Yo4j4S/flutter_tools_chrome_device.dBiw2s/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/000007.log 
+2023/02/20-09:55:01.471 10807 Reusing MANIFEST /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.knVUds/flutter_tools_chrome_device.xHaA9k/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/02/20-09:55:01.471 10807 Recovering log #7
+2023/02/20-09:55:01.472 10807 Reusing old log /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.knVUds/flutter_tools_chrome_device.xHaA9k/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/000007.log 
+2023/02/20-09:55:01.472 10807 Delete type=0 #4
+2023/02/20-09:55:01.472 10807 Delete type=2 #9
+2023/02/20-09:55:01.512 b93b Level-0 table #10: started
+2023/02/20-09:55:01.550 b93b Level-0 table #10: 28014 bytes OK
+2023/02/20-09:55:01.622 b93b Delete type=0 #7
+2023/02/20-09:55:01.623 b93b Manual compaction at level-0 from '\x00\x02\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x03\x00\x00\x00' @ 0 : 0; will stop at '\x00\x04\x01\x1f\x04\x02\x03\x00\x00\x00\x00\x00\x00\xf0?\x03\x000\xa6\x82\x87dxB\x00\x03\x00\x00\x00\x00\x00\x80A@' @ 3781 : 1
+2023/02/20-09:55:01.641 b93b Compacting 2@0 + 0@1 files
+2023/02/20-09:55:01.659 b93b Generated table #11@0: 172 keys, 4393 bytes
+2023/02/20-09:55:01.660 b93b Compacted 2@0 + 0@1 files => 4393 bytes
+2023/02/20-09:55:01.713 b93b compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/02/20-09:55:01.713 b93b Delete type=2 #10
+2023/02/20-09:55:01.713 b93b Manual compaction at level-0 from '\x00\x04\x01\x1f\x04\x02\x03\x00\x00\x00\x00\x00\x00\xf0?\x03\x000\xa6\x82\x87dxB\x00\x03\x00\x00\x00\x00\x00\x80A@' @ 3781 : 1 .. '\x00\x03\x00\x00\x00' @ 0 : 0; will stop at (end)
