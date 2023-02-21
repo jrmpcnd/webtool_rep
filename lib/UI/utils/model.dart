@@ -285,3 +285,105 @@ class Data5 {
     return data;
   }
 }
+
+class Agent_Dashboard {
+  String? retcode;
+  String? message;
+  List<Data6>? data;
+
+  Agent_Dashboard({this.retcode, this.message, this.data});
+
+  Agent_Dashboard.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data6>[];
+      json['data'].forEach((v) {
+        data!.add(new Data6.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data6 {
+  String? id;
+  String? branchDesc;
+  String? cashIn;
+  String? cashOut;
+  String? agentAssistedPayment;
+  String? billPayment;
+  String? total;
+  String? totalIncome;
+  String? clientName;
+  String? ci;
+  String? co;
+  String? aap;
+  String? bp;
+  String? sum;
+  String? sumIncome;
+
+  Data6(
+      {this.id,
+      this.branchDesc,
+      this.cashIn,
+      this.cashOut,
+      this.agentAssistedPayment,
+      this.billPayment,
+      this.total,
+      this.totalIncome,
+      this.clientName,
+      this.ci,
+      this.co,
+      this.aap,
+      this.bp,
+      this.sum,
+      this.sumIncome});
+
+  Data6.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    branchDesc = json['branch_desc'];
+    cashIn = json['cash_in'];
+    cashOut = json['cash_out'];
+    agentAssistedPayment = json['agent_assisted_payment'];
+    billPayment = json['bill_payment'];
+    total = json['total'];
+    totalIncome = json['total_income'];
+    clientName = json['client_name'];
+    ci = json['ci'];
+    co = json['co'];
+    aap = json['aap'];
+    bp = json['bp'];
+    sum = json['sum'];
+    sumIncome = json['sum_income'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['branch_desc'] = this.branchDesc;
+    data['cash_in'] = this.cashIn;
+    data['cash_out'] = this.cashOut;
+    data['agent_assisted_payment'] = this.agentAssistedPayment;
+    data['bill_payment'] = this.billPayment;
+    data['total'] = this.total;
+    data['total_income'] = this.totalIncome;
+    data['client_name'] = this.clientName;
+    data['ci'] = this.ci;
+    data['co'] = this.co;
+    data['aap'] = this.aap;
+    data['bp'] = this.bp;
+    data['sum'] = this.sum;
+    data['sum_income'] = this.sumIncome;
+    return data;
+  }
+}

@@ -167,6 +167,55 @@ class SmsParse {
   }
 }
 
+class Agent_Push {
+  Future<http.Response> pushHttp6() async {
+    http.Response response6 = await http.post(
+      Uri.parse('http://10.21.0.74:1234/get_agentdashboard/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "aap": "",
+          "agent_assisted_payment": "",
+          "bill_payment": "",
+          "bp": "",
+          "branch_desc": "",
+          "cash_in": "",
+          "cash_out": "",
+          "ci": "",
+          "client_name": "",
+          "co": "",
+          "id": "",
+          "sum": "",
+          "sum_income": "",
+          "total": "",
+          "total_income": ""
+        },
+      ),
+    );
+    if (response6.statusCode == 200) {
+      print(response6.statusCode);
+      print(response6.body);
+      return response6;
+    } else {
+      return response6;
+    }
+  }
+}
+
+class AgentParse {
+  Future<Agent_Dashboard> profile6() async {
+    Agent_Push httpPush6 = Agent_Push();
+    http.Response res6 = await httpPush6.pushHttp6();
+    print("-------->>>>>>>>>>${jsonDecode(res6.body).length}");
+    var agent = Agent_Dashboard.fromJson(jsonDecode(res6.body));
+    return agent;
+  }
+}
+
 // Enrollment API
 class Clientlist_Api {
   Future<http.Response> inquire(String searchBankNews) async {

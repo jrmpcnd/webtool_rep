@@ -28,3 +28,10 @@ class Prov5 extends ChangeNotifier {
   List<Data5> sms_data = [];
   bool search5 = false;
 }
+
+class Prov6 extends ChangeNotifier {
+  String agent_button = 'Click here';
+  List<Agent_Dashboard> agent = [];
+  List<Data6> agent_data = [];
+  bool search6 = false;
+}
