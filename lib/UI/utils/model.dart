@@ -387,3 +387,81 @@ class Data6 {
     return data;
   }
 }
+
+class Failed_Enrollment {
+  String? retcode;
+  String? message;
+  List<Data7>? data;
+
+  Failed_Enrollment({this.retcode, this.message, this.data});
+
+  Failed_Enrollment.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data7>[];
+      json['data'].forEach((v) {
+        data!.add(new Data7.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data7 {
+  String? id;
+  String? createdDate;
+  String? accountNumber;
+  String? dateOfBirth;
+  String? mobileNumber;
+  String? clientType;
+  String? deviceId;
+  String? deviceModel;
+  String? errorMessage;
+
+  Data7(
+      {this.id,
+      this.createdDate,
+      this.accountNumber,
+      this.dateOfBirth,
+      this.mobileNumber,
+      this.clientType,
+      this.deviceId,
+      this.deviceModel,
+      this.errorMessage});
+
+  Data7.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    createdDate = json['created_date'];
+    accountNumber = json['account_number'];
+    dateOfBirth = json['date_of_birth'];
+    mobileNumber = json['mobile_number'];
+    clientType = json['client_type'];
+    deviceId = json['device_id'];
+    deviceModel = json['device_model'];
+    errorMessage = json['error_message'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['created_date'] = this.createdDate;
+    data['account_number'] = this.accountNumber;
+    data['date_of_birth'] = this.dateOfBirth;
+    data['mobile_number'] = this.mobileNumber;
+    data['client_type'] = this.clientType;
+    data['device_id'] = this.deviceId;
+    data['device_model'] = this.deviceModel;
+    data['error_message'] = this.errorMessage;
+    return data;
+  }
+}

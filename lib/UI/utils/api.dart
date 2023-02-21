@@ -216,6 +216,49 @@ class AgentParse {
   }
 }
 
+class Failed_Push {
+  Future<http.Response> pushHttp7() async {
+    http.Response response7 = await http.post(
+      Uri.parse('http://10.21.0.74:1234/get_failedenrollment/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "account_number": "",
+          "client_type": "",
+          "created_date": "",
+          "date_of_birth": "",
+          "device_id": "",
+          "device_model": "",
+          "error_message": "",
+          "id": "",
+          "mobile_number": ""
+        },
+      ),
+    );
+    if (response7.statusCode == 200) {
+      print(response7.statusCode);
+      print(response7.body);
+      return response7;
+    } else {
+      return response7;
+    }
+  }
+}
+
+class FailedParse {
+  Future<Failed_Enrollment> profile7() async {
+    Failed_Push httpPush6 = Failed_Push();
+    http.Response res7 = await httpPush6.pushHttp7();
+    print("-------->>>>>>>>>>${jsonDecode(res7.body).length}");
+    var failed = Failed_Enrollment.fromJson(jsonDecode(res7.body));
+    return failed;
+  }
+}
+
 // Enrollment API
 class Clientlist_Api {
   Future<http.Response> inquire(String searchBankNews) async {
