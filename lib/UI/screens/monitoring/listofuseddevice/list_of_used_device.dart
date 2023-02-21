@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
+import '../../../../core/providers/Provider.dart';
+import '../../../utils/api2.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
+import '../../../utils/model2.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
+import '../../administration/hierarchy/hierarchy.dart';
 
 class Listofuseddevice extends StatefulWidget {
   const Listofuseddevice({Key? key}) : super(key: key);
@@ -21,8 +26,34 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
   List<String> res2 = [];
   String init = '';
   String init2 = '';
+  bool static = false;
+  bool isLoaded = false;
   ListofUseDevice_Api dropdownFunction = ListofUseDevice_Api();
   ListofUseDeviceStatus_Api dropdownStatus = ListofUseDeviceStatus_Api();
+  TextEditingController controller = TextEditingController();
+  Future<void> wait() async {
+    final shared = Provider.of<Listofuse_Device>(context, listen: false);
+    shared.Listofuse_DeviceLog.clear();
+    ListofUserDevice_Parse listofdevice = ListofUserDevice_Parse();
+    var res = await listofdevice.profile6();
+    if (res.data!.isNotEmpty) {
+      print(res.data!.length);
+      setState(() {
+        shared.Listofuse_DeviceLog.add(UseoflistDevice_Api.fromJson(res.toJson()));
+        isLoaded = true;
+      });
+      for (var i in res.data!) {
+        // shared.inqqq.add(Data.fromJson(i.toJson()));
+        shared.Listofuse_Device_data.add(UseoflistDevice_Log.fromJson(i.toJson()));
+
+      }
+    }
+    for (var i in shared.Listofuse_Device_data) {
+      print(i.toJson());
+    }
+  }
+
+
   void initState() {
     getList();
     getCathegory();
@@ -54,6 +85,12 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
 
   @override
   Widget build(BuildContext context) {
+    final shared = Provider.of<Listofuse_Device>(context);
+    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data2 = MyData2();
+    final DataTableSource data3 = MyData3();
+    final key = new GlobalKey<PaginatedDataTableState>();
+    ScrollController scrollController = ScrollController();
     return Container(
       padding: kEdgeInsetsVerticalNormal,
       child: Row(
@@ -194,240 +231,38 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
                 ),
                 verticalSpaceRegular,
                 Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  alignment: Alignment.centerLeft,
                   width: double.infinity,
-                  height: 30.0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of Users', style: kTinyBoldTextStyle),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3)),
+                  padding: kEdgeInsetsVerticalNormal,
+                  child: PaginatedDataTable(
+                    key: key,
+                    arrowHeadColor: kWhiteColor,
+                    columns: [
+                      DataColumn(
+                          label: Text('Date & Time \nActivated', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Device ID', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Device Model', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Andriod\nVersion', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('CIF', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Branch', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Mobile Number', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Name of Customer', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Client Type\n(Member/NonMember', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Status\n(Used/Unused)', style: kLargeBoldTextStyle)),
+
                     ],
-                  ),
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: Table(
-                    children: [
-                      TableRow(children: [
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('User Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Given Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Middle Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Last Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Branch', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Role', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Status', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Action', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 1',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Samplel',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 2',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                    ],
+                    source: isLoaded ? shared.Listofuse_Device_data.isNotEmpty ? data : data2 : data3,
+                    rowsPerPage: 8,
+                    showFirstLastButtons: true,
+                    header: Text('List of Role', style: kXLargeBoldTextStyle),
                   ),
                 ),
               ],
@@ -436,5 +271,111 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
         ],
       ),
     );
+  }
+}
+
+
+class MyData extends DataTableSource {
+  Listofuse_Device shared;
+  MyData({required this.shared});
+
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => shared.Listofuse_Device_data.length;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Listofuse_Device_data[index].createdDate.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Listofuse_Device_data[index].deviceId.toString()))),
+
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Listofuse_Device_data[index].deviceModel.toString()))),
+
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Listofuse_Device_data[index].androidVersion.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Listofuse_Device_data[index].cid.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Listofuse_Device_data[index].branchCode.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Listofuse_Device_data[index].mobileNumber.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Listofuse_Device_data[index].clientName.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Listofuse_Device_data[index].clientType.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.Listofuse_Device_data[index].deviceStatus.toString()))),
+
+    ]);
+  }
+}
+
+class MyData2 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(
+          SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+      DataCell(SizedBox(child: Text(''))),
+
+
+
+    ]);
+  }
+}
+
+class MyData3 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(
+          SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
+
+
+
+    ]);
   }
 }

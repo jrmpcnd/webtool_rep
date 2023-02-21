@@ -191,3 +191,86 @@ class Remittance_Log {
     return data;
   }
 }
+
+
+
+class UseoflistDevice_Api {
+  String? retCode;
+  String? message;
+  List<Remittance_Log>? data;
+
+  UseoflistDevice_Api({this.retCode, this.message, this.data});
+
+  UseoflistDevice_Api.fromJson(Map<String, dynamic> json) {
+    retCode = json['retCode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Remittance_Log>[];
+      json['data'].forEach((v) {
+        data!.add(new Remittance_Log.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retCode'] = this.retCode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+class UseoflistDevice_Log {
+  String? createdDate;
+  String? deviceId;
+  String? deviceModel;
+  String? androidVersion;
+  String? cid;
+  String? branchCode;
+  String? mobileNumber;
+  String? clientName;
+  String? clientType;
+  String? deviceStatus;
+
+  UseoflistDevice_Log(
+      {this.createdDate,
+        this.deviceId,
+        this.deviceModel,
+        this.androidVersion,
+        this.cid,
+        this.branchCode,
+        this.mobileNumber,
+        this.clientName,
+        this.clientType,
+        this.deviceStatus});
+
+  UseoflistDevice_Log.fromJson(Map<String, dynamic> json) {
+    createdDate = json['created_date'];
+    deviceId = json['device_id'];
+    deviceModel = json['device_model'];
+    androidVersion = json['android_version'];
+    cid = json['cid'];
+    branchCode = json['branch_code'];
+    mobileNumber = json['mobile_number'];
+    clientName = json['client_name'];
+    clientType = json['client_type'];
+    deviceStatus = json['device_status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['created_date'] = this.createdDate;
+    data['device_id'] = this.deviceId;
+    data['device_model'] = this.deviceModel;
+    data['android_version'] = this.androidVersion;
+    data['cid'] = this.cid;
+    data['branch_code'] = this.branchCode;
+    data['mobile_number'] = this.mobileNumber;
+    data['client_name'] = this.clientName;
+    data['client_type'] = this.clientType;
+    data['device_status'] = this.deviceStatus;
+    return data;
+  }
+}

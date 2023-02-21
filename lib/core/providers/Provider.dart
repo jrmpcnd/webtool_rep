@@ -31,3 +31,11 @@ class Remittance_L extends ChangeNotifier {
   List<Remittance_Log> Remittance_data = [];
   bool search = false;
 }
+
+
+class Listofuse_Device extends ChangeNotifier {
+  String Listofuse_Device_button = 'Click here';
+  List<UseoflistDevice_Api> Listofuse_DeviceLog = [];
+  List<UseoflistDevice_Log> Listofuse_Device_data = [];
+  bool search = false;
+}
