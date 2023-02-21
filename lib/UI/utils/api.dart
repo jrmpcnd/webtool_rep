@@ -259,6 +259,49 @@ class FailedParse {
   }
 }
 
+class List_of_Agent_Push {
+  Future<http.Response> pushHttp8() async {
+    http.Response response8 = await http.post(
+      Uri.parse('http://10.21.0.74:1234/get_listofagent/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "a.inst_desc": "",
+          "c.branch_desc": "",
+          "c.center_desc": "",
+          "c.cid": "",
+          "c.date_and_time": "",
+          "c.fullname": "",
+          "c.mobile_no": "",
+          "c.unit_desc": "",
+          "i.user_name": ""
+        },
+      ),
+    );
+    if (response8.statusCode == 200) {
+      print(response8.statusCode);
+      print(response8.body);
+      return response8;
+    } else {
+      return response8;
+    }
+  }
+}
+
+class ListAgentParse {
+  Future<List_Agent> profile8() async {
+    List_of_Agent_Push httpPush8 = List_of_Agent_Push();
+    http.Response res8 = await httpPush8.pushHttp8();
+    print("-------->>>>>>>>>>${jsonDecode(res8.body).length}");
+    var listagent = List_Agent.fromJson(jsonDecode(res8.body));
+    return listagent;
+  }
+}
+
 // Enrollment API
 class Clientlist_Api {
   Future<http.Response> inquire(String searchBankNews) async {
