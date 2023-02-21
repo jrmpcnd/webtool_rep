@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
+import '../../../../core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
+import '../../../utils/model.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
@@ -17,21 +20,47 @@ class Failedenrollment extends StatefulWidget {
 }
 
 class _FailedenrollmentState extends State<Failedenrollment> {
+  bool static = false;
+  bool isLoaded = false;
+  Future<void> wait() async {
+    final shared7 = Provider.of<Prov7>(context, listen: false);
+    shared7.failed.clear();
+    FailedParse httpParse = FailedParse();
+    var res7 = await httpParse.profile7();
+    if (res7.data!.isNotEmpty) {
+      print(res7.data!.length);
+      print(res7.data![0].toJson().length);
+      setState(() {
+        shared7.failed.add(Failed_Enrollment.fromJson(res7.toJson()));
+        isLoaded = true;
+      });
+      for (var i in res7.data!) {
+        shared7.failed_data.add(Data7.fromJson(i.toJson()));
+      }
+    }
+    for (var i in shared7.failed_data) {
+      print(i.toJson());
+    }
+  }
+
   List<String> res = [];
   String init = '';
-FieldEnrollmentList_Api dropdownFunction = FieldEnrollmentList_Api();
+  FieldEnrollmentList_Api dropdownFunction = FieldEnrollmentList_Api();
   void initState() {
     getList();
-
   }
-  getList()async{
+
+  getList() async {
     List<dynamic> dlist = await dropdownFunction.getStatus();
-    for(var i in dlist){
+    for (var i in dlist) {
       setState(() {
         res.add(i['get_fel_clienttype_dropdown']);
       });
     }
     setState(() {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        wait();
+      });
       init = res[0];
     });
     print("safgsdgsdgsdfgde $res");
@@ -39,6 +68,11 @@ FieldEnrollmentList_Api dropdownFunction = FieldEnrollmentList_Api();
 
   @override
   Widget build(BuildContext context) {
+    final shared = Provider.of<Prov7>(context);
+    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data2 = MyData2();
+    final DataTableSource data3 = MyData3();
+    final key = new GlobalKey<PaginatedDataTableState>();
     return Container(
       padding: kEdgeInsetsVerticalNormal,
       child: Row(
@@ -96,11 +130,21 @@ FieldEnrollmentList_Api dropdownFunction = FieldEnrollmentList_Api();
                             hintext: "Birthday",
                           ),
                           verticalSpaceTiny,
-                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                            setState(() {
-                              init = value.toString();
-                            });
-                          },),
+                          DropdownButton(
+                            value: init,
+                            items: res.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e,
+                                    style: TextStyle(color: Colors.black)),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                init = value.toString();
+                              });
+                            },
+                          ),
                           verticalSpaceSmall,
                           Row(
                             children: [
@@ -176,247 +220,141 @@ FieldEnrollmentList_Api dropdownFunction = FieldEnrollmentList_Api();
                 ),
                 verticalSpaceRegular,
                 Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  alignment: Alignment.centerLeft,
-                  width: double.infinity,
-                  height: 30.0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of Users', style: kTinyBoldTextStyle),
+                    width: double.infinity,
+                    padding: kEdgeInsetsVerticalNormal,
+                    child: PaginatedDataTable(
+                      key: key,
+                      arrowHeadColor: kWhiteColor,
+                      columns: [
+                        DataColumn(
+                            label: Text('Date & Time',
+                                style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Account Number',
+                                style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Date of Birth',
+                                style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Mobile Number',
+                                style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Client Type',
+                                style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label:
+                                Text('Device ID', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Device Model',
+                                style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Error Message',
+                                style: kLargeBoldTextStyle))
                       ],
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3)),
-                    ],
-                  ),
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: Table(
-                    children: [
-                      TableRow(children: [
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('User Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Given Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Middle Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Last Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Branch', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Role', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Status', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Action', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 1',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Samplel',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 2',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                    ],
-                  ),
-                ),
+                      source: isLoaded
+                          ? shared.failed_data.isNotEmpty
+                              ? data
+                              : data2
+                          : data3,
+                      rowsPerPage: 8,
+                      showFirstLastButtons: true,
+                      header: Text('Failed Enrollment List',
+                          style: kXLargeBoldTextStyle),
+                    )),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+}
+
+class MyData extends DataTableSource {
+  Prov7 shared;
+  MyData({required this.shared});
+
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => shared.failed_data.length;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.failed_data[index].createdDate.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.failed_data[index].accountNumber.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.failed_data[index].dateOfBirth.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.failed_data[index].mobileNumber.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.failed_data[index].clientType.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.failed_data[index].deviceId.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.failed_data[index].deviceModel.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.failed_data[index].errorMessage.toString())))
+    ]);
+  }
+}
+
+class MyData2 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(
+          SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text('')))
+    ]);
+  }
+}
+
+class MyData3 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(SizedBox(child: Text('Loading Please wait!'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator())))
+    ]);
   }
 }

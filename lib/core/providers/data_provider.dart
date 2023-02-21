@@ -35,3 +35,17 @@ class Prov6 extends ChangeNotifier {
   List<Data6> agent_data = [];
   bool search6 = false;
 }
+
+class Prov7 extends ChangeNotifier {
+  String failedenrollment_button = 'Click here';
+  List<Failed_Enrollment> failed = [];
+  List<Data7> failed_data = [];
+  bool search7 = false;
+}
+
+class Prov8 extends ChangeNotifier {
+  String listoragent_button = 'Click here';
+  List<List_Agent> list_agent = [];
+  List<Data8> list_agent_data = [];
+  bool search8 = false;
+}

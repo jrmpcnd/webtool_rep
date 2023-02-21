@@ -28,8 +28,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Prov3()),
         ChangeNotifierProvider(create: (context) => Prov5()),
         ChangeNotifierProvider(create: (context) => Prov6()),
+<<<<<<< HEAD
         ChangeNotifierProvider(create: (context) => Listofuse_Device()),
 
+=======
+        ChangeNotifierProvider(create: (context) => Prov7()),
+        ChangeNotifierProvider(create: (context) => Prov8()),
+>>>>>>> c792f0e349af1a223e793f4fe648047fc8e40c52
       ],
       child: MaterialApp(
           title: 'Konek2CARD PLUS Webtool',
