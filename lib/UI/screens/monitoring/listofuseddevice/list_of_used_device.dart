@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
-import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../../core/providers/Provider.dart';
 import '../../../utils/api2.dart';
 import '../../../utils/constant.dart';
@@ -35,7 +34,7 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
     final shared = Provider.of<Listofuse_Device>(context, listen: false);
     shared.Listofuse_DeviceLog.clear();
     ListofUserDevice_Parse listofdevice = ListofUserDevice_Parse();
-    var res = await listofdevice.profile6();
+    var res = await listofdevice.profile7();
     if (res.data!.isNotEmpty) {
       print(res.data!.length);
       setState(() {
@@ -57,6 +56,7 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
   void initState() {
     getList();
     getCathegory();
+    wait();
   }
   getList()async{
     List<dynamic> dlist = await dropdownFunction.getStatus();

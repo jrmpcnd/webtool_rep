@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:webtool_rep/core/providers/Provider.dart';
 import 'package:webtool_rep/core/providers/cardprovider.dart';
 import 'package:webtool_rep/core/providers/data_provider.dart';
-import 'UI/screens/homepage/homepage.dart';
 import 'UI/screens/login/login_screen.dart';
 import 'UI/utils/constant.dart';
 import 'UI/utils/web_webview.dart';
@@ -28,13 +27,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Prov3()),
         ChangeNotifierProvider(create: (context) => Prov5()),
         ChangeNotifierProvider(create: (context) => Prov6()),
-<<<<<<< HEAD
         ChangeNotifierProvider(create: (context) => Listofuse_Device()),
-
-=======
         ChangeNotifierProvider(create: (context) => Prov7()),
         ChangeNotifierProvider(create: (context) => Prov8()),
->>>>>>> c792f0e349af1a223e793f4fe648047fc8e40c52
       ],
       child: MaterialApp(
           title: 'Konek2CARD PLUS Webtool',

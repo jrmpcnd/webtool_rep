@@ -134,7 +134,7 @@ class ListofUserDevice_Push {
 }
 
 class ListofUserDevice_Parse {
-  Future<UseoflistDevice_Api> profile6() async {
+  Future<UseoflistDevice_Api> profile7() async {
     ListofUserDevice_Push httpPush2 = ListofUserDevice_Push();
     http.Response res2 = await httpPush2.pushHttp2();
     print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");

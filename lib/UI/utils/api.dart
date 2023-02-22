@@ -676,7 +676,7 @@ class ListofUseDevice_Api {
     List res = [];
     http.Response response = await http
         .get(Uri.parse('http://10.21.0.74:1234/get_lud_clientype_dropdown'));
-    print(response.statusCode);
+    print("hi" + response.statusCode.toString());
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
       res = jsonData;

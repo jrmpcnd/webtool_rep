@@ -197,7 +197,7 @@ class Remittance_Log {
 class UseoflistDevice_Api {
   String? retCode;
   String? message;
-  List<Remittance_Log>? data;
+  List<UseoflistDevice_Log>? data;
 
   UseoflistDevice_Api({this.retCode, this.message, this.data});
 
@@ -205,9 +205,9 @@ class UseoflistDevice_Api {
     retCode = json['retCode'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <Remittance_Log>[];
+      data = <UseoflistDevice_Log>[];
       json['data'].forEach((v) {
-        data!.add(new Remittance_Log.fromJson(v));
+        data!.add(new UseoflistDevice_Log.fromJson(v));
       });
     }
   }
