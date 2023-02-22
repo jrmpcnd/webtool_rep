@@ -543,3 +543,181 @@ class Data8 {
     return data;
   }
 }
+
+class Broadcast_Message {
+  String? retcode;
+  String? message;
+  List<Data9>? data;
+
+  Broadcast_Message({this.retcode, this.message, this.data});
+
+  Broadcast_Message.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data9>[];
+      json['data'].forEach((v) {
+        data!.add(new Data9.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data9 {
+  String? inboxId;
+  String? inboxDate;
+  String? subject;
+  String? inboxDesc;
+  String? periodStart;
+  String? periodEnd;
+
+  Data9(
+      {this.inboxId,
+      this.inboxDate,
+      this.subject,
+      this.inboxDesc,
+      this.periodStart,
+      this.periodEnd});
+
+  Data9.fromJson(Map<String, dynamic> json) {
+    inboxId = json['inbox_id'];
+    inboxDate = json['inbox_date'];
+    subject = json['subject'];
+    inboxDesc = json['inbox_desc'];
+    periodStart = json['period_start'];
+    periodEnd = json['period_end'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['inbox_id'] = this.inboxId;
+    data['inbox_date'] = this.inboxDate;
+    data['subject'] = this.subject;
+    data['inbox_desc'] = this.inboxDesc;
+    data['period_start'] = this.periodStart;
+    data['period_end'] = this.periodEnd;
+    return data;
+  }
+}
+
+class Type_of_Concern {
+  String? retcode;
+  String? message;
+  List<Data10>? data;
+
+  Type_of_Concern({this.retcode, this.message, this.data});
+
+  Type_of_Concern.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data10>[];
+      json['data'].forEach((v) {
+        data!.add(new Data10.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data10 {
+  String? concernCode;
+  String? concernName;
+  String? concernTime;
+  String? concernLevel;
+
+  Data10(
+      {this.concernCode,
+      this.concernName,
+      this.concernTime,
+      this.concernLevel});
+
+  Data10.fromJson(Map<String, dynamic> json) {
+    concernCode = json['concern_code'];
+    concernName = json['concern_name'];
+    concernTime = json['concern_time'];
+    concernLevel = json['concern_level'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['concern_code'] = this.concernCode;
+    data['concern_name'] = this.concernName;
+    data['concern_time'] = this.concernTime;
+    data['concern_level'] = this.concernLevel;
+    return data;
+  }
+}
+
+class CSR_Hotline {
+  String? retcode;
+  String? message;
+  List<Data11>? data;
+
+  CSR_Hotline({this.retcode, this.message, this.data});
+
+  CSR_Hotline.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data11>[];
+      json['data'].forEach((v) {
+        data!.add(new Data11.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data11 {
+  String? id;
+  String? contactNumber;
+  String? networkProvider;
+  String? instDesc;
+
+  Data11({this.id, this.contactNumber, this.networkProvider, this.instDesc});
+
+  Data11.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    contactNumber = json['contact_number'];
+    networkProvider = json['network_provider'];
+    instDesc = json['inst_desc'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['contact_number'] = this.contactNumber;
+    data['network_provider'] = this.networkProvider;
+    data['inst_desc'] = this.instDesc;
+    return data;
+  }
+}

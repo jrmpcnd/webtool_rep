@@ -323,7 +323,124 @@ class Clientlist_Api {
   }
 }
 
-// Monitoring API
+// Customer Service API
+
+class Broadcast_MessagePush {
+  Future<http.Response> pushHttp9() async {
+    http.Response response9 = await http.post(
+      Uri.parse('$API/get_broadcastsms/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "inbox_date": "",
+          "inbox_desc": "",
+          "inbox_id": "",
+          "period_end": "",
+          "period_start": "",
+          "subject": ""
+        },
+      ),
+    );
+    if (response9.statusCode == 200) {
+      print(response9.statusCode);
+      print(response9.body);
+      return response9;
+    } else {
+      return response9;
+    }
+  }
+}
+
+class Broadcast_MessageParse {
+  Future<Broadcast_Message> profile9() async {
+    Broadcast_MessagePush httpPush9 = Broadcast_MessagePush();
+    http.Response res9 = await httpPush9.pushHttp9();
+    print("-------->>>>>>>>>>${jsonDecode(res9.body).length}");
+    var broadcast = Broadcast_Message.fromJson(jsonDecode(res9.body));
+    return broadcast;
+  }
+}
+
+class Type_ConcernPush {
+  Future<http.Response> pushHttp10() async {
+    http.Response response10 = await http.post(
+      Uri.parse('$API/get_concerntype/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "concern_code": "",
+          "concern_level": "",
+          "concern_name": "",
+          "concern_time": ""
+        },
+      ),
+    );
+    if (response10.statusCode == 200) {
+      print(response10.statusCode);
+      print(response10.body);
+      return response10;
+    } else {
+      return response10;
+    }
+  }
+}
+
+class Type_ConcernParse {
+  Future<Type_of_Concern> profile10() async {
+    Type_ConcernPush httpPush10 = Type_ConcernPush();
+    http.Response res10 = await httpPush10.pushHttp10();
+    print("-------->>>>>>>>>>${jsonDecode(res10.body).length}");
+    var concern = Type_of_Concern.fromJson(jsonDecode(res10.body));
+    return concern;
+  }
+}
+
+class CSR_HotlinePush {
+  Future<http.Response> pushHttp11() async {
+    http.Response response11 = await http.post(
+      Uri.parse('$API/get_csrhotline/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "contact_number": "",
+          "id": "",
+          "inst_desc": "",
+          "network_provider": ""
+        },
+      ),
+    );
+    if (response11.statusCode == 200) {
+      print(response11.statusCode);
+      print(response11.body);
+      return response11;
+    } else {
+      return response11;
+    }
+  }
+}
+
+class CSR_HotlineParse {
+  Future<CSR_Hotline> profile11() async {
+    CSR_HotlinePush httpPush11 = CSR_HotlinePush();
+    http.Response res11 = await httpPush11.pushHttp11();
+    print("-------->>>>>>>>>>${jsonDecode(res11.body).length}");
+    var hotline = CSR_Hotline.fromJson(jsonDecode(res11.body));
+    return hotline;
+  }
+}
+
 class transacconfirm_Api {
   Future<http.Response> news(
       String branch_desc, cid, status, trans_date, trans_desc) async {

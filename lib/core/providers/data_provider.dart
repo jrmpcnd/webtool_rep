@@ -51,3 +51,24 @@ class Prov8 extends ChangeNotifier {
   List<Data8> list_agent_data = [];
   bool search8 = false;
 }
+
+class Prov9 extends ChangeNotifier {
+  String broadcast_button = 'Click here';
+  List<Broadcast_Message> broadcast = [];
+  List<Data9> broadcast_data = [];
+  bool search9 = false;
+}
+
+class Prov10 extends ChangeNotifier {
+  String concern_button = 'Click here';
+  List<Type_of_Concern> concern = [];
+  List<Data10> concern_data = [];
+  bool search10 = false;
+}
+
+class Prov11 extends ChangeNotifier {
+  String hotline_button = 'Click here';
+  List<CSR_Hotline> hotline = [];
+  List<Data11> hotline_data = [];
+  bool search11 = false;
+}
