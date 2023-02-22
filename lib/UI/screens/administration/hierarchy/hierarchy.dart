@@ -136,6 +136,7 @@ class _HierarchyState extends State<Hierarchy> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
                 Container(
                   decoration: BoxDecoration(
                     color: kTertiaryColor5,
@@ -242,6 +243,7 @@ class _HierarchyState extends State<Hierarchy> {
                                   init4 = value.toString();
                                 });
                               },),
+
 
                               verticalSpaceSmall,
                               Row(
@@ -394,7 +396,141 @@ class _HierarchyState extends State<Hierarchy> {
                       // ),
                     ],
                   ),
-                  Container(
+                  Column(children: [ Container(
+                    width: 500,
+                    child: TextFormField(
+                      style: TextStyle(color: kBlackColor),
+                      decoration: const InputDecoration(
+                        hintText: 'Search',
+                        border: OutlineInputBorder(),
+                        labelStyle: TextStyle(fontSize: 12.0),
+                        contentPadding: EdgeInsets.only(left: 10.0),
+                        hintStyle: TextStyle(color: kSecondaryColor2),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: kBlackColor),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: kBlackColor),
+                        ),
+                      ),
+                      textInputAction: TextInputAction.go,
+                      controller: controller,
+                      onChanged: (value) {
+                        setState(() {
+                          isLoaded = false;
+                        });
+                        //
+                        try {
+                          if (controller.text.isNotEmpty) {
+                            shared.Hierarchy_data.clear();
+                            for (var i in shared.Hierarchy[0].data!) {
+                              print(i.toJson());
+                              print(i.branchCode
+                                  ?.toLowerCase()
+                                  .contains(controller.text.toLowerCase()));
+                              if (i.toJson().isNotEmpty) {
+                                if (i.branchDesc!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase()) ||
+                                    i.unitCode!
+                                        .toLowerCase()
+                                        .contains(controller.text.toLowerCase())   ||
+                                    i.unitDesc!
+                                        .toLowerCase()
+                                        .contains(controller.text.toLowerCase())    ||
+                                    i.centerCode!
+                                        .toLowerCase()
+                                        .contains(controller.text.toLowerCase())  ||
+                                    i.centerDesc!
+                                        .toLowerCase()
+                                        .contains(controller.text.toLowerCase())
+
+                                ) {
+                                  debugPrint(i.centerCode);
+                                  setState(() {
+                                    shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()
+                                    ));
+                                  });
+                                  if (shared.Hierarchy_data.isNotEmpty) {
+                                    setState(() {
+                                      isLoaded = true;
+                                    });
+                                  }
+                                }
+                              }
+                            }
+                          } else if (controller.text == '') {
+                            shared.Hierarchy_data.clear();
+                            setState(() {
+                              shared.Hierarchy_data.addAll(shared.Hierarchy[0].data!);
+                              isLoaded = true;
+                            });
+                          }
+                          debugPrint(shared.Hierarchy_data[0].toJson().toString());
+                        } catch (e) {
+                          shared.Hierarchy_data.clear();
+                          isLoaded = true;
+                        }
+                      },
+                      onEditingComplete: () async {
+                        setState(() {
+                          isLoaded = false;
+                        });
+                        try {
+                          if (controller.text.isNotEmpty) {
+                            shared.Hierarchy_data.clear();
+                            for (var i in shared.Hierarchy[0].data!) {
+                              print(i.toJson());
+                              print(i.branchCode
+                                  ?.toLowerCase()
+                                  .contains(controller.text.toLowerCase()));
+                              if (i.toJson().isNotEmpty) {
+                                if (i.branchDesc!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase()) ||
+                                    i.unitCode!
+                                        .toLowerCase()
+                                        .contains(controller.text.toLowerCase())   ||
+                                    i.unitDesc!
+                                        .toLowerCase()
+                                        .contains(controller.text.toLowerCase())    ||
+                                    i.centerCode!
+                                        .toLowerCase()
+                                        .contains(controller.text.toLowerCase())  ||
+                                    i.centerDesc!
+                                        .toLowerCase()
+                                        .contains(controller.text.toLowerCase())
+
+
+                                ) {
+                                  debugPrint (i.branchCode);
+                                  setState(() {
+                                    key.currentState?.pageTo(0);
+                                    shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()
+                                    ));
+
+                                  });
+                                  if (shared.Hierarchy_data.isNotEmpty) {
+                                    setState(() {
+                                      isLoaded = true;
+                                    });
+                                  }
+                                }
+                              }
+                            }
+                          } else if (controller.text == '') {
+                            shared.Hierarchy_data.clear();
+                            setState(() {
+                              shared.Hierarchy_data.addAll(shared.Hierarchy[0].data!);
+                            });
+                          }
+                          debugPrint(shared.Hierarchy_data[0].toJson().toString());
+                        } catch (e) {
+                          shared.Hierarchy_data.clear();
+                        }
+                      },
+                    ),
+                  ),Container(
                     width: double.infinity,
                     padding: kEdgeInsetsVerticalNormal,
                     child: PaginatedDataTable(
@@ -419,7 +555,8 @@ class _HierarchyState extends State<Hierarchy> {
                       showFirstLastButtons: true,
                       header: Text('List of Role', style: kXLargeBoldTextStyle),
                     ),
-                  ),
+                  ),],),
+
 
                 ],
                 ),

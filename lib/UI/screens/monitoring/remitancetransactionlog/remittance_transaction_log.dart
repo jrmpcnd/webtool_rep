@@ -79,190 +79,403 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  height: 200.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  WebDatePicker(
-                                    hinttext: "Date Start",
-                                    onChange: (value) {},
-                                  ),
-                                  horizontalSpaceRegular,
-                                  WebDatePicker(
-                                    hinttext: "Date End",
-                                    onChange: (value) {},
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          verticalSpaceTiny,
-                          textfield(
-                            hintext: "Sender Mobile Number",
-                          ),
-                          verticalSpaceTiny,
-                          textfield(
-                            hintext: "Mobile Reference",
-                          ),
-                          verticalSpaceSmall,
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 100.0,
-                                height: 35.0,
-                                child: ElevatedButton.icon(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kPrimaryColor)),
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.search,
-                                    size: 20.0,
-                                  ),
-                                  label: Text(
-                                    'Search',
-                                    style: kSmallRegularTextStyle,
-                                  ),
-                                ),
-                              ),
-                              horizontalSpaceTiny,
-                              SizedBox(
-                                width: 100.0,
-                                height: 35.0,
-                                child: ElevatedButton.icon(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kSecondaryColor2)),
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.refresh,
-                                    size: 20.0,
-                                  ),
-                                  label: Text(
-                                    'Reset',
-                                    style: kSmallRegularTextStyle,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      horizontalSpaceMedium,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                                setState(() {
-                                  init = value.toString();
-                                });
-                              },),
-
-                              verticalSpaceTiny,
-                              elevatedbuttonpopup(
-                                  label: "Source Branch", width: 400.0),
-                              verticalSpaceTiny,
-                              elevatedbuttonpopup(
-                                  label: "Target Branch", width: 400.0),
-                              verticalSpaceMedium,
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                verticalSpaceRegular,
-                Container(
-                  width: double.infinity,
-                  padding: kEdgeInsetsVerticalNormal,
-                  child: PaginatedDataTable(
-                    key: key,
-                    arrowHeadColor: kWhiteColor,
-                    columns: [
-                      DataColumn(
-                          label: Text('Mobile Ref ID \n(sent)', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Core Ref ID \n(sent)', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Remittance Ref ID', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Sender\n(GivenName\nMiddleName\nSureName)', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Receiver\n(GivenName\nMiddleName\nSureName)', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Amount', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Sender Mobile Number', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Date&Time\nSent', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Source Branch \n(Processed By)', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Processed By Fullname\n(Member/NonMember/Agent', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Date&Time\n(Receive)', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Target Branch\n(Disbursed By)', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Disbursed By Fullname(Agent/MBO\nTeller/Branch Teller)', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Date&Time\nCancelled', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Cancelled By Fullname\n(Member/Non-Member/Agent', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Status', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Core Ref ID\n(Claimed/Cancelled)', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Mobile Ref ID\n(Claimed/Cancelled)', style: kLargeBoldTextStyle)),
-
-                    ],
-                    source: isLoaded ? shared.Remittance_data.isNotEmpty ? data : data2 : data3,
-                    rowsPerPage: 8,
-                    showFirstLastButtons: true,
-                    header: Text('List of Role', style: kXLargeBoldTextStyle),
-                  ),
-                ),
-              ],
-            ),
+      Expanded(
+      child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+      Container(
+      decoration: BoxDecoration(
+      color: kTertiaryColor5,
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          bottomRight: Radius.circular(10),
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3)),
+        ],
+      ),
+      height: 200.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+          Column(
+          children: [
+          Row(
+          children: [
+            WebDatePicker(
+            hinttext: "Date Start",
+            onChange: (value) {},
           ),
+          horizontalSpaceRegular,
+          WebDatePicker(
+            hinttext: "Date End",
+            onChange: (value) {},
+          ),
+        ],
+      ),
+      ],
+    ),
+    verticalSpaceTiny,
+    textfield(
+    hintext: "Sender Mobile Number",
+    ),
+    verticalSpaceTiny,
+    textfield(
+    hintext: "Mobile Reference",
+    ),
+    verticalSpaceSmall,
+    Row(
+    children: [
+    SizedBox(
+    width: 100.0,
+    height: 35.0,
+    child: ElevatedButton.icon(
+    style: ButtonStyle(
+    backgroundColor:
+    MaterialStateProperty.all(
+    kPrimaryColor)),
+    onPressed: () {},
+    icon: const Icon(
+    Icons.search,
+    size: 20.0,
+    ),
+    label: Text(
+    'Search',
+    style: kSmallRegularTextStyle,
+    ),
+    ),
+    ),
+    horizontalSpaceTiny,
+    SizedBox(
+    width: 100.0,
+    height: 35.0,
+    child: ElevatedButton.icon(
+    style: ButtonStyle(
+    backgroundColor:
+    MaterialStateProperty.all(
+    kSecondaryColor2)),
+    onPressed: () {},
+    icon: const Icon(
+    Icons.refresh,
+    size: 20.0,
+    ),
+    label: Text(
+    'Reset',
+    style: kSmallRegularTextStyle,
+    ),
+    ),
+    ),
+    ],
+    ),
+            ],
+          ),
+          horizontalSpaceMedium,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                    setState(() {
+                      init = value.toString();
+                    });
+                  },),
+
+                  verticalSpaceTiny,
+                  elevatedbuttonpopup(
+                      label: "Source Branch", width: 400.0),
+                  verticalSpaceTiny,
+                  elevatedbuttonpopup(
+                      label: "Target Branch", width: 400.0),
+                  verticalSpaceMedium,
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+      ),
+          verticalSpaceRegular,
+         Column(children: [ Container(
+           width: 500,
+           child: TextFormField(
+             style: TextStyle(color: kBlackColor),
+             decoration: const InputDecoration(
+               hintText: 'Search',
+               border: OutlineInputBorder(),
+               labelStyle: TextStyle(fontSize: 12.0),
+               contentPadding: EdgeInsets.only(left: 10.0),
+               hintStyle: TextStyle(color: kSecondaryColor2),
+               enabledBorder: OutlineInputBorder(
+                 borderSide: BorderSide(color: kBlackColor),
+               ),
+               focusedBorder: OutlineInputBorder(
+                 borderSide: BorderSide(color: kBlackColor),
+               ),
+             ),
+             textInputAction: TextInputAction.go,
+             controller: controller,
+             onChanged: (value) {
+               setState(() {
+                 isLoaded = false;
+               });
+               //
+               try {
+                 if (controller.text.isNotEmpty) {
+                   shared.Remittance_data.clear();
+                   for (var i in shared.RemittanceLog[0].data!) {
+                     print(i.toJson());
+                     print(i.sentMobileRefId
+                         ?.toLowerCase()
+                         .contains(controller.text.toLowerCase()));
+                     if (i.toJson().isNotEmpty) {
+                       if (i.sentCoreRefId!
+                           .toLowerCase()
+                           .contains(controller.text.toLowerCase()) ||
+                           i.id!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())   ||
+                           i.senderName!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())    ||
+                           i.receiverName!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.amount!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.senderMobileNumber!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.createdDate!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.sourceBranch!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.processedByFullname!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+
+                           i.lastUpdatedDate!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.disbursedByFullname!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.cancelledDate!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.cancelledByFullname!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.status!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.claimedCoreRefId!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.claimedMobileRefId!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())
+
+
+
+
+
+
+
+
+
+
+
+                       ) {
+                         debugPrint(i.claimedMobileRefId);
+                         setState(() {
+                           shared.Remittance_data.add(Remittance_Log.fromJson(i.toJson()
+                           ));
+                         });
+                         if (shared.Remittance_data.isNotEmpty) {
+                           setState(() {
+                             isLoaded = true;
+                           });
+                         }
+                       }
+                     }
+                   }
+                 } else if (controller.text == '') {
+                   shared.Remittance_data.clear();
+                   setState(() {
+                     shared.Remittance_data.addAll(shared.RemittanceLog[0].data!);
+                     isLoaded = true;
+                   });
+                 }
+                 debugPrint(shared.Remittance_data[0].toJson().toString());
+               } catch (e) {
+                 shared.Remittance_data.clear();
+                 isLoaded = true;
+               }
+             },
+             onEditingComplete: () async {
+               setState(() {
+                 isLoaded = false;
+               });
+               try {
+                 if (controller.text.isNotEmpty) {
+                   shared.Remittance_data.clear();
+                   for (var i in shared.RemittanceLog[0].data!) {
+                     print(i.toJson());
+                     print(i.sentMobileRefId
+                         ?.toLowerCase()
+                         .contains(controller.text.toLowerCase()));
+                     if (i.toJson().isNotEmpty) {
+                       if (i.sentCoreRefId!
+                           .toLowerCase()
+                           .contains(controller.text.toLowerCase()) ||
+                           i.id!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())   ||
+                           i.senderName!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())    ||
+                           i.receiverName!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.amount!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.senderMobileNumber!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.createdDate!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.sourceBranch!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.processedByFullname!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+
+                           i.lastUpdatedDate!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.disbursedByFullname!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.cancelledDate!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.cancelledByFullname!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.status!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.claimedCoreRefId!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.claimedMobileRefId!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())
+
+
+
+                       ) {
+                         debugPrint (i.claimedMobileRefId);
+                         setState(() {
+                           key.currentState?.pageTo(0);
+                           shared.Remittance_data.add(Remittance_Log.fromJson(i.toJson()
+                           ));
+
+                         });
+                         if (shared.Remittance_data.isNotEmpty) {
+                           setState(() {
+                             isLoaded = true;
+                           });
+                         }
+                       }
+                     }
+                   }
+                 } else if (controller.text == '') {
+                   shared.Remittance_data.clear();
+                   setState(() {
+                     shared.Remittance_data.addAll(shared.RemittanceLog[0].data!);
+                   });
+                 }
+                 debugPrint(shared.Remittance_data[0].toJson().toString());
+               } catch (e) {
+                 shared.Remittance_data.clear();
+               }
+             },
+           ),
+         ),Container(
+           width: double.infinity,
+           padding: kEdgeInsetsVerticalNormal,
+           child: PaginatedDataTable(
+             key: key,
+             arrowHeadColor: kWhiteColor,
+             columns: [
+               DataColumn(
+                   label: Text('Mobile Ref ID \n(sent)', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Core Ref ID \n(sent)', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Remittance Ref ID', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Sender\n(GivenName\nMiddleName\nSureName)', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Receiver\n(GivenName\nMiddleName\nSureName)', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Amount', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Sender Mobile Number', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Date&Time\nSent', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Source Branch \n(Processed By)', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Processed By Fullname\n(Member/NonMember/Agent', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Date&Time\n(Receive)', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Target Branch\n(Disbursed By)', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Disbursed By Fullname(Agent/MBO\nTeller/Branch Teller)', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Date&Time\nCancelled', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Cancelled By Fullname\n(Member/Non-Member/Agent', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Status', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Core Ref ID\n(Claimed/Cancelled)', style: kLargeBoldTextStyle)),
+               DataColumn(
+                   label: Text('Mobile Ref ID\n(Claimed/Cancelled)', style: kLargeBoldTextStyle)),
+
+             ],
+             source: isLoaded ? shared.Remittance_data.isNotEmpty ? data : data2 : data3,
+             rowsPerPage: 8,
+             showFirstLastButtons: true,
+             header: Text('List of Role', style: kXLargeBoldTextStyle),
+           ),
+         ),],)
+        ],
+      ),
+      ),
         ],
       ),
     );
@@ -283,42 +496,43 @@ class MyData extends DataTableSource {
   DataRow getRow(int index) {
     debugPrint(index.toString());
     return DataRow(cells: [
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].sentMobileRefId.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].sentCoreRefId.toString()))),
+        DataCell(SizedBox(
+        width: 100, child: Text(shared.Remittance_data[index].sentMobileRefId.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].sentCoreRefId.toString()))),
 
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].referenceNumberRefID.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].referenceNumberRefID.toString()))),
 
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].senderName.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].receiverName.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].amount.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].senderMobileNumber.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].createdDate.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].sourceBranch.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].processedByFullname.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].createdDate.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].targetBranch.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].disbursedByFullname.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].cancelledDate.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].cancelledByFullname.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].status.toString()))),
-      DataCell(SizedBox(
-          width: 100, child: Text(shared.Remittance_data[index].claimedMobileRefId.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].senderName.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].receiverName.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].amount.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].senderMobileNumber.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].createdDate.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].sourceBranch.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].processedByFullname.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].createdDate.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].targetBranch.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].disbursedByFullname.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].cancelledDate.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].cancelledByFullname.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].status.toString()))),
+    DataCell(SizedBox(
+    width: 100, child: Text(shared.Remittance_data[index].claimedMobileRefId.toString()
+    ))),
       DataCell(SizedBox(
           width: 100, child: Text(shared.Remittance_data[index].claimedMobileRefId.toString()))),
 
@@ -418,3 +632,147 @@ class MyData3 extends DataTableSource {
     ]);
   }
 }
+
+
+// Container(
+// width: 500,
+// child: TextFormField(
+// style: TextStyle(color: kBlackColor),
+// decoration: const InputDecoration(
+// hintText: 'First Name',
+// border: OutlineInputBorder(),
+// labelStyle: TextStyle(fontSize: 12.0),
+// contentPadding: EdgeInsets.only(left: 10.0),
+// hintStyle: TextStyle(color: kSecondaryColor2),
+// enabledBorder: OutlineInputBorder(
+// borderSide: BorderSide(color: kBlackColor),
+// ),
+// focusedBorder: OutlineInputBorder(
+// borderSide: BorderSide(color: kBlackColor),
+// ),
+// ),
+// textInputAction: TextInputAction.go,
+// controller: controller,
+// onChanged: (value) {
+// setState(() {
+// isLoaded = false;
+// });
+// //
+// try {
+// if (controller.text.isNotEmpty) {
+// shared.user_data.clear();
+// for (var i in shared.user[0].data!) {
+// print(i.toJson());
+// print(i.givenName
+//     ?.toLowerCase()
+//     .contains(controller.text.toLowerCase()));
+// if (i.toJson().isNotEmpty) {
+// if (i.givenName!
+//     .toLowerCase()
+//     .contains(controller.text.toLowerCase()) ||
+// i.lastName!
+//     .toLowerCase()
+//     .contains(controller.text.toLowerCase())   ||
+// i.middleName!
+//     .toLowerCase()
+//     .contains(controller.text.toLowerCase())    ||
+// i.roles!
+//     .toLowerCase()
+//     .contains(controller.text.toLowerCase())  ||
+// i.checkStatus!
+//     .toLowerCase()
+//     .contains(controller.text.toLowerCase())
+//
+// ) {
+// debugPrint(i.givenName);
+// setState(() {
+// shared.user_data.add(Data2.fromJson(i.toJson()
+// ));
+// });
+// if (shared.user_data.isNotEmpty) {
+// setState(() {
+// isLoaded = true;
+// });
+// }
+// }
+// }
+// }
+// } else if (controller.text == '') {
+// shared.user_data.clear();
+// setState(() {
+// shared.user_data.addAll(shared.user[0].data!);
+// isLoaded = true;
+// });
+// }
+// debugPrint(shared.user_data[0].toJson().toString());
+// } catch (e) {
+// shared.user_data.clear();
+// isLoaded = true;
+// }
+// },
+// onEditingComplete: () async {
+// setState(() {
+// isLoaded = false;
+// });
+// try {
+// if (controller.text.isNotEmpty) {
+// shared.user_data.clear();
+// for (var i in shared.user[0].data!) {
+// print(i.toJson());
+// print(i.givenName
+//     ?.toLowerCase()
+//     .contains(controller.text.toLowerCase()));
+// if (i.toJson().isNotEmpty) {
+// if (i.givenName!
+//     .toLowerCase()
+//     .contains(controller.text.toLowerCase()) ||
+// i.lastName!
+//     .toLowerCase()
+//     .contains(controller.text.toLowerCase())   ||
+// i.middleName!
+//     .toLowerCase()
+//     .contains(controller.text.toLowerCase())    ||
+// i.roles!
+//     .toLowerCase()
+//     .contains(controller.text.toLowerCase())  ||
+// i.checkStatus!
+//     .toLowerCase()
+//     .contains(controller.text.toLowerCase()) ||
+// i.branchNames!
+//     .toLowerCase()
+//     .contains(controller.text.toLowerCase())||
+// i.userLogin!
+//     .toLowerCase()
+//     .contains(controller.text.toLowerCase())
+//
+//
+//
+// ) {
+// debugPrint (i.userLogin);
+// setState(() {
+// key.currentState?.pageTo(0);
+// shared.user_data.add(Data2.fromJson(i.toJson()
+// ));
+//
+// });
+// if (shared.user_data.isNotEmpty) {
+// setState(() {
+// isLoaded = true;
+// });
+// }
+// }
+// }
+// }
+// } else if (controller.text == '') {
+// shared.user_data.clear();
+// setState(() {
+// shared.user_data.addAll(shared.user[0].data!);
+// });
+// }
+// debugPrint(shared.user_data[0].toJson().toString());
+// } catch (e) {
+// shared.user_data.clear();
+// }
+// },
+// ),
+// ),

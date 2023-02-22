@@ -62,6 +62,159 @@ class _AgentdashboardState extends State<Agentdashboard> {
       padding: kEdgeInsetsVerticalNormal,
       child: Column(
         children: [
+          Container(
+            width: 500,
+            child: TextFormField(
+              style: TextStyle(color: kBlackColor),
+              decoration: const InputDecoration(
+                hintText: 'Search',
+                border: OutlineInputBorder(),
+                labelStyle: TextStyle(fontSize: 12.0),
+                contentPadding: EdgeInsets.only(left: 10.0),
+                hintStyle: TextStyle(color: kSecondaryColor2),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: kBlackColor),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: kBlackColor),
+                ),
+              ),
+              textInputAction: TextInputAction.go,
+              controller: controller,
+              onChanged: (value) {
+                setState(() {
+                  isLoaded = false;
+                });
+                //
+                try {
+                  if (controller.text.isNotEmpty) {
+                    shared.agent_data.clear();
+                    for (var i in shared.agent[0].data!) {
+                      print(i.toJson());
+                      print(i.branchDesc
+                          ?.toLowerCase()
+                          .contains(controller.text.toLowerCase()));
+                      if (i.toJson().isNotEmpty) {
+                        if (i.branchDesc!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase()) ||
+                            i.cashIn!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())   ||
+                            i.cashOut!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())    ||
+                            i.agentAssistedPayment!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())  ||
+                            i.billPayment!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())  ||
+                            i.total!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())  ||
+                            i.totalIncome!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())
+
+
+
+
+
+                        ) {
+                          debugPrint(i.branchDesc);
+                          setState(() {
+                            shared.agent_data.add(Data6.fromJson(i.toJson()
+                            ));
+                          });
+                          if (shared.agent_data.isNotEmpty) {
+                            setState(() {
+                              isLoaded = true;
+                            });
+                          }
+                        }
+                      }
+                    }
+                  } else if (controller.text == '') {
+                    shared.agent_data.clear();
+                    setState(() {
+                      shared.agent_data.addAll(shared.agent[0].data!);
+                      isLoaded = true;
+                    });
+                  }
+                  debugPrint(shared.agent_data[0].toJson().toString());
+                } catch (e) {
+                  shared.agent_data.clear();
+                  isLoaded = true;
+                }
+              },
+              onEditingComplete: () async {
+                setState(() {
+                  isLoaded = false;
+                });
+                try {
+                  if (controller.text.isNotEmpty) {
+                    shared.agent_data.clear();
+                    for (var i in shared.agent[0].data!) {
+                      print(i.toJson());
+                      print(i.branchDesc
+                          ?.toLowerCase()
+                          .contains(controller.text.toLowerCase()));
+                      if (i.toJson().isNotEmpty) {
+                        if (i.branchDesc!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase()) ||
+                            i.cashIn!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())   ||
+                            i.cashOut!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())    ||
+                            i.agentAssistedPayment!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())  ||
+                            i.billPayment!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())  ||
+                            i.total!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())  ||
+                            i.totalIncome!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())
+
+
+
+
+                        ) {
+                          debugPrint (i.branchDesc);
+                          setState(() {
+                            key.currentState?.pageTo(0);
+                            shared.agent_data.add(Data6.fromJson(i.toJson()
+                            ));
+
+                          });
+                          if (shared.agent_data.isNotEmpty) {
+                            setState(() {
+                              isLoaded = true;
+                            });
+                          }
+                        }
+                      }
+                    }
+                  } else if (controller.text == '') {
+                    shared.agent_data.clear();
+                    setState(() {
+                      shared.agent_data.addAll(shared.agent[0].data!);
+                    });
+                  }
+                  debugPrint(shared.agent_data[0].toJson().toString());
+                } catch (e) {
+                  shared.agent.clear();
+                }
+              },
+            ),
+          ),
           // Row(
           //   mainAxisAlignment: MainAxisAlignment.center,
           //   children: [

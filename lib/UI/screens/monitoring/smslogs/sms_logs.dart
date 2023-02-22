@@ -55,32 +55,186 @@ class _SmslogsState extends State<Smslogs> {
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
     ScrollController scrollController = ScrollController();
-    return Container(
-        width: double.infinity,
-        padding: kEdgeInsetsVerticalNormal,
-        child: PaginatedDataTable(
-          key: key,
-          dataRowHeight: 100,
-          arrowHeadColor: kWhiteColor,
-          columns: [
-            DataColumn(label: Text('ID', style: kLargeBoldTextStyle)),
-            DataColumn(label: Text('Date Time', style: kLargeBoldTextStyle)),
-            DataColumn(label: Text('Mobile No.', style: kLargeBoldTextStyle)),
-            DataColumn(label: Text('CID', style: kLargeBoldTextStyle)),
-            DataColumn(label: Text('Name', style: kLargeBoldTextStyle)),
-            DataColumn(label: Text('Message', style: kLargeBoldTextStyle)),
-            DataColumn(label: Text('Message Type', style: kLargeBoldTextStyle)),
-            DataColumn(label: Text('Status', style: kLargeBoldTextStyle)),
-          ],
-          source: isLoaded
-              ? shared.sms_data.isNotEmpty
-                  ? data
-                  : data2
-              : data3,
-          rowsPerPage: 8,
-          showFirstLastButtons: true,
-          header: Text('List of Sms Logs', style: kXLargeBoldTextStyle),
-        ));
+    return Column(
+      children:[Container(
+        width: 500,
+        child: TextFormField(
+          style: TextStyle(color: kBlackColor),
+          decoration: const InputDecoration(
+            hintText: 'Search',
+            border: OutlineInputBorder(),
+            labelStyle: TextStyle(fontSize: 12.0),
+            contentPadding: EdgeInsets.only(left: 10.0),
+            hintStyle: TextStyle(color: kSecondaryColor2),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: kBlackColor),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: kBlackColor),
+            ),
+          ),
+          textInputAction: TextInputAction.go,
+          controller: controller,
+          onChanged: (value) {
+            setState(() {
+              isLoaded = false;
+            });
+            //
+            try {
+              if (controller.text.isNotEmpty) {
+                shared.sms_data.clear();
+                for (var i in shared.sms[0].data!) {
+                  print(i.toJson());
+                  print(i.msgId
+                      ?.toLowerCase()
+                      .contains(controller.text.toLowerCase()));
+                  if (i.toJson().isNotEmpty) {
+                    if (i.msgSentDate!
+                        .toLowerCase()
+                        .contains(controller.text.toLowerCase()) ||
+                        i.msisdn!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase())   ||
+                        i.cid!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase())    ||
+                        i.name!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase())  ||
+                        i.msgCommand!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase())  ||
+                        i.msgCommand!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase())  ||
+                        i.msgStatus!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase())
+
+
+
+
+
+                    ) {
+                      debugPrint(i.msgStatus);
+                      setState(() {
+                        shared.sms_data.add(Data5.fromJson(i.toJson()
+                        ));
+                      });
+                      if (shared.sms_data.isNotEmpty) {
+                        setState(() {
+                          isLoaded = true;
+                        });
+                      }
+                    }
+                  }
+                }
+              } else if (controller.text == '') {
+                shared.sms_data.clear();
+                setState(() {
+                  shared.sms_data.addAll(shared.sms[0].data!);
+                  isLoaded = true;
+                });
+              }
+              debugPrint(shared.sms_data[0].toJson().toString());
+            } catch (e) {
+              shared.sms_data.clear();
+              isLoaded = true;
+            }
+          },
+          onEditingComplete: () async {
+            setState(() {
+              isLoaded = false;
+            });
+            try {
+              if (controller.text.isNotEmpty) {
+                shared.sms_data.clear();
+                for (var i in shared.sms[0].data!) {
+                  print(i.toJson());
+                  print(i.msgId
+                      ?.toLowerCase()
+                      .contains(controller.text.toLowerCase()));
+                  if (i.toJson().isNotEmpty) {
+                    if (i.msgSentDate!
+                        .toLowerCase()
+                        .contains(controller.text.toLowerCase()) ||
+                        i.msisdn!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase())   ||
+                        i.cid!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase())    ||
+                        i.name!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase())  ||
+                        i.msgCommand!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase())  ||
+                        i.msgCommand!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase())  ||
+                        i.msgStatus!
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase())
+
+
+
+
+                    ) {
+                      debugPrint (i.msgStatus);
+                      setState(() {
+                        key.currentState?.pageTo(0);
+                        shared.sms_data.add(Data5.fromJson(i.toJson()
+                        ));
+
+                      });
+                      if (shared.sms_data.isNotEmpty) {
+                        setState(() {
+                          isLoaded = true;
+                        });
+                      }
+                    }
+                  }
+                }
+              } else if (controller.text == '') {
+                shared.sms_data.clear();
+                setState(() {
+                  shared.sms_data.addAll(shared.sms[0].data!);
+                });
+              }
+              debugPrint(shared.sms_data[0].toJson().toString());
+            } catch (e) {
+              shared.sms_data.clear();
+            }
+          },
+        ),
+      ),Container(
+          width: double.infinity,
+          padding: kEdgeInsetsVerticalNormal,
+          child: PaginatedDataTable(
+            key: key,
+            dataRowHeight: 100,
+            arrowHeadColor: kWhiteColor,
+            columns: [
+              DataColumn(label: Text('ID', style: kLargeBoldTextStyle)),
+              DataColumn(label: Text('Date Time', style: kLargeBoldTextStyle)),
+              DataColumn(label: Text('Mobile No.', style: kLargeBoldTextStyle)),
+              DataColumn(label: Text('CID', style: kLargeBoldTextStyle)),
+              DataColumn(label: Text('Name', style: kLargeBoldTextStyle)),
+              DataColumn(label: Text('Message', style: kLargeBoldTextStyle)),
+              DataColumn(label: Text('Message Type', style: kLargeBoldTextStyle)),
+              DataColumn(label: Text('Status', style: kLargeBoldTextStyle)),
+            ],
+            source: isLoaded
+                ? shared.sms_data.isNotEmpty
+                    ? data
+                    : data2
+                : data3,
+            rowsPerPage: 8,
+            showFirstLastButtons: true,
+            header: Text('List of Sms Logs', style: kXLargeBoldTextStyle),
+          )),]
+    );
   }
 }
 

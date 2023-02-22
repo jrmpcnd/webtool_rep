@@ -102,13 +102,7 @@ class _UsermanagementState extends State<Usermanagement> {
                                 i.middleName!
                                     .toLowerCase()
                                     .contains(controller.text.toLowerCase())   ||
-                            i.middleName!
-                                .toLowerCase()
-                                .contains(controller.text.toLowerCase())    ||
-                                i.roles!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase())  ||
-                            i.checkStatus!
+                            i.userLogin!
                                 .toLowerCase()
                                 .contains(controller.text.toLowerCase())
 
@@ -159,20 +153,9 @@ class _UsermanagementState extends State<Usermanagement> {
                             if (i.givenName!
                                 .toLowerCase()
                                 .contains(controller.text.toLowerCase()) ||
-                                i.middleName!
+                                i.lastName!
                                     .toLowerCase()
-                                    .contains(controller.text.toLowerCase())   ||
-                                i.middleName!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase())    ||
-                                i.roles!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase())  ||
-                                i.checkStatus!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase())
-
-                            ) {
+                                    .contains(controller.text.toLowerCase())) {
                               debugPrint(i.givenName);
                               setState(() {
                                 key.currentState?.pageTo(0);
