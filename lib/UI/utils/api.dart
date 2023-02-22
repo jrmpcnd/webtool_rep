@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import '../../core/providers/data_provider.dart';
 import 'model.dart';
 
@@ -441,6 +442,87 @@ class CSR_HotlineParse {
   }
 }
 
+class Fee_StructurePush {
+  Future<http.Response> pushHttp12() async {
+    http.Response response12 = await http.post(
+      Uri.parse('$API/get_feestructure/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "Range": "",
+          "agent_income": "",
+          "agent_target_income": "",
+          "bancnet_income": "",
+          "bank_income": "",
+          "fee_id": "",
+          "total_charge": "",
+          "trans_type": ""
+        },
+      ),
+    );
+    if (response12.statusCode == 200) {
+      print(response12.statusCode);
+      print(response12.body);
+      return response12;
+    } else {
+      return response12;
+    }
+  }
+}
+
+class Fee_StructureParse {
+  Future<Fee_Structure> profile12() async {
+    Fee_StructurePush httpPush12 = Fee_StructurePush();
+    http.Response res12 = await httpPush12.pushHttp12();
+    print("-------->>>>>>>>>>${jsonDecode(res12.body).length}");
+    var fee = Fee_Structure.fromJson(jsonDecode(res12.body));
+    return fee;
+  }
+}
+
+class Prov_ConfigPush {
+  Future<http.Response> pushHttp13() async {
+    http.Response response13 = await http.post(
+      Uri.parse('$API/get_paramconfig/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "app_type": "",
+          "param_desc": "",
+          "param_id": "",
+          "param_name": "",
+          "param_value": ""
+        },
+      ),
+    );
+    if (response13.statusCode == 200) {
+      print(response13.statusCode);
+      print(response13.body);
+      return response13;
+    } else {
+      return response13;
+    }
+  }
+}
+
+class Prov_ConfigParse {
+  Future<Prov_Config> profile13() async {
+    Prov_ConfigPush httpPush13 = Prov_ConfigPush();
+    http.Response res13 = await httpPush13.pushHttp13();
+    print("-------->>>>>>>>>>${jsonDecode(res13.body).length}");
+    var prov = Prov_Config.fromJson(jsonDecode(res13.body));
+    return prov;
+  }
+}
+
 class transacconfirm_Api {
   Future<http.Response> news(
       String branch_desc, cid, status, trans_date, trans_desc) async {
@@ -673,8 +755,8 @@ class Broadcastmessage_Api {
 class TransactionConfirm_API {
   Future<List> getCategory() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse(
-        'http://10.21.0.74:1234/get_transaction_logs_status_dropdown'));
+    http.Response response =
+        await http.get(Uri.parse('$API/get_transaction_logs_status_dropdown'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
@@ -690,8 +772,8 @@ class TransactionConfirm_API {
 class TransactionStatus_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http
-        .get(Uri.parse('http://10.21.0.74:1234/get_tfc_status_dropdown/'));
+    http.Response response =
+        await http.get(Uri.parse('$API/get_tfc_status_dropdown/'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
@@ -707,8 +789,8 @@ class TransactionStatus_Api {
 class Remittancelog_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http
-        .get(Uri.parse('http://10.21.0.74:1234/get_rtl_status_dropdown/'));
+    http.Response response =
+        await http.get(Uri.parse('$API/get_rtl_status_dropdown/'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
@@ -724,8 +806,8 @@ class Remittancelog_Api {
 class SMSLogs_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_sms_logs_smstype_dropdown/'));
+    http.Response response =
+        await http.get(Uri.parse('$API/get_sms_logs_smstype_dropdown/'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
@@ -741,8 +823,8 @@ class SMSLogs_Api {
 class SMSLogsStatus_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_sms_logs_smsstatus_dropdown/'));
+    http.Response response =
+        await http.get(Uri.parse('$API/get_sms_logs_smsstatus_dropdown/'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
@@ -758,8 +840,8 @@ class SMSLogsStatus_Api {
 class TransactionLogs_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse(
-        'http://10.21.0.74:1234/get_transaction_logs_transaction_dropdown/'));
+    http.Response response = await http
+        .get(Uri.parse('$API/get_transaction_logs_transaction_dropdown/'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
@@ -775,8 +857,8 @@ class TransactionLogs_Api {
 class TransactionLogsStatus_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http.get(Uri.parse(
-        'http://10.21.0.74:1234/get_transaction_logs_status_dropdown'));
+    http.Response response =
+        await http.get(Uri.parse('$API/get_transaction_logs_status_dropdown'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
@@ -792,8 +874,8 @@ class TransactionLogsStatus_Api {
 class ListofUseDevice_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http
-        .get(Uri.parse('http://10.21.0.74:1234/get_lud_clientype_dropdown'));
+    http.Response response =
+        await http.get(Uri.parse('$API/get_lud_clientype_dropdown'));
     print("hi" + response.statusCode.toString());
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
@@ -809,8 +891,8 @@ class ListofUseDevice_Api {
 class ListofUseDeviceStatus_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http
-        .get(Uri.parse('http://10.21.0.74:1234/get_lud_status_dropdown'));
+    http.Response response =
+        await http.get(Uri.parse('$API/get_lud_status_dropdown'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
@@ -826,8 +908,8 @@ class ListofUseDeviceStatus_Api {
 class FieldEnrollmentList_Api {
   Future<List> getStatus() async {
     List res = [];
-    http.Response response = await http
-        .get(Uri.parse('http://10.21.0.74:1234/get_fel_clienttype_dropdown'));
+    http.Response response =
+        await http.get(Uri.parse('$API/get_fel_clienttype_dropdown'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
@@ -846,7 +928,7 @@ class Um_userstatus_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_um_userstatus_dropdown'),
+        Uri.parse('$API/get_um_userstatus_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -868,7 +950,7 @@ class Hierarchy_Institution_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_hierarchy_insti_dropdown'),
+        Uri.parse('$API/get_hierarchy_insti_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -890,7 +972,7 @@ class Hierarchy_Unit_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_hierarchy_unit_dropdown'),
+        Uri.parse('$API/get_hierarchy_unit_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -912,7 +994,7 @@ class Hierarchy_Branch_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_hierarchy_branch_dropdown'),
+        Uri.parse('$API/get_hierarchy_branch_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -934,7 +1016,7 @@ class Hierarchy_Center_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_hierarchy_center_dropdown'),
+        Uri.parse('$API/get_hierarchy_center_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -957,7 +1039,7 @@ class FeeStructure_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_fs_transaction_dropdown'),
+        Uri.parse('$API/get_fs_transaction_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -979,7 +1061,7 @@ class Parameter_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_pc_parametertype_dropdown'),
+        Uri.parse('$API/get_pc_parametertype_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1001,7 +1083,7 @@ class ProductType_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_pt_provider_dropdown'),
+        Uri.parse('$API/get_pt_provider_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1023,7 +1105,7 @@ class ProductCategory_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_pt_provider_dropdown'),
+        Uri.parse('$API/get_pt_provider_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1045,7 +1127,7 @@ class ProductCategory_ProductType_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_pc_producttype_dropdown'),
+        Uri.parse('$API/get_pc_producttype_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1067,7 +1149,7 @@ class BillerProduct_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_pt_provider_dropdown'),
+        Uri.parse('$API/get_pt_provider_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1089,7 +1171,7 @@ class BillerProduct_Category_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_bp_productcategory_dropdown'),
+        Uri.parse('$API/get_bp_productcategory_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1111,7 +1193,7 @@ class LoadProduct_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_lp_productcategory_dropdown'),
+        Uri.parse('$API/get_lp_productcategory_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1133,7 +1215,7 @@ class Partner_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_p_status_dropdown'),
+        Uri.parse('$API/get_p_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1156,7 +1238,7 @@ class CSR_Dashboard_Concern_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_cs_concern_dropdown'),
+        Uri.parse('$API/get_cs_concern_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1178,7 +1260,7 @@ class CSR_Dashboard_Status_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_cs_status_dropdown'),
+        Uri.parse('$API/get_cs_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1200,7 +1282,7 @@ class CSR_TypeofConcern_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_toc_complexity_level_dropdown'),
+        Uri.parse('$API/get_toc_complexity_level_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1223,7 +1305,7 @@ class Account_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1245,7 +1327,7 @@ class ActiveatedMarchant_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1267,7 +1349,7 @@ class Activity_History_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1289,7 +1371,7 @@ class CS_Dashboard_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1311,7 +1393,7 @@ class FailedEnrollment_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1333,7 +1415,7 @@ class IGate_Recentiliation_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1355,7 +1437,7 @@ class ListofAgent_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1377,7 +1459,7 @@ class Login_Logout_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1399,7 +1481,7 @@ class Mpin_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1421,7 +1503,7 @@ class Reconn_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1443,7 +1525,7 @@ class RegisterClient_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1465,7 +1547,7 @@ class Remmittance_Cancelled_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1487,7 +1569,7 @@ class Remmittance_Claimed_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1509,7 +1591,7 @@ class Remmittance_Sent_Status_Report_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1531,7 +1613,7 @@ class ResentSms_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1553,7 +1635,7 @@ class SmsLogs_ReSport_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1575,7 +1657,7 @@ class Suspicious_Transaction_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1597,7 +1679,7 @@ class Transaction_Logs_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1619,7 +1701,7 @@ class Used_Device_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1641,7 +1723,7 @@ class User_Activity_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1663,7 +1745,7 @@ class Valid_Transaction_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -1685,7 +1767,7 @@ class WebtoolUser_Api {
     try {
       List res = [];
       http.Response response = await http.get(
-        Uri.parse('http://10.21.0.74:1234/get_report_status_dropdown'),
+        Uri.parse('$API/get_report_status_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
