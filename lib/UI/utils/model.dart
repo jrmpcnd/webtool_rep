@@ -721,3 +721,139 @@ class Data11 {
     return data;
   }
 }
+
+class Fee_Structure {
+  String? retcode;
+  String? message;
+  List<Data12>? data;
+
+  Fee_Structure({this.retcode, this.message, this.data});
+
+  Fee_Structure.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data12>[];
+      json['data'].forEach((v) {
+        data!.add(new Data12.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data12 {
+  String? feeId;
+  String? transType;
+  String? range;
+  String? totalCharge;
+  String? agentIncome;
+  String? bankIncome;
+  String? agentTargetIncome;
+  String? bancnetIncome;
+
+  Data12(
+      {this.feeId,
+      this.transType,
+      this.range,
+      this.totalCharge,
+      this.agentIncome,
+      this.bankIncome,
+      this.agentTargetIncome,
+      this.bancnetIncome});
+
+  Data12.fromJson(Map<String, dynamic> json) {
+    feeId = json['fee_id'];
+    transType = json['trans_type'];
+    range = json['Range'];
+    totalCharge = json['total_charge'];
+    agentIncome = json['agent_income'];
+    bankIncome = json['bank_income'];
+    agentTargetIncome = json['agent_target_income'];
+    bancnetIncome = json['bancnet_income'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['fee_id'] = this.feeId;
+    data['trans_type'] = this.transType;
+    data['Range'] = this.range;
+    data['total_charge'] = this.totalCharge;
+    data['agent_income'] = this.agentIncome;
+    data['bank_income'] = this.bankIncome;
+    data['agent_target_income'] = this.agentTargetIncome;
+    data['bancnet_income'] = this.bancnetIncome;
+    return data;
+  }
+}
+
+class Prov_Config {
+  String? retcode;
+  String? message;
+  List<Data13>? data;
+
+  Prov_Config({this.retcode, this.message, this.data});
+
+  Prov_Config.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data13>[];
+      json['data'].forEach((v) {
+        data!.add(new Data13.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data13 {
+  String? paramId;
+  String? appType;
+  String? paramName;
+  String? paramValue;
+  String? paramDesc;
+
+  Data13(
+      {this.paramId,
+      this.appType,
+      this.paramName,
+      this.paramValue,
+      this.paramDesc});
+
+  Data13.fromJson(Map<String, dynamic> json) {
+    paramId = json['param_id'];
+    appType = json['app_type'];
+    paramName = json['param_name'];
+    paramValue = json['param_value'];
+    paramDesc = json['param_desc'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['param_id'] = this.paramId;
+    data['app_type'] = this.appType;
+    data['param_name'] = this.paramName;
+    data['param_value'] = this.paramValue;
+    data['param_desc'] = this.paramDesc;
+    return data;
+  }
+}

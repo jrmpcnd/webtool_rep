@@ -72,3 +72,17 @@ class Prov11 extends ChangeNotifier {
   List<Data11> hotline_data = [];
   bool search11 = false;
 }
+
+class Prov12 extends ChangeNotifier {
+  String fee_button = 'Click here';
+  List<Fee_Structure> fee = [];
+  List<Data12> fee_data = [];
+  bool search12 = false;
+}
+
+class Prov13 extends ChangeNotifier {
+  String prov_button = 'Click here';
+  List<Prov_Config> prov = [];
+  List<Data13> prov_data = [];
+  bool search13 = false;
+}

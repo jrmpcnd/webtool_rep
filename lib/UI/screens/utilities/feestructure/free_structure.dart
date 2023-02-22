@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
+import 'package:webtool_rep/UI/utils/model.dart';
+import '../../../../core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -14,16 +17,44 @@ class Feestructure extends StatefulWidget {
 }
 
 class _FeestructureState extends State<Feestructure> {
+  TextEditingController controller = TextEditingController();
+  bool static = false;
+  bool isLoaded = false;
+  Future<void> wait() async {
+    final shared2 = Provider.of<Prov12>(context, listen: false);
+    shared2.fee.clear();
+    Fee_StructureParse httpParse2 = Fee_StructureParse();
+    var res2 = await httpParse2.profile12();
+    if (res2.data!.isNotEmpty) {
+      print(res2.data!.length);
+      print(res2.data![0].toJson().length);
+      setState(() {
+        shared2.fee.add(Fee_Structure.fromJson(res2.toJson()));
+        isLoaded = true;
+      });
+      for (var i in res2.data!) {
+        setState(() {});
+        shared2.fee_data.add(Data12.fromJson(i.toJson()));
+      }
+    }
+    for (var i in shared2.fee_data) {
+      print(i.toJson());
+    }
+  }
+
   List<String> res = [];
   String init = '';
   FeeStructure_Api dropdownFunction = FeeStructure_Api();
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      wait();
+    });
     getList();
-
   }
-  getList()async{
+
+  getList() async {
     List<dynamic> dlist = await dropdownFunction.getUserstatus();
-    for(var i in dlist){
+    for (var i in dlist) {
       setState(() {
         res.add(i['get_fs_transaction_dropdown']);
       });
@@ -33,8 +64,15 @@ class _FeestructureState extends State<Feestructure> {
     });
     print("safgsdgsdgsdfgde $res");
   }
+
   @override
   Widget build(BuildContext context) {
+    final shared = Provider.of<Prov12>(context);
+    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data2 = MyData2();
+    final DataTableSource data3 = MyData3();
+    final key = new GlobalKey<PaginatedDataTableState>();
+    ScrollController scrollController = ScrollController();
     return Container(
       padding: kEdgeInsetsVerticalNormal,
       child: Row(
@@ -66,68 +104,78 @@ class _FeestructureState extends State<Feestructure> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                    setState(() {
-                      init = value.toString();
-                    });
-                  },),
+                      DropdownButton(
+                        value: init,
+                        items: res.map((e) {
+                          return DropdownMenuItem(
+                            value: e,
+                            child:
+                                Text(e, style: TextStyle(color: Colors.black)),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            init = value.toString();
+                          });
+                        },
+                      ),
 
-                        // items: [
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "",
-                        //       child: Text("--Select Transaction--")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "Other",
-                        //       child: Text("Other")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "Cardless Cash Machine",
-                        //       child: Text("Cardless Cash Machine")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "Agent Assisted Payment",
-                        //       child: Text("Agent Assisted Payment")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "Fund Transfer",
-                        //       child: Text("Fund Transfer")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "Cash In",
-                        //       child: Text("Cash In")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "Cash Out",
-                        //       child: Text("Cash Out")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "Balance Inquiry",
-                        //       child: Text("Balance Inquiry")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "Client Initiated Payment",
-                        //       child: Text("Client Initiated Payment")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "Transaction History",
-                        //       child: Text("Transaction History")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "Send Remittance",
-                        //       child: Text("Send Remittance")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "Self Remittance",
-                        //       child: Text("Self Remittance")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {},
-                        //       value: "konek2PAY",
-                        //       child: Text("konek2PAY")),
-                        //   DropdownMenuItem(
-                        //       onTap: () {}, value: "IBFT", child: Text("IBFT")),
-                        // ],
+                      // items: [
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "",
+                      //       child: Text("--Select Transaction--")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "Other",
+                      //       child: Text("Other")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "Cardless Cash Machine",
+                      //       child: Text("Cardless Cash Machine")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "Agent Assisted Payment",
+                      //       child: Text("Agent Assisted Payment")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "Fund Transfer",
+                      //       child: Text("Fund Transfer")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "Cash In",
+                      //       child: Text("Cash In")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "Cash Out",
+                      //       child: Text("Cash Out")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "Balance Inquiry",
+                      //       child: Text("Balance Inquiry")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "Client Initiated Payment",
+                      //       child: Text("Client Initiated Payment")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "Transaction History",
+                      //       child: Text("Transaction History")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "Send Remittance",
+                      //       child: Text("Send Remittance")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "Self Remittance",
+                      //       child: Text("Self Remittance")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {},
+                      //       value: "konek2PAY",
+                      //       child: Text("konek2PAY")),
+                      //   DropdownMenuItem(
+                      //       onTap: () {}, value: "IBFT", child: Text("IBFT")),
+                      // ],
 
                       verticalSpaceMedium,
                       Row(
@@ -201,247 +249,131 @@ class _FeestructureState extends State<Feestructure> {
                 ),
                 verticalSpaceRegular,
                 Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  alignment: Alignment.centerLeft,
-                  width: double.infinity,
-                  height: 30.0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.calendar_month, color: kBlackColor),
-                        Text('List of Roles', style: kTinyBoldTextStyle),
+                    width: double.infinity,
+                    padding: kEdgeInsetsVerticalNormal,
+                    child: PaginatedDataTable(
+                      key: key,
+                      dataRowHeight: 50,
+                      arrowHeadColor: kWhiteColor,
+                      columns: [
+                        DataColumn(
+                            label: Text('transaction',
+                                style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Range', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Total Charge',
+                                style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Agent Income',
+                                style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Bank Income',
+                                style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Agent Target Income',
+                                style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('AP Bancnet Instapay',
+                                style: kLargeBoldTextStyle)),
                       ],
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3)),
-                    ],
-                  ),
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: Table(
-                    children: [
-                      TableRow(children: [
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('User Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Given Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Middle Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Last Name', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Branch', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Role', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Status', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: kSecondaryColor3,
-                          child: Column(children: [
-                            Text('Action', style: kSmallBoldTextStyle),
-                          ]),
-                        ),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 1',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Samplel',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [
-                          Text(
-                            'Sample 2',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            'Sample',
-                            style: kBodyRegularTextStyle.copyWith(
-                                color: kBlackColor),
-                          )
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check_circle_outline_outlined,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                        Column(children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15.0,
-                              color: kOrangeColor1,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ]),
-                    ],
-                  ),
-                ),
+                      source: isLoaded
+                          ? shared.fee_data.isNotEmpty
+                              ? data
+                              : data2
+                          : data3,
+                      rowsPerPage: 8,
+                      showFirstLastButtons: true,
+                      header: Text('List of User', style: kXLargeBoldTextStyle),
+                    )),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+}
+
+class MyData extends DataTableSource {
+  Prov12 shared;
+  MyData({required this.shared});
+
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => shared.fee_data.length;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.fee_data[index].transType.toString()))),
+      DataCell(SizedBox(
+          width: 100, child: Text(shared.fee_data[index].range.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.fee_data[index].totalCharge.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.fee_data[index].agentIncome.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.fee_data[index].bankIncome.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.fee_data[index].agentTargetIncome.toString()))),
+      DataCell(SizedBox(
+          width: 100,
+          child: Text(shared.fee_data[index].bancnetIncome.toString())))
+    ]);
+  }
+}
+
+class MyData2 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(
+          SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text('')))
+    ]);
+  }
+}
+
+class MyData3 extends DataTableSource {
+  @override
+  bool get isRowCountApproximate => false;
+  @override
+  int get rowCount => 1;
+  @override
+  int get selectedRowCount => 0;
+  @override
+  DataRow getRow(int index) {
+    debugPrint(index.toString());
+    return DataRow(cells: [
+      DataCell(SizedBox(child: Text('Loading Please wait!'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+    ]);
   }
 }
