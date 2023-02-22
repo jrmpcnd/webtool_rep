@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../utils/constant.dart';
 import '../../utils/edge_insect.dart';
+import '../../utils/spacing.dart';
 
 class Maindashboard extends StatefulWidget {
   const Maindashboard({Key? key}) : super(key: key);
@@ -12,7 +14,7 @@ class _MaindashboardState extends State<Maindashboard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: kEdgeInsetsAllLargest,
+      // padding: kEdgeInsetsAllLargest,
       // child: Expanded(
       //   child: Column(
       //     children: [

@@ -63,6 +63,150 @@ class _UsermanagementState extends State<Usermanagement> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Container(
+                width: 500,
+                child: TextFormField(
+                  style: TextStyle(color: kBlackColor),
+                  decoration: const InputDecoration(
+                    hintText: 'Search',
+                    border: OutlineInputBorder(),
+                    labelStyle: TextStyle(fontSize: 12.0),
+                    contentPadding: EdgeInsets.only(left: 10.0),
+                    hintStyle: TextStyle(color: kSecondaryColor2),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kBlackColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kBlackColor),
+                    ),
+                  ),
+                  textInputAction: TextInputAction.go,
+                  controller: controller,
+                  onChanged: (value) {
+                    setState(() {
+                      isLoaded = false;
+                    });
+                    //
+                    try {
+                      if (controller.text.isNotEmpty) {
+                        shared.user_data.clear();
+                        for (var i in shared.user[0].data!) {
+                          print(i.toJson());
+                          print(i.givenName
+                              ?.toLowerCase()
+                              .contains(controller.text.toLowerCase()));
+                          if (i.toJson().isNotEmpty) {
+                            if (i.givenName!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase()) ||
+                                i.middleName!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())   ||
+                            i.middleName!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())    ||
+                                i.roles!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())  ||
+                            i.checkStatus!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase())
+
+                            ) {
+                              debugPrint(i.givenName);
+                              setState(() {
+                                shared.user_data.add(Data2(
+                                    givenName: i.givenName,
+                                    lastName: i.lastName,
+                                    middleName: i.middleName,
+                                    roles: i.roles,
+                                    checkStatus: i.checkStatus));
+                              });
+                              if (shared.user_data.isNotEmpty) {
+                                setState(() {
+                                  isLoaded = true;
+                                });
+                              }
+                            }
+                          }
+                        }
+                      } else if (controller.text == '') {
+                        shared.user_data.clear();
+                        setState(() {
+                          shared.user_data.addAll(shared.user[0].data!);
+                          isLoaded = true;
+                        });
+                      }
+                      debugPrint(shared.user_data[0].toJson().toString());
+                    } catch (e) {
+                      shared.user_data.clear();
+                      isLoaded = true;
+                    }
+                  },
+                  onEditingComplete: () async {
+                    setState(() {
+                      isLoaded = false;
+                    });
+                    try {
+                      if (controller.text.isNotEmpty) {
+                        shared.user_data.clear();
+                        for (var i in shared.user[0].data!) {
+                          print(i.toJson());
+                          print(i.givenName
+                              ?.toLowerCase()
+                              .contains(controller.text.toLowerCase()));
+                          if (i.toJson().isNotEmpty) {
+                            if (i.givenName!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase()) ||
+                                i.middleName!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())   ||
+                                i.middleName!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())    ||
+                                i.roles!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())  ||
+                                i.checkStatus!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())
+
+                            ) {
+                              debugPrint(i.givenName);
+                              setState(() {
+                                key.currentState?.pageTo(0);
+                                shared.user_data.add(Data2(
+                                    givenName: i.givenName,
+                                    lastName: i.lastName,
+                                    middleName: i.middleName,
+                                    userLogin: i.userLogin,
+                                    branchNames: i.branchNames,
+                                roles: i.roles,
+                                checkStatus: i.checkStatus));
+
+                              });
+                              if (shared.user_data.isNotEmpty) {
+                                setState(() {
+                                  isLoaded = true;
+                                });
+                              }
+                            }
+                          }
+                        }
+                      } else if (controller.text == '') {
+                        shared.user_data.clear();
+                        setState(() {
+                          shared.user_data.addAll(shared.user[0].data!);
+                        });
+                      }
+                      debugPrint(shared.user_data[0].toJson().toString());
+                    } catch (e) {
+                      shared.user_data.clear();
+                    }
+                  },
+                ),
+              )
               // Container(
               //   width: 500,
               //   child: TextFormField(
@@ -175,6 +319,7 @@ class _UsermanagementState extends State<Usermanagement> {
               //     },
               //   ),
               // ),
+
             ],
           ),
           Container(
