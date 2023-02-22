@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../../core/providers/data_provider.dart';
 import 'model.dart';
 
 //Administration
 class User_Push {
   Future<http.Response> pushHttp2() async {
     http.Response response2 = await http.post(
-      Uri.parse('http://10.21.0.74:1234/get_usermanagement/'),
+      Uri.parse('$API/get_usermanagement/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
@@ -46,7 +47,7 @@ class UserParse {
 class Role_Push {
   Future<http.Response> pushHttp() async {
     http.Response response = await http.post(
-      Uri.parse('http://10.21.0.74:1234/get_rolesmanagement/'),
+      Uri.parse('$API/get_rolesmanagement/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
@@ -83,7 +84,7 @@ class Role_Parse {
 class Tconfirmation_Push {
   Future<http.Response> pushHttp3() async {
     http.Response response3 = await http.post(
-      Uri.parse('http://10.21.0.74:1234/get_transconfirmation/'),
+      Uri.parse('$API/get_transconfirmation/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
@@ -127,7 +128,7 @@ class TconfirmationParse {
 class Sms_Push {
   Future<http.Response> pushHttp5() async {
     http.Response response5 = await http.post(
-      Uri.parse('http://10.21.0.74:1234/get_smslog/'),
+      Uri.parse('$API/get_smslog/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
@@ -170,7 +171,7 @@ class SmsParse {
 class Agent_Push {
   Future<http.Response> pushHttp6() async {
     http.Response response6 = await http.post(
-      Uri.parse('http://10.21.0.74:1234/get_agentdashboard/'),
+      Uri.parse('$API/get_agentdashboard/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
@@ -219,7 +220,7 @@ class AgentParse {
 class Failed_Push {
   Future<http.Response> pushHttp7() async {
     http.Response response7 = await http.post(
-      Uri.parse('http://10.21.0.74:1234/get_failedenrollment/'),
+      Uri.parse('$API/get_failedenrollment/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
@@ -262,7 +263,7 @@ class FailedParse {
 class List_of_Agent_Push {
   Future<http.Response> pushHttp8() async {
     http.Response response8 = await http.post(
-      Uri.parse('http://10.21.0.74:1234/get_listofagent/'),
+      Uri.parse('$API/get_listofagent/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':

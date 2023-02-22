@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/utils/model.dart';
 
+String API = "http://35.186.156.47:1234";
+
 class Prov extends ChangeNotifier {
   String role_button = 'Click here';
   List<Role_Management> role = [];
