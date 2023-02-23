@@ -248,44 +248,188 @@ class _FeestructureState extends State<Feestructure> {
                   ),
                 ),
                 verticalSpaceRegular,
-                Container(
-                    width: double.infinity,
-                    padding: kEdgeInsetsVerticalNormal,
-                    child: PaginatedDataTable(
-                      key: key,
-                      dataRowHeight: 50,
-                      arrowHeadColor: kWhiteColor,
-                      columns: [
-                        DataColumn(
-                            label: Text('transaction',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Range', style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Total Charge',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Agent Income',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Bank Income',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Agent Target Income',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('AP Bancnet Instapay',
-                                style: kLargeBoldTextStyle)),
-                      ],
-                      source: isLoaded
-                          ? shared.fee_data.isNotEmpty
-                              ? data
-                              : data2
-                          : data3,
-                      rowsPerPage: 8,
-                      showFirstLastButtons: true,
-                      header: Text('List of User', style: kXLargeBoldTextStyle),
-                    )),
+              Column(children: [  Container(
+                width: 500,
+                child: TextFormField(
+                  style: TextStyle(color: kBlackColor),
+                  decoration: const InputDecoration(
+                    hintText: 'Search',
+                    border: OutlineInputBorder(),
+                    labelStyle: TextStyle(fontSize: 12.0),
+                    contentPadding: EdgeInsets.only(left: 10.0),
+                    hintStyle: TextStyle(color: kSecondaryColor2),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kBlackColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kBlackColor),
+                    ),
+                  ),
+                  textInputAction: TextInputAction.go,
+                  controller: controller,
+                  onChanged: (value) {
+                    setState(() {
+                      isLoaded = false;
+                    });
+                    //
+                    try {
+                      if (controller.text.isNotEmpty) {
+                        shared.fee_data.clear();
+                        for (var i in shared.fee[0].data!) {
+                          print(i.toJson());
+                          print(i.transType
+                              ?.toLowerCase()
+                              .contains(controller.text.toLowerCase()));
+                          if (i.toJson().isNotEmpty) {
+                            if (i.range!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase()) ||
+                                i.totalCharge!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())   ||
+                                i.agentIncome!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())    ||
+                                i.bankIncome!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())  ||
+                                i.agentTargetIncome!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())  ||
+                                i.agentIncome!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())
+
+
+
+
+
+
+                            ) {
+                              debugPrint(i.transType);
+                              setState(() {
+                                shared.fee_data.add(Data12.fromJson(i.toJson()));
+                              });
+                              if (shared.fee_data.isNotEmpty) {
+                                setState(() {
+                                  isLoaded = true;
+                                });
+                              }
+                            }
+                          }
+                        }
+                      } else if (controller.text == '') {
+                        shared.fee_data.clear();
+                        setState(() {
+                          shared.fee_data.addAll(shared.fee[0].data!);
+                          isLoaded = true;
+                        });
+                      }
+                      debugPrint(shared.fee_data[0].toJson().toString());
+                    } catch (e) {
+                      shared.fee_data.clear();
+                      isLoaded = true;
+                    }
+                  },
+                  onEditingComplete: () async {
+                    setState(() {
+                      isLoaded = false;
+                    });
+                    try {
+                      if (controller.text.isNotEmpty) {
+                        shared.fee_data.clear();
+                        for (var i in shared.fee[0].data!) {
+                          print(i.toJson());
+                          print(i.transType
+                              ?.toLowerCase()
+                              .contains(controller.text.toLowerCase()));
+                          if (i.toJson().isNotEmpty) {
+                            if (i.range!
+                                .toLowerCase()
+                                .contains(controller.text.toLowerCase()) ||
+                                i.totalCharge!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())   ||
+                                i.agentIncome!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())    ||
+                                i.bankIncome!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())  ||
+                                i.agentTargetIncome!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())  ||
+                                i.agentIncome!
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase())
+
+
+                            ) {
+                              debugPrint (i.transType);
+                              setState(() {
+                                key.currentState?.pageTo(0);
+                                shared.fee_data.add(Data12.fromJson(i.toJson()
+                                ));
+
+                              });
+                              if (shared.fee_data.isNotEmpty) {
+                                setState(() {
+                                  isLoaded = true;
+                                });
+                              }
+                            }
+                          }
+                        }
+                      } else if (controller.text == '') {
+                        shared.fee_data.clear();
+                        setState(() {
+                          shared.fee_data.addAll(shared.fee[0].data!);
+                        });
+                      }
+                      debugPrint(shared.fee_data[0].toJson().toString());
+                    } catch (e) {
+                      shared.fee_data.clear();
+                    }
+                  },
+                ),
+              ),Container(
+                  width: double.infinity,
+                  padding: kEdgeInsetsVerticalNormal,
+                  child: PaginatedDataTable(
+                    key: key,
+                    dataRowHeight: 50,
+                    arrowHeadColor: kWhiteColor,
+                    columns: [
+                      DataColumn(
+                          label: Text('transaction',
+                              style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Range', style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Total Charge',
+                              style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Agent Income',
+                              style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Bank Income',
+                              style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Agent Target Income',
+                              style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('AP Bancnet Instapay',
+                              style: kLargeBoldTextStyle)),
+                    ],
+                    source: isLoaded
+                        ? shared.fee_data.isNotEmpty
+                        ? data
+                        : data2
+                        : data3,
+                    rowsPerPage: 8,
+                    showFirstLastButtons: true,
+                    header: Text('List of User', style: kXLargeBoldTextStyle),
+                  )),],)
               ],
             ),
           ),

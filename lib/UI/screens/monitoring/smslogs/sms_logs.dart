@@ -116,7 +116,7 @@ class _SmslogsState extends State<Smslogs> {
 
 
                     ) {
-                      debugPrint(i.msgStatus);
+                      debugPrint(i.msgId);
                       setState(() {
                         shared.sms_data.add(Data5.fromJson(i.toJson()
                         ));
@@ -181,7 +181,7 @@ class _SmslogsState extends State<Smslogs> {
 
 
                     ) {
-                      debugPrint (i.msgStatus);
+                      debugPrint (i.msgId);
                       setState(() {
                         key.currentState?.pageTo(0);
                         shared.sms_data.add(Data5.fromJson(i.toJson()

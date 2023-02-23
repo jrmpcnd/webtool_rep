@@ -446,7 +446,7 @@ class _HierarchyState extends State<Hierarchy> {
                                         .contains(controller.text.toLowerCase())
 
                                 ) {
-                                  debugPrint(i.centerCode);
+                                  debugPrint(i.branchCode);
                                   setState(() {
                                     shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()
                                     ));

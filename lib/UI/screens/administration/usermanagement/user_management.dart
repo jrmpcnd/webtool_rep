@@ -92,7 +92,7 @@ class _UsermanagementState extends State<Usermanagement> {
                         shared.user_data.clear();
                         for (var i in shared.user[0].data!) {
                           print(i.toJson());
-                          print(i.givenName
+                          print(i.userLogin
                               ?.toLowerCase()
                               .contains(controller.text.toLowerCase()));
                           if (i.toJson().isNotEmpty) {
@@ -109,12 +109,7 @@ class _UsermanagementState extends State<Usermanagement> {
                             ) {
                               debugPrint(i.givenName);
                               setState(() {
-                                shared.user_data.add(Data2(
-                                    givenName: i.givenName,
-                                    lastName: i.lastName,
-                                    middleName: i.middleName,
-                                    roles: i.roles,
-                                    checkStatus: i.checkStatus));
+                                shared.user_data.add(Data2.fromJson(i.toJson()));
                               });
                               if (shared.user_data.isNotEmpty) {
                                 setState(() {
@@ -189,7 +184,7 @@ class _UsermanagementState extends State<Usermanagement> {
                     }
                   },
                 ),
-              )
+              ),
               // Container(
               //   width: 500,
               //   child: TextFormField(

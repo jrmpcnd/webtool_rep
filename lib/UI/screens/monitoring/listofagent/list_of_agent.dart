@@ -184,38 +184,202 @@ class _ListofagentState extends State<Listofagent> {
           //     ),
           //   ],
           // ),
-          Container(
-              width: double.infinity,
-              padding: kEdgeInsetsVerticalNormal,
-              child: PaginatedDataTable(
-                key: key,
-                arrowHeadColor: kWhiteColor,
-                columns: [
-                  DataColumn(
-                      label: Text('Date & Time Enable Agent Feature',
-                          style: kLargeBoldTextStyle)),
-                  DataColumn(
-                      label: Text('Enable By', style: kLargeBoldTextStyle)),
-                  DataColumn(label: Text('CID', style: kLargeBoldTextStyle)),
-                  DataColumn(
-                      label: Text('Full Name', style: kLargeBoldTextStyle)),
-                  DataColumn(
-                      label: Text('Mobile No', style: kLargeBoldTextStyle)),
-                  DataColumn(
-                      label: Text('Institution', style: kLargeBoldTextStyle)),
-                  DataColumn(label: Text('Branch', style: kLargeBoldTextStyle)),
-                  DataColumn(label: Text('Unit', style: kLargeBoldTextStyle)),
-                  DataColumn(label: Text('Center', style: kLargeBoldTextStyle))
-                ],
-                source: isLoaded
-                    ? shared.list_agent_data.isNotEmpty
-                        ? data
-                        : data2
-                    : data3,
-                rowsPerPage: 8,
-                showFirstLastButtons: true,
-                header: Text('List of Role', style: kXLargeBoldTextStyle),
-              )),
+         Column(children: [Container(
+           width: 500,
+           child: TextFormField(
+             style: TextStyle(color: kBlackColor),
+             decoration: const InputDecoration(
+               hintText: 'Search',
+               border: OutlineInputBorder(),
+               labelStyle: TextStyle(fontSize: 12.0),
+               contentPadding: EdgeInsets.only(left: 10.0),
+               hintStyle: TextStyle(color: kSecondaryColor2),
+               enabledBorder: OutlineInputBorder(
+                 borderSide: BorderSide(color: kBlackColor),
+               ),
+               focusedBorder: OutlineInputBorder(
+                 borderSide: BorderSide(color: kBlackColor),
+               ),
+             ),
+             textInputAction: TextInputAction.go,
+             controller: controller,
+             onChanged: (value) {
+               setState(() {
+                 isLoaded = false;
+               });
+               //
+               try {
+                 if (controller.text.isNotEmpty) {
+                   shared.list_agent_data.clear();
+                   for (var i in shared.list_agent[0].data!) {
+                     print(i.toJson());
+                     print(i.cBranchDesc
+                         ?.toLowerCase()
+                         .contains(controller.text.toLowerCase()));
+                     if (i.toJson().isNotEmpty) {
+                       if (i.cDateAndTime!
+                           .toLowerCase()
+                           .contains(controller.text.toLowerCase()) ||
+                           i.iUserName!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())   ||
+                           i.cCid!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())    ||
+                           i.cFullname!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.cMobileNo!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.aInstDesc!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.cBranchDesc!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())||
+                       i.cUnitDesc!
+                           .toLowerCase()
+               .contains(controller.text.toLowerCase())||
+                           i.cCenterDesc!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())
+
+
+
+
+
+
+                       ) {
+                         debugPrint(i.cCenterDesc);
+                         setState(() {
+                           shared.list_agent_data.add(Data8.fromJson(i.toJson()
+                           ));
+                         });
+                         if (shared.list_agent_data.isNotEmpty) {
+                           setState(() {
+                             isLoaded = true;
+                           });
+                         }
+                       }
+                     }
+                   }
+                 } else if (controller.text == '') {
+                   shared.list_agent_data.clear();
+                   setState(() {
+                     shared.list_agent_data.addAll(shared.list_agent[0].data!);
+                     isLoaded = true;
+                   });
+                 }
+                 debugPrint(shared.list_agent_data[0].toJson().toString());
+               } catch (e) {
+                 shared.list_agent_data.clear();
+                 isLoaded = true;
+               }
+             },
+             onEditingComplete: () async {
+               setState(() {
+                 isLoaded = false;
+               });
+               try {
+                 if (controller.text.isNotEmpty) {
+                   shared.list_agent_data.clear();
+                   for (var i in shared.list_agent[0].data!) {
+                     print(i.toJson());
+                     print(i.cBranchDesc
+                         ?.toLowerCase()
+                         .contains(controller.text.toLowerCase()));
+                     if (i.toJson().isNotEmpty) {
+                       if (i.cDateAndTime!
+                           .toLowerCase()
+                           .contains(controller.text.toLowerCase()) ||
+                           i.iUserName!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())   ||
+                           i.cCid!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())    ||
+                           i.cFullname!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.cMobileNo!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.aInstDesc!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())  ||
+                           i.cBranchDesc!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())||
+                           i.cUnitDesc!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())||
+                           i.cCenterDesc!
+                               .toLowerCase()
+                               .contains(controller.text.toLowerCase())
+
+
+
+                       ) {
+                         debugPrint (i.cCenterDesc);
+                         setState(() {
+                           key.currentState?.pageTo(0);
+                           shared.list_agent_data.add(Data8.fromJson(i.toJson()
+                           ));
+
+                         });
+                         if (shared.list_agent_data.isNotEmpty) {
+                           setState(() {
+                             isLoaded = true;
+                           });
+                         }
+                       }
+                     }
+                   }
+                 } else if (controller.text == '') {
+                   shared.list_agent_data.clear();
+                   setState(() {
+                     shared.list_agent_data.addAll(shared.list_agent[0].data!);
+                   });
+                 }
+                 debugPrint(shared.list_agent_data[0].toJson().toString());
+               } catch (e) {
+                 shared.list_agent_data.clear();
+               }
+             },
+           ),
+         ), Container(
+             width: double.infinity,
+             padding: kEdgeInsetsVerticalNormal,
+             child: PaginatedDataTable(
+               key: key,
+               arrowHeadColor: kWhiteColor,
+               columns: [
+                 DataColumn(
+                     label: Text('Date & Time Enable Agent Feature',
+                         style: kLargeBoldTextStyle)),
+                 DataColumn(
+                     label: Text('Enable By', style: kLargeBoldTextStyle)),
+                 DataColumn(label: Text('CID', style: kLargeBoldTextStyle)),
+                 DataColumn(
+                     label: Text('Full Name', style: kLargeBoldTextStyle)),
+                 DataColumn(
+                     label: Text('Mobile No', style: kLargeBoldTextStyle)),
+                 DataColumn(
+                     label: Text('Institution', style: kLargeBoldTextStyle)),
+                 DataColumn(label: Text('Branch', style: kLargeBoldTextStyle)),
+                 DataColumn(label: Text('Unit', style: kLargeBoldTextStyle)),
+                 DataColumn(label: Text('Center', style: kLargeBoldTextStyle))
+               ],
+               source: isLoaded
+                   ? shared.list_agent_data.isNotEmpty
+                   ? data
+                   : data2
+                   : data3,
+               rowsPerPage: 8,
+               showFirstLastButtons: true,
+               header: Text('List of Role', style: kXLargeBoldTextStyle),
+             )),],)
           // SafeArea(
           //   child: TextButton(
           //     onPressed: () async {

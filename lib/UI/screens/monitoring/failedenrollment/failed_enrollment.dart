@@ -22,6 +22,8 @@ class Failedenrollment extends StatefulWidget {
 class _FailedenrollmentState extends State<Failedenrollment> {
   bool static = false;
   bool isLoaded = false;
+  TextEditingController controller = TextEditingController();
+
   Future<void> wait() async {
     final shared7 = Provider.of<Prov7>(context, listen: false);
     shared7.failed.clear();
@@ -219,48 +221,201 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                   ),
                 ),
                 verticalSpaceRegular,
-                Container(
-                    width: double.infinity,
-                    padding: kEdgeInsetsVerticalNormal,
-                    child: PaginatedDataTable(
-                      key: key,
-                      arrowHeadColor: kWhiteColor,
-                      columns: [
-                        DataColumn(
-                            label: Text('Date & Time',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Account Number',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Date of Birth',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Mobile Number',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Client Type',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label:
-                                Text('Device ID', style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Device Model',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Error Message',
-                                style: kLargeBoldTextStyle))
-                      ],
-                      source: isLoaded
-                          ? shared.failed_data.isNotEmpty
-                              ? data
-                              : data2
-                          : data3,
-                      rowsPerPage: 8,
-                      showFirstLastButtons: true,
-                      header: Text('Failed Enrollment List',
-                          style: kXLargeBoldTextStyle),
-                    )),
+               Column(children: [ Container(
+                 width: 500,
+                 child: TextFormField(
+                   style: TextStyle(color: kBlackColor),
+                   decoration: const InputDecoration(
+                     hintText: 'Search',
+                     border: OutlineInputBorder(),
+                     labelStyle: TextStyle(fontSize: 12.0),
+                     contentPadding: EdgeInsets.only(left: 10.0),
+                     hintStyle: TextStyle(color: kSecondaryColor2),
+                     enabledBorder: OutlineInputBorder(
+                       borderSide: BorderSide(color: kBlackColor),
+                     ),
+                     focusedBorder: OutlineInputBorder(
+                       borderSide: BorderSide(color: kBlackColor),
+                     ),
+                   ),
+                   textInputAction: TextInputAction.go,
+                   controller: controller,
+                   onChanged: (value) {
+                     setState(() {
+                       isLoaded = false;
+                     });
+                     //
+                     try {
+                       if (controller.text.isNotEmpty) {
+                         shared.failed_data.clear();
+                         for (var i in shared.failed[0].data!) {
+                           print(i.toJson());
+                           print(i.createdDate
+                               ?.toLowerCase()
+                               .contains(controller.text.toLowerCase()));
+                           if (i.toJson().isNotEmpty) {
+                             if (i.accountNumber!
+                                 .toLowerCase()
+                                 .contains(controller.text.toLowerCase()) ||
+                                 i.dateOfBirth!
+                                     .toLowerCase()
+                                     .contains(controller.text.toLowerCase())   ||
+                                 i.mobileNumber!
+                                     .toLowerCase()
+                                     .contains(controller.text.toLowerCase())    ||
+                                 i.clientType!
+                                     .toLowerCase()
+                                     .contains(controller.text.toLowerCase())  ||
+                                 i.deviceId!
+                                     .toLowerCase()
+                                     .contains(controller.text.toLowerCase())  ||
+                                 i.deviceModel!
+                                     .toLowerCase()
+                                     .contains(controller.text.toLowerCase())  ||
+                                 i.errorMessage!
+                                     .toLowerCase()
+                                     .contains(controller.text.toLowerCase())
+
+
+
+
+
+
+                             ) {
+                               debugPrint(i.accountNumber);
+                               setState(() {
+                                 shared.failed_data.add(Data7.fromJson(i.toJson()
+                                 ));
+                               });
+                               if (shared.failed_data.isNotEmpty) {
+                                 setState(() {
+                                   isLoaded = true;
+                                 });
+                               }
+                             }
+                           }
+                         }
+                       } else if (controller.text == '') {
+                         shared.failed_data.clear();
+                         setState(() {
+                           shared.failed_data.addAll(shared.failed[0].data!);
+                           isLoaded = true;
+                         });
+                       }
+                       debugPrint(shared.failed_data[0].toJson().toString());
+                     } catch (e) {
+                       shared.failed_data.clear();
+                       isLoaded = true;
+                     }
+                   },
+                   onEditingComplete: () async {
+                     setState(() {
+                       isLoaded = false;
+                     });
+                     try {
+                       if (controller.text.isNotEmpty) {
+                         shared.failed_data.clear();
+                         for (var i in shared.failed[0].data!) {
+                           print(i.toJson());
+                           print(i.createdDate
+                               ?.toLowerCase()
+                               .contains(controller.text.toLowerCase()));
+                           if (i.toJson().isNotEmpty) {
+                             if (i.accountNumber!
+                                 .toLowerCase()
+                                 .contains(controller.text.toLowerCase()) ||
+                                 i.dateOfBirth!
+                                     .toLowerCase()
+                                     .contains(controller.text.toLowerCase())   ||
+                                 i.mobileNumber!
+                                     .toLowerCase()
+                                     .contains(controller.text.toLowerCase())    ||
+                                 i.clientType!
+                                     .toLowerCase()
+                                     .contains(controller.text.toLowerCase())  ||
+                                 i.deviceId!
+                                     .toLowerCase()
+                                     .contains(controller.text.toLowerCase())  ||
+                                 i.deviceModel!
+                                     .toLowerCase()
+                                     .contains(controller.text.toLowerCase())  ||
+                                 i.errorMessage!
+                                     .toLowerCase()
+                                     .contains(controller.text.toLowerCase())
+
+
+
+
+                             ) {
+                               debugPrint (i.accountNumber);
+                               setState(() {
+                                 key.currentState?.pageTo(0);
+                                 shared.failed_data.add(Data7.fromJson(i.toJson()
+                                 ));
+
+                               });
+                               if (shared.failed_data.isNotEmpty) {
+                                 setState(() {
+                                   isLoaded = true;
+                                 });
+                               }
+                             }
+                           }
+                         }
+                       } else if (controller.text == '') {
+                         shared.failed_data.clear();
+                         setState(() {
+                           shared.failed_data.addAll(shared.failed[0].data!);
+                         });
+                       }
+                       debugPrint(shared.failed_data[0].toJson().toString());
+                     } catch (e) {
+                       shared.failed_data.clear();
+                     }
+                   },
+                 ),
+               ),Container(
+                   width: double.infinity,
+                   padding: kEdgeInsetsVerticalNormal,
+                   child: PaginatedDataTable(
+                     key: key,
+                     arrowHeadColor: kWhiteColor,
+                     columns: [
+                       DataColumn(
+                           label: Text('Date & Time',
+                               style: kLargeBoldTextStyle)),
+                       DataColumn(
+                           label: Text('Account Number',
+                               style: kLargeBoldTextStyle)),
+                       DataColumn(
+                           label: Text('Date of Birth',
+                               style: kLargeBoldTextStyle)),
+                       DataColumn(
+                           label: Text('Mobile Number',
+                               style: kLargeBoldTextStyle)),
+                       DataColumn(
+                           label: Text('Client Type',
+                               style: kLargeBoldTextStyle)),
+                       DataColumn(
+                           label:
+                           Text('Device ID', style: kLargeBoldTextStyle)),
+                       DataColumn(
+                           label: Text('Device Model',
+                               style: kLargeBoldTextStyle)),
+                       DataColumn(
+                           label: Text('Error Message',
+                               style: kLargeBoldTextStyle))
+                     ],
+                     source: isLoaded
+                         ? shared.failed_data.isNotEmpty
+                         ? data
+                         : data2
+                         : data3,
+                     rowsPerPage: 8,
+                     showFirstLastButtons: true,
+                     header: Text('Failed Enrollment List',
+                         style: kXLargeBoldTextStyle),
+                   )),],)
               ],
             ),
           ),
