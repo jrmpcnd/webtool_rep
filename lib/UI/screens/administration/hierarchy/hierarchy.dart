@@ -281,119 +281,7 @@ class _HierarchyState extends State<Hierarchy> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Container(
-                      //   width: 500,
-                      //   child: TextFormField(
-                      //     style: TextStyle(color: kBlackColor),
-                      //     decoration: const InputDecoration(
-                      //       hintText: 'Search',
-                      //       border: OutlineInputBorder(),
-                      //       labelStyle: TextStyle(fontSize: 12.0),
-                      //       contentPadding: EdgeInsets.only(left: 10.0),
-                      //       hintStyle: TextStyle(color: kSecondaryColor2),
-                      //       enabledBorder: OutlineInputBorder(
-                      //         borderSide: BorderSide(color: kBlackColor),
-                      //       ),
-                      //       focusedBorder: OutlineInputBorder(
-                      //         borderSide: BorderSide(color: kBlackColor),
-                      //       ),
-                      //     ),
-                      //     textInputAction: TextInputAction.go,
-                      //     controller: controller,
-                      //     onChanged: (value) {
-                      //       setState(() {
-                      //         isLoaded = false;
-                      //       });
-                      //       try {
-                      //         if (controller.text.isNotEmpty) {
-                      //           shared.inqqq.clear();
-                      //           for (var i in shared.inqq[0].data!) {
-                      //             print(i.toJson());
-                      //             print(i.branch_code
-                      //                 ?.toLowerCase()
-                      //                 .contains(controller.text.toLowerCase()));
-                      //             if (i.toJson().isNotEmpty) {
-                      //               if (i.center_desc!
-                      //                   .toLowerCase()
-                      //                   .contains(controller.text.toLowerCase()) ||
-                      //                   i.branch_code!
-                      //                       .toLowerCase()
-                      //                       .contains(controller.text.toLowerCase())) {
-                      //                 debugPrint(i.center_desc);
-                      //                 setState(() {
-                      //                   shared.inqqq.add(Data1(
-                      //                       // role_name: i.role_name,
-                      //                   ));
-                      //                 });
-                      //                 if (shared.inqqq.isNotEmpty) {
-                      //                   setState(() {
-                      //                     isLoaded = true;
-                      //                   });
-                      //                 }
-                      //               }
-                      //             }
-                      //           }
-                      //         } else if (controller.text == '') {
-                      //           shared.inqqq.clear();
-                      //           setState(() {
-                      //             shared.inqqq.addAll(shared.inqq[0].data!);
-                      //           });
-                      //         }
-                      //         debugPrint(shared.inqqq[0].toJson().toString());
-                      //       } catch (e) {
-                      //         shared.inqqq.clear();
-                      //       }
-                      //     },
-                      //     onEditingComplete: () async {
-                      //       setState(() {
-                      //         isLoaded = false;
-                      //       });
-                      //       try {
-                      //         if (controller.text.isNotEmpty) {
-                      //           shared.inqqq.clear();
-                      //           for (var i in shared.inqq[0].data!) {
-                      //             print(i.toJson());
-                      //             print(i.unit_desc
-                      //                 ?.toLowerCase()
-                      //                 .contains(controller.text.toLowerCase()));
-                      //             if (i.toJson().isNotEmpty) {
-                      //               if (i.branch_desc!
-                      //                   .toLowerCase()
-                      //                   .contains(controller.text.toLowerCase()) ||
-                      //                   i.center_desc!
-                      //                       .toLowerCase()
-                      //                       .contains(controller.text.toLowerCase())) {
-                      //                 debugPrint(i.branch_code);
-                      //                 setState(() {
-                      //                   key.currentState?.pageTo(0);
-                      //                   shared.inqqq.add(Data1(
-                      //                     branch_code: i.branch_code,
-                      //                     center_desc: i.center_desc,
-                      //                     unit_desc: i.unit_desc,
-                      //
-                      //                       ));
-                      //                 });
-                      //                 if (shared.inqqq.isNotEmpty) {
-                      //                   setState(() {
-                      //                     isLoaded = true;
-                      //                   });
-                      //                 }
-                      //               }
-                      //             }
-                      //           }
-                      //         } else if (controller.text == '') {
-                      //           shared.inqqq.clear();
-                      //           setState(() {
-                      //             shared.inqqq.addAll(shared.inqq[0].data!);
-                      //           });
-                      //         }
-                      //         debugPrint(shared.inqqq[0].toJson().toString());
-                      //       } catch (e) {
-                      //         shared.inqqq.clear();
-                      //       }
-                      //     },
-                      //   ),
-                      // ),
+
                     ],
                   ),
                   Column(children: [ Container(
@@ -401,7 +289,7 @@ class _HierarchyState extends State<Hierarchy> {
                     child: TextFormField(
                       style: TextStyle(color: kBlackColor),
                       decoration: const InputDecoration(
-                        hintText: 'Search',
+                        hintText: 'Institution, Unit, Branch, Center',
                         border: OutlineInputBorder(),
                         labelStyle: TextStyle(fontSize: 12.0),
                         contentPadding: EdgeInsets.only(left: 10.0),

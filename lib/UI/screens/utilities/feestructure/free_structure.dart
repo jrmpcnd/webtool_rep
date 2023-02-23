@@ -120,62 +120,6 @@ class _FeestructureState extends State<Feestructure> {
                         },
                       ),
 
-                      // items: [
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "",
-                      //       child: Text("--Select Transaction--")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "Other",
-                      //       child: Text("Other")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "Cardless Cash Machine",
-                      //       child: Text("Cardless Cash Machine")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "Agent Assisted Payment",
-                      //       child: Text("Agent Assisted Payment")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "Fund Transfer",
-                      //       child: Text("Fund Transfer")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "Cash In",
-                      //       child: Text("Cash In")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "Cash Out",
-                      //       child: Text("Cash Out")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "Balance Inquiry",
-                      //       child: Text("Balance Inquiry")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "Client Initiated Payment",
-                      //       child: Text("Client Initiated Payment")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "Transaction History",
-                      //       child: Text("Transaction History")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "Send Remittance",
-                      //       child: Text("Send Remittance")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "Self Remittance",
-                      //       child: Text("Self Remittance")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {},
-                      //       value: "konek2PAY",
-                      //       child: Text("konek2PAY")),
-                      //   DropdownMenuItem(
-                      //       onTap: () {}, value: "IBFT", child: Text("IBFT")),
-                      // ],
 
                       verticalSpaceMedium,
                       Row(

@@ -68,7 +68,7 @@ class _UsermanagementState extends State<Usermanagement> {
                 child: TextFormField(
                   style: TextStyle(color: kBlackColor),
                   decoration: const InputDecoration(
-                    hintText: 'Search',
+                    hintText: 'First Name or User Name',
                     border: OutlineInputBorder(),
                     labelStyle: TextStyle(fontSize: 12.0),
                     contentPadding: EdgeInsets.only(left: 10.0),

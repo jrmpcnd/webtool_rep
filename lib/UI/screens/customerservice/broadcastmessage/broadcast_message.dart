@@ -67,7 +67,7 @@ class _BroadcastmessageState extends State<Broadcastmessage> {
             child: TextFormField(
               style: TextStyle(color: kBlackColor),
               decoration: const InputDecoration(
-                hintText: 'Search',
+                hintText: 'Subject',
                 border: OutlineInputBorder(),
                 labelStyle: TextStyle(fontSize: 12.0),
                 contentPadding: EdgeInsets.only(left: 10.0),
