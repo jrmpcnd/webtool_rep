@@ -67,7 +67,7 @@ class _RolemanagementState extends State<Rolemanagement> {
                 child: TextFormField(
                   style: TextStyle(color: kBlackColor),
                   decoration: const InputDecoration(
-                    hintText: 'Search',
+                    hintText: 'Role Name',
                     border: OutlineInputBorder(),
                     labelStyle: TextStyle(fontSize: 12.0),
                     contentPadding: EdgeInsets.only(left: 10.0),
