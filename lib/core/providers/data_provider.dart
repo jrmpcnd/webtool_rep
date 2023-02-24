@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/utils/model.dart';
 
-String API = "sit-api-janus.fortress-asya.com:1234";
+String API = "https://sit-api-janus.fortress-asya.com:1234";
 
 class Prov extends ChangeNotifier {
   String role_button = 'Click here';
