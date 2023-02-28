@@ -62,15 +62,15 @@ class H_SaveAccount {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['branch_code'] = this.branchCode;
-    data['branch_desc'] = this.branchDesc;
-    data['center_code'] = this.centerCode;
-    data['center_desc'] = this.centerDesc;
-    data['hierarchy_id'] = this.hierarchyId;
-    data['inst_desc'] = this.instDesc;
-    data['unit_code'] = this.unitCode;
-    data['unit_desc'] = this.unitDesc;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['branch_code'] = branchCode;
+    data['branch_desc'] = branchDesc;
+    data['center_code'] = centerCode;
+    data['center_desc'] = centerDesc;
+    data['hierarchy_id'] = hierarchyId;
+    data['inst_desc'] = instDesc;
+    data['unit_code'] = unitCode;
+    data['unit_desc'] = unitDesc;
     return data;
   }
 }

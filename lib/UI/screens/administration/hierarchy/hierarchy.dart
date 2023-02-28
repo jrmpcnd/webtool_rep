@@ -311,11 +311,12 @@ class _HierarchyState extends State<Hierarchy> {
                         try {
                           if (controller.text.isNotEmpty) {
                             shared.Hierarchy_data.clear();
+                            // debugPrint(shared.Hierarchy[0].data.toString());
                             for (var i in shared.Hierarchy[0].data!) {
                               print(i.toJson());
-                              print(i.branchCode
-                                  ?.toLowerCase()
-                                  .contains(controller.text.toLowerCase()));
+                              // print(i.branchCode
+                              //     ?.toLowerCase()
+                              //     .contains(controller.text.toLowerCase()));
                               if (i.toJson().isNotEmpty) {
                                 if (i.branchDesc!
                                     .toLowerCase()
@@ -331,10 +332,12 @@ class _HierarchyState extends State<Hierarchy> {
                                         .contains(controller.text.toLowerCase())  ||
                                     i.centerDesc!
                                         .toLowerCase()
-                                        .contains(controller.text.toLowerCase())
+                                        .contains(controller.text.toLowerCase()) ||
+                                i.branchCode!.toLowerCase().contains(controller.text.toLowerCase())
 
                                 ) {
-                                  debugPrint(i.branchCode);
+                                  print(i.toJson());
+                                  //debugPrint(i.branchCode);
                                   setState(() {
                                     shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()
                                     ));
@@ -368,7 +371,7 @@ class _HierarchyState extends State<Hierarchy> {
                           if (controller.text.isNotEmpty) {
                             shared.Hierarchy_data.clear();
                             for (var i in shared.Hierarchy[0].data!) {
-                              print(i.toJson());
+
                               print(i.branchCode
                                   ?.toLowerCase()
                                   .contains(controller.text.toLowerCase()));
@@ -387,10 +390,12 @@ class _HierarchyState extends State<Hierarchy> {
                                         .contains(controller.text.toLowerCase())  ||
                                     i.centerDesc!
                                         .toLowerCase()
-                                        .contains(controller.text.toLowerCase())
+                                        .contains(controller.text.toLowerCase()) ||
+                                    i.branchCode!.toLowerCase().contains(controller.text.toLowerCase())
 
 
                                 ) {
+
                                   debugPrint (i.branchCode);
                                   setState(() {
                                     key.currentState?.pageTo(0);
