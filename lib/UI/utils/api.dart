@@ -50,12 +50,6 @@ class Role_Push {
     http.Response response = await http.post(
       Uri.parse('$API/get_rolesmanagement'),
       headers: <String, String>{
-        // 'Host': '*',
-        // 'Accept': 'application/json; charset=UTF-8',
-        // "Access-Control-Allow-Methods": "GET,PUT,PATCH,POST,DELETE",
-        // "Access-Control-Allow-Headers": "Origin, Accept",
-        //
-        // "Access-Control-Allow-Origin": "*",
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
             'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjQ1MDI0NDB9.Q_yoFgYCbjrulkxZS6kw_u3brT_kx3Hp8cDxVTIWrgk'

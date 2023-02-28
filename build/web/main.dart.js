@@ -100726,7 +100726,7 @@ BC(){var s=0,r=A.v(t.O),q,p,o,n,m
 var $async$BC=A.q(function(a,b){if(a===1)return A.r(b,r)
 while(true)switch(s){case 0:p=A.bp("https://sit-api-janus.fortress-asya.com:1234/get_rolesmanagement",0,null)
 o=t.N
-n=A.aC(["Access-Control-Allow-Origin","*","Content-Type","application/json; charset=UTF-8","Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjQ1MDI0NDB9.Q_yoFgYCbjrulkxZS6kw_u3brT_kx3Hp8cDxVTIWrgk"],o,o)
+n=A.aC(["Content-Type","application/json; charset=UTF-8","Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjQ1MDI0NDB9.Q_yoFgYCbjrulkxZS6kw_u3brT_kx3Hp8cDxVTIWrgk"],o,o)
 s=3
 return A.x(A.ew(p,B.w.dT(A.aC(["role_name",""],o,o),null),n),$async$BC)
 case 3:m=b
