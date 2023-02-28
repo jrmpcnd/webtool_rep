@@ -120,7 +120,10 @@ class _TransactionforconfirmationState
                               .contains(controller.text.toLowerCase())||
                           i.status!
                               .toLowerCase()
-                              .contains(controller.text.toLowerCase())
+                              .contains(controller.text.toLowerCase())||
+                      i.transDate!
+                          .toLowerCase()
+              .contains(controller.text.toLowerCase())
 
                       ) {
                         debugPrint(i.transDate);
@@ -188,7 +191,10 @@ class _TransactionforconfirmationState
                               .contains(controller.text.toLowerCase())||
                           i.status!
                               .toLowerCase()
-                              .contains(controller.text.toLowerCase())
+                              .contains(controller.text.toLowerCase())||
+                      i.transDate!
+                          .toLowerCase()
+              .contains(controller.text.toLowerCase())
                       ) {
                         debugPrint (i.transDate);
                         setState(() {
