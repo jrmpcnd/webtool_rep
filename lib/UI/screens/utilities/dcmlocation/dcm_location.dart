@@ -53,6 +53,7 @@ class _DcmlocationState extends State<Dcmlocation> {
       wait();
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<AtmLocation>(context);
@@ -166,163 +167,161 @@ class _DcmlocationState extends State<Dcmlocation> {
                   ),
                 ),
                 verticalSpaceRegular,
-                Column(children: [Container(
-                  width: 500,
-                  child: TextFormField(
-                    style: TextStyle(color: kBlackColor),
-                    decoration: const InputDecoration(
-                      hintText: 'Search',
-                      border: OutlineInputBorder(),
-                      labelStyle: TextStyle(fontSize: 12.0),
-                      contentPadding: EdgeInsets.only(left: 10.0),
-                      hintStyle: TextStyle(color: kSecondaryColor2),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kBlackColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kBlackColor),
-                      ),
-                    ),
-                    textInputAction: TextInputAction.go,
-                    controller: controller,
-                    onChanged: (value) {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      //
-                      try {
-                        if (controller.text.isNotEmpty) {
-                          shared.AtmLocation_data.clear();
-                          for (var i in shared.AtmLocation_Log[0].data!) {
-                            print(i.toJson());
-                            print(i.atmCity
-                                ?.toLowerCase()
-                                .contains(controller.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.atmCity!
-                                  .toLowerCase()
-                                  .contains(controller.text.toLowerCase()) ||
-                                  i.atmAddress!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())   ||
-                                  i.atmDescription!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())    ||
-                                  i.instDesc!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())
-
-
-
-
-
-                              ) {
-                                debugPrint(i.instDesc);
-                                setState(() {
-                                  shared.AtmLocation_data.add(Atm_Loc_Log.fromJson(i.toJson()
-                                  ));
-                                });
-                                if (shared.AtmLocation_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
+                Column(
+                  children: [
+                    Container(
+                      width: 500,
+                      child: TextFormField(
+                        style: TextStyle(color: kBlackColor),
+                        decoration: const InputDecoration(
+                          hintText: 'Search',
+                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(fontSize: 12.0),
+                          contentPadding: EdgeInsets.only(left: 10.0),
+                          hintStyle: TextStyle(color: kSecondaryColor2),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: kBlackColor),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: kBlackColor),
+                          ),
+                        ),
+                        textInputAction: TextInputAction.go,
+                        controller: controller,
+                        onChanged: (value) {
+                          setState(() {
+                            isLoaded = false;
+                          });
+                          //
+                          try {
+                            if (controller.text.isNotEmpty) {
+                              shared.AtmLocation_data.clear();
+                              for (var i in shared.AtmLocation_Log[0].data!) {
+                                print(i.toJson());
+                                print(i.atmCity
+                                    ?.toLowerCase()
+                                    .contains(controller.text.toLowerCase()));
+                                if (i.toJson().isNotEmpty) {
+                                  if (i.atmCity!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.atmAddress!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.atmDescription!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.instDesc!.toLowerCase().contains(
+                                          controller.text.toLowerCase())) {
+                                    debugPrint(i.instDesc);
+                                    setState(() {
+                                      shared.AtmLocation_data.add(
+                                          Atm_Loc_Log.fromJson(i.toJson()));
+                                    });
+                                    if (shared.AtmLocation_data.isNotEmpty) {
+                                      setState(() {
+                                        isLoaded = true;
+                                      });
+                                    }
+                                  }
                                 }
                               }
+                            } else if (controller.text == '') {
+                              shared.AtmLocation_data.clear();
+                              setState(() {
+                                shared.AtmLocation_data.addAll(
+                                    shared.AtmLocation_Log[0].data!);
+                                isLoaded = true;
+                              });
                             }
-                          }
-                        } else if (controller.text == '') {
-                          shared.AtmLocation_data.clear();
-                          setState(() {
-                            shared.AtmLocation_data.addAll(shared.AtmLocation_Log[0].data!);
+                            debugPrint(
+                                shared.AtmLocation_data[0].toJson().toString());
+                          } catch (e) {
+                            shared.AtmLocation_data.clear();
                             isLoaded = true;
+                          }
+                        },
+                        onEditingComplete: () async {
+                          setState(() {
+                            isLoaded = false;
                           });
-                        }
-                        debugPrint(shared.AtmLocation_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.AtmLocation_data.clear();
-                        isLoaded = true;
-                      }
-                    },
-                    onEditingComplete: () async {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      try {
-                        if (controller.text.isNotEmpty) {
-                          shared.AtmLocation_data.clear();
-                          for (var i in shared.AtmLocation_Log[0].data!) {
-                            print(i.toJson());
-                            print(i.atmCity
-                                ?.toLowerCase()
-                                .contains(controller.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.atmCity!
-                                  .toLowerCase()
-                                  .contains(controller.text.toLowerCase()) ||
-                                  i.atmAddress!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())   ||
-                                  i.atmDescription!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())    ||
-                                  i.instDesc!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())
-
-
-                              ) {
-                                debugPrint (i.instDesc);
-                                setState(() {
-                                  key.currentState?.pageTo(0);
-                                  shared.AtmLocation_data.add(Atm_Loc_Log.fromJson(i.toJson()
-                                  ));
-
-                                });
-                                if (shared.AtmLocation_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
+                          try {
+                            if (controller.text.isNotEmpty) {
+                              shared.AtmLocation_data.clear();
+                              for (var i in shared.AtmLocation_Log[0].data!) {
+                                print(i.toJson());
+                                print(i.atmCity
+                                    ?.toLowerCase()
+                                    .contains(controller.text.toLowerCase()));
+                                if (i.toJson().isNotEmpty) {
+                                  if (i.atmCity!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.atmAddress!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.atmDescription!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.instDesc!.toLowerCase().contains(
+                                          controller.text.toLowerCase())) {
+                                    debugPrint(i.instDesc);
+                                    setState(() {
+                                      key.currentState?.pageTo(0);
+                                      shared.AtmLocation_data.add(
+                                          Atm_Loc_Log.fromJson(i.toJson()));
+                                    });
+                                    if (shared.AtmLocation_data.isNotEmpty) {
+                                      setState(() {
+                                        isLoaded = true;
+                                      });
+                                    }
+                                  }
                                 }
                               }
+                            } else if (controller.text == '') {
+                              shared.AtmLocation_data.clear();
+                              setState(() {
+                                shared.AtmLocation_data.addAll(
+                                    shared.AtmLocation_Log[0].data!);
+                              });
                             }
+                            debugPrint(
+                                shared.AtmLocation_data[0].toJson().toString());
+                          } catch (e) {
+                            shared.AtmLocation_data.clear();
                           }
-                        } else if (controller.text == '') {
-                          shared.AtmLocation_data.clear();
-                          setState(() {
-                            shared.AtmLocation_data.addAll(shared.AtmLocation_Log[0].data!);
-                          });
-                        }
-                        debugPrint(shared.AtmLocation_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.AtmLocation_data.clear();
-                      }
-                    },
-                  ),
-                ),
-                  Container(
-                    width: double.infinity,
-                    padding: kEdgeInsetsVerticalNormal,
-                    child: PaginatedDataTable(
-                      key: key,
-                      arrowHeadColor: kWhiteColor,
-                      columns: [
-                        DataColumn(
-                            label: Text('Insti Description', style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Description', style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Street/Brgy', style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('City/Province', style: kLargeBoldTextStyle)),
-
-
-                      ],
-                      source: isLoaded ? shared.AtmLocation_data.isNotEmpty ? data : data2 : data3,
-                      rowsPerPage: 8,
-                      showFirstLastButtons: true,
-                      header: Text('List of Role', style: kXLargeBoldTextStyle),
+                        },
+                      ),
                     ),
-                  ),],)
+                    Container(
+                      width: double.infinity,
+                      padding: kEdgeInsetsVerticalNormal,
+                      child: PaginatedDataTable(
+                        key: key,
+                        dataRowHeight: 70,
+                        arrowHeadColor: kWhiteColor,
+                        columns: [
+                          DataColumn(
+                              label: Text('Insti Description',
+                                  style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Description',
+                                  style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Street/Brgy',
+                                  style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('City/Province',
+                                  style: kLargeBoldTextStyle)),
+                        ],
+                        source: isLoaded
+                            ? shared.AtmLocation_data.isNotEmpty
+                                ? data
+                                : data2
+                            : data3,
+                        rowsPerPage: 8,
+                        showFirstLastButtons: true,
+                        header:
+                            Text('List of Role', style: kXLargeBoldTextStyle),
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
@@ -331,7 +330,6 @@ class _DcmlocationState extends State<Dcmlocation> {
     );
   }
 }
-
 
 class MyData extends DataTableSource {
   AtmLocation shared;
@@ -348,16 +346,18 @@ class MyData extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(
-          width: 100, child: Text(shared.AtmLocation_data[index].instDesc.toString()))),
+          width: 200,
+          child: Text(shared.AtmLocation_data[index].instDesc.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.AtmLocation_data[index].atmDescription.toString()))),
-
+          width: 200,
+          child:
+              Text(shared.AtmLocation_data[index].atmDescription.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.AtmLocation_data[index].atmAddress.toString()))),
-
+          width: 200,
+          child: Text(shared.AtmLocation_data[index].atmAddress.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.AtmLocation_data[index].atmCity.toString()))),
-
+          width: 200,
+          child: Text(shared.AtmLocation_data[index].atmCity.toString()))),
     ]);
   }
 }
@@ -378,9 +378,6 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
-
-
-
     ]);
   }
 }
@@ -396,13 +393,19 @@ class MyData3 extends DataTableSource {
   DataRow getRow(int index) {
     debugPrint(index.toString());
     return DataRow(cells: [
-      DataCell(
-          SizedBox(child: Text('Loading, please wait'))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
-
-
+      DataCell(SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
     ]);
   }
 }

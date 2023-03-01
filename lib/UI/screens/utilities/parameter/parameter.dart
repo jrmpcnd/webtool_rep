@@ -24,6 +24,7 @@ class _ParametersState extends State<Parameters> {
   Future<void> wait() async {
     final shared2 = Provider.of<Prov13>(context, listen: false);
     shared2.prov.clear();
+    shared2.prov_data.clear();
     Prov_ConfigParse httpParse2 = Prov_ConfigParse();
     var res2 = await httpParse2.profile13();
     if (res2.data!.isNotEmpty) {
@@ -179,154 +180,151 @@ class _ParametersState extends State<Parameters> {
                   ),
                 ),
                 verticalSpaceRegular,
-                Column(children: [Container(
-                  width: 500,
-                  child: TextFormField(
-                    style: TextStyle(color: kBlackColor),
-                    decoration: const InputDecoration(
-                      hintText: 'Search',
-                      border: OutlineInputBorder(),
-                      labelStyle: TextStyle(fontSize: 12.0),
-                      contentPadding: EdgeInsets.only(left: 10.0),
-                      hintStyle: TextStyle(color: kSecondaryColor2),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kBlackColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kBlackColor),
+                Column(
+                  children: [
+                    Container(
+                      width: 500,
+                      child: TextFormField(
+                        style: TextStyle(color: kBlackColor),
+                        decoration: const InputDecoration(
+                          hintText: 'Search',
+                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(fontSize: 12.0),
+                          contentPadding: EdgeInsets.only(left: 10.0),
+                          hintStyle: TextStyle(color: kSecondaryColor2),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: kBlackColor),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: kBlackColor),
+                          ),
+                        ),
+                        textInputAction: TextInputAction.go,
+                        controller: controller,
+                        onChanged: (value) {
+                          setState(() {
+                            isLoaded = false;
+                          });
+                          //
+                          try {
+                            if (controller.text.isNotEmpty) {
+                              shared.prov_data.clear();
+                              for (var i in shared.prov[0].data!) {
+                                print(i.toJson());
+                                print(i.appType
+                                    ?.toLowerCase()
+                                    .contains(controller.text.toLowerCase()));
+                                if (i.toJson().isNotEmpty) {
+                                  if (i.paramName!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.paramValue!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.paramDesc!.toLowerCase().contains(
+                                          controller.text.toLowerCase())) {
+                                    debugPrint(i.appType);
+                                    setState(() {
+                                      shared.prov_data
+                                          .add(Data13.fromJson(i.toJson()));
+                                    });
+                                    if (shared.prov_data.isNotEmpty) {
+                                      setState(() {
+                                        isLoaded = true;
+                                      });
+                                    }
+                                  }
+                                }
+                              }
+                            } else if (controller.text == '') {
+                              shared.prov_data.clear();
+                              setState(() {
+                                shared.prov_data.addAll(shared.prov[0].data!);
+                                isLoaded = true;
+                              });
+                            }
+                            debugPrint(shared.prov_data[0].toJson().toString());
+                          } catch (e) {
+                            shared.prov_data.clear();
+                            isLoaded = true;
+                          }
+                        },
+                        onEditingComplete: () async {
+                          setState(() {
+                            isLoaded = false;
+                          });
+                          try {
+                            if (controller.text.isNotEmpty) {
+                              shared.prov_data.clear();
+                              for (var i in shared.prov[0].data!) {
+                                print(i.toJson());
+                                print(i.appType
+                                    ?.toLowerCase()
+                                    .contains(controller.text.toLowerCase()));
+                                if (i.toJson().isNotEmpty) {
+                                  if (i.paramName!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.paramValue!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.paramDesc!.toLowerCase().contains(
+                                          controller.text.toLowerCase())) ;
+                                  debugPrint(i.appType);
+                                  setState(() {
+                                    key.currentState?.pageTo(0);
+                                    shared.prov_data
+                                        .add(Data13.fromJson(i.toJson()));
+                                  });
+                                  if (shared.prov_data.isNotEmpty) {
+                                    setState(() {
+                                      isLoaded = true;
+                                    });
+                                  }
+                                }
+                              }
+                            } else if (controller.text == '') {
+                              shared.prov_data.clear();
+                              setState(() {
+                                shared.prov_data.addAll(shared.prov[0].data!);
+                              });
+                            }
+                            debugPrint(shared.prov_data[0].toJson().toString());
+                          } catch (e) {
+                            shared.prov_data.clear();
+                          }
+                        },
                       ),
                     ),
-                    textInputAction: TextInputAction.go,
-                    controller: controller,
-                    onChanged: (value) {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      //
-                      try {
-                        if (controller.text.isNotEmpty) {
-                          shared.prov_data.clear();
-                          for (var i in shared.prov[0].data!) {
-                            print(i.toJson());
-                            print(i.appType
-                                ?.toLowerCase()
-                                .contains(controller.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.paramName!
-                                  .toLowerCase()
-                                  .contains(controller.text.toLowerCase()) ||
-                                  i.paramValue!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())   ||
-                                  i.paramDesc!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())
-
-                              ) {
-                                debugPrint(i.appType);
-                                setState(() {
-                                  shared.prov_data.add(Data13.fromJson(i.toJson()));
-                                });
-                                if (shared.prov_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
-                                }
-                              }
-                            }
-                          }
-                        } else if (controller.text == '') {
-                          shared.prov_data.clear();
-                          setState(() {
-                            shared.prov_data.addAll(shared.prov[0].data!);
-                            isLoaded = true;
-                          });
-                        }
-                        debugPrint(shared.prov_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.prov_data.clear();
-                        isLoaded = true;
-                      }
-                    },
-                    onEditingComplete: () async {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      try {
-                        if (controller.text.isNotEmpty) {
-                          shared.prov_data.clear();
-                          for (var i in shared.prov[0].data!) {
-                            print(i.toJson());
-                            print(i.appType
-        ?.toLowerCase()
-        .contains(controller.text.toLowerCase()));
-    if (i.toJson().isNotEmpty) {
-    if (i.paramName!
-        .toLowerCase()
-        .contains(controller.text.toLowerCase()) ||
-    i.paramValue!
-        .toLowerCase()
-        .contains(controller.text.toLowerCase())   ||
-    i.paramDesc!
-        .toLowerCase()
-        .contains(controller.text.toLowerCase()));
-                                debugPrint(i.appType);
-                                setState(() {
-                                  key.currentState?.pageTo(0);
-                                  shared.prov_data.add(Data13.fromJson(i.toJson()));
-
-                                });
-                                if (shared.prov_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
-                                }
-                              }
-                            }
-
-                        } else if (controller.text == '') {
-                          shared.prov_data.clear();
-                          setState(() {
-                            shared.prov_data.addAll(shared.prov[0].data!);
-                          });
-                        }
-                        debugPrint(shared.prov_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.prov_data.clear();
-                      }
-                    },
-                  ),
-                ),Container(
-                    width: double.infinity,
-                    padding: kEdgeInsetsVerticalNormal,
-                    child: PaginatedDataTable(
-                      key: key,
-                      dataRowHeight: 50,
-                      arrowHeadColor: kWhiteColor,
-                      columns: [
-                        DataColumn(
-                            label: Text('Parameter Type',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Parameter Name',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Parameter Value',
-                                style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label:
-                            Text('Description', style: kLargeBoldTextStyle))
-                      ],
-                      source: isLoaded
-                          ? shared.prov_data.isNotEmpty
-                          ? data
-                          : data2
-                          : data3,
-                      rowsPerPage: 8,
-                      showFirstLastButtons: true,
-                      header: Text(' List of Parameter Configuration',
-                          style: kXLargeBoldTextStyle),
-                    )),],)
+                    Container(
+                        width: double.infinity,
+                        padding: kEdgeInsetsVerticalNormal,
+                        child: PaginatedDataTable(
+                          key: key,
+                          dataRowHeight: 50,
+                          arrowHeadColor: kWhiteColor,
+                          columns: [
+                            DataColumn(
+                                label: Text('Parameter Type',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Parameter Name',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Parameter Value',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Description',
+                                    style: kLargeBoldTextStyle))
+                          ],
+                          source: isLoaded
+                              ? shared.prov_data.isNotEmpty
+                                  ? data
+                                  : data2
+                              : data3,
+                          rowsPerPage: 8,
+                          showFirstLastButtons: true,
+                          header: Text(' List of Parameter Configuration',
+                              style: kXLargeBoldTextStyle),
+                        )),
+                  ],
+                )
               ],
             ),
           ),
