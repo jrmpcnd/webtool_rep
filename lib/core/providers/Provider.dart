@@ -239,3 +239,10 @@ class Listofuse_Device extends ChangeNotifier {
 // },
 // ),
 // ),
+
+class AtmLocation extends ChangeNotifier {
+  String ATMLocation_button = 'Click here';
+  List<Atm_Loc_Api> AtmLocation_Log = [];
+  List<Atm_Loc_Log> AtmLocation_data = [];
+  bool search = false;
+}

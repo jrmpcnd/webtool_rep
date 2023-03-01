@@ -140,3 +140,43 @@ class ListofUserDevice_Parse {
     return useoflistdevicelog;
   }
 }
+
+class Atm_Location_Push {
+  Future<http.Response> pushHttp20() async {
+    http.Response response2 = await http.post(
+      Uri.parse('$API/get_atmloc'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "atm_id": "",
+          "inst_desc": "",
+          "atm_description": "",
+          "atm_address": "",
+          "atm_city": ""
+        },
+      ),
+    );
+    if (response2.statusCode == 200) {
+      print(response2.statusCode);
+      print(response2.body);
+      return response2;
+    } else {
+      return response2;
+    }
+  }
+}
+
+class Atm_Location_Parse {
+  Future<Atm_Loc_Api> profile20() async {
+    Atm_Location_Push httpPush20 = Atm_Location_Push();
+    http.Response res2 = await httpPush20.pushHttp20();
+    print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");
+    var atmloclogs =
+    Atm_Loc_Api.fromJson(jsonDecode(res2.body));
+    return atmloclogs;
+  }
+}

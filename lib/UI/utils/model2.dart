@@ -274,3 +274,58 @@ class UseoflistDevice_Log {
     return data;
   }
 }
+
+
+class Atm_Loc_Api {
+  String? retCode;
+  String? message;
+  List<Atm_Loc_Log>? data;
+
+  Atm_Loc_Api({this.retCode, this.message, this.data});
+
+  Atm_Loc_Api.fromJson(Map<String, dynamic> json) {
+    retCode = json['retCode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Atm_Loc_Log>[];
+      json['data'].forEach((v) {
+        data!.add(new Atm_Loc_Log.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retCode'] = this.retCode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+class Atm_Loc_Log {
+  String? atmAddress;
+  String? atmCity;
+  String? atmDescription;
+  String? instDesc;
+
+  Atm_Loc_Log(
+      {this.atmAddress, this.atmCity, this.atmDescription, this.instDesc});
+
+  Atm_Loc_Log.fromJson(Map<String, dynamic> json) {
+    atmAddress = json['atm_address'];
+    atmCity = json['atm_city'];
+    atmDescription = json['atm_description'];
+    instDesc = json['inst_desc'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['atm_address'] = this.atmAddress;
+    data['atm_city'] = this.atmCity;
+    data['atm_description'] = this.atmDescription;
+    data['inst_desc'] = this.instDesc;
+    return data;
+  }
+}
