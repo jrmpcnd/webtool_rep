@@ -500,3 +500,54 @@ class Servicedowntime_Log {
     return data;
   }
 }
+
+
+class Institution_Api {
+  String? retCode;
+  String? message;
+  List<Institution_Log>? data;
+
+  Institution_Api({this.retCode, this.message, this.data});
+
+  Institution_Api.fromJson(Map<String, dynamic> json) {
+    retCode = json['retCode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Institution_Log>[];
+      json['data'].forEach((v) {
+        data!.add(new Institution_Log.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retCode'] = this.retCode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+class Institution_Log {
+  String? instCode;
+  String? instDesc;
+  String? createdDate;
+
+  Institution_Log({this.instCode, this.instDesc, this.createdDate});
+
+  Institution_Log.fromJson(Map<String, dynamic> json) {
+    instCode = json['inst_code'];
+    instDesc = json['inst_desc'];
+    createdDate = json['created_date'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['inst_code'] = this.instCode;
+    data['inst_desc'] = this.instDesc;
+    data['created_date'] = this.createdDate;
+    return data;
+  }
+}

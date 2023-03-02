@@ -268,4 +268,11 @@ class Servicedowntime_U extends ChangeNotifier {
   bool search = false;
 }
 
+class Institution_U extends ChangeNotifier {
+  String Institution_button = 'Click here';
+  List<Institution_Api> InstitutionLog = [];
+  List<Institution_Log>Institution_data = [];
+  bool search = false;
+}
+
 
