@@ -87,4 +87,16 @@ class Prov13 extends ChangeNotifier {
   bool search13 = false;
 }
 
+class Prov14 extends ChangeNotifier {
+  String product_button = 'Click here';
+  List<Product_Type> product = [];
+  List<Data14> product_data = [];
+  bool search14 = false;
+}
 
+class Prov15 extends ChangeNotifier {
+  String category_button = 'Click here';
+  List<Product_Category> category = [];
+  List<Data15> category_data = [];
+  bool search15 = false;
+}

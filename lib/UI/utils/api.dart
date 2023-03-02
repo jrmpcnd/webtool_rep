@@ -523,6 +523,88 @@ class Prov_ConfigParse {
   }
 }
 
+class Product_TypePush {
+  Future<http.Response> pushHttp14() async {
+    http.Response response14 = await http.post(
+      Uri.parse('$API/get_producttype/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "description": "",
+          "id": "",
+          "last_sync": "",
+          "product_type_id": "",
+          "product_type_name": "",
+          "provider_name": "",
+          "status": ""
+        },
+      ),
+    );
+    if (response14.statusCode == 200) {
+      print(response14.statusCode);
+      print(response14.body);
+      return response14;
+    } else {
+      return response14;
+    }
+  }
+}
+
+class Product_TypeParse {
+  Future<Product_Type> profile14() async {
+    Product_TypePush httpPush14 = Product_TypePush();
+    http.Response res14 = await httpPush14.pushHttp14();
+    print("-------->>>>>>>>>>${jsonDecode(res14.body).length}");
+    var product = Product_Type.fromJson(jsonDecode(res14.body));
+    return product;
+  }
+}
+
+class Product_CategoryPush {
+  Future<http.Response> pushHttp15() async {
+    http.Response response15 = await http.post(
+      Uri.parse('$API/get_productcategory/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "description": "",
+          "id": "",
+          "last_sync": "",
+          "product_type_id": "",
+          "product_type_name": "",
+          "provider_name": "",
+          "status": ""
+        },
+      ),
+    );
+    if (response15.statusCode == 200) {
+      print(response15.statusCode);
+      print(response15.body);
+      return response15;
+    } else {
+      return response15;
+    }
+  }
+}
+
+class Product_CategoryParse {
+  Future<Product_Category> profile15() async {
+    Product_CategoryPush httpPush15 = Product_CategoryPush();
+    http.Response res15 = await httpPush15.pushHttp15();
+    print("-------->>>>>>>>>>${jsonDecode(res15.body).length}");
+    var category = Product_Category.fromJson(jsonDecode(res15.body));
+    return category;
+  }
+}
+
 class transacconfirm_Api {
   Future<http.Response> news(
       String branch_desc, cid, status, trans_date, trans_desc) async {

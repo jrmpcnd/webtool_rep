@@ -857,3 +857,135 @@ class Data13 {
     return data;
   }
 }
+
+class Product_Type {
+  String? retcode;
+  String? message;
+  List<Data14>? data;
+
+  Product_Type({this.retcode, this.message, this.data});
+
+  Product_Type.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data14>[];
+      json['data'].forEach((v) {
+        data!.add(new Data14.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data14 {
+  String? id;
+  String? providerName;
+  String? productTypeId;
+  String? productTypeName;
+  String? description;
+  String? status;
+  String? lastSync;
+
+  Data14(
+      {this.id,
+      this.providerName,
+      this.productTypeId,
+      this.productTypeName,
+      this.description,
+      this.status,
+      this.lastSync});
+
+  Data14.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    providerName = json['provider_name'];
+    productTypeId = json['product_type_id'];
+    productTypeName = json['product_type_name'];
+    description = json['description'];
+    status = json['status'];
+    lastSync = json['last_sync'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['provider_name'] = this.providerName;
+    data['product_type_id'] = this.productTypeId;
+    data['product_type_name'] = this.productTypeName;
+    data['description'] = this.description;
+    data['status'] = this.status;
+    data['last_sync'] = this.lastSync;
+    return data;
+  }
+}
+
+class Product_Category {
+  String? retcode;
+  String? message;
+  List<Data15>? data;
+
+  Product_Category({this.retcode, this.message, this.data});
+
+  Product_Category.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data15>[];
+      json['data'].forEach((v) {
+        data!.add(new Data15.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data15 {
+  String? providerName;
+  String? productTypeName;
+  String? productCategoryId;
+  String? productCategoryName;
+  String? status;
+
+  Data15(
+      {this.providerName,
+      this.productTypeName,
+      this.productCategoryId,
+      this.productCategoryName,
+      this.status});
+
+  Data15.fromJson(Map<String, dynamic> json) {
+    providerName = json['provider_name'];
+    productTypeName = json['product_type_name'];
+    productCategoryId = json['product_category_id'];
+    productCategoryName = json['product_category_name'];
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['provider_name'] = this.providerName;
+    data['product_type_name'] = this.productTypeName;
+    data['product_category_id'] = this.productCategoryId;
+    data['product_category_name'] = this.productCategoryName;
+    data['status'] = this.status;
+    return data;
+  }
+}
