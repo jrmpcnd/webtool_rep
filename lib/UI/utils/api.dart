@@ -647,6 +647,48 @@ class Biller_ProductParse {
   }
 }
 
+class Load_ProductPush {
+  Future<http.Response> pushHttp17() async {
+    http.Response response17 = await http.post(
+      Uri.parse('$API/get_loadproduct/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "bank_commission": "",
+          "biller_product_id": "",
+          "biller_product_name": "",
+          "description": "",
+          "product_category_name": "",
+          "provider_name": "",
+          "service_fee": "",
+          "status": ""
+        },
+      ),
+    );
+    if (response17.statusCode == 200) {
+      print(response17.statusCode);
+      print(response17.body);
+      return response17;
+    } else {
+      return response17;
+    }
+  }
+}
+
+class Load_ProductParse {
+  Future<Load_Product> profile17() async {
+    Load_ProductPush httpPush16 = Load_ProductPush();
+    http.Response res17 = await httpPush16.pushHttp17();
+    print("-------->>>>>>>>>>${jsonDecode(res17.body).length}");
+    var load = Load_Product.fromJson(jsonDecode(res17.body));
+    return load;
+  }
+}
+
 class transacconfirm_Api {
   Future<http.Response> news(
       String branch_desc, cid, status, trans_date, trans_desc) async {

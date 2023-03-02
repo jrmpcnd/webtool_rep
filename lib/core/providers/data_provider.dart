@@ -107,3 +107,10 @@ class Prov16 extends ChangeNotifier {
   List<Data16> biller_data = [];
   bool search16 = false;
 }
+
+class Prov17 extends ChangeNotifier {
+  String load_button = 'Click here';
+  List<Load_Product> load = [];
+  List<Data17> load_data = [];
+  bool search17 = false;
+}

@@ -1063,3 +1063,65 @@ class Data16 {
     return data;
   }
 }
+
+class Load_Product {
+  String? retcode;
+  String? message;
+  List<Data17>? data;
+
+  Load_Product({this.retcode, this.message, this.data});
+
+  Load_Product.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data17>[];
+      json['data'].forEach((v) {
+        data!.add(new Data17.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data17 {
+  String? productCategoryName;
+  String? loadProductId;
+  String? loadProductName;
+  String? description;
+  String? status;
+
+  Data17(
+      {this.productCategoryName,
+      this.loadProductId,
+      this.loadProductName,
+      this.description,
+      this.status});
+
+  Data17.fromJson(Map<String, dynamic> json) {
+    productCategoryName = json['product_category_name'];
+    loadProductId = json['load_product_id'];
+    loadProductName = json['load_product_name'];
+    description = json['description'];
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['product_category_name'] = this.productCategoryName;
+    data['load_product_id'] = this.loadProductId;
+    data['load_product_name'] = this.loadProductName;
+    data['description'] = this.description;
+    data['status'] = this.status;
+    return data;
+  }
+}
