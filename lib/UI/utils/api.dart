@@ -689,6 +689,47 @@ class Load_ProductParse {
   }
 }
 
+class Commission_SetupPush {
+  Future<http.Response> pushHttp18() async {
+    http.Response response18 = await http.post(
+      Uri.parse('$API/get_commission/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "agent_income": "",
+          "bank_income": "",
+          "bank_partner_income": "",
+          "commission_type": "",
+          "customer_income": "",
+          "id": "",
+          "trans_type": ""
+        },
+      ),
+    );
+    if (response18.statusCode == 200) {
+      print(response18.statusCode);
+      print(response18.body);
+      return response18;
+    } else {
+      return response18;
+    }
+  }
+}
+
+class Commission_SetupParse {
+  Future<Commission_Setup> profile18() async {
+    Commission_SetupPush httpPush18 = Commission_SetupPush();
+    http.Response res17 = await httpPush18.pushHttp18();
+    print("-------->>>>>>>>>>${jsonDecode(res17.body).length}");
+    var load = Commission_Setup.fromJson(jsonDecode(res17.body));
+    return load;
+  }
+}
+
 class transacconfirm_Api {
   Future<http.Response> news(
       String branch_desc, cid, status, trans_date, trans_desc) async {

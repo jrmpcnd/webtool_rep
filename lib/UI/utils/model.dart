@@ -1125,3 +1125,73 @@ class Data17 {
     return data;
   }
 }
+
+class Commission_Setup {
+  String? retcode;
+  String? message;
+  List<Data18>? data;
+
+  Commission_Setup({this.retcode, this.message, this.data});
+
+  Commission_Setup.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data18>[];
+      json['data'].forEach((v) {
+        data!.add(new Data18.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data18 {
+  String? id;
+  String? transType;
+  String? commissionType;
+  double? customerIncome;
+  double? agentIncome;
+  double? bankIncome;
+  double? bankPartnerIncome;
+
+  Data18(
+      {this.id,
+      this.transType,
+      this.commissionType,
+      this.customerIncome,
+      this.agentIncome,
+      this.bankIncome,
+      this.bankPartnerIncome});
+
+  Data18.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    transType = json['trans_type'];
+    commissionType = json['commission_type'];
+    customerIncome = json['customer_income'];
+    agentIncome = json['agent_income'];
+    bankIncome = json['bank_income'];
+    bankPartnerIncome = json['bank_partner_income'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['trans_type'] = this.transType;
+    data['commission_type'] = this.commissionType;
+    data['customer_income'] = this.customerIncome;
+    data['agent_income'] = this.agentIncome;
+    data['bank_income'] = this.bankIncome;
+    data['bank_partner_income'] = this.bankPartnerIncome;
+    return data;
+  }
+}
