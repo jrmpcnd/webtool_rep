@@ -440,3 +440,63 @@ class ProductandServices_Log {
 
 
 
+class Servicedowntime_Api {
+  String? retCode;
+  String? message;
+  List<Servicedowntime_Log>? data;
+
+  Servicedowntime_Api({this.retCode, this.message, this.data});
+
+  Servicedowntime_Api.fromJson(Map<String, dynamic> json) {
+    retCode = json['retCode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Servicedowntime_Log>[];
+      json['data'].forEach((v) {
+        data!.add(new Servicedowntime_Log.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retCode'] = this.retCode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+class Servicedowntime_Log {
+  String? downtimeId;
+  String? downtimeDesc;
+  String? downtimeStart;
+  String? downtimeEnd;
+  String? clientType;
+
+  Servicedowntime_Log(
+      {this.downtimeId,
+        this.downtimeDesc,
+        this.downtimeStart,
+        this.downtimeEnd,
+        this.clientType});
+
+  Servicedowntime_Log.fromJson(Map<String, dynamic> json) {
+    downtimeId = json['downtime_id'];
+    downtimeDesc = json['downtime_desc'];
+    downtimeStart = json['downtime_start'];
+    downtimeEnd = json['downtime_end'];
+    clientType = json['client_type'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['downtime_id'] = this.downtimeId;
+    data['downtime_desc'] = this.downtimeDesc;
+    data['downtime_start'] = this.downtimeStart;
+    data['downtime_end'] = this.downtimeEnd;
+    data['client_type'] = this.clientType;
+    return data;
+  }
+}

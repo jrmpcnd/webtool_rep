@@ -261,4 +261,11 @@ class ProductandServices_U extends ChangeNotifier {
   bool search = false;
 }
 
+class Servicedowntime_U extends ChangeNotifier {
+  String Servicedowntime_button = 'Click here';
+  List<Servicedowntime_Api> ServicedowntimeLog = [];
+  List<Servicedowntime_Log>Servicedowntime_data = [];
+  bool search = false;
+}
+
 
