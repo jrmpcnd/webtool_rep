@@ -1195,3 +1195,60 @@ class Data18 {
     return data;
   }
 }
+
+class Bank_List {
+  String? retcode;
+  String? message;
+  List<Data19>? data;
+
+  Bank_List({this.retcode, this.message, this.data});
+
+  Bank_List.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data19>[];
+      json['data'].forEach((v) {
+        data!.add(new Data19.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data19 {
+  String? id;
+  String? bankCode;
+  String? bankName;
+  String? shortName;
+  String? bankBic;
+
+  Data19({this.id, this.bankCode, this.bankName, this.shortName, this.bankBic});
+
+  Data19.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    bankCode = json['bank_code'];
+    bankName = json['bank_name'];
+    shortName = json['short_name'];
+    bankBic = json['bank_bic'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['bank_code'] = this.bankCode;
+    data['bank_name'] = this.bankName;
+    data['short_name'] = this.shortName;
+    data['bank_bic'] = this.bankBic;
+    return data;
+  }
+}

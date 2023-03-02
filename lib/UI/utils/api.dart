@@ -730,6 +730,45 @@ class Commission_SetupParse {
   }
 }
 
+class Bank_ListPush {
+  Future<http.Response> pushHttp19() async {
+    http.Response response19 = await http.post(
+      Uri.parse('$API/get_banklist/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "bank_bic": "",
+          "bank_code": "",
+          "bank_name": "",
+          "id": "",
+          "short_name": ""
+        },
+      ),
+    );
+    if (response19.statusCode == 200) {
+      print(response19.statusCode);
+      print(response19.body);
+      return response19;
+    } else {
+      return response19;
+    }
+  }
+}
+
+class Bank_ListParse {
+  Future<Bank_List> profile19() async {
+    Bank_ListPush httpPush18 = Bank_ListPush();
+    http.Response res17 = await httpPush18.pushHttp19();
+    print("-------->>>>>>>>>>${jsonDecode(res17.body).length}");
+    var list = Bank_List.fromJson(jsonDecode(res17.body));
+    return list;
+  }
+}
+
 class transacconfirm_Api {
   Future<http.Response> news(
       String branch_desc, cid, status, trans_date, trans_desc) async {

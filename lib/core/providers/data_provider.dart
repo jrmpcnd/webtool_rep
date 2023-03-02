@@ -121,3 +121,10 @@ class Prov18 extends ChangeNotifier {
   List<Data18> commission_data = [];
   bool search18 = false;
 }
+
+class Prov19 extends ChangeNotifier {
+  String list_button = 'Click here';
+  List<Bank_List> list = [];
+  List<Data19> list_data = [];
+  bool search19 = false;
+}
