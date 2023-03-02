@@ -302,6 +302,7 @@ class _ProductandservicesState extends State<Productandservices> {
                   width: double.infinity,
                   padding: kEdgeInsetsVerticalNormal,
                   child: PaginatedDataTable(
+                    dataRowHeight: 200,
                     key: key,
                     arrowHeadColor: kWhiteColor,
                     columns: [
@@ -344,7 +345,7 @@ class MyData extends DataTableSource {
       DataCell(SizedBox(
           width: 100, child: Text(shared.ProductandServices_data[index].serviceName.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.ProductandServices_data[index].serviceDescription.toString()))),
+          width: 400, child: Text(shared.ProductandServices_data[index].serviceDescription.toString()))),
       DataCell(SizedBox(
           width: 100, child: Text(shared.ProductandServices_data[index].show.toString()))),
 
