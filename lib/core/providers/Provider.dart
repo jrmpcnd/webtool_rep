@@ -254,3 +254,11 @@ class Banknews_U extends ChangeNotifier {
   bool search = false;
 }
 
+class ProductandServices_U extends ChangeNotifier {
+  String ProductandServices_button = 'Click here';
+  List<ProductandServices_Api> ProductandServicesLog = [];
+  List<ProductandServices_Log>ProductandServices_data = [];
+  bool search = false;
+}
+
+

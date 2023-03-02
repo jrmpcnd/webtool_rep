@@ -384,5 +384,59 @@ class BankNews_Log {
   }
 }
 
+class ProductandServices_Api {
+  String? retCode;
+  String? message;
+  List<ProductandServices_Log>? data;
+
+  ProductandServices_Api({this.retCode, this.message, this.data});
+
+  ProductandServices_Api.fromJson(Map<String, dynamic> json) {
+    retCode = json['retCode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <ProductandServices_Log>[];
+      json['data'].forEach((v) {
+        data!.add(new ProductandServices_Log.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retCode'] = this.retCode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+class ProductandServices_Log {
+  String? serviceId;
+  String? serviceName;
+  String? serviceDescription;
+  bool? show;
+
+  ProductandServices_Log(
+      {this.serviceId, this.serviceName, this.serviceDescription, this.show});
+
+  ProductandServices_Log.fromJson(Map<String, dynamic> json) {
+    serviceId = json['service_id'];
+    serviceName = json['service_name'];
+    serviceDescription = json['service_description'];
+    show = json['show'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['service_id'] = this.serviceId;
+    data['service_name'] = this.serviceName;
+    data['service_description'] = this.serviceDescription;
+    data['show'] = this.show;
+    return data;
+  }
+}
+
 
 
