@@ -551,3 +551,55 @@ class Institution_Log {
     return data;
   }
 }
+
+
+class Branch_Api {
+  String? retCode;
+  String? message;
+  List<Branch_Log>? data;
+
+ Branch_Api({this.retCode, this.message, this.data});
+
+  Branch_Api.fromJson(Map<String, dynamic> json) {
+    retCode = json['retCode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Branch_Log>[];
+      json['data'].forEach((v) {
+        data!.add(new Branch_Log.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retCode'] = this.retCode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Branch_Log {
+  String? branchCode;
+  String? branchDesc;
+  String? createdDate;
+
+  Branch_Log({this.branchCode, this.branchDesc, this.createdDate});
+
+  Branch_Log.fromJson(Map<String, dynamic> json) {
+    branchCode = json['branch_code'];
+    branchDesc = json['branch_desc'];
+    createdDate = json['created_date'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['branch_code'] = this.branchCode;
+    data['branch_desc'] = this.branchDesc;
+    data['created_date'] = this.createdDate;
+    return data;
+  }
+}

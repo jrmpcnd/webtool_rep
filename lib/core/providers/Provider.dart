@@ -275,4 +275,11 @@ class Institution_U extends ChangeNotifier {
   bool search = false;
 }
 
+class Branch_U extends ChangeNotifier {
+  String Branch_button = 'Click here';
+  List<Branch_Api> BranchLog = [];
+  List<Branch_Log>Branch_data = [];
+  bool search = false;
+}
+
 

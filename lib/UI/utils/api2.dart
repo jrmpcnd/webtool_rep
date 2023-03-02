@@ -338,3 +338,42 @@ class Institution_Parse {
     return institution;
   }
 }
+
+
+class Branch_Push {
+  Future<http.Response> pushHttp21() async {
+    http.Response response2 = await http.post(
+      Uri.parse('$API/get_branch'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "branch_code": "",
+          "branch_desc": "",
+          "created_date": ""
+        },
+      ),
+    );
+    if (response2.statusCode == 200) {
+      print(response2.statusCode);
+      print(response2.body);
+      return response2;
+    } else {
+      return response2;
+    }
+  }
+}
+
+class Branch_Parse {
+  Future<Branch_Api> profile24() async {
+    Branch_Push httpPush20 = Branch_Push();
+    http.Response res2 = await httpPush20.pushHttp21();
+    print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");
+    var branch =
+    Branch_Api.fromJson(jsonDecode(res2.body));
+    return branch;
+  }
+}
