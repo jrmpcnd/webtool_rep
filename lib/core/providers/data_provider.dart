@@ -100,3 +100,10 @@ class Prov15 extends ChangeNotifier {
   List<Data15> category_data = [];
   bool search15 = false;
 }
+
+class Prov16 extends ChangeNotifier {
+  String biller_button = 'Click here';
+  List<Biller_Product> biller = [];
+  List<Data16> biller_data = [];
+  bool search16 = false;
+}

@@ -989,3 +989,77 @@ class Data15 {
     return data;
   }
 }
+
+class Biller_Product {
+  String? retcode;
+  String? message;
+  List<Data16>? data;
+
+  Biller_Product({this.retcode, this.message, this.data});
+
+  Biller_Product.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data16>[];
+      json['data'].forEach((v) {
+        data!.add(new Data16.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data16 {
+  String? providerName;
+  String? productCategoryName;
+  String? billerProductId;
+  String? billerProductName;
+  String? description;
+  String? bankCommission;
+  String? serviceFee;
+  String? status;
+
+  Data16(
+      {this.providerName,
+      this.productCategoryName,
+      this.billerProductId,
+      this.billerProductName,
+      this.description,
+      this.bankCommission,
+      this.serviceFee,
+      this.status});
+
+  Data16.fromJson(Map<String, dynamic> json) {
+    providerName = json['provider_name'];
+    productCategoryName = json['product_category_name'];
+    billerProductId = json['biller_product_id'];
+    billerProductName = json['biller_product_name'];
+    description = json['description'];
+    bankCommission = json['bank_commission'];
+    serviceFee = json['service_fee'];
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['provider_name'] = this.providerName;
+    data['product_category_name'] = this.productCategoryName;
+    data['biller_product_id'] = this.billerProductId;
+    data['biller_product_name'] = this.billerProductName;
+    data['description'] = this.description;
+    data['bank_commission'] = this.bankCommission;
+    data['service_fee'] = this.serviceFee;
+    data['status'] = this.status;
+    return data;
+  }
+}

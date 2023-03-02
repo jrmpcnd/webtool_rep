@@ -605,6 +605,48 @@ class Product_CategoryParse {
   }
 }
 
+class Biller_ProductPush {
+  Future<http.Response> pushHttp16() async {
+    http.Response response16 = await http.post(
+      Uri.parse('$API/get_billerproduct/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "bank_commission": "",
+          "biller_product_id": "",
+          "biller_product_name": "",
+          "description": "",
+          "product_category_name": "",
+          "provider_name": "",
+          "service_fee": "",
+          "status": ""
+        },
+      ),
+    );
+    if (response16.statusCode == 200) {
+      print(response16.statusCode);
+      print(response16.body);
+      return response16;
+    } else {
+      return response16;
+    }
+  }
+}
+
+class Biller_ProductParse {
+  Future<Biller_Product> profile16() async {
+    Biller_ProductPush httpPush16 = Biller_ProductPush();
+    http.Response res16 = await httpPush16.pushHttp16();
+    print("-------->>>>>>>>>>${jsonDecode(res16.body).length}");
+    var biller = Biller_Product.fromJson(jsonDecode(res16.body));
+    return biller;
+  }
+}
+
 class transacconfirm_Api {
   Future<http.Response> news(
       String branch_desc, cid, status, trans_date, trans_desc) async {
