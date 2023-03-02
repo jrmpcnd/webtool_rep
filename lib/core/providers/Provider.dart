@@ -246,3 +246,11 @@ class AtmLocation extends ChangeNotifier {
   List<Atm_Loc_Log> AtmLocation_data = [];
   bool search = false;
 }
+
+class Banknews_U extends ChangeNotifier {
+  String Banknews_button = 'Click here';
+  List<BankNews_Api> BanknewsLog = [];
+  List<BankNews_Log>Banknews_data = [];
+  bool search = false;
+}
+

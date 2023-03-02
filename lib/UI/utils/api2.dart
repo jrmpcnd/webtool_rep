@@ -180,3 +180,42 @@ class Atm_Location_Parse {
     return atmloclogs;
   }
 }
+
+class BankNews_Push {
+  Future<http.Response> pushHttp21() async {
+    http.Response response2 = await http.post(
+      Uri.parse('$API/get_banknews'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "product_id": "",
+          "product_date": "",
+          "given_name": "",
+          "product_name": ""
+        },
+      ),
+    );
+    if (response2.statusCode == 200) {
+      print(response2.statusCode);
+      print(response2.body);
+      return response2;
+    } else {
+      return response2;
+    }
+  }
+}
+
+class BanksNews_Parse {
+  Future<BankNews_Api> profile21() async {
+    BankNews_Push httpPush20 = BankNews_Push();
+    http.Response res2 = await httpPush20.pushHttp21();
+    print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");
+    var banknewslog =
+    BankNews_Api.fromJson(jsonDecode(res2.body));
+    return banknewslog;
+  }
+}

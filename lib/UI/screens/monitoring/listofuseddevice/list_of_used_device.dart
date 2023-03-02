@@ -396,8 +396,7 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
                      }
                    },
                  ),
-               ),
-                 Container(
+               ), Container(
                  width: double.infinity,
                  padding: kEdgeInsetsVerticalNormal,
                  child: PaginatedDataTable(

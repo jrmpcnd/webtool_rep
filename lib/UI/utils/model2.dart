@@ -329,3 +329,60 @@ class Atm_Loc_Log {
     return data;
   }
 }
+
+class BankNews_Api {
+  String? retCode;
+  String? message;
+  List<BankNews_Log>? data;
+
+  BankNews_Api({this.retCode, this.message, this.data});
+
+  BankNews_Api.fromJson(Map<String, dynamic> json) {
+    retCode = json['retCode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <BankNews_Log>[];
+      json['data'].forEach((v) {
+        data!.add(new BankNews_Log.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retCode'] = this.retCode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+class BankNews_Log {
+  String? productId;
+  String? productDate;
+  String? givenName;
+  String? productName;
+
+  BankNews_Log(
+      {this.productId, this.productDate, this.givenName, this.productName});
+
+  BankNews_Log.fromJson(Map<String, dynamic> json) {
+    productId = json['product_id'];
+    productDate = json['product_date'];
+    givenName = json['given_name'];
+    productName = json['product_name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['product_id'] = this.productId;
+    data['product_date'] = this.productDate;
+    data['given_name'] = this.givenName;
+    data['product_name'] = this.productName;
+    return data;
+  }
+}
+
+
+
