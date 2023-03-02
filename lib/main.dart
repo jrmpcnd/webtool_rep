@@ -38,12 +38,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Prov14()),
         ChangeNotifierProvider(create: (context) => Prov15()),
         ChangeNotifierProvider(create: (context) => AtmLocation()),
-<<<<<<< HEAD
-=======
         ChangeNotifierProvider(create: (context) => Banknews_U()),
 
 
->>>>>>> 0336a6e (done bank news screen)
+
       ],
       child: MaterialApp(
           title: 'Konek2CARD PLUS Webtool',
