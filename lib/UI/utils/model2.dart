@@ -708,3 +708,74 @@ class Center_Log {
   }
 }
 
+class Providers_Api {
+  String? retCode;
+  String? message;
+  List<Providers_Log>? data;
+
+  Providers_Api({this.retCode, this.message, this.data});
+
+  Providers_Api.fromJson(Map<String, dynamic> json) {
+    retCode = json['retCode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Providers_Log>[];
+      json['data'].forEach((v) {
+        data!.add(new Providers_Log.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retCode'] = this.retCode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Providers_Log {
+  String? id;
+  String? providerName;
+  String? description;
+  String? providerAlias;
+  String? status;
+  String? lastSync;
+
+  Providers_Log(
+      {this.id,
+        this.providerName,
+        this.description,
+        this.providerAlias,
+        this.status,
+        this.lastSync});
+
+  Providers_Log.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    providerName = json['provider_name'];
+    description = json['description'];
+    providerAlias = json['provider_alias'];
+    status = json['status'];
+    lastSync = json['last_sync'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['provider_name'] = this.providerName;
+    data['description'] = this.description;
+    data['provider_alias'] = this.providerAlias;
+    data['status'] = this.status;
+    data['last_sync'] = this.lastSync;
+    return data;
+  }
+}
+
+
+
+
+
+

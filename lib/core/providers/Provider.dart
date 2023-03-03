@@ -296,4 +296,11 @@ class Center_U extends ChangeNotifier {
   bool search = false;
 }
 
+class Providers_U extends ChangeNotifier {
+  String Providers_button = 'Click here';
+  List<Providers_Api> ProvidersLog = [];
+  List<Providers_Log>Providers_data = [];
+  bool search = false;
+}
+
 
