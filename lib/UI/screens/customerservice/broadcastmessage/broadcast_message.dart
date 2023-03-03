@@ -63,138 +63,213 @@ class _BroadcastmessageState extends State<Broadcastmessage> {
       child: Column(
         children: [
           Container(
-            width: 500,
-            child: TextFormField(
-              style: TextStyle(color: kBlackColor),
-              decoration: const InputDecoration(
-                hintText: 'Subject',
-                border: OutlineInputBorder(),
-                labelStyle: TextStyle(fontSize: 12.0),
-                contentPadding: EdgeInsets.only(left: 10.0),
-                hintStyle: TextStyle(color: kSecondaryColor2),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: kBlackColor),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: kBlackColor),
-                ),
+            padding: kEdgeInsetsAllNormal,
+            decoration: BoxDecoration(
+              color: kTertiaryColor5,
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
               ),
-              textInputAction: TextInputAction.go,
-              controller: controller,
-              onChanged: (value) {
-                setState(() {
-                  isLoaded = false;
-                });
-                //
-                try {
-                  if (controller.text.isNotEmpty) {
-                    shared.broadcast_data.clear();
-                    for (var i in shared.broadcast[0].data!) {
-                      print(i.toJson());
-                      print(i.inboxDate
-                          ?.toLowerCase()
-                          .contains(controller.text.toLowerCase()));
-                      if (i.toJson().isNotEmpty) {
-                        if (i.subject!
-                            .toLowerCase()
-                            .contains(controller.text.toLowerCase()) ||
-                            i.inboxDesc!
-                                .toLowerCase()
-                                .contains(controller.text.toLowerCase())   ||
-                            i.periodStart!
-                                .toLowerCase()
-                                .contains(controller.text.toLowerCase())    ||
-                            i.periodEnd!
-                                .toLowerCase()
-                                .contains(controller.text.toLowerCase())
-
-
-
-
-
-
-
-                        ) {
-                          debugPrint(i.inboxDesc);
-                          setState(() {
-                            shared.broadcast_data.add(Data9.fromJson(i.toJson()));
-                          });
-                          if (shared.broadcast_data.isNotEmpty) {
-                            setState(() {
-                              isLoaded = true;
-                            });
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3)),
+              ],
+            ),
+            height: 150.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 35.0,
+                  width: 400,
+                  child: TextFormField(
+                    style: TextStyle(color: kBlackColor),
+                    decoration: const InputDecoration(
+                      hintText: 'Subject',
+                      border: OutlineInputBorder(),
+                      labelStyle: TextStyle(fontSize: 12.0),
+                      contentPadding: EdgeInsets.only(left: 10.0),
+                      hintStyle: TextStyle(color: kSecondaryColor2),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: kBlackColor),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: kBlackColor),
+                      ),
+                    ),
+                    textInputAction: TextInputAction.go,
+                    controller: controller,
+                    onChanged: (value) {
+                      setState(() {
+                        isLoaded = false;
+                      });
+                      //
+                      try {
+                        if (controller.text.isNotEmpty) {
+                          shared.broadcast_data.clear();
+                          for (var i in shared.broadcast[0].data!) {
+                            print(i.toJson());
+                            print(i.inboxDate
+                                ?.toLowerCase()
+                                .contains(controller.text.toLowerCase()));
+                            if (i.toJson().isNotEmpty) {
+                              if (i.subject!.toLowerCase().contains(
+                                      controller.text.toLowerCase()) ||
+                                  i.inboxDesc!.toLowerCase().contains(
+                                      controller.text.toLowerCase()) ||
+                                  i.periodStart!.toLowerCase().contains(
+                                      controller.text.toLowerCase()) ||
+                                  i.periodEnd!.toLowerCase().contains(
+                                      controller.text.toLowerCase())) {
+                                debugPrint(i.inboxDesc);
+                                setState(() {
+                                  shared.broadcast_data
+                                      .add(Data9.fromJson(i.toJson()));
+                                });
+                                if (shared.broadcast_data.isNotEmpty) {
+                                  setState(() {
+                                    isLoaded = true;
+                                  });
+                                }
+                              }
+                            }
                           }
-                        }
-                      }
-                    }
-                  } else if (controller.text == '') {
-                    shared.broadcast_data.clear();
-                    setState(() {
-                      shared.broadcast_data.addAll(shared.broadcast[0].data!);
-                      isLoaded = true;
-                    });
-                  }
-                  debugPrint(shared.broadcast_data[0].toJson().toString());
-                } catch (e) {
-                  shared.broadcast_data.clear();
-                  isLoaded = true;
-                }
-              },
-              onEditingComplete: () async {
-                setState(() {
-                  isLoaded = false;
-                });
-                try {
-                  if (controller.text.isNotEmpty) {
-                    shared.broadcast_data.clear();
-                    for (var i in shared.broadcast[0].data!) {
-                      print(i.toJson());
-                      print(i.inboxDate
-                          ?.toLowerCase()
-                          .contains(controller.text.toLowerCase()));
-                      if (i.toJson().isNotEmpty) {
-                        if (i.subject!
-                            .toLowerCase()
-                            .contains(controller.text.toLowerCase()) ||
-                            i.inboxDesc!
-                                .toLowerCase()
-                                .contains(controller.text.toLowerCase())   ||
-                            i.periodStart!
-                                .toLowerCase()
-                                .contains(controller.text.toLowerCase())    ||
-                            i.periodEnd!
-                                .toLowerCase()
-                                .contains(controller.text.toLowerCase())
-
-
-
-                        ) {
-                          debugPrint (i.inboxDate);
+                        } else if (controller.text == '') {
+                          shared.broadcast_data.clear();
                           setState(() {
-                            key.currentState?.pageTo(0);
-                            shared.broadcast_data.add(Data9.fromJson(i.toJson()
-                            ));
-
+                            shared.broadcast_data
+                                .addAll(shared.broadcast[0].data!);
+                            isLoaded = true;
                           });
-                          if (shared.broadcast_data.isNotEmpty) {
-                            setState(() {
-                              isLoaded = true;
-                            });
-                          }
                         }
+                        debugPrint(
+                            shared.broadcast_data[0].toJson().toString());
+                      } catch (e) {
+                        shared.broadcast_data.clear();
+                        isLoaded = true;
                       }
-                    }
-                  } else if (controller.text == '') {
-                    shared.broadcast_data.clear();
-                    setState(() {
-                      shared.broadcast_data.addAll(shared.broadcast[0].data!);
-                    });
-                  }
-                  debugPrint(shared.broadcast_data[0].toJson().toString());
-                } catch (e) {
-                  shared.broadcast_data.clear();
-                }
-              },
+                    },
+                    onEditingComplete: () async {
+                      setState(() {
+                        isLoaded = false;
+                      });
+                      try {
+                        if (controller.text.isNotEmpty) {
+                          shared.broadcast_data.clear();
+                          for (var i in shared.broadcast[0].data!) {
+                            print(i.toJson());
+                            print(i.inboxDate
+                                ?.toLowerCase()
+                                .contains(controller.text.toLowerCase()));
+                            if (i.toJson().isNotEmpty) {
+                              if (i.subject!.toLowerCase().contains(
+                                      controller.text.toLowerCase()) ||
+                                  i.inboxDesc!.toLowerCase().contains(
+                                      controller.text.toLowerCase()) ||
+                                  i.periodStart!.toLowerCase().contains(
+                                      controller.text.toLowerCase()) ||
+                                  i.periodEnd!.toLowerCase().contains(
+                                      controller.text.toLowerCase())) {
+                                debugPrint(i.inboxDate);
+                                setState(() {
+                                  key.currentState?.pageTo(0);
+                                  shared.broadcast_data
+                                      .add(Data9.fromJson(i.toJson()));
+                                });
+                                if (shared.broadcast_data.isNotEmpty) {
+                                  setState(() {
+                                    isLoaded = true;
+                                  });
+                                }
+                              }
+                            }
+                          }
+                        } else if (controller.text == '') {
+                          shared.broadcast_data.clear();
+                          setState(() {
+                            shared.broadcast_data
+                                .addAll(shared.broadcast[0].data!);
+                          });
+                        }
+                        debugPrint(
+                            shared.broadcast_data[0].toJson().toString());
+                      } catch (e) {
+                        shared.broadcast_data.clear();
+                      }
+                    },
+                  ),
+                ),
+                verticalSpaceSmall,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 100.0,
+                          height: 35.0,
+                          child: ElevatedButton.icon(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(kPrimaryColor)),
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.search,
+                              size: 20.0,
+                            ),
+                            label: Text(
+                              'Search',
+                              style: kSmallRegularTextStyle,
+                            ),
+                          ),
+                        ),
+                        horizontalSpaceTiny,
+                        SizedBox(
+                          width: 100.0,
+                          height: 35.0,
+                          child: ElevatedButton.icon(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    kSecondaryColor2)),
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.refresh,
+                              size: 20.0,
+                            ),
+                            label: Text(
+                              'Reset',
+                              style: kSmallRegularTextStyle,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 100.0,
+                      height: 35.0,
+                      child: ElevatedButton.icon(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(kPrimaryColor)),
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.delete_outline,
+                          size: 20.0,
+                        ),
+                        label: Text(
+                          'Delete',
+                          style: kSmallRegularTextStyle,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           Container(
