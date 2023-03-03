@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:web_date_picker/web_date_picker.dart';
 import '../../../../core/providers/data_provider.dart';
 import '../../../utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/model.dart';
+import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
+import '../../../widgets/elevatedbuttonpopup.dart';
+import '../../../widgets/textfield.dart';
 
 class Usermanagement extends StatefulWidget {
   const Usermanagement({Key? key}) : super(key: key);
@@ -16,6 +20,13 @@ class Usermanagement extends StatefulWidget {
 
 class _UsermanagementState extends State<Usermanagement> {
   TextEditingController controller = TextEditingController();
+  TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
+  TextEditingController controller3 = TextEditingController();
+  TextEditingController controller4 = TextEditingController();
+
+
+
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -58,331 +69,606 @@ class _UsermanagementState extends State<Usermanagement> {
     ScrollController scrollController = ScrollController();
     return Container(
       padding: kEdgeInsetsVerticalNormal,
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 500,
-                child: TextFormField(
-                  style: TextStyle(color: kBlackColor),
-                  decoration: const InputDecoration(
-                    hintText: 'First Name or User Name',
-                    border: OutlineInputBorder(),
-                    labelStyle: TextStyle(fontSize: 12.0),
-                    contentPadding: EdgeInsets.only(left: 10.0),
-                    hintStyle: TextStyle(color: kSecondaryColor2),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: kBlackColor),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: kTertiaryColor5,
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: kBlackColor),
-                    ),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3)),
+                    ],
                   ),
-                  textInputAction: TextInputAction.go,
-                  controller: controller,
-                  onChanged: (value) {
-                    setState(() {
-                      isLoaded = false;
-                    });
-                    //
-                    try {
-                      if (controller.text.isNotEmpty) {
-                        shared.user_data.clear();
-                        for (var i in shared.user[0].data!) {
-                          print(i.toJson());
-                          print(i.userLogin
-                              ?.toLowerCase()
-                              .contains(controller.text.toLowerCase()));
-                          if (i.toJson().isNotEmpty) {
-                            if (i.givenName!
-                                .toLowerCase()
-                                .contains(controller.text.toLowerCase()) ||
-                                i.middleName!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase())   ||
-                            i.userLogin!
-                                .toLowerCase()
-                                .contains(controller.text.toLowerCase())
+                  height: 200.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              Column(
+                                children: [
+                                 SizedBox(
+                                   height: 35.0,
+                                   width: 400,
+                                   child: TextFormField(
+                                     style: kTextStyle,
+                                     decoration: const InputDecoration(
+                                       hintText: 'First Name',
+                                       border: OutlineInputBorder(),
+                                       labelStyle: TextStyle(fontSize: 12.0),
+                                       contentPadding: EdgeInsets.only(left: 10.0),
+                                       hintStyle: TextStyle(color: kSecondaryColor2),
+                                       enabledBorder: OutlineInputBorder(
+                                         borderSide: BorderSide(color: kBlackColor),
+                                       ),
+                                       focusedBorder: OutlineInputBorder(
+                                         borderSide: BorderSide(color: kBlackColor),
+                                       ),
+                                     ),
+                                     textInputAction: TextInputAction.go,
+                                     controller: controller1,
+                                     onChanged: (value) {
+                                       setState(() {
+                                         isLoaded = false;
+                                       });
+                                       try {
+                                         if (controller1.text.isNotEmpty) {
+                                           shared.user_data.clear();
+                                           for (var i in shared.user[0].data!) {
+                                             print(i.toJson());
+                                             print(i.userLogin
+                                                 ?.toLowerCase()
+                                                 .contains(controller1.text.toLowerCase()));
+                                             if (i.toJson().isNotEmpty) {
+                                               if (i.givenName!
+                                                   .toLowerCase()
+                                                   .contains(controller1.text.toLowerCase())
 
-                            ) {
-                              debugPrint(i.givenName);
-                              setState(() {
-                                shared.user_data.add(Data2.fromJson(i.toJson()));
-                              });
-                              if (shared.user_data.isNotEmpty) {
-                                setState(() {
-                                  isLoaded = true;
-                                });
-                              }
-                            }
-                          }
-                        }
-                      } else if (controller.text == '') {
-                        shared.user_data.clear();
-                        setState(() {
-                          shared.user_data.addAll(shared.user[0].data!);
-                          isLoaded = true;
-                        });
-                      }
-                      debugPrint(shared.user_data[0].toJson().toString());
-                    } catch (e) {
-                      shared.user_data.clear();
-                      isLoaded = true;
-                    }
-                  },
-                  onEditingComplete: () async {
-                    setState(() {
-                      isLoaded = false;
-                    });
-                    try {
-                      if (controller.text.isNotEmpty) {
-                        shared.user_data.clear();
-                        for (var i in shared.user[0].data!) {
-                          print(i.toJson());
-                          print(i.givenName
-                              ?.toLowerCase()
-                              .contains(controller.text.toLowerCase()));
-                          if (i.toJson().isNotEmpty) {
-                            if (i.givenName!
-                                .toLowerCase()
-                                .contains(controller.text.toLowerCase()) ||
-                                i.lastName!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase())) {
-                              debugPrint(i.givenName);
-                              setState(() {
-                                key.currentState?.pageTo(0);
-                                shared.user_data.add(Data2(
-                                    givenName: i.givenName,
-                                    lastName: i.lastName,
-                                    middleName: i.middleName,
-                                    userLogin: i.userLogin,
-                                    branchNames: i.branchNames,
-                                roles: i.roles,
-                                checkStatus: i.checkStatus));
+                                               ) {
+                                                 debugPrint(i.givenName);
+                                                 setState(() {
+                                                   shared.user_data.add(Data2.fromJson(i.toJson()));
+                                                 });
+                                                 if (shared.user_data.isNotEmpty) {
+                                                   setState(() {
+                                                     isLoaded = true;
+                                                   });
+                                                 }
+                                               }
+                                             }
+                                           }
+                                         } else if (controller1.text == '') {
+                                           shared.user_data.clear();
+                                           setState(() {
+                                             shared.user_data.addAll(shared.user[0].data!);
+                                             isLoaded = true;
+                                           });
+                                         }
+                                         debugPrint(shared.user_data[0].toJson().toString());
+                                       } catch (e) {
+                                         shared.user_data.clear();
+                                         isLoaded = true;
+                                       }
+                                     },
+                                     onEditingComplete: () async {
+                                       setState(() {
+                                         isLoaded = false;
+                                       });
+                                       try {
+                                         if (controller1.text.isNotEmpty) {
+                                           shared.user_data.clear();
+                                           for (var i in shared.user[0].data!) {
+                                             print(i.toJson());
+                                             print(i.givenName
+                                                 ?.toLowerCase()
+                                                 .contains(controller1.text.toLowerCase()));
+                                             if (i.toJson().isNotEmpty) {
+                                               if (i.givenName!
+                                                   .toLowerCase()
+                                                   .contains(controller1.text.toLowerCase()) ||
+                                                   i.lastName!
+                                                       .toLowerCase()
+                                                       .contains(controller1.text.toLowerCase())) {
+                                                 debugPrint(i.givenName);
+                                                 setState(() {
+                                                   key.currentState?.pageTo(0);
+                                                   shared.user_data.add(Data2.fromJson(i.toJson()));
+                                                 });
+                                                 if (shared.user_data.isNotEmpty) {
+                                                   setState(() {
+                                                     isLoaded = true;
+                                                   });
+                                                 }
+                                               }
+                                             }
+                                           }
+                                         } else if (controller1.text == '') {
+                                           shared.user_data.clear();
+                                           setState(() {
+                                             shared.user_data.addAll(shared.user[0].data!);
+                                           });
+                                         }
+                                         debugPrint(shared.user_data[0].toJson().toString());
+                                       } catch (e) {
+                                         shared.user_data.clear();
+                                       }
+                                     },
+                                   ),
+                                 ),
+                                  verticalSpaceTiny,
 
-                              });
-                              if (shared.user_data.isNotEmpty) {
-                                setState(() {
-                                  isLoaded = true;
-                                });
-                              }
-                            }
-                          }
-                        }
-                      } else if (controller.text == '') {
-                        shared.user_data.clear();
-                        setState(() {
-                          shared.user_data.addAll(shared.user[0].data!);
-                        });
-                      }
-                      debugPrint(shared.user_data[0].toJson().toString());
-                    } catch (e) {
-                      shared.user_data.clear();
-                    }
-                  },
+                                  SizedBox(
+                                    height: 35.0,
+                                    width: 400,
+                                    child: TextFormField(
+                                      style: kTextStyle,
+                                      decoration: const InputDecoration(
+                                        hintText: 'Middle Name',
+                                        border: OutlineInputBorder(),
+                                        labelStyle: TextStyle(fontSize: 12.0),
+                                        contentPadding: EdgeInsets.only(left: 10.0),
+                                        hintStyle: TextStyle(color: kSecondaryColor2),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(color: kBlackColor),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(color: kBlackColor),
+                                        ),
+                                      ),
+
+                                      textInputAction: TextInputAction.go,
+                                      controller: controller2,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        try {
+                                          if (controller2.text.isNotEmpty) {
+                                            shared.user_data.clear();
+                                            for (var i in shared.user[0].data!) {
+                                              print(i.toJson());
+                                              print(i.userLogin
+                                                  ?.toLowerCase()
+                                                  .contains(controller2.text.toLowerCase()));
+                                              if (i.toJson().isNotEmpty) {
+                                                if (i.middleName!
+                                                    .toLowerCase()
+                                                    .contains(controller2.text.toLowerCase())
+
+                                                ) {
+                                                  debugPrint(i.middleName);
+                                                  setState(() {
+                                                    shared.user_data.add(Data2.fromJson(i.toJson()));
+                                                  });
+                                                  if (shared.user_data.isNotEmpty) {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          } else if (controller2.text == '') {
+                                            shared.user_data.clear();
+                                            setState(() {
+                                              shared.user_data.addAll(shared.user[0].data!);
+                                              isLoaded = true;
+                                            });
+                                          }
+                                          debugPrint(shared.user_data[0].toJson().toString());
+                                        } catch (e) {
+                                          shared.user_data.clear();
+                                          isLoaded = true;
+                                        }
+                                      },
+                                      onEditingComplete: () async {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        try {
+                                          if (controller2.text.isNotEmpty) {
+                                            shared.user_data.clear();
+                                            for (var i in shared.user[0].data!) {
+                                              print(i.toJson());
+                                              print(i.middleName
+                                                  ?.toLowerCase()
+                                                  .contains(controller2.text.toLowerCase()));
+                                              if (i.toJson().isNotEmpty) {
+                                                if (i.middleName!
+                                                    .toLowerCase()
+                                                    .contains(controller2.text.toLowerCase()))
+                                                  debugPrint(i.givenName);
+                                                  setState(() {
+                                                    key.currentState?.pageTo(0);
+                                                    shared.user_data.add(Data2.fromJson(i.toJson()));
+                                                  });
+                                                  if (shared.user_data.isNotEmpty) {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  }
+
+                                              }
+                                            }
+                                          } else if (controller2.text == '') {
+                                            shared.user_data.clear();
+                                            setState(() {
+                                              shared.user_data.addAll(shared.user[0].data!);
+                                            });
+                                          }
+                                          debugPrint(shared.user_data[0].toJson().toString());
+                                        } catch (e) {
+                                          shared.user_data.clear();
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  verticalSpaceTiny,
+
+                                  SizedBox(
+                                    height: 35.0,
+                                    width: 400,
+                                    child: TextFormField(
+                                      style: kTextStyle,
+                                      decoration: const InputDecoration(
+                                        hintText: 'Last Name',
+                                        border: OutlineInputBorder(),
+                                        labelStyle: TextStyle(fontSize: 12.0),
+                                        contentPadding: EdgeInsets.only(left: 10.0),
+                                        hintStyle: TextStyle(color: kSecondaryColor2),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(color: kBlackColor),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(color: kBlackColor),
+                                        ),
+                                      ),
+                                      textInputAction: TextInputAction.go,
+                                      controller: controller3,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        try {
+                                          if (controller3.text.isNotEmpty) {
+                                            shared.user_data.clear();
+                                            for (var i in shared.user[0].data!) {
+                                              print(i.toJson());
+                                              print(i.userLogin
+                                                  ?.toLowerCase()
+                                                  .contains(controller3.text.toLowerCase()));
+                                              if (i.toJson().isNotEmpty) {
+                                                if (i.lastName!
+                                                    .toLowerCase()
+                                                    .contains(controller3.text.toLowerCase())
+
+                                                ) {
+                                                  debugPrint(i.lastName);
+                                                  setState(() {
+                                                    shared.user_data.add(Data2.fromJson(i.toJson()));
+                                                  });
+                                                  if (shared.user_data.isNotEmpty) {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          } else if (controller3.text == '') {
+                                            shared.user_data.clear();
+                                            setState(() {
+                                              shared.user_data.addAll(shared.user[0].data!);
+                                              isLoaded = true;
+                                            });
+                                          }
+                                          debugPrint(shared.user_data[0].toJson().toString());
+                                        } catch (e) {
+                                          shared.user_data.clear();
+                                          isLoaded = true;
+                                        }
+                                      },
+                                      onEditingComplete: () async {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        try {
+                                          if (controller3.text.isNotEmpty) {
+                                            shared.user_data.clear();
+                                            for (var i in shared.user[0].data!) {
+                                              print(i.toJson());
+                                              print(i.lastName
+                                                  ?.toLowerCase()
+                                                  .contains(controller3.text.toLowerCase()));
+                                              if (i.toJson().isNotEmpty) {
+                                                if (i.lastName!
+                                                    .toLowerCase()
+                                                    .contains(controller3.text.toLowerCase()))
+                                                  debugPrint(i.lastName);
+                                                setState(() {
+                                                  key.currentState?.pageTo(0);
+                                                  shared.user_data.add(Data2.fromJson(i.toJson()));
+                                                });
+                                                if (shared.user_data.isNotEmpty) {
+                                                  setState(() {
+                                                    isLoaded = true;
+                                                  });
+                                                }
+
+                                              }
+                                            }
+                                          } else if (controller3.text == '') {
+                                            shared.user_data.clear();
+                                            setState(() {
+                                              shared.user_data.addAll(shared.user[0].data!);
+                                            });
+                                          }
+                                          debugPrint(shared.user_data[0].toJson().toString());
+                                        } catch (e) {
+                                          shared.user_data.clear();
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          verticalSpaceTiny,
+                          // DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                          //   setState(() {
+                          //     init = value.toString();
+                          //   });
+                          // },),
+                          verticalSpaceSmall,
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 100.0,
+                                height: 35.0,
+                                child: ElevatedButton.icon(
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                      MaterialStateProperty.all(
+                                          kPrimaryColor)),
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.search,
+                                    size: 20.0,
+                                  ),
+                                  label: Text(
+                                    'Search',
+                                    style: kSmallRegularTextStyle,
+                                  ),
+                                ),
+                              ),
+                              horizontalSpaceTiny,
+                              SizedBox(
+                                width: 100.0,
+                                height: 35.0,
+                                child: ElevatedButton.icon(
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                      MaterialStateProperty.all(
+                                          kSecondaryColor2)),
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.refresh,
+                                    size: 20.0,
+                                  ),
+                                  label: Text(
+                                    'Reset',
+                                    style: kSmallRegularTextStyle,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      horizontalSpaceMedium,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 35.0,
+                                width: 400,
+                                child: TextFormField(
+                                  style: kTextStyle,
+                                  decoration: const InputDecoration(
+                                    hintText: 'User Name',
+                                    border: OutlineInputBorder(),
+                                    labelStyle: TextStyle(fontSize: 12.0),
+                                    contentPadding: EdgeInsets.only(left: 10.0),
+                                    hintStyle: TextStyle(color: kSecondaryColor2),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                  ),
+                                  textInputAction: TextInputAction.go,
+                                  controller: controller4,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    try {
+                                      if (controller4.text.isNotEmpty) {
+                                        shared.user_data.clear();
+                                        for (var i in shared.user[0].data!) {
+                                          print(i.toJson());
+                                          print(i.userLogin
+                                              ?.toLowerCase()
+                                              .contains(controller4.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.userLogin!
+                                                .toLowerCase()
+                                                .contains(controller4.text.toLowerCase())
+
+                                            ) {
+                                              debugPrint(i.userLogin);
+                                              setState(() {
+                                                shared.user_data.add(Data2.fromJson(i.toJson()));
+                                              });
+                                              if (shared.user_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller4.text == '') {
+                                        shared.user_data.clear();
+                                        setState(() {
+                                          shared.user_data.addAll(shared.user[0].data!);
+                                          isLoaded = true;
+                                        });
+                                      }
+                                      debugPrint(shared.user_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.user_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
+                                  onEditingComplete: () async {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    try {
+                                      if (controller4.text.isNotEmpty) {
+                                        shared.user_data.clear();
+                                        for (var i in shared.user[0].data!) {
+                                          print(i.toJson());
+                                          print(i.lastName
+                                              ?.toLowerCase()
+                                              .contains(controller4.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.lastName!
+                                                .toLowerCase()
+                                                .contains(controller4.text.toLowerCase()))
+                                              debugPrint(i.lastName);
+                                            setState(() {
+                                              key.currentState?.pageTo(0);
+                                              shared.user_data.add(Data2.fromJson(i.toJson()));
+                                            });
+                                            if (shared.user_data.isNotEmpty) {
+                                              setState(() {
+                                                isLoaded = true;
+                                              });
+                                            }
+
+                                          }
+                                        }
+                                      } else if (controller4.text == '') {
+                                        shared.user_data.clear();
+                                        setState(() {
+                                          shared.user_data.addAll(shared.user[0].data!);
+                                        });
+                                      }
+                                      debugPrint(shared.user_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.user_data.clear();
+                                    }
+                                  },
+                                ),
+                              ),
+                              verticalSpaceTiny,
+                              elevatedbuttonpopup(
+                                  label: "Branch", width: 400.0),
+                              verticalSpaceTiny,
+                              textfield(
+                                hintext: "--Status--",
+                              ),
+                              verticalSpaceMedium,
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              // Container(
-              //   width: 500,
-              //   child: TextFormField(
-              //     style: TextStyle(color: kBlackColor),
-              //     decoration: const InputDecoration(
-              //       hintText: 'Search',
-              //       border: OutlineInputBorder(),
-              //       labelStyle: TextStyle(fontSize: 12.0),
-              //       contentPadding: EdgeInsets.only(left: 10.0),
-              //       hintStyle: TextStyle(color: kSecondaryColor2),
-              //       enabledBorder: OutlineInputBorder(
-              //         borderSide: BorderSide(color: kBlackColor),
-              //       ),
-              //       focusedBorder: OutlineInputBorder(
-              //         borderSide: BorderSide(color: kBlackColor),
-              //       ),
-              //     ),
-              //     textInputAction: TextInputAction.go,
-              //     controller: controller,
-              //     onChanged: (value) {
-              //       setState(() {
-              //         isLoaded = false;
-              //       });
-              //       try {
-              //         if (controller.text.isNotEmpty) {
-              //           shared.role_data.clear();
-              //           for (var i in shared.role[0].data!) {
-              //             print(i.toJson());
-              //             print(i.role_name
-              //                 ?.toLowerCase()
-              //                 .contains(controller.text.toLowerCase()));
-              //             if (i.toJson().isNotEmpty) {
-              //               if (i.role_name!
-              //                       .toLowerCase()
-              //                       .contains(controller.text.toLowerCase()) ||
-              //                   i.role_desc!
-              //                       .toLowerCase()
-              //                       .contains(controller.text.toLowerCase())) {
-              //                 debugPrint(i.role_name);
-              //                 setState(() {
-              //                   shared.role_data.add(Data(
-              //                       role_name: i.role_name,
-              //                       role_desc: i.role_desc,
-              //                       role_id: i.role_id));
-              //                 });
-              //                 if (shared.role_data.isNotEmpty) {
-              //                   setState(() {
-              //                     isLoaded = true;
-              //                   });
-              //                 }
-              //               }
-              //             }
-              //           }
-              //         } else if (controller.text == '') {
-              //           shared.role_data.clear();
-              //           setState(() {
-              //             shared.role_data.addAll(shared.role[0].data!);
-              //           });
-              //         }
-              //         debugPrint(shared.role_data[0].toJson().toString());
-              //       } catch (e) {
-              //         shared.role_data.clear();
-              //       }
-              //     },
-              //     onEditingComplete: () async {
-              //       setState(() {
-              //         isLoaded = false;
-              //       });
-              //       try {
-              //         if (controller.text.isNotEmpty) {
-              //           shared.role_data.clear();
-              //           for (var i in shared.role[0].data!) {
-              //             print(i.toJson());
-              //             print(i.role_name
-              //                 ?.toLowerCase()
-              //                 .contains(controller.text.toLowerCase()));
-              //             if (i.toJson().isNotEmpty) {
-              //               if (i.role_name!
-              //                       .toLowerCase()
-              //                       .contains(controller.text.toLowerCase()) ||
-              //                   i.role_desc!
-              //                       .toLowerCase()
-              //                       .contains(controller.text.toLowerCase())) {
-              //                 debugPrint(i.role_name);
-              //                 setState(() {
-              //                   key.currentState?.pageTo(0);
-              //                   shared.role_data.add(Data(
-              //                       role_name: i.role_name,
-              //                       role_desc: i.role_desc,
-              //                       role_id: i.role_id));
-              //                 });
-              //                 if (shared.role_data.isNotEmpty) {
-              //                   setState(() {
-              //                     isLoaded = true;
-              //                   });
-              //                 }
-              //               }
-              //             }
-              //           }
-              //         } else if (controller.text == '') {
-              //           shared.role_data.clear();
-              //           setState(() {
-              //             shared.role_data.addAll(shared.role[0].data!);
-              //           });
-              //         }
-              //         debugPrint(shared.role_data[0].toJson().toString());
-              //       } catch (e) {
-              //         shared.role_data.clear();
-              //       }
-              //     },
-              //   ),
-              // ),
+                verticalSpaceRegular,
+                Container(
+                padding: kEdgeInsetsVerticalNormal,
+                child: Column(
+                children: [
+                Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
 
-            ],
-          ),
-          Container(
-              width: double.infinity,
-              padding: kEdgeInsetsVerticalNormal,
-              child: PaginatedDataTable(
-                key: key,
-                dataRowHeight: 100,
-                arrowHeadColor: kWhiteColor,
-                columns: [
-                  DataColumn(
-                      label: Text('User Name', style: kLargeBoldTextStyle)),
-                  DataColumn(
-                      label: Text('Given Name', style: kLargeBoldTextStyle)),
-                  DataColumn(
-                      label: Text('Middle Name', style: kLargeBoldTextStyle)),
-                  DataColumn(
-                      label: Text('Last Name', style: kLargeBoldTextStyle)),
-                  DataColumn(label: Text('Branch', style: kLargeBoldTextStyle)),
-                  DataColumn(label: Text('Role', style: kLargeBoldTextStyle)),
-                  DataColumn(label: Text('Status', style: kLargeBoldTextStyle)),
-                ],
-                source: isLoaded
-                    ? shared.user_data.isNotEmpty
-                        ? data
-                        : data2
-                    : data3,
-                rowsPerPage: 8,
-                showFirstLastButtons: true,
-                header: Text('List of User', style: kXLargeBoldTextStyle),
-              )),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => a.role_name
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(b.role_name.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role name ascending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => b.role_name
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(a.role_name.toString().toLowerCase()));
-          //       //print(shared.inqq.sort());
-          //     },
-          //     child: const Text('Role name descending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => a.role_desc
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(b.role_desc.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role desc ascending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => b.role_desc
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(a.role_desc.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role desc descending'),
-          //   ),
-          // )
-        ],
+    ],
+    ),
+    Container(
+    width: double.infinity,
+    padding: kEdgeInsetsVerticalNormal,
+    child: PaginatedDataTable(
+    key: key,
+    dataRowHeight: 100,
+    arrowHeadColor: kWhiteColor,
+    columns: [
+    DataColumn(
+    label: Text('User Name', style: kLargeBoldTextStyle)),
+    DataColumn(
+    label: Text('Given Name', style: kLargeBoldTextStyle)),
+    DataColumn(
+    label: Text('Middle Name', style: kLargeBoldTextStyle)),
+    DataColumn(
+    label: Text('Last Name', style: kLargeBoldTextStyle)),
+    DataColumn(label: Text('Branch', style: kLargeBoldTextStyle)),
+    DataColumn(label: Text('Role', style: kLargeBoldTextStyle)),
+    DataColumn(label: Text('Status', style: kLargeBoldTextStyle)),
+    ],
+    source: isLoaded
+    ? shared.user_data.isNotEmpty
+    ? data
+        : data2
+        : data3,
+    rowsPerPage: 8,
+    showFirstLastButtons: true,
+    header: Text('List of User', style: kXLargeBoldTextStyle),
+    )),
+    ],
+    ),
+    ),
+    ]
+    )
+    ),
+    ]
       ),
     );
+
   }
 }
+
+
+
+
 
 class MyData extends DataTableSource {
   Prov1 shared;
