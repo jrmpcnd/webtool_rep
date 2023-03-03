@@ -655,3 +655,56 @@ class Unit_Log {
     return data;
   }
 }
+
+
+class Center_Api {
+  String? retCode;
+  String? message;
+  List<Center_Log>? data;
+
+  Center_Api({this.retCode, this.message, this.data});
+
+  Center_Api.fromJson(Map<String, dynamic> json) {
+    retCode = json['retCode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Center_Log>[];
+      json['data'].forEach((v) {
+        data!.add(new Center_Log.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retCode'] = this.retCode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Center_Log {
+  String? centerCode;
+  String? centerDesc;
+  String? createdDate;
+
+  Center_Log({this.centerCode, this.centerDesc, this.createdDate});
+
+  Center_Log.fromJson(Map<String, dynamic> json) {
+    centerCode = json['center_code'];
+    centerDesc = json['center_desc'];
+    createdDate = json['created_date'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['center_code'] = this.centerCode;
+    data['center_desc'] = this.centerDesc;
+    data['created_date'] = this.createdDate;
+    return data;
+  }
+}
+

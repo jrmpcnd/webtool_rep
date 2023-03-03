@@ -289,4 +289,11 @@ class Unit_U extends ChangeNotifier {
   bool search = false;
 }
 
+class Center_U extends ChangeNotifier {
+  String Center_button = 'Click here';
+  List<Center_Api> CenterLog = [];
+  List<Center_Log>Center_data = [];
+  bool search = false;
+}
+
 
