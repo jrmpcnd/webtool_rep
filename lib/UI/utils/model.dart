@@ -1252,3 +1252,81 @@ class Data19 {
     return data;
   }
 }
+
+class Partner_List {
+  String? retcode;
+  String? message;
+  List<Data20>? data;
+
+  Partner_List({this.retcode, this.message, this.data});
+
+  Partner_List.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data20>[];
+      json['data'].forEach((v) {
+        data!.add(new Data20.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data20 {
+  String? partnerId;
+  String? partnerName;
+  String? partnerDesc;
+  String? partnerAccount;
+  String? partnerApiUrl;
+  String? merchantPaymentCallbackUrl;
+  String? merchantIdPrefix;
+  String? mriGroup;
+  String? status;
+
+  Data20(
+      {this.partnerId,
+      this.partnerName,
+      this.partnerDesc,
+      this.partnerAccount,
+      this.partnerApiUrl,
+      this.merchantPaymentCallbackUrl,
+      this.merchantIdPrefix,
+      this.mriGroup,
+      this.status});
+
+  Data20.fromJson(Map<String, dynamic> json) {
+    partnerId = json['partner_id'];
+    partnerName = json['partner_name'];
+    partnerDesc = json['partner_desc'];
+    partnerAccount = json['partner_account'];
+    partnerApiUrl = json['partner_api_url'];
+    merchantPaymentCallbackUrl = json['merchant_payment_callback_url'];
+    merchantIdPrefix = json['merchant_id_prefix'];
+    mriGroup = json['mri_group'];
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['partner_id'] = this.partnerId;
+    data['partner_name'] = this.partnerName;
+    data['partner_desc'] = this.partnerDesc;
+    data['partner_account'] = this.partnerAccount;
+    data['partner_api_url'] = this.partnerApiUrl;
+    data['merchant_payment_callback_url'] = this.merchantPaymentCallbackUrl;
+    data['merchant_id_prefix'] = this.merchantIdPrefix;
+    data['mri_group'] = this.mriGroup;
+    data['status'] = this.status;
+    return data;
+  }
+}

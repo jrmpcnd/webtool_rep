@@ -128,3 +128,10 @@ class Prov19 extends ChangeNotifier {
   List<Data19> list_data = [];
   bool search19 = false;
 }
+
+class Prov20 extends ChangeNotifier {
+  String partner_button = 'Click here';
+  List<Partner_List> partner = [];
+  List<Data20> partner_data = [];
+  bool search10 = false;
+}

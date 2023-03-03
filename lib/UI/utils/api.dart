@@ -769,6 +769,49 @@ class Bank_ListParse {
   }
 }
 
+class Partner_ListPush {
+  Future<http.Response> pushHttp20() async {
+    http.Response response20 = await http.post(
+      Uri.parse('$API/get_partnerlist/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "merchant_id_prefix": "",
+          "merchant_payment_callback_url": "",
+          "mri_group": "",
+          "partner_account": "",
+          "partner_api_url": "",
+          "partner_desc": "",
+          "partner_id": "",
+          "partner_name": "",
+          "status": ""
+        },
+      ),
+    );
+    if (response20.statusCode == 200) {
+      print(response20.statusCode);
+      print(response20.body);
+      return response20;
+    } else {
+      return response20;
+    }
+  }
+}
+
+class Partner_listParse {
+  Future<Partner_List> profile20() async {
+    Partner_ListPush httpPush18 = Partner_ListPush();
+    http.Response res17 = await httpPush18.pushHttp20();
+    print("-------->>>>>>>>>>${jsonDecode(res17.body).length}");
+    var partner = Partner_List.fromJson(jsonDecode(res17.body));
+    return partner;
+  }
+}
+
 class transacconfirm_Api {
   Future<http.Response> news(
       String branch_desc, cid, status, trans_date, trans_desc) async {
