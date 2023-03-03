@@ -1330,3 +1330,69 @@ class Data20 {
     return data;
   }
 }
+
+class Splash_Screen {
+  String? retcode;
+  String? message;
+  List<Data21>? data;
+
+  Splash_Screen({this.retcode, this.message, this.data});
+
+  Splash_Screen.fromJson(Map<String, dynamic> json) {
+    retcode = json['retcode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data21>[];
+      json['data'].forEach((v) {
+        data!.add(new Data21.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retcode'] = this.retcode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data21 {
+  String? action;
+  String? title;
+  String? message;
+  String? subMessage;
+  String? imageUrl;
+  String? show;
+
+  Data21(
+      {this.action,
+      this.title,
+      this.message,
+      this.subMessage,
+      this.imageUrl,
+      this.show});
+
+  Data21.fromJson(Map<String, dynamic> json) {
+    action = json['action'];
+    title = json['title'];
+    message = json['message'];
+    subMessage = json['sub_message'];
+    imageUrl = json['image_url'];
+    show = json['show'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['action'] = this.action;
+    data['title'] = this.title;
+    data['message'] = this.message;
+    data['sub_message'] = this.subMessage;
+    data['image_url'] = this.imageUrl;
+    data['show'] = this.show;
+    return data;
+  }
+}

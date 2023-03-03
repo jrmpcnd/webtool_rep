@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Prov18()),
         ChangeNotifierProvider(create: (context) => Prov19()),
         ChangeNotifierProvider(create: (context) => Prov20()),
+        ChangeNotifierProvider(create: (context) => Prov21()),
         ChangeNotifierProvider(create: (context) => AtmLocation()),
         ChangeNotifierProvider(create: (context) => Banknews_U()),
         ChangeNotifierProvider(create: (context) => ProductandServices_U()),

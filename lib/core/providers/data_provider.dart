@@ -133,5 +133,12 @@ class Prov20 extends ChangeNotifier {
   String partner_button = 'Click here';
   List<Partner_List> partner = [];
   List<Data20> partner_data = [];
-  bool search10 = false;
+  bool search20 = false;
+}
+
+class Prov21 extends ChangeNotifier {
+  String splash_button = 'Click here';
+  List<Splash_Screen> splash = [];
+  List<Data21> splash_data = [];
+  bool search21 = false;
 }

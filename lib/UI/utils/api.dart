@@ -812,6 +812,46 @@ class Partner_listParse {
   }
 }
 
+class Splash_ScreenPush {
+  Future<http.Response> pushHttp21() async {
+    http.Response response21 = await http.post(
+      Uri.parse('$API/get_splashscreen/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "action": "",
+          "image_url": "",
+          "message": "",
+          "show": "",
+          "sub_message": "",
+          "title": ""
+        },
+      ),
+    );
+    if (response21.statusCode == 200) {
+      print(response21.statusCode);
+      print(response21.body);
+      return response21;
+    } else {
+      return response21;
+    }
+  }
+}
+
+class Splash_ScreenParse {
+  Future<Splash_Screen> profile21() async {
+    Splash_ScreenPush httpPush18 = Splash_ScreenPush();
+    http.Response res17 = await httpPush18.pushHttp21();
+    print("-------->>>>>>>>>>${jsonDecode(res17.body).length}");
+    var partner = Splash_Screen.fromJson(jsonDecode(res17.body));
+    return partner;
+  }
+}
+
 class transacconfirm_Api {
   Future<http.Response> news(
       String branch_desc, cid, status, trans_date, trans_desc) async {
