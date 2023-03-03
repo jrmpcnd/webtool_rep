@@ -282,4 +282,11 @@ class Branch_U extends ChangeNotifier {
   bool search = false;
 }
 
+class Unit_U extends ChangeNotifier {
+  String Unit_button = 'Click here';
+  List<Unit_Api> UnitLog = [];
+  List<Unit_Log>Unit_data = [];
+  bool search = false;
+}
+
 

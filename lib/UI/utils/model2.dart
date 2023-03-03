@@ -603,3 +603,55 @@ class Branch_Log {
     return data;
   }
 }
+
+
+class Unit_Api {
+  String? retCode;
+  String? message;
+  List<Unit_Log>? data;
+
+  Unit_Api({this.retCode, this.message, this.data});
+
+  Unit_Api.fromJson(Map<String, dynamic> json) {
+    retCode = json['retCode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Unit_Log>[];
+      json['data'].forEach((v) {
+        data!.add(new Unit_Log.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retCode'] = this.retCode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Unit_Log {
+  String? unitCode;
+  String? unitDesc;
+  String? createdDate;
+
+  Unit_Log({this.unitCode, this.unitDesc, this.createdDate});
+
+  Unit_Log.fromJson(Map<String, dynamic> json) {
+    unitCode = json['unit_code'];
+    unitDesc = json['unit_desc'];
+    createdDate = json['created_date'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['unit_code'] = this.unitCode;
+    data['unit_desc'] = this.unitDesc;
+    data['created_date'] = this.createdDate;
+    return data;
+  }
+}
