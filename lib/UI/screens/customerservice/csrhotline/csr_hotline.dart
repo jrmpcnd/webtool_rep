@@ -19,7 +19,8 @@ class Csrhotline extends StatefulWidget {
 }
 
 class _CsrhotlineState extends State<Csrhotline> {
-  TextEditingController controller = TextEditingController();
+  TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -64,35 +65,254 @@ class _CsrhotlineState extends State<Csrhotline> {
       padding: kEdgeInsetsVerticalNormal,
       child: Column(
         children: [
-
-          Container(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 500,
+                child: TextFormField(
+                  style: TextStyle(color: kBlackColor),
+                  decoration: const InputDecoration(
+                    hintText: 'Contact Number',
+                    border: OutlineInputBorder(),
+                    labelStyle: TextStyle(fontSize: 12.0),
+                    contentPadding: EdgeInsets.only(left: 10.0),
+                    hintStyle: TextStyle(color: kSecondaryColor2),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kBlackColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kBlackColor),
+                    ),
+                  ),
+                  textInputAction: TextInputAction.go,
+                  controller: controller1,
+                  onChanged: (value) {
+                    setState(() {
+                      isLoaded = false;
+                    });
+                    //
+                    try {
+                      if (controller1.text.isNotEmpty) {
+                        shared.hotline_data.clear();
+                        for (var i in shared.hotline[0].data!) {
+                          print(i.toJson());
+                          print(i.contactNumber
+                              ?.toLowerCase()
+                              .contains(controller1.text.toLowerCase()));
+                          if (i.toJson().isNotEmpty) {
+                            if (i.contactNumber!
+                                .toLowerCase()
+                                .contains(controller1.text.toLowerCase())) {
+                              debugPrint(i.contactNumber);
+                              setState(() {
+                                shared.hotline_data
+                                    .add(Data11.fromJson(i.toJson()));
+                              });
+                              if (shared.hotline_data.isNotEmpty) {
+                                setState(() {
+                                  isLoaded = true;
+                                });
+                              }
+                            }
+                          }
+                        }
+                      } else if (controller1.text == '') {
+                        shared.hotline_data.clear();
+                        setState(() {
+                          shared.hotline_data.addAll(shared.hotline[0].data!);
+                          isLoaded = true;
+                        });
+                      }
+                      debugPrint(shared.hotline_data[0].toJson().toString());
+                    } catch (e) {
+                      shared.hotline_data.clear();
+                      isLoaded = true;
+                    }
+                  },
+                  onEditingComplete: () async {
+                    setState(() {
+                      isLoaded = false;
+                    });
+                    try {
+                      if (controller1.text.isNotEmpty) {
+                        shared.hotline_data.clear();
+                        for (var i in shared.hotline[0].data!) {
+                          print(i.toJson());
+                          print(i.contactNumber
+                              ?.toLowerCase()
+                              .contains(controller1.text.toLowerCase()));
+                          if (i.toJson().isNotEmpty) {
+                            if (i.contactNumber!
+                                .toLowerCase()
+                                .contains(controller1.text.toLowerCase())) {
+                              debugPrint(i.contactNumber);
+                              setState(() {
+                                shared.hotline_data
+                                    .add(Data11.fromJson(i.toJson()));
+                              });
+                              if (shared.hotline_data.isNotEmpty) {
+                                setState(() {
+                                  isLoaded = true;
+                                });
+                              }
+                            }
+                          }
+                        }
+                      } else if (controller1.text == '') {
+                        shared.hotline_data.clear();
+                        setState(() {
+                          shared.hotline_data.addAll(shared.hotline[0].data!);
+                        });
+                      }
+                      debugPrint(shared.hotline_data[0].toJson().toString());
+                    } catch (e) {
+                      shared.hotline_data.clear();
+                    }
+                  },
+                ),
+              ),
+              Container(
+                width: 500,
+                child: TextFormField(
+                  style: TextStyle(color: kBlackColor),
+                  decoration: const InputDecoration(
+                    hintText: 'Network Provider',
+                    border: OutlineInputBorder(),
+                    labelStyle: TextStyle(fontSize: 12.0),
+                    contentPadding: EdgeInsets.only(left: 10.0),
+                    hintStyle: TextStyle(color: kSecondaryColor2),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kBlackColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kBlackColor),
+                    ),
+                  ),
+                  textInputAction: TextInputAction.go,
+                  controller: controller2,
+                  onChanged: (value) {
+                    setState(() {
+                      isLoaded = false;
+                    });
+                    //
+                    try {
+                      if (controller2.text.isNotEmpty) {
+                        shared.hotline_data.clear();
+                        for (var i in shared.hotline[0].data!) {
+                          print(i.toJson());
+                          print(i.networkProvider
+                              ?.toLowerCase()
+                              .contains(controller2.text.toLowerCase()));
+                          if (i.toJson().isNotEmpty) {
+                            if (i.networkProvider!
+                                .toLowerCase()
+                                .contains(controller2.text.toLowerCase())) {
+                              debugPrint(i.networkProvider);
+                              setState(() {
+                                shared.hotline_data
+                                    .add(Data11.fromJson(i.toJson()));
+                              });
+                              if (shared.hotline_data.isNotEmpty) {
+                                setState(() {
+                                  isLoaded = true;
+                                });
+                              }
+                            }
+                          }
+                        }
+                      } else if (controller2.text == '') {
+                        shared.hotline_data.clear();
+                        setState(() {
+                          shared.hotline_data.addAll(shared.hotline[0].data!);
+                          isLoaded = true;
+                        });
+                      }
+                      debugPrint(shared.hotline_data[0].toJson().toString());
+                    } catch (e) {
+                      shared.hotline_data.clear();
+                      isLoaded = true;
+                    }
+                  },
+                  onEditingComplete: () async {
+                    setState(() {
+                      isLoaded = false;
+                    });
+                    try {
+                      if (controller2.text.isNotEmpty) {
+                        shared.hotline_data.clear();
+                        for (var i in shared.hotline[0].data!) {
+                          print(i.toJson());
+                          print(i.networkProvider
+                              ?.toLowerCase()
+                              .contains(controller2.text.toLowerCase()));
+                          if (i.toJson().isNotEmpty) {
+                            if (i.networkProvider!
+                                .toLowerCase()
+                                .contains(controller2.text.toLowerCase())) {
+                              debugPrint(i.networkProvider);
+                              setState(() {
+                                shared.hotline_data
+                                    .add(Data11.fromJson(i.toJson()));
+                              });
+                              if (shared.hotline_data.isNotEmpty) {
+                                setState(() {
+                                  isLoaded = true;
+                                });
+                              }
+                            }
+                          }
+                        }
+                      } else if (controller2.text == '') {
+                        shared.hotline_data.clear();
+                        setState(() {
+                          shared.hotline_data.addAll(shared.hotline[0].data!);
+                        });
+                      }
+                      debugPrint(shared.hotline_data[0].toJson().toString());
+                    } catch (e) {
+                      shared.hotline_data.clear();
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Container(
               width: double.infinity,
               padding: kEdgeInsetsVerticalNormal,
-              child: PaginatedDataTable(
-                key: key,
-                dataRowHeight: 50,
-                arrowHeadColor: kWhiteColor,
-                columns: [
-                  DataColumn(
-                      label:
-                          Text('Contact Number', style: kLargeBoldTextStyle)),
-                  DataColumn(
-                      label:
-                          Text('Network Provider', style: kLargeBoldTextStyle)),
-                  DataColumn(
-                      label:
-                          Text('Institution Desc', style: kLargeBoldTextStyle))
-                ],
-                source: isLoaded
-                    ? shared.hotline_data.isNotEmpty
-                        ? data
-                        : data2
-                    : data3,
-                rowsPerPage: 8,
-                showFirstLastButtons: true,
-                header:
-                    Text('Type Of Concern List', style: kXLargeBoldTextStyle),
-              )),
+              child: Container(
+                  width: double.infinity,
+                  padding: kEdgeInsetsVerticalNormal,
+                  child: PaginatedDataTable(
+                    key: key,
+                    dataRowHeight: 50,
+                    arrowHeadColor: kWhiteColor,
+                    columns: [
+                      DataColumn(
+                          label: Text('Contact Number',
+                              style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Network Provider',
+                              style: kLargeBoldTextStyle)),
+                      DataColumn(
+                          label: Text('Institution Desc',
+                              style: kLargeBoldTextStyle))
+                    ],
+                    source: isLoaded
+                        ? shared.hotline_data.isNotEmpty
+                            ? data
+                            : data2
+                        : data3,
+                    rowsPerPage: 8,
+                    showFirstLastButtons: true,
+                    header: Text('Type Of Concern List',
+                        style: kXLargeBoldTextStyle),
+                  )),
+            ),
+          ),
           // SafeArea(
           //   child: TextButton(
           //     onPressed: () async {
