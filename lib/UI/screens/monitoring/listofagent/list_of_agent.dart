@@ -62,293 +62,262 @@ class _ListofagentState extends State<Listofagent> {
     ScrollController scrollController = ScrollController();
     return Container(
       padding: kEdgeInsetsVerticalNormal,
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     Container(
-          //       width: 500,
-          //       child: TextFormField(
-          //         style: TextStyle(color: kBlackColor),
-          //         decoration: const InputDecoration(
-          //           hintText: 'Search',
-          //           border: OutlineInputBorder(),
-          //           labelStyle: TextStyle(fontSize: 12.0),
-          //           contentPadding: EdgeInsets.only(left: 10.0),
-          //           hintStyle: TextStyle(color: kSecondaryColor2),
-          //           enabledBorder: OutlineInputBorder(
-          //             borderSide: BorderSide(color: kBlackColor),
-          //           ),
-          //           focusedBorder: OutlineInputBorder(
-          //             borderSide: BorderSide(color: kBlackColor),
-          //           ),
-          //         ),
-          //         textInputAction: TextInputAction.go,
-          //         controller: controller,
-          //         onChanged: (value) {
-          //           setState(() {
-          //             isLoaded = false;
-          //           });
-          //           //
-          //           try {
-          //             if (controller.text.isNotEmpty) {
-          //               shared.role_data.clear();
-          //               for (var i in shared.role[0].data!) {
-          //                 print(i.toJson());
-          //                 print(i.role_name
-          //                     ?.toLowerCase()
-          //                     .contains(controller.text.toLowerCase()));
-          //                 if (i.toJson().isNotEmpty) {
-          //                   if (i.role_name!
-          //                           .toLowerCase()
-          //                           .contains(controller.text.toLowerCase()) ||
-          //                       i.role_desc!
-          //                           .toLowerCase()
-          //                           .contains(controller.text.toLowerCase())) {
-          //                     debugPrint(i.role_name);
-          //                     setState(() {
-          //                       shared.role_data.add(Data(
-          //                           role_name: i.role_name,
-          //                           role_desc: i.role_desc,
-          //                           role_id: i.role_id));
-          //                     });
-          //                     if (shared.role_data.isNotEmpty) {
-          //                       setState(() {
-          //                         isLoaded = true;
-          //                       });
-          //                     }
-          //                   }
-          //                 }
-          //               }
-          //             } else if (controller.text == '') {
-          //               shared.role_data.clear();
-          //               setState(() {
-          //                 shared.role_data.addAll(shared.role[0].data!);
-          //                 isLoaded = true;
-          //               });
-          //             }
-          //             debugPrint(shared.role_data[0].toJson().toString());
-          //           } catch (e) {
-          //             shared.role_data.clear();
-          //             isLoaded = true;
-          //           }
-          //         },
-          //         onEditingComplete: () async {
-          //           setState(() {
-          //             isLoaded = false;
-          //           });
-          //           try {
-          //             if (controller.text.isNotEmpty) {
-          //               shared.role_data.clear();
-          //               for (var i in shared.role[0].data!) {
-          //                 print(i.toJson());
-          //                 print(i.role_name
-          //                     ?.toLowerCase()
-          //                     .contains(controller.text.toLowerCase()));
-          //                 if (i.toJson().isNotEmpty) {
-          //                   if (i.role_name!
-          //                           .toLowerCase()
-          //                           .contains(controller.text.toLowerCase()) ||
-          //                       i.role_desc!
-          //                           .toLowerCase()
-          //                           .contains(controller.text.toLowerCase())) {
-          //                     debugPrint(i.role_name);
-          //                     setState(() {
-          //                       key.currentState?.pageTo(0);
-          //                       shared.role_data.add(Data(
-          //                           role_name: i.role_name,
-          //                           role_desc: i.role_desc,
-          //                           role_id: i.role_id));
-          //                     });
-          //                     if (shared.role_data.isNotEmpty) {
-          //                       setState(() {
-          //                         isLoaded = true;
-          //                       });
-          //                     }
-          //                   }
-          //                 }
-          //               }
-          //             } else if (controller.text == '') {
-          //               shared.role_data.clear();
-          //               setState(() {
-          //                 shared.role_data.addAll(shared.role[0].data!);
-          //               });
-          //             }
-          //             debugPrint(shared.role_data[0].toJson().toString());
-          //           } catch (e) {
-          //             shared.role_data.clear();
-          //           }
-          //         },
-          //       ),
-          //     ),
-          //   ],
-          // ),
-         Column(children: [Container(
-           width: 500,
-           child: TextFormField(
-             style: TextStyle(color: kBlackColor),
-             decoration: const InputDecoration(
-               hintText: 'Search',
-               border: OutlineInputBorder(),
-               labelStyle: TextStyle(fontSize: 12.0),
-               contentPadding: EdgeInsets.only(left: 10.0),
-               hintStyle: TextStyle(color: kSecondaryColor2),
-               enabledBorder: OutlineInputBorder(
-                 borderSide: BorderSide(color: kBlackColor),
-               ),
-               focusedBorder: OutlineInputBorder(
-                 borderSide: BorderSide(color: kBlackColor),
-               ),
-             ),
-             textInputAction: TextInputAction.go,
-             controller: controller,
-             onChanged: (value) {
-               setState(() {
-                 isLoaded = false;
-               });
-               //
-               try {
-                 if (controller.text.isNotEmpty) {
-                   shared.list_agent_data.clear();
-                   for (var i in shared.list_agent[0].data!) {
-                     print(i.toJson());
-                     print(i.cBranchDesc
-                         ?.toLowerCase()
-                         .contains(controller.text.toLowerCase()));
-                     if (i.toJson().isNotEmpty) {
-                       if (i.cDateAndTime!
-                           .toLowerCase()
-                           .contains(controller.text.toLowerCase()) ||
-                           i.iUserName!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())   ||
-                           i.cCid!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())    ||
-                           i.cFullname!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())  ||
-                           i.cMobileNo!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())  ||
-                           i.aInstDesc!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())  ||
-                           i.cBranchDesc!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())||
-                       i.cUnitDesc!
-                           .toLowerCase()
-               .contains(controller.text.toLowerCase())||
-                           i.cCenterDesc!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())
-
-
-
-
-
-
-                       ) {
-                         debugPrint(i.cCenterDesc);
-                         setState(() {
-                           shared.list_agent_data.add(Data8.fromJson(i.toJson()
-                           ));
-                         });
-                         if (shared.list_agent_data.isNotEmpty) {
-                           setState(() {
-                             isLoaded = true;
-                           });
-                         }
-                       }
-                     }
-                   }
-                 } else if (controller.text == '') {
-                   shared.list_agent_data.clear();
-                   setState(() {
-                     shared.list_agent_data.addAll(shared.list_agent[0].data!);
-                     isLoaded = true;
-                   });
-                 }
-                 debugPrint(shared.list_agent_data[0].toJson().toString());
-               } catch (e) {
-                 shared.list_agent_data.clear();
-                 isLoaded = true;
-               }
-             },
-             onEditingComplete: () async {
-               setState(() {
-                 isLoaded = false;
-               });
-               try {
-                 if (controller.text.isNotEmpty) {
-                   shared.list_agent_data.clear();
-                   for (var i in shared.list_agent[0].data!) {
-                     print(i.toJson());
-                     print(i.cBranchDesc
-                         ?.toLowerCase()
-                         .contains(controller.text.toLowerCase()));
-                     if (i.toJson().isNotEmpty) {
-                       if (i.cDateAndTime!
-                           .toLowerCase()
-                           .contains(controller.text.toLowerCase()) ||
-                           i.iUserName!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())   ||
-                           i.cCid!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())    ||
-                           i.cFullname!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())  ||
-                           i.cMobileNo!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())  ||
-                           i.aInstDesc!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())  ||
-                           i.cBranchDesc!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())||
-                           i.cUnitDesc!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())||
-                           i.cCenterDesc!
-                               .toLowerCase()
-                               .contains(controller.text.toLowerCase())
-
-
-
-                       ) {
-                         debugPrint (i.cCenterDesc);
-                         setState(() {
-                           key.currentState?.pageTo(0);
-                           shared.list_agent_data.add(Data8.fromJson(i.toJson()
-                           ));
-
-                         });
-                         if (shared.list_agent_data.isNotEmpty) {
-                           setState(() {
-                             isLoaded = true;
-                           });
-                         }
-                       }
-                     }
-                   }
-                 } else if (controller.text == '') {
-                   shared.list_agent_data.clear();
-                   setState(() {
-                     shared.list_agent_data.addAll(shared.list_agent[0].data!);
-                   });
-                 }
-                 debugPrint(shared.list_agent_data[0].toJson().toString());
-               } catch (e) {
-                 shared.list_agent_data.clear();
-               }
-             },
-           ),
-         ), Container(
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: kTertiaryColor5,
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3)),
+                    ],
+                  ),
+                  height: 300.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  WebDatePicker(
+                                    hinttext: "Start Sent Date",
+                                    onChange: (value) {},
+                                  ),
+                                  horizontalSpaceRegular,
+                                  WebDatePicker(
+                                    hinttext: "End Sent Date",
+                                    onChange: (value) {},
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          verticalSpaceTiny,
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                hintText: 'CID',
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: controller,
+                              onChanged: (value) {
+                                setState(() {
+                                  isLoaded = false;
+                                });
+                                //
+                                try {
+                                  if (controller.text.isNotEmpty) {
+                                    shared.list_agent_data.clear();
+                                    for (var i in shared.list_agent[0].data!) {
+                                      print(i.toJson());
+                                      print(i.cCid
+                                          ?.toLowerCase()
+                                          .contains(controller.text.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.cCid!
+                                            .toLowerCase()
+                                            .contains(controller.text.toLowerCase()) ||
+                                            i.cCid!
+                                                .toLowerCase()
+                                                .contains(controller.text.toLowerCase())) {
+                                          debugPrint(i.cCid);
+                                          setState(() {
+                                            shared.list_agent_data.add(Data8.fromJson(i.toJson()));
+                                          });
+                                          if (shared.list_agent_data.isNotEmpty) {
+                                            setState(() {
+                                              isLoaded = true;
+                                            });
+                                          }
+                                        }
+                                      }
+                                    }
+                                  } else if (controller.text == '') {
+                                    shared.list_agent_data.clear();
+                                    setState(() {
+                                      shared.list_agent_data.addAll(shared.list_agent[0].data!);
+                                      isLoaded = true;
+                                    });
+                                  }
+                                  debugPrint(shared.list_agent_data[0].toJson().toString());
+                                } catch (e) {
+                                  shared.list_agent_data.clear();
+                                  isLoaded = true;
+                                }
+                              },
+                              onEditingComplete: () async {
+                                setState(() {
+                                  isLoaded = false;
+                                });
+                                try {
+                                  if (controller.text.isNotEmpty) {
+                                    shared.list_agent_data.clear();
+                                    for (var i in shared.list_agent[0].data!) {
+                                      print(i.toJson());
+                                      print(i.cCid
+                                          ?.toLowerCase()
+                                          .contains(controller.text.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.cCid!
+                                            .toLowerCase()
+                                            .contains(controller.text.toLowerCase()) ||
+                                            i.cCid!
+                                                .toLowerCase()
+                                                .contains(controller.text.toLowerCase())) {
+                                          debugPrint(i.cCid);
+                                          setState(() {
+                                            shared.list_agent_data.add(Data8.fromJson(i.toJson()));
+                                          });
+                                          if (shared.list_agent_data.isNotEmpty) {
+                                            setState(() {
+                                              isLoaded = true;
+                                            });
+                                          }
+                                        }
+                                      }
+                                    }
+                                  } else if (controller.text == '') {
+                                    shared.list_agent_data.clear();
+                                    setState(() {
+                                      shared.list_agent_data.addAll(shared.list_agent[0].data!);
+                                    });
+                                  }
+                                  debugPrint(shared.list_agent_data[0].toJson().toString());
+                                } catch (e) {
+                                  shared.list_agent_data.clear();
+                                }
+                              },
+                            ),
+                          ),
+                          verticalSpaceTiny,
+                          elevatedbuttonpopup(
+                              label: "Branch", width: 400.0),
+                          verticalSpaceTiny,
+                          elevatedbuttonpopup(
+                              label: "Institution", width: 400.0),
+                          // DropdownButton(
+                          //   value: init,
+                          //   items: res.map((e) {
+                          //     return DropdownMenuItem(
+                          //       value: e,
+                          //       child: Text(e,
+                          //           style: TextStyle(color: Colors.black)),
+                          //     );
+                          //   }).toList(),
+                          //   onChanged: (value) {
+                          //     setState(() {
+                          //       init = value.toString();
+                          //     });
+                          //   },
+                          // ),
+                          verticalSpaceSmall,
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 100.0,
+                                height: 35.0,
+                                child: ElevatedButton.icon(
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                      MaterialStateProperty.all(
+                                          kPrimaryColor)),
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.search,
+                                    size: 20.0,
+                                  ),
+                                  label: Text(
+                                    'Search',
+                                    style: kSmallRegularTextStyle,
+                                  ),
+                                ),
+                              ),
+                              horizontalSpaceTiny,
+                              SizedBox(
+                                width: 100.0,
+                                height: 35.0,
+                                child: ElevatedButton.icon(
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                      MaterialStateProperty.all(
+                                          kSecondaryColor2)),
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.refresh,
+                                    size: 20.0,
+                                  ),
+                                  label: Text(
+                                    'Reset',
+                                    style: kSmallRegularTextStyle,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      horizontalSpaceMedium,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              textfield(
+                                hintext: "Account Number",
+                              ),
+                              verticalSpaceTiny,
+                              textfield(
+                                hintext: "Mobile Number",
+                              ),
+                              verticalSpaceTiny,
+                              textfield(
+                                hintext: "Error Message",
+                              ),
+                              verticalSpaceMedium,
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                verticalSpaceRegular,
+                Column(children: [Container(
              width: double.infinity,
              padding: kEdgeInsetsVerticalNormal,
              child: PaginatedDataTable(
@@ -431,7 +400,382 @@ class _ListofagentState extends State<Listofagent> {
           // )
         ],
       ),
+    ),
+    ],
+      ),
     );
+    // return Container(
+    //   padding: kEdgeInsetsVerticalNormal,
+    //   child: Column(
+    //     children: [
+    //       // Row(
+    //       //   mainAxisAlignment: MainAxisAlignment.center,
+    //       //   children: [
+    //       //     Container(
+    //       //       width: 500,
+    //       //       child: TextFormField(
+    //       //         style: TextStyle(color: kBlackColor),
+    //       //         decoration: const InputDecoration(
+    //       //           hintText: 'Search',
+    //       //           border: OutlineInputBorder(),
+    //       //           labelStyle: TextStyle(fontSize: 12.0),
+    //       //           contentPadding: EdgeInsets.only(left: 10.0),
+    //       //           hintStyle: TextStyle(color: kSecondaryColor2),
+    //       //           enabledBorder: OutlineInputBorder(
+    //       //             borderSide: BorderSide(color: kBlackColor),
+    //       //           ),
+    //       //           focusedBorder: OutlineInputBorder(
+    //       //             borderSide: BorderSide(color: kBlackColor),
+    //       //           ),
+    //       //         ),
+    //       //         textInputAction: TextInputAction.go,
+    //       //         controller: controller,
+    //       //         onChanged: (value) {
+    //       //           setState(() {
+    //       //             isLoaded = false;
+    //       //           });
+    //       //           //
+    //       //           try {
+    //       //             if (controller.text.isNotEmpty) {
+    //       //               shared.role_data.clear();
+    //       //               for (var i in shared.role[0].data!) {
+    //       //                 print(i.toJson());
+    //       //                 print(i.role_name
+    //       //                     ?.toLowerCase()
+    //       //                     .contains(controller.text.toLowerCase()));
+    //       //                 if (i.toJson().isNotEmpty) {
+    //       //                   if (i.role_name!
+    //       //                           .toLowerCase()
+    //       //                           .contains(controller.text.toLowerCase()) ||
+    //       //                       i.role_desc!
+    //       //                           .toLowerCase()
+    //       //                           .contains(controller.text.toLowerCase())) {
+    //       //                     debugPrint(i.role_name);
+    //       //                     setState(() {
+    //       //                       shared.role_data.add(Data(
+    //       //                           role_name: i.role_name,
+    //       //                           role_desc: i.role_desc,
+    //       //                           role_id: i.role_id));
+    //       //                     });
+    //       //                     if (shared.role_data.isNotEmpty) {
+    //       //                       setState(() {
+    //       //                         isLoaded = true;
+    //       //                       });
+    //       //                     }
+    //       //                   }
+    //       //                 }
+    //       //               }
+    //       //             } else if (controller.text == '') {
+    //       //               shared.role_data.clear();
+    //       //               setState(() {
+    //       //                 shared.role_data.addAll(shared.role[0].data!);
+    //       //                 isLoaded = true;
+    //       //               });
+    //       //             }
+    //       //             debugPrint(shared.role_data[0].toJson().toString());
+    //       //           } catch (e) {
+    //       //             shared.role_data.clear();
+    //       //             isLoaded = true;
+    //       //           }
+    //       //         },
+    //       //         onEditingComplete: () async {
+    //       //           setState(() {
+    //       //             isLoaded = false;
+    //       //           });
+    //       //           try {
+    //       //             if (controller.text.isNotEmpty) {
+    //       //               shared.role_data.clear();
+    //       //               for (var i in shared.role[0].data!) {
+    //       //                 print(i.toJson());
+    //       //                 print(i.role_name
+    //       //                     ?.toLowerCase()
+    //       //                     .contains(controller.text.toLowerCase()));
+    //       //                 if (i.toJson().isNotEmpty) {
+    //       //                   if (i.role_name!
+    //       //                           .toLowerCase()
+    //       //                           .contains(controller.text.toLowerCase()) ||
+    //       //                       i.role_desc!
+    //       //                           .toLowerCase()
+    //       //                           .contains(controller.text.toLowerCase())) {
+    //       //                     debugPrint(i.role_name);
+    //       //                     setState(() {
+    //       //                       key.currentState?.pageTo(0);
+    //       //                       shared.role_data.add(Data(
+    //       //                           role_name: i.role_name,
+    //       //                           role_desc: i.role_desc,
+    //       //                           role_id: i.role_id));
+    //       //                     });
+    //       //                     if (shared.role_data.isNotEmpty) {
+    //       //                       setState(() {
+    //       //                         isLoaded = true;
+    //       //                       });
+    //       //                     }
+    //       //                   }
+    //       //                 }
+    //       //               }
+    //       //             } else if (controller.text == '') {
+    //       //               shared.role_data.clear();
+    //       //               setState(() {
+    //       //                 shared.role_data.addAll(shared.role[0].data!);
+    //       //               });
+    //       //             }
+    //       //             debugPrint(shared.role_data[0].toJson().toString());
+    //       //           } catch (e) {
+    //       //             shared.role_data.clear();
+    //       //           }
+    //       //         },
+    //       //       ),
+    //       //     ),
+    //       //   ],
+    //       // ),
+    //      Column(children: [Container(
+    //        width: 500,
+    //        child: TextFormField(
+    //          style: TextStyle(color: kBlackColor),
+    //          decoration: const InputDecoration(
+    //            hintText: 'Search',
+    //            border: OutlineInputBorder(),
+    //            labelStyle: TextStyle(fontSize: 12.0),
+    //            contentPadding: EdgeInsets.only(left: 10.0),
+    //            hintStyle: TextStyle(color: kSecondaryColor2),
+    //            enabledBorder: OutlineInputBorder(
+    //              borderSide: BorderSide(color: kBlackColor),
+    //            ),
+    //            focusedBorder: OutlineInputBorder(
+    //              borderSide: BorderSide(color: kBlackColor),
+    //            ),
+    //          ),
+    //          textInputAction: TextInputAction.go,
+    //          controller: controller,
+    //          onChanged: (value) {
+    //            setState(() {
+    //              isLoaded = false;
+    //            });
+    //            //
+    //            try {
+    //              if (controller.text.isNotEmpty) {
+    //                shared.list_agent_data.clear();
+    //                for (var i in shared.list_agent[0].data!) {
+    //                  print(i.toJson());
+    //                  print(i.cBranchDesc
+    //                      ?.toLowerCase()
+    //                      .contains(controller.text.toLowerCase()));
+    //                  if (i.toJson().isNotEmpty) {
+    //                    if (i.cDateAndTime!
+    //                        .toLowerCase()
+    //                        .contains(controller.text.toLowerCase()) ||
+    //                        i.iUserName!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())   ||
+    //                        i.cCid!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())    ||
+    //                        i.cFullname!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())  ||
+    //                        i.cMobileNo!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())  ||
+    //                        i.aInstDesc!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())  ||
+    //                        i.cBranchDesc!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())||
+    //                    i.cUnitDesc!
+    //                        .toLowerCase()
+    //            .contains(controller.text.toLowerCase())||
+    //                        i.cCenterDesc!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())
+    //
+    //
+    //
+    //
+    //
+    //
+    //                    ) {
+    //                      debugPrint(i.cCenterDesc);
+    //                      setState(() {
+    //                        shared.list_agent_data.add(Data8.fromJson(i.toJson()
+    //                        ));
+    //                      });
+    //                      if (shared.list_agent_data.isNotEmpty) {
+    //                        setState(() {
+    //                          isLoaded = true;
+    //                        });
+    //                      }
+    //                    }
+    //                  }
+    //                }
+    //              } else if (controller.text == '') {
+    //                shared.list_agent_data.clear();
+    //                setState(() {
+    //                  shared.list_agent_data.addAll(shared.list_agent[0].data!);
+    //                  isLoaded = true;
+    //                });
+    //              }
+    //              debugPrint(shared.list_agent_data[0].toJson().toString());
+    //            } catch (e) {
+    //              shared.list_agent_data.clear();
+    //              isLoaded = true;
+    //            }
+    //          },
+    //          onEditingComplete: () async {
+    //            setState(() {
+    //              isLoaded = false;
+    //            });
+    //            try {
+    //              if (controller.text.isNotEmpty) {
+    //                shared.list_agent_data.clear();
+    //                for (var i in shared.list_agent[0].data!) {
+    //                  print(i.toJson());
+    //                  print(i.cBranchDesc
+    //                      ?.toLowerCase()
+    //                      .contains(controller.text.toLowerCase()));
+    //                  if (i.toJson().isNotEmpty) {
+    //                    if (i.cDateAndTime!
+    //                        .toLowerCase()
+    //                        .contains(controller.text.toLowerCase()) ||
+    //                        i.iUserName!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())   ||
+    //                        i.cCid!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())    ||
+    //                        i.cFullname!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())  ||
+    //                        i.cMobileNo!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())  ||
+    //                        i.aInstDesc!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())  ||
+    //                        i.cBranchDesc!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())||
+    //                        i.cUnitDesc!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())||
+    //                        i.cCenterDesc!
+    //                            .toLowerCase()
+    //                            .contains(controller.text.toLowerCase())
+    //
+    //
+    //
+    //                    ) {
+    //                      debugPrint (i.cCenterDesc);
+    //                      setState(() {
+    //                        key.currentState?.pageTo(0);
+    //                        shared.list_agent_data.add(Data8.fromJson(i.toJson()
+    //                        ));
+    //
+    //                      });
+    //                      if (shared.list_agent_data.isNotEmpty) {
+    //                        setState(() {
+    //                          isLoaded = true;
+    //                        });
+    //                      }
+    //                    }
+    //                  }
+    //                }
+    //              } else if (controller.text == '') {
+    //                shared.list_agent_data.clear();
+    //                setState(() {
+    //                  shared.list_agent_data.addAll(shared.list_agent[0].data!);
+    //                });
+    //              }
+    //              debugPrint(shared.list_agent_data[0].toJson().toString());
+    //            } catch (e) {
+    //              shared.list_agent_data.clear();
+    //            }
+    //          },
+    //        ),
+    //      ), Container(
+    //          width: double.infinity,
+    //          padding: kEdgeInsetsVerticalNormal,
+    //          child: PaginatedDataTable(
+    //            key: key,
+    //            arrowHeadColor: kWhiteColor,
+    //            columns: [
+    //              DataColumn(
+    //                  label: Text('Date & Time Enable Agent Feature',
+    //                      style: kLargeBoldTextStyle)),
+    //              DataColumn(
+    //                  label: Text('Enable By', style: kLargeBoldTextStyle)),
+    //              DataColumn(label: Text('CID', style: kLargeBoldTextStyle)),
+    //              DataColumn(
+    //                  label: Text('Full Name', style: kLargeBoldTextStyle)),
+    //              DataColumn(
+    //                  label: Text('Mobile No', style: kLargeBoldTextStyle)),
+    //              DataColumn(
+    //                  label: Text('Institution', style: kLargeBoldTextStyle)),
+    //              DataColumn(label: Text('Branch', style: kLargeBoldTextStyle)),
+    //              DataColumn(label: Text('Unit', style: kLargeBoldTextStyle)),
+    //              DataColumn(label: Text('Center', style: kLargeBoldTextStyle))
+    //            ],
+    //            source: isLoaded
+    //                ? shared.list_agent_data.isNotEmpty
+    //                ? data
+    //                : data2
+    //                : data3,
+    //            rowsPerPage: 8,
+    //            showFirstLastButtons: true,
+    //            header: Text('List of Role', style: kXLargeBoldTextStyle),
+    //          )),],)
+    //       // SafeArea(
+    //       //   child: TextButton(
+    //       //     onPressed: () async {
+    //       //       setState(() {});
+    //       //       shared.inqqq.sort((a, b) => a.role_name
+    //       //           .toString()
+    //       //           .toLowerCase()
+    //       //           .compareTo(b.role_name.toString().toLowerCase()));
+    //       //     },
+    //       //     child: const Text('Role name ascending'),
+    //       //   ),
+    //       // ),
+    //       // SafeArea(
+    //       //   child: TextButton(
+    //       //     onPressed: () async {
+    //       //       setState(() {});
+    //       //       shared.inqqq.sort((a, b) => b.role_name
+    //       //           .toString()
+    //       //           .toLowerCase()
+    //       //           .compareTo(a.role_name.toString().toLowerCase()));
+    //       //       //print(shared.inqq.sort());
+    //       //     },
+    //       //     child: const Text('Role name descending'),
+    //       //   ),
+    //       // ),
+    //       // SafeArea(
+    //       //   child: TextButton(
+    //       //     onPressed: () async {
+    //       //       setState(() {});
+    //       //       shared.inqqq.sort((a, b) => a.role_desc
+    //       //           .toString()
+    //       //           .toLowerCase()
+    //       //           .compareTo(b.role_desc.toString().toLowerCase()));
+    //       //     },
+    //       //     child: const Text('Role desc ascending'),
+    //       //   ),
+    //       // ),
+    //       // SafeArea(
+    //       //   child: TextButton(
+    //       //     onPressed: () async {
+    //       //       setState(() {});
+    //       //       shared.inqqq.sort((a, b) => b.role_desc
+    //       //           .toString()
+    //       //           .toLowerCase()
+    //       //           .compareTo(a.role_desc.toString().toLowerCase()));
+    //       //     },
+    //       //     child: const Text('Role desc descending'),
+    //       //   ),
+    //       // )
+    //     ],
+    //   ),
+    // );
   }
 }
 
