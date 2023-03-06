@@ -1085,7 +1085,7 @@ class TransactionConfirm_API {
   Future<List> getCategory() async {
     List res = [];
     http.Response response =
-        await http.get(Uri.parse('$API/get_transaction_logs_status_dropdown'));
+        await http.get(Uri.parse('$API/get_tfc_transaction_dropdown'));
     print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonData = await jsonDecode(response.body)['data'];
