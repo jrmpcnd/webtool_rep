@@ -59,126 +59,162 @@ class _RolemanagementState extends State<Rolemanagement> {
       padding: kEdgeInsetsVerticalNormal,
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 500,
-                child: TextFormField(
-                  style: TextStyle(color: kBlackColor),
-                  decoration: const InputDecoration(
-                    hintText: 'Role Name',
-                    border: OutlineInputBorder(),
-                    labelStyle: TextStyle(fontSize: 12.0),
-                    contentPadding: EdgeInsets.only(left: 10.0),
-                    hintStyle: TextStyle(color: kSecondaryColor2),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: kBlackColor),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: kBlackColor),
-                    ),
-                  ),
-                  textInputAction: TextInputAction.go,
-                  controller: controller,
-                  onChanged: (value) {
-                    setState(() {
-                      isLoaded = false;
-                    });
-                    //
-                    try {
-                      if (controller.text.isNotEmpty) {
-                        shared.role_data.clear();
-                        for (var i in shared.role[0].data!) {
-                          print(i.toJson());
-                          print(i.role_name
-                              ?.toLowerCase()
-                              .contains(controller.text.toLowerCase()));
-                          if (i.toJson().isNotEmpty) {
-                            if (i.role_name!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase()) ||
-                                i.role_desc!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase())) {
-                              debugPrint(i.role_name);
-                              setState(() {
-                                shared.role_data.add(Data(
-                                    role_name: i.role_name,
-                                    role_desc: i.role_desc,
-                                    role_id: i.role_id));
-                              });
-                              if (shared.role_data.isNotEmpty) {
-                                setState(() {
-                                  isLoaded = true;
-                                });
-                              }
-                            }
-                          }
-                        }
-                      } else if (controller.text == '') {
-                        shared.role_data.clear();
-                        setState(() {
-                          shared.role_data.addAll(shared.role[0].data!);
-                          isLoaded = true;
-                        });
-                      }
-                      debugPrint(shared.role_data[0].toJson().toString());
-                    } catch (e) {
-                      shared.role_data.clear();
-                      isLoaded = true;
-                    }
-                  },
-                  onEditingComplete: () async {
-                    setState(() {
-                      isLoaded = false;
-                    });
-                    try {
-                      if (controller.text.isNotEmpty) {
-                        shared.role_data.clear();
-                        for (var i in shared.role[0].data!) {
-                          print(i.toJson());
-                          print(i.role_name
-                              ?.toLowerCase()
-                              .contains(controller.text.toLowerCase()));
-                          if (i.toJson().isNotEmpty) {
-                            if (i.role_name!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase()) ||
-                                i.role_desc!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase())) {
-                              debugPrint(i.role_name);
-                              setState(() {
-                                key.currentState?.pageTo(0);
-                                shared.role_data.add(Data(
-                                    role_name: i.role_name,
-                                    role_desc: i.role_desc,
-                                    role_id: i.role_id));
-                              });
-                              if (shared.role_data.isNotEmpty) {
-                                setState(() {
-                                  isLoaded = true;
-                                });
-                              }
-                            }
-                          }
-                        }
-                      } else if (controller.text == '') {
-                        shared.role_data.clear();
-                        setState(() {
-                          shared.role_data.addAll(shared.role[0].data!);
-                        });
-                      }
-                      debugPrint(shared.role_data[0].toJson().toString());
-                    } catch (e) {
-                      shared.role_data.clear();
-                    }
-                  },
-                ),
+          Container(
+            decoration: BoxDecoration(
+              color: kTertiaryColor5,
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
               ),
-            ],
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3)),
+              ],
+            ),
+            height: 200.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 35.0,
+                              width: 400,
+                              child: TextFormField(
+                                style: kTextStyle,
+                                decoration: const InputDecoration(
+                                  hintText: 'Role Management',
+                                  border: OutlineInputBorder(),
+                                  labelStyle: TextStyle(fontSize: 12.0),
+                                  contentPadding: EdgeInsets.only(left: 10.0),
+                                  hintStyle: TextStyle(color: kSecondaryColor2),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: kBlackColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: kBlackColor),
+                                  ),
+                                ),
+                                textInputAction: TextInputAction.go,
+                                controller: controller,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isLoaded = false;
+                                  });
+                                  //
+                                  try {
+                                    if (controller.text.isNotEmpty) {
+                                      shared.role_data.clear();
+                                      for (var i in shared.role[0].data!) {
+                                        print(i.toJson());
+                                        print(i.role_name
+                                            ?.toLowerCase()
+                                            .contains(controller.text.toLowerCase()));
+                                        if (i.toJson().isNotEmpty) {
+                                          if (i.role_name!
+                                              .toLowerCase()
+                                              .contains(controller.text.toLowerCase()) ||
+                                              i.role_desc!
+                                                  .toLowerCase()
+                                                  .contains(controller.text.toLowerCase())) {
+                                            debugPrint(i.role_name);
+                                            setState(() {
+                                              shared.role_data.add(Data(
+                                                  role_name: i.role_name,
+                                                  role_desc: i.role_desc,
+                                                  role_id: i.role_id));
+                                            });
+                                            if (shared.role_data.isNotEmpty) {
+                                              setState(() {
+                                                isLoaded = true;
+                                              });
+                                            }
+                                          }
+                                        }
+                                      }
+                                    } else if (controller.text == '') {
+                                      shared.role_data.clear();
+                                      setState(() {
+                                        shared.role_data.addAll(shared.role[0].data!);
+                                        isLoaded = true;
+                                      });
+                                    }
+                                    debugPrint(shared.role_data[0].toJson().toString());
+                                  } catch (e) {
+                                    shared.role_data.clear();
+                                    isLoaded = true;
+                                  }
+                                },
+                                onEditingComplete: () async {
+                                  setState(() {
+                                    isLoaded = false;
+                                  });
+                                  try {
+                                    if (controller.text.isNotEmpty) {
+                                      shared.role_data.clear();
+                                      for (var i in shared.role[0].data!) {
+                                        print(i.toJson());
+                                        print(i.role_name
+                                            ?.toLowerCase()
+                                            .contains(controller.text.toLowerCase()));
+                                        if (i.toJson().isNotEmpty) {
+                                          if (i.role_name!
+                                              .toLowerCase()
+                                              .contains(controller.text.toLowerCase()) ||
+                                              i.role_desc!
+                                                  .toLowerCase()
+                                                  .contains(controller.text.toLowerCase())) {
+                                            debugPrint(i.role_name);
+                                            setState(() {
+                                              key.currentState?.pageTo(0);
+                                              shared.role_data.add(Data(
+                                                  role_name: i.role_name,
+                                                  role_desc: i.role_desc,
+                                                  role_id: i.role_id));
+                                            });
+                                            if (shared.role_data.isNotEmpty) {
+                                              setState(() {
+                                                isLoaded = true;
+                                              });
+                                            }
+                                          }
+                                        }
+                                      }
+                                    } else if (controller.text == '') {
+                                      shared.role_data.clear();
+                                      setState(() {
+                                        shared.role_data.addAll(shared.role[0].data!);
+                                      });
+                                    }
+                                    debugPrint(shared.role_data[0].toJson().toString());
+                                  } catch (e) {
+                                    shared.role_data.clear();
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
+
           Container(
               width: double.infinity,
               padding: kEdgeInsetsVerticalNormal,
@@ -200,55 +236,6 @@ class _RolemanagementState extends State<Rolemanagement> {
                 showFirstLastButtons: true,
                 header: Text('List of Role', style: kXLargeBoldTextStyle),
               )),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => a.role_name
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(b.role_name.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role name ascending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => b.role_name
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(a.role_name.toString().toLowerCase()));
-          //       //print(shared.inqq.sort());
-          //     },
-          //     child: const Text('Role name descending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => a.role_desc
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(b.role_desc.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role desc ascending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => b.role_desc
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(a.role_desc.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role desc descending'),
-          //   ),
-          // )
         ],
       ),
     );
