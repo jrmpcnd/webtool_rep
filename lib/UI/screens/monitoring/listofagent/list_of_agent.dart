@@ -21,6 +21,7 @@ class Listofagent extends StatefulWidget {
 
 class _ListofagentState extends State<Listofagent> {
   TextEditingController controller = TextEditingController();
+  TextEditingController controller1 = TextEditingController();
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -297,12 +298,118 @@ class _ListofagentState extends State<Listofagent> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              textfield(
-                                hintext: "Account Number",
+                              SizedBox(
+                                height: 35.0,
+                                width: 400,
+                                child: TextFormField(
+                                  style: kTextStyle,
+                                  decoration: const InputDecoration(
+                                    hintText: 'Mobile Number',
+                                    border: OutlineInputBorder(),
+                                    labelStyle: TextStyle(fontSize: 12.0),
+                                    contentPadding: EdgeInsets.only(left: 10.0),
+                                    hintStyle: TextStyle(color: kSecondaryColor2),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                  ),
+                                  textInputAction: TextInputAction.go,
+                                  controller: controller1,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    //
+                                    try {
+                                      if (controller1.text.isNotEmpty) {
+                                        shared.list_agent_data.clear();
+                                        for (var i in shared.list_agent[0].data!) {
+                                          print(i.toJson());
+                                          print(i.cMobileNo
+                                              ?.toLowerCase()
+                                              .contains(controller1.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.cMobileNo!
+                                                .toLowerCase()
+                                                .contains(controller1.text.toLowerCase()) ||
+                                                i.cMobileNo!
+                                                    .toLowerCase()
+                                                    .contains(controller1.text.toLowerCase())) {
+                                              debugPrint(i.cMobileNo);
+                                              setState(() {
+                                                shared.list_agent_data.add(Data8.fromJson(i.toJson()));
+                                              });
+                                              if (shared.list_agent_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller1.text == '') {
+                                        shared.list_agent_data.clear();
+                                        setState(() {
+                                          shared.list_agent_data.addAll(shared.list_agent[0].data!);
+                                          isLoaded = true;
+                                        });
+                                      }
+                                      debugPrint(shared.list_agent_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.list_agent_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
+                                  onEditingComplete: () async {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    try {
+                                      if (controller1.text.isNotEmpty) {
+                                        shared.list_agent_data.clear();
+                                        for (var i in shared.list_agent[0].data!) {
+                                          print(i.toJson());
+                                          print(i.cMobileNo
+                                              ?.toLowerCase()
+                                              .contains(controller1.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.cMobileNo!
+                                                .toLowerCase()
+                                                .contains(controller1.text.toLowerCase()) ||
+                                                i.cMobileNo!
+                                                    .toLowerCase()
+                                                    .contains(controller1.text.toLowerCase())) {
+                                              debugPrint(i.cMobileNo);
+                                              setState(() {
+                                                shared.list_agent_data.add(Data8.fromJson(i.toJson()));
+                                              });
+                                              if (shared.list_agent_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller1.text == '') {
+                                        shared.list_agent_data.clear();
+                                        setState(() {
+                                          shared.list_agent_data.addAll(shared.list_agent[0].data!);
+                                        });
+                                      }
+                                      debugPrint(shared.list_agent_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.list_agent_data.clear();
+                                    }
+                                  },
+                                ),
                               ),
                               verticalSpaceTiny,
                               textfield(
-                                hintext: "Mobile Number",
+                                hintext: "Number",
                               ),
                               verticalSpaceTiny,
                               textfield(

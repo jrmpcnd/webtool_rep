@@ -257,8 +257,113 @@ class _SmslogsState extends State<Smslogs> {
                           ),
 
                           verticalSpaceTiny,
-                          textfield(
-                            hintext: "Mobile Number",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                hintText: 'Mobile Number',
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: controller1,
+                              onChanged: (value) {
+                                setState(() {
+                                  isLoaded = false;
+                                });
+                                try {
+                                  if (controller1.text.isNotEmpty) {
+                                    shared.sms_data.clear();
+                                    for (var i in shared.sms[0].data!) {
+                                      print(i.toJson());
+                                      print(i.msisdn
+                                          ?.toLowerCase()
+                                          .contains(controller1.text.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.msisdn!
+                                            .toLowerCase()
+                                            .contains(controller1.text.toLowerCase())
+
+                                        ) {
+                                          debugPrint(i.msisdn);
+                                          setState(() {
+                                            shared.sms_data.add(Data5.fromJson(i.toJson()));
+                                          });
+                                          if (shared.sms_data.isNotEmpty) {
+                                            setState(() {
+                                              isLoaded = true;
+                                            });
+                                          }
+                                        }
+                                      }
+                                    }
+                                  } else if (controller1.text == '') {
+                                    shared.sms_data.clear();
+                                    setState(() {
+                                      shared.sms_data.addAll(shared.sms[0].data!);
+                                      isLoaded = true;
+                                    });
+                                  }
+                                  debugPrint(shared.sms_data[0].toJson().toString());
+                                } catch (e) {
+                                  shared.sms_data.clear();
+                                  isLoaded = true;
+                                }
+                              },
+                              onEditingComplete: () async {
+                                setState(() {
+                                  isLoaded = false;
+                                });
+                                try {
+                                  if (controller1.text.isNotEmpty) {
+                                    shared.sms_data.clear();
+                                    for (var i in shared.sms[0].data!) {
+                                      print(i.toJson());
+                                      print(i.msisdn
+                                          ?.toLowerCase()
+                                          .contains(controller1.text.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.msisdn!
+                                            .toLowerCase()
+                                            .contains(controller1.text.toLowerCase()) ||
+                                            i.msisdn!
+                                                .toLowerCase()
+                                                .contains(controller1.text.toLowerCase())) {
+                                          debugPrint(i.msisdn);
+                                          setState(() {
+                                            key.currentState?.pageTo(0);
+                                            shared.sms_data.add(Data5.fromJson(i.toJson()));
+                                          });
+                                          if (shared.sms_data.isNotEmpty) {
+                                            setState(() {
+                                              isLoaded = true;
+                                            });
+                                          }
+                                        }
+                                      }
+                                    }
+                                  } else if (controller1.text == '') {
+                                    shared.sms_data.clear();
+                                    setState(() {
+                                      shared.sms_data.addAll(shared.sms[0].data!);
+                                    });
+                                  }
+                                  debugPrint(shared.sms_data[0].toJson().toString());
+                                } catch (e) {
+                                  shared.sms_data.clear();
+                                }
+                              },
+                            ),
                           ),
                           verticalSpaceTiny,
 
