@@ -31,6 +31,11 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
   ListofUseDevice_Api dropdownFunction = ListofUseDevice_Api();
   ListofUseDeviceStatus_Api dropdownStatus = ListofUseDeviceStatus_Api();
   TextEditingController controller = TextEditingController();
+  TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
+  TextEditingController controller3 = TextEditingController();
+
+
   Future<void> wait() async {
     final shared = Provider.of<Listofuse_Device>(context, listen: false);
     shared.Listofuse_DeviceLog.clear();
@@ -145,9 +150,116 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
                             ],
                           ),
                           verticalSpaceTiny,
-                          textfield(
-                            hintext: "CIF Number",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              style: TextStyle(color: kBlackColor),
+                              decoration: const InputDecoration(
+                                hintText: 'CIF Number',
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: controller1,
+                              onChanged: (value) {
+                                setState(() {
+                                  isLoaded = false;
+                                });
+                                //
+                                try {
+                                  if (controller1.text.isNotEmpty) {
+                                    shared.Listofuse_Device_data.clear();
+                                    for (var i in shared.Listofuse_DeviceLog[0].data!) {
+                                      print(i.toJson());
+                                      print(i.cid
+                                          ?.toLowerCase()
+                                          .contains(controller1.text.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.cid!
+                                            .toLowerCase()
+                                            .contains(controller1.text.toLowerCase())
+                                        ) {
+                                          debugPrint(i.cid);
+                                          setState(() {
+                                            shared.Listofuse_Device_data.add(UseoflistDevice_Log.fromJson(i.toJson()
+                                            ));
+                                          });
+                                          if (shared.Listofuse_Device_data.isNotEmpty) {
+                                            setState(() {
+                                              isLoaded = true;
+                                            });
+                                          }
+                                        }
+                                      }
+                                    }
+                                  } else if (controller1.text == '') {
+                                    shared.Listofuse_Device_data.clear();
+                                    setState(() {
+                                      shared.Listofuse_Device_data.addAll(shared.Listofuse_DeviceLog[0].data!);
+                                      isLoaded = true;
+                                    });
+                                  }
+                                  debugPrint(shared.Listofuse_Device_data[0].toJson().toString());
+                                } catch (e) {
+                                  shared.Listofuse_Device_data.clear();
+                                  isLoaded = true;
+                                }
+                              },
+                              onEditingComplete: () async {
+                                setState(() {
+                                  isLoaded = false;
+                                });
+                                try {
+                                  if (controller1.text.isNotEmpty) {
+                                    shared.Listofuse_Device_data.clear();
+                                    for (var i in shared.Listofuse_DeviceLog[0].data!) {
+                                      print(i.toJson());
+                                      print(i.cid
+                                          ?.toLowerCase()
+                                          .contains(controller1.text.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.cid!
+                                            .toLowerCase()
+                                            .contains(controller1.text.toLowerCase())
+                                        ) {
+                                          debugPrint (i.cid);
+                                          setState(() {
+                                            key.currentState?.pageTo(0);
+                                            shared.Listofuse_Device_data.add(UseoflistDevice_Log.fromJson(i.toJson()
+                                            ));
+
+                                          });
+                                          if (shared.Listofuse_Device_data.isNotEmpty) {
+                                            setState(() {
+                                              isLoaded = true;
+                                            });
+                                          }
+                                        }
+                                      }
+                                    }
+                                  } else if (controller1.text == '') {
+                                    shared.Listofuse_Device_data.clear();
+                                    setState(() {
+                                      shared.Listofuse_Device_data.addAll(shared.Listofuse_DeviceLog[0].data!);
+                                    });
+                                  }
+                                  debugPrint(shared.Listofuse_Device_data[0].toJson().toString());
+                                } catch (e) {
+                                  shared.Listofuse_Device_data.clear();
+                                }
+                              },
+                            ),
                           ),
+
                           verticalSpaceTiny,
                           DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
                             setState(() {
@@ -208,12 +320,224 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              textfield(
-                                hintext: "Device ID",
+                              SizedBox(
+                                height: 35.0,
+                                width: 400,
+                                child: TextFormField(
+                                  style: TextStyle(color: kBlackColor),
+                                  decoration: const InputDecoration(
+                                    hintText: 'Device ID',
+                                    border: OutlineInputBorder(),
+                                    labelStyle: TextStyle(fontSize: 12.0),
+                                    contentPadding: EdgeInsets.only(left: 10.0),
+                                    hintStyle: TextStyle(color: kSecondaryColor2),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                  ),
+                                  textInputAction: TextInputAction.go,
+                                  controller: controller2,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    //
+                                    try {
+                                      if (controller2.text.isNotEmpty) {
+                                        shared.Listofuse_Device_data.clear();
+                                        for (var i in shared.Listofuse_DeviceLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.deviceId
+                                              ?.toLowerCase()
+                                              .contains(controller2.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.deviceId!
+                                                .toLowerCase()
+                                                .contains(controller2.text.toLowerCase())
+                                            ) {
+                                              debugPrint(i.deviceId);
+                                              setState(() {
+                                                shared.Listofuse_Device_data.add(UseoflistDevice_Log.fromJson(i.toJson()
+                                                ));
+                                              });
+                                              if (shared.Listofuse_Device_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller2.text == '') {
+                                        shared.Listofuse_Device_data.clear();
+                                        setState(() {
+                                          shared.Listofuse_Device_data.addAll(shared.Listofuse_DeviceLog[0].data!);
+                                          isLoaded = true;
+                                        });
+                                      }
+                                      debugPrint(shared.Listofuse_Device_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.Listofuse_Device_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
+                                  onEditingComplete: () async {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    try {
+                                      if (controller2.text.isNotEmpty) {
+                                        shared.Listofuse_Device_data.clear();
+                                        for (var i in shared.Listofuse_DeviceLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.deviceId
+                                              ?.toLowerCase()
+                                              .contains(controller2.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.deviceId!
+                                                .toLowerCase()
+                                                .contains(controller2.text.toLowerCase())
+                                            ) {
+                                              debugPrint (i.deviceId);
+                                              setState(() {
+                                                key.currentState?.pageTo(0);
+                                                shared.Listofuse_Device_data.add(UseoflistDevice_Log.fromJson(i.toJson()
+                                                ));
+
+                                              });
+                                              if (shared.Listofuse_Device_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller2.text == '') {
+                                        shared.Listofuse_Device_data.clear();
+                                        setState(() {
+                                          shared.Listofuse_Device_data.addAll(shared.Listofuse_DeviceLog[0].data!);
+                                        });
+                                      }
+                                      debugPrint(shared.Listofuse_Device_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.Listofuse_Device_data.clear();
+                                    }
+                                  },
+                                ),
                               ),
                               verticalSpaceTiny,
-                              textfield(
-                                hintext: "Mobile Number",
+                              SizedBox(
+                                height: 35.0,
+                                width: 400,
+                                child: TextFormField(
+                                  style: TextStyle(color: kBlackColor),
+                                  decoration: const InputDecoration(
+                                    hintText: 'Mobile Number',
+                                    border: OutlineInputBorder(),
+                                    labelStyle: TextStyle(fontSize: 12.0),
+                                    contentPadding: EdgeInsets.only(left: 10.0),
+                                    hintStyle: TextStyle(color: kSecondaryColor2),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                  ),
+                                  textInputAction: TextInputAction.go,
+                                  controller: controller3,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    //
+                                    try {
+                                      if (controller3.text.isNotEmpty) {
+                                        shared.Listofuse_Device_data.clear();
+                                        for (var i in shared.Listofuse_DeviceLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.mobileNumber
+                                              ?.toLowerCase()
+                                              .contains(controller3.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.mobileNumber!
+                                                .toLowerCase()
+                                                .contains(controller3.text.toLowerCase())
+                                            ) {
+                                              debugPrint(i.mobileNumber);
+                                              setState(() {
+                                                shared.Listofuse_Device_data.add(UseoflistDevice_Log.fromJson(i.toJson()
+                                                ));
+                                              });
+                                              if (shared.Listofuse_Device_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller3.text == '') {
+                                        shared.Listofuse_Device_data.clear();
+                                        setState(() {
+                                          shared.Listofuse_Device_data.addAll(shared.Listofuse_DeviceLog[0].data!);
+                                          isLoaded = true;
+                                        });
+                                      }
+                                      debugPrint(shared.Listofuse_Device_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.Listofuse_Device_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
+                                  onEditingComplete: () async {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    try {
+                                      if (controller3.text.isNotEmpty) {
+                                        shared.Listofuse_Device_data.clear();
+                                        for (var i in shared.Listofuse_DeviceLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.mobileNumber
+                                              ?.toLowerCase()
+                                              .contains(controller3.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.mobileNumber!
+                                                .toLowerCase()
+                                                .contains(controller3.text.toLowerCase())
+                                            ) {
+                                              debugPrint (i.mobileNumber);
+                                              setState(() {
+                                                key.currentState?.pageTo(0);
+                                                shared.Listofuse_Device_data.add(UseoflistDevice_Log.fromJson(i.toJson()
+                                                ));
+
+                                              });
+                                              if (shared.Listofuse_Device_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller3.text == '') {
+                                        shared.Listofuse_Device_data.clear();
+                                        setState(() {
+                                          shared.Listofuse_Device_data.addAll(shared.Listofuse_DeviceLog[0].data!);
+                                        });
+                                      }
+                                      debugPrint(shared.Listofuse_Device_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.Listofuse_Device_data.clear();
+                                    }
+                                  },
+                                ),
                               ),
                               verticalSpaceTiny,
                               DropdownButton(value: init2,items: res2.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
