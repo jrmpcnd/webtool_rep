@@ -23,6 +23,10 @@ class _FailedenrollmentState extends State<Failedenrollment> {
   bool static = false;
   bool isLoaded = false;
   TextEditingController controller = TextEditingController();
+  TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
+  TextEditingController controller3 = TextEditingController();
+  TextEditingController controller4 = TextEditingController();
 
   Future<void> wait() async {
     final shared7 = Provider.of<Prov7>(context, listen: false);
@@ -128,8 +132,114 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                             ],
                           ),
                           verticalSpaceTiny,
-                          textfield(
-                            hintext: "Birthday",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              style: TextStyle(color: kBlackColor),
+                              decoration: const InputDecoration(
+                                hintText: 'Date Birth',
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: controller1,
+                              onChanged: (value) {
+                                setState(() {
+                                  isLoaded = false;
+                                });
+                                //
+                                try {
+                                  if (controller1.text.isNotEmpty) {
+                                    shared.failed_data.clear();
+                                    for (var i in shared.failed[0].data!) {
+                                      print(i.toJson());
+                                      print(i.dateOfBirth
+                                          ?.toLowerCase()
+                                          .contains(controller1.text.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.dateOfBirth!
+                                            .toLowerCase()
+                                            .contains(controller1.text.toLowerCase())
+                                        ) {
+                                          debugPrint(i.dateOfBirth);
+                                          setState(() {
+                                            shared.failed_data.add(Data7.fromJson(i.toJson()
+                                            ));
+                                          });
+                                          if (shared.failed_data.isNotEmpty) {
+                                            setState(() {
+                                              isLoaded = true;
+                                            });
+                                          }
+                                        }
+                                      }
+                                    }
+                                  } else if (controller1.text == '') {
+                                    shared.failed_data.clear();
+                                    setState(() {
+                                      shared.failed_data.addAll(shared.failed[0].data!);
+                                      isLoaded = true;
+                                    });
+                                  }
+                                  debugPrint(shared.failed_data[0].toJson().toString());
+                                } catch (e) {
+                                  shared.failed_data.clear();
+                                  isLoaded = true;
+                                }
+                              },
+                              onEditingComplete: () async {
+                                setState(() {
+                                  isLoaded = false;
+                                });
+                                try {
+                                  if (controller1.text.isNotEmpty) {
+                                    shared.failed_data.clear();
+                                    for (var i in shared.failed[0].data!) {
+                                      print(i.toJson());
+                                      print(i.dateOfBirth
+                                          ?.toLowerCase()
+                                          .contains(controller1.text.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.dateOfBirth!
+                                            .toLowerCase()
+                                            .contains(controller1.text.toLowerCase())
+                                        ) {
+                                          debugPrint (i.dateOfBirth);
+                                          setState(() {
+                                            key.currentState?.pageTo(0);
+                                            shared.failed_data.add(Data7.fromJson(i.toJson()
+                                            ));
+
+                                          });
+                                          if (shared.failed_data.isNotEmpty) {
+                                            setState(() {
+                                              isLoaded = true;
+                                            });
+                                          }
+                                        }
+                                      }
+                                    }
+                                  } else if (controller1.text == '') {
+                                    shared.failed_data.clear();
+                                    setState(() {
+                                      shared.failed_data.addAll(shared.failed[0].data!);
+                                    });
+                                  }
+                                  debugPrint(shared.failed_data[0].toJson().toString());
+                                } catch (e) {
+                                  shared.failed_data.clear();
+                                }
+                              },
+                            ),
                           ),
                           verticalSpaceTiny,
                           DropdownButton(
@@ -201,16 +311,334 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              textfield(
-                                hintext: "Account Number",
+                              SizedBox(
+                                height: 35.0,
+                                width: 400,
+                                child: TextFormField(
+                                  style: TextStyle(color: kBlackColor),
+                                  decoration: const InputDecoration(
+                                    hintText: 'Account Number',
+                                    border: OutlineInputBorder(),
+                                    labelStyle: TextStyle(fontSize: 12.0),
+                                    contentPadding: EdgeInsets.only(left: 10.0),
+                                    hintStyle: TextStyle(color: kSecondaryColor2),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                  ),
+                                  textInputAction: TextInputAction.go,
+                                  controller: controller2,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    //
+                                    try {
+                                      if (controller2.text.isNotEmpty) {
+                                        shared.failed_data.clear();
+                                        for (var i in shared.failed[0].data!) {
+                                          print(i.toJson());
+                                          print(i.accountNumber
+                                              ?.toLowerCase()
+                                              .contains(controller2.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.accountNumber!
+                                                .toLowerCase()
+                                                .contains(controller2.text.toLowerCase())
+                                            ) {
+                                              debugPrint(i.accountNumber);
+                                              setState(() {
+                                                shared.failed_data.add(Data7.fromJson(i.toJson()
+                                                ));
+                                              });
+                                              if (shared.failed_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller2.text == '') {
+                                        shared.failed_data.clear();
+                                        setState(() {
+                                          shared.failed_data.addAll(shared.failed[0].data!);
+                                          isLoaded = true;
+                                        });
+                                      }
+                                      debugPrint(shared.failed_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.failed_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
+                                  onEditingComplete: () async {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    try {
+                                      if (controller2.text.isNotEmpty) {
+                                        shared.failed_data.clear();
+                                        for (var i in shared.failed[0].data!) {
+                                          print(i.toJson());
+                                          print(i.accountNumber
+                                              ?.toLowerCase()
+                                              .contains(controller2.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.accountNumber!
+                                                .toLowerCase()
+                                                .contains(controller2.text.toLowerCase())
+                                            ) {
+                                              debugPrint (i.accountNumber);
+                                              setState(() {
+                                                key.currentState?.pageTo(0);
+                                                shared.failed_data.add(Data7.fromJson(i.toJson()
+                                                ));
+
+                                              });
+                                              if (shared.failed_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller2.text == '') {
+                                        shared.failed_data.clear();
+                                        setState(() {
+                                          shared.failed_data.addAll(shared.failed[0].data!);
+                                        });
+                                      }
+                                      debugPrint(shared.failed_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.failed_data.clear();
+                                    }
+                                  },
+                                ),
                               ),
                               verticalSpaceTiny,
-                              textfield(
-                                hintext: "Mobile Number",
+                              SizedBox(
+                                height: 35.0,
+                                width: 400,
+                                child: TextFormField(
+                                  style: TextStyle(color: kBlackColor),
+                                  decoration: const InputDecoration(
+                                    hintText: 'Mobile Number',
+                                    border: OutlineInputBorder(),
+                                    labelStyle: TextStyle(fontSize: 12.0),
+                                    contentPadding: EdgeInsets.only(left: 10.0),
+                                    hintStyle: TextStyle(color: kSecondaryColor2),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                  ),
+                                  textInputAction: TextInputAction.go,
+                                  controller: controller3,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    //
+                                    try {
+                                      if (controller3.text.isNotEmpty) {
+                                        shared.failed_data.clear();
+                                        for (var i in shared.failed[0].data!) {
+                                          print(i.toJson());
+                                          print(i.mobileNumber
+                                              ?.toLowerCase()
+                                              .contains(controller3.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.mobileNumber!
+                                                .toLowerCase()
+                                                .contains(controller3.text.toLowerCase())
+                                            ) {
+                                              debugPrint(i.mobileNumber);
+                                              setState(() {
+                                                shared.failed_data.add(Data7.fromJson(i.toJson()
+                                                ));
+                                              });
+                                              if (shared.failed_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller3.text == '') {
+                                        shared.failed_data.clear();
+                                        setState(() {
+                                          shared.failed_data.addAll(shared.failed[0].data!);
+                                          isLoaded = true;
+                                        });
+                                      }
+                                      debugPrint(shared.failed_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.failed_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
+                                  onEditingComplete: () async {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    try {
+                                      if (controller3.text.isNotEmpty) {
+                                        shared.failed_data.clear();
+                                        for (var i in shared.failed[0].data!) {
+                                          print(i.toJson());
+                                          print(i.mobileNumber
+                                              ?.toLowerCase()
+                                              .contains(controller3.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.mobileNumber!
+                                                .toLowerCase()
+                                                .contains(controller3.text.toLowerCase())
+                                            ) {
+                                              debugPrint (i.mobileNumber);
+                                              setState(() {
+                                                key.currentState?.pageTo(0);
+                                                shared.failed_data.add(Data7.fromJson(i.toJson()
+                                                ));
+
+                                              });
+                                              if (shared.failed_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller3.text == '') {
+                                        shared.failed_data.clear();
+                                        setState(() {
+                                          shared.failed_data.addAll(shared.failed[0].data!);
+                                        });
+                                      }
+                                      debugPrint(shared.failed_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.failed_data.clear();
+                                    }
+                                  },
+                                ),
                               ),
                               verticalSpaceTiny,
-                              textfield(
-                                hintext: "Error Message",
+                              SizedBox(
+                                height: 35.0,
+                                width: 400,
+                                child: TextFormField(
+                                  style: TextStyle(color: kBlackColor),
+                                  decoration: const InputDecoration(
+                                    hintText: 'Error Message',
+                                    border: OutlineInputBorder(),
+                                    labelStyle: TextStyle(fontSize: 12.0),
+                                    contentPadding: EdgeInsets.only(left: 10.0),
+                                    hintStyle: TextStyle(color: kSecondaryColor2),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kBlackColor),
+                                    ),
+                                  ),
+                                  textInputAction: TextInputAction.go,
+                                  controller: controller4,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    //
+                                    try {
+                                      if (controller4.text.isNotEmpty) {
+                                        shared.failed_data.clear();
+                                        for (var i in shared.failed[0].data!) {
+                                          print(i.toJson());
+                                          print(i.errorMessage
+                                              ?.toLowerCase()
+                                              .contains(controller4.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.errorMessage!
+                                                .toLowerCase()
+                                                .contains(controller4.text.toLowerCase())
+                                            ) {
+                                              debugPrint(i.errorMessage);
+                                              setState(() {
+                                                shared.failed_data.add(Data7.fromJson(i.toJson()
+                                                ));
+                                              });
+                                              if (shared.failed_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller4.text == '') {
+                                        shared.failed_data.clear();
+                                        setState(() {
+                                          shared.failed_data.addAll(shared.failed[0].data!);
+                                          isLoaded = true;
+                                        });
+                                      }
+                                      debugPrint(shared.failed_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.failed_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
+                                  onEditingComplete: () async {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    try {
+                                      if (controller4.text.isNotEmpty) {
+                                        shared.failed_data.clear();
+                                        for (var i in shared.failed[0].data!) {
+                                          print(i.toJson());
+                                          print(i.errorMessage
+                                              ?.toLowerCase()
+                                              .contains(controller4.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.errorMessage!
+                                                .toLowerCase()
+                                                .contains(controller4.text.toLowerCase())
+                                            ) {
+                                              debugPrint (i.errorMessage);
+                                              setState(() {
+                                                key.currentState?.pageTo(0);
+                                                shared.failed_data.add(Data7.fromJson(i.toJson()
+                                                ));
+
+                                              });
+                                              if (shared.failed_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller4.text == '') {
+                                        shared.failed_data.clear();
+                                        setState(() {
+                                          shared.failed_data.addAll(shared.failed[0].data!);
+                                        });
+                                      }
+                                      debugPrint(shared.failed_data[0].toJson().toString());
+                                    } catch (e) {
+                                      shared.failed_data.clear();
+                                    }
+                                  },
+                                ),
                               ),
                               verticalSpaceMedium,
                             ],
