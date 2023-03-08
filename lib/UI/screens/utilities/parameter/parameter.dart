@@ -7,8 +7,7 @@ import '../../../utils/edge_insect.dart';
 import '../../../utils/model.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/textfield.dart';
+
 
 class Parameters extends StatefulWidget {
   const Parameters({Key? key}) : super(key: key);

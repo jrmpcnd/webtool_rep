@@ -24,7 +24,6 @@ class _SmslogsState extends State<Smslogs> {
   List<String> res1 = [];
   String init = '';
   String init1 = '';
-
   TextEditingController controller = TextEditingController();
   TextEditingController controller1 = TextEditingController();
   SMSLogs_Api dropdownInsti = SMSLogs_Api();
@@ -151,23 +150,26 @@ class _SmslogsState extends State<Smslogs> {
                                 ),
                               ),
                               textInputAction: TextInputAction.go,
-                              controller: controller1,
+                              controller: controller,
                               onChanged: (value) {
                                 setState(() {
                                   isLoaded = false;
                                 });
                                 try {
-                                  if (controller1.text.isNotEmpty) {
+                                  if (controller.text.isNotEmpty) {
                                     shared.sms_data.clear();
                                     for (var i in shared.sms[0].data!) {
                                       print(i.toJson());
                                       print(i.cid
                                           ?.toLowerCase()
-                                          .contains(controller1.text.toLowerCase()));
+                                          .contains(controller.text.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
                                         if (i.cid!
                                             .toLowerCase()
-                                            .contains(controller1.text.toLowerCase())
+                                            .contains(controller.text.toLowerCase()) ||
+                                        i.cid!
+                                        .toLowerCase()
+                                        .contains(controller.text.toLowerCase())
 
                                         ) {
                                           debugPrint(i.cid);
@@ -182,7 +184,7 @@ class _SmslogsState extends State<Smslogs> {
                                         }
                                       }
                                     }
-                                  } else if (controller1.text == '') {
+                                  } else if (controller.text == '') {
                                     shared.sms_data.clear();
                                     setState(() {
                                       shared.sms_data.addAll(shared.sms[0].data!);
@@ -200,20 +202,23 @@ class _SmslogsState extends State<Smslogs> {
                                   isLoaded = false;
                                 });
                                 try {
-                                  if (controller1.text.isNotEmpty) {
+                                  if (controller.text.isNotEmpty) {
                                     shared.sms_data.clear();
                                     for (var i in shared.sms[0].data!) {
                                       print(i.toJson());
                                       print(i.cid
                                           ?.toLowerCase()
-                                          .contains(controller1.text.toLowerCase()));
+                                          .contains(controller.text.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
                                         if (i.cid!
                                             .toLowerCase()
-                                            .contains(controller1.text.toLowerCase()) ||
+                                            .contains(controller.text.toLowerCase()) ||
                                             i.cid!
                                                 .toLowerCase()
-                                                .contains(controller1.text.toLowerCase())) {
+                                                .contains(controller.text.toLowerCase()) ||
+                                            i.cid!
+                                                .toLowerCase()
+                                                .contains(controller.text.toLowerCase())) {
                                           debugPrint(i.cid);
                                           setState(() {
                                             key.currentState?.pageTo(0);
@@ -227,7 +232,7 @@ class _SmslogsState extends State<Smslogs> {
                                         }
                                       }
                                     }
-                                  } else if (controller1.text == '') {
+                                  } else if (controller.text == '') {
                                     shared.sms_data.clear();
                                     setState(() {
                                       shared.sms_data.addAll(shared.sms[0].data!);
