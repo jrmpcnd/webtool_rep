@@ -19,6 +19,11 @@ class Usermanagement extends StatefulWidget {
 }
 
 class _UsermanagementState extends State<Usermanagement> {
+  List<String> res = [];
+  String init = '';
+  Usermanagementdropdown_Api dropdownstatus = Usermanagementdropdown_Api();
+
+
   TextEditingController controller = TextEditingController();
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
@@ -56,9 +61,22 @@ class _UsermanagementState extends State<Usermanagement> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       wait();
+      getCenter();
     });
   }
 
+  getCenter()async{
+    List<dynamic> dlist = await dropdownstatus.getUserstatus();
+    for(var i in dlist){
+      setState(() {
+        res.add(i['get_um_userstatus_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Prov1>(context);
@@ -602,9 +620,12 @@ class _UsermanagementState extends State<Usermanagement> {
                               elevatedbuttonpopup(
                                   label: "Branch", width: 400.0),
                               verticalSpaceTiny,
-                              textfield(
-                                hintext: "--Status--",
-                              ),
+                              DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                                setState(() {
+                                  init = value.toString();
+                                });
+                              },),
+
                               verticalSpaceMedium,
                             ],
                           ),

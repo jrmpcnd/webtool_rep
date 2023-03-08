@@ -127,8 +127,113 @@ class _ParametersState extends State<Parameters> {
                             },
                           ),
                           verticalSpaceTiny,
-                          textfield(
-                            hintext: "Parameter Name",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                hintText: 'Parameter Name',
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: controller,
+                              onChanged: (value) {
+                                setState(() {
+                                  isLoaded = false;
+                                });
+                                try {
+                                  if (controller.text.isNotEmpty) {
+                                    shared.prov_data.clear();
+                                    for (var i in shared.prov[0].data!) {
+                                      print(i.toJson());
+                                      print(i.paramName
+                                          ?.toLowerCase()
+                                          .contains(controller.text.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.paramName!
+                                            .toLowerCase()
+                                            .contains(controller.text.toLowerCase())
+
+                                        ) {
+                                          debugPrint(i.paramName);
+                                          setState(() {
+                                            shared.prov_data.add(Data13.fromJson(i.toJson()));
+                                          });
+                                          if (shared.prov_data.isNotEmpty) {
+                                            setState(() {
+                                              isLoaded = true;
+                                            });
+                                          }
+                                        }
+                                      }
+                                    }
+                                  } else if (controller.text == '') {
+                                    shared.prov_data.clear();
+                                    setState(() {
+                                      shared.prov_data.addAll(shared.prov[0].data!);
+                                      isLoaded = true;
+                                    });
+                                  }
+                                  debugPrint(shared.prov_data[0].toJson().toString());
+                                } catch (e) {
+                                  shared.prov_data.clear();
+                                  isLoaded = true;
+                                }
+                              },
+                              onEditingComplete: () async {
+                                setState(() {
+                                  isLoaded = false;
+                                });
+                                try {
+                                  if (controller.text.isNotEmpty) {
+                                    shared.prov_data.clear();
+                                    for (var i in shared.prov[0].data!) {
+                                      print(i.toJson());
+                                      print(i.paramName
+                                          ?.toLowerCase()
+                                          .contains(controller.text.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.paramName!
+                                            .toLowerCase()
+                                            .contains(controller.text.toLowerCase()) ||
+                                            i.paramName!
+                                                .toLowerCase()
+                                                .contains(controller.text.toLowerCase())) {
+                                          debugPrint(i.paramName);
+                                          setState(() {
+                                            key.currentState?.pageTo(0);
+                                            shared.prov_data.add(Data13.fromJson(i.toJson()));
+                                          });
+                                          if (shared.prov_data.isNotEmpty) {
+                                            setState(() {
+                                              isLoaded = true;
+                                            });
+                                          }
+                                        }
+                                      }
+                                    }
+                                  } else if (controller.text == '') {
+                                    shared.prov_data.clear();
+                                    setState(() {
+                                      shared.prov_data.addAll(shared.prov[0].data!);
+                                    });
+                                  }
+                                  debugPrint(shared.prov_data[0].toJson().toString());
+                                } catch (e) {
+                                  shared.prov_data.clear();
+                                }
+                              },
+                            ),
                           ),
                           verticalSpaceSmall,
                           Row(
@@ -182,116 +287,6 @@ class _ParametersState extends State<Parameters> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.prov_data.clear();
-                              for (var i in shared.prov[0].data!) {
-                                print(i.toJson());
-                                print(i.appType
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.paramName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.paramValue!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.paramDesc!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.appType);
-                                    setState(() {
-                                      shared.prov_data
-                                          .add(Data13.fromJson(i.toJson()));
-                                    });
-                                    if (shared.prov_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.prov_data.clear();
-                              setState(() {
-                                shared.prov_data.addAll(shared.prov[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(shared.prov_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.prov_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.prov_data.clear();
-                              for (var i in shared.prov[0].data!) {
-                                print(i.toJson());
-                                print(i.appType
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.paramName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.paramValue!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.paramDesc!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) ;
-                                  debugPrint(i.appType);
-                                  setState(() {
-                                    key.currentState?.pageTo(0);
-                                    shared.prov_data
-                                        .add(Data13.fromJson(i.toJson()));
-                                  });
-                                  if (shared.prov_data.isNotEmpty) {
-                                    setState(() {
-                                      isLoaded = true;
-                                    });
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.prov_data.clear();
-                              setState(() {
-                                shared.prov_data.addAll(shared.prov[0].data!);
-                              });
-                            }
-                            debugPrint(shared.prov_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.prov_data.clear();
-                          }
-                        },
-                      ),
-                    ),
                     Container(
                         width: double.infinity,
                         padding: kEdgeInsetsVerticalNormal,

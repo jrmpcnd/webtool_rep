@@ -1,5 +1,3 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webtool_rep/core/providers/Provider.dart';
@@ -7,7 +5,6 @@ import '../../../utils/api.dart';
 import '../../../utils/api2.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
-
 import '../../../utils/model2.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
@@ -23,14 +20,15 @@ class Hierarchy extends StatefulWidget {
 class _HierarchyState extends State<Hierarchy> {
   List<String> res = [];
   List<String> res2 = [];
-  List<String> res3 = [];
+  List<String> res5 = [];
+
   List<String> res4 = [];
 
 
   String init = '';
   String init2 = '';
-  String init3 = '';
   String init4 = '';
+  String init5 = '';
 
 
 
@@ -53,7 +51,6 @@ class _HierarchyState extends State<Hierarchy> {
         isLoaded = true;
       });
       for (var i in res.data!) {
-        // shared.inqqq.add(Data.fromJson(i.toJson()));
         shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()));
 
       }
@@ -95,16 +92,16 @@ class _HierarchyState extends State<Hierarchy> {
     print("safgsdgsdgsdfgde $res2");
   }
   getBranch()async{
-    List<dynamic> dlist = await dropdownBranch.getUserstatus();
-    for(var i in dlist){
+    List<dynamic> blist = await dropdownBranch.getUserstatus()  ;
+    for(var i in blist){
       setState(() {
-        res3.add(i['branch_desc']);
+        res5.add(i['branch_desc']);
       });
     }
     setState(() {
-      init3 = res3[0];
+      init5 = res5[2];
     });
-    print("safgsdgsdgsdfgde $res3");
+    print("safgsdgsdgsdfgde $res5");
   }
   getCenter()async{
     List<dynamic> dlist = await dropdownCenter.getUserstatus();
@@ -116,7 +113,7 @@ class _HierarchyState extends State<Hierarchy> {
     setState(() {
       init4 = res4[0];
     });
-    print("safgsdgsdgsdfgde $res4");
+
   }
 
 
@@ -233,11 +230,11 @@ class _HierarchyState extends State<Hierarchy> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              DropdownButton(value: init3,items: res3.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                                setState(() {
-                                  init3 = value.toString();
-                                });
-                              },),
+                              // DropdownButton(value: init5,items: res5.map((i) {return DropdownMenuItem(value: i,child: Text(i, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                              //   setState(() {
+                              //     init5 = value.toString();
+                              //   });
+                              // },),
 
                               verticalSpaceTiny,
                               DropdownButton(value: init4,items: res4.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
@@ -278,7 +275,7 @@ class _HierarchyState extends State<Hierarchy> {
                     ],
                   ),
                 ),
-                verticalSpaceRegular,
+                verticalSpaceMedium,
                 Column(children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

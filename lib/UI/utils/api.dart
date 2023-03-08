@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 import '../../core/providers/data_provider.dart';
 import 'model.dart';
 
@@ -2112,3 +2111,27 @@ class WebtoolUser_Api {
     }
   }
 }
+
+
+class Usermanagementdropdown_Api {
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('$API/get_um_userstatus_dropdown'),
+      );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+}
+
