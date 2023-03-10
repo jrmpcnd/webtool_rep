@@ -13,6 +13,8 @@
 //   bool search = false;
 // }
 
+import 'dart:js';
+
 import 'package:flutter/cupertino.dart';
 
 import '../../UI/utils/model.dart';
@@ -31,7 +33,6 @@ class Remittance_L extends ChangeNotifier {
   List<Remittance_Log> Remittance_data = [];
   bool search = false;
 }
-
 
 class Listofuse_Device extends ChangeNotifier {
   String Listofuse_Device_button = 'Click here';
@@ -250,57 +251,56 @@ class AtmLocation extends ChangeNotifier {
 class Banknews_U extends ChangeNotifier {
   String Banknews_button = 'Click here';
   List<BankNews_Api> BanknewsLog = [];
-  List<BankNews_Log>Banknews_data = [];
+  List<BankNews_Log> Banknews_data = [];
   bool search = false;
 }
 
 class ProductandServices_U extends ChangeNotifier {
   String ProductandServices_button = 'Click here';
   List<ProductandServices_Api> ProductandServicesLog = [];
-  List<ProductandServices_Log>ProductandServices_data = [];
+  List<ProductandServices_Log> ProductandServices_data = [];
   bool search = false;
 }
 
 class Servicedowntime_U extends ChangeNotifier {
   String Servicedowntime_button = 'Click here';
   List<Servicedowntime_Api> ServicedowntimeLog = [];
-  List<Servicedowntime_Log>Servicedowntime_data = [];
+  List<Servicedowntime_Log> Servicedowntime_data = [];
   bool search = false;
 }
 
 class Institution_U extends ChangeNotifier {
   String Institution_button = 'Click here';
   List<Institution_Api> InstitutionLog = [];
-  List<Institution_Log>Institution_data = [];
+  List<Institution_Log> Institution_data = [];
   bool search = false;
 }
 
 class Branch_U extends ChangeNotifier {
   String Branch_button = 'Click here';
   List<Branch_Api> BranchLog = [];
-  List<Branch_Log>Branch_data = [];
+  List<Branch_Log> Branch_data = [];
   bool search = false;
 }
 
 class Unit_U extends ChangeNotifier {
   String Unit_button = 'Click here';
+  late BuildContext dashboardContext;
   List<Unit_Api> UnitLog = [];
-  List<Unit_Log>Unit_data = [];
+  List<Unit_Log> Unit_data = [];
   bool search = false;
 }
 
 class Center_U extends ChangeNotifier {
   String Center_button = 'Click here';
   List<Center_Api> CenterLog = [];
-  List<Center_Log>Center_data = [];
+  List<Center_Log> Center_data = [];
   bool search = false;
 }
 
 class Providers_U extends ChangeNotifier {
   String Providers_button = 'Click here';
   List<Providers_Api> ProvidersLog = [];
-  List<Providers_Log>Providers_data = [];
+  List<Providers_Log> Providers_data = [];
   bool search = false;
 }
-
-

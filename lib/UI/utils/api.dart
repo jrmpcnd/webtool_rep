@@ -999,6 +999,28 @@ class Unit_Api {
   }
 }
 
+class Unit_Update {
+  Future<http.Response> unit(
+      String get_unit_code, get_unit_desc, get_unit_id) async {
+    http.Response getResponse = await http
+        .post(
+          Uri.parse('https://sit-api-janus.fortress-asya.com:1234/edit_unit/'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(
+            <String, String>{
+              "get_unit_code": get_unit_code,
+              "get_unit_desc": get_unit_desc,
+              "get_unit_id": get_unit_id,
+            },
+          ),
+        )
+        .timeout(const Duration(minutes: 1));
+    return getResponse;
+  }
+}
+
 class Center_Api {
   Future<http.Response> center(String center_code, center_desc) async {
     http.Response getResponse = await http
@@ -2112,7 +2134,6 @@ class WebtoolUser_Api {
   }
 }
 
-
 class Usermanagementdropdown_Api {
   Future<List> getUserstatus() async {
     try {
@@ -2134,4 +2155,3 @@ class Usermanagementdropdown_Api {
     }
   }
 }
-

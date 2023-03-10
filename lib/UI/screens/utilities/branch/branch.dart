@@ -44,7 +44,6 @@ class _BranchState extends State<Branch> {
     }
   }
 
-
   @override
   void initState() {
     Branch_Function.branch(branch_code: '', branch_desc: '');
@@ -212,18 +211,13 @@ class _BranchState extends State<Branch> {
                                     .contains(controller.text.toLowerCase()));
                                 if (i.toJson().isNotEmpty) {
                                   if (i.branchCode!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
+                                          controller.text.toLowerCase()) ||
                                       i.createdDate!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
                                       i.branchDesc!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
                                       i.branchCode!.toLowerCase().contains(
-                                          controller.text.toLowerCase()))
-
-
-
-                                  {
-
+                                          controller.text.toLowerCase())) {
                                     debugPrint(i.branchCode);
                                     setState(() {
                                       shared.Branch_data.add(
@@ -262,32 +256,30 @@ class _BranchState extends State<Branch> {
                               for (var i in shared.BranchLog[0].data!) {
                                 print(i.toJson());
                                 print(i.branchCode
-        ?.toLowerCase()
-        .contains(controller.text.toLowerCase()));
-    if (i.toJson().isNotEmpty) {
-    if (i.branchCode!.toLowerCase().contains(
-    controller.text.toLowerCase()) ||
-    i.createdDate!.toLowerCase().contains(
-    controller.text.toLowerCase()) ||
-    i.branchDesc!.toLowerCase().contains(
-    controller.text.toLowerCase()) ||
-    i.branchCode!.toLowerCase().contains(
-    controller.text.toLowerCase()))
-
-    debugPrint(i.branchCode);
+                                    ?.toLowerCase()
+                                    .contains(controller.text.toLowerCase()));
+                                if (i.toJson().isNotEmpty) {
+                                  if (i.branchCode!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.createdDate!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.branchDesc!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.branchCode!.toLowerCase().contains(
+                                          controller.text.toLowerCase()))
+                                    debugPrint(i.branchCode);
+                                  setState(() {
+                                    key.currentState?.pageTo(0);
+                                    shared.Branch_data.add(
+                                        Branch_Log.fromJson(i.toJson()));
+                                  });
+                                  if (shared.Branch_data.isNotEmpty) {
                                     setState(() {
-                                      key.currentState?.pageTo(0);
-                                      shared.Branch_data.add(
-                                          Branch_Log.fromJson(i.toJson()));
+                                      isLoaded = true;
                                     });
-                                    if (shared.Branch_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
                                   }
                                 }
-
+                              }
                             } else if (controller.text == '') {
                               shared.Branch_data.clear();
                               setState(() {
@@ -312,25 +304,24 @@ class _BranchState extends State<Branch> {
                         arrowHeadColor: kWhiteColor,
                         columns: [
                           DataColumn(
-                              label: Text('Code',
-                                  style: kLargeBoldTextStyle)),
+                              label: Text('Code', style: kLargeBoldTextStyle)),
                           DataColumn(
                               label: Text('Description',
                                   style: kLargeBoldTextStyle)),
                           DataColumn(
-                              label: Text('Create Date',)
-                          )
-
+                              label: Text(
+                            'Create Date',
+                          ))
                         ],
                         source: isLoaded
                             ? shared.Branch_data.isNotEmpty
-                            ? data
-                            : data2
+                                ? data
+                                : data2
                             : data3,
                         rowsPerPage: 8,
                         showFirstLastButtons: true,
                         header:
-                        Text('List of Role', style: kXLargeBoldTextStyle),
+                            Text('List of Branch', style: kXLargeBoldTextStyle),
                       ),
                     ),
                   ],
@@ -363,12 +354,10 @@ class MyData extends DataTableSource {
           child: Text(shared.Branch_data[index].branchCode.toString()))),
       DataCell(SizedBox(
           width: 200,
-          child:
-          Text(shared.Branch_data[index].branchDesc.toString()))),
+          child: Text(shared.Branch_data[index].branchDesc.toString()))),
       DataCell(SizedBox(
           width: 200,
           child: Text(shared.Branch_data[index].createdDate.toString()))),
-
     ]);
   }
 }
@@ -406,12 +395,12 @@ class MyData3 extends DataTableSource {
       DataCell(SizedBox(child: Text('Loading, please wait'))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
     ]);
   }
 }
