@@ -16,7 +16,9 @@
 import 'dart:js';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
+import '../../UI/screens/homepage/main_dashboard.dart';
 import '../../UI/utils/model.dart';
 import '../../UI/utils/model2.dart';
 
@@ -289,6 +291,7 @@ class Unit_U extends ChangeNotifier {
   List<Unit_Api> UnitLog = [];
   List<Unit_Log> Unit_data = [];
   bool search = false;
+  bool isLoaded = false;
 }
 
 class Center_U extends ChangeNotifier {
@@ -303,4 +306,17 @@ class Providers_U extends ChangeNotifier {
   List<Providers_Api> ProvidersLog = [];
   List<Providers_Log> Providers_data = [];
   bool search = false;
+}
+class HomePageProvider extends ChangeNotifier {
+  List<Widget> homewidget = [const Maindashboard()];
+  String title = "Dashboard";
+  String header = "Home";
+  String addbutton = "";
+  String subaddbutton = "";
+  String uploadbutton = "";
+  String subuploadbutton = "";
+  IconData? icon = Icons.home_outlined;
+  IconData? addicon;
+  VoidCallback? onPress;
+  VoidCallback? onTaps;
 }

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
 import 'package:webtool_rep/UI/utils/functions.dart';
 import 'package:webtool_rep/UI/utils/model2.dart';
+import 'package:webtool_rep/UI/screens/utilities/unit/components/alertdialog.dart';
 import 'package:webtool_rep/core/providers/Provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
@@ -24,7 +25,6 @@ class _UnitState extends State<Unit> {
   TextEditingController unit_desc_controller = TextEditingController();
   TextEditingController controller = TextEditingController();
   bool static = false;
-  bool isLoaded = false;
   Future<void> wait() async {
     final shared = Provider.of<Unit_U>(context, listen: false);
     shared.Unit_data.clear();
@@ -35,7 +35,7 @@ class _UnitState extends State<Unit> {
       print(res.data![0].toJson().length);
       setState(() {
         shared.UnitLog.add(Unit_Api.fromJson(res.toJson()));
-        isLoaded = true;
+        shared.isLoaded = true;
       });
       for (var i in res.data!) {
         shared.Unit_data.add(Unit_Log.fromJson(i.toJson()));
@@ -201,7 +201,7 @@ class _UnitState extends State<Unit> {
                         controller: controller,
                         onChanged: (value) {
                           setState(() {
-                            isLoaded = false;
+                            shared.isLoaded = false;
                           });
                           //
                           try {
@@ -228,7 +228,7 @@ class _UnitState extends State<Unit> {
                                     });
                                     if (shared.Unit_data.isNotEmpty) {
                                       setState(() {
-                                        isLoaded = true;
+                                        shared.isLoaded = true;
                                       });
                                     }
                                   }
@@ -239,18 +239,18 @@ class _UnitState extends State<Unit> {
                               setState(() {
                                 shared.Unit_data.addAll(
                                     shared.UnitLog[0].data!);
-                                isLoaded = true;
+                                shared.isLoaded = true;
                               });
                             }
                             debugPrint(shared.Unit_data[0].toJson().toString());
                           } catch (e) {
                             shared.Unit_data.clear();
-                            isLoaded = true;
+                            shared.isLoaded = true;
                           }
                         },
                         onEditingComplete: () async {
                           setState(() {
-                            isLoaded = false;
+                            shared.isLoaded = false;
                           });
                           try {
                             if (controller.text.isNotEmpty) {
@@ -277,7 +277,7 @@ class _UnitState extends State<Unit> {
                                   });
                                   if (shared.Unit_data.isNotEmpty) {
                                     setState(() {
-                                      isLoaded = true;
+                                      shared.isLoaded = true;
                                     });
                                   }
                                 }
@@ -316,7 +316,7 @@ class _UnitState extends State<Unit> {
                               label:
                                   Text('Action', style: kLargeBoldTextStyle)),
                         ],
-                        source: isLoaded
+                        source: shared.isLoaded
                             ? shared.Unit_data.isNotEmpty
                                 ? data
                                 : data2
@@ -345,7 +345,6 @@ class MyData extends DataTableSource {
   //   get_branch_id = "branch001";
   //   super.initState();
   // }
-
   final _formKey = GlobalKey<FormState>();
   late String get_unit_code = '';
   late String get_unit_desc = '';
@@ -353,6 +352,23 @@ class MyData extends DataTableSource {
 
   BuildContext? dashboardContext;
   Unit_U shared;
+  Future<void> wait() async {
+    shared.Unit_data.clear();
+    Unit_Parse unit = Unit_Parse();
+    var res = await unit.profile25();
+    if (res.data!.isNotEmpty) {
+      print(res.data!.length);
+      print(res.data![0].toJson().length);
+        shared.UnitLog.add(Unit_Api.fromJson(res.toJson()));
+        shared.isLoaded = true;
+      for (var i in res.data!) {
+        shared.Unit_data.add(Unit_Log.fromJson(i.toJson()));
+      }
+    }
+    for (var i in shared.Unit_data) {
+      print(i.toJson());
+    }
+  }
   MyData({required this.shared, this.dashboardContext});
   @override
   bool get isRowCountApproximate => false;
@@ -382,109 +398,119 @@ class MyData extends DataTableSource {
               context: dashboardContext!,
               builder: (ctx) => Form(
                 key: _formKey,
-                child: AlertDialog(
-                  actions: <Widget>[
-                    TextFormField(
-                      mouseCursor: SystemMouseCursors.forbidden,
-                      readOnly: true,
-                      initialValue: shared.Unit_data[index].unitCode.toString(),
-                      decoration: InputDecoration(
-                          labelText: 'Name',
-                          border: OutlineInputBorder(borderSide: BorderSide())),
-                      // validator: (value) {
-                      //   if (value == null || value.isEmpty) {
-                      //     return 'Please enter a name';
-                      //   }
-                      //   return null;
-                      // },
-                      onSaved: (value) {
-                        shared.Unit_data[index].unitCode = value!;
-                      },
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      initialValue: get_unit_desc,
-                      decoration: InputDecoration(
-                          labelText: 'Name',
-                          border: OutlineInputBorder(borderSide: BorderSide())),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a name';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        get_unit_desc = value!;
-                      },
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      mouseCursor: SystemMouseCursors.forbidden,
-                      readOnly: true,
-                      initialValue:
-                          shared.Unit_data[index].createdDate.toString(),
-                      decoration: InputDecoration(
-                          labelText: 'Name',
-                          border: OutlineInputBorder(borderSide: BorderSide())),
-                      // validator: (value) {
-                      //   if (value == null || value.isEmpty) {
-                      //     return 'Please enter a name';
-                      //   }
-                      //   return null;
-                      // },
-                      onSaved: (value) {
-                        shared.Unit_data[index].createdDate = value!;
-                      },
-                    ),
-                    SizedBox(height: 10),
-                    TextButton(
-                      child: Text('Cancel'),
-                      onPressed: () {
-                        Navigator.of(dashboardContext!).pop();
-                      },
-                    ),
-                    TextButton(
-                      child: Text('Update'),
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          Navigator.of(dashboardContext!).pop(false);
-                          const String apiUrl =
-                              'https://sit-api-janus.fortress-asya.com:1234/edit_unit/';
-                          final Map<String, dynamic> data = {
-                            "get_unit_code": get_unit_code,
-                            "get_unit_desc": get_unit_desc,
-                            "get_unit_id": get_unit_id,
-                            // Add more fields as needed
-                          };
-
-                          final http.Response response = await http.post(
-                            Uri.parse(apiUrl),
-                            headers: <String, String>{
-                              'Content-Type': 'application/json; charset=UTF-8',
-                            },
-                            body: jsonEncode(data),
-                          );
-                          print(
-                              "-------->>>>>>>>>>${jsonDecode(response.body).length}");
-                          if (response.statusCode == 200) {
-                            print(
-                                "-------->>>>>>>>>>${jsonDecode(response.body).length}");
-                            // Data was successfully updated
-                            print('Data updated successfully');
-                            Navigator.of(dashboardContext!).pop(true);
-                          } else {
-                            print(
-                                "-------->>>>>>>>>>${jsonDecode(response.body).length}");
-                            // Failed to update data
-                            print('Failed to update data');
-                            Navigator.of(dashboardContext!).pop(false);
-                          }
-                        }
-                      },
-                    ),
-                  ],
-                ),
+                child: AlertEditFunction(code: shared.Unit_data[index].unitCode.toString(),
+                    date: shared.Unit_data[index].createdDate.toString(),
+                desc: shared.Unit_data[index].unitDesc.toString(),),
+                // child: AlertDialog(
+                //   actions: <Widget>[
+                //     TextFormField(
+                //       mouseCursor: SystemMouseCursors.forbidden,
+                //       readOnly: true,
+                //       initialValue: shared.Unit_data[index].unitCode.toString(),
+                //       decoration: InputDecoration(
+                //           labelText: 'Code',
+                //           border: OutlineInputBorder(borderSide: BorderSide())),
+                //       // validator: (value) {
+                //       //   if (value == null || value.isEmpty) {
+                //       //     return 'Please enter a name';
+                //       //   }
+                //       //   return null;
+                //       // },
+                //       onSaved: (value) {
+                //         shared.Unit_data[index].unitCode = value!;
+                //       },
+                //     ),
+                //     SizedBox(height: 10),
+                //     TextFormField(
+                //       initialValue: get_unit_desc,
+                //       decoration: InputDecoration(
+                //           labelText: 'Description',
+                //           border: OutlineInputBorder(borderSide: BorderSide())),
+                //       validator: (value) {
+                //         if (value == null || value.isEmpty) {
+                //           return 'Please enter a name';
+                //         }
+                //         return null;
+                //       },
+                //       onSaved: (value) {
+                //         get_unit_desc = value!;
+                //       },
+                //     ),
+                //     SizedBox(height: 10),
+                //     TextFormField(
+                //       mouseCursor: SystemMouseCursors.forbidden,
+                //       readOnly: true,
+                //       initialValue:
+                //           shared.Unit_data[index].createdDate.toString(),
+                //       decoration: InputDecoration(
+                //           labelText: 'Date',
+                //           border: OutlineInputBorder(borderSide: BorderSide())),
+                //       // validator: (value) {
+                //       //   if (value == null || value.isEmpty) {
+                //       //     return 'Please enter a name';
+                //       //   }
+                //       //   return null;
+                //       // },
+                //       onSaved: (value) {
+                //         shared.Unit_data[index].createdDate = value!;
+                //       },
+                //     ),
+                //     SizedBox(height: 10),
+                //     TextButton(
+                //       child: Text('Cancel'),
+                //       onPressed: () {
+                //         Navigator.of(dashboardContext!).pop();
+                //       },
+                //     ),
+                //     TextButton(
+                //       child: Text('Update'),
+                //       onPressed: () async {
+                //         if (_formKey.currentState!.validate()) {
+                //           _formKey.currentState!.save();
+                //           //Navigator.of(dashboardContext!).pop(false);
+                //           try{
+                //           const String apiUrl =
+                //               'https://sit-api-janus.fortress-asya.com:1234/edit_unit';
+                //           final Map<String, dynamic> data = {
+                //             "get_unit_code": shared.Unit_data[index].unitCode,
+                //             "get_unit_desc": get_unit_desc,
+                //             "get_unit_id": shared.Unit_data[index].unitCode,
+                //             // Add more fields as needed
+                //           };
+                //
+                //           final http.Response response = await http.post(
+                //             Uri.parse(apiUrl),
+                //             headers: <String, String>{
+                //               'Content-Type': 'application/json; charset=UTF-8',
+                //             },
+                //             body: jsonEncode(data),
+                //           );
+                //           print(
+                //               "-------->>>>>>>>>>${jsonDecode(response.body).length}");
+                //           if (response.statusCode == 200) {
+                //             print(
+                //                 "-------->>>>>>>>>>${jsonDecode(response.body).length}");
+                //             // Data was successfully updated
+                //             print('Restore Successful');
+                //             shared.isLoaded = false;
+                //             await wait();
+                //             Navigator.of(dashboardContext!).pop();
+                //
+                //           } else {
+                //             print(
+                //                 "-------->>>>>>>>>>${jsonDecode(response.body).length}");
+                //             // Failed to update data
+                //             print('Failed to update data');
+                //             Navigator.of(dashboardContext!).pop(false);
+                //           }
+                //         }catch(e){
+                //             print(e);
+                //           }
+                //         }
+                //       },
+                //     ),
+                //   ],
+                // ),
               ),
             );
           },

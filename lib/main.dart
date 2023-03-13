@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Unit_U()),
         ChangeNotifierProvider(create: (context) => Center_U()),
         ChangeNotifierProvider(create: (context) => Providers_U()),
+        ChangeNotifierProvider(create: (context) => HomePageProvider()),
 
       ],
       child: MaterialApp(

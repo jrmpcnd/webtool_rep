@@ -230,11 +230,11 @@ class _HierarchyState extends State<Hierarchy> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              // DropdownButton(value: init5,items: res5.map((i) {return DropdownMenuItem(value: i,child: Text(i, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                              //   setState(() {
-                              //     init5 = value.toString();
-                              //   });
-                              // },),
+                              DropdownButton(value: init5,items: res5.map((i) {return DropdownMenuItem(value: i,child: Text(i, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                                setState(() {
+                                  init5 = value.toString();
+                                });
+                              },),
 
                               verticalSpaceTiny,
                               DropdownButton(value: init4,items: res4.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {

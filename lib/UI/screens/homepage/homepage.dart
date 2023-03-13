@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:webtool_rep/UI/screens/administration/hierarchy/addhierarchy/add_hierarchy.dart';
 import 'package:webtool_rep/UI/screens/administration/rolemanagement/addroles/add_roles.dart';
 import 'package:webtool_rep/UI/screens/administration/rolemanagement/role_management.dart';
@@ -38,6 +39,7 @@ import 'package:webtool_rep/UI/screens/utilities/producttype/product_type.dart';
 import 'package:webtool_rep/UI/screens/utilities/splashscreen/addsplashscreen/addsplash_screen.dart';
 import 'package:webtool_rep/UI/screens/utilities/splashscreen/splash_screen.dart';
 import 'package:webtool_rep/UI/widgets/header.dart';
+import 'package:webtool_rep/core/providers/Provider.dart';
 import '../../../UI/utils/constant.dart';
 import '../../../UI/widgets/contains.dart';
 import '../../../UI/widgets/listTile.dart';
@@ -109,19 +111,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Widget> homewidget = [const Maindashboard()];
-  String title = "Dashboard";
-  String header = "Home";
-  String addbutton = "";
-  String subaddbutton = "";
-  String uploadbutton = "";
-  String subuploadbutton = "";
-  IconData? icon = Icons.home_outlined;
-  IconData? addicon;
-  VoidCallback? onPress;
-  VoidCallback? onTaps;
   @override
   Widget build(BuildContext context) {
+    final shared = Provider.of<HomePageProvider>(context, listen: false);
     return Scaffold(
       body: Row(
         children: [
@@ -156,23 +148,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Register Client",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = CupertinoIcons.cube;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Dashboard";
-                                title = "Register Client";
-                                homewidget = [const Registerclient()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = CupertinoIcons.cube;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Dashboard";
+                                shared.title = "Register Client";
+                                shared.homewidget = [const Registerclient()];
                               });
                             },
                           ),
@@ -182,23 +174,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Active Client",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = CupertinoIcons.cube;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Dashboard";
-                                title = "Active Client";
-                                homewidget = [const Activeclient()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = CupertinoIcons.cube;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Dashboard";
+                                shared.title = "Active Client";
+                                shared.homewidget = [const Activeclient()];
                               });
                             },
                           ),
@@ -208,23 +200,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Client Transaction",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = CupertinoIcons.cube;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Dashboard";
-                                title = "Client Transaction";
-                                homewidget = [const Clienttransaction()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = CupertinoIcons.cube;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Dashboard";
+                                shared.title = "Client Transaction";
+                                shared.homewidget = [const Clienttransaction()];
                               });
                             },
                           ),
@@ -234,23 +226,23 @@ class _HomePageState extends State<HomePage> {
                             title: "eLoad Transaction",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = CupertinoIcons.cube;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Dashboard";
-                                title = "eLoad Transaction";
-                                homewidget = [const eLoadtransaction()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = CupertinoIcons.cube;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Dashboard";
+                                shared.title = "eLoad Transaction";
+                                shared.homewidget = [const eLoadtransaction()];
                               });
                             },
                           ),
@@ -260,23 +252,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Bank Transaction",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = CupertinoIcons.cube;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Dashboard";
-                                title = "Bank Transaction";
-                                homewidget = [const Banktransaction()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = CupertinoIcons.cube;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Dashboard";
+                                shared.title = "Bank Transaction";
+                                shared.homewidget = [const Banktransaction()];
                               });
                             },
                           ),
@@ -292,46 +284,46 @@ class _HomePageState extends State<HomePage> {
                             title: "User Management",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.perm_identity;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New User";
-                                        subaddbutton = "Add New User Data";
-                                        header = "Administration";
-                                        title = "User Management";
-                                        homewidget = [const Usermanagement()];
+                                        shared.icon = Icons.perm_identity;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New User";
+                                        shared.subaddbutton = "Add New User Data";
+                                        shared.header = "Administration";
+                                        shared.title = "User Management";
+                                        shared.homewidget = [const Usermanagement()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Administration  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save All User Data";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Administration  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save All User Data";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.perm_identity;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New User";
-                                subaddbutton = "Add New User Data";
-                                header = "Administration";
-                                title = "User Management";
-                                homewidget = [const Usermanagement()];
+                                shared.icon = Icons.perm_identity;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New User";
+                                shared.subaddbutton = "Add New User Data";
+                                shared.header = "Administration";
+                                shared.title = "User Management";
+                                shared.homewidget = [const Usermanagement()];
                               });
                             },
                           ),
@@ -341,48 +333,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Role Management",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Role";
-                                        subaddbutton = "Add New Role Data";
-                                        header = "Administration";
-                                        title = "Role Management";
-                                        homewidget = [const Rolemanagement()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared. icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Role";
+                                        shared.subaddbutton = "Add New Role Data";
+                                        shared.header = "Administration";
+                                        shared.title = "Role Management";
+                                        shared.homewidget = [const Rolemanagement()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Administration  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save All Roles";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addroles()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Administration  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save All Roles";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addroles()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Role";
-                                subaddbutton = "Add New Role Data";
-                                header = "Administration";
-                                title = "Role Management";
-                                homewidget = [const Rolemanagement()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Role";
+                                shared.subaddbutton = "Add New Role Data";
+                                shared.header = "Administration";
+                                shared.title = "Role Management";
+                                shared.homewidget = [const Rolemanagement()];
                               });
                             },
                           ),
@@ -392,49 +384,49 @@ class _HomePageState extends State<HomePage> {
                             title: "Hierarchy",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.lan_outlined;
-                                        uploadbutton = "Upload";
-                                        subuploadbutton =
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.lan_outlined;
+                                        shared.uploadbutton = "Upload";
+                                        shared.subuploadbutton =
                                             "Upload Hierarchy Data";
-                                        addbutton = "New Hierarchy";
-                                        subaddbutton = "Add New Hierarchy Data";
-                                        header = "Administration";
-                                        title = "Hierarchy";
-                                        homewidget = [const Hierarchy()];
+                                        shared.addbutton = "New Hierarchy";
+                                        shared.subaddbutton = "Add New Hierarchy Data";
+                                        shared.header = "Administration";
+                                        shared.title = "Hierarchy";
+                                        shared.homewidget = [const Hierarchy()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    uploadbutton = "";
-                                    subuploadbutton = "";
-                                    header = "Administration  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Hierarchy";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addhierarchy()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.uploadbutton = "";
+                                    shared.subuploadbutton = "";
+                                    shared.header = "Administration  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Hierarchy";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addhierarchy()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.lan_outlined;
-                                uploadbutton = "Upload";
-                                subuploadbutton = "Upload Hierarchy Data";
-                                addbutton = "New Hierarchy";
-                                subaddbutton = "Add New Hierarchy Data";
-                                header = "Administration";
-                                title = "Hierarchy";
-                                homewidget = [const Hierarchy()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.lan_outlined;
+                                shared.uploadbutton = "Upload";
+                                shared.subuploadbutton = "Upload Hierarchy Data";
+                                shared.addbutton = "New Hierarchy";
+                                shared.subaddbutton = "Add New Hierarchy Data";
+                                shared.header = "Administration";
+                                shared.title = "Hierarchy";
+                                shared.homewidget = [const Hierarchy()];
                               });
                             },
                           ),
@@ -450,23 +442,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Client List for Registration",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = null;
-                                addicon = null;
-                                icon = Icons.menu;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Enrollment";
-                                title = "Client List for Registration";
-                                homewidget = [
+                                shared.onPress = null;
+                                shared.addicon = null;
+                                shared.icon = Icons.menu;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Enrollment";
+                                shared.title = "Client List for Registration";
+                                shared.homewidget = [
                                   const Clientlistforregistration()
                                 ];
                               });
@@ -484,23 +476,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Client Profile",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.person_outline;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "Client Profile";
-                                homewidget = [const Clientprofile()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.person_outline;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "Client Profile";
+                                shared.homewidget = [const Clientprofile()];
                               });
                             },
                           ),
@@ -510,23 +502,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Dashboard",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.content_copy_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "Remittance Dashboard";
-                                homewidget = [const Remittancedashboard()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "Remittance Dashboard";
+                                shared.homewidget = [const Remittancedashboard()];
                               });
                             },
                           ),
@@ -536,23 +528,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Transaction for Confirmation",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.mobile_friendly_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "Transaction for Confirmation";
-                                homewidget = [
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.mobile_friendly_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "Transaction for Confirmation";
+                                shared.homewidget = [
                                   const Transactionforconfirmation()
                                 ];
                               });
@@ -564,23 +556,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Transaction Log",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.content_copy_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "Remittance Transaction Log";
-                                homewidget = [const Remittancetransactionlog()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "Remittance Transaction Log";
+                                shared.homewidget = [const Remittancetransactionlog()];
                               });
                             },
                           ),
@@ -590,23 +582,23 @@ class _HomePageState extends State<HomePage> {
                             title: "SMS Logs",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.email_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "SMS Logs";
-                                homewidget = [const Smslogs()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.email_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "SMS Logs";
+                                shared.homewidget = [const Smslogs()];
                               });
                             },
                           ),
@@ -616,23 +608,23 @@ class _HomePageState extends State<HomePage> {
                             title: "SLF Request",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.archive_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "SLF Request";
-                                homewidget = [const Slfrequest()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.archive_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "SLF Request";
+                                shared.homewidget = [const Slfrequest()];
                               });
                             },
                           ),
@@ -642,23 +634,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Transaction Log",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.list_alt_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "Transaction Log";
-                                homewidget = [const Transactionlog()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.list_alt_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "Transaction Log";
+                                shared.homewidget = [const Transactionlog()];
                               });
                             },
                           ),
@@ -668,23 +660,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Operation Dashboard",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.list_alt_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "Operation Dashboard";
-                                homewidget = [const Operationdashboard()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.list_alt_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "Operation Dashboard";
+                                shared.homewidget = [const Operationdashboard()];
                               });
                             },
                           ),
@@ -694,23 +686,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Authorized Reset Password and MPIN",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.list_alt_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "Authorized Reset Password and MPIN";
-                                homewidget = [const Authorizedresetpassword()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.list_alt_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "Authorized Reset Password and MPIN";
+                                shared.homewidget = [const Authorizedresetpassword()];
                               });
                             },
                           ),
@@ -720,23 +712,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Agent Dashboard",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.list_alt_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "Agent Dashboard";
-                                homewidget = [const Agentdashboard()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.list_alt_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "Agent Dashboard";
+                                shared.homewidget = [const Agentdashboard()];
                               });
                             },
                           ),
@@ -746,23 +738,23 @@ class _HomePageState extends State<HomePage> {
                             title: "List of Used Device ID",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.smartphone_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "List of Used Device ID";
-                                homewidget = [const Listofuseddevice()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.smartphone_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "List of Used Device ID";
+                                shared.homewidget = [const Listofuseddevice()];
                               });
                             },
                           ),
@@ -772,23 +764,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Failed Enrollment List",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.list_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "Failed Enrollment List";
-                                homewidget = [const Failedenrollment()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.list_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "Failed Enrollment List";
+                                shared.homewidget = [const Failedenrollment()];
                               });
                             },
                           ),
@@ -798,23 +790,23 @@ class _HomePageState extends State<HomePage> {
                             title: "List of Agent",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                addicon = null;
-                                onPress = null;
-                                icon = Icons.list_alt_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Monitoring";
-                                title = "List of Agent";
-                                homewidget = [const Listofagent()];
+                                shared.addicon = null;
+                                shared.onPress = null;
+                                shared.icon = Icons.list_alt_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Monitoring";
+                                shared.title = "List of Agent";
+                                shared.homewidget = [const Listofagent()];
                               });
                             },
                           ),
@@ -830,48 +822,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Fee Structure",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Fee Structure";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Fee Structure";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Fee Structure";
-                                        subaddbutton = "Add New Fee Structure";
-                                        header = "Utilities";
-                                        title = "Fee Structure";
-                                        homewidget = [const Feestructure()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Fee Structure";
+                                        shared.subaddbutton = "Add New Fee Structure";
+                                        shared.header = "Utilities";
+                                        shared.title = "Fee Structure";
+                                        shared.homewidget = [const Feestructure()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Fee Structure";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addstructure()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Fee Structure";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addstructure()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Fee Structure";
-                                subaddbutton = "Add New Fee Structure";
-                                header = "Utilities";
-                                title = "Fee Structure";
-                                homewidget = [const Feestructure()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Fee Structure";
+                                shared.subaddbutton = "Add New Fee Structure";
+                                shared.header = "Utilities";
+                                shared.title = "Fee Structure";
+                                shared.homewidget = [const Feestructure()];
                               });
                             },
                           ),
@@ -881,48 +873,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Parameter",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Parameter";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Parameter";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Parameter";
-                                        subaddbutton = "Add New Parameter";
-                                        header = "Utilities";
-                                        title = "Parameter";
-                                        homewidget = [const Parameters()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Parameter";
+                                        shared.subaddbutton = "Add New Parameter";
+                                        shared.header = "Utilities";
+                                        shared.title = "Parameter";
+                                        shared.homewidget = [const Parameters()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Parameter";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addparameters()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Parameter";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addparameters()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Parameter";
-                                subaddbutton = "Add New Parameter";
-                                header = "Utilities";
-                                title = "Parameter";
-                                homewidget = [const Parameters()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Parameter";
+                                shared.subaddbutton = "Add New Parameter";
+                                shared.header = "Utilities";
+                                shared.title = "Parameter";
+                                shared.homewidget = [const Parameters()];
                               });
                             },
                           ),
@@ -932,48 +924,48 @@ class _HomePageState extends State<HomePage> {
                             title: "DCM Location",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "DCM Location";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "DCM Location";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New DCM Location";
-                                        subaddbutton = "Add New DCM Location";
-                                        header = "Utilities";
-                                        title = "DCM Location";
-                                        homewidget = [const Dcmlocation()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New DCM Location";
+                                        shared.subaddbutton = "Add New DCM Location";
+                                        shared.header = "Utilities";
+                                        shared.title = "DCM Location";
+                                        shared.homewidget = [const Dcmlocation()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save DCM Location";
-                                    title = "Create / Edit";
-                                    homewidget = [const Adddcmlocation()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save DCM Location";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Adddcmlocation()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New DCM Location";
-                                subaddbutton = "Add New DCM Location";
-                                header = "Utilities";
-                                title = "DCM Location";
-                                homewidget = [const Dcmlocation()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New DCM Location";
+                                shared.subaddbutton = "Add New DCM Location";
+                                shared.header = "Utilities";
+                                shared.title = "DCM Location";
+                                shared.homewidget = [const Dcmlocation()];
                               });
                             },
                           ),
@@ -983,48 +975,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Bank News",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Bank News";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Bank News";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Bank News";
-                                        subaddbutton = "Add New Bank News";
-                                        header = "Utilities";
-                                        title = "Bank News";
-                                        homewidget = [const Banknews()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Bank News";
+                                        shared.subaddbutton = "Add New Bank News";
+                                        shared.header = "Utilities";
+                                        shared.title = "Bank News";
+                                        shared.homewidget = [const Banknews()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Bank News";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addbanknews()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Bank News";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addbanknews()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Bank News";
-                                subaddbutton = "Add New Bank News";
-                                header = "Utilities";
-                                title = "Bank News";
-                                homewidget = [const Banknews()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Bank News";
+                                shared.subaddbutton = "Add New Bank News";
+                                shared.header = "Utilities";
+                                shared.title = "Bank News";
+                                shared.homewidget = [const Banknews()];
                               });
                             },
                           ),
@@ -1034,53 +1026,53 @@ class _HomePageState extends State<HomePage> {
                             title: "Product and Services",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Product and Services";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Product and Services";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Product";
-                                        subaddbutton =
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Product";
+                                        shared.subaddbutton =
                                             "Add New Product & Services";
-                                        header = "Utilities";
-                                        title = "Product and Services";
-                                        homewidget = [
+                                        shared.header = "Utilities";
+                                        shared.title = "Product and Services";
+                                        shared.homewidget = [
                                           const Productandservices()
                                         ];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Product & Services";
-                                    title = "Create / Edit";
-                                    homewidget = [
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Product & Services";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [
                                       const Addproductandservices()
                                     ];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Product";
-                                subaddbutton = "Add Product & Services";
-                                header = "Utilities";
-                                title = "Product and Services";
-                                homewidget = [const Productandservices()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Product";
+                                shared.subaddbutton = "Add Product & Services";
+                                shared.header = "Utilities";
+                                shared.title = "Product and Services";
+                                shared.homewidget = [const Productandservices()];
                               });
                             },
                           ),
@@ -1090,51 +1082,50 @@ class _HomePageState extends State<HomePage> {
                             title: "Service DownTime",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Service DownTime";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Service DownTime";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Service";
-                                        subaddbutton =
-                                            "Add New ServiceDownTime";
-                                        header = "Utilities";
-                                        title = "Product and Services";
-                                        homewidget = [
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Service";
+                                        shared.subaddbutton = "Add New ServiceDownTime";
+                                        shared. header = "Utilities";
+                                        shared.title = "Product and Services";
+                                        shared.homewidget = [
                                           const Productandservices()
                                         ];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save ServiceDownTime";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addservicedowntime()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save ServiceDownTime";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addservicedowntime()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Service";
-                                subaddbutton = "Add ServiceDownTime";
-                                header = "Utilities";
-                                title = "Service DownTime";
-                                homewidget = [const Servicedowntime()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Service";
+                                shared.subaddbutton = "Add ServiceDownTime";
+                                shared.header = "Utilities";
+                                shared.title = "Service DownTime";
+                                shared.homewidget = [const Servicedowntime()];
                               });
                             },
                           ),
@@ -1144,48 +1135,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Institution",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Institution";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Institution";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Institution";
-                                        subaddbutton = "Add New Institution";
-                                        header = "Utilities";
-                                        title = "Institution";
-                                        homewidget = [const Institution()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Institution";
+                                        shared.subaddbutton = "Add New Institution";
+                                        shared.header = "Utilities";
+                                        shared.title = "Institution";
+                                        shared.homewidget = [const Institution()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Institution";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addinstitution()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Institution";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addinstitution()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Institution";
-                                subaddbutton = "Add Institution";
-                                header = "Utilities";
-                                title = "Institution";
-                                homewidget = [const Institution()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Institution";
+                                shared.subaddbutton = "Add Institution";
+                                shared.header = "Utilities";
+                                shared.title = "Institution";
+                                shared.homewidget = [const Institution()];
                               });
                             },
                           ),
@@ -1195,48 +1186,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Branch",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Branch";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Branch";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Branch";
-                                        subaddbutton = "Add New Branch";
-                                        header = "Utilities";
-                                        title = "Branch";
-                                        homewidget = [const Branch()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Branch";
+                                        shared.subaddbutton = "Add New Branch";
+                                        shared.header = "Utilities";
+                                        shared.title = "Branch";
+                                        shared.homewidget = [const Branch()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Branch";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addbranch()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Branch";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addbranch()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Branch";
-                                subaddbutton = "Add Branch";
-                                header = "Utilities";
-                                title = "Branch";
-                                homewidget = [const Branch()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Branch";
+                                shared.subaddbutton = "Add Branch";
+                                shared.header = "Utilities";
+                                shared.title = "Branch";
+                                shared.homewidget = [const Branch()];
                               });
                             },
                           ),
@@ -1246,48 +1237,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Unit",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Unit";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Unit";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Unit";
-                                        subaddbutton = "Add New Unit";
-                                        header = "Utilities";
-                                        title = "Unit";
-                                        homewidget = [const Unit()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Unit";
+                                        shared.subaddbutton = "Add New Unit";
+                                        shared.header = "Utilities";
+                                        shared.title = "Unit";
+                                        shared.homewidget = [const Unit()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Unit";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addunit()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Unit";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addunit()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Unit";
-                                subaddbutton = "Add Unit";
-                                header = "Utilities";
-                                title = "Unit";
-                                homewidget = [const Unit()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Unit";
+                                shared.subaddbutton = "Add Unit";
+                                shared.header = "Utilities";
+                                shared.title = "Unit";
+                                shared.homewidget = [const Unit()];
                               });
                             },
                           ),
@@ -1297,48 +1288,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Center",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Center";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Center";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Center";
-                                        subaddbutton = "Add New Center";
-                                        header = "Utilities";
-                                        title = "Center";
-                                        homewidget = [const Centers()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Center";
+                                        shared.subaddbutton = "Add New Center";
+                                        shared.header = "Utilities";
+                                        shared.title = "Center";
+                                        shared.homewidget = [const Centers()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Center";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addcenters()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Center";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addcenters()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Unit";
-                                subaddbutton = "Add Center";
-                                header = "Utilities";
-                                title = "Center";
-                                homewidget = [const Centers()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Unit";
+                                shared.subaddbutton = "Add Center";
+                                shared.header = "Utilities";
+                                shared.title = "Center";
+                                shared.homewidget = [const Centers()];
                               });
                             },
                           ),
@@ -1348,48 +1339,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Provider",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Provider";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Provider";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Provider";
-                                        subaddbutton = "Add New Provider";
-                                        header = "Utilities";
-                                        title = "Provider";
-                                        homewidget = [const Providers()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Provider";
+                                        shared.subaddbutton = "Add New Provider";
+                                        shared.header = "Utilities";
+                                        shared.title = "Provider";
+                                        shared.homewidget = [const Providers()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Provider";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addproviders()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Provider";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addproviders()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Provider";
-                                subaddbutton = "Add Provider";
-                                header = "Utilities";
-                                title = "Provider";
-                                homewidget = [const Providers()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Provider";
+                                shared.subaddbutton = "Add Provider";
+                                shared.header = "Utilities";
+                                shared.title = "Provider";
+                                shared.homewidget = [const Providers()];
                               });
                             },
                           ),
@@ -1399,48 +1390,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Product Type",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Product Type";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Product Type";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Product Type";
-                                        subaddbutton = "Add New Product Type";
-                                        header = "Utilities";
-                                        title = "Product Type";
-                                        homewidget = [const Producttype()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Product Type";
+                                        shared.subaddbutton = "Add New Product Type";
+                                        shared.header = "Utilities";
+                                        shared.title = "Product Type";
+                                        shared.homewidget = [const Producttype()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Product Type";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addproducttype()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Product Type";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addproducttype()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Product Type";
-                                subaddbutton = "Add Product Type";
-                                header = "Utilities";
-                                title = "Product Type";
-                                homewidget = [const Producttype()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Product Type";
+                                shared.subaddbutton = "Add Product Type";
+                                shared.header = "Utilities";
+                                shared.title = "Product Type";
+                                shared.homewidget = [const Producttype()];
                               });
                             },
                           ),
@@ -1450,48 +1441,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Product Category",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Product Category";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Product Category";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Product";
-                                        subaddbutton = "Add Product Category";
-                                        header = "Utilities";
-                                        title = "Product Category";
-                                        homewidget = [const Productcategory()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Product";
+                                        shared.subaddbutton = "Add Product Category";
+                                        shared.header = "Utilities";
+                                        shared.title = "Product Category";
+                                        shared.homewidget = [const Productcategory()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Product Category";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addproductcategory()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Product Category";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addproductcategory()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Product";
-                                subaddbutton = "Add Product Category";
-                                header = "Utilities";
-                                title = "Product Category";
-                                homewidget = [const Productcategory()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Product";
+                                shared.subaddbutton = "Add Product Category";
+                                shared.header = "Utilities";
+                                shared.title = "Product Category";
+                                shared.homewidget = [const Productcategory()];
                               });
                             },
                           ),
@@ -1501,53 +1492,53 @@ class _HomePageState extends State<HomePage> {
                             title: "Biller Product",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    uploadbutton = "";
-                                    subuploadbutton = "";
-                                    header = "Biller Product";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.uploadbutton = "";
+                                    shared.subuploadbutton = "";
+                                    shared.header = "Biller Product";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        uploadbutton = "Download";
-                                        subuploadbutton =
+                                        shared.uploadbutton = "Download";
+                                        shared.subuploadbutton =
                                             "Download Biller Product";
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        addbutton = "New Biller Product";
-                                        subaddbutton = "Add Biller Product";
-                                        header = "Utilities";
-                                        title = "Biller Product";
-                                        homewidget = [const Billerproduct()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.addbutton = "New Biller Product";
+                                        shared.subaddbutton = "Add Biller Product";
+                                        shared.header = "Utilities";
+                                        shared.title = "Biller Product";
+                                        shared.homewidget = [const Billerproduct()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    uploadbutton = "";
-                                    subuploadbutton = "";
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Biller Product";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addbillerproduct()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.uploadbutton = "";
+                                    shared.subuploadbutton = "";
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Biller Product";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addbillerproduct()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                addbutton = "New Biller Product";
-                                subaddbutton = "Add Biller Product";
-                                uploadbutton = "Download";
-                                subuploadbutton = "Download Biller Product";
-                                header = "Utilities";
-                                title = "Biller Product";
-                                homewidget = [const Billerproduct()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.addbutton = "New Biller Product";
+                                shared.subaddbutton = "Add Biller Product";
+                                shared.uploadbutton = "Download";
+                                shared.subuploadbutton = "Download Biller Product";
+                                shared.header = "Utilities";
+                                shared.title = "Biller Product";
+                                shared.homewidget = [const Billerproduct()];
                               });
                             },
                           ),
@@ -1557,48 +1548,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Load Product",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Load Product";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Load Product";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Load Product";
-                                        subaddbutton = "Add Load Product";
-                                        header = "Utilities";
-                                        title = "Load Product";
-                                        homewidget = [const Loadproduct()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Load Product";
+                                        shared.subaddbutton = "Add Load Product";
+                                        shared.header = "Utilities";
+                                        shared.title = "Load Product";
+                                        shared.homewidget = [const Loadproduct()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Load Product";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addloadproduct()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Load Product";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addloadproduct()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Load Product";
-                                subaddbutton = "Add Load Product";
-                                header = "Utilities";
-                                title = "Load Product";
-                                homewidget = [const Loadproduct()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Load Product";
+                                shared.subaddbutton = "Add Load Product";
+                                shared.header = "Utilities";
+                                shared.title = "Load Product";
+                                shared.homewidget = [const Loadproduct()];
                               });
                             },
                           ),
@@ -1608,48 +1599,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Commission Setup",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Commission Setup";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Commission Setup";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Commission";
-                                        subaddbutton = "Add Commission Setup";
-                                        header = "Utilities";
-                                        title = "Commission Setup";
-                                        homewidget = [const Commissionsetup()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Commission";
+                                        shared.subaddbutton = "Add Commission Setup";
+                                        shared.header = "Utilities";
+                                        shared.title = "Commission Setup";
+                                        shared. homewidget = [const Commissionsetup()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Commission Setup";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addcommission()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Commission Setup";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addcommission()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Commission";
-                                subaddbutton = "Add Commission Setup";
-                                header = "Utilities";
-                                title = "Commission Setup";
-                                homewidget = [const Commissionsetup()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Commission";
+                                shared.subaddbutton = "Add Commission Setup";
+                                shared.header = "Utilities";
+                                shared.title = "Commission Setup";
+                                shared.homewidget = [const Commissionsetup()];
                               });
                             },
                           ),
@@ -1659,48 +1650,48 @@ class _HomePageState extends State<HomePage> {
                             title: "IBFT Bank List",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Bank List";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Bank List";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Bank List";
-                                        subaddbutton = "Add Bank List";
-                                        header = "Utilities";
-                                        title = "Bank List";
-                                        homewidget = [const Banklist()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Bank List";
+                                        shared.subaddbutton = "Add Bank List";
+                                        shared.header = "Utilities";
+                                        shared.title = "Bank List";
+                                        shared.homewidget = [const Banklist()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Bank List";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addbanklist()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Bank List";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addbanklist()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Bank List";
-                                subaddbutton = "Add Bank List";
-                                header = "Utilities";
-                                title = "Bank List";
-                                homewidget = [const Banklist()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Bank List";
+                                shared.subaddbutton = "Add Bank List";
+                                shared.header = "Utilities";
+                                shared.title = "Bank List";
+                                shared.homewidget = [const Banklist()];
                               });
                             },
                           ),
@@ -1710,48 +1701,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Partner",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Partner";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Partner";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Partner";
-                                        subaddbutton = "Add Partner";
-                                        header = "Utilities";
-                                        title = "Partner";
-                                        homewidget = [const Partner()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Partner";
+                                        shared.subaddbutton = "Add Partner";
+                                        shared.header = "Utilities";
+                                        shared.title = "Partner";
+                                        shared.homewidget = [const Partner()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Partner";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addpartner()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Partner";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addpartner()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Partner";
-                                subaddbutton = "Add Partner";
-                                header = "Utilities";
-                                title = "Partner";
-                                homewidget = [const Partner()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Partner";
+                                shared.subaddbutton = "Add Partner";
+                                shared.header = "Utilities";
+                                shared.title = "Partner";
+                                shared.homewidget = [const Partner()];
                               });
                             },
                           ),
@@ -1761,48 +1752,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Splash Screen",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Splash Screen";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Splash Screen";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        addicon = Icons.add_outlined;
-                                        icon = Icons.people_outline;
-                                        addicon = Icons.add_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Splash Screen";
-                                        subaddbutton = "Add Splash Screen";
-                                        header = "Utilities";
-                                        title = "Splash Screen";
-                                        homewidget = [const Splashscreen()];
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.icon = Icons.people_outline;
+                                        shared.addicon = Icons.add_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Splash Screen";
+                                        shared.subaddbutton = "Add Splash Screen";
+                                        shared.header = "Utilities";
+                                        shared.title = "Splash Screen";
+                                        shared.homewidget = [const Splashscreen()];
                                       });
                                     };
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Utilities  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Splash Screen";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addsplashscreen()];
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Utilities  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Splash Screen";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addsplashscreen()];
                                   });
                                 };
-                                addicon = Icons.add_outlined;
-                                icon = Icons.people_outline;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Splash Screen";
-                                subaddbutton = "Add Splash Screen";
-                                header = "Utilities";
-                                title = "Splash Screen";
-                                homewidget = [const Splashscreen()];
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.people_outline;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Splash Screen";
+                                shared.subaddbutton = "Add Splash Screen";
+                                shared.header = "Utilities";
+                                shared.title = "Splash Screen";
+                                shared.homewidget = [const Splashscreen()];
                               });
                             },
                           ),
@@ -1818,34 +1809,34 @@ class _HomePageState extends State<HomePage> {
                             title: "CSR Dashboard",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    icon = Icons.add_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header =
+                                    shared.icon = Icons.add_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header =
                                         "Customer Service  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save All User Data";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addcsrdashboard()];
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save All User Data";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addcsrdashboard()];
                                   });
                                 };
-                                icon = Icons.perm_identity;
-                                addicon = Icons.add_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New CS Dashboard";
-                                subaddbutton = "Add New CS Dashboard";
-                                header = "Customer Service";
-                                title = "CSR Dashboard";
-                                homewidget = [const Csrdashboard()];
+                                shared.icon = Icons.perm_identity;
+                                shared.addicon = Icons.add_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New CS Dashboard";
+                                shared.subaddbutton = "Add New CS Dashboard";
+                                shared.header = "Customer Service";
+                                shared.title = "CSR Dashboard";
+                                shared.homewidget = [const Csrdashboard()];
                               });
                             },
                           ),
@@ -1855,23 +1846,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Broadcast Message",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {};
-                                addicon = Icons.add_outlined;
-                                icon = Icons.list_alt_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Message";
-                                subaddbutton = "Add New Dashboard";
-                                header = "Customer Service";
-                                title = "Broadcast Message";
-                                homewidget = [const Broadcastmessage()];
+                                shared.onPress = () {};
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.list_alt_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Message";
+                                shared.subaddbutton = "Add New Dashboard";
+                                shared.header = "Customer Service";
+                                shared.title = "Broadcast Message";
+                                shared.homewidget = [const Broadcastmessage()];
                               });
                             },
                           ),
@@ -1881,23 +1872,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Type of Concern",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {};
-                                addicon = Icons.add_outlined;
-                                icon = Icons.list_alt_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Concern";
-                                subaddbutton = "Add New Type Concern";
-                                header = "Customer Service";
-                                title = "Type of Concern";
-                                homewidget = [const Typeofconcern()];
+                                shared.onPress = () {};
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.list_alt_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Concern";
+                                shared.subaddbutton = "Add New Type Concern";
+                                shared.header = "Customer Service";
+                                shared.title = "Type of Concern";
+                                shared.homewidget = [const Typeofconcern()];
                               });
                             },
                           ),
@@ -1907,23 +1898,23 @@ class _HomePageState extends State<HomePage> {
                             title: "CSR Hotline",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Client Profile";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Client Profile";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {};
-                                addicon = Icons.add_outlined;
-                                icon = Icons.list_alt_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New CSR Hotline";
-                                subaddbutton = "Add New Data";
-                                header = "Customer Service";
-                                title = "CSR Hotline";
-                                homewidget = [const Csrhotline()];
+                                shared.onPress = () {};
+                                shared.addicon = Icons.add_outlined;
+                                shared.icon = Icons.list_alt_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New CSR Hotline";
+                                shared.subaddbutton = "Add New Data";
+                                shared.header = "Customer Service";
+                                shared.title = "CSR Hotline";
+                                shared.homewidget = [const Csrhotline()];
                               });
                             },
                           ),
@@ -1939,46 +1930,46 @@ class _HomePageState extends State<HomePage> {
                             title: "Webtool User Listing",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Webtool User Listing";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Webtool User Listing";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Webtool User Listing";
-                                        homewidget = [const Webtoolusereport()];
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Webtool User Listing";
+                                        shared.homewidget = [const Webtoolusereport()];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Webtool User Listing";
-                                homewidget = [const Webtoolusereport()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Webtool User Listing";
+                                shared.homewidget = [const Webtoolusereport()];
                               });
                             },
                           ),
@@ -1988,46 +1979,46 @@ class _HomePageState extends State<HomePage> {
                             title: "Transaction Logs",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Transaction Logs";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Transaction Logs";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Transaction Logs";
-                                        homewidget = [const Transactionlogs()];
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Transaction Logs";
+                                        shared.homewidget = [const Transactionlogs()];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Transaction Logs";
-                                homewidget = [const Transactionlogs()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Transaction Logs";
+                                shared.homewidget = [const Transactionlogs()];
                               });
                             },
                           ),
@@ -2037,46 +2028,46 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Sent",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Remittance Sent";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Remittance Sent";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Remittance Sent";
-                                        homewidget = [const Remittancesent()];
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Remittance Sent";
+                                        shared.homewidget = [const Remittancesent()];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Remittance Sent";
-                                homewidget = [const Remittancesent()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Remittance Sent";
+                                shared.homewidget = [const Remittancesent()];
                               });
                             },
                           ),
@@ -2086,48 +2077,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Claimed",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Remittance Claimed";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Remittance Claimed";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Remittance Claimed";
-                                        homewidget = [
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Remittance Claimed";
+                                        shared.homewidget = [
                                           const Remittanceclaimed()
                                         ];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Remittance Claimed";
-                                homewidget = [const Remittanceclaimed()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Remittance Claimed";
+                                shared.homewidget = [const Remittanceclaimed()];
                               });
                             },
                           ),
@@ -2137,48 +2128,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Remittance Cancelled",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Remittance Cancelled";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Remittance Cancelled";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Remittance Cancelled";
-                                        homewidget = [
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Remittance Cancelled";
+                                        shared.homewidget = [
                                           const Remittancecancelled()
                                         ];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Remittance Cancelled";
-                                homewidget = [const Remittancecancelled()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Remittance Cancelled";
+                                shared.homewidget = [const Remittancecancelled()];
                               });
                             },
                           ),
@@ -2188,46 +2179,46 @@ class _HomePageState extends State<HomePage> {
                             title: "Activity History",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Activity History";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Activity History";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Activity History";
-                                        homewidget = [const Activityhistory()];
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Activity History";
+                                        shared.homewidget = [const Activityhistory()];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Activity History";
-                                homewidget = [const Activityhistory()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Activity History";
+                                shared.homewidget = [const Activityhistory()];
                               });
                             },
                           ),
@@ -2237,48 +2228,48 @@ class _HomePageState extends State<HomePage> {
                             title: "MPIN Change - Password",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "MPIN Change - Password";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "MPIN Change - Password";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "MPIN Change - Password";
-                                        homewidget = [
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "MPIN Change - Password";
+                                        shared.homewidget = [
                                           const MPINchangepassword()
                                         ];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "MPIN Change - Password";
-                                homewidget = [const MPINchangepassword()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "MPIN Change - Password";
+                                shared.homewidget = [const MPINchangepassword()];
                               });
                             },
                           ),
@@ -2288,48 +2279,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Resend SMS Activation",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Resend SMS Activation";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Resend SMS Activation";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Resend SMS Activation";
-                                        homewidget = [
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Resend SMS Activation";
+                                        shared.homewidget = [
                                           const Resendsmsactivation()
                                         ];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Resend SMS Activation";
-                                homewidget = [const Resendsmsactivation()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Resend SMS Activation";
+                                shared.homewidget = [const Resendsmsactivation()];
                               });
                             },
                           ),
@@ -2339,46 +2330,46 @@ class _HomePageState extends State<HomePage> {
                             title: "Login - Logout",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Login - Logout";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Login - Logout";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Login - Logout";
-                                        homewidget = [const Loginlogout()];
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Login - Logout";
+                                        shared.homewidget = [const Loginlogout()];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Login - Logout";
-                                homewidget = [const Loginlogout()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Login - Logout";
+                                shared.homewidget = [const Loginlogout()];
                               });
                             },
                           ),
@@ -2388,46 +2379,46 @@ class _HomePageState extends State<HomePage> {
                             title: "User Activity Logs",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "User Activity Logs";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "User Activity Logs";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "User Activity Logs";
-                                        homewidget = [const Useractivitylogs()];
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "User Activity Logs";
+                                        shared.homewidget = [const Useractivitylogs()];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "User Activity Logs";
-                                homewidget = [const Useractivitylogs()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "User Activity Logs";
+                                shared.homewidget = [const Useractivitylogs()];
                               });
                             },
                           ),
@@ -2437,48 +2428,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Suspicious Transaction",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Suspicious Transaction";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Suspicious Transaction";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Suspicious Transaction";
-                                        homewidget = [
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Suspicious Transaction";
+                                        shared.homewidget = [
                                           const Suspicioustransaction()
                                         ];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Suspicious Transaction";
-                                homewidget = [const Suspicioustransaction()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Suspicious Transaction";
+                                shared.homewidget = [const Suspicioustransaction()];
                               });
                             },
                           ),
@@ -2488,46 +2479,46 @@ class _HomePageState extends State<HomePage> {
                             title: "Register Clients",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Register Clients";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Register Clients";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Register Clients";
-                                        homewidget = [const Registerclients()];
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Register Clients";
+                                        shared.homewidget = [const Registerclients()];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Register Clients";
-                                homewidget = [const Registerclients()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Register Clients";
+                                shared.homewidget = [const Registerclients()];
                               });
                             },
                           ),
@@ -2537,46 +2528,46 @@ class _HomePageState extends State<HomePage> {
                             title: "Valid Transaction",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Valid Transaction";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Valid Transaction";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Valid Transaction";
-                                        homewidget = [const Validtransaction()];
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Valid Transaction";
+                                        shared.homewidget = [const Validtransaction()];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Valid Transaction";
-                                homewidget = [const Validtransaction()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Valid Transaction";
+                                shared.homewidget = [const Validtransaction()];
                               });
                             },
                           ),
@@ -2586,46 +2577,46 @@ class _HomePageState extends State<HomePage> {
                             title: "CS Dashboard",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "CS Dashboard";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "CS Dashboard";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "CS Dashboard";
-                                        homewidget = [const CSdashboard()];
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "CS Dashboard";
+                                        shared.homewidget = [const CSdashboard()];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "CS Dashboard";
-                                homewidget = [const CSdashboard()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "CS Dashboard";
+                                shared.homewidget = [const CSdashboard()];
                               });
                             },
                           ),
@@ -2635,46 +2626,46 @@ class _HomePageState extends State<HomePage> {
                             title: "Reconn CCM",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Reconn CCM";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Reconn CCM";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Reconn CCM";
-                                        homewidget = [const Reconnccm()];
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Reconn CCM";
+                                        shared.homewidget = [const Reconnccm()];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Reconn CCM";
-                                homewidget = [const Reconnccm()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Reconn CCM";
+                                shared.homewidget = [const Reconnccm()];
                               });
                             },
                           ),
@@ -2684,46 +2675,46 @@ class _HomePageState extends State<HomePage> {
                             title: "SMS Log Report",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "SMS Log Report";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "SMS Log Report";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "SMS Log Report";
-                                        homewidget = [const Smslogreport()];
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "SMS Log Report";
+                                        shared.homewidget = [const Smslogreport()];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "SMS Log Report";
-                                homewidget = [const Smslogreport()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "SMS Log Report";
+                                shared.homewidget = [const Smslogreport()];
                               });
                             },
                           ),
@@ -2733,48 +2724,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Account Status Report",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Account Status Report";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Account Status Report";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Account Status Report";
-                                        homewidget = [
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Account Status Report";
+                                        shared.homewidget = [
                                           const Accountstatusreport()
                                         ];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Account Status Report";
-                                homewidget = [const Accountstatusreport()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Account Status Report";
+                                shared.homewidget = [const Accountstatusreport()];
                               });
                             },
                           ),
@@ -2784,48 +2775,48 @@ class _HomePageState extends State<HomePage> {
                             title: "List of Agent Report",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "List of Agent Report";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "List of Agent Report";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "List of Agent Report";
-                                        homewidget = [
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "List of Agent Report";
+                                        shared.homewidget = [
                                           const Listofagentreport()
                                         ];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "List of Agent Report";
-                                homewidget = [const Listofagentreport()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "List of Agent Report";
+                                shared.homewidget = [const Listofagentreport()];
                               });
                             },
                           ),
@@ -2835,48 +2826,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Igate Recentiliation",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Igate Recentiliation";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Igate Recentiliation";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Igate Recentiliation";
-                                        homewidget = [
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Igate Recentiliation";
+                                        shared.homewidget = [
                                           const Igaterecentiliation()
                                         ];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Igate Recentiliation";
-                                homewidget = [const Igaterecentiliation()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Igate Recentiliation";
+                                shared.homewidget = [const Igaterecentiliation()];
                               });
                             },
                           ),
@@ -2886,47 +2877,47 @@ class _HomePageState extends State<HomePage> {
                             title: "Activated Merchant",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Activated Merchant";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Activated Merchant";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Activated Merchant";
-                                        homewidget = [
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Activated Merchant";
+                                        shared.homewidget = [
                                           const Activatedmerchant()
                                         ];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Activated Merchant";
-                                homewidget = [const Activatedmerchant()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Activated Merchant";
+                                shared.homewidget = [const Activatedmerchant()];
                               });
                             },
                           ),
@@ -2936,48 +2927,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Deactivated Merchant",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Deactivated Merchant";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Deactivated Merchant";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Activated Merchant";
-                                        homewidget = [
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Activated Merchant";
+                                        shared.homewidget = [
                                           const Deactivatedmerchant()
                                         ];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Deactivated Merchant";
-                                homewidget = [const Deactivatedmerchant()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Deactivated Merchant";
+                                shared.homewidget = [const Deactivatedmerchant()];
                               });
                             },
                           ),
@@ -2987,46 +2978,46 @@ class _HomePageState extends State<HomePage> {
                             title: "Used Device ID",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Used Device ID";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Used Device ID";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Used Device ID";
-                                        homewidget = [const Useddeviceid()];
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Used Device ID";
+                                        shared.homewidget = [const Useddeviceid()];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Used Device ID";
-                                homewidget = [const Useddeviceid()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Used Device ID";
+                                shared.homewidget = [const Useddeviceid()];
                               });
                             },
                           ),
@@ -3036,48 +3027,48 @@ class _HomePageState extends State<HomePage> {
                             title: "Failed Enrollment Report",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Failed Enrollment Report";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Failed Enrollment Report";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = () {
+                                shared.onPress = () {
                                   setState(() {
-                                    onPress = () {
+                                    shared.onPress = () {
                                       setState(() {
-                                        icon = Icons.content_copy_outlined;
-                                        addicon = Icons.report_outlined;
-                                        uploadbutton = "";
-                                        subuploadbutton = "";
-                                        addbutton = "New Report";
-                                        subaddbutton = "Generate Reports";
-                                        header = "Reports";
-                                        title = "Failed Enrollment Report";
-                                        homewidget = [
+                                        shared.icon = Icons.content_copy_outlined;
+                                        shared.addicon = Icons.report_outlined;
+                                        shared.uploadbutton = "";
+                                        shared.subuploadbutton = "";
+                                        shared.addbutton = "New Report";
+                                        shared.subaddbutton = "Generate Reports";
+                                        shared.header = "Reports";
+                                        shared.title = "Failed Enrollment Report";
+                                        shared.homewidget = [
                                           const Failedenrollmentreport()
                                         ];
                                       });
                                     };
-                                    icon = Icons.report_outlined;
-                                    addicon = Icons.save_outlined;
-                                    header = "Report  >  Create / Edit";
-                                    addbutton = "Save";
-                                    subaddbutton = "Save Report";
-                                    title = "Create / Edit";
-                                    homewidget = [const Addusers()];
+                                    shared.icon = Icons.report_outlined;
+                                    shared.addicon = Icons.save_outlined;
+                                    shared.header = "Report  >  Create / Edit";
+                                    shared.addbutton = "Save";
+                                    shared.subaddbutton = "Save Report";
+                                    shared.title = "Create / Edit";
+                                    shared.homewidget = [const Addusers()];
                                   });
                                 };
-                                icon = Icons.content_copy_outlined;
-                                addicon = Icons.report_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "New Report";
-                                subaddbutton = "Generate Reports";
-                                header = "Reports";
-                                title = "Failed Enrollment Report";
-                                homewidget = [const Failedenrollmentreport()];
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.addicon = Icons.report_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "New Report";
+                                shared.subaddbutton = "Generate Reports";
+                                shared.header = "Reports";
+                                shared.title = "Failed Enrollment Report";
+                                shared.homewidget = [const Failedenrollmentreport()];
                               });
                             },
                           ),
@@ -3087,23 +3078,23 @@ class _HomePageState extends State<HomePage> {
                             title: "Core Transaction",
                             onTap: () {
                               setState(() {
-                                onTaps = () {
+                                shared.onTaps = () {
                                   setState(() {
-                                    header = "Core Transaction";
-                                    title = "Change Password";
-                                    homewidget = [const Changepassword()];
+                                    shared.header = "Core Transaction";
+                                    shared.title = "Change Password";
+                                    shared.homewidget = [const Changepassword()];
                                   });
                                 };
-                                onPress = null;
-                                addicon = null;
-                                icon = Icons.content_copy_outlined;
-                                uploadbutton = "";
-                                subuploadbutton = "";
-                                addbutton = "";
-                                subaddbutton = "";
-                                header = "Enrollment";
-                                title = "Core Transaction";
-                                homewidget = [const Coretransaction()];
+                                shared.onPress = null;
+                                shared.addicon = null;
+                                shared.icon = Icons.content_copy_outlined;
+                                shared.uploadbutton = "";
+                                shared.subuploadbutton = "";
+                                shared.addbutton = "";
+                                shared.subaddbutton = "";
+                                shared.header = "Enrollment";
+                                shared.title = "Core Transaction";
+                                shared.homewidget = [const Coretransaction()];
                               });
                             },
                           ),
@@ -3113,7 +3104,7 @@ class _HomePageState extends State<HomePage> {
                             title: "ECPay Reconciliation",
                             onTap: () {
                               setState(() {
-                                title = "ECPay Reconciliation";
+                                shared.title = "ECPay Reconciliation";
                               });
                             },
                           ),
@@ -3128,19 +3119,19 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 children: [
                   Header(
-                    icon: icon,
-                    header: header,
-                    addicon: addicon,
-                    title: title,
-                    addbutton: addbutton,
-                    subaddbutton: subaddbutton,
-                    uploadbutton: uploadbutton,
-                    subuploadbutton: subuploadbutton,
-                    onPress: onPress,
-                    onTaps: onTaps,
+                    icon: shared.icon,
+                    header: shared.header,
+                    addicon: shared.addicon,
+                    title: shared.title,
+                    addbutton: shared.addbutton,
+                    subaddbutton: shared.subaddbutton,
+                    uploadbutton: shared.uploadbutton,
+                    subuploadbutton: shared.subuploadbutton,
+                    onPress: shared.onPress,
+                    onTaps: shared.onTaps,
                   ),
                   Contains(
-                    child: homewidget,
+                    child: shared.homewidget,
                   )
                 ],
               ),
