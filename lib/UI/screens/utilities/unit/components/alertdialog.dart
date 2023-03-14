@@ -32,6 +32,11 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
   Widget build(BuildContext context) {
    final home = Provider.of<HomePageProvider>(context, listen: false);
     final shared = Provider.of<Unit_U>(context, listen: false);
+    void close(){
+      Navigator.pop(context);
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
+    }
     Future<void> wait() async {
       shared.UnitLog.clear();
       shared.Unit_data.clear();
@@ -200,7 +205,7 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
                       home.title = "Unit";
                       home.homewidget = [const Unit()];
                     });
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
+                    close();
                   } else {
                     print(
                         "-------->>>>>>>>>>${jsonDecode(response.body).length}");

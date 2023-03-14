@@ -141,136 +141,154 @@ class _HomePageState extends State<HomePage> {
                         icon: Icons.dashboard_outlined,
                         title: "Dashboard",
                         child: [
-                          Listtile(
+                          Container(
+                            decoration: BoxDecoration(
+                                color:shared.title == "Register Client"? Colors.white :Colors.transparent, ),
+                            child: Listtile(
 
-                            color: Colors.black,
-                            icon: Icons.account_circle_outlined,
-                            title: "Register Client",
-                            onTap: () {
-                              setState(() {
-                                shared.onTaps = () {
-                                  setState(() {
-                                    shared.header = "Client Profile";
-                                    shared.title = "Change Password";
-                                    shared.homewidget = [const Changepassword()];
-                                  });
-                                };
-                                shared.addicon = null;
-                                shared.onPress = null;
-                                shared.icon = CupertinoIcons.cube;
-                                shared.uploadbutton = "";
-                                shared.subuploadbutton = "";
-                                shared.addbutton = "";
-                                shared.subaddbutton = "";
-                                shared.header = "Dashboard";
-                                shared.title = "Register Client";
-                                shared.homewidget = [const Registerclient()];
-                              });
-                            },
+                              color: Colors.black,
+                              icon: Icons.account_circle_outlined,
+                              title: "Register Client",
+                              onTap: () {
+                                setState(() {
+                                  shared.onTaps = () {
+                                    setState(() {
+                                      shared.header = "Client Profile";
+                                      shared.title = "Change Password";
+                                      shared.homewidget = [const Changepassword()];
+                                    });
+                                  };
+                                  shared.addicon = null;
+                                  shared.onPress = null;
+                                  shared.icon = CupertinoIcons.cube;
+                                  shared.uploadbutton = "";
+                                  shared.subuploadbutton = "";
+                                  shared.addbutton = "";
+                                  shared.subaddbutton = "";
+                                  shared.header = "Dashboard";
+                                  shared.title = "Register Client";
+                                  shared.homewidget = [const Registerclient()];
+                                });
+                              },
+                            ),
                           ),
-                          Listtile(
-                            color: Colors.black,
-                            icon: Icons.check_circle_outline_outlined,
-                            title: "Active Client",
-                            onTap: () {
-                              setState(() {
-                                shared.onTaps = () {
-                                  setState(() {
-                                    shared.header = "Client Profile";
-                                    shared.title = "Change Password";
-                                    shared.homewidget = [const Changepassword()];
-                                  });
-                                };
-                                shared.addicon = null;
-                                shared.onPress = null;
-                                shared.icon = CupertinoIcons.cube;
-                                shared.uploadbutton = "";
-                                shared.subuploadbutton = "";
-                                shared.addbutton = "";
-                                shared.subaddbutton = "";
-                                shared.header = "Dashboard";
-                                shared.title = "Active Client";
-                                shared.homewidget = [const Activeclient()];
-                              });
-                            },
+                          Container(
+                            decoration: BoxDecoration(
+                                color:shared.title == "Active Client"? Colors.white :Colors.transparent
+                            ),
+                            child: Listtile(
+                              color: Colors.black,
+                              icon: Icons.check_circle_outline_outlined,
+                              title: "Active Client",
+                              onTap: () {
+                                setState(() {
+                                  shared.onTaps = () {
+                                    setState(() {
+                                      shared.header = "Client Profile";
+                                      shared.title = "Change Password";
+                                      shared.homewidget = [const Changepassword()];
+                                    });
+                                  };
+                                  shared.addicon = null;
+                                  shared.onPress = null;
+                                  shared.icon = CupertinoIcons.cube;
+                                  shared.uploadbutton = "";
+                                  shared.subuploadbutton = "";
+                                  shared.addbutton = "";
+                                  shared.subaddbutton = "";
+                                  shared.header = "Dashboard";
+                                  shared.title = "Active Client";
+                                  shared.homewidget = [const Activeclient()];
+                                });
+                              },
+                            ),
                           ),
-                          Listtile(
-                            color: Colors.black,
-                            icon: Icons.receipt_long_outlined,
-                            title: "Client Transaction",
-                            onTap: () {
-                              setState(() {
-                                shared.onTaps = () {
-                                  setState(() {
-                                    shared.header = "Client Profile";
-                                    shared.title = "Change Password";
-                                    shared.homewidget = [const Changepassword()];
-                                  });
-                                };
-                                shared.addicon = null;
-                                shared.onPress = null;
-                                shared.icon = CupertinoIcons.cube;
-                                shared.uploadbutton = "";
-                                shared.subuploadbutton = "";
-                                shared.addbutton = "";
-                                shared.subaddbutton = "";
-                                shared.header = "Dashboard";
-                                shared.title = "Client Transaction";
-                                shared.homewidget = [const Clienttransaction()];
-                              });
-                            },
+                          Container(
+                            decoration: BoxDecoration(color:shared.title == "Client Transaction"? Colors.white :Colors.transparent),
+                            child: Listtile(
+                              color: Colors.black,
+                              icon: Icons.receipt_long_outlined,
+                              title: "Client Transaction",
+                              onTap: () {
+                                setState(() {
+                                  shared.onTaps = () {
+                                    setState(() {
+                                      shared.header = "Client Profile";
+                                      shared.title = "Change Password";
+                                      shared.homewidget = [const Changepassword()];
+                                    });
+                                  };
+                                  shared.addicon = null;
+                                  shared.onPress = null;
+                                  shared.icon = CupertinoIcons.cube;
+                                  shared.uploadbutton = "";
+                                  shared.subuploadbutton = "";
+                                  shared.addbutton = "";
+                                  shared.subaddbutton = "";
+                                  shared.header = "Dashboard";
+                                  shared.title = "Client Transaction";
+                                  shared.homewidget = [const Clienttransaction()];
+                                });
+                              },
+                            ),
                           ),
-                          Listtile(
-                            color: Colors.black,
-                            icon: Icons.receipt_outlined,
-                            title: "eLoad Transaction",
-                            onTap: () {
-                              setState(() {
-                                shared.onTaps = () {
-                                  setState(() {
-                                    shared.header = "Client Profile";
-                                    shared.title = "Change Password";
-                                    shared.homewidget = [const Changepassword()];
-                                  });
-                                };
-                                shared.addicon = null;
-                                shared.onPress = null;
-                                shared.icon = CupertinoIcons.cube;
-                                shared.uploadbutton = "";
-                                shared.subuploadbutton = "";
-                                shared.addbutton = "";
-                                shared.subaddbutton = "";
-                                shared.header = "Dashboard";
-                                shared.title = "eLoad Transaction";
-                                shared.homewidget = [const eLoadtransaction()];
-                              });
-                            },
+                          Container(
+                            decoration:BoxDecoration(color:shared.title == "eLoad Transaction"? Colors.white :Colors.transparent) ,
+                            child: Listtile(
+                              color: Colors.black,
+                              icon: Icons.receipt_outlined,
+                              title: "eLoad Transaction",
+                              onTap: () {
+                                setState(() {
+                                  shared.onTaps = () {
+                                    setState(() {
+                                      shared.header = "Client Profile";
+                                      shared.title = "Change Password";
+                                      shared.homewidget = [const Changepassword()];
+                                    });
+                                  };
+                                  shared.addicon = null;
+                                  shared.onPress = null;
+                                  shared.icon = CupertinoIcons.cube;
+                                  shared.uploadbutton = "";
+                                  shared.subuploadbutton = "";
+                                  shared.addbutton = "";
+                                  shared.subaddbutton = "";
+                                  shared.header = "Dashboard";
+                                  shared.title = "eLoad Transaction";
+                                  shared.homewidget = [const eLoadtransaction()];
+                                });
+                              },
+                            ),
                           ),
-                          Listtile(
-                            color: Colors.black,
-                            icon: Icons.account_balance_outlined,
-                            title: "Bank Transaction",
-                            onTap: () {
-                              setState(() {
-                                shared.onTaps = () {
-                                  setState(() {
-                                    shared.header = "Client Profile";
-                                    shared.title = "Change Password";
-                                    shared.homewidget = [const Changepassword()];
-                                  });
-                                };
-                                shared.addicon = null;
-                                shared.onPress = null;
-                                shared.icon = CupertinoIcons.cube;
-                                shared.uploadbutton = "";
-                                shared.subuploadbutton = "";
-                                shared.addbutton = "";
-                                shared.subaddbutton = "";
-                                shared.header = "Dashboard";
-                                shared.title = "Bank Transaction";
-                                shared.homewidget = [const Banktransaction()];
-                              });
-                            },
+                          Container(
+                            decoration: BoxDecoration(color:shared.title == "Bank Transaction"? Colors.white :Colors.transparent),
+                            child: Listtile(
+                              color: Colors.black,
+                              icon: Icons.account_balance_outlined,
+                              title: "Bank Transaction",
+                              onTap: () {
+                                setState(() {
+                                  shared.onTaps = () {
+                                    setState(() {
+                                      shared.header = "Client Profile";
+                                      shared.title = "Change Password";
+                                      shared.homewidget = [const Changepassword()];
+                                    });
+                                  };
+                                  shared.addicon = null;
+                                  shared.onPress = null;
+                                  shared.icon = CupertinoIcons.cube;
+                                  shared.uploadbutton = "";
+                                  shared.subuploadbutton = "";
+                                  shared.addbutton = "";
+                                  shared.subaddbutton = "";
+                                  shared.header = "Dashboard";
+                                  shared.title = "Bank Transaction";
+                                  shared.homewidget = [const Banktransaction()];
+                                });
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -278,105 +296,111 @@ class _HomePageState extends State<HomePage> {
                         icon: Icons.admin_panel_settings_outlined,
                         title: "Administration",
                         child: [
-                          Listtile(
-                            color: Colors.black,
-                            icon: Icons.person_outline,
-                            title: "User Management",
-                            onTap: () {
-                              setState(() {
-                                shared.onTaps = () {
-                                  setState(() {
-                                    shared.header = "Client Profile";
-                                    shared.title = "Change Password";
-                                    shared.homewidget = [const Changepassword()];
-                                  });
-                                };
-                                shared.onPress = () {
-                                  setState(() {
-                                    shared.onPress = () {
-                                      setState(() {
-                                        shared.icon = Icons.perm_identity;
-                                        shared.addicon = Icons.add_outlined;
-                                        shared.uploadbutton = "";
-                                        shared.subuploadbutton = "";
-                                        shared.addbutton = "New User";
-                                        shared.subaddbutton = "Add New User Data";
-                                        shared.header = "Administration";
-                                        shared.title = "User Management";
-                                        shared.homewidget = [const Usermanagement()];
-                                      });
-                                    };
-                                    shared.icon = Icons.add_outlined;
-                                    shared.addicon = Icons.save_outlined;
-                                    shared.header = "Administration  >  Create / Edit";
-                                    shared.addbutton = "Save";
-                                    shared.subaddbutton = "Save All User Data";
-                                    shared.title = "Create / Edit";
-                                    shared.homewidget = [const Addusers()];
-                                  });
-                                };
-                                shared.icon = Icons.perm_identity;
-                                shared.addicon = Icons.add_outlined;
-                                shared.uploadbutton = "";
-                                shared.subuploadbutton = "";
-                                shared.addbutton = "New User";
-                                shared.subaddbutton = "Add New User Data";
-                                shared.header = "Administration";
-                                shared.title = "User Management";
-                                shared.homewidget = [const Usermanagement()];
-                              });
-                            },
+                          Container(
+                            decoration: BoxDecoration(color:shared.title == "User Management"? Colors.white :Colors.transparent),
+                            child: Listtile(
+                              color: Colors.black,
+                              icon: Icons.person_outline,
+                              title: "User Management",
+                              onTap: () {
+                                setState(() {
+                                  shared.onTaps = () {
+                                    setState(() {
+                                      shared.header = "Client Profile";
+                                      shared.title = "Change Password";
+                                      shared.homewidget = [const Changepassword()];
+                                    });
+                                  };
+                                  shared.onPress = () {
+                                    setState(() {
+                                      shared.onPress = () {
+                                        setState(() {
+                                          shared.icon = Icons.perm_identity;
+                                          shared.addicon = Icons.add_outlined;
+                                          shared.uploadbutton = "";
+                                          shared.subuploadbutton = "";
+                                          shared.addbutton = "New User";
+                                          shared.subaddbutton = "Add New User Data";
+                                          shared.header = "Administration";
+                                          shared.title = "User Management";
+                                          shared.homewidget = [const Usermanagement()];
+                                        });
+                                      };
+                                      shared.icon = Icons.add_outlined;
+                                      shared.addicon = Icons.save_outlined;
+                                      shared.header = "Administration  >  Create / Edit";
+                                      shared.addbutton = "Save";
+                                      shared.subaddbutton = "Save All User Data";
+                                      shared.title = "Create / Edit";
+                                      shared.homewidget = [const Addusers()];
+                                    });
+                                  };
+                                  shared.icon = Icons.perm_identity;
+                                  shared.addicon = Icons.add_outlined;
+                                  shared.uploadbutton = "";
+                                  shared.subuploadbutton = "";
+                                  shared.addbutton = "New User";
+                                  shared.subaddbutton = "Add New User Data";
+                                  shared.header = "Administration";
+                                  shared.title = "User Management";
+                                  shared.homewidget = [const Usermanagement()];
+                                });
+                              },
+                            ),
                           ),
-                          Listtile(
-                            color: Colors.black,
-                            icon: Icons.people_outline,
-                            title: "Role Management",
-                            onTap: () {
-                              setState(() {
-                                shared.onTaps = () {
-                                  setState(() {
-                                    shared.header = "Client Profile";
-                                    shared.title = "Change Password";
-                                    shared.homewidget = [const Changepassword()];
-                                  });
-                                };
-                                shared.onPress = () {
-                                  setState(() {
-                                    shared.onPress = () {
-                                      setState(() {
-                                        shared.addicon = Icons.add_outlined;
-                                        shared. icon = Icons.people_outline;
-                                        shared.addicon = Icons.add_outlined;
-                                        shared.uploadbutton = "";
-                                        shared.subuploadbutton = "";
-                                        shared.addbutton = "New Role";
-                                        shared.subaddbutton = "Add New Role Data";
-                                        shared.header = "Administration";
-                                        shared.title = "Role Management";
-                                        shared.homewidget = [const Rolemanagement()];
-                                      });
-                                    };
-                                    shared.icon = Icons.add_outlined;
-                                    shared.addicon = Icons.save_outlined;
-                                    shared.header = "Administration  >  Create / Edit";
-                                    shared.addbutton = "Save";
-                                    shared.subaddbutton = "Save All Roles";
-                                    shared.title = "Create / Edit";
-                                    shared.homewidget = [const Addroles()];
-                                  });
-                                };
-                                shared.addicon = Icons.add_outlined;
-                                shared.icon = Icons.people_outline;
-                                shared.addicon = Icons.add_outlined;
-                                shared.uploadbutton = "";
-                                shared.subuploadbutton = "";
-                                shared.addbutton = "New Role";
-                                shared.subaddbutton = "Add New Role Data";
-                                shared.header = "Administration";
-                                shared.title = "Role Management";
-                                shared.homewidget = [const Rolemanagement()];
-                              });
-                            },
+                          Container(
+                            decoration: BoxDecoration(color:shared.title == "Role Management"? Colors.white :Colors.transparent),
+                            child: Listtile(
+                              color: Colors.black,
+                              icon: Icons.people_outline,
+                              title: "Role Management",
+                              onTap: () {
+                                setState(() {
+                                  shared.onTaps = () {
+                                    setState(() {
+                                      shared.header = "Client Profile";
+                                      shared.title = "Change Password";
+                                      shared.homewidget = [const Changepassword()];
+                                    });
+                                  };
+                                  shared.onPress = () {
+                                    setState(() {
+                                      shared.onPress = () {
+                                        setState(() {
+                                          shared.addicon = Icons.add_outlined;
+                                          shared. icon = Icons.people_outline;
+                                          shared.addicon = Icons.add_outlined;
+                                          shared.uploadbutton = "";
+                                          shared.subuploadbutton = "";
+                                          shared.addbutton = "New Role";
+                                          shared.subaddbutton = "Add New Role Data";
+                                          shared.header = "Administration";
+                                          shared.title = "Role Management";
+                                          shared.homewidget = [const Rolemanagement()];
+                                        });
+                                      };
+                                      shared.icon = Icons.add_outlined;
+                                      shared.addicon = Icons.save_outlined;
+                                      shared.header = "Administration  >  Create / Edit";
+                                      shared.addbutton = "Save";
+                                      shared.subaddbutton = "Save All Roles";
+                                      shared.title = "Create / Edit";
+                                      shared.homewidget = [const Addroles()];
+                                    });
+                                  };
+                                  shared.addicon = Icons.add_outlined;
+                                  shared.icon = Icons.people_outline;
+                                  shared.addicon = Icons.add_outlined;
+                                  shared.uploadbutton = "";
+                                  shared.subuploadbutton = "";
+                                  shared.addbutton = "New Role";
+                                  shared.subaddbutton = "Add New Role Data";
+                                  shared.header = "Administration";
+                                  shared.title = "Role Management";
+                                  shared.homewidget = [const Rolemanagement()];
+                                });
+                              },
+                            ),
                           ),
                           Listtile(
                             color: Colors.black,
