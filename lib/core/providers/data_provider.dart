@@ -78,6 +78,7 @@ class Prov12 extends ChangeNotifier {
   List<Fee_Structure> fee = [];
   List<Data12> fee_data = [];
   bool search12 = false;
+  bool isLoaded = false;
 }
 
 class Prov13 extends ChangeNotifier {

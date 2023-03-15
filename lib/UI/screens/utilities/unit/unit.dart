@@ -339,12 +339,6 @@ class _UnitState extends State<Unit> {
 }
 
 class MyData extends DataTableSource {
-  // void initState() {
-  //   get_branch_code = "branch001";
-  //   get_branch_desc = "";
-  //   get_branch_id = "branch001";
-  //   super.initState();
-  // }
   final _formKey = GlobalKey<FormState>();
   late String get_unit_code = '';
   late String get_unit_desc = '';
@@ -401,116 +395,6 @@ class MyData extends DataTableSource {
                 child: AlertEditFunction(code: shared.Unit_data[index].unitCode.toString(),
                     date: shared.Unit_data[index].createdDate.toString(),
                 desc: shared.Unit_data[index].unitDesc.toString(),),
-                // child: AlertDialog(
-                //   actions: <Widget>[
-                //     TextFormField(
-                //       mouseCursor: SystemMouseCursors.forbidden,
-                //       readOnly: true,
-                //       initialValue: shared.Unit_data[index].unitCode.toString(),
-                //       decoration: InputDecoration(
-                //           labelText: 'Code',
-                //           border: OutlineInputBorder(borderSide: BorderSide())),
-                //       // validator: (value) {
-                //       //   if (value == null || value.isEmpty) {
-                //       //     return 'Please enter a name';
-                //       //   }
-                //       //   return null;
-                //       // },
-                //       onSaved: (value) {
-                //         shared.Unit_data[index].unitCode = value!;
-                //       },
-                //     ),
-                //     SizedBox(height: 10),
-                //     TextFormField(
-                //       initialValue: get_unit_desc,
-                //       decoration: InputDecoration(
-                //           labelText: 'Description',
-                //           border: OutlineInputBorder(borderSide: BorderSide())),
-                //       validator: (value) {
-                //         if (value == null || value.isEmpty) {
-                //           return 'Please enter a name';
-                //         }
-                //         return null;
-                //       },
-                //       onSaved: (value) {
-                //         get_unit_desc = value!;
-                //       },
-                //     ),
-                //     SizedBox(height: 10),
-                //     TextFormField(
-                //       mouseCursor: SystemMouseCursors.forbidden,
-                //       readOnly: true,
-                //       initialValue:
-                //           shared.Unit_data[index].createdDate.toString(),
-                //       decoration: InputDecoration(
-                //           labelText: 'Date',
-                //           border: OutlineInputBorder(borderSide: BorderSide())),
-                //       // validator: (value) {
-                //       //   if (value == null || value.isEmpty) {
-                //       //     return 'Please enter a name';
-                //       //   }
-                //       //   return null;
-                //       // },
-                //       onSaved: (value) {
-                //         shared.Unit_data[index].createdDate = value!;
-                //       },
-                //     ),
-                //     SizedBox(height: 10),
-                //     TextButton(
-                //       child: Text('Cancel'),
-                //       onPressed: () {
-                //         Navigator.of(dashboardContext!).pop();
-                //       },
-                //     ),
-                //     TextButton(
-                //       child: Text('Update'),
-                //       onPressed: () async {
-                //         if (_formKey.currentState!.validate()) {
-                //           _formKey.currentState!.save();
-                //           //Navigator.of(dashboardContext!).pop(false);
-                //           try{
-                //           const String apiUrl =
-                //               'https://sit-api-janus.fortress-asya.com:1234/edit_unit';
-                //           final Map<String, dynamic> data = {
-                //             "get_unit_code": shared.Unit_data[index].unitCode,
-                //             "get_unit_desc": get_unit_desc,
-                //             "get_unit_id": shared.Unit_data[index].unitCode,
-                //             // Add more fields as needed
-                //           };
-                //
-                //           final http.Response response = await http.post(
-                //             Uri.parse(apiUrl),
-                //             headers: <String, String>{
-                //               'Content-Type': 'application/json; charset=UTF-8',
-                //             },
-                //             body: jsonEncode(data),
-                //           );
-                //           print(
-                //               "-------->>>>>>>>>>${jsonDecode(response.body).length}");
-                //           if (response.statusCode == 200) {
-                //             print(
-                //                 "-------->>>>>>>>>>${jsonDecode(response.body).length}");
-                //             // Data was successfully updated
-                //             print('Restore Successful');
-                //             shared.isLoaded = false;
-                //             await wait();
-                //             Navigator.of(dashboardContext!).pop();
-                //
-                //           } else {
-                //             print(
-                //                 "-------->>>>>>>>>>${jsonDecode(response.body).length}");
-                //             // Failed to update data
-                //             print('Failed to update data');
-                //             Navigator.of(dashboardContext!).pop(false);
-                //           }
-                //         }catch(e){
-                //             print(e);
-                //           }
-                //         }
-                //       },
-                //     ),
-                //   ],
-                // ),
               ),
             );
           },

@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webtool_rep/UI/screens/utilities/feestructure/components/alertdialog.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/utils/model.dart';
 import '../../../../core/providers/data_provider.dart';
@@ -69,7 +71,7 @@ class _FeestructureState extends State<Feestructure> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Prov12>(context);
-    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data = MyData(shared: shared, dashboardContext: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -349,6 +351,9 @@ class _FeestructureState extends State<Feestructure> {
                             DataColumn(
                                 label: Text('AP Bancnet Instapay',
                                     style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label:
+                                Text('Action', style: kLargeBoldTextStyle)),
                           ],
                           source: isLoaded
                               ? shared.fee_data.isNotEmpty
@@ -372,8 +377,11 @@ class _FeestructureState extends State<Feestructure> {
 }
 
 class MyData extends DataTableSource {
+  final _formKey = GlobalKey<FormState>();
+  BuildContext? dashboardContext;
+
   Prov12 shared;
-  MyData({required this.shared});
+  MyData({required this.shared, this.dashboardContext});
 
   @override
   bool get isRowCountApproximate => false;
@@ -404,7 +412,30 @@ class MyData extends DataTableSource {
           child: Text(shared.fee_data[index].agentTargetIncome.toString()))),
       DataCell(SizedBox(
           width: 100,
-          child: Text(shared.fee_data[index].bancnetIncome.toString())))
+          child: Text(shared.fee_data[index].bancnetIncome.toString()))),
+    DataCell(SizedBox(
+    width: 50,
+    child: IconButton(
+    icon: Icon(Icons.edit),
+    onPressed: () {
+    showDialog(
+    context: dashboardContext!,
+    builder: (ctx) => Form(
+    key: _formKey,
+    child: AlertEditFunction(feeId: shared.fee_data[index].feeId.toString(),
+    transType: shared.fee_data[index].transType.toString(),
+    range: shared.fee_data[index].range.toString(),
+        totalCharge: shared.fee_data[index].totalCharge.toString(),
+        agentIncome: shared.fee_data[index].agentIncome.toString(),
+        bankIncome: shared.fee_data[index].bankIncome.toString(),
+        bancnetIncome: shared.fee_data[index].bancnetIncome.toString(),
+        agentTargetIncome: shared.fee_data[index].agentTargetIncome.toString(),
+    ),
+    ),
+    );
+    },
+    ),
+    ),),
     ]);
   }
 }
@@ -444,6 +475,7 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
