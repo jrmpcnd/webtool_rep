@@ -9,6 +9,8 @@ import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/textfield.dart';
+import '../unit/components/alertdialog.dart';
+import 'components/branch_edit.dart';
 
 class Branch extends StatefulWidget {
   const Branch({Key? key}) : super(key: key);
@@ -54,7 +56,8 @@ class _BranchState extends State<Branch> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Branch_U>(context);
-    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data =
+        MyData(shared: shared, dashboardContext1: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -311,6 +314,10 @@ class _BranchState extends State<Branch> {
                           DataColumn(
                               label: Text(
                             'Create Date',
+                          )),
+                          DataColumn(
+                              label: Text(
+                            'Action',
                           ))
                         ],
                         source: isLoaded
@@ -336,8 +343,32 @@ class _BranchState extends State<Branch> {
 }
 
 class MyData extends DataTableSource {
+  final _formKey1 = GlobalKey<FormState>();
+  late String get_branch_code = '';
+  late String get_branch_desc = '';
+  late String get_branch_id = '';
+
+  BuildContext? dashboardContext1;
   Branch_U shared;
-  MyData({required this.shared});
+  Future<void> wait() async {
+    shared.Branch_data.clear();
+    Branch_Parse branch = Branch_Parse();
+    var res = await branch.profile24();
+    if (res.data!.isNotEmpty) {
+      print(res.data!.length);
+      print(res.data![0].toJson().length);
+      shared.BranchLog.add(Branch_Api.fromJson(res.toJson()));
+      shared.isLoaded = true;
+      for (var i in res.data!) {
+        shared.Branch_data.add(Branch_Log.fromJson(i.toJson()));
+      }
+    }
+    for (var i in shared.Branch_data) {
+      print(i.toJson());
+    }
+  }
+
+  MyData({required this.shared, this.dashboardContext1});
 
   @override
   bool get isRowCountApproximate => false;
@@ -358,6 +389,25 @@ class MyData extends DataTableSource {
       DataCell(SizedBox(
           width: 200,
           child: Text(shared.Branch_data[index].createdDate.toString()))),
+      DataCell(SizedBox(
+        width: 50,
+        child: IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () {
+            showDialog(
+              context: dashboardContext1!,
+              builder: (ctx) => Form(
+                key: _formKey1,
+                child: BranchEditFunction(
+                  code1: shared.Branch_data[index].branchCode.toString(),
+                  date1: shared.Branch_data[index].createdDate.toString(),
+                  desc1: shared.Branch_data[index].branchDesc.toString(),
+                ),
+              ),
+            );
+          },
+        ),
+      )),
     ]);
   }
 }
@@ -375,6 +425,7 @@ class MyData2 extends DataTableSource {
     return DataRow(cells: [
       DataCell(
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
+      DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
     ]);
@@ -401,6 +452,10 @@ class MyData3 extends DataTableSource {
           child: Center(
         child: CircularProgressIndicator(),
       ))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      )))
     ]);
   }
 }

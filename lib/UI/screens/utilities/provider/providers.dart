@@ -9,6 +9,7 @@ import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/textfield.dart';
+import 'components/provider_edit.dart';
 
 class Providers extends StatefulWidget {
   const Providers({Key? key}) : super(key: key);
@@ -44,7 +45,6 @@ class _ProvidersState extends State<Providers> {
     }
   }
 
-
   @override
   void initState() {
     Provider_Function.provider(provider_code: '', provider_desc: '');
@@ -55,7 +55,8 @@ class _ProvidersState extends State<Providers> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Providers_U>(context);
-    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data =
+        MyData(shared: shared, dashboardContext: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -214,25 +215,15 @@ class _ProvidersState extends State<Providers> {
                                     .contains(controller.text.toLowerCase()));
                                 if (i.toJson().isNotEmpty) {
                                   if (i.status!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
+                                          controller.text.toLowerCase()) ||
                                       i.description!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
                                       i.id!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
                                       i.providerAlias!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
-
-                                    i.providerName!.toLowerCase().contains(
-                                        controller.text.toLowerCase()))
-
-
-
-
-
-
-
-                                  {
-
+                                      i.providerName!.toLowerCase().contains(
+                                          controller.text.toLowerCase())) {
                                     debugPrint(i.providerName);
                                     setState(() {
                                       shared.Providers_data.add(
@@ -275,18 +266,15 @@ class _ProvidersState extends State<Providers> {
                                     .contains(controller.text.toLowerCase()));
                                 if (i.toJson().isNotEmpty) {
                                   if (i.status!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
+                                          controller.text.toLowerCase()) ||
                                       i.description!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
                                       i.id!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
                                       i.providerAlias!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
-
                                       i.providerName!.toLowerCase().contains(
                                           controller.text.toLowerCase()))
-
-
                                     debugPrint(i.providerName);
                                   setState(() {
                                     key.currentState?.pageTo(0);
@@ -300,7 +288,6 @@ class _ProvidersState extends State<Providers> {
                                   }
                                 }
                               }
-
                             } else if (controller.text == '') {
                               shared.Providers_data.clear();
                               setState(() {
@@ -331,25 +318,31 @@ class _ProvidersState extends State<Providers> {
                               label: Text('Provider Name',
                                   style: kLargeBoldTextStyle)),
                           DataColumn(
-                              label: Text('Description',)
-                          ),
+                              label: Text(
+                            'Description',
+                          )),
                           DataColumn(
-                              label: Text('Provider Alias',)
-                          ),
+                              label: Text(
+                            'Provider Alias',
+                          )),
                           DataColumn(
-                              label: Text('Status',)
-                          ),
-
+                              label: Text(
+                            'Status',
+                          )),
+                          DataColumn(
+                              label: Text(
+                            'Action',
+                          )),
                         ],
                         source: isLoaded
                             ? shared.Providers_data.isNotEmpty
-                            ? data
-                            : data2
+                                ? data
+                                : data2
                             : data3,
                         rowsPerPage: 8,
                         showFirstLastButtons: true,
                         header:
-                        Text('List of Role', style: kXLargeBoldTextStyle),
+                            Text('List of Role', style: kXLargeBoldTextStyle),
                       ),
                     ),
                   ],
@@ -364,8 +357,33 @@ class _ProvidersState extends State<Providers> {
 }
 
 class MyData extends DataTableSource {
+  final _formKey = GlobalKey<FormState>();
+  late String get_provider_id = '';
+  late String get_provider_name = '';
+  late String get_description = '';
+  late String get_provider_alias = '';
+
+  BuildContext? dashboardContext;
   Providers_U shared;
-  MyData({required this.shared});
+  Future<void> wait() async {
+    shared.Providers_data.clear();
+    Provider_Parse provider = Provider_Parse();
+    var res = await provider.profile26();
+    if (res.data!.isNotEmpty) {
+      print(res.data!.length);
+      print(res.data![0].toJson().length);
+      shared.ProvidersLog.add(Providers_Api.fromJson(res.toJson()));
+      shared.isLoaded = true;
+      for (var i in res.data!) {
+        shared.Providers_data.add(Providers_Log.fromJson(i.toJson()));
+      }
+    }
+    for (var i in shared.Providers_data) {
+      print(i.toJson());
+    }
+  }
+
+  MyData({required this.shared, this.dashboardContext});
 
   @override
   bool get isRowCountApproximate => false;
@@ -378,12 +396,10 @@ class MyData extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(
-          width: 200,
-          child: Text(shared.Providers_data[index].id.toString()))),
+          width: 200, child: Text(shared.Providers_data[index].id.toString()))),
       DataCell(SizedBox(
           width: 200,
-          child:
-          Text(shared.Providers_data[index].providerName.toString()))),
+          child: Text(shared.Providers_data[index].providerName.toString()))),
       DataCell(SizedBox(
           width: 200,
           child: Text(shared.Providers_data[index].description.toString()))),
@@ -391,11 +407,32 @@ class MyData extends DataTableSource {
           width: 200,
           child: Text(shared.Providers_data[index].providerAlias.toString()))),
       DataCell(SizedBox(
-          width: 200,
+          width: 100,
           child: Text(shared.Providers_data[index].status.toString()))),
-
-
-
+      DataCell(SizedBox(
+        width: 50,
+        child: IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () {
+            showDialog(
+              context: dashboardContext!,
+              builder: (ctx) => Form(
+                key: _formKey,
+                child: ProviderEditFunction(
+                  prov_id: shared.Providers_data[index].id.toString(),
+                  prov_name:
+                      shared.Providers_data[index].providerName.toString(),
+                  prov_desc:
+                      shared.Providers_data[index].description.toString(),
+                  prov_alias:
+                      shared.Providers_data[index].providerAlias.toString(),
+                  prov_status: shared.Providers_data[index].status.toString(),
+                ),
+              ),
+            );
+          },
+        ),
+      )),
     ]);
   }
 }
@@ -417,6 +454,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text('')))
     ]);
   }
 }
@@ -435,25 +473,24 @@ class MyData3 extends DataTableSource {
       DataCell(SizedBox(child: Text('Loading, please wait'))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
-
+        child: CircularProgressIndicator(),
+      ))),
     ]);
   }
 }

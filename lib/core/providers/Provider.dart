@@ -76,6 +76,7 @@ class Institution_U extends ChangeNotifier {
   List<Institution_Api> InstitutionLog = [];
   List<Institution_Log> Institution_data = [];
   bool search = false;
+  bool isLoaded = false;
 }
 
 class Branch_U extends ChangeNotifier {
@@ -83,6 +84,7 @@ class Branch_U extends ChangeNotifier {
   List<Branch_Api> BranchLog = [];
   List<Branch_Log> Branch_data = [];
   bool search = false;
+  bool isLoaded = false;
 }
 
 class Unit_U extends ChangeNotifier {
@@ -99,6 +101,7 @@ class Center_U extends ChangeNotifier {
   List<Center_Api> CenterLog = [];
   List<Center_Log> Center_data = [];
   bool search = false;
+  bool isLoaded = false;
 }
 
 class Providers_U extends ChangeNotifier {
@@ -106,7 +109,9 @@ class Providers_U extends ChangeNotifier {
   List<Providers_Api> ProvidersLog = [];
   List<Providers_Log> Providers_data = [];
   bool search = false;
+  bool isLoaded = false;
 }
+
 class HomePageProvider extends ChangeNotifier {
   List<Widget> homewidget = [const Maindashboard()];
   String title = "Dashboard";

@@ -9,6 +9,8 @@ import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/textfield.dart';
+import '../feestructure/components/alertdialog.dart';
+import 'components/center_edit.dart';
 
 class Centers extends StatefulWidget {
   const Centers({Key? key}) : super(key: key);
@@ -43,6 +45,7 @@ class _CentersState extends State<Centers> {
       print(i.toJson());
     }
   }
+
   @override
   void initState() {
     Center_Function.center(center_code: '', center_desc: '');
@@ -50,11 +53,11 @@ class _CentersState extends State<Centers> {
     wait();
   }
 
-
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Center_U>(context);
-    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data =
+        MyData(shared: shared, dashboardContext: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -211,18 +214,13 @@ class _CentersState extends State<Centers> {
                                     .contains(controller.text.toLowerCase()));
                                 if (i.toJson().isNotEmpty) {
                                   if (i.createdDate!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
+                                          controller.text.toLowerCase()) ||
                                       i.createdDate!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
                                       i.centerDesc!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
                                       i.centerCode!.toLowerCase().contains(
-                                          controller.text.toLowerCase()))
-
-
-
-                                  {
-
+                                          controller.text.toLowerCase())) {
                                     debugPrint(i.centerCode);
                                     setState(() {
                                       shared.Center_data.add(
@@ -265,16 +263,13 @@ class _CentersState extends State<Centers> {
                                     .contains(controller.text.toLowerCase()));
                                 if (i.toJson().isNotEmpty) {
                                   if (i.createdDate!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
+                                          controller.text.toLowerCase()) ||
                                       i.createdDate!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
                                       i.centerDesc!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
                                       i.centerCode!.toLowerCase().contains(
                                           controller.text.toLowerCase()))
-
-
-
                                     debugPrint(i.centerCode);
                                   setState(() {
                                     key.currentState?.pageTo(0);
@@ -288,7 +283,6 @@ class _CentersState extends State<Centers> {
                                   }
                                 }
                               }
-
                             } else if (controller.text == '') {
                               shared.Center_data.clear();
                               setState(() {
@@ -313,25 +307,26 @@ class _CentersState extends State<Centers> {
                         arrowHeadColor: kWhiteColor,
                         columns: [
                           DataColumn(
-                              label: Text('Code',
-                                  style: kLargeBoldTextStyle)),
+                              label: Text('Code', style: kLargeBoldTextStyle)),
                           DataColumn(
                               label: Text('Description',
                                   style: kLargeBoldTextStyle)),
                           DataColumn(
-                              label: Text('Create Date',)
-                          )
-
+                              label: Text('Create Date',
+                                  style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label:
+                                  Text('Action', style: kLargeBoldTextStyle)),
                         ],
                         source: isLoaded
                             ? shared.Center_data.isNotEmpty
-                            ? data
-                            : data2
+                                ? data
+                                : data2
                             : data3,
                         rowsPerPage: 8,
                         showFirstLastButtons: true,
                         header:
-                        Text('List of Role', style: kXLargeBoldTextStyle),
+                            Text('List of Role', style: kXLargeBoldTextStyle),
                       ),
                     ),
                   ],
@@ -346,8 +341,32 @@ class _CentersState extends State<Centers> {
 }
 
 class MyData extends DataTableSource {
+  final _formKey = GlobalKey<FormState>();
+  late String get_center_code = '';
+  late String get_center_desc = '';
+  late String get_center_id = '';
+
+  BuildContext? dashboardContext;
   Center_U shared;
-  MyData({required this.shared});
+  Future<void> wait() async {
+    shared.Center_data.clear();
+    Center_Parse center = Center_Parse();
+    var res = await center.profile26();
+    if (res.data!.isNotEmpty) {
+      print(res.data!.length);
+      print(res.data![0].toJson().length);
+      shared.CenterLog.add(Center_Api.fromJson(res.toJson()));
+      shared.isLoaded = true;
+      for (var i in res.data!) {
+        shared.Center_data.add(Center_Log.fromJson(i.toJson()));
+      }
+    }
+    for (var i in shared.Center_data) {
+      print(i.toJson());
+    }
+  }
+
+  MyData({required this.shared, this.dashboardContext});
 
   @override
   bool get isRowCountApproximate => false;
@@ -364,12 +383,29 @@ class MyData extends DataTableSource {
           child: Text(shared.Center_data[index].centerCode.toString()))),
       DataCell(SizedBox(
           width: 200,
-          child:
-          Text(shared.Center_data[index].centerDesc.toString()))),
+          child: Text(shared.Center_data[index].centerDesc.toString()))),
       DataCell(SizedBox(
           width: 200,
           child: Text(shared.Center_data[index].createdDate.toString()))),
-
+      DataCell(SizedBox(
+        width: 50,
+        child: IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () {
+            showDialog(
+              context: dashboardContext!,
+              builder: (ctx) => Form(
+                key: _formKey,
+                child: CenterEditFunction(
+                  code1: shared.Center_data[index].centerCode.toString(),
+                  date1: shared.Center_data[index].createdDate.toString(),
+                  desc1: shared.Center_data[index].centerDesc.toString(),
+                ),
+              ),
+            );
+          },
+        ),
+      )),
     ]);
   }
 }
@@ -389,6 +425,7 @@ class MyData2 extends DataTableSource {
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text('')))
     ]);
   }
 }
@@ -407,12 +444,16 @@ class MyData3 extends DataTableSource {
       DataCell(SizedBox(child: Text('Loading, please wait'))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      )))
     ]);
   }
 }

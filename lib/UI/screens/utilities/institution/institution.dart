@@ -9,6 +9,7 @@ import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/textfield.dart';
+import 'components/intitution_edit.dart';
 
 class Institution extends StatefulWidget {
   const Institution({Key? key}) : super(key: key);
@@ -44,7 +45,6 @@ class _InstitutionState extends State<Institution> {
     }
   }
 
-
   @override
   void initState() {
     Institution_Function.insti(insti_code: '', insti_desc: '');
@@ -55,7 +55,8 @@ class _InstitutionState extends State<Institution> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Institution_U>(context);
-    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data =
+        MyData(shared: shared, dashboardContext: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -214,11 +215,12 @@ class _InstitutionState extends State<Institution> {
                                     .contains(controller.text.toLowerCase()));
                                 if (i.toJson().isNotEmpty) {
                                   if (i.instDesc!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
+                                          controller.text.toLowerCase()) ||
                                       i.createdDate!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
-                                      i.instCode!.toString().contains(controller.text)){
-
+                                      i.instCode!
+                                          .toString()
+                                          .contains(controller.text)) {
                                     debugPrint(i.instDesc);
                                     setState(() {
                                       shared.Institution_data.add(
@@ -261,10 +263,12 @@ class _InstitutionState extends State<Institution> {
                                     .contains(controller.text.toLowerCase()));
                                 if (i.toJson().isNotEmpty) {
                                   if (i.instDesc!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
+                                          controller.text.toLowerCase()) ||
                                       i.createdDate!.toLowerCase().contains(
                                           controller.text.toLowerCase()) ||
-                                      i.instCode!.toString().contains(controller.text)){
+                                      i.instCode!
+                                          .toString()
+                                          .contains(controller.text)) {
                                     debugPrint(i.instDesc);
                                     setState(() {
                                       key.currentState?.pageTo(0);
@@ -303,25 +307,28 @@ class _InstitutionState extends State<Institution> {
                         arrowHeadColor: kWhiteColor,
                         columns: [
                           DataColumn(
-                              label: Text('Code',
-                                  style: kLargeBoldTextStyle)),
+                              label: Text('Code', style: kLargeBoldTextStyle)),
                           DataColumn(
                               label: Text('Description',
                                   style: kLargeBoldTextStyle)),
                           DataColumn(
-                              label: Text('Create Date',)
-                          )
-
+                              label: Text(
+                            'Create Date',
+                          )),
+                          DataColumn(
+                              label: Text(
+                            'Action',
+                          ))
                         ],
                         source: isLoaded
                             ? shared.Institution_data.isNotEmpty
-                            ? data
-                            : data2
+                                ? data
+                                : data2
                             : data3,
                         rowsPerPage: 8,
                         showFirstLastButtons: true,
                         header:
-                        Text('List of Role', style: kXLargeBoldTextStyle),
+                            Text('List of Role', style: kXLargeBoldTextStyle),
                       ),
                     ),
                   ],
@@ -336,8 +343,32 @@ class _InstitutionState extends State<Institution> {
 }
 
 class MyData extends DataTableSource {
+  final _formKey = GlobalKey<FormState>();
+  late String get_insti_code = '';
+  late String get_insti_desc = '';
+  late String get_insti_id = '';
+
+  BuildContext? dashboardContext;
   Institution_U shared;
-  MyData({required this.shared});
+  Future<void> wait() async {
+    shared.Institution_data.clear();
+    Institution_Parse provider = Institution_Parse();
+    var res = await provider.profile24();
+    if (res.data!.isNotEmpty) {
+      print(res.data!.length);
+      print(res.data![0].toJson().length);
+      shared.InstitutionLog.add(Institution_Api.fromJson(res.toJson()));
+      shared.isLoaded = true;
+      for (var i in res.data!) {
+        shared.Institution_data.add(Institution_Log.fromJson(i.toJson()));
+      }
+    }
+    for (var i in shared.Institution_data) {
+      print(i.toJson());
+    }
+  }
+
+  MyData({required this.shared, this.dashboardContext});
 
   @override
   bool get isRowCountApproximate => false;
@@ -354,12 +385,29 @@ class MyData extends DataTableSource {
           child: Text(shared.Institution_data[index].instCode.toString()))),
       DataCell(SizedBox(
           width: 200,
-          child:
-          Text(shared.Institution_data[index].instDesc.toString()))),
+          child: Text(shared.Institution_data[index].instDesc.toString()))),
       DataCell(SizedBox(
           width: 200,
           child: Text(shared.Institution_data[index].createdDate.toString()))),
-
+      DataCell(SizedBox(
+        width: 50,
+        child: IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () {
+            showDialog(
+              context: dashboardContext!,
+              builder: (ctx) => Form(
+                key: _formKey,
+                child: InstitutionEditFunction(
+                  code1: shared.Institution_data[index].instCode.toString(),
+                  date1: shared.Institution_data[index].createdDate.toString(),
+                  desc1: shared.Institution_data[index].instDesc.toString(),
+                ),
+              ),
+            );
+          },
+        ),
+      )),
     ]);
   }
 }
@@ -377,6 +425,7 @@ class MyData2 extends DataTableSource {
     return DataRow(cells: [
       DataCell(
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
+      DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
     ]);
@@ -397,12 +446,16 @@ class MyData3 extends DataTableSource {
       DataCell(SizedBox(child: Text('Loading, please wait'))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
     ]);
   }
 }
