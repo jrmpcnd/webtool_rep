@@ -459,8 +459,10 @@ class Fee_StructurePush {
           "bank_income": "",
           "fee_id": "",
           "total_charge": "",
-          "trans_type": ""
-        },
+          "trans_type": "",
+          "clientType;": "",
+
+      },
       ),
     );
     if (response12.statusCode == 200) {
@@ -1390,6 +1392,27 @@ class FeeStructure_Api {
       List res = [];
       http.Response response = await http.get(
         Uri.parse('$API/get_fs_transaction_dropdown'),
+      );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+}
+class FeeStructureEdit_Api {
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('$API/get_edit_fs_clienttype_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {

@@ -13,33 +13,77 @@ import '../../../../../core/providers/Provider.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
 import '../../../../utils/model.dart';
 class AlertEditFunction extends StatefulWidget {
-  String? feeId;
-  String? transType;
   String? range;
-  String? totalCharge;
   String? agentIncome;
-  String? bankIncome;
   String? agentTargetIncome;
   String? bancnetIncome;
-  AlertEditFunction({Key? key, this.feeId,this.transType,this.range,this.totalCharge,this.agentIncome,this.bankIncome,this.agentTargetIncome,this.bancnetIncome}) : super(key: key);
+  String? bankIncome;
+  String? clientType;
+  String? feeId;
+  String? totalCharge;
+  String? transType;
+
+  AlertEditFunction({Key? key, this.clientType,this.range,this.bankIncome,this.transType,this.agentTargetIncome,this.bancnetIncome,this.agentIncome,this.totalCharge,this.feeId}) : super(key: key);
 
   @override
   State<AlertEditFunction> createState() => _AlertEditFunctionState();
 }
 
 class _AlertEditFunctionState extends State<AlertEditFunction> {
-  List<String> res = [];
-  String init = '';
+  List<String> res = []; List<String> res1 = [];
+  String init = '';String init1 = '';
   String transType = '';
   FeeStructure_Api dropdownFunction = FeeStructure_Api();
+  FeeStructureEdit_Api dropdowneFunction = FeeStructureEdit_Api();
   String rangeText = '';
   String feeId = '';
   String totalCharge = '';
   String agentIncome = "";
   String bankIncome = "";
   String agentTargetIncome = "";
+  String clientType ="";
   final _formKey = GlobalKey<FormState>();
 
+  getEdit() async {
+    print("==>>${widget.clientType}");
+    List<dynamic> dlist = await dropdowneFunction.getUserstatus();
+    for (var i in dlist) {
+      print(i['get_edit_fs_clienttype_dropdown'].toString()
+          .toLowerCase()
+          .contains(widget.clientType!.toLowerCase().replaceAll("_", " ")));
+      print(widget.clientType!.toString());
+      setState(() {
+        res1.add(i['get_edit_fs_clienttype_dropdown']);
+      });
+      if(widget.clientType!.toString() == "OTHERS") {
+        if (i['get_edit_fs_clienttype_dropdown'].toString() == "Others") {
+          setState(() {
+            init1 = i['get_edit_fs_clienttype_dropdown'];
+          });
+        }
+      }
+      if( widget.clientType!.toString() == "REMITTANCE") {
+        if (i['get_edit_fs_clienttype_dropdown'].toString() == "Remittance") {
+          setState(() {
+            init1 = i['get_edit_fs_clienttype_dropdown'];
+          });
+        }
+      }
+      if( widget.clientType!.toString() == "MBO") {
+        if (i['get_edit_fs_clienttype_dropdown'].toString() == "Mbo") {
+          setState(() {
+            init1 = i['get_edit_fs_clienttype_dropdown'];
+          });
+        }
+      }
+      if(i['get_fs_transaction_dropdown'].toString().toLowerCase().contains(widget.clientType!.toLowerCase().replaceAll("_", " "))) {
+        setState(() {
+          init1 = i['get_fs_transaction_dropdown'];
+        });
+      }
+      print("safgsdgsdgsdfgde $res1");
+    }
+  }
   getList() async {
     print("==>>${widget.transType}");
     List<dynamic> dlist = await dropdownFunction.getUserstatus();
@@ -63,19 +107,50 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
           });
         }
       }
+      if( widget.transType!.toString() == "REMITTANCE") {
+        if (i['get_fs_transaction_dropdown'].toString() == "Remittance") {
+          setState(() {
+            init = i['get_fs_transaction_dropdown'];
+          });
+        }
+      }
+      if( widget.transType!.toString() == "SEND_REMITTANCE") {
+        if (i['get_fs_transaction_dropdown'].toString() == "Sent Remittance") {
+          setState(() {
+            init = i['get_fs_transaction_dropdown'];
+          });
+        }
+      }
+      if( widget.transType!.toString() == "CCM") {
+        if (i['get_fs_transaction_dropdown'].toString() == "Cardless Cash Machine") {
+          setState(() {
+            init = i['get_fs_transaction_dropdown'];
+          });
+        }
+      }
+      if( widget.transType!.toString() == "string") {
+        if (i['get_fs_transaction_dropdown'].toString() == "string") {
+          setState(() {
+            init = i['get_fs_transaction_dropdown'];
+          });
+        }
+      }
       if(i['get_fs_transaction_dropdown'].toString().toLowerCase().contains(widget.transType!.toLowerCase().replaceAll("_", " "))){
         setState(() {
           init = i['get_fs_transaction_dropdown'];
         });
+
       }
     }
 
     print("safgsdgsdgsdfgde $res");
   }
+
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
     });
     getList();
+    getEdit();
   }
 
   @override
@@ -121,6 +196,24 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
               SizedBox(
 
                 child: DropdownButton(
+                  value: init1,
+                  items: res1.map((e) {
+                    return DropdownMenuItem(
+                      value: e,
+                      child:
+                      Text(e, ),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      init1 = value.toString();
+                    });
+                  },
+                ),
+              ),
+              SizedBox(
+
+                child: DropdownButton(
                   value: init,
                   items: res.map((e) {
                     return DropdownMenuItem(
@@ -162,8 +255,15 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
               ],),
               SizedBox(height: 20,),
               TextFormField(
-                mouseCursor: SystemMouseCursors.forbidden,
-                readOnly: true,
+                mouseCursor:
+                    init == 'Other'||
+                    init == 'Cardless Cash Machine' ||
+                        init == 'Agent Assisted Payment'|| init == 'Fund Transfer'
+                        || init == 'Cash In' || init == 'Cash Out'|| init == 'Balance Inquiry'|| init == 'Client Initiated Payment'|| init == 'Transaction History'|| init == 'Send Remittance' || init == 'Self Remittance' || init == 'konek2PAY'|| init == 'IBFT'? SystemMouseCursors.forbidden: SystemMouseCursors.click,
+                readOnly:
+                    init == 'Other'||
+                    init == 'Cardless Cash Machine' || init == 'Agent Assisted Payment'|| init == 'Fund Transfer'
+                        || init == 'Cash In'|| init == 'Cash Out'|| init == 'Balance Inquiry'|| init == 'Client Initiated Payment'|| init == 'Transaction History' || init == 'Send Remittance' || init == 'Self Remittance'|| init == 'konek2PAY' || init == 'IBFT'? true : false,
                 keyboardType: TextInputType.number,
                 inputFormatters: <TextInputFormatter>[ FilteringTextInputFormatter.allow(RegExp(r"^[\d+-.]+$")),],
                 initialValue: widget.totalCharge!,
@@ -185,6 +285,8 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
               SizedBox(height: 20,),
               TextFormField(
                 keyboardType: TextInputType.number,
+                mouseCursor: init == 'IBFT'|| init == 'konek2PAY' ? SystemMouseCursors.forbidden: SystemMouseCursors.click,
+                readOnly: init == 'IBFT' || init == 'konek2PAY'? true : false,
                 inputFormatters: <TextInputFormatter>[ FilteringTextInputFormatter.allow(RegExp(r"^[\d+-.]+$")),],
                 initialValue: widget.agentIncome!,
                 decoration: InputDecoration(
@@ -224,10 +326,10 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
               ),
               SizedBox(height: 20,),
               TextFormField(
+                mouseCursor:init == 'konek2PAY' || init == 'IBFT'? SystemMouseCursors.forbidden: SystemMouseCursors.click,
+                readOnly:  init == 'konek2PAY'|| init == 'IBFT'? true : false,
                 keyboardType: TextInputType.number,
                 inputFormatters: <TextInputFormatter>[ FilteringTextInputFormatter.allow(RegExp(r"^[\d+-.]+$")),],
-                mouseCursor: SystemMouseCursors.forbidden,
-                readOnly: true,
                 initialValue: widget.agentTargetIncome!,
                 decoration: InputDecoration(
                     labelText: 'Agent Targets Income',
@@ -246,8 +348,9 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
               ),
               SizedBox(height: 20,),
               TextFormField(
-                mouseCursor: SystemMouseCursors.forbidden,
-                readOnly: true,
+                mouseCursor:
+                init == 'Other'|| init == 'Cardless Cash Machine' || init == 'Agent Assisted Payment '|| init == 'Agent Assisted Payment'|| init == 'Fund Transfer' || init == 'Cash In'|| init == 'Cash Out' || init == 'Balance Inquiry'|| init == 'Client Initiated Payment'|| init == 'Transaction History'|| init == 'Send Remittance' || init == 'Self Remittance'|| init == 'konek2PAY'? SystemMouseCursors.forbidden: SystemMouseCursors.click,
+                readOnly: init == 'Other'|| init == 'Cardless Cash Machine' || init == 'Agent Assisted Payment '|| init == 'Agent Assisted Payment'|| init == 'Fund Transfer'|| init == 'Cash In'|| init == 'Cash Out'|| init == 'Balance Inquiry'|| init == 'Client Initiated Payment' || init == 'Transaction History'|| init == 'Send Remittance' || init == 'Self Remittance'|| init == 'konek2PAY'? true : false,
                 keyboardType: TextInputType.number,
                 inputFormatters: <TextInputFormatter>[ FilteringTextInputFormatter.allow(RegExp(r"^[\d+-.]+$")),],
                 initialValue: widget.bancnetIncome!,
@@ -284,17 +387,22 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
                     //Navigator.of(dashboardContext!).pop(false);
                     try {
                       const String apiUrl =
-                          'https://sit-api-janus.fortress-asya.com:1234/edit_unit';
+                          'https://sit-api-janus.fortress-asya.com:1234/edit_feestructure';
                       final Map<String, dynamic> data = {
-                        "Range": widget.range,
-                        "agent_income": widget.agentIncome,
-                        "agent_target_income": widget.agentTargetIncome,
-                        "bancnet_income": widget.bancnetIncome,
-                        "bank_income": widget.bankIncome,
-                        "fee_id": widget.feeId,
-                        "total_charge": widget.totalCharge,
-                        "trans_type": widget.transType,
-                        // Add more fields as needed
+                  //     " getAgentIncome" : ;
+                  //     'getAgentTargetIncome' :;
+                  // 'getBancnetIncome' :;
+                  // 'getBankIncome' :;
+                  // 'getClientType' :clientType;
+                  // 'getEndRange' :;
+                  // 'getFeeId' :;
+                  // 'getLastUpdatedBy' :;
+                  // 'getStartRange' :;
+                  // 'getTotalCharge' :;
+                  // ' getTransType' :;
+
+
+                  // Add more fields as needed
                       };
 
                       final http.Response response = await http.post(

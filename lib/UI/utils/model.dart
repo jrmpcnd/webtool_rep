@@ -760,6 +760,7 @@ class Data12 {
   String? bankIncome;
   String? agentTargetIncome;
   String? bancnetIncome;
+  String? clientType;
 
   Data12(
       {this.feeId,
@@ -769,10 +770,12 @@ class Data12 {
       this.agentIncome,
       this.bankIncome,
       this.agentTargetIncome,
-      this.bancnetIncome});
+      this.bancnetIncome,
+      this.clientType});
 
   Data12.fromJson(Map<String, dynamic> json) {
     feeId = json['fee_id'];
+    clientType = json['client_type'];
     transType = json['trans_type'];
     range = json['Range'];
     totalCharge = json['total_charge'];
@@ -785,6 +788,7 @@ class Data12 {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['fee_id'] = this.feeId;
+    data['client_type'] = this.clientType;
     data['trans_type'] = this.transType;
     data['Range'] = this.range;
     data['total_charge'] = this.totalCharge;

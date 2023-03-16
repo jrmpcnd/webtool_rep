@@ -430,6 +430,7 @@ class MyData extends DataTableSource {
         bankIncome: shared.fee_data[index].bankIncome.toString(),
         bancnetIncome: shared.fee_data[index].bancnetIncome.toString(),
         agentTargetIncome: shared.fee_data[index].agentTargetIncome.toString(),
+      clientType: shared.fee_data[index].clientType,
     ),
     ),
     );
@@ -458,7 +459,9 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
-      DataCell(SizedBox(child: Text('')))
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
+
     ]);
   }
 }
