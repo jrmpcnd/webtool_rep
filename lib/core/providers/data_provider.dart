@@ -125,9 +125,11 @@ class Prov18 extends ChangeNotifier {
 
 class Prov19 extends ChangeNotifier {
   String list_button = 'Click here';
+  late BuildContext dashboardContext;
   List<Bank_List> list = [];
   List<Data19> list_data = [];
   bool search19 = false;
+  bool isLoaded = false;
 }
 
 class Prov20 extends ChangeNotifier {

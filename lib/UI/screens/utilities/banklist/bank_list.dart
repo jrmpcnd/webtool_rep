@@ -13,6 +13,7 @@ import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/tables.dart';
 import '../../../widgets/textfield.dart';
+import 'components/bank_list_edit.dart';
 
 class Banklist extends StatefulWidget {
   const Banklist({Key? key}) : super(key: key);
@@ -57,7 +58,8 @@ class _BanklistState extends State<Banklist> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Prov19>(context);
-    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data =
+        MyData(shared: shared, dashboardContext: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -304,7 +306,10 @@ class _BanklistState extends State<Banklist> {
                                 label: Text('Short Name',
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
-                                label: Text('BIC', style: kLargeBoldTextStyle))
+                                label: Text('BIC', style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label:
+                                    Text('Action', style: kLargeBoldTextStyle))
                           ],
                           source: isLoaded
                               ? shared.list_data.isNotEmpty
@@ -328,8 +333,33 @@ class _BanklistState extends State<Banklist> {
 }
 
 class MyData extends DataTableSource {
+  final _formKey = GlobalKey<FormState>();
+  late String get_center_code = '';
+  late String get_center_desc = '';
+  late String get_center_id = '';
+
+  BuildContext? dashboardContext;
+
+  Future<void> wait() async {
+    shared.list_data.clear();
+    Bank_ListParse center = Bank_ListParse();
+    var res = await center.profile19();
+    if (res.data!.isNotEmpty) {
+      print(res.data!.length);
+      print(res.data![0].toJson().length);
+      shared.list.add(Bank_List.fromJson(res.toJson()));
+      shared.isLoaded = true;
+      for (var i in res.data!) {
+        shared.list_data.add(Data19.fromJson(i.toJson()));
+      }
+    }
+    for (var i in shared.list_data) {
+      print(i.toJson());
+    }
+  }
+
   Prov19 shared;
-  MyData({required this.shared});
+  MyData({required this.shared, this.dashboardContext});
 
   @override
   bool get isRowCountApproximate => false;
@@ -350,7 +380,27 @@ class MyData extends DataTableSource {
           width: 150,
           child: Text(shared.list_data[index].shortName.toString()))),
       DataCell(SizedBox(
-          width: 150, child: Text(shared.list_data[index].bankBic.toString())))
+          width: 150, child: Text(shared.list_data[index].bankBic.toString()))),
+      DataCell(SizedBox(
+        width: 50,
+        child: IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () {
+            showDialog(
+              context: dashboardContext!,
+              builder: (ctx) => Form(
+                key: _formKey,
+                child: BankEditFunction(
+                  code: shared.list_data[index].bankCode.toString(),
+                  name: shared.list_data[index].bankName.toString(),
+                  short: shared.list_data[index].shortName.toString(),
+                  bic: shared.list_data[index].bankBic.toString(),
+                ),
+              ),
+            );
+          },
+        ),
+      )),
     ]);
   }
 }
@@ -370,6 +420,7 @@ class MyData2 extends DataTableSource {
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text('')))
     ]);
   }
@@ -387,6 +438,7 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator())))

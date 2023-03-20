@@ -318,21 +318,17 @@ class _ProvidersState extends State<Providers> {
                               label: Text('Provider Name',
                                   style: kLargeBoldTextStyle)),
                           DataColumn(
-                              label: Text(
-                            'Description',
-                          )),
+                              label: Text('Description',
+                                  style: kLargeBoldTextStyle)),
                           DataColumn(
-                              label: Text(
-                            'Provider Alias',
-                          )),
+                              label: Text('Provider Alias',
+                                  style: kLargeBoldTextStyle)),
                           DataColumn(
-                              label: Text(
-                            'Status',
-                          )),
+                              label:
+                                  Text('Status', style: kLargeBoldTextStyle)),
                           DataColumn(
-                              label: Text(
-                            'Action',
-                          )),
+                              label:
+                                  Text('Action', style: kLargeBoldTextStyle)),
                         ],
                         source: isLoaded
                             ? shared.Providers_data.isNotEmpty

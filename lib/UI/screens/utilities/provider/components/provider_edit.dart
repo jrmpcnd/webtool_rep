@@ -5,15 +5,21 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:webtool_rep/UI/screens/homepage/homepage.dart';
 import 'package:webtool_rep/UI/screens/login/change_password.dart';
-import 'package:webtool_rep/UI/screens/utilities/branch/addbranch/addbranch.dart';
+import 'package:webtool_rep/UI/screens/utilities/banklist/addbanklist/addbank_list.dart';
+import 'package:webtool_rep/UI/screens/utilities/banklist/bank_list.dart';
 import 'package:webtool_rep/UI/screens/utilities/provider/addprovider/addprovider.dart';
+import 'package:webtool_rep/UI/screens/utilities/provider/providers.dart';
+import 'package:webtool_rep/UI/screens/utilities/unit/addunit/addunit.dart';
+import 'package:webtool_rep/UI/screens/utilities/unit/unit.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
+import 'package:webtool_rep/UI/utils/model.dart';
 
 import '../../../../../core/providers/Provider.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
 
 import 'package:webtool_rep/UI/utils/model2.dart';
 
-import '../providers.dart';
+import '../../../../../core/providers/data_provider.dart';
 
 class ProviderEditFunction extends StatefulWidget {
   String? prov_id;
@@ -24,8 +30,8 @@ class ProviderEditFunction extends StatefulWidget {
   ProviderEditFunction(
       {Key? key,
       this.prov_id,
-      this.prov_name,
       this.prov_desc,
+      this.prov_name,
       this.prov_alias,
       this.prov_status})
       : super(key: key);
@@ -36,12 +42,11 @@ class ProviderEditFunction extends StatefulWidget {
 
 class _ProviderEditFunctionState extends State<ProviderEditFunction> {
   String prov_id = '';
-  String prov_name = '';
-  String prov_desc = '';
-  String prov_alias = '';
-  String prov_status = '';
-
-  final _formKey1 = GlobalKey<FormState>();
+  String descText = '';
+  String descText1 = '';
+  String descText2 = '';
+  String descText3 = '';
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +62,15 @@ class _ProviderEditFunctionState extends State<ProviderEditFunction> {
           ));
     }
 
+    void pop() {
+      Navigator.pop(context);
+    }
+
     Future<void> wait() async {
       shared.ProvidersLog.clear();
       shared.Providers_data.clear();
-      Provider_Parse provider = Provider_Parse();
-      var res = await provider.profile26();
+      Provider_Parse unit = Provider_Parse();
+      var res = await unit.profile26();
       if (res.data!.isNotEmpty) {
         print(res.data!.length);
         print(res.data![0].toJson().length);
@@ -79,7 +88,7 @@ class _ProviderEditFunctionState extends State<ProviderEditFunction> {
     }
 
     return Form(
-      key: _formKey1,
+      key: _formKey,
       child: AlertDialog(
         actions: <Widget>[
           TextFormField(
@@ -87,7 +96,7 @@ class _ProviderEditFunctionState extends State<ProviderEditFunction> {
             readOnly: true,
             initialValue: widget.prov_id!,
             decoration: InputDecoration(
-                labelText: 'ID',
+                labelText: 'Provider ID',
                 border: OutlineInputBorder(borderSide: BorderSide())),
             // validator: (value) {
             //   if (value == null || value.isEmpty) {
@@ -105,7 +114,7 @@ class _ProviderEditFunctionState extends State<ProviderEditFunction> {
           TextFormField(
             initialValue: widget.prov_name!,
             decoration: InputDecoration(
-                labelText: 'Name',
+                labelText: 'Provider Name',
                 border: OutlineInputBorder(borderSide: BorderSide())),
             // validator: (value) {
             //   if (value == null || value.isEmpty) {
@@ -115,15 +124,15 @@ class _ProviderEditFunctionState extends State<ProviderEditFunction> {
             // },
             onSaved: (value) {
               setState(() {
-                prov_name = value!;
+                descText = value!;
               });
             },
           ),
           SizedBox(height: 10),
           TextFormField(
-            initialValue: widget.prov_desc!,
+            initialValue: widget.prov_desc,
             decoration: InputDecoration(
-                labelText: 'Description',
+                labelText: 'Provider Description',
                 border: OutlineInputBorder(borderSide: BorderSide())),
             // validator: (value) {
             //   if (value == null || value.isEmpty) {
@@ -132,9 +141,7 @@ class _ProviderEditFunctionState extends State<ProviderEditFunction> {
             //   return null;
             // },
             onSaved: (value) {
-              setState(() {
-                prov_desc = value!;
-              });
+              descText1 = value!;
             },
           ),
           SizedBox(height: 10),
@@ -150,26 +157,26 @@ class _ProviderEditFunctionState extends State<ProviderEditFunction> {
             //   return null;
             // },
             onSaved: (value) {
-              prov_alias = value!;
+              descText2 = value!;
             },
           ),
           SizedBox(height: 10),
-          TextFormField(
-            initialValue: widget.prov_status,
-            decoration: InputDecoration(
-                labelText: 'Provider Alias',
-                border: OutlineInputBorder(borderSide: BorderSide())),
-            // validator: (value) {
-            //   if (value == null || value.isEmpty) {
-            //     return 'Please enter a name';
-            //   }
-            //   return null;
-            // },
-            onSaved: (value) {
-              prov_status = value!;
-            },
-          ),
-          SizedBox(height: 10),
+          // TextFormField(
+          //   initialValue: widget.prov_status,
+          //   decoration: InputDecoration(
+          //       labelText: 'Status',
+          //       border: OutlineInputBorder(borderSide: BorderSide())),
+          //   // validator: (value) {
+          //   //   if (value == null || value.isEmpty) {
+          //   //     return 'Please enter a name';
+          //   //   }
+          //   //   return null;
+          //   // },
+          //   onSaved: (value) {
+          //     descText3 = value!;
+          //   },
+          // ),
+          // SizedBox(height: 10),
           TextButton(
             child: Text('Cancel'),
             onPressed: () {
@@ -179,23 +186,21 @@ class _ProviderEditFunctionState extends State<ProviderEditFunction> {
           TextButton(
             child: Text('Update'),
             onPressed: () async {
-              print(prov_id);
-              print(prov_name);
-              print(prov_desc);
-              print(prov_alias);
-              print(prov_status);
-              if (_formKey1.currentState!.validate()) {
-                _formKey1.currentState!.save();
+              print(widget.prov_id);
+              print(descText);
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
                 //Navigator.of(dashboardContext!).pop(false);
                 try {
                   const String apiUrl =
                       'https://sit-api-janus.fortress-asya.com:1234/edit_provider';
                   final Map<String, dynamic> data = {
-                    "get_provider_id": prov_id,
-                    "get_provider_name": prov_name,
-                    "get_description": prov_desc,
-                    "get_provider_alias": prov_alias,
-                    "get_status": prov_status
+                    "get_provider_id": widget.prov_id,
+                    "get_provider_name": descText,
+                    "get_description": descText1,
+                    "get_provider_alias": descText2,
+                    "get_last_updated_by": 0,
+                    "get_status": 0
                     // Add more fields as needed
                   };
 
@@ -220,7 +225,7 @@ class _ProviderEditFunctionState extends State<ProviderEditFunction> {
                     setState(() {
                       home.onTaps = () {
                         setState(() {
-                          home.header = "Provider";
+                          home.header = "Bank List";
                           home.title = "Change Password";
                           home.homewidget = [const Changepassword()];
                         });
@@ -267,7 +272,7 @@ class _ProviderEditFunctionState extends State<ProviderEditFunction> {
                         "-------->>>>>>>>>>${jsonDecode(response.body).length}");
                     // Failed to update data
                     print('Failed to update data');
-                    Navigator.of(context).pop(false);
+                    pop();
                   }
                 } catch (e) {
                   print(e);

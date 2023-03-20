@@ -17,10 +17,10 @@ import '../../branch/branch.dart';
 import '../addcenter/addcenter.dart';
 
 class CenterEditFunction extends StatefulWidget {
-  String? code1;
-  String? desc1;
-  String? date1;
-  CenterEditFunction({Key? key, this.code1, this.date1, this.desc1})
+  String? code;
+  String? desc;
+  String? date;
+  CenterEditFunction({Key? key, this.code, this.date, this.desc})
       : super(key: key);
 
   @override
@@ -28,9 +28,9 @@ class CenterEditFunction extends StatefulWidget {
 }
 
 class _CenterEditFunctionState extends State<CenterEditFunction> {
-  String descText1 = '';
-  String code1 = '';
-  final _formKey1 = GlobalKey<FormState>();
+  String descText = '';
+  String code = '';
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +49,8 @@ class _CenterEditFunctionState extends State<CenterEditFunction> {
     Future<void> wait() async {
       shared.CenterLog.clear();
       shared.Center_data.clear();
-      Center_Parse center = Center_Parse();
-      var res = await center.profile26();
+      Center_Parse unit = Center_Parse();
+      var res = await unit.profile26();
       if (res.data!.isNotEmpty) {
         print(res.data!.length);
         print(res.data![0].toJson().length);
@@ -68,13 +68,13 @@ class _CenterEditFunctionState extends State<CenterEditFunction> {
     }
 
     return Form(
-      key: _formKey1,
+      key: _formKey,
       child: AlertDialog(
         actions: <Widget>[
           TextFormField(
             mouseCursor: SystemMouseCursors.forbidden,
             readOnly: true,
-            initialValue: widget.code1!,
+            initialValue: widget.code!,
             decoration: InputDecoration(
                 labelText: 'Code',
                 border: OutlineInputBorder(borderSide: BorderSide())),
@@ -84,15 +84,15 @@ class _CenterEditFunctionState extends State<CenterEditFunction> {
             //   }
             //   return null;
             // },
-            // onSaved: (value) {
-            //   setState(() {
-            //     code1 = value!;
-            //   });
-            // },
+            onSaved: (value) {
+              setState(() {
+                code = value!;
+              });
+            },
           ),
           SizedBox(height: 10),
           TextFormField(
-            initialValue: widget.desc1!,
+            initialValue: widget.desc!,
             decoration: InputDecoration(
                 labelText: 'Description',
                 border: OutlineInputBorder(borderSide: BorderSide())),
@@ -104,7 +104,7 @@ class _CenterEditFunctionState extends State<CenterEditFunction> {
             },
             onSaved: (value) {
               setState(() {
-                descText1 = value!;
+                descText = value!;
               });
             },
           ),
@@ -112,7 +112,7 @@ class _CenterEditFunctionState extends State<CenterEditFunction> {
           TextFormField(
             mouseCursor: SystemMouseCursors.forbidden,
             readOnly: true,
-            initialValue: widget.date1,
+            initialValue: widget.date,
             decoration: InputDecoration(
                 labelText: 'Date',
                 border: OutlineInputBorder(borderSide: BorderSide())),
@@ -136,18 +136,18 @@ class _CenterEditFunctionState extends State<CenterEditFunction> {
           TextButton(
             child: Text('Update'),
             onPressed: () async {
-              print(widget.code1);
-              print(descText1);
-              if (_formKey1.currentState!.validate()) {
-                _formKey1.currentState!.save();
+              print(widget.code);
+              print(descText);
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
                 //Navigator.of(dashboardContext!).pop(false);
                 try {
                   const String apiUrl =
                       'https://sit-api-janus.fortress-asya.com:1234/edit_center';
                   final Map<String, dynamic> data = {
-                    "get_center_code": code1,
-                    "get_center_desc": descText1,
-                    "get_center_id": code1
+                    "get_center_code": widget.code,
+                    "get_center_desc": descText,
+                    "get_center_id": widget.code
                     // Add more fields as needed
                   };
 
@@ -172,7 +172,7 @@ class _CenterEditFunctionState extends State<CenterEditFunction> {
                     setState(() {
                       home.onTaps = () {
                         setState(() {
-                          home.header = "Center";
+                          home.header = "Unit";
                           home.title = "Change Password";
                           home.homewidget = [const Changepassword()];
                         });
@@ -186,10 +186,10 @@ class _CenterEditFunctionState extends State<CenterEditFunction> {
                               home.addicon = Icons.add_outlined;
                               home.uploadbutton = "";
                               home.subuploadbutton = "";
-                              home.addbutton = "New Center";
-                              home.subaddbutton = "Add New Center";
+                              home.addbutton = "New Unit";
+                              home.subaddbutton = "Add New Unit";
                               home.header = "Utilities";
-                              home.title = "Center";
+                              home.title = "Unit";
                               home.homewidget = [const Centers()];
                             });
                           };
@@ -197,7 +197,7 @@ class _CenterEditFunctionState extends State<CenterEditFunction> {
                           home.addicon = Icons.save_outlined;
                           home.header = "Utilities  >  Create / Edit";
                           home.addbutton = "Save";
-                          home.subaddbutton = "Save Center";
+                          home.subaddbutton = "Save Unit";
                           home.title = "Create / Edit";
                           home.homewidget = [const Addcenters()];
                         });
@@ -207,10 +207,10 @@ class _CenterEditFunctionState extends State<CenterEditFunction> {
                       home.addicon = Icons.add_outlined;
                       home.uploadbutton = "";
                       home.subuploadbutton = "";
-                      home.addbutton = "New Center";
-                      home.subaddbutton = "Add Center";
+                      home.addbutton = "New Unit";
+                      home.subaddbutton = "Add Unit";
                       home.header = "Utilities";
-                      home.title = "Center";
+                      home.title = "Unit";
                       home.homewidget = [const Centers()];
                     });
                     close();

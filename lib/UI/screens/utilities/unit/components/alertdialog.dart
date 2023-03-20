@@ -17,7 +17,8 @@ class AlertEditFunction extends StatefulWidget {
   String? code;
   String? desc;
   String? date;
-  AlertEditFunction({Key? key, this.code, this.date, this.desc}) : super(key: key);
+  AlertEditFunction({Key? key, this.code, this.date, this.desc})
+      : super(key: key);
 
   @override
   State<AlertEditFunction> createState() => _AlertEditFunctionState();
@@ -30,13 +31,22 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
 
   @override
   Widget build(BuildContext context) {
-   final home = Provider.of<HomePageProvider>(context, listen: false);
+    final home = Provider.of<HomePageProvider>(context, listen: false);
     final shared = Provider.of<Unit_U>(context, listen: false);
-    void close(){
+    void close() {
       Navigator.pop(context);
       Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ));
     }
+
+    void pop() {
+      Navigator.pop(context);
+    }
+
     Future<void> wait() async {
       shared.UnitLog.clear();
       shared.Unit_data.clear();
@@ -44,9 +54,7 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
       var res = await unit.profile25();
       if (res.data!.isNotEmpty) {
         print(res.data!.length);
-        print(res.data![0]
-            .toJson()
-            .length);
+        print(res.data![0].toJson().length);
         setState(() {
           shared.UnitLog.add(Unit_Api.fromJson(res.toJson()));
           shared.isLoaded = true;
@@ -59,6 +67,7 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
         print(i.toJson());
       }
     }
+
     return Form(
       key: _formKey,
       child: AlertDialog(
@@ -211,7 +220,7 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
                         "-------->>>>>>>>>>${jsonDecode(response.body).length}");
                     // Failed to update data
                     print('Failed to update data');
-                    Navigator.of(context).pop(false);
+                    pop();
                   }
                 } catch (e) {
                   print(e);

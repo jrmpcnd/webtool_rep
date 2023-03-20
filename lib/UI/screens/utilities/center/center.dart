@@ -397,9 +397,9 @@ class MyData extends DataTableSource {
               builder: (ctx) => Form(
                 key: _formKey,
                 child: CenterEditFunction(
-                  code1: shared.Center_data[index].centerCode.toString(),
-                  date1: shared.Center_data[index].createdDate.toString(),
-                  desc1: shared.Center_data[index].centerDesc.toString(),
+                  code: shared.Center_data[index].centerCode.toString(),
+                  date: shared.Center_data[index].createdDate.toString(),
+                  desc: shared.Center_data[index].centerDesc.toString(),
                 ),
               ),
             );
