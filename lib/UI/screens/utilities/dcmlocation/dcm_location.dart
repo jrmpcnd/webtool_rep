@@ -13,6 +13,7 @@ import '../../../utils/text_styles.dart';
 import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
+import 'components/alertdialogdcm.dart';
 
 class Dcmlocation extends StatefulWidget {
   const Dcmlocation({Key? key}) : super(key: key);
@@ -57,7 +58,7 @@ class _DcmlocationState extends State<Dcmlocation> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<AtmLocation>(context);
-    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data = MyData(shared: shared,dashboardContext: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -308,6 +309,9 @@ class _DcmlocationState extends State<Dcmlocation> {
                           DataColumn(
                               label: Text('City/Province',
                                   style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label:
+                              Text('Action', style: kLargeBoldTextStyle)),
                         ],
                         source: isLoaded
                             ? shared.AtmLocation_data.isNotEmpty
@@ -332,8 +336,10 @@ class _DcmlocationState extends State<Dcmlocation> {
 }
 
 class MyData extends DataTableSource {
+  final _formKey = GlobalKey<FormState>();
+  BuildContext? dashboardContext;
   AtmLocation shared;
-  MyData({required this.shared});
+  MyData({required this.shared, this.dashboardContext});
 
   @override
   bool get isRowCountApproximate => false;
@@ -358,6 +364,28 @@ class MyData extends DataTableSource {
       DataCell(SizedBox(
           width: 200,
           child: Text(shared.AtmLocation_data[index].atmCity.toString()))),
+      DataCell(SizedBox(
+        width: 50,
+        child: IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () {
+            showDialog(
+              context: dashboardContext!,
+              builder: (ctx) => Form(
+                key: _formKey,
+                child: AlertEditFunction(atmCity: shared.AtmLocation_data[index].atmCity.toString(),
+                  atmId: shared.AtmLocation_data[index].atmId.toString(),
+                  atmAddress: shared.AtmLocation_data[index].atmAddress.toString(),
+                  atmLatitude: shared.AtmLocation_data[index].atmLatitude.toString(),
+                  atmLongitude: shared.AtmLocation_data[index].atmLongitude.toString(),
+                  instDesc: shared.AtmLocation_data[index].instDesc.toString(),
+                  atmDescription: shared.AtmLocation_data[index].atmDescription.toString(),
+                ),
+              ),
+            );
+          },
+        ),
+      )),
     ]);
   }
 }
@@ -378,6 +406,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
     ]);
   }
 }
@@ -394,6 +423,10 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
         child: CircularProgressIndicator(),

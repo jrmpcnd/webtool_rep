@@ -48,6 +48,7 @@ class AtmLocation extends ChangeNotifier {
   List<Atm_Loc_Api> AtmLocation_Log = [];
   List<Atm_Loc_Log> AtmLocation_data = [];
   bool search = false;
+  bool isLoaded = false;
 }
 
 class Banknews_U extends ChangeNotifier {

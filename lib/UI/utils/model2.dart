@@ -308,15 +308,28 @@ class Atm_Loc_Log {
   String? atmAddress;
   String? atmCity;
   String? atmDescription;
+  String? atmId;
+  String? atmLatitude;
+  String? atmLongitude;
   String? instDesc;
 
+
   Atm_Loc_Log(
-      {this.atmAddress, this.atmCity, this.atmDescription, this.instDesc});
+      {this.atmAddress,
+        this.atmCity,
+        this.atmDescription,
+        this.atmId,
+        this.atmLatitude,
+        this.atmLongitude,
+        this.instDesc});
 
   Atm_Loc_Log.fromJson(Map<String, dynamic> json) {
     atmAddress = json['atm_address'];
     atmCity = json['atm_city'];
     atmDescription = json['atm_description'];
+    atmId = json['atm_id'];
+    atmLatitude = json['atm_latitude'];
+    atmLongitude = json['atm_longitude'];
     instDesc = json['inst_desc'];
   }
 
@@ -325,6 +338,9 @@ class Atm_Loc_Log {
     data['atm_address'] = this.atmAddress;
     data['atm_city'] = this.atmCity;
     data['atm_description'] = this.atmDescription;
+    data['atm_id'] = this.atmId;
+    data['atm_latitude'] = this.atmLatitude;
+    data['atm_longitude'] = this.atmLongitude;
     data['inst_desc'] = this.instDesc;
     return data;
   }
