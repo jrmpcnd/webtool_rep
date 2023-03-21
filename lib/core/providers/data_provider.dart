@@ -86,6 +86,7 @@ class Prov13 extends ChangeNotifier {
   List<Prov_Config> prov = [];
   List<Data13> prov_data = [];
   bool search13 = false;
+  bool isLoaded = false;
 }
 
 class Prov14 extends ChangeNotifier {

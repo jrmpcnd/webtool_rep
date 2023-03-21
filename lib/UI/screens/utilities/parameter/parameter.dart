@@ -7,6 +7,7 @@ import '../../../utils/edge_insect.dart';
 import '../../../utils/model.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
+import 'components/alerdialogparameter.dart';
 
 
 class Parameters extends StatefulWidget {
@@ -69,7 +70,7 @@ class _ParametersState extends State<Parameters> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Prov13>(context);
-    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data = MyData(shared: shared, dashboardContext: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -305,7 +306,9 @@ class _ParametersState extends State<Parameters> {
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label: Text('Description',
-                                    style: kLargeBoldTextStyle))
+                                    style: kLargeBoldTextStyle)),  DataColumn(
+                                label:
+                                Text('Action', style: kLargeBoldTextStyle)),
                           ],
                           source: isLoaded
                               ? shared.prov_data.isNotEmpty
@@ -329,8 +332,10 @@ class _ParametersState extends State<Parameters> {
 }
 
 class MyData extends DataTableSource {
+  final _formKey = GlobalKey<FormState>();
+  BuildContext? dashboardContext;
   Prov13 shared;
-  MyData({required this.shared});
+  MyData({required this.shared, this.dashboardContext});
 
   @override
   bool get isRowCountApproximate => false;
@@ -352,7 +357,29 @@ class MyData extends DataTableSource {
           child: Text(shared.prov_data[index].paramValue.toString()))),
       DataCell(SizedBox(
           width: 150,
-          child: Text(shared.prov_data[index].paramDesc.toString())))
+          child: Text(shared.prov_data[index].paramDesc.toString()))),
+      DataCell(SizedBox(
+        width: 50,
+        child: IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () {
+            showDialog(
+              context: dashboardContext!,
+              builder: (ctx) => Form(
+                key: _formKey,
+                child: AlertEditFunction(
+                  paramDesc: shared.prov_data[index].paramDesc.toString(),
+                  paramValue: shared.prov_data[index].paramValue.toString(),
+                  paramName: shared.prov_data[index].paramName.toString(),
+                  paramId: shared.prov_data[index].paramId.toString(),
+                  appType: shared.prov_data[index].appType.toString(),
+                ),
+
+              ),
+            );
+          },
+        ),
+      )),
     ]);
   }
 }
@@ -372,7 +399,8 @@ class MyData2 extends DataTableSource {
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
-      DataCell(SizedBox(child: Text('')))
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
     ]);
   }
 }
@@ -389,6 +417,7 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),

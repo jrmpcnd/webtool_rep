@@ -60,16 +60,16 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
     }
 
     Future<void> wait() async {
-      shared.AtmLocation_Log.clear();
+      final shared = Provider.of<AtmLocation>(context, listen: false);
       shared.AtmLocation_data.clear();
-      Unit_Parse unit = Unit_Parse();
-      var res = await unit.profile25();
+      Atm_Location_Parse httpParse = Atm_Location_Parse();
+      var res = await httpParse.profile20();
       if (res.data!.isNotEmpty) {
         print(res.data!.length);
         print(res.data![0].toJson().length);
         setState(() {
           shared.AtmLocation_Log.add(Atm_Loc_Api.fromJson(res.toJson()));
-          shared.isLoaded = true;
+
         });
         for (var i in res.data!) {
           shared.AtmLocation_data.add(Atm_Loc_Log.fromJson(i.toJson()));
@@ -203,10 +203,42 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
 
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
+                print(widget.atmAddress);
+                print(widget.atmId);
                 //Navigator.of(dashboardContext!).pop(false);
+
+                if(provID == null){
+                  setState(() {
+                    provID = widget.atmId!;
+                  });
+
+                }
+                if(provatmCity == null){
+                  setState(() {
+                    provatmCity = widget.atmCity!;
+                  });
+
+                }
+                if(provatmDescription == null){
+                  setState(() {
+                    provatmDescription = widget.atmDescription!;
+                  });
+
+                }
+                if(provatmLongitude == null){
+                setState(() {
+                  provatmAddress = widget.atmLongitude!;
+                });
+                }
+                if(provatmLatitude == null){
+               setState(() {
+                 provatmLatitude = widget.atmLatitude!;
+               });
+                }
                 try {
+
                   const String apiUrl =
-                      'https://sit-api-janus.fortress-asya.com:1234/edit_unit';
+                      'https://sit-api-janus.fortress-asya.com:1234/edit_atmloc';
                   final Map<String, dynamic> data = {
                     "get_atm_address": provatmAddress.toString(),
                     "get_atm_city": provatmCity.toString(),
