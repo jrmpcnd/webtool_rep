@@ -9,6 +9,7 @@ import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/textfield.dart';
+import 'components/alertdialogType_of_Concern.dart';
 
 class Typeofconcern extends StatefulWidget {
   const Typeofconcern({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class _TypeofconcernState extends State<Typeofconcern> {
   Future<void> wait() async {
     final shared2 = Provider.of<Prov10>(context, listen: false);
     shared2.concern.clear();
+    shared2.concern_data.clear();
     Type_ConcernParse httpParse2 = Type_ConcernParse();
     var res2 = await httpParse2.profile10();
     if (res2.data!.isNotEmpty) {
@@ -70,7 +72,7 @@ class _TypeofconcernState extends State<Typeofconcern> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Prov10>(context);
-    final DataTableSource data = MyData(shared: shared);
+    final DataTableSource data = MyData(shared: shared, dashboardContext: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -307,7 +309,10 @@ class _TypeofconcernState extends State<Typeofconcern> {
                                             style: kLargeBoldTextStyle)),
                                     DataColumn(
                                         label:
-                                            Text('Complexity Level', style: kLargeBoldTextStyle))
+                                            Text('Complexity Level', style: kLargeBoldTextStyle)),
+                                    DataColumn(
+                                        label:
+                                        Text('Action', style: kLargeBoldTextStyle)),
                                   ],
                                   source: isLoaded
                                       ? shared.concern_data.isNotEmpty
@@ -333,8 +338,10 @@ class _TypeofconcernState extends State<Typeofconcern> {
 }
 
 class MyData extends DataTableSource {
+  final _formKey = GlobalKey<FormState>();
+  BuildContext? dashboardContext;
   Prov10 shared;
-  MyData({required this.shared});
+  MyData({required this.shared, this.dashboardContext});
 
   @override
   bool get isRowCountApproximate => false;
@@ -354,7 +361,27 @@ class MyData extends DataTableSource {
           child: Text(shared.concern_data[index].concernTime.toString()))),
       DataCell(SizedBox(
           width: 100,
-          child: Text(shared.concern_data[index].concernLevel.toString())))
+          child: Text(shared.concern_data[index].concernLevel.toString()))),
+      DataCell(SizedBox(
+        width: 50,
+        child: IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () {
+            showDialog(
+              context: dashboardContext!,
+              builder: (ctx) => Form(
+                key: _formKey,
+                child: AlertEditFunction(concernLevel: shared.concern_data[index].concernLevel.toString(),
+                  concernTime: shared.concern_data[index].concernTime.toString(),
+                  concernCode: shared.concern_data[index].concernCode.toString(),
+                  concernName: shared.concern_data[index].concernName.toString(),
+                  concernDesc: shared.concern_data[index].concernDesc.toString(),
+                ),
+              ),
+            );
+          },
+        ),
+      )),
     ]);
   }
 }
@@ -373,7 +400,8 @@ class MyData2 extends DataTableSource {
       DataCell(
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
-      DataCell(SizedBox(child: Text('')))
+      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
     ]);
   }
 }
@@ -391,7 +419,8 @@ class MyData3 extends DataTableSource {
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator())))
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
     ]);
   }
 }

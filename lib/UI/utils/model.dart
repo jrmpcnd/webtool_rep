@@ -641,33 +641,37 @@ class Type_of_Concern {
 
 class Data10 {
   String? concernCode;
+  String? concernDesc;
+  String? concernLevel;
   String? concernName;
   String? concernTime;
-  String? concernLevel;
+
 
   Data10(
       {this.concernCode,
-      this.concernName,
-      this.concernTime,
-      this.concernLevel});
+        this.concernDesc,
+        this.concernLevel,
+        this.concernName,
+        this.concernTime});
 
   Data10.fromJson(Map<String, dynamic> json) {
     concernCode = json['concern_code'];
+    concernDesc = json['concern_desc'];
+    concernLevel = json['concern_level'];
     concernName = json['concern_name'];
     concernTime = json['concern_time'];
-    concernLevel = json['concern_level'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['concern_code'] = this.concernCode;
+    data['concern_desc'] = this.concernDesc;
+    data['concern_level'] = this.concernLevel;
     data['concern_name'] = this.concernName;
     data['concern_time'] = this.concernTime;
-    data['concern_level'] = this.concernLevel;
     return data;
   }
 }
-
 class CSR_Hotline {
   String? retcode;
   String? message;

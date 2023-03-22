@@ -1,7 +1,12 @@
-2023/03/21-08:55:36.088 af03 Reusing MANIFEST /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.CSWmLl/flutter_tools_chrome_device.gl3sXE/Default/shared_proto_db/MANIFEST-000001
-2023/03/21-08:55:36.100 af03 Recovering log #16
-2023/03/21-08:55:36.103 af03 Reusing old log /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.CSWmLl/flutter_tools_chrome_device.gl3sXE/Default/shared_proto_db/000016.log 
-2023/03/21-08:55:36.103 af03 Delete type=0 #13
-2023/03/21-08:55:36.103 af03 Delete type=0 #7
-2023/03/21-08:55:36.103 af03 Delete type=0 #4
-2023/03/21-08:55:36.103 af03 Delete type=0 #10
+2023/03/22-08:59:54.686 14803 Reusing MANIFEST /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.hxIged/flutter_tools_chrome_device.wW6HHL/Default/shared_proto_db/MANIFEST-000001
+2023/03/22-08:59:54.731 14803 Recovering log #19
+2023/03/22-08:59:54.731 14803 Reusing old log /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.hxIged/flutter_tools_chrome_device.wW6HHL/Default/shared_proto_db/000019.log 
+2023/03/22-08:59:54.732 14803 Delete type=0 #13
+2023/03/22-08:59:54.732 14803 Delete type=0 #7
+2023/03/22-08:59:54.732 14803 Delete type=0 #4
+2023/03/22-08:59:54.732 14803 Delete type=0 #10
+2023/03/22-08:59:54.732 14803 Delete type=0 #16
+2023/03/22-08:59:54.732 14803 Delete type=2 #14
+2023/03/22-08:59:54.732 14803 Delete type=2 #17
+2023/03/22-08:59:54.732 14803 Delete type=2 #11
+2023/03/22-08:59:54.732 14803 Delete type=2 #8
