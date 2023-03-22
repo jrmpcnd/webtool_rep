@@ -40,9 +40,8 @@ class _BanknewsState extends State<Banknews> {
       for (var i in res.data!) {
         // shared.inqqq.add(Data.fromJson(i.toJson()));
         shared.Banknews_data.add(BankNews_Log.fromJson(i.toJson()));
-
       }
-    } else{
+    } else {
       setState(() {
         isLoaded = true;
       });
@@ -51,11 +50,13 @@ class _BanknewsState extends State<Banknews> {
       print(i.toJson());
     }
   }
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     wait();
-}
+  }
+
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Banknews_U>(context);
@@ -91,13 +92,129 @@ class _BanknewsState extends State<Banknews> {
                           offset: Offset(0, 3)),
                     ],
                   ),
-                  height: 110.0,
+                  height: 130.0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Topic",
-                        controller: bank_newscontroller,
+                      Container(
+                        height: 35,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Topic',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: controller,
+                          onChanged: (value) {
+                            setState(() {
+                              isLoaded = false;
+                            });
+                            //
+                            try {
+                              if (controller.text.isNotEmpty) {
+                                shared.Banknews_data.clear();
+                                for (var i in shared.BanknewsLog[0].data!) {
+                                  print(i.toJson());
+                                  print(i.givenName
+                                      ?.toLowerCase()
+                                      .contains(controller.text.toLowerCase()));
+                                  if (i.toJson().isNotEmpty) {
+                                    if (i.givenName!.toLowerCase().contains(
+                                        controller.text.toLowerCase()) ||
+                                        i.productDate!.toLowerCase().contains(
+                                            controller.text.toLowerCase()) ||
+                                        i.productId!.toLowerCase().contains(
+                                            controller.text.toLowerCase()) ||
+                                        i.productName!.toLowerCase().contains(
+                                            controller.text.toLowerCase())) {
+                                      debugPrint(i.productName);
+                                      setState(() {
+                                        shared.Banknews_data.add(
+                                            BankNews_Log.fromJson(i.toJson()));
+                                      });
+                                      if (shared.Banknews_data.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = true;
+                                        });
+                                      }
+                                    }
+                                  }
+                                }
+                              } else if (controller.text == '') {
+                                shared.Banknews_data.clear();
+                                setState(() {
+                                  shared.Banknews_data.addAll(
+                                      shared.BanknewsLog[0].data!);
+                                  isLoaded = true;
+                                });
+                              }
+                              debugPrint(
+                                  shared.Banknews_data[0].toJson().toString());
+                            } catch (e) {
+                              shared.Banknews_data.clear();
+                              isLoaded = true;
+                            }
+                          },
+                          onEditingComplete: () async {
+                            setState(() {
+                              isLoaded = false;
+                            });
+                            try {
+                              if (controller.text.isNotEmpty) {
+                                shared.Banknews_data.clear();
+                                for (var i in shared.BanknewsLog[0].data!) {
+                                  print(i.toJson());
+                                  print(i.givenName
+                                      ?.toLowerCase()
+                                      .contains(controller.text.toLowerCase()));
+                                  if (i.toJson().isNotEmpty) {
+                                    if (i.givenName!.toLowerCase().contains(
+                                        controller.text.toLowerCase()) ||
+                                        i.productDate!.toLowerCase().contains(
+                                            controller.text.toLowerCase()) ||
+                                        i.productId!.toLowerCase().contains(
+                                            controller.text.toLowerCase()) ||
+                                        i.productName!.toLowerCase().contains(
+                                            controller.text.toLowerCase())) {
+                                      debugPrint(i.productName);
+                                      setState(() {
+                                        key.currentState?.pageTo(0);
+                                        shared.Banknews_data.add(
+                                            BankNews_Log.fromJson(i.toJson()));
+                                      });
+                                      if (shared.Banknews_data.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = true;
+                                        });
+                                      }
+                                    }
+                                  }
+                                }
+                              } else if (controller.text == '') {
+                                shared.Banknews_data.clear();
+                                setState(() {
+                                  shared.Banknews_data.addAll(
+                                      shared.BanknewsLog[0].data!);
+                                });
+                              }
+                              debugPrint(
+                                  shared.Banknews_data[0].toJson().toString());
+                            } catch (e) {
+                              shared.Banknews_data.clear();
+                            }
+                          },
+                        ),
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -111,12 +228,12 @@ class _BanknewsState extends State<Banknews> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kPrimaryColor)),
+                                      MaterialStateProperty.all(
+                                          kPrimaryColor)),
                                   onPressed: () {
                                     Banknews_Function.news(
                                         search_banknews:
-                                            bank_newscontroller.text);
+                                        bank_newscontroller.text);
                                   },
                                   icon: const Icon(
                                     Icons.search,
@@ -135,8 +252,8 @@ class _BanknewsState extends State<Banknews> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kSecondaryColor2)),
+                                      MaterialStateProperty.all(
+                                          kSecondaryColor2)),
                                   onPressed: () {},
                                   icon: const Icon(
                                     Icons.refresh,
@@ -156,7 +273,7 @@ class _BanknewsState extends State<Banknews> {
                             child: ElevatedButton.icon(
                               style: ButtonStyle(
                                   backgroundColor:
-                                      MaterialStateProperty.all(kPrimaryColor)),
+                                  MaterialStateProperty.all(kPrimaryColor)),
                               onPressed: () {},
                               icon: const Icon(
                                 Icons.delete_outline,
@@ -174,159 +291,36 @@ class _BanknewsState extends State<Banknews> {
                   ),
                 ),
                 verticalSpaceRegular,
-                Column(children: [Container(
-                  width: 500,
-                  child: TextFormField(
-                    style: TextStyle(color: kBlackColor),
-                    decoration: const InputDecoration(
-                      hintText: 'Search',
-                      border: OutlineInputBorder(),
-                      labelStyle: TextStyle(fontSize: 12.0),
-                      contentPadding: EdgeInsets.only(left: 10.0),
-                      hintStyle: TextStyle(color: kSecondaryColor2),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kBlackColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kBlackColor),
+                Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: kEdgeInsetsVerticalNormal,
+                      child: PaginatedDataTable(
+                        key: key,
+                        arrowHeadColor: kWhiteColor,
+                        columns: [
+                          DataColumn(
+                              label: Text('Date', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label:
+                              Text('Sender', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Topic', style: kLargeBoldTextStyle)),
+                        ],
+                        source: isLoaded
+                            ? shared.Banknews_data.isNotEmpty
+                            ? data
+                            : data2
+                            : data3,
+                        rowsPerPage: 8,
+                        showFirstLastButtons: true,
+                        header:
+                        Text('List of Role', style: kXLargeBoldTextStyle),
                       ),
                     ),
-                    textInputAction: TextInputAction.go,
-                    controller: controller,
-                    onChanged: (value) {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      //
-                      try {
-                        if (controller.text.isNotEmpty) {
-                          shared.Banknews_data.clear();
-                          for (var i in shared.BanknewsLog[0].data!) {
-                            print(i.toJson());
-                            print(i.givenName
-                                ?.toLowerCase()
-                                .contains(controller.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.givenName!
-                                  .toLowerCase()
-                                  .contains(controller.text.toLowerCase()) ||
-                                  i.productDate!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())   ||
-                                  i.productId!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())    ||
-                                  i.productName!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())
-
-
-
-                              ) {
-                                debugPrint(i.productName);
-                                setState(() {
-                                  shared.Banknews_data.add(BankNews_Log.fromJson(i.toJson()
-                                  ));
-                                });
-                                if (shared.Banknews_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
-                                }
-                              }
-                            }
-                          }
-                        } else if (controller.text == '') {
-                          shared.Banknews_data.clear();
-                          setState(() {
-                            shared.Banknews_data.addAll(shared.BanknewsLog[0].data!);
-                            isLoaded = true;
-                          });
-                        }
-                        debugPrint(shared.Banknews_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.Banknews_data.clear();
-                        isLoaded = true;
-                      }
-                    },
-                    onEditingComplete: () async {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      try {
-                        if (controller.text.isNotEmpty) {
-                          shared.Banknews_data.clear();
-                          for (var i in shared.BanknewsLog[0].data!) {
-                            print(i.toJson());
-                            print(i.givenName
-                                ?.toLowerCase()
-                                .contains(controller.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.givenName!
-                                  .toLowerCase()
-                                  .contains(controller.text.toLowerCase()) ||
-                                  i.productDate!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())   ||
-                                  i.productId!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())    ||
-                                  i.productName!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())
-
-
-
-
-                              ) {
-                                debugPrint (i.productName);
-                                setState(() {
-                                  key.currentState?.pageTo(0);
-                                  shared.Banknews_data.add(BankNews_Log.fromJson(i.toJson()
-                                  ));
-
-                                });
-                                if (shared.Banknews_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
-                                }
-                              }
-                            }
-                          }
-                        } else if (controller.text == '') {
-                          shared.Banknews_data.clear();
-                          setState(() {
-                            shared.Banknews_data.addAll(shared.BanknewsLog[0].data!);
-                          });
-                        }
-                        debugPrint(shared.Banknews_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.Banknews_data.clear();
-                      }
-                    },
-                  ),
-                ), Container(
-                  width: double.infinity,
-                  padding: kEdgeInsetsVerticalNormal,
-                  child: PaginatedDataTable(
-                    key: key,
-                    arrowHeadColor: kWhiteColor,
-                    columns: [
-                      DataColumn(
-                          label: Text('Date', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Sender', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Topic', style: kLargeBoldTextStyle)),
-
-                    ],
-                    source: isLoaded ? shared.Banknews_data.isNotEmpty ? data : data2 : data3,
-                    rowsPerPage: 8,
-                    showFirstLastButtons: true,
-                    header: Text('List of Role', style: kXLargeBoldTextStyle),
-                  ),
-                ),],)
+                  ],
+                )
               ],
             ),
           ),
@@ -335,6 +329,7 @@ class _BanknewsState extends State<Banknews> {
     );
   }
 }
+
 class MyData extends DataTableSource {
   Banknews_U shared;
   MyData({required this.shared});
@@ -350,13 +345,14 @@ class MyData extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(
-          width: 100, child: Text(shared.Banknews_data[index].productDate.toString()))),
+          width: 160,
+          child: Text(shared.Banknews_data[index].productDate.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.Banknews_data[index].givenName.toString()))),
+          width: 100,
+          child: Text(shared.Banknews_data[index].givenName.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.Banknews_data[index].productName.toString()))),
-
-
+          width: 250,
+          child: Text(shared.Banknews_data[index].productName.toString()))),
     ]);
   }
 }
@@ -376,10 +372,6 @@ class MyData2 extends DataTableSource {
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
-
-
-
-
     ]);
   }
 }
@@ -395,15 +387,15 @@ class MyData3 extends DataTableSource {
   DataRow getRow(int index) {
     debugPrint(index.toString());
     return DataRow(cells: [
-      DataCell(
-          SizedBox(child: Text('Loading, please wait'))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
-
-
-
-
+      DataCell(SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(
+          child: Center(
+            child: CircularProgressIndicator(),
+          ))),
+      DataCell(SizedBox(
+          child: Center(
+            child: CircularProgressIndicator(),
+          ))),
     ]);
   }
 }
-
