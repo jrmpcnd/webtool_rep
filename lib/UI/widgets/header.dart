@@ -206,13 +206,26 @@ class _HeaderState extends State<Header> {
         Column(
           children: [
             verticalSpaceSmall,
+            SizedBox(height: 20,),
             Container(
               padding: kEdgeInsetsHorizontalNormal,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: kBlackColor,
+    borderRadius: const BorderRadius.only(
+    bottomLeft: Radius.circular(10),
+    bottomRight: Radius.circular(10),
+    topLeft: Radius.circular(10),
+    topRight: Radius.circular(10),
+    ),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.green.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: const Offset(0, 1)),
+                ],
+                color: Color(0xFF48A14D)
               ),
-              height: height * 0.20,
+              height: height * 0.23,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

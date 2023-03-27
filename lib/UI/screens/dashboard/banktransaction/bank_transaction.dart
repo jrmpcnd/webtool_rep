@@ -14,22 +14,25 @@ class _BanktransactionState extends State<Banktransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        verticalSpaceRegular,
-        SizedBox(
-          height: 650,
-          child: WebView(
-            initialUrl:
-                'https://flutter.dev/?gclid=EAIaIQobChMIosO9jL7K-gIV0RxyCh1g-QvIEAAYASAAEgJA4vD_BwE&gclsrc=aw.ds',
-            javascriptMode: JavascriptMode.unrestricted,
-            onWebViewCreated: (controller) {
-              this.controller = controller;
-            },
-            onPageStarted: (url) {},
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          verticalSpaceRegular,
+          SizedBox(
+            height: 530,
+            child: WebView(
+              initialUrl:
+                  'https://flutter.dev/?gclid=EAIaIQobChMIosO9jL7K-gIV0RxyCh1g-QvIEAAYASAAEgJA4vD_BwE&gclsrc=aw.ds',
+              javascriptMode: JavascriptMode.unrestricted,
+              onWebViewCreated: (controller) {
+                this.controller = controller;
+              },
+              onPageStarted: (url) {},
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

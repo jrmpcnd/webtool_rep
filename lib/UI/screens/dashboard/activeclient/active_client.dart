@@ -14,22 +14,24 @@ class _ActiveclientState extends State<Activeclient> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        verticalSpaceRegular,
-        SizedBox(
-          height: 650,
-          child: WebView(
-            initialUrl:
-                'https://datastudio.google.com/embed/reporting/d483b67a-c8a3-4c96-9e8d-048f86f4db59/page/GzUdC',
-            javascriptMode: JavascriptMode.unrestricted,
-            onWebViewCreated: (controller) {
-              this.controller = controller;
-            },
-            onPageStarted: (url) {},
+    return Padding(padding: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          verticalSpaceRegular,
+          Container(
+            height: 530,
+            child: WebView(
+              initialUrl:
+                  'https://datastudio.google.com/embed/reporting/d483b67a-c8a3-4c96-9e8d-048f86f4db59/page/GzUdC',
+              javascriptMode: JavascriptMode.unrestricted,
+              onWebViewCreated: (controller) {
+                this.controller = controller;
+              },
+              onPageStarted: (url) {},
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

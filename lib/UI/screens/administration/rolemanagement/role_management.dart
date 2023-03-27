@@ -218,23 +218,29 @@ class _RolemanagementState extends State<Rolemanagement> {
           Container(
               width: double.infinity,
               padding: kEdgeInsetsVerticalNormal,
-              child: PaginatedDataTable(
-                key: key,
-                arrowHeadColor: kWhiteColor,
-                columns: [
-                  DataColumn(
-                      label: Text('Role Name', style: kLargeBoldTextStyle)),
-                  DataColumn(
-                      label: Text('Role Desc', style: kLargeBoldTextStyle))
-                ],
-                source: isLoaded
-                    ? shared.role_data.isNotEmpty
-                        ? data
-                        : data2
-                    : data3,
-                rowsPerPage: 8,
-                showFirstLastButtons: true,
-                header: Text('List of Role', style: kXLargeBoldTextStyle),
+              child: Theme(
+                data: Theme.of(context)
+                    .copyWith(cardColor: Color(0xFF1B3C59),),
+
+
+                child: PaginatedDataTable(
+                  key: key,
+                  arrowHeadColor: kWhiteColor,
+                  columns: [
+                    DataColumn(
+                        label: Text('Role Name', style: kLargeBoldTextStyle)),
+                    DataColumn(
+                        label: Text('Role Desc', style: kLargeBoldTextStyle))
+                  ],
+                  source: isLoaded
+                      ? shared.role_data.isNotEmpty
+                          ? data
+                          : data2
+                      : data3,
+                  rowsPerPage: 8,
+                  showFirstLastButtons: true,
+                  header: Text('List of Role', style: kXLargeBoldTextStyle),
+                ),
               )),
         ],
       ),

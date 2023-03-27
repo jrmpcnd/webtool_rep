@@ -15,23 +15,25 @@ class _ClienttransactionState extends State<Clienttransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        verticalSpaceRegular,
-        Container(
-          height: 650,
-          child: WebView(
-            initialUrl: 'https://www.google.com/',
-            javascriptMode: JavascriptMode.unrestricted,
-            onWebViewCreated: (controller) {
-              this.controller = controller;
-            },
-            onPageStarted: (url) {
-              print('New website: $url');
-            },
+    return Padding(padding: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          verticalSpaceRegular,
+          Container(
+            height: 530,
+            child: WebView(
+              initialUrl: 'https://www.google.com/',
+              javascriptMode: JavascriptMode.unrestricted,
+              onWebViewCreated: (controller) {
+                this.controller = controller;
+              },
+              onPageStarted: (url) {
+                print('New website: $url');
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

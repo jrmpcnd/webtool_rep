@@ -425,27 +425,32 @@ class _HierarchyState extends State<Hierarchy> {
                   ),Container(
                     width: double.infinity,
                     padding: kEdgeInsetsVerticalNormal,
-                    child: PaginatedDataTable(
-                      key: key,
-                      arrowHeadColor: kWhiteColor,
-                      columns: [
-                        DataColumn(
-                            label: Text('Branch Code', style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Branch Name', style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Unit Code', style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Unit Name', style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Center Code', style: kLargeBoldTextStyle)),
-                        DataColumn(
-                            label: Text('Center Name', style: kLargeBoldTextStyle)),
-                      ],
-                      source: isLoaded ? shared.Hierarchy_data.isNotEmpty ? data : data2 : data3,
-                      rowsPerPage: 8,
-                      showFirstLastButtons: true,
-                      header: Text('List of Role', style: kXLargeBoldTextStyle),
+                    child: Theme(
+                      data: Theme.of(context)
+                          .copyWith(cardColor: Color(0xFF1B3C59),),
+
+                      child: PaginatedDataTable(
+                        key: key,
+                        arrowHeadColor: kWhiteColor,
+                        columns: [
+                          DataColumn(
+                              label: Text('Branch Code', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Branch Name', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Unit Code', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Unit Name', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Center Code', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Center Name', style: kLargeBoldTextStyle)),
+                        ],
+                        source: isLoaded ? shared.Hierarchy_data.isNotEmpty ? data : data2 : data3,
+                        rowsPerPage: 8,
+                        showFirstLastButtons: true,
+                        header: Text('List of Role', style: kXLargeBoldTextStyle),
+                      ),
                     ),
                   ),],),
 

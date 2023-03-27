@@ -648,31 +648,35 @@ class _UsermanagementState extends State<Usermanagement> {
     Container(
     width: double.infinity,
     padding: kEdgeInsetsVerticalNormal,
-    child: PaginatedDataTable(
-    key: key,
-    dataRowHeight: 100,
-    arrowHeadColor: kWhiteColor,
-    columns: [
-    DataColumn(
-    label: Text('User Name', style: kLargeBoldTextStyle)),
-    DataColumn(
-    label: Text('Given Name', style: kLargeBoldTextStyle)),
-    DataColumn(
-    label: Text('Middle Name', style: kLargeBoldTextStyle)),
-    DataColumn(
-    label: Text('Last Name', style: kLargeBoldTextStyle)),
-    DataColumn(label: Text('Branch', style: kLargeBoldTextStyle)),
-    DataColumn(label: Text('Role', style: kLargeBoldTextStyle)),
-    DataColumn(label: Text('Status', style: kLargeBoldTextStyle)),
-    ],
-    source: isLoaded
-    ? shared.user_data.isNotEmpty
-    ? data
-        : data2
-        : data3,
-    rowsPerPage: 8,
-    showFirstLastButtons: true,
-    header: Text('List of User', style: kXLargeBoldTextStyle),
+    child: Theme(
+      data: Theme.of(context)
+          .copyWith(cardColor: Color(0xFF1B3C59),),
+      child: PaginatedDataTable(
+      key: key,
+      dataRowHeight: 100,
+      arrowHeadColor: kWhiteColor,
+      columns: [
+      DataColumn(
+      label: Text('User Name', style: kLargeBoldTextStyle)),
+      DataColumn(
+      label: Text('Given Name', style: kLargeBoldTextStyle)),
+      DataColumn(
+      label: Text('Middle Name', style: kLargeBoldTextStyle)),
+      DataColumn(
+      label: Text('Last Name', style: kLargeBoldTextStyle)),
+      DataColumn(label: Text('Branch', style: kLargeBoldTextStyle)),
+      DataColumn(label: Text('Role', style: kLargeBoldTextStyle)),
+      DataColumn(label: Text('Status', style: kLargeBoldTextStyle)),
+      ],
+      source: isLoaded
+      ? shared.user_data.isNotEmpty
+      ? data
+          : data2
+          : data3,
+      rowsPerPage: 8,
+      showFirstLastButtons: true,
+      header: Text('List of User', style: kXLargeBoldTextStyle),
+      ),
     )),
     ],
     ),

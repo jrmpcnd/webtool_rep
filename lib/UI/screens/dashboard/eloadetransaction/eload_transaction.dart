@@ -14,22 +14,25 @@ class _eLoadtransactionState extends State<eLoadtransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        verticalSpaceRegular,
-        SizedBox(
-          height: 650,
-          child: WebView(
-            initialUrl:
-                'https://datastudio.google.com/embed/reporting/158dd32f-abd9-4a58-90bc-831f718c4ac9/page/6XIeC',
-            javascriptMode: JavascriptMode.unrestricted,
-            onWebViewCreated: (controller) {
-              this.controller = controller;
-            },
-            onPageStarted: (url) {},
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          verticalSpaceRegular,
+          SizedBox(
+            height: 530,
+            child: WebView(
+              initialUrl:
+                  'https://datastudio.google.com/embed/reporting/158dd32f-abd9-4a58-90bc-831f718c4ac9/page/6XIeC',
+              javascriptMode: JavascriptMode.unrestricted,
+              onWebViewCreated: (controller) {
+                this.controller = controller;
+              },
+              onPageStarted: (url) {},
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
