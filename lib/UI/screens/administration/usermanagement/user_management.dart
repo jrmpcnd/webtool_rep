@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:web_date_picker/web_date_picker.dart';
 import '../../../../core/providers/data_provider.dart';
 import '../../../utils/api.dart';
 import '../../../utils/constant.dart';
@@ -22,16 +21,11 @@ class _UsermanagementState extends State<Usermanagement> {
   List<String> res = [];
   String init = '';
   Usermanagementdropdown_Api dropdownstatus = Usermanagementdropdown_Api();
-
-
   TextEditingController controller = TextEditingController();
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   TextEditingController controller3 = TextEditingController();
   TextEditingController controller4 = TextEditingController();
-
-
-
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -106,8 +100,8 @@ class _UsermanagementState extends State<Usermanagement> {
                     boxShadow: [
                       BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
+                          spreadRadius: 1,
+                          blurRadius: 1,
                           offset: Offset(0, 3)),
                     ],
                   ),
@@ -650,10 +644,10 @@ class _UsermanagementState extends State<Usermanagement> {
     padding: kEdgeInsetsVerticalNormal,
     child: Theme(
       data: Theme.of(context)
-          .copyWith(cardColor: Color(0xFF1B3C59),),
+          .copyWith(cardColor: Color(0xFF6F8A71),),
       child: PaginatedDataTable(
       key: key,
-      dataRowHeight: 100,
+      dataRowHeight: 300,
       arrowHeadColor: kWhiteColor,
       columns: [
       DataColumn(

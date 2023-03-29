@@ -46,16 +46,16 @@ class _LoginpageState extends State<Loginpage> {
                 ),
                 Column(
                   children: [
-                    SizedBox(height: 250),
+                    SizedBox(height: 200),
                     buildCard(),
-                    verticalSpaceXXRegular,
+
                     Row(
                       children: [
                         Text(
                           '©CARD Bank | Version 2.0. build 20150704.1727',
                           style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            color: Colors.black,
+                            fontSize: 14,
+                            color: Colors.green,
                           ),
                         ),
                       ],

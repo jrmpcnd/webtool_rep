@@ -17,123 +17,128 @@ class _buildCardState extends State<buildCard> {
   bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: kWhiteColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      elevation: 10,
+    return Padding(
+      padding: EdgeInsets.all(10),
       child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10),
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          ),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 1,
+                offset: const Offset(0, 1)),
+          ],
+        ),
         width: 430,
-        height: 250,
+        height: 300,
         padding: kEdgeInsetsAllSNormal,
-        child: Column(
-          children: [
-            SizedBox(height: 30.0),
-            Container(
-              height: 60,
-              padding: kEdgeInsetsAllSNormal,
-              child: TextField(
-                style: kTextStyle,
-                autocorrect: true,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.only(left: 10.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0.0),
-                  ),
-                  prefixIcon: const Icon(
-                    Icons.person_outline,
-                    color: kSecondaryColor2,
-                  ),
-                  hintText: 'Username',
-                  hintStyle: kHintStyle,
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: kSecondaryColor2),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: kSecondaryColor2),
-                  ),
+        child: Padding(padding: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              SizedBox(height: 30.0),
+          Container(
+            width: 350,
+            child: TextField(
+              style: TextStyle(color: Colors.black),
+              cursorColor: Colors.green,
+              decoration: InputDecoration(
+                hintText: 'Enter Your Email',
+                hintStyle: TextStyle(color: Colors.grey[500]),
+                fillColor: Colors.blueGrey[100],
+                filled: true,
+                labelStyle: TextStyle(fontSize: 12),
+                contentPadding: EdgeInsets.only(left: 30),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.green),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.green),
+                  borderRadius: BorderRadius.circular(15),
                 ),
               ),
             ),
-            Container(
-              height: 60,
-              padding: kEdgeInsetsAllSNormal,
-              child: TextField(
-                style: kTextStyle,
-                obscureText: _isObscure,
-                autocorrect: true,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.only(left: 10.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0.0),
-                  ),
-                  prefixIcon: const Icon(
-                    Icons.lock_outline,
-                    color: kSecondaryColor2,
-                  ),
-                  suffixIcon: IconButton(
+          ),
+              SizedBox(height: 20,),
+              Container(
+                width: 350,
+                child: TextField(style: TextStyle(color: Colors.black),
+                  obscureText: _isObscure,
+                  autocorrect: true,
+                  decoration: InputDecoration(
+                   hintText: 'Enter Your Password',
+                    hintStyle: TextStyle(color: Colors.grey[500],),
+                    fillColor: Colors.blueGrey[100],
+                    filled: true,
+                    labelStyle: TextStyle(fontSize: 12),
+                    contentPadding: EdgeInsets.only(left: 30),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.green),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.green),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.lock_outline,
                       color: kSecondaryColor2,
-                      icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off),
-                      onPressed: () {
-                        setState(() {
-                          _isObscure = !_isObscure;
-                        });
-                      }),
-                  hintText: 'Password',
-                  hintStyle: kHintStyle,
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: kSecondaryColor2),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: kSecondaryColor2),
+                    ),
+                    suffixIcon: IconButton(
+                        color: kSecondaryColor2,
+                        icon: Icon(
+                            _isObscure ? Icons.visibility : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        }),
                   ),
                 ),
               ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        top: 9.0, bottom: 15.0, left: 9.0, right: 9.0),
-                    child: Container(
-                      height: 40,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(kDarkGreenColor),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(3.0),
-                            ),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: kEdgeInsetsAllTiny,
-                          child: Text(
-                            'Log In',
-                            style: GoogleFonts.roboto(
-                                fontSize: 18, color: kWhiteColor),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomePage(),
-                            ),
-                          );
-                        },
+              SizedBox(height: 30,),
+              Column(
+                children: [
+                  Container(
+                    decoration:BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    width: 350,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 10,
+                        backgroundColor: Colors.green[500],
                       ),
+                      child: Padding(
+                        padding: kEdgeInsetsAllTiny,
+                        child: Text(
+                          'Log In',
+                          style: GoogleFonts.roboto(
+                              fontSize: 18, color: kWhiteColor),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      },
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
