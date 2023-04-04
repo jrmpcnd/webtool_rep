@@ -6,7 +6,6 @@ import 'package:webtool_rep/UI/screens/administration/rolemanagement/addroles/ad
 import 'package:webtool_rep/UI/screens/administration/rolemanagement/role_management.dart';
 import 'package:webtool_rep/UI/screens/administration/usermanagement/adduser/add_user.dart';
 import 'package:webtool_rep/UI/screens/customerservice/csrdashboard/addcsrdashboard/add_csrdashboard.dart';
-import 'package:webtool_rep/UI/screens/homepage/main_dashboard.dart';
 import 'package:webtool_rep/UI/screens/login/change_password.dart';
 import 'package:webtool_rep/UI/screens/monitoring/agentdashboard/agent_dashboard.dart';
 import 'package:webtool_rep/UI/screens/monitoring/authorizedresetpassword/authorized_reset_password.dart';
@@ -104,7 +103,10 @@ import '../utilities/unit/addunit/addunit.dart';
 import '../utilities/unit/unit.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  static const String route = '/HomePage';
+  String? user;
+  String? oldpass;
+   HomePage({Key? key, this.user,this.oldpass}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -122,13 +124,13 @@ class _HomePageState extends State<HomePage> {
               width: 250.0,
               child: Drawer(
                   backgroundColor: Colors.green[200],
-                  child: Padding(padding: EdgeInsets.all(10),
+                  child: Padding(padding: const EdgeInsets.all(10),
                     child: ListView(
                       children: [
                         DrawerHeader(
                           child: Row(
                             children:  [
-                              SizedBox(width: 50,),
+                              const SizedBox(width: 50,),
                               Container(
                                 decoration: BoxDecoration(
                                   color: kTertiaryColor5,
@@ -146,11 +148,11 @@ class _HomePageState extends State<HomePage> {
                                         offset: const Offset(0, 1)),
                                   ],
                                 ),
-                                child: Image(
-                                  image: AssetImage("assets/icons/kplus.png"),
-                                ),
                                 height: 100,
                                 width: 100,
+                                child: const Image(
+                                  image: AssetImage("assets/icons/kplus.png"),
+                                ),
 
                               )
                             ],
@@ -179,9 +181,8 @@ class _HomePageState extends State<HomePage> {
                             child: [
                               Container(
                                 decoration: BoxDecoration(
-                                    color:shared.title == "Register Client"? Color(0xFF7FA998) :Colors.transparent, ),
+                                    color:shared.title == "Register Client"? const Color(0xFF7FA998) :Colors.transparent, ),
                                 child: Listtile(
-
                                   color: Colors.black,
                                   icon: Icons.account_circle_outlined,
                                   title: "Register Client",
@@ -210,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    color:shared.title == "Active Client"? Color(0xFF7FA998) :Colors.transparent
+                                    color:shared.title == "Active Client"? const Color(0xFF7FA998) :Colors.transparent
                                 ),
                                 child: Listtile(
                                   color: Colors.black,
@@ -240,7 +241,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                decoration: BoxDecoration(color:shared.title == "Client Transaction"? Color(0xFF7FA998) :Colors.transparent),
+                                decoration: BoxDecoration(color:shared.title == "Client Transaction"? const Color(0xFF7FA998) :Colors.transparent),
                                 child: Listtile(
                                   color: Colors.black,
                                   icon: Icons.receipt_long_outlined,
@@ -269,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                decoration:BoxDecoration(color:shared.title == "eLoad Transaction"? Color(0xFF7FA998) :Colors.transparent) ,
+                                decoration:BoxDecoration(color:shared.title == "eLoad Transaction"? const Color(0xFF7FA998) :Colors.transparent) ,
                                 child: Listtile(
                                   color: Colors.black,
                                   icon: Icons.receipt_outlined,
@@ -298,7 +299,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                decoration: BoxDecoration(color:shared.title == "Bank Transaction"? Color(0xFF7FA998) :Colors.transparent),
+                                decoration: BoxDecoration(color:shared.title == "Bank Transaction"? const Color(0xFF7FA998) :Colors.transparent),
                                 child: Listtile(
                                   color: Colors.black,
                                   icon: Icons.account_balance_outlined,
@@ -329,7 +330,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         Container(
                           decoration: BoxDecoration(
                             color: kTertiaryColor5,
@@ -352,7 +353,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Administration",
                             child: [
                               Container(
-                                decoration: BoxDecoration(color:shared.title == "User Management"? Color(0xFF7FA998) :Colors.transparent),
+                                decoration: BoxDecoration(color:shared.title == "User Management"? const Color(0xFF7FA998) :Colors.transparent),
                                 child: Listtile(
                                   color: Colors.black,
                                   icon: Icons.person_outline,
@@ -404,7 +405,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                decoration: BoxDecoration(color:shared.title == "Role Management"? Color(0xFF7FA998) :Colors.transparent),
+                                decoration: BoxDecoration(color:shared.title == "Role Management"? const Color(0xFF7FA998) :Colors.transparent),
                                 child: Listtile(
                                   color: Colors.black,
                                   icon: Icons.people_outline,
@@ -458,7 +459,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                decoration: BoxDecoration(color:shared.title == "Hierarchy"? Color(0xFF7FA998) :Colors.transparent),
+                                decoration: BoxDecoration(color:shared.title == "Hierarchy"? const Color(0xFF7FA998) :Colors.transparent),
 
                                 child: Listtile(
                                   color: Colors.black,
@@ -516,7 +517,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         Container(
                           decoration: BoxDecoration(
                             color: kTertiaryColor5,
@@ -539,7 +540,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Enrollment",
                             child: [
                               Container(
-                                decoration: BoxDecoration(color:shared.title == "Client List for Registration"? Color(0xFF7FA998) :Colors.transparent),
+                                decoration: BoxDecoration(color:shared.title == "Client List for Registration"? const Color(0xFF7FA998) :Colors.transparent),
 
                                 child: Listtile(
                                   color: Colors.black,
@@ -573,7 +574,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         Container(
                           decoration: BoxDecoration(
                             color: kTertiaryColor5,
@@ -596,7 +597,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Monitoring",
                             child: [
                               Container(
-                                decoration: BoxDecoration(color:shared.title == "Client Profile"? Color(0xFF7FA998) :Colors.transparent),
+                                decoration: BoxDecoration(color:shared.title == "Client Profile"? const Color(0xFF7FA998) :Colors.transparent),
 
                                 child: Listtile(
                                   color: Colors.black,
@@ -626,7 +627,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                decoration: BoxDecoration(color:shared.title == "Remittance Dashboard"? Color(0xFF7FA998) :Colors.transparent),
+                                decoration: BoxDecoration(color:shared.title == "Remittance Dashboard"? const Color(0xFF7FA998) :Colors.transparent),
 
                                 child: Listtile(
                                   color: Colors.black,
@@ -656,7 +657,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                decoration: BoxDecoration(color:shared.title == "Transaction for Confirmation"? Color(0xFF7FA998) :Colors.transparent),
+                                decoration: BoxDecoration(color:shared.title == "Transaction for Confirmation"? const Color(0xFF7FA998) :Colors.transparent),
 
                                 child: Listtile(
                                   color: Colors.black,
@@ -688,7 +689,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                decoration: BoxDecoration(color:shared.title == "Remittance Transaction Log"? Color(0xFF7FA998) :Colors.transparent),
+                                decoration: BoxDecoration(color:shared.title == "Remittance Transaction Log"? const Color(0xFF7FA998) :Colors.transparent),
 
                                 child: Listtile(
                                   color: Colors.black,
@@ -718,7 +719,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                decoration: BoxDecoration(color:shared.title == "SMS Logs"? Color(0xFF7FA998) :Colors.transparent),
+                                decoration: BoxDecoration(color:shared.title == "SMS Logs"? const Color(0xFF7FA998) :Colors.transparent),
 
                                 child: Listtile(
                                   color: Colors.black,
@@ -958,7 +959,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         Container(
                           decoration: BoxDecoration(
                             color: kTertiaryColor5,
@@ -1964,7 +1965,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         Container(
                           decoration: BoxDecoration(
                             color: kTertiaryColor5,
@@ -2104,7 +2105,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         Container(
                           decoration: BoxDecoration(
                             color: kTertiaryColor5,
@@ -2127,7 +2128,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Report",
                             child: [
                               Container(
-                                decoration: BoxDecoration(color:shared.title == "Webtool User Listing"? Color(0xFF7FA998) :Colors.transparent),
+                                decoration: BoxDecoration(color:shared.title == "Webtool User Listing"? const Color(0xFF7FA998) :Colors.transparent),
 
                                 child: Listtile(
 

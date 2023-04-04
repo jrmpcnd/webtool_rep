@@ -1,22 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:webtool_rep/UI/screens/homepage/homepage.dart';
+import 'package:webtool_rep/UI/screens/login/popup.dart';
 import 'package:webtool_rep/UI/utils/constant.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../../utils/edge_insect.dart';
-import '../../utils/text_styles.dart';
+import 'components/loginapi.dart';
 
 class buildCard extends StatefulWidget {
+
+  static const String route = 'Loginpage';
   const buildCard({Key? key}) : super(key: key);
 
   @override
   State<buildCard> createState() => _buildCardState();
 }
 
+
 class _buildCardState extends State<buildCard> {
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController userController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+    userController.dispose();
+    passController.dispose();
+  }
   bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
+    void pop() {
+      Navigator.pop(context);
+    }
+
+    Login login = Login();
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
@@ -37,107 +55,186 @@ class _buildCardState extends State<buildCard> {
           ],
         ),
         width: 430,
-        height: 300,
+        height: 350,
         padding: kEdgeInsetsAllSNormal,
         child: Padding(padding: EdgeInsets.all(10),
-          child: Column(
-            children: [
-              SizedBox(height: 30.0),
-          Container(
-            width: 350,
-            child: TextField(
-              style: TextStyle(color: Colors.black),
-              cursorColor: Colors.green,
-              decoration: InputDecoration(
-                hintText: 'Enter Your Email',
-                hintStyle: TextStyle(color: Colors.grey[500]),
-                fillColor: Colors.blueGrey[100],
-                filled: true,
-                labelStyle: TextStyle(fontSize: 12),
-                contentPadding: EdgeInsets.only(left: 30),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.green),
-                  borderRadius: BorderRadius.circular(15),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const SizedBox(height: 30.0),
+            Container(
+              width: 350,
+              child: TextFormField(
+                style: const TextStyle(color: Colors.black),
+                cursorColor: Colors.green,
+                decoration: InputDecoration(
+                  hintText: 'Enter Your Email',
+                  hintStyle: TextStyle(color: Colors.grey[600]),
+                  fillColor: Colors.white,
+                  filled: true,
+                  labelStyle: const TextStyle(fontSize: 12),
+                  contentPadding: EdgeInsets.only(left: 30),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.green),
-                  borderRadius: BorderRadius.circular(15),
-                ),
+
+                controller: userController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please insert Username';
+                  }
+                },
               ),
             ),
-          ),
-              SizedBox(height: 20,),
-              Container(
-                width: 350,
-                child: TextField(style: TextStyle(color: Colors.black),
-                  obscureText: _isObscure,
-                  autocorrect: true,
-                  decoration: InputDecoration(
-                   hintText: 'Enter Your Password',
-                    hintStyle: TextStyle(color: Colors.grey[500],),
-                    fillColor: Colors.blueGrey[100],
-                    filled: true,
-                    labelStyle: TextStyle(fontSize: 12),
-                    contentPadding: EdgeInsets.only(left: 30),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    prefixIcon: const Icon(
-                      Icons.lock_outline,
-                      color: kSecondaryColor2,
-                    ),
-                    suffixIcon: IconButton(
+                SizedBox(height: 20,),
+                Container(
+                  width: 350,
+                  child: TextFormField(style: TextStyle(color: Colors.black),
+                    obscureText: _isObscure,
+                    autocorrect: true,
+                    cursorColor: Colors.green,
+                    decoration: InputDecoration(
+                     hintText: 'Enter Your Password',
+                      hintStyle: TextStyle(color: Colors.grey[600],),
+                      fillColor: Colors.white,
+                      filled: true,
+                      labelStyle: TextStyle(fontSize: 12),
+                      contentPadding: EdgeInsets.only(left: 30),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.lock_outline,
                         color: kSecondaryColor2,
-                        icon: Icon(
-                            _isObscure ? Icons.visibility : Icons.visibility_off),
-                        onPressed: () {
-                          setState(() {
-                            _isObscure = !_isObscure;
-                          });
-                        }),
+                      ),
+                      suffixIcon: IconButton(
+                          color: kSecondaryColor2,
+                          icon: Icon(
+                              _isObscure ? Icons.visibility : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _isObscure = !_isObscure;
+                            });
+                          }),
+                    ),
+                    controller: passController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please insert Password';
+                      }
+                    },
                   ),
                 ),
-              ),
-              SizedBox(height: 30,),
-              Column(
-                children: [
-                  Container(
-                    decoration:BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    width: 350,
-                    height: 50,
-                    child: ElevatedButton(
+                SizedBox(height: 25,),
+                Column(
+                  children: [
+                    ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        elevation: 10,
-                        backgroundColor: Colors.green[500],
-                      ),
-                      child: Padding(
-                        padding: kEdgeInsetsAllTiny,
-                        child: Text(
-                          'Log In',
-                          style: GoogleFonts.roboto(
-                              fontSize: 18, color: kWhiteColor),
+                        backgroundColor: Colors.green,
+                        fixedSize: const Size(350, 45),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomePage(),
-                          ),
-                        );
+                      child: const Text("Submit"),
+                      onPressed: () async {
+                        print("--------->>>>>>>>>>>>>>>>12$_formKey");
+                        if (_formKey.currentState!.validate()) {
+                          AlertDialog loading = AlertDialog(
+                            backgroundColor: Colors.white,
+                            title: Text("Please Wait",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
+                            content: Row(children: [
+                              CircularProgressIndicator(color: Colors.black,),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text("Loading...",style: TextStyle(color: Colors.black),)
+                            ]),
+                          );
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return loading;
+                            },
+                          );
+                          http.Response response = await login.login(
+                              userController.text, passController.text);
+                          // http.Response res = await search.search(userController.text);
+                          print(jsonDecode(response.body)['message']);
+
+                          // print(jsonDecode(res.body)['data']['name']);
+                          if (await jsonDecode(response.body)['message'].contains(
+                              'You need to input a new password. Confirm your email.')) {
+                            pop();
+                            Navigator.of(context).pushNamed(Pop.route);
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return Pop(
+                                  user: userController.text,
+                                  oldpass: passController.text,
+                                );
+                              },
+                            ));
+                            debugPrint('Login Failed');
+                          } else {
+                            if (jsonDecode(response.body)['message']
+                                .toString()
+                                .toLowerCase()
+                                .contains('successfully')) {
+                              pop();
+                              Navigator.pushReplacement(context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return HomePage(
+                                        user: userController.text,
+                                        oldpass: passController.text,
+                                      );
+                                    },
+                                  ));
+                            } else {
+                              pop();
+                              var message =
+                              jsonDecode(response.body)['message'];
+                              AlertDialog alert = AlertDialog(
+                                title: Text("Invalid Login"),
+                                content: Text(message),
+                                actions: [
+                                  TextButton(
+                                    child: Text("OK"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                              await showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
+                            }
+                          }
+                        }
                       },
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

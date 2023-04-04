@@ -1,3 +1,9 @@
-2023/03/29-08:29:05.588 2a397 Reusing MANIFEST /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.Bbqv5l/flutter_tools_chrome_device.OSGkEj/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/03/29-08:29:05.609 2a397 Recovering log #26
-2023/03/29-08:29:05.618 2a397 Reusing old log /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.Bbqv5l/flutter_tools_chrome_device.OSGkEj/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/000026.log 
+2023/04/04-10:00:28.091 9307 Reusing MANIFEST /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.TrYojK/flutter_tools_chrome_device.39Nifh/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/04/04-10:00:28.099 9307 Recovering log #26
+2023/04/04-10:00:28.106 9307 Reusing old log /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.TrYojK/flutter_tools_chrome_device.39Nifh/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/000026.log 
+2023/04/04-10:00:28.106 9307 Delete type=0 #4
+2023/04/04-10:00:28.106 9307 Delete type=0 #3
+2023/04/04-10:00:28.107 9307 Delete type=2 #5
+2023/04/04-10:00:28.107 9307 Delete type=2 #21
+2023/04/04-10:00:28.107 9307 Delete type=2 #24
+2023/04/04-10:00:28.107 9307 Delete type=0 #22

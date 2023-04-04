@@ -63,7 +63,9 @@ class MyApp extends StatelessWidget {
                 .apply(bodyColor: kWhiteColor),
             canvasColor: kSecondaryColor2,
           ),
-          home: Loginpage()),
+          home: Loginpage(),
+      ),
+
     );
   }
 }

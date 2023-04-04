@@ -22,7 +22,7 @@ class _ActiveclientState extends State<Activeclient> {
             height: 530,
             child: WebView(
               initialUrl:
-                  'https://datastudio.google.com/embed/reporting/d483b67a-c8a3-4c96-9e8d-048f86f4db59/page/GzUdC',
+                  'https://lookerstudio.google.com/reporting/c829bc0c-a2dd-40b2-84e6-6fa187a6ce2a',
               javascriptMode: JavascriptMode.unrestricted,
               onWebViewCreated: (controller) {
                 this.controller = controller;
