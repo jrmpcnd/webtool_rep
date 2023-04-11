@@ -205,12 +205,11 @@ class _UsermanagementState extends State<Usermanagement> {
                                     MaterialStateProperty.all(kPrimaryColor)),
                             onPressed: () {
                               try {
-                                if (controller1
-                                        .text.isNotEmpty &&
+                                if (controller1.text.isNotEmpty &&
                                     controller2.text.isNotEmpty &&
                                     controller3.text.isNotEmpty &&
-                                    controller4.text.isNotEmpty&&
-                                init.toString().isNotEmpty) {
+                                    controller4.text.isNotEmpty &&
+                                    init.toString().isNotEmpty) {
                                   setState(() {
                                     isLoaded = false;
                                   });
@@ -220,17 +219,16 @@ class _UsermanagementState extends State<Usermanagement> {
                                     print(i.userLogin?.toLowerCase().contains(
                                         controller4.text.toLowerCase()));
                                     if (i.toJson().isNotEmpty) {
-                                      if (init.toLowerCase().contains(
-                                          'inactive')) {
-                                        if (i.userLogin!.toLowerCase().contains(
-                                            controller4.text.toLowerCase()) ||
+                                      if (init
+                                          .toLowerCase()
+                                          .contains('inactive')) {
+                                        if (i.userLogin!.toLowerCase().contains(controller4.text.toLowerCase()) ||
                                             i.lastName!.toLowerCase().contains(
                                                 controller3.text
                                                     .toLowerCase()) ||
                                             i.middleName!
                                                 .toLowerCase()
-                                                .contains(
-                                                controller2.text
+                                                .contains(controller2.text
                                                     .toLowerCase()) ||
                                             i.givenName!.toLowerCase().contains(
                                                 controller1.text
@@ -240,14 +238,13 @@ class _UsermanagementState extends State<Usermanagement> {
                                                 .contains(init)) {
                                           debugPrint(i.userLogin);
                                           setState(() {
-                                            shared.user_data
-                                                .add(
+                                            shared.user_data.add(
                                                 Data2.fromJson(i.toJson()));
                                           });
                                           if (shared.user_data.isNotEmpty) {
                                             Future.delayed(
                                               Duration(seconds: 1),
-                                                  () {
+                                              () {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
@@ -256,30 +253,38 @@ class _UsermanagementState extends State<Usermanagement> {
                                           }
                                         }
                                       }
-                                      if(!init.toLowerCase().contains('inactive')){
-                                        if (i.userLogin!.toLowerCase().contains(
-                                            controller4.text.toLowerCase()) ||
-                                            i.lastName!.toLowerCase().contains(
-                                                controller3.text
-                                                    .toLowerCase()) ||
-                                            i.middleName!
+                                      if (!init
+                                          .toLowerCase()
+                                          .contains('inactive')) {
+                                        if (i.userLogin!
                                                 .toLowerCase()
                                                 .contains(
-                                                controller2.text
+                                                    controller4
+                                                        .text
+                                                        .toLowerCase()) ||
+                                            i
+                                                .lastName!
+                                                .toLowerCase()
+                                                .contains(
+                                                    controller3
+                                                        .text
+                                                        .toLowerCase()) ||
+                                            i.middleName!
+                                                .toLowerCase()
+                                                .contains(controller2.text
                                                     .toLowerCase()) ||
                                             i.givenName!.toLowerCase().contains(
                                                 controller1.text
                                                     .toLowerCase())) {
                                           debugPrint(i.userLogin);
                                           setState(() {
-                                            shared.user_data
-                                                .add(
+                                            shared.user_data.add(
                                                 Data2.fromJson(i.toJson()));
                                           });
                                           if (shared.user_data.isNotEmpty) {
                                             Future.delayed(
                                               Duration(seconds: 1),
-                                                  () {
+                                              () {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
@@ -289,11 +294,10 @@ class _UsermanagementState extends State<Usermanagement> {
                                         }
                                       }
                                     }
-
                                   }
                                 }
-                                if(init.isNotEmpty) {
-                                  if(init.toLowerCase().contains('inactive')){
+                                if (init.isNotEmpty) {
+                                  if (init.toLowerCase().contains('inactive')) {
                                     setState(() {
                                       isLoaded = false;
                                     });
@@ -303,17 +307,18 @@ class _UsermanagementState extends State<Usermanagement> {
                                       print(i.userLogin?.toLowerCase().contains(
                                           controller4.text.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
-                                        if (i.checkStatus!.toLowerCase().contains(
-                                           init.toLowerCase())) {
+                                        if (i.checkStatus!
+                                            .toLowerCase()
+                                            .contains(init.toLowerCase())) {
                                           debugPrint(i.userLogin);
                                           setState(() {
-                                            shared.user_data
-                                                .add(Data2.fromJson(i.toJson()));
+                                            shared.user_data.add(
+                                                Data2.fromJson(i.toJson()));
                                           });
                                           if (shared.user_data.isNotEmpty) {
                                             Future.delayed(
                                               Duration(seconds: 1),
-                                                  () {
+                                              () {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
@@ -324,7 +329,9 @@ class _UsermanagementState extends State<Usermanagement> {
                                       }
                                     }
                                   }
-                                  if(!init.toLowerCase().contains('inactive')){
+                                  if (!init
+                                      .toLowerCase()
+                                      .contains('inactive')) {
                                     setState(() {
                                       isLoaded = false;
                                     });
@@ -334,17 +341,18 @@ class _UsermanagementState extends State<Usermanagement> {
                                       print(i.userLogin?.toLowerCase().contains(
                                           controller4.text.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
-                                        if (!i.checkStatus!.toLowerCase().contains(
-                                            init.toLowerCase())) {
+                                        if (!i.checkStatus!
+                                            .toLowerCase()
+                                            .contains(init.toLowerCase())) {
                                           debugPrint(i.userLogin);
                                           setState(() {
-                                            shared.user_data
-                                                .add(Data2.fromJson(i.toJson()));
+                                            shared.user_data.add(
+                                                Data2.fromJson(i.toJson()));
                                           });
                                           if (shared.user_data.isNotEmpty) {
                                             Future.delayed(
                                               Duration(seconds: 1),
-                                                  () {
+                                              () {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
@@ -583,20 +591,36 @@ class _UsermanagementState extends State<Usermanagement> {
                         verticalSpaceTiny,
                         elevatedbuttonpopup(label: "Branch", width: 400.0),
                         verticalSpaceTiny,
-                        DropdownButton(
-                          value: init,
-                          items: res.map((e) {
-                            return DropdownMenuItem(
-                              value: e,
-                              child: Text(e,
-                                  style: TextStyle(color: Colors.black)),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              init = value.toString();
-                            });
-                          },
+                        Container(
+                          height: 35.0,
+                          width: 400,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.fromBorderSide(
+                              BorderSide(color: Color(0xFF000000), width: 1),
+                            ),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: Padding(
+                              padding: EdgeInsets.all(5),
+                              child: DropdownButton(
+                                value: init,
+                                items: res.map((e) {
+                                  return DropdownMenuItem(
+                                    value: e,
+                                    child: Text(e,
+                                        style: kTextStyle),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    init = value.toString();
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
                         ),
                         verticalSpaceMedium,
                       ],
