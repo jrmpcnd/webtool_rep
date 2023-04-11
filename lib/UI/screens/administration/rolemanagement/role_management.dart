@@ -110,100 +110,6 @@ class _RolemanagementState extends State<Rolemanagement> {
                                 ),
                                 textInputAction: TextInputAction.go,
                                 controller: controller,
-                                onChanged: (value) {
-                                  setState(() {
-                                    isLoaded = false;
-                                  });
-                                  //
-                                  try {
-                                    if (controller.text.isNotEmpty) {
-                                      shared.role_data.clear();
-                                      for (var i in shared.role[0].data!) {
-                                        print(i.toJson());
-                                        print(i.role_name
-                                            ?.toLowerCase()
-                                            .contains(controller.text.toLowerCase()));
-                                        if (i.toJson().isNotEmpty) {
-                                          if (i.role_name!
-                                              .toLowerCase()
-                                              .contains(controller.text.toLowerCase()) ||
-                                              i.role_desc!
-                                                  .toLowerCase()
-                                                  .contains(controller.text.toLowerCase())) {
-                                            debugPrint(i.role_name);
-                                            setState(() {
-                                              shared.role_data.add(Data(
-                                                  role_name: i.role_name,
-                                                  role_desc: i.role_desc,
-                                                  role_id: i.role_id));
-                                            });
-                                            if (shared.role_data.isNotEmpty) {
-                                              setState(() {
-                                                isLoaded = true;
-                                              });
-                                            }
-                                          }
-                                        }
-                                      }
-                                    } else if (controller.text == '') {
-                                      shared.role_data.clear();
-                                      setState(() {
-                                        shared.role_data.addAll(shared.role[0].data!);
-                                        isLoaded = true;
-                                      });
-                                    }
-                                    debugPrint(shared.role_data[0].toJson().toString());
-                                  } catch (e) {
-                                    shared.role_data.clear();
-                                    isLoaded = true;
-                                  }
-                                },
-                                onEditingComplete: () async {
-                                  setState(() {
-                                    isLoaded = false;
-                                  });
-                                  try {
-                                    if (controller.text.isNotEmpty) {
-                                      shared.role_data.clear();
-                                      for (var i in shared.role[0].data!) {
-                                        print(i.toJson());
-                                        print(i.role_name
-                                            ?.toLowerCase()
-                                            .contains(controller.text.toLowerCase()));
-                                        if (i.toJson().isNotEmpty) {
-                                          if (i.role_name!
-                                              .toLowerCase()
-                                              .contains(controller.text.toLowerCase()) ||
-                                              i.role_desc!
-                                                  .toLowerCase()
-                                                  .contains(controller.text.toLowerCase())) {
-                                            debugPrint(i.role_name);
-                                            setState(() {
-                                              key.currentState?.pageTo(0);
-                                              shared.role_data.add(Data(
-                                                  role_name: i.role_name,
-                                                  role_desc: i.role_desc,
-                                                  role_id: i.role_id));
-                                            });
-                                            if (shared.role_data.isNotEmpty) {
-                                              setState(() {
-                                                isLoaded = true;
-                                              });
-                                            }
-                                          }
-                                        }
-                                      }
-                                    } else if (controller.text == '') {
-                                      shared.role_data.clear();
-                                      setState(() {
-                                        shared.role_data.addAll(shared.role[0].data!);
-                                      });
-                                    }
-                                    debugPrint(shared.role_data[0].toJson().toString());
-                                  } catch (e) {
-                                    shared.role_data.clear();
-                                  }
-                                },
                               ),
                             ),
                             verticalSpaceTiny,
@@ -222,7 +128,46 @@ class _RolemanagementState extends State<Rolemanagement> {
                                     style: ButtonStyle(
                                         backgroundColor:
                                         MaterialStateProperty.all(kPrimaryColor)),
-                                    onPressed: () {},
+                                   onPressed: (){
+                                      try{
+                                        if (controller.text.isNotEmpty) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.role_data.clear();
+                                          for (var i in shared.role[0].data!) {
+                                            print(i.toJson());
+                                            print(i.role_name?.toLowerCase().contains(
+                                                controller.text.toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.role_name!.toLowerCase().contains(
+                                                  controller.text.toLowerCase())) {
+                                                debugPrint(i.role_name);
+                                                setState(() {
+                                                  shared.role_data
+                                                      .add(Data.fromJson(i.toJson()));
+                                                });
+                                                if (shared.role_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                        debugPrint(
+                                            shared.role_data[0].toJson().toString());
+                                      }catch (e) {
+                                        shared.role_data.clear();
+                                        isLoaded = true;
+                                      }
+                                   },
                                     icon: const Icon(
                                       Icons.search,
                                       size: 20.0,
@@ -241,7 +186,24 @@ class _RolemanagementState extends State<Rolemanagement> {
                                     style: ButtonStyle(
                                         backgroundColor: MaterialStateProperty.all(
                                             kSecondaryColor2)),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      setState(() {
+                                        isLoaded = false;
+                                      });
+                                      controller.clear();
+                                      shared.role_data.clear();
+                                      setState(() {
+                                        shared.role_data.addAll(shared.role[0].data!);
+                                        Future.delayed(
+                                          Duration(seconds: 1),
+                                              () {
+                                            setState(() {
+                                              isLoaded = true;
+                                            });
+                                          },
+                                        );
+                                      });
+                                    },
                                     icon: const Icon(
                                       Icons.refresh,
                                       size: 20.0,
