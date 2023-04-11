@@ -4,6 +4,7 @@ import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/utils/constant.dart';
 import 'package:webtool_rep/UI/utils/edge_insect.dart';
 import 'package:webtool_rep/UI/utils/model.dart';
+import 'package:webtool_rep/UI/utils/spacing.dart';
 import 'package:webtool_rep/UI/utils/text_styles.dart';
 import 'package:webtool_rep/core/providers/data_provider.dart';
 
@@ -205,6 +206,54 @@ class _RolemanagementState extends State<Rolemanagement> {
                                 },
                               ),
                             ),
+                            verticalSpaceTiny,
+                            // DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                            //   setState(() {
+                            //     init = value.toString();
+                            //   });
+                            // },),
+                            verticalSpaceSmall,
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 100.0,
+                                  height: 35.0,
+                                  child: ElevatedButton.icon(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                        MaterialStateProperty.all(kPrimaryColor)),
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.search,
+                                      size: 20.0,
+                                    ),
+                                    label: Text(
+                                      'Search',
+                                      style: kSmallRegularTextStyle,
+                                    ),
+                                  ),
+                                ),
+                                horizontalSpaceTiny,
+                                SizedBox(
+                                  width: 100.0,
+                                  height: 35.0,
+                                  child: ElevatedButton.icon(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            kSecondaryColor2)),
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.refresh,
+                                      size: 20.0,
+                                    ),
+                                    label: Text(
+                                      'Reset',
+                                      style: kSmallRegularTextStyle,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ],
@@ -220,7 +269,7 @@ class _RolemanagementState extends State<Rolemanagement> {
               padding: kEdgeInsetsVerticalNormal,
               child: Theme(
                 data: Theme.of(context)
-                    .copyWith(cardColor: Color(0xFF1B3C59),),
+                    .copyWith(cardColor: Color(0xFF6F8A71),),
 
 
                 child: PaginatedDataTable(

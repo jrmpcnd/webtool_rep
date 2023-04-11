@@ -59,9 +59,9 @@ class _UsermanagementState extends State<Usermanagement> {
     });
   }
 
-  getCenter()async{
+  getCenter() async {
     List<dynamic> dlist = await dropdownstatus.getUserstatus();
-    for(var i in dlist){
+    for (var i in dlist) {
       setState(() {
         res.add(i['get_um_userstatus_dropdown']);
       });
@@ -69,8 +69,8 @@ class _UsermanagementState extends State<Usermanagement> {
     setState(() {
       init = res[0];
     });
-
   }
+
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Prov1>(context);
@@ -81,613 +81,592 @@ class _UsermanagementState extends State<Usermanagement> {
     ScrollController scrollController = ScrollController();
     return Container(
       padding: kEdgeInsetsVerticalNormal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Expanded(
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Container(
+            decoration: BoxDecoration(
+              color: kTertiaryColor5,
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                    offset: Offset(0, 3)),
+              ],
+            ),
+            height: 200.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 35.0,
+                              width: 400,
+                              child: TextFormField(
+                                style: kTextStyle,
+                                decoration: const InputDecoration(
+                                  hintText: 'First Name',
+                                  border: OutlineInputBorder(),
+                                  labelStyle: TextStyle(fontSize: 12.0),
+                                  contentPadding: EdgeInsets.only(left: 10.0),
+                                  hintStyle: TextStyle(color: kSecondaryColor2),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: kBlackColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: kBlackColor),
+                                  ),
+                                ),
+                                textInputAction: TextInputAction.go,
+                                controller: controller1,
+                              ),
+                            ),
+                            verticalSpaceTiny,
+                            SizedBox(
+                              height: 35.0,
+                              width: 400,
+                              child: TextFormField(
+                                style: kTextStyle,
+                                decoration: const InputDecoration(
+                                  hintText: 'Middle Name',
+                                  border: OutlineInputBorder(),
+                                  labelStyle: TextStyle(fontSize: 12.0),
+                                  contentPadding: EdgeInsets.only(left: 10.0),
+                                  hintStyle: TextStyle(color: kSecondaryColor2),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: kBlackColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: kBlackColor),
+                                  ),
+                                ),
+                                textInputAction: TextInputAction.go,
+                                controller: controller2,
+                              ),
+                            ),
+                            verticalSpaceTiny,
+                            SizedBox(
+                              height: 35.0,
+                              width: 400,
+                              child: TextFormField(
+                                style: kTextStyle,
+                                decoration: const InputDecoration(
+                                  hintText: 'Last Name',
+                                  border: OutlineInputBorder(),
+                                  labelStyle: TextStyle(fontSize: 12.0),
+                                  contentPadding: EdgeInsets.only(left: 10.0),
+                                  hintStyle: TextStyle(color: kSecondaryColor2),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: kBlackColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: kBlackColor),
+                                  ),
+                                ),
+                                textInputAction: TextInputAction.go,
+                                controller: controller3,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: Offset(0, 3)),
-                    ],
-                  ),
-                  height: 200.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            children: [
-                              Column(
-                                children: [
-                                 SizedBox(
-                                   height: 35.0,
-                                   width: 400,
-                                   child: TextFormField(
-                                     style: kTextStyle,
-                                     decoration: const InputDecoration(
-                                       hintText: 'First Name',
-                                       border: OutlineInputBorder(),
-                                       labelStyle: TextStyle(fontSize: 12.0),
-                                       contentPadding: EdgeInsets.only(left: 10.0),
-                                       hintStyle: TextStyle(color: kSecondaryColor2),
-                                       enabledBorder: OutlineInputBorder(
-                                         borderSide: BorderSide(color: kBlackColor),
-                                       ),
-                                       focusedBorder: OutlineInputBorder(
-                                         borderSide: BorderSide(color: kBlackColor),
-                                       ),
-                                     ),
-                                     textInputAction: TextInputAction.go,
-                                     controller: controller1,
-                                     onChanged: (value) {
-                                       setState(() {
-                                         isLoaded = false;
-                                       });
-                                       try {
-                                         if (controller1.text.isNotEmpty) {
-                                           shared.user_data.clear();
-                                           for (var i in shared.user[0].data!) {
-                                             print(i.toJson());
-                                             print(i.userLogin
-                                                 ?.toLowerCase()
-                                                 .contains(controller1.text.toLowerCase()));
-                                             if (i.toJson().isNotEmpty) {
-                                               if (i.givenName!
-                                                   .toLowerCase()
-                                                   .contains(controller1.text.toLowerCase())
-
-                                               ) {
-                                                 debugPrint(i.givenName);
-                                                 setState(() {
-                                                   shared.user_data.add(Data2.fromJson(i.toJson()));
-                                                 });
-                                                 if (shared.user_data.isNotEmpty) {
-                                                   setState(() {
-                                                     isLoaded = true;
-                                                   });
-                                                 }
-                                               }
-                                             }
-                                           }
-                                         } else if (controller1.text == '') {
-                                           shared.user_data.clear();
-                                           setState(() {
-                                             shared.user_data.addAll(shared.user[0].data!);
-                                             isLoaded = true;
-                                           });
-                                         }
-                                         debugPrint(shared.user_data[0].toJson().toString());
-                                       } catch (e) {
-                                         shared.user_data.clear();
-                                         isLoaded = true;
-                                       }
-                                     },
-                                     onEditingComplete: () async {
-                                       setState(() {
-                                         isLoaded = false;
-                                       });
-                                       try {
-                                         if (controller1.text.isNotEmpty) {
-                                           shared.user_data.clear();
-                                           for (var i in shared.user[0].data!) {
-                                             print(i.toJson());
-                                             print(i.givenName
-                                                 ?.toLowerCase()
-                                                 .contains(controller1.text.toLowerCase()));
-                                             if (i.toJson().isNotEmpty) {
-                                               if (i.givenName!
-                                                   .toLowerCase()
-                                                   .contains(controller1.text.toLowerCase()) ||
-                                                   i.lastName!
-                                                       .toLowerCase()
-                                                       .contains(controller1.text.toLowerCase())) {
-                                                 debugPrint(i.givenName);
-                                                 setState(() {
-                                                   key.currentState?.pageTo(0);
-                                                   shared.user_data.add(Data2.fromJson(i.toJson()));
-                                                 });
-                                                 if (shared.user_data.isNotEmpty) {
-                                                   setState(() {
-                                                     isLoaded = true;
-                                                   });
-                                                 }
-                                               }
-                                             }
-                                           }
-                                         } else if (controller1.text == '') {
-                                           shared.user_data.clear();
-                                           setState(() {
-                                             shared.user_data.addAll(shared.user[0].data!);
-                                           });
-                                         }
-                                         debugPrint(shared.user_data[0].toJson().toString());
-                                       } catch (e) {
-                                         shared.user_data.clear();
-                                       }
-                                     },
-                                   ),
-                                 ),
-                                  verticalSpaceTiny,
-
-                                  SizedBox(
-                                    height: 35.0,
-                                    width: 400,
-                                    child: TextFormField(
-                                      style: kTextStyle,
-                                      decoration: const InputDecoration(
-                                        hintText: 'Middle Name',
-                                        border: OutlineInputBorder(),
-                                        labelStyle: TextStyle(fontSize: 12.0),
-                                        contentPadding: EdgeInsets.only(left: 10.0),
-                                        hintStyle: TextStyle(color: kSecondaryColor2),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: kBlackColor),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: kBlackColor),
-                                        ),
-                                      ),
-
-                                      textInputAction: TextInputAction.go,
-                                      controller: controller2,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          isLoaded = false;
-                                        });
-                                        try {
-                                          if (controller2.text.isNotEmpty) {
-                                            shared.user_data.clear();
-                                            for (var i in shared.user[0].data!) {
-                                              print(i.toJson());
-                                              print(i.userLogin
-                                                  ?.toLowerCase()
-                                                  .contains(controller2.text.toLowerCase()));
-                                              if (i.toJson().isNotEmpty) {
-                                                if (i.middleName!
-                                                    .toLowerCase()
-                                                    .contains(controller2.text.toLowerCase())
-
-                                                ) {
-                                                  debugPrint(i.middleName);
-                                                  setState(() {
-                                                    shared.user_data.add(Data2.fromJson(i.toJson()));
-                                                  });
-                                                  if (shared.user_data.isNotEmpty) {
-                                                    setState(() {
-                                                      isLoaded = true;
-                                                    });
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          } else if (controller2.text == '') {
-                                            shared.user_data.clear();
-                                            setState(() {
-                                              shared.user_data.addAll(shared.user[0].data!);
-                                              isLoaded = true;
-                                            });
-                                          }
-                                          debugPrint(shared.user_data[0].toJson().toString());
-                                        } catch (e) {
-                                          shared.user_data.clear();
-                                          isLoaded = true;
-                                        }
-                                      },
-                                      onEditingComplete: () async {
-                                        setState(() {
-                                          isLoaded = false;
-                                        });
-                                        try {
-                                          if (controller2.text.isNotEmpty) {
-                                            shared.user_data.clear();
-                                            for (var i in shared.user[0].data!) {
-                                              print(i.toJson());
-                                              print(i.middleName
-                                                  ?.toLowerCase()
-                                                  .contains(controller2.text.toLowerCase()));
-                                              if (i.toJson().isNotEmpty) {
-                                                if (i.middleName!
-                                                    .toLowerCase()
-                                                    .contains(controller2.text.toLowerCase()))
-                                                  debugPrint(i.givenName);
-                                                  setState(() {
-                                                    key.currentState?.pageTo(0);
-                                                    shared.user_data.add(Data2.fromJson(i.toJson()));
-                                                  });
-                                                  if (shared.user_data.isNotEmpty) {
-                                                    setState(() {
-                                                      isLoaded = true;
-                                                    });
-                                                  }
-
-                                              }
-                                            }
-                                          } else if (controller2.text == '') {
-                                            shared.user_data.clear();
-                                            setState(() {
-                                              shared.user_data.addAll(shared.user[0].data!);
-                                            });
-                                          }
-                                          debugPrint(shared.user_data[0].toJson().toString());
-                                        } catch (e) {
-                                          shared.user_data.clear();
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  verticalSpaceTiny,
-
-                                  SizedBox(
-                                    height: 35.0,
-                                    width: 400,
-                                    child: TextFormField(
-                                      style: kTextStyle,
-                                      decoration: const InputDecoration(
-                                        hintText: 'Last Name',
-                                        border: OutlineInputBorder(),
-                                        labelStyle: TextStyle(fontSize: 12.0),
-                                        contentPadding: EdgeInsets.only(left: 10.0),
-                                        hintStyle: TextStyle(color: kSecondaryColor2),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: kBlackColor),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: kBlackColor),
-                                        ),
-                                      ),
-                                      textInputAction: TextInputAction.go,
-                                      controller: controller3,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          isLoaded = false;
-                                        });
-                                        try {
-                                          if (controller3.text.isNotEmpty) {
-                                            shared.user_data.clear();
-                                            for (var i in shared.user[0].data!) {
-                                              print(i.toJson());
-                                              print(i.userLogin
-                                                  ?.toLowerCase()
-                                                  .contains(controller3.text.toLowerCase()));
-                                              if (i.toJson().isNotEmpty) {
-                                                if (i.lastName!
-                                                    .toLowerCase()
-                                                    .contains(controller3.text.toLowerCase())
-
-                                                ) {
-                                                  debugPrint(i.lastName);
-                                                  setState(() {
-                                                    shared.user_data.add(Data2.fromJson(i.toJson()));
-                                                  });
-                                                  if (shared.user_data.isNotEmpty) {
-                                                    setState(() {
-                                                      isLoaded = true;
-                                                    });
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          } else if (controller3.text == '') {
-                                            shared.user_data.clear();
-                                            setState(() {
-                                              shared.user_data.addAll(shared.user[0].data!);
-                                              isLoaded = true;
-                                            });
-                                          }
-                                          debugPrint(shared.user_data[0].toJson().toString());
-                                        } catch (e) {
-                                          shared.user_data.clear();
-                                          isLoaded = true;
-                                        }
-                                      },
-                                      onEditingComplete: () async {
-                                        setState(() {
-                                          isLoaded = false;
-                                        });
-                                        try {
-                                          if (controller3.text.isNotEmpty) {
-                                            shared.user_data.clear();
-                                            for (var i in shared.user[0].data!) {
-                                              print(i.toJson());
-                                              print(i.lastName
-                                                  ?.toLowerCase()
-                                                  .contains(controller3.text.toLowerCase()));
-                                              if (i.toJson().isNotEmpty) {
-                                                if (i.lastName!
-                                                    .toLowerCase()
-                                                    .contains(controller3.text.toLowerCase()))
-                                                  debugPrint(i.lastName);
-                                                setState(() {
-                                                  key.currentState?.pageTo(0);
-                                                  shared.user_data.add(Data2.fromJson(i.toJson()));
-                                                });
-                                                if (shared.user_data.isNotEmpty) {
-                                                  setState(() {
-                                                    isLoaded = true;
-                                                  });
-                                                }
-
-                                              }
-                                            }
-                                          } else if (controller3.text == '') {
-                                            shared.user_data.clear();
-                                            setState(() {
-                                              shared.user_data.addAll(shared.user[0].data!);
-                                            });
-                                          }
-                                          debugPrint(shared.user_data[0].toJson().toString());
-                                        } catch (e) {
-                                          shared.user_data.clear();
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          verticalSpaceTiny,
-                          // DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                          //   setState(() {
-                          //     init = value.toString();
-                          //   });
-                          // },),
-                          verticalSpaceSmall,
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 100.0,
-                                height: 35.0,
-                                child: ElevatedButton.icon(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kPrimaryColor)),
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.search,
-                                    size: 20.0,
-                                  ),
-                                  label: Text(
-                                    'Search',
-                                    style: kSmallRegularTextStyle,
-                                  ),
-                                ),
-                              ),
-                              horizontalSpaceTiny,
-                              SizedBox(
-                                width: 100.0,
-                                height: 35.0,
-                                child: ElevatedButton.icon(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kSecondaryColor2)),
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.refresh,
-                                    size: 20.0,
-                                  ),
-                                  label: Text(
-                                    'Reset',
-                                    style: kSmallRegularTextStyle,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      horizontalSpaceMedium,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 35.0,
-                                width: 400,
-                                child: TextFormField(
-                                  style: kTextStyle,
-                                  decoration: const InputDecoration(
-                                    hintText: 'User Name',
-                                    border: OutlineInputBorder(),
-                                    labelStyle: TextStyle(fontSize: 12.0),
-                                    contentPadding: EdgeInsets.only(left: 10.0),
-                                    hintStyle: TextStyle(color: kSecondaryColor2),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: kBlackColor),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: kBlackColor),
-                                    ),
-                                  ),
-                                  textInputAction: TextInputAction.go,
-                                  controller: controller4,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isLoaded = false;
-                                    });
-                                    try {
-                                      if (controller4.text.isNotEmpty) {
-                                        shared.user_data.clear();
-                                        for (var i in shared.user[0].data!) {
-                                          print(i.toJson());
-                                          print(i.userLogin
-                                              ?.toLowerCase()
-                                              .contains(controller4.text.toLowerCase()));
-                                          if (i.toJson().isNotEmpty) {
-                                            if (i.userLogin!
+                    verticalSpaceTiny,
+                    // DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
+                    //   setState(() {
+                    //     init = value.toString();
+                    //   });
+                    // },),
+                    verticalSpaceSmall,
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 100.0,
+                          height: 35.0,
+                          child: ElevatedButton.icon(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(kPrimaryColor)),
+                            onPressed: () {
+                              try {
+                                if (controller1
+                                        .text.isNotEmpty &&
+                                    controller2.text.isNotEmpty &&
+                                    controller3.text.isNotEmpty &&
+                                    controller4.text.isNotEmpty&&
+                                init.toString().isNotEmpty) {
+                                  setState(() {
+                                    isLoaded = false;
+                                  });
+                                  shared.user_data.clear();
+                                  for (var i in shared.user[0].data!) {
+                                    print(i.toJson());
+                                    print(i.userLogin?.toLowerCase().contains(
+                                        controller4.text.toLowerCase()));
+                                    if (i.toJson().isNotEmpty) {
+                                      if (init.toLowerCase().contains(
+                                          'inactive')) {
+                                        if (i.userLogin!.toLowerCase().contains(
+                                            controller4.text.toLowerCase()) ||
+                                            i.lastName!.toLowerCase().contains(
+                                                controller3.text
+                                                    .toLowerCase()) ||
+                                            i.middleName!
                                                 .toLowerCase()
-                                                .contains(controller4.text.toLowerCase())
-
-                                            ) {
-                                              debugPrint(i.userLogin);
-                                              setState(() {
-                                                shared.user_data.add(Data2.fromJson(i.toJson()));
-                                              });
-                                              if (shared.user_data.isNotEmpty) {
+                                                .contains(
+                                                controller2.text
+                                                    .toLowerCase()) ||
+                                            i.givenName!.toLowerCase().contains(
+                                                controller1.text
+                                                    .toLowerCase()) ||
+                                            i.checkStatus!
+                                                .toLowerCase()
+                                                .contains(init)) {
+                                          debugPrint(i.userLogin);
+                                          setState(() {
+                                            shared.user_data
+                                                .add(
+                                                Data2.fromJson(i.toJson()));
+                                          });
+                                          if (shared.user_data.isNotEmpty) {
+                                            Future.delayed(
+                                              Duration(seconds: 1),
+                                                  () {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
-                                              }
-                                            }
+                                              },
+                                            );
                                           }
                                         }
-                                      } else if (controller4.text == '') {
-                                        shared.user_data.clear();
-                                        setState(() {
-                                          shared.user_data.addAll(shared.user[0].data!);
-                                          isLoaded = true;
-                                        });
                                       }
-                                      debugPrint(shared.user_data[0].toJson().toString());
-                                    } catch (e) {
-                                      shared.user_data.clear();
-                                      isLoaded = true;
+                                      if(!init.toLowerCase().contains('inactive')){
+                                        if (i.userLogin!.toLowerCase().contains(
+                                            controller4.text.toLowerCase()) ||
+                                            i.lastName!.toLowerCase().contains(
+                                                controller3.text
+                                                    .toLowerCase()) ||
+                                            i.middleName!
+                                                .toLowerCase()
+                                                .contains(
+                                                controller2.text
+                                                    .toLowerCase()) ||
+                                            i.givenName!.toLowerCase().contains(
+                                                controller1.text
+                                                    .toLowerCase())) {
+                                          debugPrint(i.userLogin);
+                                          setState(() {
+                                            shared.user_data
+                                                .add(
+                                                Data2.fromJson(i.toJson()));
+                                          });
+                                          if (shared.user_data.isNotEmpty) {
+                                            Future.delayed(
+                                              Duration(seconds: 1),
+                                                  () {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              },
+                                            );
+                                          }
+                                        }
+                                      }
                                     }
-                                  },
-                                  onEditingComplete: () async {
+
+                                  }
+                                }
+                                if(init.isNotEmpty) {
+                                  if(init.toLowerCase().contains('inactive')){
                                     setState(() {
                                       isLoaded = false;
                                     });
-                                    try {
-                                      if (controller4.text.isNotEmpty) {
-                                        shared.user_data.clear();
-                                        for (var i in shared.user[0].data!) {
-                                          print(i.toJson());
-                                          print(i.lastName
-                                              ?.toLowerCase()
-                                              .contains(controller4.text.toLowerCase()));
-                                          if (i.toJson().isNotEmpty) {
-                                            if (i.lastName!
-                                                .toLowerCase()
-                                                .contains(controller4.text.toLowerCase()))
-                                              debugPrint(i.lastName);
-                                            setState(() {
-                                              key.currentState?.pageTo(0);
-                                              shared.user_data.add(Data2.fromJson(i.toJson()));
-                                            });
-                                            if (shared.user_data.isNotEmpty) {
+                                    shared.user_data.clear();
+                                    for (var i in shared.user[0].data!) {
+                                      print(i.toJson());
+                                      print(i.userLogin?.toLowerCase().contains(
+                                          controller4.text.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.checkStatus!.toLowerCase().contains(
+                                           init.toLowerCase())) {
+                                          debugPrint(i.userLogin);
+                                          setState(() {
+                                            shared.user_data
+                                                .add(Data2.fromJson(i.toJson()));
+                                          });
+                                          if (shared.user_data.isNotEmpty) {
+                                            Future.delayed(
+                                              Duration(seconds: 1),
+                                                  () {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              },
+                                            );
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                  if(!init.toLowerCase().contains('inactive')){
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    shared.user_data.clear();
+                                    for (var i in shared.user[0].data!) {
+                                      print(i.toJson());
+                                      print(i.userLogin?.toLowerCase().contains(
+                                          controller4.text.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (!i.checkStatus!.toLowerCase().contains(
+                                            init.toLowerCase())) {
+                                          debugPrint(i.userLogin);
+                                          setState(() {
+                                            shared.user_data
+                                                .add(Data2.fromJson(i.toJson()));
+                                          });
+                                          if (shared.user_data.isNotEmpty) {
+                                            Future.delayed(
+                                              Duration(seconds: 1),
+                                                  () {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              },
+                                            );
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                                if (controller1.text.isNotEmpty) {
+                                  setState(() {
+                                    isLoaded = false;
+                                  });
+                                  shared.user_data.clear();
+                                  for (var i in shared.user[0].data!) {
+                                    print(i.toJson());
+                                    print(i.userLogin?.toLowerCase().contains(
+                                        controller4.text.toLowerCase()));
+                                    if (i.toJson().isNotEmpty) {
+                                      if (i.givenName!.toLowerCase().contains(
+                                          controller1.text.toLowerCase())) {
+                                        debugPrint(i.userLogin);
+                                        setState(() {
+                                          shared.user_data
+                                              .add(Data2.fromJson(i.toJson()));
+                                        });
+                                        if (shared.user_data.isNotEmpty) {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                            () {
                                               setState(() {
                                                 isLoaded = true;
                                               });
-                                            }
-
-                                          }
+                                            },
+                                          );
                                         }
-                                      } else if (controller4.text == '') {
-                                        shared.user_data.clear();
-                                        setState(() {
-                                          shared.user_data.addAll(shared.user[0].data!);
-                                        });
                                       }
-                                      debugPrint(shared.user_data[0].toJson().toString());
-                                    } catch (e) {
-                                      shared.user_data.clear();
                                     }
-                                  },
-                                ),
-                              ),
-                              verticalSpaceTiny,
-                              elevatedbuttonpopup(
-                                  label: "Branch", width: 400.0),
-                              verticalSpaceTiny,
-                              DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                                setState(() {
-                                  init = value.toString();
-                                });
-                              },),
-
-                              verticalSpaceMedium,
-                            ],
+                                  }
+                                }
+                                if (controller2.text.isNotEmpty) {
+                                  setState(() {
+                                    isLoaded = false;
+                                  });
+                                  shared.user_data.clear();
+                                  for (var i in shared.user[0].data!) {
+                                    print(i.toJson());
+                                    print(i.userLogin?.toLowerCase().contains(
+                                        controller4.text.toLowerCase()));
+                                    if (i.toJson().isNotEmpty) {
+                                      if (i.middleName!.toLowerCase().contains(
+                                          controller2.text.toLowerCase())) {
+                                        debugPrint(i.userLogin);
+                                        setState(() {
+                                          shared.user_data
+                                              .add(Data2.fromJson(i.toJson()));
+                                        });
+                                        if (shared.user_data.isNotEmpty) {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                            () {
+                                              setState(() {
+                                                isLoaded = true;
+                                              });
+                                            },
+                                          );
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                                if (controller3.text.isNotEmpty) {
+                                  setState(() {
+                                    isLoaded = false;
+                                  });
+                                  shared.user_data.clear();
+                                  for (var i in shared.user[0].data!) {
+                                    print(i.toJson());
+                                    print(i.userLogin?.toLowerCase().contains(
+                                        controller4.text.toLowerCase()));
+                                    if (i.toJson().isNotEmpty) {
+                                      if (i.lastName!.toLowerCase().contains(
+                                          controller3.text.toLowerCase())) {
+                                        debugPrint(i.userLogin);
+                                        setState(() {
+                                          shared.user_data
+                                              .add(Data2.fromJson(i.toJson()));
+                                        });
+                                        if (shared.user_data.isNotEmpty) {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                            () {
+                                              setState(() {
+                                                isLoaded = true;
+                                              });
+                                            },
+                                          );
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                                if (controller4.text.isNotEmpty) {
+                                  setState(() {
+                                    isLoaded = false;
+                                  });
+                                  shared.user_data.clear();
+                                  for (var i in shared.user[0].data!) {
+                                    print(i.toJson());
+                                    print(i.userLogin?.toLowerCase().contains(
+                                        controller4.text.toLowerCase()));
+                                    if (i.toJson().isNotEmpty) {
+                                      if (i.userLogin!.toLowerCase().contains(
+                                          controller4.text.toLowerCase())) {
+                                        debugPrint(i.userLogin);
+                                        setState(() {
+                                          shared.user_data
+                                              .add(Data2.fromJson(i.toJson()));
+                                        });
+                                        if (shared.user_data.isNotEmpty) {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                            () {
+                                              setState(() {
+                                                isLoaded = true;
+                                              });
+                                            },
+                                          );
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                                /*else if (controller4.text == '') {
+                                  shared.user_data.clear();
+                                  setState(() {
+                                    shared.user_data
+                                        .addAll(shared.user[0].data!);
+                                    isLoaded = true;
+                                  });
+                                }*/
+                                debugPrint(
+                                    shared.user_data[0].toJson().toString());
+                              } catch (e) {
+                                shared.user_data.clear();
+                                isLoaded = true;
+                              }
+                              print(shared.user_data);
+                            },
+                            icon: const Icon(
+                              Icons.search,
+                              size: 20.0,
+                            ),
+                            label: Text(
+                              'Search',
+                              style: kSmallRegularTextStyle,
+                            ),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                        horizontalSpaceTiny,
+                        SizedBox(
+                          width: 100.0,
+                          height: 35.0,
+                          child: ElevatedButton.icon(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    kSecondaryColor2)),
+                            onPressed: () {
+                              setState(() {
+                                isLoaded = false;
+                              });
+                              controller1.clear();
+                              controller2.clear();
+                              controller3.clear();
+                              controller4.clear();
+                              shared.user_data.clear();
+                              setState(() {
+                                shared.user_data.addAll(shared.user[0].data!);
+                                Future.delayed(
+                                  Duration(seconds: 1),
+                                  () {
+                                    setState(() {
+                                      isLoaded = true;
+                                    });
+                                  },
+                                );
+                              });
+                            },
+                            icon: const Icon(
+                              Icons.refresh,
+                              size: 20.0,
+                            ),
+                            label: Text(
+                              'Reset',
+                              style: kSmallRegularTextStyle,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                verticalSpaceRegular,
-                Container(
-                padding: kEdgeInsetsVerticalNormal,
-                child: Column(
-                children: [
+                horizontalSpaceMedium,
                 Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-
-    ],
-    ),
-    Container(
-    width: double.infinity,
-    padding: kEdgeInsetsVerticalNormal,
-    child: Theme(
-      data: Theme.of(context)
-          .copyWith(cardColor: Color(0xFF6F8A71),),
-      child: PaginatedDataTable(
-      key: key,
-      dataRowHeight: 300,
-      arrowHeadColor: kWhiteColor,
-      columns: [
-      DataColumn(
-      label: Text('User Name', style: kLargeBoldTextStyle)),
-      DataColumn(
-      label: Text('Given Name', style: kLargeBoldTextStyle)),
-      DataColumn(
-      label: Text('Middle Name', style: kLargeBoldTextStyle)),
-      DataColumn(
-      label: Text('Last Name', style: kLargeBoldTextStyle)),
-      DataColumn(label: Text('Branch', style: kLargeBoldTextStyle)),
-      DataColumn(label: Text('Role', style: kLargeBoldTextStyle)),
-      DataColumn(label: Text('Status', style: kLargeBoldTextStyle)),
-      ],
-      source: isLoaded
-      ? shared.user_data.isNotEmpty
-      ? data
-          : data2
-          : data3,
-      rowsPerPage: 8,
-      showFirstLastButtons: true,
-      header: Text('List of User', style: kXLargeBoldTextStyle),
-      ),
-    )),
-    ],
-    ),
-    ),
-    ]
-    )
-    ),
-    ]
-      ),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 35.0,
+                          width: 400,
+                          child: TextFormField(
+                            style: kTextStyle,
+                            decoration: const InputDecoration(
+                              hintText: 'User Name',
+                              border: OutlineInputBorder(),
+                              labelStyle: TextStyle(fontSize: 12.0),
+                              contentPadding: EdgeInsets.only(left: 10.0),
+                              hintStyle: TextStyle(color: kSecondaryColor2),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: kBlackColor),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: kBlackColor),
+                              ),
+                            ),
+                            textInputAction: TextInputAction.go,
+                            controller: controller4,
+                            onEditingComplete: () async {},
+                          ),
+                        ),
+                        verticalSpaceTiny,
+                        elevatedbuttonpopup(label: "Branch", width: 400.0),
+                        verticalSpaceTiny,
+                        DropdownButton(
+                          value: init,
+                          items: res.map((e) {
+                            return DropdownMenuItem(
+                              value: e,
+                              child: Text(e,
+                                  style: TextStyle(color: Colors.black)),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              init = value.toString();
+                            });
+                          },
+                        ),
+                        verticalSpaceMedium,
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          verticalSpaceRegular,
+          Container(
+            padding: kEdgeInsetsVerticalNormal,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [],
+                ),
+                Container(
+                    width: double.infinity,
+                    padding: kEdgeInsetsVerticalNormal,
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        cardColor: Color(0xFF6F8A71),
+                      ),
+                      child: PaginatedDataTable(
+                        key: key,
+                        dataRowHeight: 300,
+                        arrowHeadColor: kWhiteColor,
+                        columns: [
+                          DataColumn(
+                              label: Text('User Name',
+                                  style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Given Name',
+                                  style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Middle Name',
+                                  style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Last Name',
+                                  style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label:
+                                  Text('Branch', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Role', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label:
+                                  Text('Status', style: kLargeBoldTextStyle)),
+                        ],
+                        source: isLoaded
+                            ? shared.user_data.isNotEmpty
+                                ? data
+                                : data2
+                            : data3,
+                        rowsPerPage: 8,
+                        showFirstLastButtons: true,
+                        header:
+                            Text('List of User', style: kXLargeBoldTextStyle),
+                      ),
+                    )),
+              ],
+            ),
+          ),
+        ])),
+      ]),
     );
-
   }
 }
-
-
-
-
 
 class MyData extends DataTableSource {
   Prov1 shared;

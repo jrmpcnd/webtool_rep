@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/screens/homepage/homepage.dart';
 import 'package:webtool_rep/UI/screens/login/popup.dart';
@@ -93,10 +94,10 @@ class _buildCardState extends State<buildCard> {
                 },
               ),
             ),
-                SizedBox(height: 20,),
-                Container(
+                const SizedBox(height: 20,),
+                SizedBox(
                   width: 350,
-                  child: TextFormField(style: TextStyle(color: Colors.black),
+                  child: TextFormField(style: const TextStyle(color: Colors.black),
                     obscureText: _isObscure,
                     autocorrect: true,
                     cursorColor: Colors.green,
@@ -105,14 +106,14 @@ class _buildCardState extends State<buildCard> {
                       hintStyle: TextStyle(color: Colors.grey[600],),
                       fillColor: Colors.white,
                       filled: true,
-                      labelStyle: TextStyle(fontSize: 12),
-                      contentPadding: EdgeInsets.only(left: 30),
+                      labelStyle: const TextStyle(fontSize: 12),
+                      contentPadding: const EdgeInsets.only(left: 30),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
+                        borderSide: const BorderSide(color: Colors.green),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
+                        borderSide: const BorderSide(color: Colors.green),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       prefixIcon: const Icon(
@@ -150,12 +151,11 @@ class _buildCardState extends State<buildCard> {
                       ),
                       child: const Text("Submit"),
                       onPressed: () async {
-                        print("--------->>>>>>>>>>>>>>>>12$_formKey");
                         if (_formKey.currentState!.validate()) {
                           AlertDialog loading = AlertDialog(
                             backgroundColor: Colors.white,
-                            title: Text("Please Wait",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
-                            content: Row(children: [
+                            title: const Text("Please Wait",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
+                            content: Row(children: const [
                               CircularProgressIndicator(color: Colors.black,),
                               SizedBox(
                                 width: 20,
@@ -209,11 +209,11 @@ class _buildCardState extends State<buildCard> {
                               var message =
                               jsonDecode(response.body)['message'];
                               AlertDialog alert = AlertDialog(
-                                title: Text("Invalid Login"),
+                                title: const Text("Invalid Login"),
                                 content: Text(message),
                                 actions: [
                                   TextButton(
-                                    child: Text("OK"),
+                                    child: const Text("OK"),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
