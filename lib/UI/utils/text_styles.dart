@@ -11,7 +11,7 @@ TextStyle kHeading1TextStyle = GoogleFonts.poppins(
 
 TextStyle kHeading2TextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.w500,
-  fontSize: 16,
+  fontSize: 14,
   height: 1.5,
   color: kBlackColor,
 );
@@ -19,6 +19,12 @@ TextStyle kHeading2TextStyle = GoogleFonts.poppins(
 TextStyle kTextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.normal,
   fontSize: 14,
+  height: 1.5,
+  color: kBlackColor,
+);
+TextStyle kText = GoogleFonts.poppins(
+  fontWeight: FontWeight.normal,
+  fontSize: 12,
   height: 1.5,
   color: kBlackColor,
 );
@@ -98,7 +104,7 @@ TextStyle kSmallRegularTextStyle = GoogleFonts.poppins(
 );
 TextStyle kTinyBoldTextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.w500,
-  fontSize: 18,
+  fontSize: 14,
   height: 1.5,
   color: kBlackColor,
 );

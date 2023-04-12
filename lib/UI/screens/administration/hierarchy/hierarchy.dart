@@ -9,7 +9,6 @@ import '../../../utils/model2.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 
-
 class Hierarchy extends StatefulWidget {
   const Hierarchy({Key? key}) : super(key: key);
 
@@ -24,13 +23,10 @@ class _HierarchyState extends State<Hierarchy> {
 
   List<String> res4 = [];
 
-
   String init = '';
   String init2 = '';
   String init4 = '';
   String init5 = '';
-
-
 
   TextEditingController controller = TextEditingController();
   Hierarchy_Institution_Api dropdownInsti = Hierarchy_Institution_Api();
@@ -52,13 +48,13 @@ class _HierarchyState extends State<Hierarchy> {
       });
       for (var i in res.data!) {
         shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()));
-
       }
     }
     for (var i in shared.Hierarchy_data) {
       print(i.toJson());
     }
   }
+
   @override
   void initState() {
     wait();
@@ -67,9 +63,10 @@ class _HierarchyState extends State<Hierarchy> {
     getBranch();
     getCenter();
   }
-  getList()async{
+
+  getList() async {
     List<dynamic> dlist = await dropdownInsti.getUserstatus();
-    for(var i in dlist){
+    for (var i in dlist) {
       setState(() {
         res.add(i['insti_desc']);
       });
@@ -79,9 +76,10 @@ class _HierarchyState extends State<Hierarchy> {
     });
     print("safgsdgsdgsdfgde $res");
   }
-  getUnit()async{
+
+  getUnit() async {
     List<dynamic> dlist = await dropdownUnit.getUserstatus();
-    for(var i in dlist){
+    for (var i in dlist) {
       setState(() {
         res2.add(i['unit_desc']);
       });
@@ -91,9 +89,10 @@ class _HierarchyState extends State<Hierarchy> {
     });
     print("safgsdgsdgsdfgde $res2");
   }
-  getBranch()async{
-    List<dynamic> blist = await dropdownBranch.getUserstatus()  ;
-    for(var i in blist){
+
+  getBranch() async {
+    List<dynamic> blist = await dropdownBranch.getUserstatus();
+    for (var i in blist) {
       setState(() {
         res5.add(i['branch_desc']);
       });
@@ -103,9 +102,10 @@ class _HierarchyState extends State<Hierarchy> {
     });
     print("safgsdgsdgsdfgde $res5");
   }
-  getCenter()async{
+
+  getCenter() async {
     List<dynamic> dlist = await dropdownCenter.getUserstatus();
-    for(var i in dlist){
+    for (var i in dlist) {
       setState(() {
         res4.add(i['center_desc']);
       });
@@ -113,10 +113,7 @@ class _HierarchyState extends State<Hierarchy> {
     setState(() {
       init4 = res4[0];
     });
-
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +132,6 @@ class _HierarchyState extends State<Hierarchy> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 Container(
                   decoration: BoxDecoration(
                     color: kTertiaryColor5,
@@ -162,19 +158,69 @@ class _HierarchyState extends State<Hierarchy> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                            setState(() {
-                              init = value.toString();
-                            });
-                          },),
-
+                          Container(
+                            height: 35.0,
+                            width: 400,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.fromBorderSide(
+                                BorderSide(color: Color(0xFF000000), width: 1),
+                              ),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: Padding(
+                                padding: EdgeInsets.all(5),
+                                child: DropdownButton(
+                                  iconEnabledColor: Colors.black,
+                                  value: init,
+                                  items: res.map((e) {
+                                    return DropdownMenuItem(
+                                      value: e,
+                                      child: Text(e, style: kText),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      init = value.toString();
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
                           verticalSpaceTiny,
-                          DropdownButton(value: init2,items: res2.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                            setState(() {
-                              init2 = value.toString();
-                            });
-                          },),
-
+                          Container(
+                            height: 35.0,
+                            width: 400,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.fromBorderSide(
+                                BorderSide(color: Color(0xFF000000), width: 1),
+                              ),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: Padding(
+                                padding: EdgeInsets.all(5),
+                                child: DropdownButton(
+                                  iconEnabledColor: Colors.black,
+                                  value: init2,
+                                  items: res2.map((e) {
+                                    return DropdownMenuItem(
+                                      value: e,
+                                      child: Text(e, style: kText),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      init2 = value.toString();
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
                           verticalSpaceSmall,
                           Row(
                             children: [
@@ -184,8 +230,8 @@ class _HierarchyState extends State<Hierarchy> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kPrimaryColor)),
+                                          MaterialStateProperty.all(
+                                              kPrimaryColor)),
                                   onPressed: () {},
                                   icon: const Icon(
                                     Icons.search,
@@ -204,8 +250,8 @@ class _HierarchyState extends State<Hierarchy> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kSecondaryColor2)),
+                                          MaterialStateProperty.all(
+                                              kSecondaryColor2)),
                                   onPressed: () {},
                                   icon: const Icon(
                                     Icons.refresh,
@@ -230,20 +276,71 @@ class _HierarchyState extends State<Hierarchy> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              DropdownButton(value: init5,items: res5.map((i) {return DropdownMenuItem(value: i,child: Text(i, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                                setState(() {
-                                  init5 = value.toString();
-                                });
-                              },),
-
+                              Container(
+                                height: 35.0,
+                                width: 400,
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.fromBorderSide(
+                                    BorderSide(
+                                        color: Color(0xFF000000), width: 1),
+                                  ),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(5),
+                                    child: DropdownButton(
+                                      iconEnabledColor: Colors.black,
+                                      value: init5,
+                                      items: res5.map((i) {
+                                        return DropdownMenuItem(
+                                          value: i,
+                                          child: Text(i,  style: kText),
+                                        );
+                                      }).toList(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          init5 = value.toString();
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
                               verticalSpaceTiny,
-                              DropdownButton(value: init4,items: res4.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                                setState(() {
-                                  init4 = value.toString();
-                                });
-                              },),
-
-
+                              Container(
+                                height: 35.0,
+                                width: 400,
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.fromBorderSide(
+                                    BorderSide(
+                                        color: Color(0xFF000000), width: 1),
+                                  ),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(5),
+                                    child: DropdownButton(
+                                      iconEnabledColor: Colors.black,
+                                      value: init4,
+                                      items: res4.map((e) {
+                                        return DropdownMenuItem(
+                                          value: e,
+                                          child: Text(e, style: kText),
+                                        );
+                                      }).toList(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          init4 = value.toString();
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
                               verticalSpaceSmall,
                               Row(
                                 children: [
@@ -253,8 +350,8 @@ class _HierarchyState extends State<Hierarchy> {
                                     child: ElevatedButton.icon(
                                       style: ButtonStyle(
                                           backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kPrimaryColor)),
+                                              MaterialStateProperty.all(
+                                                  kPrimaryColor)),
                                       onPressed: () {},
                                       icon: const Icon(
                                         Icons.delete,
@@ -276,186 +373,190 @@ class _HierarchyState extends State<Hierarchy> {
                   ),
                 ),
                 verticalSpaceMedium,
-                Column(children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-
-                    ],
-                  ),
-                  Column(children: [ Container(
-                    width: 500,
-                    child: TextFormField(
-                      style: TextStyle(color: kBlackColor),
-                      decoration: const InputDecoration(
-                        hintText: 'Institution, Unit, Branch, Center',
-                        border: OutlineInputBorder(),
-                        labelStyle: TextStyle(fontSize: 12.0),
-                        contentPadding: EdgeInsets.only(left: 10.0),
-                        hintStyle: TextStyle(color: kSecondaryColor2),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: kBlackColor),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: kBlackColor),
-                        ),
-                      ),
-                      textInputAction: TextInputAction.go,
-                      controller: controller,
-                      onChanged: (value) {
-                        setState(() {
-                          isLoaded = false;
-                        });
-                        //
-                        try {
-                          if (controller.text.isNotEmpty) {
-                            shared.Hierarchy_data.clear();
-                            // debugPrint(shared.Hierarchy[0].data.toString());
-                            for (var i in shared.Hierarchy[0].data!) {
-                              print(i.toJson());
-                              // print(i.branchCode
-                              //     ?.toLowerCase()
-                              //     .contains(controller.text.toLowerCase()));
-                              if (i.toJson().isNotEmpty) {
-                                if (i.branchDesc!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase()) ||
-                                    i.unitCode!
-                                        .toLowerCase()
-                                        .contains(controller.text.toLowerCase())   ||
-                                    i.unitDesc!
-                                        .toLowerCase()
-                                        .contains(controller.text.toLowerCase())    ||
-                                    i.centerCode!
-                                        .toLowerCase()
-                                        .contains(controller.text.toLowerCase())  ||
-                                    i.centerDesc!
-                                        .toLowerCase()
-                                        .contains(controller.text.toLowerCase()) ||
-                                i.branchCode!.toLowerCase().contains(controller.text.toLowerCase())
-
-                                ) {
-                                  print(i.toJson());
-                                  //debugPrint(i.branchCode);
-                                  setState(() {
-                                    shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()
-                                    ));
-                                  });
-                                  if (shared.Hierarchy_data.isNotEmpty) {
-                                    setState(() {
-                                      isLoaded = true;
-                                    });
-                                  }
-                                }
-                              }
-                            }
-                          } else if (controller.text == '') {
-                            shared.Hierarchy_data.clear();
-                            setState(() {
-                              shared.Hierarchy_data.addAll(shared.Hierarchy[0].data!);
-                              isLoaded = true;
-                            });
-                          }
-                          debugPrint(shared.Hierarchy_data[0].toJson().toString());
-                        } catch (e) {
-                          shared.Hierarchy_data.clear();
-                          isLoaded = true;
-                        }
-                      },
-                      onEditingComplete: () async {
-                        setState(() {
-                          isLoaded = false;
-                        });
-                        try {
-                          if (controller.text.isNotEmpty) {
-                            shared.Hierarchy_data.clear();
-                            for (var i in shared.Hierarchy[0].data!) {
-
-                              print(i.branchCode
-                                  ?.toLowerCase()
-                                  .contains(controller.text.toLowerCase()));
-                              if (i.toJson().isNotEmpty) {
-                                if (i.branchDesc!
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase()) ||
-                                    i.unitCode!
-                                        .toLowerCase()
-                                        .contains(controller.text.toLowerCase())   ||
-                                    i.unitDesc!
-                                        .toLowerCase()
-                                        .contains(controller.text.toLowerCase())    ||
-                                    i.centerCode!
-                                        .toLowerCase()
-                                        .contains(controller.text.toLowerCase())  ||
-                                    i.centerDesc!
-                                        .toLowerCase()
-                                        .contains(controller.text.toLowerCase()) ||
-                                    i.branchCode!.toLowerCase().contains(controller.text.toLowerCase())
-
-
-                                ) {
-
-                                  debugPrint (i.branchCode);
-                                  setState(() {
-                                    key.currentState?.pageTo(0);
-                                    shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()
-                                    ));
-
-                                  });
-                                  if (shared.Hierarchy_data.isNotEmpty) {
-                                    setState(() {
-                                      isLoaded = true;
-                                    });
-                                  }
-                                }
-                              }
-                            }
-                          } else if (controller.text == '') {
-                            shared.Hierarchy_data.clear();
-                            setState(() {
-                              shared.Hierarchy_data.addAll(shared.Hierarchy[0].data!);
-                            });
-                          }
-                          debugPrint(shared.Hierarchy_data[0].toJson().toString());
-                        } catch (e) {
-                          shared.Hierarchy_data.clear();
-                        }
-                      },
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [],
                     ),
-                  ),Container(
-                    width: double.infinity,
-                    padding: kEdgeInsetsVerticalNormal,
-                    child: Theme(
-                      data: Theme.of(context)
-                          .copyWith(cardColor: Color(0xFF1B3C59),),
-
-                      child: PaginatedDataTable(
-                        key: key,
-                        arrowHeadColor: kWhiteColor,
-                        columns: [
-                          DataColumn(
-                              label: Text('Branch Code', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Branch Name', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Unit Code', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Unit Name', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Center Code', style: kLargeBoldTextStyle)),
-                          DataColumn(
-                              label: Text('Center Name', style: kLargeBoldTextStyle)),
-                        ],
-                        source: isLoaded ? shared.Hierarchy_data.isNotEmpty ? data : data2 : data3,
-                        rowsPerPage: 8,
-                        showFirstLastButtons: true,
-                        header: Text('List of Role', style: kXLargeBoldTextStyle),
-                      ),
+                    Column(
+                      children: [
+                        // Container(
+                        //   width: 500,
+                        //   child: TextFormField(
+                        //     style: TextStyle(color: kBlackColor),
+                        //     decoration: const InputDecoration(
+                        //       hintText: 'Institution, Unit, Branch, Center',
+                        //       border: OutlineInputBorder(),
+                        //       labelStyle: TextStyle(fontSize: 12.0),
+                        //       contentPadding: EdgeInsets.only(left: 10.0),
+                        //       hintStyle: TextStyle(color: kSecondaryColor2),
+                        //       enabledBorder: OutlineInputBorder(
+                        //         borderSide: BorderSide(color: kBlackColor),
+                        //       ),
+                        //       focusedBorder: OutlineInputBorder(
+                        //         borderSide: BorderSide(color: kBlackColor),
+                        //       ),
+                        //     ),
+                        //     textInputAction: TextInputAction.go,
+                        //     controller: controller,
+                        //     onChanged: (value) {
+                        //       setState(() {
+                        //         isLoaded = false;
+                        //       });
+                        //       //
+                        //       try {
+                        //         if (controller.text.isNotEmpty) {
+                        //           shared.Hierarchy_data.clear();
+                        //           // debugPrint(shared.Hierarchy[0].data.toString());
+                        //           for (var i in shared.Hierarchy[0].data!) {
+                        //             print(i.toJson());
+                        //             // print(i.branchCode
+                        //             //     ?.toLowerCase()
+                        //             //     .contains(controller.text.toLowerCase()));
+                        //             if (i.toJson().isNotEmpty) {
+                        //               if (i.branchDesc!.toLowerCase().contains(
+                        //                       controller.text.toLowerCase()) ||
+                        //                   i.unitCode!.toLowerCase().contains(
+                        //                       controller.text.toLowerCase()) ||
+                        //                   i.unitDesc!.toLowerCase().contains(
+                        //                       controller.text.toLowerCase()) ||
+                        //                   i.centerCode!.toLowerCase().contains(
+                        //                       controller.text.toLowerCase()) ||
+                        //                   i.centerDesc!.toLowerCase().contains(
+                        //                       controller.text.toLowerCase()) ||
+                        //                   i.branchCode!.toLowerCase().contains(
+                        //                       controller.text.toLowerCase())) {
+                        //                 print(i.toJson());
+                        //                 //debugPrint(i.branchCode);
+                        //                 setState(() {
+                        //                   shared.Hierarchy_data.add(
+                        //                       H_SaveAccount.fromJson(
+                        //                           i.toJson()));
+                        //                 });
+                        //                 if (shared.Hierarchy_data.isNotEmpty) {
+                        //                   setState(() {
+                        //                     isLoaded = true;
+                        //                   });
+                        //                 }
+                        //               }
+                        //             }
+                        //           }
+                        //         } else if (controller.text == '') {
+                        //           shared.Hierarchy_data.clear();
+                        //           setState(() {
+                        //             shared.Hierarchy_data.addAll(
+                        //                 shared.Hierarchy[0].data!);
+                        //             isLoaded = true;
+                        //           });
+                        //         }
+                        //         debugPrint(shared.Hierarchy_data[0]
+                        //             .toJson()
+                        //             .toString());
+                        //       } catch (e) {
+                        //         shared.Hierarchy_data.clear();
+                        //         isLoaded = true;
+                        //       }
+                        //     },
+                        //     onEditingComplete: () async {
+                        //       setState(() {
+                        //         isLoaded = false;
+                        //       });
+                        //       try {
+                        //         if (controller.text.isNotEmpty) {
+                        //           shared.Hierarchy_data.clear();
+                        //           for (var i in shared.Hierarchy[0].data!) {
+                        //             print(i.branchCode?.toLowerCase().contains(
+                        //                 controller.text.toLowerCase()));
+                        //             if (i.toJson().isNotEmpty) {
+                        //               if (i.branchDesc!.toLowerCase().contains(
+                        //                       controller.text.toLowerCase()) ||
+                        //                   i.unitCode!.toLowerCase().contains(
+                        //                       controller.text.toLowerCase()) ||
+                        //                   i.unitDesc!.toLowerCase().contains(
+                        //                       controller.text.toLowerCase()) ||
+                        //                   i.centerCode!.toLowerCase().contains(
+                        //                       controller.text.toLowerCase()) ||
+                        //                   i.centerDesc!.toLowerCase().contains(
+                        //                       controller.text.toLowerCase()) ||
+                        //                   i.branchCode!.toLowerCase().contains(
+                        //                       controller.text.toLowerCase())) {
+                        //                 debugPrint(i.branchCode);
+                        //                 setState(() {
+                        //                   key.currentState?.pageTo(0);
+                        //                   shared.Hierarchy_data.add(
+                        //                       H_SaveAccount.fromJson(
+                        //                           i.toJson()));
+                        //                 });
+                        //                 if (shared.Hierarchy_data.isNotEmpty) {
+                        //                   setState(() {
+                        //                     isLoaded = true;
+                        //                   });
+                        //                 }
+                        //               }
+                        //             }
+                        //           }
+                        //         } else if (controller.text == '') {
+                        //           shared.Hierarchy_data.clear();
+                        //           setState(() {
+                        //             shared.Hierarchy_data.addAll(
+                        //                 shared.Hierarchy[0].data!);
+                        //           });
+                        //         }
+                        //         debugPrint(shared.Hierarchy_data[0]
+                        //             .toJson()
+                        //             .toString());
+                        //       } catch (e) {
+                        //         shared.Hierarchy_data.clear();
+                        //       }
+                        //     },
+                        //   ),
+                        // ),
+                        Container(
+                          width: double.infinity,
+                          padding: kEdgeInsetsVerticalNormal,
+                          child: Theme(
+                            data: Theme.of(context).copyWith(
+                              cardColor: Color(0xFF6F8A71),
+                            ),
+                            child: PaginatedDataTable(
+                              key: key,
+                              arrowHeadColor: kWhiteColor,
+                              columns: [
+                                DataColumn(
+                                    label: Text('Branch Code',
+                                        style: kLargeBoldTextStyle)),
+                                DataColumn(
+                                    label: Text('Branch Name',
+                                        style: kLargeBoldTextStyle)),
+                                DataColumn(
+                                    label: Text('Unit Code',
+                                        style: kLargeBoldTextStyle)),
+                                DataColumn(
+                                    label: Text('Unit Name',
+                                        style: kLargeBoldTextStyle)),
+                                DataColumn(
+                                    label: Text('Center Code',
+                                        style: kLargeBoldTextStyle)),
+                                DataColumn(
+                                    label: Text('Center Name',
+                                        style: kLargeBoldTextStyle)),
+                              ],
+                              source: isLoaded
+                                  ? shared.Hierarchy_data.isNotEmpty
+                                      ? data
+                                      : data2
+                                  : data3,
+                              rowsPerPage: 8,
+                              showFirstLastButtons: true,
+                              header: Text('List of Role',
+                                  style: kXLargeBoldTextStyle),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),],),
-
-
-                ],
+                  ],
                 ),
               ],
             ),
@@ -465,6 +566,7 @@ class _HierarchyState extends State<Hierarchy> {
     );
   }
 }
+
 class MyData extends DataTableSource {
   H_Prov shared;
   MyData({required this.shared});
@@ -480,20 +582,23 @@ class MyData extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(
-          width: 100, child: Text(shared.Hierarchy_data[index].branchCode.toString()))),
+          width: 100,
+          child: Text(shared.Hierarchy_data[index].branchCode.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.Hierarchy_data[index].branchDesc.toString()))),
-
+          width: 100,
+          child: Text(shared.Hierarchy_data[index].branchDesc.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.Hierarchy_data[index].unitCode.toString()))),
-
+          width: 100,
+          child: Text(shared.Hierarchy_data[index].unitCode.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.Hierarchy_data[index].unitDesc.toString()))),
+          width: 100,
+          child: Text(shared.Hierarchy_data[index].unitDesc.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.Hierarchy_data[index].centerCode.toString()))),
+          width: 100,
+          child: Text(shared.Hierarchy_data[index].centerCode.toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.Hierarchy_data[index].centerDesc.toString()))),
-
+          width: 100,
+          child: Text(shared.Hierarchy_data[index].centerDesc.toString()))),
     ]);
   }
 }
@@ -531,14 +636,27 @@ class MyData3 extends DataTableSource {
   DataRow getRow(int index) {
     debugPrint(index.toString());
     return DataRow(cells: [
-      DataCell(
-          SizedBox(child: Text('Loading, please wait'))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
-
+      DataCell(SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
     ]);
   }
 }

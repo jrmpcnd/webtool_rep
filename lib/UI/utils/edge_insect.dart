@@ -15,7 +15,7 @@ EdgeInsetsGeometry get kEdgeInsetsVerticalSmall =>
     const EdgeInsets.symmetric(horizontal: 28.0);
 
 EdgeInsetsGeometry get kEdgeInsetsVerticalNormal =>
-    const EdgeInsets.symmetric(vertical: 12.0);
+    const EdgeInsets.symmetric(vertical: 10.0);
 
 EdgeInsetsGeometry get kEdgeInsetsAllTiny => const EdgeInsets.all(6.0);
 

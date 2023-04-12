@@ -605,12 +605,12 @@ class _UsermanagementState extends State<Usermanagement> {
                             child: Padding(
                               padding: EdgeInsets.all(5),
                               child: DropdownButton(
+                              iconEnabledColor: Colors.black,
                                 value: init,
                                 items: res.map((e) {
                                   return DropdownMenuItem(
                                     value: e,
-                                    child: Text(e,
-                                        style: kTextStyle),
+                                    child: Text(e, style: kTextStyle),
                                   );
                                 }).toList(),
                                 onChanged: (value) {
@@ -635,10 +635,6 @@ class _UsermanagementState extends State<Usermanagement> {
             padding: kEdgeInsetsVerticalNormal,
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [],
-                ),
                 Container(
                     width: double.infinity,
                     padding: kEdgeInsetsVerticalNormal,
@@ -679,8 +675,10 @@ class _UsermanagementState extends State<Usermanagement> {
                             : data3,
                         rowsPerPage: 8,
                         showFirstLastButtons: true,
-                        header:
-                            Text('List of User', style: kXLargeBoldTextStyle),
+                        header: Container(
+                          height: 35,
+                            child: Text('List of User',
+                                style: kXLargeBoldTextStyle)),
                       ),
                     )),
               ],
