@@ -7,6 +7,7 @@ import 'package:webtool_rep/core/providers/data_provider.dart';
 import 'UI/screens/login/login_screen.dart';
 import 'UI/utils/constant.dart';
 import 'UI/utils/web_webview.dart';
+import 'core/providers/timer_provider.dart';
 
 void main() {
   WebViewWebImplementation();
@@ -53,19 +54,18 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Center_U()),
         ChangeNotifierProvider(create: (context) => Providers_U()),
         ChangeNotifierProvider(create: (context) => HomePageProvider()),
-
+        ChangeNotifierProvider(create: (context) => TimerProvider()),
       ],
       child: MaterialApp(
-          title: 'Konek2CARD PLUS Webtool',
-          theme: ThemeData.dark().copyWith(
-            scaffoldBackgroundColor: kWhiteColor,
-            textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-                .apply(bodyColor: kWhiteColor),
-            canvasColor: kSecondaryColor2,
-          ),
-          home: Loginpage(),
+        title: 'Konek2CARD PLUS Webtool',
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: kWhiteColor,
+          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+              .apply(bodyColor: kWhiteColor),
+          canvasColor: kSecondaryColor2,
+        ),
+        home: Loginpage(),
       ),
-
     );
   }
 }
