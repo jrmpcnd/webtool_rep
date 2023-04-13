@@ -19,7 +19,7 @@ class _ActiveclientState extends State<Activeclient> {
         children: [
           verticalSpaceRegular,
           Container(
-            height: 530,
+            height: 1,
             child: WebView(
               initialUrl:
                   'https://lookerstudio.google.com/reporting/c829bc0c-a2dd-40b2-84e6-6fa187a6ce2a',

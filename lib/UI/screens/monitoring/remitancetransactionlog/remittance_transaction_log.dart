@@ -134,7 +134,7 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                             height: 35.0,
                             width: 400,
                             child: TextFormField(
-                              style: TextStyle(color: kBlackColor),
+                              style: kTextStyle,
                               decoration: const InputDecoration(
                                 hintText: 'Sender Mobile Number',
                                 border: OutlineInputBorder(),
@@ -157,7 +157,7 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                             height: 35.0,
                             width: 400,
                             child: TextFormField(
-                              style: TextStyle(color: kBlackColor),
+                              style: kTextStyle,
                               decoration: const InputDecoration(
                                 hintText: 'Mobile Reference Number',
                                 border: OutlineInputBorder(),
@@ -223,7 +223,7 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                         }
                                         if (!init
                                             .toLowerCase()
-                                            .contains('inactive')) {
+                                            .contains('Pending')) {
                                           setState(() {
                                             isLoaded = false;
                                           });
@@ -233,9 +233,9 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                             print(i.status?.toLowerCase().contains(
                                                 controller.text.toLowerCase()));
                                             if (i.toJson().isNotEmpty) {
-                                              if (!i.status!
+                                              if (i.status!
                                                   .toLowerCase()
-                                                  .contains(init.toLowerCase())) {
+                                                  .contains('0')) {
                                                 debugPrint(i.status);
                                                 setState(() {
                                                   shared.Remittance_data.add(
@@ -409,8 +409,8 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                         return DropdownMenuItem(
                                           value: e,
                                           child: Text(e,
-                                              style: TextStyle(
-                                                  color: Colors.black)),
+                                            style: kText,
+                                          ),
                                         );
                                       }).toList(),
                                       onChanged: (value) {

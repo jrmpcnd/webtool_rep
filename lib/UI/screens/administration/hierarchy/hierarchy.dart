@@ -232,7 +232,49 @@ class _HierarchyState extends State<Hierarchy> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    shared.Hierarchy_data.clear();
+                                    for (var i in shared.Hierarchy[0].data!) {
+                                      print(i.unitDesc?.toLowerCase().contains(
+                                          init2.toLowerCase()));
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.unitDesc!
+                                            .toLowerCase()
+                                            .contains(init2.toLowerCase())) {
+                                          debugPrint("======>>>>>>${i.unitDesc?.toLowerCase()}");
+                                          debugPrint("========>>>>>>>>>>>>${init2.toLowerCase()}");
+
+                                          print(i.toJson());
+                                          setState(() {
+                                            shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()));
+                                          });
+
+                                          if (shared.Hierarchy_data.isNotEmpty) {
+                                            Future.delayed(
+                                              Duration(seconds: 1),
+                                                  () {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              },
+                                            );
+                                          } else{
+                                            setState(() {
+                                              isLoaded = true;
+                                            });
+                                          }
+                                          print("========>>>>>>>>${shared.Hierarchy_data.length}");
+                                        } else{
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        }
+                                      }
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,

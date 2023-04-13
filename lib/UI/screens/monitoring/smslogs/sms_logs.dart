@@ -62,9 +62,10 @@ class _SmslogsState extends State<Smslogs> {
       getList();
     });
   }
-  getList()async{
+
+  getList() async {
     List<dynamic> dlist = await dropdownInsti.getStatus();
-    for(var i in dlist){
+    for (var i in dlist) {
       setState(() {
         res.add(i['get_sms_logs_smstype_dropdown']);
       });
@@ -74,9 +75,10 @@ class _SmslogsState extends State<Smslogs> {
     });
     print("safgsdgsdgsdfgde $res");
   }
-  getUnit()async{
+
+  getUnit() async {
     List<dynamic> dlist = await dropdownUnit.getStatus();
-    for(var i in dlist){
+    for (var i in dlist) {
       setState(() {
         res1.add(i['get_sms_logs_smsstatus_dropdown']);
       });
@@ -86,7 +88,6 @@ class _SmslogsState extends State<Smslogs> {
     });
     print("safgsdgsdgsdfgde $res1");
   }
-
 
   Widget build(BuildContext context) {
     final shared = Provider.of<Prov5>(context);
@@ -160,21 +161,19 @@ class _SmslogsState extends State<Smslogs> {
                                     shared.sms_data.clear();
                                     for (var i in shared.sms[0].data!) {
                                       print(i.toJson());
-                                      print(i.cid
-                                          ?.toLowerCase()
-                                          .contains(controller.text.toLowerCase()));
+                                      print(i.cid?.toLowerCase().contains(
+                                          controller.text.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
-                                        if (i.cid!
-                                            .toLowerCase()
-                                            .contains(controller.text.toLowerCase()) ||
-                                        i.cid!
-                                        .toLowerCase()
-                                        .contains(controller.text.toLowerCase())
-
-                                        ) {
+                                        if (i.cid!.toLowerCase().contains(
+                                                controller.text
+                                                    .toLowerCase()) ||
+                                            i.cid!.toLowerCase().contains(
+                                                controller.text
+                                                    .toLowerCase())) {
                                           debugPrint(i.cid);
                                           setState(() {
-                                            shared.sms_data.add(Data5.fromJson(i.toJson()));
+                                            shared.sms_data.add(
+                                                Data5.fromJson(i.toJson()));
                                           });
                                           if (shared.sms_data.isNotEmpty) {
                                             setState(() {
@@ -187,11 +186,13 @@ class _SmslogsState extends State<Smslogs> {
                                   } else if (controller.text == '') {
                                     shared.sms_data.clear();
                                     setState(() {
-                                      shared.sms_data.addAll(shared.sms[0].data!);
+                                      shared.sms_data
+                                          .addAll(shared.sms[0].data!);
                                       isLoaded = true;
                                     });
                                   }
-                                  debugPrint(shared.sms_data[0].toJson().toString());
+                                  debugPrint(
+                                      shared.sms_data[0].toJson().toString());
                                 } catch (e) {
                                   shared.sms_data.clear();
                                   isLoaded = true;
@@ -206,23 +207,21 @@ class _SmslogsState extends State<Smslogs> {
                                     shared.sms_data.clear();
                                     for (var i in shared.sms[0].data!) {
                                       print(i.toJson());
-                                      print(i.cid
-                                          ?.toLowerCase()
-                                          .contains(controller.text.toLowerCase()));
+                                      print(i.cid?.toLowerCase().contains(
+                                          controller.text.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
-                                        if (i.cid!
-                                            .toLowerCase()
-                                            .contains(controller.text.toLowerCase()) ||
-                                            i.cid!
-                                                .toLowerCase()
-                                                .contains(controller.text.toLowerCase()) ||
-                                            i.cid!
-                                                .toLowerCase()
-                                                .contains(controller.text.toLowerCase())) {
+                                        if (i.cid!.toLowerCase().contains(controller.text.toLowerCase()) ||
+                                            i.cid!.toLowerCase().contains(
+                                                controller.text
+                                                    .toLowerCase()) ||
+                                            i.cid!.toLowerCase().contains(
+                                                controller.text
+                                                    .toLowerCase())) {
                                           debugPrint(i.cid);
                                           setState(() {
                                             key.currentState?.pageTo(0);
-                                            shared.sms_data.add(Data5.fromJson(i.toJson()));
+                                            shared.sms_data.add(
+                                                Data5.fromJson(i.toJson()));
                                           });
                                           if (shared.sms_data.isNotEmpty) {
                                             setState(() {
@@ -235,10 +234,12 @@ class _SmslogsState extends State<Smslogs> {
                                   } else if (controller.text == '') {
                                     shared.sms_data.clear();
                                     setState(() {
-                                      shared.sms_data.addAll(shared.sms[0].data!);
+                                      shared.sms_data
+                                          .addAll(shared.sms[0].data!);
                                     });
                                   }
-                                  debugPrint(shared.sms_data[0].toJson().toString());
+                                  debugPrint(
+                                      shared.sms_data[0].toJson().toString());
                                 } catch (e) {
                                   shared.sms_data.clear();
                                 }
@@ -252,7 +253,7 @@ class _SmslogsState extends State<Smslogs> {
                                 hinttext: "Enroll Date Start",
                                 onChange: (value) {},
                               ),
-                              verticalSpaceTiny,
+                             SizedBox(width: 17,),
                               WebDatePicker(
                                 hinttext: "Activate Date Start",
                                 onChange: (value) {},
@@ -260,7 +261,6 @@ class _SmslogsState extends State<Smslogs> {
                               horizontalSpaceRegular,
                             ],
                           ),
-
                           verticalSpaceTiny,
                           SizedBox(
                             height: 35.0,
@@ -291,18 +291,15 @@ class _SmslogsState extends State<Smslogs> {
                                     shared.sms_data.clear();
                                     for (var i in shared.sms[0].data!) {
                                       print(i.toJson());
-                                      print(i.msisdn
-                                          ?.toLowerCase()
-                                          .contains(controller1.text.toLowerCase()));
+                                      print(i.msisdn?.toLowerCase().contains(
+                                          controller1.text.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
-                                        if (i.msisdn!
-                                            .toLowerCase()
-                                            .contains(controller1.text.toLowerCase())
-
-                                        ) {
+                                        if (i.msisdn!.toLowerCase().contains(
+                                            controller1.text.toLowerCase())) {
                                           debugPrint(i.msisdn);
                                           setState(() {
-                                            shared.sms_data.add(Data5.fromJson(i.toJson()));
+                                            shared.sms_data.add(
+                                                Data5.fromJson(i.toJson()));
                                           });
                                           if (shared.sms_data.isNotEmpty) {
                                             setState(() {
@@ -315,11 +312,13 @@ class _SmslogsState extends State<Smslogs> {
                                   } else if (controller1.text == '') {
                                     shared.sms_data.clear();
                                     setState(() {
-                                      shared.sms_data.addAll(shared.sms[0].data!);
+                                      shared.sms_data
+                                          .addAll(shared.sms[0].data!);
                                       isLoaded = true;
                                     });
                                   }
-                                  debugPrint(shared.sms_data[0].toJson().toString());
+                                  debugPrint(
+                                      shared.sms_data[0].toJson().toString());
                                 } catch (e) {
                                   shared.sms_data.clear();
                                   isLoaded = true;
@@ -334,20 +333,20 @@ class _SmslogsState extends State<Smslogs> {
                                     shared.sms_data.clear();
                                     for (var i in shared.sms[0].data!) {
                                       print(i.toJson());
-                                      print(i.msisdn
-                                          ?.toLowerCase()
-                                          .contains(controller1.text.toLowerCase()));
+                                      print(i.msisdn?.toLowerCase().contains(
+                                          controller1.text.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
-                                        if (i.msisdn!
-                                            .toLowerCase()
-                                            .contains(controller1.text.toLowerCase()) ||
-                                            i.msisdn!
-                                                .toLowerCase()
-                                                .contains(controller1.text.toLowerCase())) {
+                                        if (i.msisdn!.toLowerCase().contains(
+                                                controller1.text
+                                                    .toLowerCase()) ||
+                                            i.msisdn!.toLowerCase().contains(
+                                                controller1.text
+                                                    .toLowerCase())) {
                                           debugPrint(i.msisdn);
                                           setState(() {
                                             key.currentState?.pageTo(0);
-                                            shared.sms_data.add(Data5.fromJson(i.toJson()));
+                                            shared.sms_data.add(
+                                                Data5.fromJson(i.toJson()));
                                           });
                                           if (shared.sms_data.isNotEmpty) {
                                             setState(() {
@@ -360,10 +359,12 @@ class _SmslogsState extends State<Smslogs> {
                                   } else if (controller1.text == '') {
                                     shared.sms_data.clear();
                                     setState(() {
-                                      shared.sms_data.addAll(shared.sms[0].data!);
+                                      shared.sms_data
+                                          .addAll(shared.sms[0].data!);
                                     });
                                   }
-                                  debugPrint(shared.sms_data[0].toJson().toString());
+                                  debugPrint(
+                                      shared.sms_data[0].toJson().toString());
                                 } catch (e) {
                                   shared.sms_data.clear();
                                 }
@@ -371,19 +372,69 @@ class _SmslogsState extends State<Smslogs> {
                             ),
                           ),
                           verticalSpaceTiny,
-
-                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                            setState(() {
-                              init = value.toString();
-                            });
-                          },),
+                          Container(
+                            height: 35.0,
+                            width: 400,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.fromBorderSide(
+                                BorderSide(color: Color(0xFF000000), width: 1),
+                              ),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: DropdownButton(
+                                  iconEnabledColor: Colors.black,
+                                  value: init,
+                                  items: res.map((e) {
+                                    return DropdownMenuItem(
+                                      value: e,
+                                      child: Text(e, style: kText),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      init = value.toString();
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
                           verticalSpaceTiny,
-
-                          DropdownButton(value: init1,items: res1.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                            setState(() {
-                              init1 = value.toString();
-                            });
-                          },),
+                          Container(
+                            height: 35.0,
+                            width: 400,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.fromBorderSide(
+                                BorderSide(color: Color(0xFF000000), width: 1),
+                              ),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: DropdownButton(
+                                  iconEnabledColor: Colors.black,
+                                  value: init1,
+                                  items: res1.map((e) {
+                                    return DropdownMenuItem(
+                                      value: e,
+                                      child: Text(e, style: kText),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      init1 = value.toString();
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
                           verticalSpaceRegular,
                           Row(
                             children: [
@@ -393,8 +444,8 @@ class _SmslogsState extends State<Smslogs> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kPrimaryColor)),
+                                          MaterialStateProperty.all(
+                                              kPrimaryColor)),
                                   onPressed: () {},
                                   icon: const Icon(
                                     Icons.search,
@@ -413,8 +464,8 @@ class _SmslogsState extends State<Smslogs> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kSecondaryColor2)),
+                                          MaterialStateProperty.all(
+                                              kSecondaryColor2)),
                                   onPressed: () {},
                                   icon: const Icon(
                                     Icons.refresh,
@@ -431,45 +482,60 @@ class _SmslogsState extends State<Smslogs> {
                         ],
                       ),
                       horizontalSpaceMedium,
-
                     ],
                   ),
                 ),
                 verticalSpaceRegular,
-    Container(
-          width: double.infinity,
-          padding: kEdgeInsetsVerticalNormal,
-          child: PaginatedDataTable(
-            key: key,
-            dataRowHeight: 100,
-            arrowHeadColor: kWhiteColor,
-            columns: [
-              DataColumn(label: Text('ID', style: kLargeBoldTextStyle)),
-              DataColumn(label: Text('Date Time', style: kLargeBoldTextStyle)),
-              DataColumn(label: Text('Mobile No.', style: kLargeBoldTextStyle)),
-              DataColumn(label: Text('CID', style: kLargeBoldTextStyle)),
-              DataColumn(label: Text('Name', style: kLargeBoldTextStyle)),
-              DataColumn(label: Text('Message', style: kLargeBoldTextStyle)),
-              DataColumn(label: Text('Message Type', style: kLargeBoldTextStyle)),
-              DataColumn(label: Text('Status', style: kLargeBoldTextStyle)),
-            ],
-            source: isLoaded
-                ? shared.sms_data.isNotEmpty
-                    ? data
-                    : data2
-                : data3,
-            rowsPerPage: 8,
-            showFirstLastButtons: true,
-            header: Text('List of Sms Logs', style: kXLargeBoldTextStyle),
+                Container(
+                  width: double.infinity,
+                  padding: kEdgeInsetsVerticalNormal,
+                  child: Theme(
+                    data: Theme.of(context).copyWith(
+                      cardColor: Color(0xFF6F8A71),
+                    ),
+                    child: PaginatedDataTable(
+                      key: key,
+                      dataRowHeight: 100,
+                      arrowHeadColor: kWhiteColor,
+                      columns: [
+                        DataColumn(
+                            label: Text('ID', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label:
+                                Text('Date Time', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label:
+                                Text('Mobile No.', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('CID', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Name', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Message', style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Message Type',
+                                style: kLargeBoldTextStyle)),
+                        DataColumn(
+                            label: Text('Status', style: kLargeBoldTextStyle)),
+                      ],
+                      source: isLoaded
+                          ? shared.sms_data.isNotEmpty
+                              ? data
+                              : data2
+                          : data3,
+                      rowsPerPage: 8,
+                      showFirstLastButtons: true,
+                      header:
+                          Text('List of Sms Logs', style: kXLargeBoldTextStyle),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-    ),
-    ],
-      ),
-    ),
-   ],
+        ],
       ),
     );
-
   }
 }
 
