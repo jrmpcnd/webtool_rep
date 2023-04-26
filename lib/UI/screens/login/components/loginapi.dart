@@ -1,21 +1,25 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-String token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNjc5MDEzMzY3LCJpZGVudGl0eSI6IiQyYSQxNCRMbmdBVXR3Y0paRzlCV0Q4NDJHLzBPalNjNkZGUEVHeVcuYU1DbWF0bWNGbU5ibmdxZHhBaSJ9.b4yZWgw8RC528rDERL9Z-uSNG8mcUpVJ5lcsixh6PlU";
+import '../../../utils/token.dart';
 
+String token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNjgyNDc1MzM1LCJpZGVudGl0eSI6IiQyYSQxNCRneDl0b1AzYTV3eDk1c3QxZEpvVjgubHRYUHdVelNuVE1LLlR2UW5HNVBKLnFuUnRSUVFodSJ9.c0eCS_VEoNPCa8_ynymvJ3jLqKjhd9uYIA3Vfviz-z4";
 class Login {
   Future<http.Response> login(user_login, go_password) async {
     String url = 'https://sit-api-janus.fortress-asya.com:1234/Login/';
     final http.Response response = await http.post(Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer $token',
+
         },
         body: jsonEncode(<String, String>{
           'user_login': user_login,
           'go_password': go_password
         }));
+  var result=json.decode(response.body);
+  Token.SetToken(result['token']);
+
     return response;
   }
 }

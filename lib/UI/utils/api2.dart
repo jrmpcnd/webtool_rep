@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:webtool_rep/UI/utils/token.dart';
 import '../../core/providers/data_provider.dart';
 import 'model2.dart';
 
@@ -9,8 +10,7 @@ class HierachyPush {
       Uri.parse('$API/get_hierarchy'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+        'Authorization': 'Bearer ${Token.getToken()}'
       },
       body: jsonEncode(
         <String, String>{
@@ -49,8 +49,7 @@ class RemittanceL_Push {
       Uri.parse('$API/get_remittancelog'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+        'Authorization': 'Bearer ${Token.getToken()}'
       },
       body: jsonEncode(
         <String, String>{
@@ -148,7 +147,7 @@ class Atm_Location_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
       },
       body: jsonEncode(
         <String, String>{
@@ -175,8 +174,7 @@ class Atm_Location_Parse {
     Atm_Location_Push httpPush20 = Atm_Location_Push();
     http.Response res2 = await httpPush20.pushHttp20();
     print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");
-    var atmloclogs =
-    Atm_Loc_Api.fromJson(jsonDecode(res2.body));
+    var atmloclogs = Atm_Loc_Api.fromJson(jsonDecode(res2.body));
     return atmloclogs;
   }
 }
@@ -188,7 +186,7 @@ class BankNews_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
       },
       body: jsonEncode(
         <String, String>{
@@ -214,12 +212,10 @@ class BanksNews_Parse {
     BankNews_Push httpPush20 = BankNews_Push();
     http.Response res2 = await httpPush20.pushHttp21();
     print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");
-    var banknewslog =
-    BankNews_Api.fromJson(jsonDecode(res2.body));
+    var banknewslog = BankNews_Api.fromJson(jsonDecode(res2.body));
     return banknewslog;
   }
 }
-
 
 class ProductandServices_Push {
   Future<http.Response> pushHttp21() async {
@@ -228,7 +224,7 @@ class ProductandServices_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
       },
       body: jsonEncode(
         <String, String>{
@@ -255,11 +251,10 @@ class ProductandServices_Parse {
     http.Response res2 = await httpPush20.pushHttp21();
     print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");
     var productandservices =
-    ProductandServices_Api.fromJson(jsonDecode(res2.body));
+        ProductandServices_Api.fromJson(jsonDecode(res2.body));
     return productandservices;
   }
 }
-
 
 class Servicedowntime_Push {
   Future<http.Response> pushHttp21() async {
@@ -268,7 +263,7 @@ class Servicedowntime_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
       },
       body: jsonEncode(
         <String, String>{
@@ -294,12 +289,10 @@ class Servicedowntime_Parse {
     Servicedowntime_Push httpPush20 = Servicedowntime_Push();
     http.Response res2 = await httpPush20.pushHttp21();
     print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");
-    var servicedowntime =
-    Servicedowntime_Api.fromJson(jsonDecode(res2.body));
+    var servicedowntime = Servicedowntime_Api.fromJson(jsonDecode(res2.body));
     return servicedowntime;
   }
 }
-
 
 class Institution_Push {
   Future<http.Response> pushHttp21() async {
@@ -308,14 +301,10 @@ class Institution_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
       },
       body: jsonEncode(
-        <String, String>{
-          "inst_code": "",
-          "inst_desc": "",
-          "created_date": ""
-        },
+        <String, String>{"inst_code": "", "inst_desc": "", "created_date": ""},
       ),
     );
     if (response2.statusCode == 200) {
@@ -333,12 +322,10 @@ class Institution_Parse {
     Institution_Push httpPush20 = Institution_Push();
     http.Response res2 = await httpPush20.pushHttp21();
     print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");
-    var institution =
-    Institution_Api.fromJson(jsonDecode(res2.body));
+    var institution = Institution_Api.fromJson(jsonDecode(res2.body));
     return institution;
   }
 }
-
 
 class Branch_Push {
   Future<http.Response> pushHttp21() async {
@@ -347,7 +334,7 @@ class Branch_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
       },
       body: jsonEncode(
         <String, String>{
@@ -372,12 +359,10 @@ class Branch_Parse {
     Branch_Push httpPush20 = Branch_Push();
     http.Response res2 = await httpPush20.pushHttp21();
     print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");
-    var branch =
-    Branch_Api.fromJson(jsonDecode(res2.body));
+    var branch = Branch_Api.fromJson(jsonDecode(res2.body));
     return branch;
   }
 }
-
 
 class Unit_Push {
   Future<http.Response> pushHttp21() async {
@@ -386,14 +371,10 @@ class Unit_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNjgxODAzNzk2LCJpZGVudGl0eSI6IiQyYSQxNCRneDl0b1AzYTV3eDk1c3QxZEpvVjgubHRYUHdVelNuVE1LLlR2UW5HNVBKLnFuUnRSUVFodSJ9.iEiKdIDCeo5yGS5PTtYq0rt2x0IFVrZseTroY9k7txg'
       },
       body: jsonEncode(
-        <String, String>{
-          "unit_code": "",
-          "unit_desc": "",
-          "created_date": ""
-        },
+        <String, String>{"unit_code": "", "unit_desc": "", "created_date": ""},
       ),
     );
     if (response2.statusCode == 200) {
@@ -411,8 +392,7 @@ class Unit_Parse {
     Unit_Push httpPush20 = Unit_Push();
     http.Response res2 = await httpPush20.pushHttp21();
     print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");
-    var unit =
-  Unit_Api.fromJson(jsonDecode(res2.body));
+    var unit = Unit_Api.fromJson(jsonDecode(res2.body));
     return unit;
   }
 }
@@ -424,7 +404,7 @@ class Center_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
       },
       body: jsonEncode(
         <String, String>{
@@ -449,8 +429,7 @@ class Center_Parse {
     Center_Push httpPush20 = Center_Push();
     http.Response res2 = await httpPush20.pushHttp21();
     print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");
-    var center =
-    Center_Api.fromJson(jsonDecode(res2.body));
+    var center = Center_Api.fromJson(jsonDecode(res2.body));
     return center;
   }
 }
@@ -462,7 +441,7 @@ class Provider_Push {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
       },
       body: jsonEncode(
         <String, String>{
@@ -490,8 +469,7 @@ class Provider_Parse {
     Provider_Push httpPush20 = Provider_Push();
     http.Response res2 = await httpPush20.pushHttp21();
     print("-------->>>>>>>>>>${jsonDecode(res2.body).length}");
-    var provider =
-    Providers_Api.fromJson(jsonDecode(res2.body));
+    var provider = Providers_Api.fromJson(jsonDecode(res2.body));
     return provider;
   }
 }

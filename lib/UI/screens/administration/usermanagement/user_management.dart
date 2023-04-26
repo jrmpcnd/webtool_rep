@@ -531,6 +531,7 @@ class _UsermanagementState extends State<Usermanagement> {
                               controller3.clear();
                               controller4.clear();
                               shared.user_data.clear();
+                              init= res[0];
                               setState(() {
                                 shared.user_data.addAll(shared.user[0].data!);
                                 Future.delayed(

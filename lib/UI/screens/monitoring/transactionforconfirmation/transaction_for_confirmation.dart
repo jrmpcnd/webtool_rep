@@ -73,7 +73,7 @@ class _TransactionforconfirmationState
     setState(() {
       init = res[0];
     });
-    print("safgsdgsdgsdfgde $res");
+    print("safgsdgsdgsdfgde == $res");
   }
 
   getUnit() async {
@@ -267,19 +267,20 @@ class _TransactionforconfirmationState
                                     color: Colors.transparent,
                                     borderRadius: BorderRadius.circular(5),
                                     border: Border.fromBorderSide(
-                                      BorderSide(color: Color(0xFF000000), width: 1),
+                                      BorderSide(
+                                          color: Color(0xFF000000), width: 1),
                                     ),
                                   ),
                                   child: DropdownButtonHideUnderline(
-                                    child: Padding(padding: EdgeInsets.all(5),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(5),
                                       child: DropdownButton(
                                         iconEnabledColor: Colors.black,
                                         value: init,
                                         items: res.map((e) {
                                           return DropdownMenuItem(
                                             value: e,
-                                            child: Text(e,
-                                                style: kText),
+                                            child: Text(e, style: kText),
                                           );
                                         }).toList(),
                                         onChanged: (value) {
@@ -299,19 +300,20 @@ class _TransactionforconfirmationState
                                     color: Colors.transparent,
                                     borderRadius: BorderRadius.circular(5),
                                     border: Border.fromBorderSide(
-                                      BorderSide(color: Color(0xFF000000), width: 1),
+                                      BorderSide(
+                                          color: Color(0xFF000000), width: 1),
                                     ),
                                   ),
                                   child: DropdownButtonHideUnderline(
-                                    child: Padding(padding: EdgeInsets.all(5),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(5),
                                       child: DropdownButton(
                                         iconEnabledColor: Colors.black,
                                         value: init1,
                                         items: res1.map((e) {
                                           return DropdownMenuItem(
                                             value: e,
-                                            child: Text(e,
-                                                style: kText),
+                                            child: Text(e, style: kText),
                                           );
                                         }).toList(),
                                         onChanged: (value) {
@@ -327,7 +329,9 @@ class _TransactionforconfirmationState
                             ),
                           ],
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         Row(
                           children: [
                             SizedBox(
@@ -337,7 +341,105 @@ class _TransactionforconfirmationState
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
                                         kPrimaryColor)),
-                                onPressed: () {},
+                                onPressed: () {
+                                  try {
+                                    print(" === $init");
+                                    print(
+                                        "+_+_+_+_+${init.toLowerCase().contains('cash out')}");
+                                    if (controller.text.isNotEmpty) {
+                                      setState(() {
+                                        isLoaded = false;
+                                      });
+                                      shared.confirm_data.clear();
+                                      for (var i in shared.confirm[0].data!) {
+                                        // print(i.toJson());
+                                        // print(i.cid?.toLowerCase().contains(
+                                        //     controller.text.toLowerCase()));
+                                        if (i.toJson().isNotEmpty) {
+                                          if (i.cid!.toLowerCase().contains(controller.text.toLowerCase())) {
+                                            setState(() {
+                                              shared.confirm_data.add(
+                                                  Data3.fromJson(i.toJson()));
+                                            });
+                                            if (shared
+                                                .confirm_data.isNotEmpty) {
+                                              Future.delayed(
+                                                Duration(seconds: 1),
+                                                () {
+                                                  setState(() {
+                                                    isLoaded = true;
+                                                  });
+                                                },
+                                              );
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                    if (init.toLowerCase().contains('cash out')) {
+                                      setState(() {
+                                        isLoaded = false;
+                                      });
+                                      shared.confirm_data.clear();
+                                      for (var i in shared.confirm[0].data!) {
+                                        if (i.toJson().isNotEmpty) {
+                                          if (i.transDesc!.toLowerCase().contains(init.toString().toLowerCase())) {
+                                            setState(() {
+                                              shared.confirm_data.add(
+                                                  Data3.fromJson(i.toJson()));
+                                            });
+                                            if (shared
+                                                .confirm_data.isNotEmpty) {
+                                              Future.delayed(
+                                                Duration(seconds: 1),
+                                                () {
+                                                  setState(() {
+                                                    isLoaded = true;
+                                                  });
+                                                },
+                                              );
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                    print("init fuckers:"+init.toLowerCase());
+                                    if (init.toLowerCase()=="cash in - cash out"){
+
+                                      setState(() {
+                                        isLoaded = false;
+                                      });
+                                      shared.confirm_data.clear();
+                                      for (var i in shared.confirm[0].data!) {
+                                        if (i.toJson().isNotEmpty) {
+                                          if (i.transDesc!.toLowerCase().contains(init.toString().toLowerCase())) {
+                                            setState(() {
+                                              shared.confirm_data.add(
+                                                  Data3.fromJson(i.toJson()));
+                                            });
+                                            if (shared
+                                                .confirm_data.isNotEmpty) {
+                                              Future.delayed(
+                                                Duration(seconds: 1),
+                                                    () {
+                                                  setState(() {
+                                                    isLoaded = true;
+                                                  });
+                                                },
+                                              );
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                    // debugPrint(shared.confirm_data[0]
+                                    //     .toJson()
+                                    //     .toString());
+                                  } catch (e) {
+                                    shared.confirm_data.clear();
+                                    isLoaded = true;
+                                  }
+                                },
                                 icon: const Icon(
                                   Icons.search,
                                   size: 20.0,
@@ -348,7 +450,9 @@ class _TransactionforconfirmationState
                                 ),
                               ),
                             ),
-                            SizedBox(width: 20,),
+                            SizedBox(
+                              width: 20,
+                            ),
                             SizedBox(
                               width: 100.0,
                               height: 35.0,
@@ -356,7 +460,26 @@ class _TransactionforconfirmationState
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
                                         kSecondaryColor2)),
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    isLoaded = false;
+                                  });
+                                  controller.clear();
+                                  controller1.clear();
+                                  init= res[0];
+                                  init1= res1[0];
+                                  setState(() {
+                                    shared.confirm_data.addAll(shared.confirm[0].data!);
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                          () {
+                                        setState(() {
+                                          isLoaded = true;
+                                        });
+                                      },
+                                    );
+                                  });
+                                },
                                 icon: const Icon(
                                   Icons.refresh,
                                   size: 20.0,
@@ -372,7 +495,6 @@ class _TransactionforconfirmationState
                       ],
                     ),
                     horizontalSpaceMedium,
-
                     Column(
                       children: [
                         SizedBox(
@@ -400,13 +522,14 @@ class _TransactionforconfirmationState
                         ),
                         verticalSpaceTiny,
                         WebDatePicker(
-                          hinttext: "Enroll Date Start",  style: kText,
+                          hinttext: "Enroll Date Start",
+                          style: kText,
                           onChange: (value) {},
                         ),
                         verticalSpaceTiny,
                         WebDatePicker(
-                          hinttext: "Activate Date Start",  style: kText,
-
+                          hinttext: "Activate Date Start",
+                          style: kText,
                           onChange: (value) {},
                         ),
                       ],
@@ -470,210 +593,6 @@ class _TransactionforconfirmationState
         ],
       ),
     );
-
-    // return Column(
-    //   mainAxisAlignment: MainAxisAlignment.center,
-    //   children:[
-    //     SizedBox(height: 10,),
-    //     Container(
-    //       width: 500,
-    //       child: TextFormField(
-    //         style: TextStyle(color: kBlackColor),
-    //         decoration: const InputDecoration(
-    //           hintText: 'Search',
-    //           border: OutlineInputBorder(),
-    //           labelStyle: TextStyle(fontSize: 12.0),
-    //           contentPadding: EdgeInsets.only(left: 10.0),
-    //           hintStyle: TextStyle(color: kSecondaryColor2),
-    //           enabledBorder: OutlineInputBorder(
-    //             borderSide: BorderSide(color: kBlackColor),
-    //           ),
-    //           focusedBorder: OutlineInputBorder(
-    //             borderSide: BorderSide(color: kBlackColor),
-    //           ),
-    //         ),
-    //         textInputAction: TextInputAction.go,
-    //         controller: controller,
-    //         onChanged: (value) {
-    //           setState(() {
-    //             isLoaded = false;
-    //           });
-    //           //
-    //           try {
-    //             if (controller.text.isNotEmpty) {
-    //               shared.confirm_data.clear();
-    //               for (var i in shared.confirm[0].data!) {
-    //                 print(i.toJson());
-    //                 print(i.transDate
-    //                     ?.toLowerCase()
-    //                     .contains(controller.text.toLowerCase()));
-    //                 if (i.toJson().isNotEmpty) {
-    //                   if (i.transDesc!
-    //                       .toLowerCase()
-    //                       .contains(controller.text.toLowerCase()) ||
-    //                       i.clientMobileNo!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())   ||
-    //                       i.cid!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())    ||
-    //                       i.clientName!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())  ||
-    //                       i.branchDesc!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())||
-    //                       i.unitDesc!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())||
-    //                       i.centerDesc!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())||
-    //                       i.note!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())||
-    //                       i.status!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())||
-    //                   i.transDate!
-    //                       .toLowerCase()
-    //           .contains(controller.text.toLowerCase())
-    //
-    //                   ) {
-    //                     debugPrint(i.transDate);
-    //                     setState(() {
-    //                       shared.confirm_data.add(Data3.fromJson(i.toJson()
-    //                       ));
-    //                     });
-    //                     if (shared.confirm_data.isNotEmpty) {
-    //                       setState(() {
-    //                         isLoaded = true;
-    //                       });
-    //                     }
-    //                   }
-    //                 }
-    //               }
-    //             } else if (controller.text == '') {
-    //               shared.confirm_data.clear();
-    //               setState(() {
-    //                 shared.confirm_data.addAll(shared.confirm[0].data!);
-    //                 isLoaded = true;
-    //               });
-    //             }
-    //             debugPrint(shared.confirm_data[0].toJson().toString());
-    //           } catch (e) {
-    //             shared.confirm_data.clear();
-    //             isLoaded = true;
-    //           }
-    //         },
-    //         onEditingComplete: () async {
-    //           setState(() {
-    //             isLoaded = false;
-    //           });
-    //           try {
-    //             if (controller.text.isNotEmpty) {
-    //               shared.confirm_data.clear();
-    //               for (var i in shared.confirm[0].data!) {
-    //                 print(i.toJson());
-    //                 print(i.transDate
-    //                     ?.toLowerCase()
-    //                     .contains(controller.text.toLowerCase()));
-    //                 if (i.toJson().isNotEmpty) {
-    //                   if (i.transDesc!
-    //                       .toLowerCase()
-    //                       .contains(controller.text.toLowerCase()) ||
-    //                       i.clientMobileNo!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())   ||
-    //                       i.cid!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())    ||
-    //                       i.clientName!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())  ||
-    //                       i.branchDesc!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())||
-    //                       i.unitDesc!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())||
-    //                       i.centerDesc!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())||
-    //                       i.note!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())||
-    //                       i.status!
-    //                           .toLowerCase()
-    //                           .contains(controller.text.toLowerCase())||
-    //                   i.transDate!
-    //                       .toLowerCase()
-    //           .contains(controller.text.toLowerCase())
-    //                   ) {
-    //                     debugPrint (i.transDate);
-    //                     setState(() {
-    //                       key.currentState?.pageTo(0);
-    //                       shared.confirm_data.add(Data3.fromJson(i.toJson()
-    //                       ));
-    //
-    //                     });
-    //                     if (shared.confirm_data.isNotEmpty) {
-    //                       setState(() {
-    //                         isLoaded = true;
-    //                       });
-    //                     }
-    //                   }
-    //                 }
-    //               }
-    //             } else if (controller.text == '') {
-    //               shared.confirm_data.clear();
-    //               setState(() {
-    //                 shared.confirm_data.addAll(shared.confirm[0].data!);
-    //               });
-    //             }
-    //             debugPrint(shared.confirm_data[0].toJson().toString());
-    //           } catch (e) {
-    //             shared.confirm_data.clear();
-    //           }
-    //         },
-    //       ),
-    //     ),
-    //
-    //     Padding(padding: EdgeInsets.all(10),
-    //       child: Container(
-    //         width: double.infinity,
-    //         padding: kEdgeInsetsVerticalNormal,
-    //         child: PaginatedDataTable(
-    //           key: key,
-    //           dataRowHeight: 50,
-    //           arrowHeadColor: kWhiteColor,
-    //           columns: [
-    //             DataColumn(label: Text('Date', style: kLargeBoldTextStyle)),
-    //             DataColumn(label: Text('Transaction', style: kLargeBoldTextStyle)),
-    //             DataColumn(label: Text('Mobile No.', style: kLargeBoldTextStyle)),
-    //             DataColumn(label: Text('CID', style: kLargeBoldTextStyle)),
-    //             DataColumn(label: Text('Client Name', style: kLargeBoldTextStyle)),
-    //             DataColumn(label: Text('Branch', style: kLargeBoldTextStyle)),
-    //             DataColumn(label: Text('Unit', style: kLargeBoldTextStyle)),
-    //             DataColumn(label: Text('Center', style: kLargeBoldTextStyle)),
-    //             DataColumn(label: Text('Details', style: kLargeBoldTextStyle)),
-    //             DataColumn(label: Text('Status', style: kLargeBoldTextStyle)),
-    //           ],
-    //           source: isLoaded
-    //               ? shared.confirm_data.isNotEmpty
-    //                   ? data
-    //                   : data2
-    //               : data3,
-    //           rowsPerPage: 8,
-    //           showFirstLastButtons: true,
-    //           header: Text('Transaction for Confirmation List',
-    //               style: kXLargeBoldTextStyle),
-    //         ),),
-    //     ),
-    //
-    //
-    //   ]
-    // );
   }
 }
 

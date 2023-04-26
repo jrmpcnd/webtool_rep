@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../core/providers/data_provider.dart';
+import 'token.dart';
 import 'model.dart';
 
 //Administration
@@ -10,8 +11,7 @@ class User_Push {
       Uri.parse('$API/get_usermanagement/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+        'Authorization': 'Bearer ${Token.getToken()}'
       },
       body: jsonEncode(
         <String, String>{
@@ -50,8 +50,7 @@ class Role_Push {
       Uri.parse('$API/get_rolesmanagement'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjQ1MDI0NDB9.Q_yoFgYCbjrulkxZS6kw_u3brT_kx3Hp8cDxVTIWrgk'
+        'Authorization': 'Bearer ${Token.getToken()}'
       },
       body: jsonEncode(
         <String, String>{"role_name": ""},
@@ -131,8 +130,7 @@ class Sms_Push {
       Uri.parse('$API/get_smslog/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+        'Authorization': 'Bearer ${Token.getToken()}'
       },
       body: jsonEncode(
         <String, String>{
@@ -461,8 +459,7 @@ class Fee_StructurePush {
           "total_charge": "",
           "trans_type": "",
           "clientType;": "",
-
-      },
+        },
       ),
     );
     if (response12.statusCode == 200) {
@@ -1407,6 +1404,7 @@ class FeeStructure_Api {
     }
   }
 }
+
 class FeeStructureEdit_Api {
   Future<List> getUserstatus() async {
     try {

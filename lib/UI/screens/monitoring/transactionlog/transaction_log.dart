@@ -28,9 +28,10 @@ class _TransactionlogState extends State<Transactionlog> {
     getList();
     getCategory();
   }
-  getList()async{
+
+  getList() async {
     List<dynamic> dlist = await dropdownStatus.getStatus();
-    for(var i in dlist){
+    for (var i in dlist) {
       setState(() {
         res.add(i['get_transaction_logs_transaction_dropdown']);
       });
@@ -40,9 +41,10 @@ class _TransactionlogState extends State<Transactionlog> {
     });
     print("safgsdgsdgsdfgde $res");
   }
-  getCategory()async{
+
+  getCategory() async {
     List<dynamic> dlist = await dropdownFunction.getStatus();
-    for(var i in dlist){
+    for (var i in dlist) {
       setState(() {
         res2.add(i['get_transaction_logs_status_dropdown']);
       });
@@ -94,12 +96,21 @@ class _TransactionlogState extends State<Transactionlog> {
                             hintext: "Core ID",
                           ),
                           verticalSpaceTiny,
-                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                            setState(() {
-                              init = value.toString();
-                            });
-                          },),
-
+                          DropdownButton(
+                            value: init,
+                            items: res.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e,
+                                    style: TextStyle(color: Colors.black)),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                init = value.toString();
+                              });
+                            },
+                          ),
                           verticalSpaceTiny,
                           textfield(
                             hintext: "Source CID",
@@ -109,11 +120,21 @@ class _TransactionlogState extends State<Transactionlog> {
                             hintext: "Source Account",
                           ),
                           verticalSpaceTiny,
-                          DropdownButton(value: init2,items: res2.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                            setState(() {
-                              init2 = value.toString();
-                            });
-                          },),
+                          DropdownButton(
+                            value: init2,
+                            items: res2.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e,
+                                    style: TextStyle(color: Colors.black)),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                init2 = value.toString();
+                              });
+                            },
+                          ),
                           verticalSpaceSmall,
                           Row(
                             children: [

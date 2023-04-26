@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +44,6 @@ import '../../../UI/utils/constant.dart';
 import '../../../UI/widgets/contains.dart';
 import '../../../UI/widgets/listTile.dart';
 import '../../../UI/widgets/sidemenu.dart';
-import '../../../core/providers/timer_provider.dart';
 import '../../utils/responsive.dart';
 import '../administration/hierarchy/hierarchy.dart';
 import '../administration/usermanagement/user_management.dart';
@@ -118,32 +116,32 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Timer? _timer;
 
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _startTimer();
-      print('flutter-----(time start!)');
-    });
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+  //     _startTimer();
+  //     print('flutter-----(time start!)');
+  //   });
+  //   super.initState();
+  // }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  void _startTimer() {
-    final timer = Provider.of<TimerProvider>(context, listen: false);
-    timer.startTimer();
-    timer.buildContext = context;
-  }
-
-  void _pauseTimer([_]) {
-    _timer?.cancel();
-    _startTimer();
-    print('flutter-----(time pause!)');
-  }
+  // @override
+  // void dispose() {
+  //   _timer?.cancel();
+  //   super.dispose();
+  // }
+  //
+  // void _startTimer() {
+  //   final timer = Provider.of<TimerProvider>(context, listen: false);
+  //   timer.startTimer();
+  //   timer.buildContext = context;
+  // }
+  //
+  // void _pauseTimer([_]) {
+  //   _timer?.cancel();
+  //   _startTimer();
+  //   print('flutter-----(time pause!)');
+  // }
 
   @override
   Widget build(BuildContext context) {
