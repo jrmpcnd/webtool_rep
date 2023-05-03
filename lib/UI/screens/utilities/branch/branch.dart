@@ -93,14 +93,50 @@ class _BranchState extends State<Branch> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Code",
-                        controller: branch_code_controller,
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Branch Code',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: branch_code_controller,
+                        ),
                       ),
                       verticalSpaceTiny,
-                      textfield(
-                        hintext: "Description",
-                        controller: branch_desc_controller,
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Branch Description',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: branch_desc_controller,
+                        ),
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -117,10 +153,96 @@ class _BranchState extends State<Branch> {
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
                                   onPressed: () {
-                                    Branch_Function.branch(
-                                      branch_code: branch_code_controller.text,
-                                      branch_desc: branch_desc_controller.text,
-                                    );
+                                    try {
+                                      if (branch_code_controller
+                                          .text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Branch_data.clear();
+                                        for (var i
+                                            in shared.BranchLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.branchCode
+                                              ?.toLowerCase()
+                                              .contains(branch_code_controller
+                                                  .text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.branchCode!
+                                                .toLowerCase()
+                                                .contains(branch_code_controller
+                                                    .text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.branchCode);
+                                              setState(() {
+                                                shared.Branch_data.add(
+                                                    Branch_Log.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .Branch_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (branch_desc_controller
+                                          .text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Branch_data.clear();
+                                        for (var i
+                                            in shared.BranchLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.branchDesc
+                                              ?.toLowerCase()
+                                              .contains(branch_desc_controller
+                                                  .text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.branchDesc!
+                                                .toLowerCase()
+                                                .contains(branch_desc_controller
+                                                    .text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.branchDesc);
+                                              setState(() {
+                                                shared.Branch_data.add(
+                                                    Branch_Log.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .Branch_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(shared.Branch_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.Branch_data.clear();
+                                      isLoaded = true;
+                                    }
                                   },
                                   icon: const Icon(
                                     Icons.search,
@@ -141,7 +263,26 @@ class _BranchState extends State<Branch> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    branch_code_controller.clear();
+                                    branch_desc_controller.clear();
+                                    shared.Branch_data.clear();
+                                    setState(() {
+                                      shared.Branch_data.addAll(
+                                          shared.BranchLog[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                        () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -180,124 +321,6 @@ class _BranchState extends State<Branch> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.Branch_data.clear();
-                              for (var i in shared.BranchLog[0].data!) {
-                                print(i.toJson());
-                                print(i.branchCode
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.branchCode!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.createdDate!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.branchDesc!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.branchCode!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.branchCode);
-                                    setState(() {
-                                      shared.Branch_data.add(
-                                          Branch_Log.fromJson(i.toJson()));
-                                    });
-                                    if (shared.Branch_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.Branch_data.clear();
-                              setState(() {
-                                shared.Branch_data.addAll(
-                                    shared.BranchLog[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(
-                                shared.Branch_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.Branch_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.Branch_data.clear();
-                              for (var i in shared.BranchLog[0].data!) {
-                                print(i.toJson());
-                                print(i.branchCode
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.branchCode!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.createdDate!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.branchDesc!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.branchCode!.toLowerCase().contains(
-                                          controller.text.toLowerCase()))
-                                    debugPrint(i.branchCode);
-                                  setState(() {
-                                    key.currentState?.pageTo(0);
-                                    shared.Branch_data.add(
-                                        Branch_Log.fromJson(i.toJson()));
-                                  });
-                                  if (shared.Branch_data.isNotEmpty) {
-                                    setState(() {
-                                      isLoaded = true;
-                                    });
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.Branch_data.clear();
-                              setState(() {
-                                shared.Branch_data.addAll(
-                                    shared.BranchLog[0].data!);
-                              });
-                            }
-                            debugPrint(
-                                shared.Branch_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.Branch_data.clear();
-                          }
-                        },
-                      ),
-                    ),
                     Container(
                       width: double.infinity,
                       padding: kEdgeInsetsVerticalNormal,
