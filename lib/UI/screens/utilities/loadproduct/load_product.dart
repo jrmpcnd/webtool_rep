@@ -22,6 +22,8 @@ class Loadproduct extends StatefulWidget {
 
 class _LoadproductState extends State<Loadproduct> {
   TextEditingController controller = TextEditingController();
+  TextEditingController load_id_controller = TextEditingController();
+  TextEditingController load_product_controller = TextEditingController();
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -105,18 +107,56 @@ class _LoadproductState extends State<Loadproduct> {
                           offset: Offset(0, 3)),
                     ],
                   ),
-                  height: 200.0,
+                  height: 220.0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Load Product ID",
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Load Product ID',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: load_id_controller,
+                        ),
                       ),
                       verticalSpaceTiny,
-                      textfield(
-                        hintext: "Load Product Name",
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: "Load Product Name",
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: load_product_controller,
+                        ),
                       ),
-                      verticalSpaceTiny,
+                      verticalSpaceSmall,
                       DropdownButton(
                         value: init,
                         items: res.map((e) {
@@ -146,7 +186,116 @@ class _LoadproductState extends State<Loadproduct> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    try {
+                                      if (load_id_controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.load_data.clear();
+                                        for (var i in shared.load[0].data!) {
+                                          print(i.toJson());
+                                          print(i.productCategoryName
+                                              ?.toLowerCase()
+                                              .contains(load_id_controller.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.loadProductId!
+                                                    .toLowerCase()
+                                                    .contains(load_id_controller
+                                                        .text
+                                                        .toLowerCase()) ||
+                                                i.loadProductName!
+                                                    .toLowerCase()
+                                                    .contains(load_id_controller
+                                                        .text
+                                                        .toLowerCase()) ||
+                                                i.description!
+                                                    .toLowerCase()
+                                                    .contains(load_id_controller
+                                                        .text
+                                                        .toLowerCase()) ||
+                                                i.status!
+                                                    .toLowerCase()
+                                                    .contains(load_id_controller
+                                                        .text
+                                                        .toLowerCase())) {
+                                              debugPrint(i.productCategoryName);
+                                              setState(() {
+                                                shared.load_data.add(
+                                                    Data17.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared.load_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (load_product_controller
+                                          .text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.load_data.clear();
+                                        for (var i in shared.load[0].data!) {
+                                          print(i.toJson());
+                                          print(i.productCategoryName
+                                              ?.toLowerCase()
+                                              .contains(load_product_controller
+                                                  .text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.loadProductId!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        load_product_controller
+                                                            .text
+                                                            .toLowerCase()) ||
+                                                i.loadProductName!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        load_product_controller
+                                                            .text
+                                                            .toLowerCase()) ||
+                                                i.description!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        load_product_controller
+                                                            .text
+                                                            .toLowerCase()) ||
+                                                i.status!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        load_product_controller
+                                                            .text
+                                                            .toLowerCase())) {
+                                              debugPrint(i.productCategoryName);
+                                              setState(() {
+                                                shared.load_data.add(
+                                                    Data17.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared.load_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(shared.load_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.load_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -166,7 +315,26 @@ class _LoadproductState extends State<Loadproduct> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    load_id_controller.clear();
+                                    load_product_controller.clear();
+                                    shared.load_data.clear();
+                                    setState(() {
+                                      shared.load_data
+                                          .addAll(shared.load[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                        () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -205,120 +373,6 @@ class _LoadproductState extends State<Loadproduct> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.load_data.clear();
-                              for (var i in shared.load[0].data!) {
-                                print(i.toJson());
-                                print(i.productCategoryName
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.loadProductId!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.loadProductName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.description!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.status!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.productCategoryName);
-                                    setState(() {
-                                      shared.load_data
-                                          .add(Data17.fromJson(i.toJson()));
-                                    });
-                                    if (shared.load_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.load_data.clear();
-                              setState(() {
-                                shared.load_data.addAll(shared.load[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(shared.load_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.load_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.load_data.clear();
-                              for (var i in shared.load[0].data!) {
-                                print(i.toJson());
-                                print(i.productCategoryName
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.loadProductId!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.loadProductName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.description!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.status!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) ;
-                                  debugPrint(i.productCategoryName);
-                                  setState(() {
-                                    key.currentState?.pageTo(0);
-                                    shared.load_data
-                                        .add(Data17.fromJson(i.toJson()));
-                                  });
-                                  if (shared.load_data.isNotEmpty) {
-                                    setState(() {
-                                      isLoaded = true;
-                                    });
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.load_data.clear();
-                              setState(() {
-                                shared.load_data.addAll(shared.load[0].data!);
-                              });
-                            }
-                            debugPrint(shared.load_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.load_data.clear();
-                          }
-                        },
-                      ),
-                    ),
                     Container(
                         width: double.infinity,
                         padding: kEdgeInsetsVerticalNormal,
