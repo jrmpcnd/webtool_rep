@@ -93,14 +93,50 @@ class _CentersState extends State<Centers> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Code",
-                        controller: center_code_controller,
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Center Code',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: center_code_controller,
+                        ),
                       ),
                       verticalSpaceTiny,
-                      textfield(
-                        hintext: "Description",
-                        controller: center_desc_controller,
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Center Description',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: center_desc_controller,
+                        ),
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -117,10 +153,96 @@ class _CentersState extends State<Centers> {
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
                                   onPressed: () {
-                                    Center_Function.center(
-                                      center_code: center_code_controller.text,
-                                      center_desc: center_desc_controller.text,
-                                    );
+                                    try {
+                                      if (center_code_controller
+                                          .text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Center_data.clear();
+                                        for (var i
+                                            in shared.CenterLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.centerCode
+                                              ?.toLowerCase()
+                                              .contains(center_code_controller
+                                                  .text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.centerDesc!
+                                                .toLowerCase()
+                                                .contains(center_code_controller
+                                                    .text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.centerDesc);
+                                              setState(() {
+                                                shared.Center_data.add(
+                                                    Center_Log.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .Center_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (center_desc_controller
+                                          .text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Center_data.clear();
+                                        for (var i
+                                            in shared.CenterLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.centerDesc
+                                              ?.toLowerCase()
+                                              .contains(center_desc_controller
+                                                  .text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.centerDesc!
+                                                .toLowerCase()
+                                                .contains(center_desc_controller
+                                                    .text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.centerDesc);
+                                              setState(() {
+                                                shared.Center_data.add(
+                                                    Center_Log.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .Center_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(shared.Center_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.Center_data.clear();
+                                      isLoaded = true;
+                                    }
                                   },
                                   icon: const Icon(
                                     Icons.search,
@@ -141,7 +263,26 @@ class _CentersState extends State<Centers> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    center_code_controller.clear();
+                                    center_desc_controller.clear();
+                                    shared.Center_data.clear();
+                                    setState(() {
+                                      shared.Center_data.addAll(
+                                          shared.CenterLog[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                        () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -180,124 +321,6 @@ class _CentersState extends State<Centers> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.Center_data.clear();
-                              for (var i in shared.CenterLog[0].data!) {
-                                print(i.toJson());
-                                print(i.createdDate
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.createdDate!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.createdDate!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.centerDesc!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.centerCode!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.centerCode);
-                                    setState(() {
-                                      shared.Center_data.add(
-                                          Center_Log.fromJson(i.toJson()));
-                                    });
-                                    if (shared.Center_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.Center_data.clear();
-                              setState(() {
-                                shared.Center_data.addAll(
-                                    shared.CenterLog[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(
-                                shared.Center_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.Center_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.Center_data.clear();
-                              for (var i in shared.CenterLog[0].data!) {
-                                print(i.toJson());
-                                print(i.createdDate
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.createdDate!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.createdDate!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.centerDesc!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.centerCode!.toLowerCase().contains(
-                                          controller.text.toLowerCase()))
-                                    debugPrint(i.centerCode);
-                                  setState(() {
-                                    key.currentState?.pageTo(0);
-                                    shared.Center_data.add(
-                                        Center_Log.fromJson(i.toJson()));
-                                  });
-                                  if (shared.Center_data.isNotEmpty) {
-                                    setState(() {
-                                      isLoaded = true;
-                                    });
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.Center_data.clear();
-                              setState(() {
-                                shared.Center_data.addAll(
-                                    shared.CenterLog[0].data!);
-                              });
-                            }
-                            debugPrint(
-                                shared.Center_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.CenterLog.clear();
-                          }
-                        },
-                      ),
-                    ),
                     Container(
                       width: double.infinity,
                       padding: kEdgeInsetsVerticalNormal,
