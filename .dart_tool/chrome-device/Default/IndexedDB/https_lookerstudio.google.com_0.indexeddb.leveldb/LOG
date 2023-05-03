@@ -1,5 +1,2 @@
-2023/04/27-08:38:31.410 9003 Reusing MANIFEST /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.XayNtp/flutter_tools_chrome_device.NLYJ33/Default/IndexedDB/https_lookerstudio.google.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/04/27-08:38:31.415 9003 Recovering log #4
-2023/04/27-08:38:31.416 9003 Reusing old log /private/var/folders/sw/vchrtz9n2014135wp5xz2ryr0000gp/T/flutter_tools.XayNtp/flutter_tools_chrome_device.NLYJ33/Default/IndexedDB/https_lookerstudio.google.com_0.indexeddb.leveldb/000004.log 
-2023/04/27-08:38:31.416 9003 Delete type=0 #3
-2023/04/27-08:38:31.416 9003 Delete type=2 #3
+2023/04/27-13:42:42.355 9907 Creating DB /private/var/folders/d9/4wmr_rjn12n53ksxf2kh6s8c0000gp/T/flutter_tools.MZgwdP/flutter_tools_chrome_device.XSMNXC/Default/IndexedDB/https_lookerstudio.google.com_0.indexeddb.leveldb since it was missing.
+2023/04/27-13:42:42.425 9907 Reusing MANIFEST /private/var/folders/d9/4wmr_rjn12n53ksxf2kh6s8c0000gp/T/flutter_tools.MZgwdP/flutter_tools_chrome_device.XSMNXC/Default/IndexedDB/https_lookerstudio.google.com_0.indexeddb.leveldb/MANIFEST-000001
