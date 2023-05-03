@@ -32,11 +32,13 @@ class _ServicedowntimeState extends State<Servicedowntime> {
       print(res.data!.length);
       print(res.data![0].toJson().length);
       setState(() {
-        shared.ServicedowntimeLog.add(Servicedowntime_Api.fromJson(res.toJson()));
+        shared.ServicedowntimeLog.add(
+            Servicedowntime_Api.fromJson(res.toJson()));
         isLoaded = true;
       });
       for (var i in res.data!) {
-        shared.Servicedowntime_data.add(Servicedowntime_Log.fromJson(i.toJson()));
+        shared.Servicedowntime_data.add(
+            Servicedowntime_Log.fromJson(i.toJson()));
       }
     }
     for (var i in shared.Servicedowntime_data) {
@@ -51,6 +53,7 @@ class _ServicedowntimeState extends State<Servicedowntime> {
       wait();
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Servicedowntime_U>(context);
@@ -90,8 +93,27 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Description",
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Description',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: controller,
+                        ),
                       ),
                       verticalSpaceTiny,
                       Row(
@@ -121,7 +143,46 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    try{
+                                      if (controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Servicedowntime_data.clear();
+                                        for (var i in shared.ServicedowntimeLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.downtimeDesc?.toLowerCase().contains(
+                                              controller.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.downtimeDesc!.toLowerCase().contains(
+                                                controller.text.toLowerCase())) {
+                                              debugPrint(i.downtimeDesc);
+                                              setState(() {
+                                                shared.Servicedowntime_data
+                                                    .add(Servicedowntime_Log.fromJson(i.toJson()));
+                                              });
+                                              if (shared.Servicedowntime_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(
+                                          shared.Servicedowntime_data[0].toJson().toString());
+                                    }catch (e) {
+                                      shared.Servicedowntime_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -141,7 +202,25 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    controller.clear();
+                                    shared.Servicedowntime_data.clear();
+                                    setState(() {
+                                      shared.Servicedowntime_data.addAll(
+                                          shared.ServicedowntimeLog[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                        () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -181,138 +260,6 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                 Column(
                   children: [
                     Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.Servicedowntime_data.clear();
-                              for (var i in shared.ServicedowntimeLog[0].data!) {
-                                print(i.toJson());
-                                print(i.downtimeId
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.downtimeId!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
-                                      i.downtimeStart!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.downtimeEnd!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.clientType!.toLowerCase().contains(
-                                          controller.text.toLowerCase()))
-
-
-
-                                  {
-
-
-                                    debugPrint(i.clientType);
-                                    setState(() {
-                                      key.currentState?.pageTo(0);
-                                      shared.Servicedowntime_data.add(
-                                          Servicedowntime_Log.fromJson(i.toJson()));
-                                    });
-                                    if (shared.Servicedowntime_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.Servicedowntime_data.clear();
-                              setState(() {
-                                shared.Servicedowntime_data.addAll(
-                                    shared.ServicedowntimeLog[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(
-                                shared.Servicedowntime_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.Servicedowntime_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.Servicedowntime_data.clear();
-                              for (var i in shared.ServicedowntimeLog[0].data!) {
-                                print(i.toJson());
-                                print(i.downtimeId
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.downtimeId!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
-                                      i.downtimeStart!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.downtimeEnd!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.clientType!.toLowerCase().contains(
-                                          controller.text.toLowerCase()))
-
-
-
-                                  {
-
-
-                                    debugPrint(i.clientType);
-                                    setState(() {
-                                      key.currentState?.pageTo(0);
-                                      shared.Servicedowntime_data.add(
-                                          Servicedowntime_Log.fromJson(i.toJson()));
-                                    });
-                                    if (shared.Servicedowntime_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.Servicedowntime_data.clear();
-                              setState(() {
-                                shared.Servicedowntime_data.addAll(
-                                    shared.ServicedowntimeLog[0].data!);
-                              });
-                            }
-                            debugPrint(
-                                shared.Servicedowntime_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.Servicedowntime_data.clear();
-                          }
-                        },
-                      ),
-                    ),
-                    Container(
                       width: double.infinity,
                       padding: kEdgeInsetsVerticalNormal,
                       child: PaginatedDataTable(
@@ -327,21 +274,21 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                               label: Text('Date Start',
                                   style: kLargeBoldTextStyle)),
                           DataColumn(
-                              label: Text('Date End',
-                                  style: kLargeBoldTextStyle)),
+                              label:
+                                  Text('Date End', style: kLargeBoldTextStyle)),
                           DataColumn(
                               label: Text('Client Type',
                                   style: kLargeBoldTextStyle)),
                         ],
                         source: isLoaded
                             ? shared.Servicedowntime_data.isNotEmpty
-                            ? data
-                            : data2
+                                ? data
+                                : data2
                             : data3,
                         rowsPerPage: 8,
                         showFirstLastButtons: true,
                         header:
-                        Text('List of Role', style: kXLargeBoldTextStyle),
+                            Text('List of Role', style: kXLargeBoldTextStyle),
                       ),
                     ),
                   ],
@@ -371,17 +318,20 @@ class MyData extends DataTableSource {
     return DataRow(cells: [
       DataCell(SizedBox(
           width: 200,
-          child: Text(shared.Servicedowntime_data[index].downtimeDesc.toString()))),
+          child: Text(
+              shared.Servicedowntime_data[index].downtimeDesc.toString()))),
+      DataCell(SizedBox(
+          width: 200,
+          child: Text(
+              shared.Servicedowntime_data[index].downtimeStart.toString()))),
       DataCell(SizedBox(
           width: 200,
           child:
-          Text(shared.Servicedowntime_data[index].downtimeStart.toString()))),
+              Text(shared.Servicedowntime_data[index].downtimeEnd.toString()))),
       DataCell(SizedBox(
           width: 200,
-          child: Text(shared.Servicedowntime_data[index].downtimeEnd.toString()))),
-      DataCell(SizedBox(
-          width: 200,
-          child: Text(shared.Servicedowntime_data[index].clientType.toString()))),
+          child:
+              Text(shared.Servicedowntime_data[index].clientType.toString()))),
     ]);
   }
 }
@@ -420,16 +370,16 @@ class MyData3 extends DataTableSource {
       DataCell(SizedBox(child: Text('Loading, please wait'))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
     ]);
   }
 }

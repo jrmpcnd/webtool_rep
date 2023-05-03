@@ -92,14 +92,50 @@ class _InstitutionState extends State<Institution> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Code",
-                        controller: institution_code_controller,
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'institution Code',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: institution_code_controller,
+                        ),
                       ),
                       verticalSpaceTiny,
-                      textfield(
-                        hintext: "Description",
-                        controller: institution_desc_controller,
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'institution Description',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: institution_desc_controller,
+                        ),
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -115,13 +151,76 @@ class _InstitutionState extends State<Institution> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {
-                                    Institution_Function.insti(
-                                      insti_code:
-                                          institution_code_controller.text,
-                                      insti_desc:
-                                          institution_desc_controller.text,
-                                    );
+                                  onPressed: (){
+                                    try{
+                                      if (institution_code_controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Institution_data.clear();
+                                        for (var i in shared.InstitutionLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.instCode?.toLowerCase().contains(
+                                              institution_code_controller.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.instCode!.toLowerCase().contains(
+                                                institution_code_controller.text.toLowerCase())) {
+                                              debugPrint(i.instCode);
+                                              setState(() {
+                                                shared.Institution_data
+                                                    .add(Institution_Log.fromJson(i.toJson()));
+                                              });
+                                              if (shared.Institution_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (institution_desc_controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Institution_data.clear();
+                                        for (var i in shared.InstitutionLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.instDesc?.toLowerCase().contains(
+                                              institution_desc_controller.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.instDesc!.toLowerCase().contains(
+                                                institution_desc_controller.text.toLowerCase())) {
+                                              debugPrint(i.instCode);
+                                              setState(() {
+                                                shared.Institution_data
+                                                    .add(Institution_Log.fromJson(i.toJson()));
+                                              });
+                                              if (shared.Institution_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(
+                                          shared.Institution_data[0].toJson().toString());
+                                    }catch (e) {
+                                      shared.Institution_data.clear();
+                                      isLoaded = true;
+                                    }
                                   },
                                   icon: const Icon(
                                     Icons.search,
@@ -142,7 +241,25 @@ class _InstitutionState extends State<Institution> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    institution_desc_controller.clear();
+                                    institution_code_controller.clear();
+                                    shared.Institution_data.clear();
+                                    setState(() {
+                                      shared.Institution_data.addAll(shared.InstitutionLog[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                            () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -181,123 +298,7 @@ class _InstitutionState extends State<Institution> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.Institution_data.clear();
-                              for (var i in shared.InstitutionLog[0].data!) {
-                                print(i.toJson());
-                                print(i.instDesc
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.instDesc!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.createdDate!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.instCode!
-                                          .toString()
-                                          .contains(controller.text)) {
-                                    debugPrint(i.instDesc);
-                                    setState(() {
-                                      shared.Institution_data.add(
-                                          Institution_Log.fromJson(i.toJson()));
-                                    });
-                                    if (shared.Institution_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.Institution_data.clear();
-                              setState(() {
-                                shared.Institution_data.addAll(
-                                    shared.InstitutionLog[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(
-                                shared.Institution_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.Institution_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.Institution_data.clear();
-                              for (var i in shared.InstitutionLog[0].data!) {
-                                print(i.toJson());
-                                print(i.instDesc
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.instDesc!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.createdDate!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.instCode!
-                                          .toString()
-                                          .contains(controller.text)) {
-                                    debugPrint(i.instDesc);
-                                    setState(() {
-                                      key.currentState?.pageTo(0);
-                                      shared.Institution_data.add(
-                                          Institution_Log.fromJson(i.toJson()));
-                                    });
-                                    if (shared.Institution_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.Institution_data.clear();
-                              setState(() {
-                                shared.Institution_data.addAll(
-                                    shared.InstitutionLog[0].data!);
-                              });
-                            }
-                            debugPrint(
-                                shared.Institution_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.Institution_data.clear();
-                          }
-                        },
-                      ),
-                    ),
+
                     Container(
                       width: double.infinity,
                       padding: kEdgeInsetsVerticalNormal,
