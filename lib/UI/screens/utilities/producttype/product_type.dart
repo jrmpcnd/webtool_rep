@@ -21,6 +21,7 @@ class Producttype extends StatefulWidget {
 
 class _ProducttypeState extends State<Producttype> {
   TextEditingController controller = TextEditingController();
+  TextEditingController controller1 = TextEditingController();
   bool static = false;
   bool isLoaded = false;
 
@@ -108,12 +109,50 @@ class _ProducttypeState extends State<Producttype> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Product Type ID",
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Product type ID',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: controller,
+                        ),
                       ),
                       verticalSpaceTiny,
-                      textfield(
-                        hintext: "Product Type Name",
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Product type Name',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: controller1,
+                        ),
                       ),
                       verticalSpaceTiny,
                       DropdownButton(
@@ -122,7 +161,7 @@ class _ProducttypeState extends State<Producttype> {
                           return DropdownMenuItem(
                             value: e,
                             child:
-                                Text(e, style: TextStyle(color: Colors.black)),
+                            Text(e, style: TextStyle(color: Colors.black)),
                           );
                         }).toList(),
                         onChanged: (value) {
@@ -143,9 +182,257 @@ class _ProducttypeState extends State<Producttype> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kPrimaryColor)),
-                                  onPressed: () {},
+                                      MaterialStateProperty.all(
+                                          kPrimaryColor)),
+                                  onPressed: (){
+                                    try{
+                                      if (controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.product_data.clear();
+                                        for (var i in shared.product[0].data!) {
+                                          print(i.toJson());
+                                          print(i.productTypeId?.toLowerCase().contains(
+                                              controller.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.productTypeId!.toLowerCase().contains(
+                                                controller.text.toLowerCase())) {
+                                              debugPrint(i.productTypeId);
+                                              setState(() {
+                                                shared.product_data
+                                                    .add(Data14.fromJson(i.toJson()));
+                                              });
+                                              if (shared.product_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (controller1.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.product_data.clear();
+                                        for (var i in shared.product[0].data!) {
+                                          print(i.toJson());
+                                          print(i.productTypeName?.toLowerCase().contains(
+                                              controller1.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.productTypeName!.toLowerCase().contains(
+                                                controller1.text.toLowerCase())) {
+                                              debugPrint(i.productTypeName);
+                                              setState(() {
+                                                shared.product_data
+                                                    .add(Data14.fromJson(i.toJson()));
+                                              });
+                                              if (shared.product_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (init.isNotEmpty) {
+                                        if (init.toLowerCase().contains(
+                                            'payswitch')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.product_data.clear();
+                                          for (var i in shared.product[0]
+                                              .data!) {
+                                            print(i.toJson());
+                                            print(i.providerName?.toLowerCase()
+                                                .contains(
+                                                controller.text.toLowerCase()));
+                                            if (i
+                                                .toJson()
+                                                .isNotEmpty) {
+                                              if (i.providerName!
+                                                  .toLowerCase()
+                                                  .contains(
+                                                  init.toLowerCase())) {
+                                                debugPrint(i.providerName);
+                                                setState(() {
+                                                  shared.product_data.add(
+                                                      Data14.fromJson(
+                                                          i.toJson()));
+                                                });
+                                                if (shared.product_data
+                                                    .isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (init.isNotEmpty) {
+                                        if (init.toLowerCase().contains('ECPAY')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.product_data.clear();
+                                          for (var i in shared.product[0].data!) {
+                                            print(i.toJson());
+                                            print(i.providerName?.toLowerCase().contains(
+                                                controller.text.toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.providerName!
+                                                  .toLowerCase()
+                                                  .contains(init.toLowerCase())) {
+                                                debugPrint(i.providerName);
+                                                setState(() {
+                                                  shared.product_data.add(
+                                                      Data14.fromJson(i.toJson()));
+                                                });
+                                                if (shared.product_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                        if (!init
+                                            .toLowerCase()
+                                            .contains('')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.product_data.clear();
+                                          for (var i in shared.product[0].data!) {
+                                            print(i.toJson());
+                                            print(i.providerName?.toLowerCase().contains(
+                                                controller.text.toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.providerName!
+                                                  .toLowerCase()
+                                                  .contains('')) {
+                                                debugPrint(i.providerName);
+                                                setState(() {
+                                                  shared.product_data.add(
+                                                      Data14.fromJson(i.toJson()));
+                                                });
+                                                if (shared.product_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (init.isNotEmpty) {
+                                        if (init.toLowerCase().contains('bayad center')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.product_data.clear();
+                                          for (var i in shared.product[0].data!) {
+                                            print(i.toJson());
+                                            print(i.providerName?.toLowerCase().contains(
+                                                controller.text.toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.providerName!
+                                                  .toLowerCase()
+                                                  .contains(init.toLowerCase())) {
+                                                debugPrint(i.providerName);
+                                                setState(() {
+                                                  shared.product_data.add(
+                                                      Data14.fromJson(i.toJson()));
+                                                });
+                                                if (shared.product_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                        if (!init
+                                            .toLowerCase()
+                                            .contains('bayad center')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.product_data.clear();
+                                          for (var i in shared.product[0].data!) {
+                                            print(i.toJson());
+                                            print(i.providerName?.toLowerCase().contains(
+                                                controller.text.toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.providerName!
+                                                  .toLowerCase()
+                                                  .contains('')) {
+                                                debugPrint(i.providerName);
+                                                setState(() {
+                                                  shared.product_data.add(
+                                                      Data14.fromJson(i.toJson()));
+                                                });
+                                                if (shared.product_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(
+                                          shared.product_data[0].toJson().toString());
+                                    }catch (e) {
+                                      shared.product_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -163,9 +450,29 @@ class _ProducttypeState extends State<Producttype> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kSecondaryColor2)),
-                                  onPressed: () {},
+                                      MaterialStateProperty.all(
+                                          kSecondaryColor2)),
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    controller1.clear();
+                                    controller.clear();
+                                    init= res[0];
+                                    shared.product_data.clear();
+                                    setState(() {
+                                      shared.product_data.addAll(
+                                          shared.product[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                            () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -184,7 +491,7 @@ class _ProducttypeState extends State<Producttype> {
                             child: ElevatedButton.icon(
                               style: ButtonStyle(
                                   backgroundColor:
-                                      MaterialStateProperty.all(kPrimaryColor)),
+                                  MaterialStateProperty.all(kPrimaryColor)),
                               onPressed: () {},
                               icon: const Icon(
                                 Icons.delete_outline,
@@ -204,120 +511,6 @@ class _ProducttypeState extends State<Producttype> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.product_data.clear();
-                              for (var i in shared.product[0].data!) {
-                                print(i.toJson());
-                                print(i.providerName
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.productTypeId!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.productTypeName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.description!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.providerName);
-                                    setState(() {
-                                      shared.product_data
-                                          .add(Data14.fromJson(i.toJson()));
-                                    });
-                                    if (shared.product_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.product_data.clear();
-                              setState(() {
-                                shared.product_data
-                                    .addAll(shared.product[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(
-                                shared.product_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.product_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.product_data.clear();
-                              for (var i in shared.product[0].data!) {
-                                print(i.toJson());
-                                print(i.providerName
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.productTypeId!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.productTypeName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.description!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) ;
-                                  debugPrint(i.providerName);
-                                  setState(() {
-                                    key.currentState?.pageTo(0);
-                                    shared.product_data
-                                        .add(Data14.fromJson(i.toJson()));
-                                  });
-                                  if (shared.product_data.isNotEmpty) {
-                                    setState(() {
-                                      isLoaded = true;
-                                    });
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.product_data.clear();
-                              setState(() {
-                                shared.product_data
-                                    .addAll(shared.product[0].data!);
-                              });
-                            }
-                            debugPrint(
-                                shared.product_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.product_data.clear();
-                          }
-                        },
-                      ),
-                    ),
                     Container(
                         width: double.infinity,
                         padding: kEdgeInsetsVerticalNormal,
@@ -340,12 +533,12 @@ class _ProducttypeState extends State<Producttype> {
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label:
-                                    Text('Status', style: kLargeBoldTextStyle))
+                                Text('Status', style: kLargeBoldTextStyle))
                           ],
                           source: isLoaded
                               ? shared.product_data.isNotEmpty
-                                  ? data
-                                  : data2
+                              ? data
+                              : data2
                               : data3,
                           rowsPerPage: 8,
                           showFirstLastButtons: true,
