@@ -22,6 +22,8 @@ class Splashscreen extends StatefulWidget {
 
 class _SplashscreenState extends State<Splashscreen> {
   TextEditingController controller = TextEditingController();
+  TextEditingController action_controller = TextEditingController();
+  TextEditingController title_controller = TextEditingController();
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -91,12 +93,50 @@ class _SplashscreenState extends State<Splashscreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Action",
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Action',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: action_controller,
+                        ),
                       ),
                       verticalSpaceTiny,
-                      textfield(
-                        hintext: "Title",
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: "Title",
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: title_controller,
+                        ),
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -112,7 +152,88 @@ class _SplashscreenState extends State<Splashscreen> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    try {
+                                      if (action_controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.splash_data.clear();
+                                        for (var i in shared.splash[0].data!) {
+                                          print(i.toJson());
+                                          print(i.action
+                                              ?.toLowerCase()
+                                              .contains(action_controller.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.action!
+                                                    .toLowerCase()
+                                                    .contains(action_controller
+                                                        .text
+                                                        .toLowerCase()) ||
+                                                i.title!.toLowerCase().contains(
+                                                    action_controller.text
+                                                        .toLowerCase())) {
+                                              debugPrint(i.action);
+                                              setState(() {
+                                                shared.splash_data.add(
+                                                    Data21.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .splash_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (title_controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.splash_data.clear();
+                                        for (var i in shared.splash[0].data!) {
+                                          print(i.toJson());
+                                          print(i.action
+                                              ?.toLowerCase()
+                                              .contains(title_controller.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.action!
+                                                    .toLowerCase()
+                                                    .contains(title_controller
+                                                        .text
+                                                        .toLowerCase()) ||
+                                                i.title!.toLowerCase().contains(
+                                                    title_controller.text
+                                                        .toLowerCase())) {
+                                              debugPrint(i.action);
+                                              setState(() {
+                                                shared.splash_data.add(
+                                                    Data21.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .splash_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(shared.splash_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.splash_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -132,7 +253,26 @@ class _SplashscreenState extends State<Splashscreen> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    action_controller.clear();
+                                    title_controller.clear();
+                                    shared.splash_data.clear();
+                                    setState(() {
+                                      shared.splash_data
+                                          .addAll(shared.splash[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                        () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -171,116 +311,6 @@ class _SplashscreenState extends State<Splashscreen> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.splash_data.clear();
-                              for (var i in shared.splash[0].data!) {
-                                print(i.toJson());
-                                print(i.action
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.action!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.title!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.action);
-                                    setState(() {
-                                      shared.splash_data
-                                          .add(Data21.fromJson(i.toJson()));
-                                    });
-                                    if (shared.splash_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.splash_data.clear();
-                              setState(() {
-                                shared.splash_data
-                                    .addAll(shared.splash[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(
-                                shared.splash_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.splash_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.splash_data.clear();
-                              for (var i in shared.splash[0].data!) {
-                                print(i.toJson());
-                                print(i.action
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.action!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.title!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.action);
-                                    setState(() {
-                                      shared.splash_data
-                                          .add(Data21.fromJson(i.toJson()));
-                                    });
-                                    if (shared.splash_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.splash_data.clear();
-                              setState(() {
-                                shared.splash_data
-                                    .addAll(shared.splash[0].data!);
-                              });
-                            }
-                            debugPrint(
-                                shared.splash_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.splash_data.clear();
-                          }
-                        },
-                      ),
-                    ),
                     Container(
                         width: double.infinity,
                         padding: kEdgeInsetsVerticalNormal,
