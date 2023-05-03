@@ -9,7 +9,6 @@ import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import 'components/alerdialogparameter.dart';
 
-
 class Parameters extends StatefulWidget {
   const Parameters({Key? key}) : super(key: key);
 
@@ -70,7 +69,8 @@ class _ParametersState extends State<Parameters> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Prov13>(context);
-    final DataTableSource data = MyData(shared: shared, dashboardContext: context);
+    final DataTableSource data =
+        MyData(shared: shared, dashboardContext: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -111,20 +111,37 @@ class _ParametersState extends State<Parameters> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          DropdownButton(
-                            value: init,
-                            items: res.map((e) {
-                              return DropdownMenuItem(
-                                value: e,
-                                child: Text(e,
-                                    style: TextStyle(color: Colors.black)),
-                              );
-                            }).toList(),
-                            onChanged: (value) {
-                              setState(() {
-                                init = value.toString();
-                              });
-                            },
+                          Container(
+                            height: 35.0,
+                            width: 400,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.fromBorderSide(
+                                BorderSide(color: Color(0xFF000000), width: 1),
+                              ),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: DropdownButton(
+                                  value: init,
+                                  items: res.map((e) {
+                                    return DropdownMenuItem(
+                                      value: e,
+                                      child: Text(e,
+                                          style:
+                                              TextStyle(color: Colors.black)),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      init = value.toString();
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
                           ),
                           verticalSpaceTiny,
                           SizedBox(
@@ -147,92 +164,6 @@ class _ParametersState extends State<Parameters> {
                               ),
                               textInputAction: TextInputAction.go,
                               controller: controller,
-                              onChanged: (value) {
-                                setState(() {
-                                  isLoaded = false;
-                                });
-                                try {
-                                  if (controller.text.isNotEmpty) {
-                                    shared.prov_data.clear();
-                                    for (var i in shared.prov[0].data!) {
-                                      print(i.toJson());
-                                      print(i.paramName
-                                          ?.toLowerCase()
-                                          .contains(controller.text.toLowerCase()));
-                                      if (i.toJson().isNotEmpty) {
-                                        if (i.paramName!
-                                            .toLowerCase()
-                                            .contains(controller.text.toLowerCase())
-
-                                        ) {
-                                          debugPrint(i.paramName);
-                                          setState(() {
-                                            shared.prov_data.add(Data13.fromJson(i.toJson()));
-                                          });
-                                          if (shared.prov_data.isNotEmpty) {
-                                            setState(() {
-                                              isLoaded = true;
-                                            });
-                                          }
-                                        }
-                                      }
-                                    }
-                                  } else if (controller.text == '') {
-                                    shared.prov_data.clear();
-                                    setState(() {
-                                      shared.prov_data.addAll(shared.prov[0].data!);
-                                      isLoaded = true;
-                                    });
-                                  }
-                                  debugPrint(shared.prov_data[0].toJson().toString());
-                                } catch (e) {
-                                  shared.prov_data.clear();
-                                  isLoaded = true;
-                                }
-                              },
-                              onEditingComplete: () async {
-                                setState(() {
-                                  isLoaded = false;
-                                });
-                                try {
-                                  if (controller.text.isNotEmpty) {
-                                    shared.prov_data.clear();
-                                    for (var i in shared.prov[0].data!) {
-                                      print(i.toJson());
-                                      print(i.paramName
-                                          ?.toLowerCase()
-                                          .contains(controller.text.toLowerCase()));
-                                      if (i.toJson().isNotEmpty) {
-                                        if (i.paramName!
-                                            .toLowerCase()
-                                            .contains(controller.text.toLowerCase()) ||
-                                            i.paramName!
-                                                .toLowerCase()
-                                                .contains(controller.text.toLowerCase())) {
-                                          debugPrint(i.paramName);
-                                          setState(() {
-                                            key.currentState?.pageTo(0);
-                                            shared.prov_data.add(Data13.fromJson(i.toJson()));
-                                          });
-                                          if (shared.prov_data.isNotEmpty) {
-                                            setState(() {
-                                              isLoaded = true;
-                                            });
-                                          }
-                                        }
-                                      }
-                                    }
-                                  } else if (controller.text == '') {
-                                    shared.prov_data.clear();
-                                    setState(() {
-                                      shared.prov_data.addAll(shared.prov[0].data!);
-                                    });
-                                  }
-                                  debugPrint(shared.prov_data[0].toJson().toString());
-                                } catch (e) {
-                                  shared.prov_data.clear();
-                                }
-                              },
                             ),
                           ),
                           verticalSpaceSmall,
@@ -246,7 +177,256 @@ class _ParametersState extends State<Parameters> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    try {
+                                      if (controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.prov_data.clear();
+                                        for (var i in shared.prov[0].data!) {
+                                          print(i.toJson());
+                                          print(i.paramName
+                                              ?.toLowerCase()
+                                              .contains(controller.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.paramName!
+                                                .toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.paramName);
+                                              setState(() {
+                                                shared.prov_data.add(
+                                                    Data13.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared.prov_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (init.isNotEmpty) {
+                                        if (init.toLowerCase().contains('web')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.prov_data.clear();
+                                          for (var i in shared.prov[0].data!) {
+                                            print(i.toJson());
+                                            print(i.appType?.toLowerCase().contains(
+                                                controller.text.toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.appType!
+                                                  .toLowerCase()
+                                                  .contains(init.toLowerCase())) {
+                                                debugPrint(i.appType);
+                                                setState(() {
+                                                  shared.prov_data.add(
+                                                      Data13.fromJson(i.toJson()));
+                                                });
+                                                if (shared.prov_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                        if (!init
+                                            .toLowerCase()
+                                            .contains('web')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.prov_data.clear();
+                                          for (var i in shared.prov[0].data!) {
+                                            print(i.toJson());
+                                            print(i.appType?.toLowerCase().contains(
+                                                controller.text.toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.appType!
+                                                  .toLowerCase()
+                                                  .contains('')) {
+                                                debugPrint(i.appType);
+                                                setState(() {
+                                                  shared.prov_data.add(
+                                                      Data13.fromJson(i.toJson()));
+                                                });
+                                                if (shared.prov_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      else if (init.isNotEmpty) {
+                                        if (init.toLowerCase().contains('core')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.prov_data.clear();
+                                          for (var i in shared.prov[0].data!) {
+                                            print(i.toJson());
+                                            print(i.appType?.toLowerCase().contains(
+                                                controller.text.toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.appType!
+                                                  .toLowerCase()
+                                                  .contains(init.toLowerCase())) {
+                                                debugPrint(i.appType);
+                                                setState(() {
+                                                  shared.prov_data.add(
+                                                      Data13.fromJson(i.toJson()));
+                                                });
+                                                if (shared.prov_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                        if (!init
+                                            .toLowerCase()
+                                            .contains('')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.prov_data.clear();
+                                          for (var i in shared.prov[0].data!) {
+                                            print(i.toJson());
+                                            print(i.appType?.toLowerCase().contains(
+                                                controller.text.toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.appType!
+                                                  .toLowerCase()
+                                                  .contains('')) {
+                                                debugPrint(i.appType);
+                                                setState(() {
+                                                  shared.prov_data.add(
+                                                      Data13.fromJson(i.toJson()));
+                                                });
+                                                if (shared.prov_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      else if (init.isNotEmpty) {
+                                        if (init.toLowerCase().contains('customer')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.prov_data.clear();
+                                          for (var i in shared.prov[0].data!) {
+                                            print(i.toJson());
+                                            print(i.appType?.toLowerCase().contains(
+                                                controller.text.toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.appType!
+                                                  .toLowerCase()
+                                                  .contains(init.toLowerCase())) {
+                                                debugPrint(i.appType);
+                                                setState(() {
+                                                  shared.prov_data.add(
+                                                      Data13.fromJson(i.toJson()));
+                                                });
+                                                if (shared.prov_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                        if (!init
+                                            .toLowerCase()
+                                            .contains('cust')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.prov_data.clear();
+                                          for (var i in shared.prov[0].data!) {
+                                            print(i.toJson());
+                                            print(i.appType?.toLowerCase().contains(
+                                                controller.text.toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.appType!
+                                                  .toLowerCase()
+                                                  .contains('')) {
+                                                debugPrint(i.appType);
+                                                setState(() {
+                                                  shared.prov_data.add(
+                                                      Data13.fromJson(i.toJson()));
+                                                });
+                                                if (shared.prov_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(shared.prov_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.prov_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -266,7 +446,25 @@ class _ParametersState extends State<Parameters> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    controller.clear();
+                                    init = res[0];
+                                    setState(() {
+                                      shared.prov_data
+                                          .addAll(shared.prov[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                        () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -306,9 +504,10 @@ class _ParametersState extends State<Parameters> {
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label: Text('Description',
-                                    style: kLargeBoldTextStyle)),  DataColumn(
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
                                 label:
-                                Text('Action', style: kLargeBoldTextStyle)),
+                                    Text('Action', style: kLargeBoldTextStyle)),
                           ],
                           source: isLoaded
                               ? shared.prov_data.isNotEmpty
@@ -374,7 +573,6 @@ class MyData extends DataTableSource {
                   paramId: shared.prov_data[index].paramId.toString(),
                   appType: shared.prov_data[index].appType.toString(),
                 ),
-
               ),
             );
           },

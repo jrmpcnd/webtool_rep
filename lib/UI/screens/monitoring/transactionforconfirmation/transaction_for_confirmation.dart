@@ -346,7 +346,7 @@ class _TransactionforconfirmationState
                                     print(" === $init");
                                     print(
                                         "+_+_+_+_+${init.toLowerCase().contains('cash out')}");
-                                    if (controller.text.isNotEmpty) {
+                                    if (controller.text.isNotEmpty ) {
                                       setState(() {
                                         isLoaded = false;
                                       });
@@ -356,7 +356,8 @@ class _TransactionforconfirmationState
                                         // print(i.cid?.toLowerCase().contains(
                                         //     controller.text.toLowerCase()));
                                         if (i.toJson().isNotEmpty) {
-                                          if (i.cid!.toLowerCase().contains(controller.text.toLowerCase())) {
+                                          if (i.cid!.toLowerCase().contains(
+                                              controller.text.toLowerCase())) {
                                             setState(() {
                                               shared.confirm_data.add(
                                                   Data3.fromJson(i.toJson()));
@@ -376,14 +377,20 @@ class _TransactionforconfirmationState
                                         }
                                       }
                                     }
-                                    if (init.toLowerCase().contains('cash out')) {
+                                    if (init
+                                        .toLowerCase()
+                                        .contains('cash out')) {
                                       setState(() {
                                         isLoaded = false;
                                       });
                                       shared.confirm_data.clear();
                                       for (var i in shared.confirm[0].data!) {
                                         if (i.toJson().isNotEmpty) {
-                                          if (i.transDesc!.toLowerCase().contains(init.toString().toLowerCase())) {
+                                          if (i.transDesc!
+                                              .toLowerCase()
+                                              .contains(init
+                                                  .toString()
+                                                  .toLowerCase())) {
                                             setState(() {
                                               shared.confirm_data.add(
                                                   Data3.fromJson(i.toJson()));
@@ -403,16 +410,21 @@ class _TransactionforconfirmationState
                                         }
                                       }
                                     }
-                                    print("init fuckers:"+init.toLowerCase());
-                                    if (init.toLowerCase()=="cash in - cash out"){
-
+                                    if (init
+                                        .toLowerCase()
+                                        .contains('cash in - cash out')) {
                                       setState(() {
                                         isLoaded = false;
                                       });
                                       shared.confirm_data.clear();
                                       for (var i in shared.confirm[0].data!) {
                                         if (i.toJson().isNotEmpty) {
-                                          if (i.transDesc!.toLowerCase().contains(init.toString().toLowerCase())) {
+                                          if (i.transDesc!
+                                                  .toLowerCase()
+                                                  .contains('cash in') ||
+                                              i.transDesc!
+                                                  .toLowerCase()
+                                                  .contains('cash out')) {
                                             setState(() {
                                               shared.confirm_data.add(
                                                   Data3.fromJson(i.toJson()));
@@ -421,7 +433,7 @@ class _TransactionforconfirmationState
                                                 .confirm_data.isNotEmpty) {
                                               Future.delayed(
                                                 Duration(seconds: 1),
-                                                    () {
+                                                () {
                                                   setState(() {
                                                     isLoaded = true;
                                                   });
@@ -432,9 +444,46 @@ class _TransactionforconfirmationState
                                         }
                                       }
                                     }
-                                    // debugPrint(shared.confirm_data[0]
-                                    //     .toJson()
-                                    //     .toString());
+                                    if (init
+                                        .toLowerCase()
+                                        .contains('fund transfer')) {
+                                      setState(() {
+                                        if (init.toLowerCase().contains(
+                                            'cash in - fund transfer')) {
+                                          isLoaded = false;
+                                        }
+                                      });
+                                      shared.confirm_data.clear();
+                                      for (var i in shared.confirm[0].data!) {
+                                        if (i.toJson().isNotEmpty) {
+                                          if (i.transDesc!
+                                                  .toLowerCase()
+                                                  .contains('cash in') ||
+                                              i.transDesc!
+                                                  .toLowerCase()
+                                                  .contains('fund transfer')) {
+                                            setState(() {
+                                              shared.confirm_data.add(
+                                                  Data3.fromJson(i.toJson()));
+                                            });
+                                            if (shared
+                                                .confirm_data.isNotEmpty) {
+                                              Future.delayed(
+                                                Duration(seconds: 1),
+                                                () {
+                                                  setState(() {
+                                                    isLoaded = true;
+                                                  });
+                                                },
+                                              );
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                    debugPrint(shared.confirm_data[0]
+                                        .toJson()
+                                        .toString());
                                   } catch (e) {
                                     shared.confirm_data.clear();
                                     isLoaded = true;
@@ -466,13 +515,14 @@ class _TransactionforconfirmationState
                                   });
                                   controller.clear();
                                   controller1.clear();
-                                  init= res[0];
-                                  init1= res1[0];
+                                  init = res[0];
+                                  init1 = res1[0];
                                   setState(() {
-                                    shared.confirm_data.addAll(shared.confirm[0].data!);
+                                    shared.confirm_data
+                                        .addAll(shared.confirm[0].data!);
                                     Future.delayed(
                                       Duration(seconds: 1),
-                                          () {
+                                      () {
                                         setState(() {
                                           isLoaded = true;
                                         });

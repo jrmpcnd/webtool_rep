@@ -263,12 +263,12 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                         shared.Remittance_data.clear();
                                         for (var i in shared.RemittanceLog[0].data!) {
                                           print(i.toJson());
-                                          print(i.sentMobileRefId?.toLowerCase().contains(
+                                          print(i.senderMobileNumber?.toLowerCase().contains(
                                               controller.text.toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
-                                            if (i.sentMobileRefId!.toLowerCase().contains(
+                                            if (i.senderMobileNumber!.toLowerCase().contains(
                                                 controller.text.toLowerCase())) {
-                                              debugPrint(i.sentMobileRefId);
+                                              debugPrint(i.senderMobileNumber);
                                               setState(() {
                                                 shared.Remittance_data
                                                     .add(Remittance_Log.fromJson(i.toJson()));
@@ -353,6 +353,7 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                     });
                                     controller.clear();
                                     controller1.clear();
+                                    init= res[0];
                                     shared.Remittance_data.clear();
                                     setState(() {
                                       shared.Remittance_data.addAll(shared.RemittanceLog[0].data!);
