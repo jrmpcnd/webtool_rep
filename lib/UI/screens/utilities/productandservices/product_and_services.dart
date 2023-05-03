@@ -93,9 +93,27 @@ class _ProductandservicesState extends State<Productandservices> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Name",
-                        controller: product_servicescontroller,
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Name',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: controller,
+                        ),
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -109,12 +127,47 @@ class _ProductandservicesState extends State<Productandservices> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kPrimaryColor)),
+                                      MaterialStateProperty.all(
+                                          kPrimaryColor)),
                                   onPressed: () {
-                                    Productandservices_Function.product(
-                                        search_productservices:
-                                            product_servicescontroller.text);
+                                    try{
+                                      if (controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.ProductandServices_data.clear();
+                                        for (var i in shared.ProductandServicesLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.serviceName?.toLowerCase().contains(
+                                              controller.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.serviceName!.toLowerCase().contains(
+                                                controller.text.toLowerCase())) {
+                                              debugPrint(i.serviceName);
+                                              setState(() {
+                                                shared.ProductandServices_data
+                                                    .add(ProductandServices_Log.fromJson(i.toJson()));
+                                              });
+                                              if (shared.ProductandServices_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(
+                                          shared.ProductandServices_data[0].toJson().toString());
+                                    }catch (e) {
+                                      shared.ProductandServices_data.clear();
+                                      isLoaded = true;
+                                    }
                                   },
                                   icon: const Icon(
                                     Icons.search,
@@ -133,9 +186,26 @@ class _ProductandservicesState extends State<Productandservices> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kSecondaryColor2)),
-                                  onPressed: () {},
+                                      MaterialStateProperty.all(
+                                          kSecondaryColor2)),
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    controller.clear();
+                                    shared.ProductandServices_data.clear();
+                                    setState(() {
+                                      shared.ProductandServices_data.addAll(shared.ProductandServicesLog[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                            () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -154,7 +224,7 @@ class _ProductandservicesState extends State<Productandservices> {
                             child: ElevatedButton.icon(
                               style: ButtonStyle(
                                   backgroundColor:
-                                      MaterialStateProperty.all(kPrimaryColor)),
+                                  MaterialStateProperty.all(kPrimaryColor)),
                               onPressed: () {},
                               icon: const Icon(
                                 Icons.delete_outline,
@@ -172,133 +242,7 @@ class _ProductandservicesState extends State<Productandservices> {
                   ),
                 ),
                 verticalSpaceRegular,
-                Column(children: [Container(
-                  width: 500,
-                  child: TextFormField(
-                    style: TextStyle(color: kBlackColor),
-                    decoration: const InputDecoration(
-                      hintText: 'Search',
-                      border: OutlineInputBorder(),
-                      labelStyle: TextStyle(fontSize: 12.0),
-                      contentPadding: EdgeInsets.only(left: 10.0),
-                      hintStyle: TextStyle(color: kSecondaryColor2),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kBlackColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kBlackColor),
-                      ),
-                    ),
-                    textInputAction: TextInputAction.go,
-                    controller: controller,
-                    onChanged: (value) {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      //
-                      try {
-                        if (controller.text.isNotEmpty) {
-                          shared.ProductandServices_data.clear();
-                          for (var i in shared.ProductandServicesLog[0].data!) {
-                            print(i.toJson());
-                            print(i.serviceDescription
-                                ?.toLowerCase()
-                                .contains(controller.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.serviceDescription!
-                                  .toLowerCase()
-                                  .contains(controller.text.toLowerCase()) ||
-                                  i.serviceId!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())   ||
-                                  i.serviceName!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())    ||
-                                  i.show!.toString() == controller.text
-
-
-
-                              ) {
-                                debugPrint(i.serviceName);
-                                setState(() {
-                                  shared.ProductandServices_data.add(ProductandServices_Log.fromJson(i.toJson()
-                                  ));
-                                });
-                                if (shared.ProductandServices_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
-                                }
-                              }
-                            }
-                          }
-                        } else if (controller.text == '') {
-                          shared.ProductandServices_data.clear();
-                          setState(() {
-                            shared.ProductandServices_data.addAll(shared.ProductandServicesLog[0].data!);
-                            isLoaded = true;
-                          });
-                        }
-                        debugPrint(shared.ProductandServices_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.ProductandServices_data.clear();
-                        isLoaded = true;
-                      }
-                    },
-                    onEditingComplete: () async {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      try {
-                        if (controller.text.isNotEmpty) {
-                          shared.ProductandServices_data.clear();
-                          for (var i in shared.ProductandServicesLog[0].data!) {
-                            print(i.toJson());
-                            print(i.serviceDescription
-                                ?.toLowerCase()
-                                .contains(controller.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.serviceDescription!
-                                  .toLowerCase()
-                                  .contains(controller.text.toLowerCase()) ||
-                                  i.serviceId!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())   ||
-                                  i.serviceName!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase())    ||
-                                  i.show!.toString() == controller.text
-
-
-                              ) {
-                                debugPrint (i.serviceName);
-                                setState(() {
-                                  key.currentState?.pageTo(0);
-                                  shared.ProductandServices_data.add(ProductandServices_Log.fromJson(i.toJson()
-                                  ));
-
-                                });
-                                if (shared.ProductandServices_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
-                                }
-                              }
-                            }
-                          }
-                        } else if (controller.text == '') {
-                          shared.ProductandServices_data.clear();
-                          setState(() {
-                            shared.ProductandServices_data.addAll(shared.ProductandServicesLog[0].data!);
-                          });
-                        }
-                        debugPrint(shared.ProductandServices_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.ProductandServices_data.clear();
-                      }
-                    },
-                  ),
-                ), Container(
+                Column(children: [ Container(
                   width: double.infinity,
                   padding: kEdgeInsetsVerticalNormal,
                   child: PaginatedDataTable(
