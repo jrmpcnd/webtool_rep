@@ -116,104 +116,6 @@ class _BanknewsState extends State<Banknews> {
                           ),
                           textInputAction: TextInputAction.go,
                           controller: controller,
-                          onChanged: (value) {
-                            setState(() {
-                              isLoaded = false;
-                            });
-                            //
-                            try {
-                              if (controller.text.isNotEmpty) {
-                                shared.Banknews_data.clear();
-                                for (var i in shared.BanknewsLog[0].data!) {
-                                  print(i.toJson());
-                                  print(i.givenName
-                                      ?.toLowerCase()
-                                      .contains(controller.text.toLowerCase()));
-                                  if (i.toJson().isNotEmpty) {
-                                    if (i.givenName!.toLowerCase().contains(
-                                        controller.text.toLowerCase()) ||
-                                        i.productDate!.toLowerCase().contains(
-                                            controller.text.toLowerCase()) ||
-                                        i.productId!.toLowerCase().contains(
-                                            controller.text.toLowerCase()) ||
-                                        i.productName!.toLowerCase().contains(
-                                            controller.text.toLowerCase())) {
-                                      debugPrint(i.productName);
-                                      setState(() {
-                                        shared.Banknews_data.add(
-                                            BankNews_Log.fromJson(i.toJson()));
-                                      });
-                                      if (shared.Banknews_data.isNotEmpty) {
-                                        setState(() {
-                                          isLoaded = true;
-                                        });
-                                      }
-                                    }
-                                  }
-                                }
-                              } else if (controller.text == '') {
-                                shared.Banknews_data.clear();
-                                setState(() {
-                                  shared.Banknews_data.addAll(
-                                      shared.BanknewsLog[0].data!);
-                                  isLoaded = true;
-                                });
-                              }
-                              debugPrint(
-                                  shared.Banknews_data[0].toJson().toString());
-                            } catch (e) {
-                              shared.Banknews_data.clear();
-                              isLoaded = true;
-                            }
-                          },
-                          onEditingComplete: () async {
-                            setState(() {
-                              isLoaded = false;
-                            });
-                            try {
-                              if (controller.text.isNotEmpty) {
-                                shared.Banknews_data.clear();
-                                for (var i in shared.BanknewsLog[0].data!) {
-                                  print(i.toJson());
-                                  print(i.givenName
-                                      ?.toLowerCase()
-                                      .contains(controller.text.toLowerCase()));
-                                  if (i.toJson().isNotEmpty) {
-                                    if (i.givenName!.toLowerCase().contains(
-                                        controller.text.toLowerCase()) ||
-                                        i.productDate!.toLowerCase().contains(
-                                            controller.text.toLowerCase()) ||
-                                        i.productId!.toLowerCase().contains(
-                                            controller.text.toLowerCase()) ||
-                                        i.productName!.toLowerCase().contains(
-                                            controller.text.toLowerCase())) {
-                                      debugPrint(i.productName);
-                                      setState(() {
-                                        key.currentState?.pageTo(0);
-                                        shared.Banknews_data.add(
-                                            BankNews_Log.fromJson(i.toJson()));
-                                      });
-                                      if (shared.Banknews_data.isNotEmpty) {
-                                        setState(() {
-                                          isLoaded = true;
-                                        });
-                                      }
-                                    }
-                                  }
-                                }
-                              } else if (controller.text == '') {
-                                shared.Banknews_data.clear();
-                                setState(() {
-                                  shared.Banknews_data.addAll(
-                                      shared.BanknewsLog[0].data!);
-                                });
-                              }
-                              debugPrint(
-                                  shared.Banknews_data[0].toJson().toString());
-                            } catch (e) {
-                              shared.Banknews_data.clear();
-                            }
-                          },
                         ),
                       ),
                       verticalSpaceSmall,
@@ -228,12 +130,67 @@ class _BanknewsState extends State<Banknews> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kPrimaryColor)),
+                                          MaterialStateProperty.all(
+                                              kPrimaryColor)),
                                   onPressed: () {
-                                    Banknews_Function.news(
-                                        search_banknews:
-                                        bank_newscontroller.text);
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    //
+                                    try {
+                                      if (controller.text.isNotEmpty) {
+                                        shared.Banknews_data.clear();
+                                        for (var i
+                                            in shared.BanknewsLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.givenName
+                                              ?.toLowerCase()
+                                              .contains(controller.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.givenName!.toLowerCase().contains(controller.text.toLowerCase()) ||
+                                                i.productDate!
+                                                    .toLowerCase()
+                                                    .contains(controller.text
+                                                        .toLowerCase()) ||
+                                                i.productId!
+                                                    .toLowerCase()
+                                                    .contains(controller.text
+                                                        .toLowerCase()) ||
+                                                i.productName!
+                                                    .toLowerCase()
+                                                    .contains(controller.text
+                                                        .toLowerCase())) {
+                                              debugPrint(i.productName);
+                                              setState(() {
+                                                shared.Banknews_data.add(
+                                                    BankNews_Log.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .Banknews_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller.text == '') {
+                                        shared.Banknews_data.clear();
+                                        setState(() {
+                                          shared.Banknews_data.addAll(
+                                              shared.BanknewsLog[0].data!);
+                                          isLoaded = true;
+                                        });
+                                      }
+                                      debugPrint(shared.Banknews_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.Banknews_data.clear();
+                                      isLoaded = true;
+                                    }
                                   },
                                   icon: const Icon(
                                     Icons.search,
@@ -252,8 +209,8 @@ class _BanknewsState extends State<Banknews> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kSecondaryColor2)),
+                                          MaterialStateProperty.all(
+                                              kSecondaryColor2)),
                                   onPressed: () {},
                                   icon: const Icon(
                                     Icons.refresh,
@@ -273,7 +230,7 @@ class _BanknewsState extends State<Banknews> {
                             child: ElevatedButton.icon(
                               style: ButtonStyle(
                                   backgroundColor:
-                                  MaterialStateProperty.all(kPrimaryColor)),
+                                      MaterialStateProperty.all(kPrimaryColor)),
                               onPressed: () {},
                               icon: const Icon(
                                 Icons.delete_outline,
@@ -304,19 +261,19 @@ class _BanknewsState extends State<Banknews> {
                               label: Text('Date', style: kLargeBoldTextStyle)),
                           DataColumn(
                               label:
-                              Text('Sender', style: kLargeBoldTextStyle)),
+                                  Text('Sender', style: kLargeBoldTextStyle)),
                           DataColumn(
                               label: Text('Topic', style: kLargeBoldTextStyle)),
                         ],
                         source: isLoaded
                             ? shared.Banknews_data.isNotEmpty
-                            ? data
-                            : data2
+                                ? data
+                                : data2
                             : data3,
                         rowsPerPage: 8,
                         showFirstLastButtons: true,
                         header:
-                        Text('List of Role', style: kXLargeBoldTextStyle),
+                            Text('List of Role', style: kXLargeBoldTextStyle),
                       ),
                     ),
                   ],
@@ -390,12 +347,12 @@ class MyData3 extends DataTableSource {
       DataCell(SizedBox(child: Text('Loading, please wait'))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
     ]);
   }
 }
