@@ -142,7 +142,26 @@ class _ProvidersState extends State<Providers> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: (){
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    controller.clear();
+                                    provider_code_controller.clear();
+                                    provider_desc_controller.clear();
+                                    shared.Providers_data.clear();
+                                    setState(() {
+                                      shared.Providers_data.addAll(shared.ProvidersLog[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                            () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
