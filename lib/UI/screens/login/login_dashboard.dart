@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:webtool_rep/UI/screens/login/changePassword.dart';
 import 'package:webtool_rep/UI/screens/login/components/loginapi.dart';
 
-
 class Dashboard extends StatefulWidget {
   static const String route = '/Dashboardpage';
   String? user;
@@ -92,7 +91,7 @@ class _DashboardState extends State<Dashboard> {
                             initialValue: widget.oldpass!,
                             obscureText: true,
                             decoration:
-                            InputDecoration(hintText: 'Old Password'),
+                                InputDecoration(hintText: 'Old Password'),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Please insert Password';
@@ -107,7 +106,7 @@ class _DashboardState extends State<Dashboard> {
                           TextFormField(
                             controller: newpassController,
                             decoration:
-                            InputDecoration(hintText: 'New Password'),
+                                InputDecoration(hintText: 'New Password'),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Please insert Password';
@@ -174,7 +173,6 @@ class _DashboardState extends State<Dashboard> {
                       );
                       http.Response response = await reset.reset(widget.user!,
                           newpassController.text, retypepassController.text);
-                      // http.Response res = await search.search(userController.text);
                       print(jsonDecode(response.body)['message']);
                       if (await jsonDecode(response.body)['message']
                           .contains('failed')) {
@@ -200,10 +198,10 @@ class _DashboardState extends State<Dashboard> {
                                   Navigator.pop(context);
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(
-                                        builder: (context) {
-                                          return Dashboard();
-                                        },
-                                      ));
+                                    builder: (context) {
+                                      return Dashboard();
+                                    },
+                                  ));
                                 },
                               ),
                             ],

@@ -1,16 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:webtool_rep/UI/screens/login/login_screen.dart';
 import 'package:webtool_rep/UI/widgets/searchlist.dart';
 import 'package:webtool_rep/UI/widgets/uploadbutton.dart';
+import '../utils/api.dart';
 import '../utils/constant.dart';
 import '../utils/edge_insect.dart';
 import '../utils/responsive.dart';
 import '../utils/spacing.dart';
+import 'package:http/http.dart' as http;
 import '../utils/text_styles.dart';
 import 'addbutton.dart';
 
 class Header extends StatefulWidget {
+  String? user;
   IconData? icon;
   IconData? addicon;
   String? title = "";
@@ -23,6 +28,7 @@ class Header extends StatefulWidget {
   VoidCallback? onTaps;
   Header({
     Key? key,
+    this.user,
     this.icon,
     this.title,
     this.header,
@@ -40,6 +46,7 @@ class Header extends StatefulWidget {
 }
 
 class _HeaderState extends State<Header> {
+  Logout logout = Logout();
   String? userSelected;
   @override
   Widget build(BuildContext context) {
@@ -177,14 +184,27 @@ class _HeaderState extends State<Header> {
                     child: ListTile(
                       leading: const Icon(Icons.logout),
                       title: const Text('Logout'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Loginpage(),
-                          ),
+                      onTap: () async {
+                        http.Response response = await logout.logout(
+                          widget.user,
                         );
+                        print(jsonDecode(response.body)['message']);
+                        if (await jsonDecode(response.body)['message']
+                            .contains('Logout')) {}
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return Loginpage();
+                          },
+                        ));
                       },
+                      // onTap: () {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => Loginpage(),
+                      //     ),
+                      //   );
+                      // },
                       // onTap: () {
                       //   AlertDialog alert = const AlertDialog(
                       //     title: Text('Are you sure you want to Logout?'),

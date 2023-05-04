@@ -114,7 +114,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Timer? _timer;
+  // Timer? _timer;
 
   // @override
   // void initState() {
@@ -3926,6 +3926,7 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 children: [
                   Header(
+                    user: widget.user!,
                     icon: shared.icon,
                     header: shared.header,
                     addicon: shared.addicon,

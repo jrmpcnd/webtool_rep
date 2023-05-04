@@ -2183,7 +2183,7 @@ class Logout {
     final http.Response response = await http.post(Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          // 'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer ${Token.getToken()}',
         },
         body: jsonEncode(<String, String>{
           'user_login': user_login,
