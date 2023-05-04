@@ -188,14 +188,22 @@ class _HeaderState extends State<Header> {
                         http.Response response = await logout.logout(
                           widget.user,
                         );
-                        print(jsonDecode(response.body)['message']);
+                        print(widget.user);
+                        print(await jsonDecode(response.body)['message']
+                            .toString()
+                            .toLowerCase()
+                            .contains("success"));
                         if (await jsonDecode(response.body)['message']
-                            .contains('Logout')) {}
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) {
-                            return Loginpage();
-                          },
-                        ));
+                            .toString()
+                            .toLowerCase()
+                            .contains("success")) {
+                          print(response.body);
+                          Navigator.pushReplacement(context, MaterialPageRoute(
+                            builder: (context) {
+                              return Loginpage();
+                            },
+                          ));
+                        }
                       },
                       // onTap: () {
                       //   Navigator.push(
