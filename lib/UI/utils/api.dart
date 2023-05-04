@@ -2176,3 +2176,18 @@ class Usermanagementdropdown_Api {
     }
   }
 }
+
+class Logout {
+  Future<http.Response> logout(user_login) async {
+    String url = 'https://sit-api-janus.fortress-asya.com:1234/Logout/';
+    final http.Response response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          // 'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(<String, String>{
+          'user_login': user_login,
+        }));
+    return response;
+  }
+}

@@ -211,7 +211,25 @@ class _BanknewsState extends State<Banknews> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    bank_newscontroller.clear();
+                                    shared.Banknews_data.clear();
+                                    setState(() {
+                                      shared.Banknews_data.addAll(
+                                          shared.BanknewsLog[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                        () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
