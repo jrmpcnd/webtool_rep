@@ -352,7 +352,7 @@ class _ParametersState extends State<Parameters> {
                                         }
                                       }
                                       else if (init.isNotEmpty) {
-                                        if (init.toLowerCase().contains('customer')) {
+                                        if (init.toLowerCase().contains('cust')) {
                                           setState(() {
                                             isLoaded = false;
                                           });
@@ -360,12 +360,12 @@ class _ParametersState extends State<Parameters> {
                                           for (var i in shared.prov[0].data!) {
                                             print(i.toJson());
                                             print(i.appType?.toLowerCase().contains(
-                                                controller.text.toLowerCase()));
+                                                'cust'));
                                             if (i.toJson().isNotEmpty) {
                                               if (i.appType!
                                                   .toLowerCase()
-                                                  .contains(init.toLowerCase())) {
-                                                debugPrint(i.appType);
+                                                  .contains('cust')) {
+                                                debugPrint("=======........>>>>${i.appType}");
                                                 setState(() {
                                                   shared.prov_data.add(
                                                       Data13.fromJson(i.toJson()));

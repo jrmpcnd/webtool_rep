@@ -19,6 +19,7 @@ class Productcategory extends StatefulWidget {
 
 class _ProductcategoryState extends State<Productcategory> {
   TextEditingController controller = TextEditingController();
+  TextEditingController controller1 = TextEditingController();
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -127,12 +128,50 @@ class _ProductcategoryState extends State<Productcategory> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          textfield(
-                            hintext: "Product Category ID",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                hintText: 'Product Category ID',
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: controller,
+                            ),
                           ),
                           verticalSpaceTiny,
-                          textfield(
-                            hintext: "Product Category Name",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                hintText: 'Product Category Name',
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: controller1,
+                            ),
                           ),
                           verticalSpaceSmall,
                           Row(
@@ -165,7 +204,28 @@ class _ProductcategoryState extends State<Productcategory> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    controller.clear();
+                                    controller1.clear();
+                                    init=res[0];
+                                    init2=res2[0];
+                                    shared.category_data.clear();
+                                    setState(() {
+                                      shared.category_data.addAll(
+                                          shared.category[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                            () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -254,128 +314,7 @@ class _ProductcategoryState extends State<Productcategory> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.category_data.clear();
-                              for (var i in shared.category[0].data!) {
-                                print(i.toJson());
-                                print(i.providerName
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.productTypeName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.productCategoryId!
-                                          .toLowerCase()
-                                          .contains(
-                                              controller.text.toLowerCase()) ||
-                                      i.productCategoryName!
-                                          .toLowerCase()
-                                          .contains(
-                                              controller.text.toLowerCase())) {
-                                    debugPrint(i.providerName);
-                                    setState(() {
-                                      shared.category_data
-                                          .add(Data15.fromJson(i.toJson()));
-                                    });
-                                    if (shared.category_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.category_data.clear();
-                              setState(() {
-                                shared.category_data
-                                    .addAll(shared.category[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(
-                                shared.category_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.category_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.category_data.clear();
-                              for (var i in shared.category[0].data!) {
-                                print(i.toJson());
-                                print(i.providerName
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.productTypeName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.productCategoryId!
-                                          .toLowerCase()
-                                          .contains(
-                                              controller.text.toLowerCase()) ||
-                                      i.productCategoryName!
-                                          .toLowerCase()
-                                          .contains(
-                                              controller.text.toLowerCase())) ;
-                                  debugPrint(i.providerName);
-                                  setState(() {
-                                    key.currentState?.pageTo(0);
-                                    shared.category_data
-                                        .add(Data15.fromJson(i.toJson()));
-                                  });
-                                  if (shared.category_data.isNotEmpty) {
-                                    setState(() {
-                                      isLoaded = true;
-                                    });
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.category_data.clear();
-                              setState(() {
-                                shared.category_data
-                                    .addAll(shared.category[0].data!);
-                              });
-                            }
-                            debugPrint(
-                                shared.category_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.category_data.clear();
-                          }
-                        },
-                      ),
-                    ),
+
                     Container(
                         width: double.infinity,
                         padding: kEdgeInsetsVerticalNormal,

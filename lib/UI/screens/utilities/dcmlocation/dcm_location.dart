@@ -101,7 +101,7 @@ class _DcmlocationState extends State<Dcmlocation> {
                         child: TextFormField(
                           style: TextStyle(color: kBlackColor),
                           decoration: const InputDecoration(
-                            hintText: 'Search',
+                            hintText: 'Location',
                             border: OutlineInputBorder(),
                             labelStyle: TextStyle(fontSize: 12.0),
                             contentPadding: EdgeInsets.only(left: 10.0),
@@ -213,7 +213,24 @@ class _DcmlocationState extends State<Dcmlocation> {
                                       backgroundColor:
                                       MaterialStateProperty.all(
                                           kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    controller.clear();
+                                    shared.AtmLocation_data.clear();
+                                    setState(() {
+                                      shared.AtmLocation_data.addAll(shared.AtmLocation_Log[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                            () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,

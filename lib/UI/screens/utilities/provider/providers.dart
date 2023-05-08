@@ -92,14 +92,50 @@ class _ProvidersState extends State<Providers> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Code",
-                        controller: provider_code_controller,
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Provider ID',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: provider_code_controller,
+                        ),
                       ),
                       verticalSpaceTiny,
-                      textfield(
-                        hintext: "Description",
-                        controller: provider_desc_controller,
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Provider Name',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: provider_desc_controller,
+                        ),
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -116,12 +152,75 @@ class _ProvidersState extends State<Providers> {
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
                                   onPressed: () {
-                                    Provider_Function.provider(
-                                      provider_code:
-                                          provider_code_controller.text,
-                                      provider_desc:
-                                          provider_desc_controller.text,
-                                    );
+                                    try{
+                                      if (provider_code_controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Providers_data.clear();
+                                        for (var i in shared.ProvidersLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.id?.toLowerCase().contains(
+                                              provider_code_controller.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.id!.toLowerCase().contains(
+                                                provider_code_controller.text.toLowerCase())) {
+                                              debugPrint(i.id);
+                                              setState(() {
+                                                shared.Providers_data
+                                                    .add(Providers_Log.fromJson(i.toJson()));
+                                              });
+                                              if (shared.Providers_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (provider_desc_controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Providers_data.clear();
+                                        for (var i in shared.ProvidersLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.providerName?.toLowerCase().contains(
+                                              provider_desc_controller.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.providerName!.toLowerCase().contains(
+                                                provider_desc_controller.text.toLowerCase())) {
+                                              debugPrint(i.providerName);
+                                              setState(() {
+                                                shared.Providers_data
+                                                    .add(Providers_Log.fromJson(i.toJson()));
+                                              });
+                                              if (shared.Providers_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(
+                                          shared.Providers_data[0].toJson().toString());
+                                    }catch (e) {
+                                      shared.Providers_data.clear();
+                                      isLoaded = true;
+                                    }
                                   },
                                   icon: const Icon(
                                     Icons.search,
@@ -200,128 +299,7 @@ class _ProvidersState extends State<Providers> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.Providers_data.clear();
-                              for (var i in shared.ProvidersLog[0].data!) {
-                                print(i.toJson());
-                                print(i.status
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.status!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.description!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.id!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.providerAlias!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.providerName!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.providerName);
-                                    setState(() {
-                                      shared.Providers_data.add(
-                                          Providers_Log.fromJson(i.toJson()));
-                                    });
-                                    if (shared.Providers_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.Providers_data.clear();
-                              setState(() {
-                                shared.Providers_data.addAll(
-                                    shared.ProvidersLog[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(
-                                shared.Providers_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.Providers_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.Providers_data.clear();
-                              for (var i in shared.ProvidersLog[0].data!) {
-                                print(i.toJson());
-                                print(i.status
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.status!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.description!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.id!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.providerAlias!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.providerName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()))
-                                    debugPrint(i.providerName);
-                                  setState(() {
-                                    key.currentState?.pageTo(0);
-                                    shared.Providers_data.add(
-                                        Providers_Log.fromJson(i.toJson()));
-                                  });
-                                  if (shared.Providers_data.isNotEmpty) {
-                                    setState(() {
-                                      isLoaded = true;
-                                    });
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.Providers_data.clear();
-                              setState(() {
-                                shared.Providers_data.addAll(
-                                    shared.ProvidersLog[0].data!);
-                              });
-                            }
-                            debugPrint(
-                                shared.Providers_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.ProvidersLog.clear();
-                          }
-                        },
-                      ),
-                    ),
+
                     Container(
                       width: double.infinity,
                       padding: kEdgeInsetsVerticalNormal,
