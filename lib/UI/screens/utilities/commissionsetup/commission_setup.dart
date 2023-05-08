@@ -22,6 +22,8 @@ class Commissionsetup extends StatefulWidget {
 
 class _CommissionsetupState extends State<Commissionsetup> {
   TextEditingController controller = TextEditingController();
+  TextEditingController transaction_controller = TextEditingController();
+  TextEditingController commission_controller = TextEditingController();
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -91,12 +93,50 @@ class _CommissionsetupState extends State<Commissionsetup> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Transaction Type",
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Transaction Type',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: transaction_controller,
+                        ),
                       ),
                       verticalSpaceTiny,
-                      textfield(
-                        hintext: "Commission Type",
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Commission Type',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: commission_controller,
+                        ),
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -112,7 +152,82 @@ class _CommissionsetupState extends State<Commissionsetup> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    try {
+                                      if (transaction_controller
+                                          .text.isNotEmpty) {
+                                        shared.commission_data.clear();
+                                        for (var i
+                                            in shared.commission[0].data!) {
+                                          print(i.toJson());
+                                          print(i.transType
+                                              ?.toLowerCase()
+                                              .contains(transaction_controller
+                                                  .text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.transType!
+                                                .toLowerCase()
+                                                .contains(transaction_controller
+                                                    .text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.transType);
+                                              setState(() {
+                                                shared.commission_data.add(
+                                                    Data18.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .commission_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (commission_controller
+                                          .text.isNotEmpty) {
+                                        shared.commission_data.clear();
+                                        for (var i
+                                            in shared.commission[0].data!) {
+                                          print(i.toJson());
+                                          print(i.commissionType
+                                              ?.toLowerCase()
+                                              .contains(commission_controller
+                                                  .text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.commissionType!
+                                                .toLowerCase()
+                                                .contains(commission_controller
+                                                    .text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.commissionType);
+                                              setState(() {
+                                                shared.commission_data.add(
+                                                    Data18.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .commission_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(shared.commission_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.commission_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -132,7 +247,26 @@ class _CommissionsetupState extends State<Commissionsetup> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    transaction_controller.clear();
+                                    commission_controller.clear();
+                                    shared.commission_data.clear();
+                                    setState(() {
+                                      shared.commission_data
+                                          .addAll(shared.commission[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                        () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -171,114 +305,6 @@ class _CommissionsetupState extends State<Commissionsetup> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.commission_data.clear();
-                              for (var i in shared.commission[0].data!) {
-                                print(i.toJson());
-                                print(i.transType
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.commissionType!.toLowerCase().contains(
-                                      controller.text.toLowerCase())) {
-                                    debugPrint(i.transType);
-                                    setState(() {
-                                      shared.commission_data
-                                          .add(Data18.fromJson(i.toJson()));
-                                    });
-                                    if (shared.commission_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.commission_data.clear();
-                              setState(() {
-                                shared.commission_data
-                                    .addAll(shared.commission[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(
-                                shared.commission_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.commission_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.commission_data.clear();
-                              for (var i in shared.commission[0].data!) {
-                                print(i.toJson());
-                                print(i.transType
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.commissionType!
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase()))
-                                    ;
-                                  debugPrint(i.transType);
-                                  setState(() {
-                                    key.currentState?.pageTo(0);
-                                    shared.commission_data
-                                        .add(Data18.fromJson(i.toJson()));
-                                  });
-                                  if (shared.commission_data.isNotEmpty) {
-                                    setState(() {
-                                      isLoaded = true;
-                                    });
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.commission_data.clear();
-                              setState(() {
-                                shared.commission_data
-                                    .addAll(shared.commission[0].data!);
-                              });
-                            }
-                            debugPrint(
-                                shared.commission_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.commission_data.clear();
-                          }
-                        },
-                      ),
-                    ),
                     Container(
                         width: double.infinity,
                         padding: kEdgeInsetsVerticalNormal,
