@@ -24,6 +24,10 @@ class Banklist extends StatefulWidget {
 
 class _BanklistState extends State<Banklist> {
   TextEditingController controller = TextEditingController();
+  TextEditingController code_controller = TextEditingController();
+  TextEditingController name_controller = TextEditingController();
+  TextEditingController short_controller = TextEditingController();
+
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -94,16 +98,73 @@ class _BanklistState extends State<Banklist> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Bank Code",
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Bank Code',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: code_controller,
+                        ),
                       ),
                       verticalSpaceTiny,
-                      textfield(
-                        hintext: "Bank Name",
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Bank Name',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: name_controller,
+                        ),
                       ),
                       verticalSpaceTiny,
-                      textfield(
-                        hintext: "Short Name",
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Short Name',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: short_controller,
+                        ),
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -119,7 +180,100 @@ class _BanklistState extends State<Banklist> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    try {
+                                      if (code_controller.text.isNotEmpty) {
+                                        shared.list_data.clear();
+                                        for (var i in shared.list[0].data!) {
+                                          print(i.toJson());
+                                          print(i.bankCode
+                                              ?.toLowerCase()
+                                              .contains(code_controller.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.bankCode!
+                                                .toLowerCase()
+                                                .contains(code_controller.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.bankCode);
+                                              setState(() {
+                                                shared.list_data.add(
+                                                    Data19.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared.list_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (name_controller.text.isNotEmpty) {
+                                        shared.list_data.clear();
+                                        for (var i in shared.list[0].data!) {
+                                          print(i.toJson());
+                                          print(i.bankName
+                                              ?.toLowerCase()
+                                              .contains(name_controller.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.bankName!
+                                                .toLowerCase()
+                                                .contains(name_controller.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.bankName);
+                                              setState(() {
+                                                shared.list_data.add(
+                                                    Data19.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared.list_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (short_controller.text.isNotEmpty) {
+                                        shared.list_data.clear();
+                                        for (var i in shared.list[0].data!) {
+                                          print(i.toJson());
+                                          print(i.shortName
+                                              ?.toLowerCase()
+                                              .contains(short_controller.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.shortName!
+                                                .toLowerCase()
+                                                .contains(short_controller.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.shortName);
+                                              setState(() {
+                                                shared.list_data.add(
+                                                    Data19.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared.list_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(shared.list_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.list_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -139,7 +293,27 @@ class _BanklistState extends State<Banklist> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    code_controller.clear();
+                                    name_controller.clear();
+                                    short_controller.clear();
+                                    shared.list_data.clear();
+                                    setState(() {
+                                      shared.list_data
+                                          .addAll(shared.list[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                        () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -178,116 +352,6 @@ class _BanklistState extends State<Banklist> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.list_data.clear();
-                              for (var i in shared.list[0].data!) {
-                                print(i.toJson());
-                                print(i.bankCode
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.bankCode!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.bankName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.shortName!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.bankCode);
-                                    setState(() {
-                                      shared.list_data
-                                          .add(Data19.fromJson(i.toJson()));
-                                    });
-                                    if (shared.list_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.list_data.clear();
-                              setState(() {
-                                shared.list_data.addAll(shared.list[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(shared.list_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.list_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.list_data.clear();
-                              for (var i in shared.list[0].data!) {
-                                print(i.toJson());
-                                print(i.bankCode
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.bankCode!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.bankName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.shortName!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.bankCode);
-                                    setState(() {
-                                      shared.list_data
-                                          .add(Data19.fromJson(i.toJson()));
-                                    });
-                                    if (shared.list_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.list_data.clear();
-                              setState(() {
-                                shared.list_data.addAll(shared.list[0].data!);
-                              });
-                            }
-                            debugPrint(shared.list_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.list_data.clear();
-                          }
-                        },
-                      ),
-                    ),
                     Container(
                         width: double.infinity,
                         padding: kEdgeInsetsVerticalNormal,
