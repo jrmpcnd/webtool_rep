@@ -210,6 +210,8 @@ class _BillerproductState extends State<Billerproduct> {
                                     });
                                     controller.clear();
                                     controller1.clear();
+                                    init = res [0];
+                                    init2 = res2 [0];
                                     shared.biller_data.clear();
                                     setState(() {
                                       shared.biller_data.addAll(shared.biller[0].data!);

@@ -104,104 +104,6 @@ class _BroadcastmessageState extends State<Broadcastmessage> {
                     ),
                     textInputAction: TextInputAction.go,
                     controller: controller,
-                    onChanged: (value) {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      //
-                      try {
-                        if (controller.text.isNotEmpty) {
-                          shared.broadcast_data.clear();
-                          for (var i in shared.broadcast[0].data!) {
-                            print(i.toJson());
-                            print(i.inboxDate
-                                ?.toLowerCase()
-                                .contains(controller.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.subject!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
-                                  i.inboxDesc!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
-                                  i.periodStart!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
-                                  i.periodEnd!.toLowerCase().contains(
-                                      controller.text.toLowerCase())) {
-                                debugPrint(i.inboxDesc);
-                                setState(() {
-                                  shared.broadcast_data
-                                      .add(Data9.fromJson(i.toJson()));
-                                });
-                                if (shared.broadcast_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
-                                }
-                              }
-                            }
-                          }
-                        } else if (controller.text == '') {
-                          shared.broadcast_data.clear();
-                          setState(() {
-                            shared.broadcast_data
-                                .addAll(shared.broadcast[0].data!);
-                            isLoaded = true;
-                          });
-                        }
-                        debugPrint(
-                            shared.broadcast_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.broadcast_data.clear();
-                        isLoaded = true;
-                      }
-                    },
-                    onEditingComplete: () async {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      try {
-                        if (controller.text.isNotEmpty) {
-                          shared.broadcast_data.clear();
-                          for (var i in shared.broadcast[0].data!) {
-                            print(i.toJson());
-                            print(i.inboxDate
-                                ?.toLowerCase()
-                                .contains(controller.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.subject!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
-                                  i.inboxDesc!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
-                                  i.periodStart!.toLowerCase().contains(
-                                      controller.text.toLowerCase()) ||
-                                  i.periodEnd!.toLowerCase().contains(
-                                      controller.text.toLowerCase())) {
-                                debugPrint(i.inboxDate);
-                                setState(() {
-                                  key.currentState?.pageTo(0);
-                                  shared.broadcast_data
-                                      .add(Data9.fromJson(i.toJson()));
-                                });
-                                if (shared.broadcast_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
-                                }
-                              }
-                            }
-                          }
-                        } else if (controller.text == '') {
-                          shared.broadcast_data.clear();
-                          setState(() {
-                            shared.broadcast_data
-                                .addAll(shared.broadcast[0].data!);
-                          });
-                        }
-                        debugPrint(
-                            shared.broadcast_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.broadcast_data.clear();
-                      }
-                    },
                   ),
                 ),
                 verticalSpaceSmall,
@@ -217,7 +119,46 @@ class _BroadcastmessageState extends State<Broadcastmessage> {
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all(kPrimaryColor)),
-                            onPressed: () {},
+                            onPressed: (){
+                              try{
+                                if (controller.text.isNotEmpty) {
+                                  setState(() {
+                                    isLoaded = false;
+                                  });
+                                  shared.broadcast_data.clear();
+                                  for (var i in shared.broadcast[0].data!) {
+                                    print(i.toJson());
+                                    print(i.subject?.toLowerCase().contains(
+                                        controller.text.toLowerCase()));
+                                    if (i.toJson().isNotEmpty) {
+                                      if (i.subject!.toLowerCase().contains(
+                                          controller.text.toLowerCase())) {
+                                        debugPrint(i.subject);
+                                        setState(() {
+                                          shared.broadcast_data
+                                              .add(Data9.fromJson(i.toJson()));
+                                        });
+                                        if (shared.broadcast_data.isNotEmpty) {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                                () {
+                                              setState(() {
+                                                isLoaded = true;
+                                              });
+                                            },
+                                          );
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                                debugPrint(
+                                    shared.broadcast_data[0].toJson().toString());
+                              }catch (e) {
+                                shared.broadcast_data.clear();
+                                isLoaded = true;
+                              }
+                            },
                             icon: const Icon(
                               Icons.search,
                               size: 20.0,
@@ -236,7 +177,25 @@ class _BroadcastmessageState extends State<Broadcastmessage> {
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
                                     kSecondaryColor2)),
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                isLoaded = false;
+                              });
+                              controller.clear();
+                              shared.broadcast_data.clear();
+                              setState(() {
+                                shared.broadcast_data
+                                    .addAll(shared.broadcast[0].data!);
+                                Future.delayed(
+                                  Duration(seconds: 1),
+                                      () {
+                                    setState(() {
+                                      isLoaded = true;
+                                    });
+                                  },
+                                );
+                              });
+                            },
                             icon: const Icon(
                               Icons.refresh,
                               size: 20.0,

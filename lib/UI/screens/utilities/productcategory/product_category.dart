@@ -184,7 +184,181 @@ class _ProductcategoryState extends State<Productcategory> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    try {
+
+                                      if (controller.text.isNotEmpty &&
+                                      controller1.text.isNotEmpty &&
+                                      init.toString().isNotEmpty&&
+                                      init2.toString().isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.category_data.clear();
+                                        for (var i
+                                            in shared.category[0].data!) {
+                                          print(i.toJson());
+                                          print(i.productCategoryId
+                                              ?.toLowerCase()
+                                              .contains(controller.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.productCategoryId!
+                                                .toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.productCategoryId);
+                                              setState(() {
+                                                shared.category_data.add(
+                                                    Data15.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .category_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (controller1.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.category_data.clear();
+                                        for (var i
+                                            in shared.category[0].data!) {
+                                          print(i.toJson());
+                                          print(i.productCategoryName
+                                              ?.toLowerCase()
+                                              .contains(controller1.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.productCategoryName!
+                                                .toLowerCase()
+                                                .contains(controller1.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.productCategoryName);
+                                              setState(() {
+                                                shared.category_data.add(
+                                                    Data15.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .category_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (init.isNotEmpty) {
+                                        if (init
+                                            .toLowerCase()
+                                            .contains(init.toLowerCase())) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.category_data.clear();
+                                          for (var i
+                                              in shared.category[0].data!) {
+                                            print(i.toJson());
+                                            print(i.providerName
+                                                ?.toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.providerName!
+                                                  .toLowerCase()
+                                                  .contains(
+                                                      init.toLowerCase())) {
+                                                debugPrint(i.providerName);
+                                                setState(() {
+                                                  shared.category_data.add(
+                                                      Data15.fromJson(
+                                                          i.toJson()));
+                                                });
+                                                if (shared
+                                                    .category_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                    () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (init2.isNotEmpty) {
+                                        if (init2
+                                            .toLowerCase()
+                                            .contains(init2.toLowerCase())) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.category_data.clear();
+                                          for (var i
+                                          in shared.category[0].data!) {
+                                            print(i.toJson());
+                                            print(i.productTypeName
+                                                ?.toLowerCase()
+                                                .contains(init2.toLowerCase()
+                                                .toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.productTypeName!
+                                                  .toLowerCase()
+                                                  .contains(
+                                                  init2.toLowerCase())) {
+                                                debugPrint(i.productTypeName);
+                                                setState(() {
+                                                  shared.category_data.add(
+                                                      Data15.fromJson(
+                                                          i.toJson()));
+                                                });
+                                                if (shared
+                                                    .category_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+
+                                      debugPrint(shared.category_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.category_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -210,15 +384,15 @@ class _ProductcategoryState extends State<Productcategory> {
                                     });
                                     controller.clear();
                                     controller1.clear();
-                                    init=res[0];
-                                    init2=res2[0];
+                                    init = res[0];
+                                    init2 = res2[0];
                                     shared.category_data.clear();
                                     setState(() {
-                                      shared.category_data.addAll(
-                                          shared.category[0].data!);
+                                      shared.category_data
+                                          .addAll(shared.category[0].data!);
                                       Future.delayed(
                                         Duration(seconds: 1),
-                                            () {
+                                        () {
                                           setState(() {
                                             isLoaded = true;
                                           });
@@ -314,7 +488,6 @@ class _ProductcategoryState extends State<Productcategory> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-
                     Container(
                         width: double.infinity,
                         padding: kEdgeInsetsVerticalNormal,
@@ -327,13 +500,13 @@ class _ProductcategoryState extends State<Productcategory> {
                                 label: Text('Provider Name',
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
-                                label: Text('Product Type ID',
-                                    style: kLargeBoldTextStyle)),
-                            DataColumn(
                                 label: Text('Product Type Name',
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
-                                label: Text('Description',
+                                label: Text('Product Category ID',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Product Category Name',
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label:
