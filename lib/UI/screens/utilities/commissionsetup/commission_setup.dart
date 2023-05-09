@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:web_date_picker/web_date_picker.dart';
 import '../../../../core/providers/data_provider.dart';
 import '../../../utils/api.dart';
 import '../../../utils/constant.dart';
@@ -8,10 +7,7 @@ import '../../../utils/edge_insect.dart';
 import '../../../utils/model.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
-import '../../../widgets/tables.dart';
-import '../../../widgets/textfield.dart';
+
 
 class Commissionsetup extends StatefulWidget {
   const Commissionsetup({Key? key}) : super(key: key);
@@ -154,72 +150,80 @@ class _CommissionsetupState extends State<Commissionsetup> {
                                               kPrimaryColor)),
                                   onPressed: () {
                                     try {
-                                      if (transaction_controller
-                                          .text.isNotEmpty) {
+                                      if (transaction_controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
                                         shared.commission_data.clear();
-                                        for (var i
-                                            in shared.commission[0].data!) {
+                                        for (var i in shared.commission[0].data!) {
                                           print(i.toJson());
                                           print(i.transType
                                               ?.toLowerCase()
-                                              .contains(transaction_controller
-                                                  .text
-                                                  .toLowerCase()));
+                                              .contains(transaction_controller.text
+                                              .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.transType!
                                                 .toLowerCase()
-                                                .contains(transaction_controller
-                                                    .text
-                                                    .toLowerCase())) {
+                                                .contains(transaction_controller.text
+                                                .toLowerCase())) {
                                               debugPrint(i.transType);
                                               setState(() {
                                                 shared.commission_data.add(
                                                     Data18.fromJson(
                                                         i.toJson()));
                                               });
-                                              if (shared
-                                                  .commission_data.isNotEmpty) {
-                                                setState(() {
-                                                  isLoaded = true;
-                                                });
+                                              if (shared.commission_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
                                               }
                                             }
                                           }
                                         }
                                       }
-                                      if (commission_controller
-                                          .text.isNotEmpty) {
-                                        shared.commission_data.clear();
-                                        for (var i
-                                            in shared.commission[0].data!) {
-                                          print(i.toJson());
-                                          print(i.commissionType
-                                              ?.toLowerCase()
-                                              .contains(commission_controller
-                                                  .text
-                                                  .toLowerCase()));
-                                          if (i.toJson().isNotEmpty) {
-                                            if (i.commissionType!
-                                                .toLowerCase()
-                                                .contains(commission_controller
-                                                    .text
-                                                    .toLowerCase())) {
-                                              debugPrint(i.commissionType);
-                                              setState(() {
-                                                shared.commission_data.add(
-                                                    Data18.fromJson(
-                                                        i.toJson()));
-                                              });
-                                              if (shared
-                                                  .commission_data.isNotEmpty) {
-                                                setState(() {
-                                                  isLoaded = true;
-                                                });
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
+    if (commission_controller.text.isNotEmpty) {
+      setState(() {
+        isLoaded = false;
+      });
+      shared.commission_data.clear();
+      for (var i in shared.commission[0].data!) {
+        print(i.toJson());
+        print(i.commissionType
+            ?.toLowerCase()
+            .contains(commission_controller.text
+            .toLowerCase()));
+        if (i
+            .toJson()
+            .isNotEmpty) {
+          if (i.commissionType!
+              .toLowerCase()
+              .contains(commission_controller.text
+              .toLowerCase())) {
+            debugPrint(i.commissionType);
+            setState(() {
+              shared.commission_data.add(
+                  Data18.fromJson(
+                      i.toJson()));
+            });
+            if (shared.commission_data.isNotEmpty) {
+              Future.delayed(
+                Duration(seconds: 1),
+                    () {
+                  setState(() {
+                    isLoaded = true;
+                  });
+                },
+              );
+            }
+          }
+        }
+      }
+    }
                                       debugPrint(shared.commission_data[0]
                                           .toJson()
                                           .toString());
