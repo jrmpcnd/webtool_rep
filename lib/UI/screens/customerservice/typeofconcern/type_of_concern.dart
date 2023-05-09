@@ -56,9 +56,10 @@ class _TypeofconcernState extends State<Typeofconcern> {
       getList();
     });
   }
-  getList()async{
+
+  getList() async {
     List<dynamic> dlist = await complexlevel.getUserstatus();
-    for(var i in dlist){
+    for (var i in dlist) {
       setState(() {
         res.add(i['get_toc_complexity_level_dropdown']);
       });
@@ -72,7 +73,8 @@ class _TypeofconcernState extends State<Typeofconcern> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Prov10>(context);
-    final DataTableSource data = MyData(shared: shared, dashboardContext: context);
+    final DataTableSource data =
+        MyData(shared: shared, dashboardContext: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -135,95 +137,6 @@ class _TypeofconcernState extends State<Typeofconcern> {
                               ),
                               textInputAction: TextInputAction.go,
                               controller: controller,
-                              onChanged: (value) {
-                                setState(() {
-                                  isLoaded = false;
-                                });
-                                //
-                                try {
-                                  if (controller.text.isNotEmpty) {
-                                    shared.concern_data.clear();
-                                    for (var i in shared.concern[0].data!) {
-                                      print(i.toJson());
-                                      print(i.concernName
-                                          ?.toLowerCase()
-                                          .contains(controller.text.toLowerCase()));
-                                      if (i.toJson().isNotEmpty) {
-                                        if (i.concernName!.toLowerCase().contains(
-                                            controller.text.toLowerCase()) ||
-                                            i.concernName!.toLowerCase().contains(
-                                                controller.text.toLowerCase()) ||
-                                            i.concernName!.toLowerCase().contains(
-                                                controller.text.toLowerCase())) {
-                                          debugPrint(i.concernName);
-                                          setState(() {
-                                            shared.concern_data
-                                                .add(Data10.fromJson(i.toJson()));
-                                          });
-                                          if (shared.concern_data.isNotEmpty) {
-                                            setState(() {
-                                              isLoaded = true;
-                                            });
-                                          }
-                                        }
-                                      }
-                                    }
-                                  } else if (controller.text == '') {
-                                    shared.concern_data.clear();
-                                    setState(() {
-                                      shared.concern_data.addAll(shared.concern[0].data!);
-                                      isLoaded = true;
-                                    });
-                                  }
-                                  debugPrint(shared.concern_data[0].toJson().toString());
-                                } catch (e) {
-                                  shared.concern_data.clear();
-                                  isLoaded = true;
-                                }
-                              },
-                              onEditingComplete: () async {
-                                setState(() {
-                                  isLoaded = false;
-                                });
-                                try {
-                                  if (controller.text.isNotEmpty) {
-                                    shared.concern_data.clear();
-                                    for (var i in shared.concern[0].data!) {
-                                      print(i.toJson());
-                                      print(i.concernName
-                                          ?.toLowerCase()
-                                          .contains(controller.text.toLowerCase()));
-                                      if (i.toJson().isNotEmpty) {
-                                        if (i.concernName!.toLowerCase().contains(
-                                            controller.text.toLowerCase()) ||
-                                            i.concernName!.toLowerCase().contains(
-                                                controller.text.toLowerCase()) ||
-                                            i.concernName!.toLowerCase().contains(
-                                                controller.text.toLowerCase()))
-                                          debugPrint(i.concernName);
-                                        setState(() {
-                                          key.currentState?.pageTo(0);
-                                          shared.concern_data
-                                              .add(Data10.fromJson(i.toJson()));
-                                        });
-                                        if (shared.concern_data.isNotEmpty) {
-                                          setState(() {
-                                            isLoaded = true;
-                                          });
-                                        }
-                                      }
-                                    }
-                                  } else if (controller.text == '') {
-                                    shared.concern_data.clear();
-                                    setState(() {
-                                      shared.concern_data.addAll(shared.concern[0].data!);
-                                    });
-                                  }
-                                  debugPrint(shared.concern_data[0].toJson().toString());
-                                } catch (e) {
-                                  shared.concern_data.clear();
-                                }
-                              },
                             ),
                           ),
                           verticalSpaceSmall,
@@ -251,9 +164,181 @@ class _TypeofconcernState extends State<Typeofconcern> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kPrimaryColor)),
-                                  onPressed: () {},
+                                          MaterialStateProperty.all(
+                                              kPrimaryColor)),
+                                  onPressed: () {
+                                    try {
+                                      if (controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.concern_data.clear();
+                                        for (var i in shared.concern[0].data!) {
+                                          print(i.toJson());
+                                          print(i.concernName
+                                              ?.toLowerCase()
+                                              .contains(controller.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.concernName!
+                                                .toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.concernName);
+                                              setState(() {
+                                                shared.concern_data.add(
+                                                    Data10.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .concern_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (init.isNotEmpty) {
+                                        if (init
+                                            .toLowerCase()
+                                            .contains('low')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.concern_data.clear();
+                                          for (var i
+                                              in shared.concern[0].data!) {
+                                            print(i.toJson());
+                                            print(i.concernLevel
+                                                ?.toLowerCase()
+                                                .contains(init
+                                                    .toLowerCase()
+                                                    .toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.concernLevel!
+                                                  .toLowerCase()
+                                                  .contains(
+                                                      init.toLowerCase())) {
+                                                debugPrint(i.concernLevel);
+                                                setState(() {
+                                                  shared.concern_data.add(
+                                                      Data10.fromJson(
+                                                          i.toJson()));
+                                                });
+                                                if (shared
+                                                    .concern_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                    () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (init.isNotEmpty) {
+                                        if (init
+                                            .toLowerCase()
+                                            .contains('medium')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.concern_data.clear();
+                                          for (var i
+                                              in shared.concern[0].data!) {
+                                            print(i.toJson());
+                                            print(i.concernLevel
+                                                ?.toLowerCase()
+                                                .contains(init
+                                                    .toLowerCase()
+                                                    .toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.concernLevel!
+                                                  .toLowerCase()
+                                                  .contains(
+                                                      init.toLowerCase())) {
+                                                debugPrint(i.concernLevel);
+                                                setState(() {
+                                                  shared.concern_data.add(
+                                                      Data10.fromJson(
+                                                          i.toJson()));
+                                                });
+                                                if (shared
+                                                    .concern_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                    () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (init.isNotEmpty) {
+                                        if (init
+                                            .toLowerCase()
+                                            .contains('critical')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.concern_data.clear();
+                                          for (var i
+                                              in shared.concern[0].data!) {
+                                            print(i.toJson());
+                                            print(i.concernLevel
+                                                ?.toLowerCase()
+                                                .contains('high'));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.concernLevel!
+                                                  .toLowerCase()
+                                                  .contains('high')) {
+                                                debugPrint(i.concernLevel);
+                                                setState(() {
+                                                  shared.concern_data.add(
+                                                      Data10.fromJson(
+                                                          i.toJson()));
+                                                });
+                                                if (shared
+                                                    .concern_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                    () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(shared.concern_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.concern_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -271,8 +356,8 @@ class _TypeofconcernState extends State<Typeofconcern> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kSecondaryColor2)),
+                                          MaterialStateProperty.all(
+                                              kSecondaryColor2)),
                                   onPressed: () {},
                                   icon: const Icon(
                                     Icons.refresh,
@@ -295,45 +380,44 @@ class _TypeofconcernState extends State<Typeofconcern> {
                 Column(
                   children: [
                     Container(
-                                width: double.infinity,
-                                padding: kEdgeInsetsVerticalNormal,
-                                child: PaginatedDataTable(
-                                  key: key,
-                                  dataRowHeight: 50,
-                                  arrowHeadColor: kWhiteColor,
-                                  columns: [
-                                    DataColumn(
-                                        label: Text('Concern', style: kLargeBoldTextStyle)),
-                                    DataColumn(
-                                        label: Text('Turn Around Time(In Minutes)',
-                                            style: kLargeBoldTextStyle)),
-                                    DataColumn(
-                                        label:
-                                            Text('Complexity Level', style: kLargeBoldTextStyle)),
-                                    DataColumn(
-                                        label:
-                                        Text('Action', style: kLargeBoldTextStyle)),
-                                  ],
-                                  source: isLoaded
-                                      ? shared.concern_data.isNotEmpty
-                                          ? data
-                                          : data2
-                                      : data3,
-                                  rowsPerPage: 8,
-                                  showFirstLastButtons: true,
-                                  header:
-                                      Text('Type Of Concern List', style: kXLargeBoldTextStyle),
-                                )),
-
+                        width: double.infinity,
+                        padding: kEdgeInsetsVerticalNormal,
+                        child: PaginatedDataTable(
+                          key: key,
+                          dataRowHeight: 50,
+                          arrowHeadColor: kWhiteColor,
+                          columns: [
+                            DataColumn(
+                                label: Text('Concern',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Turn Around Time(In Minutes)',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Complexity Level',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label:
+                                    Text('Action', style: kLargeBoldTextStyle)),
                           ],
-                        ),
-    ],
+                          source: isLoaded
+                              ? shared.concern_data.isNotEmpty
+                                  ? data
+                                  : data2
+                              : data3,
+                          rowsPerPage: 8,
+                          showFirstLastButtons: true,
+                          header: Text('Type Of Concern List',
+                              style: kXLargeBoldTextStyle),
+                        )),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-    ),
-    ],
-      ),
-                      );
-
+    );
   }
 }
 
@@ -371,11 +455,17 @@ class MyData extends DataTableSource {
               context: dashboardContext!,
               builder: (ctx) => Form(
                 key: _formKey,
-                child: AlertEditFunction(concernLevel: shared.concern_data[index].concernLevel.toString(),
-                  concernTime: shared.concern_data[index].concernTime.toString(),
-                  concernCode: shared.concern_data[index].concernCode.toString(),
-                  concernName: shared.concern_data[index].concernName.toString(),
-                  concernDesc: shared.concern_data[index].concernDesc.toString(),
+                child: AlertEditFunction(
+                  concernLevel:
+                      shared.concern_data[index].concernLevel.toString(),
+                  concernTime:
+                      shared.concern_data[index].concernTime.toString(),
+                  concernCode:
+                      shared.concern_data[index].concernCode.toString(),
+                  concernName:
+                      shared.concern_data[index].concernName.toString(),
+                  concernDesc:
+                      shared.concern_data[index].concernDesc.toString(),
                 ),
               ),
             );
