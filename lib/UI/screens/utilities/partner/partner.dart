@@ -20,6 +20,8 @@ class Partner extends StatefulWidget {
 
 class _PartnerState extends State<Partner> {
   TextEditingController controller = TextEditingController();
+  TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -110,12 +112,50 @@ class _PartnerState extends State<Partner> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          textfield(
-                            hintext: "Partner ID",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                hintText: 'Partner ID',
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: controller,
+                            ),
                           ),
                           verticalSpaceTiny,
-                          textfield(
-                            hintext: "Partner Desc",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                hintText: 'Partner Desc',
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: controller1,
+                            ),
                           ),
                           verticalSpaceSmall,
                           Row(
@@ -128,7 +168,127 @@ class _PartnerState extends State<Partner> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    try {
+                                      if (controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.partner_data.clear();
+                                        for (var i in shared.partner[0].data!) {
+                                          print(i.toJson());
+                                          print(i.partnerId
+                                              ?.toLowerCase()
+                                              .contains(controller.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.partnerId!
+                                                .toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.partnerId);
+                                              setState(() {
+                                                shared.partner_data.add(
+                                                    Data20.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .partner_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (controller1.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.partner_data.clear();
+                                        for (var i in shared.partner[0].data!) {
+                                          print(i.toJson());
+                                          print(i.partnerDesc
+                                              ?.toLowerCase()
+                                              .contains(controller1.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.partnerDesc!
+                                                .toLowerCase()
+                                                .contains(controller1.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.partnerDesc);
+                                              setState(() {
+                                                shared.partner_data.add(
+                                                    Data20.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .partner_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (controller2.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.partner_data.clear();
+                                        for (var i in shared.partner[0].data!) {
+                                          print(i.toJson());
+                                          print(i.partnerName
+                                              ?.toLowerCase()
+                                              .contains(controller2.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.partnerName!
+                                                .toLowerCase()
+                                                .contains(controller2.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.partnerName);
+                                              setState(() {
+                                                shared.partner_data.add(
+                                                    Data20.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .partner_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(shared.partner_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.partner_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -148,7 +308,27 @@ class _PartnerState extends State<Partner> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    controller1.clear();
+                                    controller.clear();
+                                    controller2.clear();
+                                    shared.partner_data.clear();
+                                    setState(() {
+                                      shared.partner_data
+                                          .addAll(shared.partner[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                        () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -172,8 +352,30 @@ class _PartnerState extends State<Partner> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              textfield(
-                                hintext: "Partner Name",
+                              SizedBox(
+                                height: 35.0,
+                                width: 400,
+                                child: TextFormField(
+                                  style: kTextStyle,
+                                  decoration: const InputDecoration(
+                                    hintText: 'Partner Name',
+                                    border: OutlineInputBorder(),
+                                    labelStyle: TextStyle(fontSize: 12.0),
+                                    contentPadding: EdgeInsets.only(left: 10.0),
+                                    hintStyle:
+                                        TextStyle(color: kSecondaryColor2),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: kBlackColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: kBlackColor),
+                                    ),
+                                  ),
+                                  textInputAction: TextInputAction.go,
+                                  controller: controller2,
+                                ),
                               ),
                               verticalSpaceTiny,
                               DropdownButton(
@@ -225,120 +427,6 @@ class _PartnerState extends State<Partner> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.partner_data.clear();
-                              for (var i in shared.partner[0].data!) {
-                                print(i.toJson());
-                                print(i.partnerId
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.partnerId!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.partnerName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.partnerDesc!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.partnerId);
-                                    setState(() {
-                                      shared.partner_data
-                                          .add(Data20.fromJson(i.toJson()));
-                                    });
-                                    if (shared.partner_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.partner_data.clear();
-                              setState(() {
-                                shared.partner_data
-                                    .addAll(shared.partner[0].data!);
-                                isLoaded = true;
-                              });
-                            }
-                            debugPrint(
-                                shared.partner_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.partner_data.clear();
-                            isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.partner_data.clear();
-                              for (var i in shared.partner[0].data!) {
-                                print(i.toJson());
-                                print(i.partnerId
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.partnerId!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.partnerName!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.partnerDesc!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.partnerId);
-                                    setState(() {
-                                      shared.partner_data
-                                          .add(Data20.fromJson(i.toJson()));
-                                    });
-                                    if (shared.partner_data.isNotEmpty) {
-                                      setState(() {
-                                        isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.partner_data.clear();
-                              setState(() {
-                                shared.partner_data
-                                    .addAll(shared.partner[0].data!);
-                              });
-                            }
-                            debugPrint(
-                                shared.partner_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.partner_data.clear();
-                          }
-                        },
-                      ),
-                    ),
                     Container(
                         width: double.infinity,
                         padding: kEdgeInsetsVerticalNormal,
