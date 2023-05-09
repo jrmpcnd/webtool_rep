@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/screens/homepage/homepage.dart';
 import 'package:webtool_rep/UI/screens/login/popup.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/utils/constant.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -9,14 +10,12 @@ import '../../utils/edge_insect.dart';
 import 'components/loginapi.dart';
 
 class buildCard extends StatefulWidget {
-
   static const String route = 'Loginpage';
   const buildCard({Key? key}) : super(key: key);
 
   @override
   State<buildCard> createState() => _buildCardState();
 }
-
 
 class _buildCardState extends State<buildCard> {
   final _formKey = GlobalKey<FormState>();
@@ -28,6 +27,7 @@ class _buildCardState extends State<buildCard> {
     userController.dispose();
     passController.dispose();
   }
+
   bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
@@ -35,6 +35,7 @@ class _buildCardState extends State<buildCard> {
       Navigator.pop(context);
     }
 
+    Logout logout = Logout();
     Login login = Login();
     return Padding(
       padding: EdgeInsets.all(10),
@@ -58,52 +59,57 @@ class _buildCardState extends State<buildCard> {
         width: 430,
         height: 350,
         padding: kEdgeInsetsAllSNormal,
-        child: Padding(padding: EdgeInsets.all(10),
+        child: Padding(
+          padding: EdgeInsets.all(10),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
                 const SizedBox(height: 30.0),
-            Container(
-              width: 350,
-              child: TextFormField(
-                style: const TextStyle(color: Colors.black),
-                cursorColor: Colors.green,
-                decoration: InputDecoration(
-                  hintText: 'Enter Your Email',
-                  hintStyle: TextStyle(color: Colors.grey[600]),
-                  fillColor: Colors.white,
-                  filled: true,
-                  labelStyle: const TextStyle(fontSize: 12),
-                  contentPadding: EdgeInsets.only(left: 30),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.green),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.green),
-                    borderRadius: BorderRadius.circular(15),
+                Container(
+                  width: 350,
+                  child: TextFormField(
+                    style: const TextStyle(color: Colors.black),
+                    cursorColor: Colors.green,
+                    decoration: InputDecoration(
+                      hintText: 'Enter Your Email',
+                      hintStyle: TextStyle(color: Colors.grey[600]),
+                      fillColor: Colors.white,
+                      filled: true,
+                      labelStyle: const TextStyle(fontSize: 12),
+                      contentPadding: EdgeInsets.only(left: 30),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    controller: userController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please insert Username';
+                      }
+                    },
                   ),
                 ),
-
-                controller: userController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please insert Username';
-                  }
-                },
-              ),
-            ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 SizedBox(
                   width: 350,
-                  child: TextFormField(style: const TextStyle(color: Colors.black),
+                  child: TextFormField(
+                    style: const TextStyle(color: Colors.black),
                     obscureText: _isObscure,
                     autocorrect: true,
                     cursorColor: Colors.green,
                     decoration: InputDecoration(
-                     hintText: 'Enter Your Password',
-                      hintStyle: TextStyle(color: Colors.grey[600],),
+                      hintText: 'Enter Your Password',
+                      hintStyle: TextStyle(
+                        color: Colors.grey[600],
+                      ),
                       fillColor: Colors.white,
                       filled: true,
                       labelStyle: const TextStyle(fontSize: 12),
@@ -122,8 +128,9 @@ class _buildCardState extends State<buildCard> {
                       ),
                       suffixIcon: IconButton(
                           color: kSecondaryColor2,
-                          icon: Icon(
-                              _isObscure ? Icons.visibility : Icons.visibility_off),
+                          icon: Icon(_isObscure
+                              ? Icons.visibility
+                              : Icons.visibility_off),
                           onPressed: () {
                             setState(() {
                               _isObscure = !_isObscure;
@@ -138,7 +145,9 @@ class _buildCardState extends State<buildCard> {
                     },
                   ),
                 ),
-                SizedBox(height: 25,),
+                SizedBox(
+                  height: 25,
+                ),
                 Column(
                   children: [
                     ElevatedButton(
@@ -154,13 +163,24 @@ class _buildCardState extends State<buildCard> {
                         if (_formKey.currentState!.validate()) {
                           AlertDialog loading = AlertDialog(
                             backgroundColor: Colors.white,
-                            title: const Text("Please Wait",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
+                            title: const Text(
+                              "Please Wait",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                            ),
                             content: Row(children: const [
-                              CircularProgressIndicator(color: Colors.black,),
+                              CircularProgressIndicator(
+                                color: Colors.black,
+                              ),
                               SizedBox(
                                 width: 20,
                               ),
-                              Text("Loading...",style: TextStyle(color: Colors.black),)
+                              Text(
+                                "Loading...",
+                                style: TextStyle(color: Colors.black),
+                              )
                             ]),
                           );
                           showDialog(
@@ -197,17 +217,17 @@ class _buildCardState extends State<buildCard> {
                               pop();
                               Navigator.pushReplacement(context,
                                   MaterialPageRoute(
-                                    builder: (context) {
-                                      return HomePage(
-                                        user: userController.text,
-                                        oldpass: passController.text,
-                                      );
-                                    },
-                                  ));
+                                builder: (context) {
+                                  return HomePage(
+                                    user: userController.text,
+                                    oldpass: passController.text,
+                                  );
+                                },
+                              ));
                             } else {
                               pop();
                               var message =
-                              jsonDecode(response.body)['message'];
+                                  jsonDecode(response.body)['message'];
                               AlertDialog alert = AlertDialog(
                                 title: const Text("Invalid Login"),
                                 content: Text(message),
@@ -217,6 +237,48 @@ class _buildCardState extends State<buildCard> {
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
+                                  ),
+                                ],
+                              );
+                              await showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
+                            }
+                            if (await jsonDecode(response.body)['message']
+                                .contains("You're already logged in.")) {
+                              AlertDialog alert = AlertDialog(
+                                title: Text("Force Login?"),
+                                actions: [
+                                  Center(
+                                    child: TextButton(
+                                      child: Text("OK"),
+                                      onPressed: () async {
+                                        http.Response response =
+                                            await logout.logout(
+                                          userController.text,
+                                        );
+                                        print(jsonDecode(
+                                            response.body)['message']);
+                                        if (await jsonDecode(
+                                                response.body)['message']
+                                            .toString()
+                                            .toLowerCase()
+                                            .contains("logout")) {}
+                                        print(response.body);
+                                        Navigator.pushReplacement(context,
+                                            MaterialPageRoute(
+                                          builder: (context) {
+                                            return HomePage(
+                                              user: userController.text,
+                                              oldpass: passController.text,
+                                            );
+                                          },
+                                        ));
+                                      },
+                                    ),
                                   ),
                                 ],
                               );
