@@ -169,12 +169,12 @@ class _CentersState extends State<Centers> {
                                                   .text
                                                   .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
-                                            if (i.centerDesc!
+                                            if (i.centerCode!
                                                 .toLowerCase()
                                                 .contains(center_code_controller
                                                     .text
                                                     .toLowerCase())) {
-                                              debugPrint(i.centerDesc);
+                                              debugPrint(i.centerCode);
                                               setState(() {
                                                 shared.Center_data.add(
                                                     Center_Log.fromJson(

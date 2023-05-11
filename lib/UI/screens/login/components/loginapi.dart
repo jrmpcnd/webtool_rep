@@ -5,20 +5,24 @@ import '../../../utils/token.dart';
 
 String token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNjgyNDc1MzM1LCJpZGVudGl0eSI6IiQyYSQxNCRneDl0b1AzYTV3eDk1c3QxZEpvVjgubHRYUHdVelNuVE1LLlR2UW5HNVBKLnFuUnRSUVFodSJ9.c0eCS_VEoNPCa8_ynymvJ3jLqKjhd9uYIA3Vfviz-z4";
+
 class Login {
   Future<http.Response> login(user_login, go_password) async {
     String url = 'https://sit-api-janus.fortress-asya.com:1234/Login/';
     final http.Response response = await http.post(Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-
         },
         body: jsonEncode(<String, String>{
           'user_login': user_login,
           'go_password': go_password
         }));
-  var result=json.decode(response.body);
-  Token.SetToken(result['token']);
+    var result = json.decode(response.body);
+    try {
+      Token.SetToken(result['token']);
+    } catch (e) {
+      //  do something for handling error;
+    }
 
     return response;
   }
@@ -92,4 +96,3 @@ class Confirmation {
 //     return response;
 //   }
 // }
-

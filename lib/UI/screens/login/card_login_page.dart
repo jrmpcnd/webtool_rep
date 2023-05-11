@@ -192,8 +192,8 @@ class _buildCardState extends State<buildCard> {
                           http.Response response = await login.login(
                               userController.text, passController.text);
                           // http.Response res = await search.search(userController.text);
-                          print(jsonDecode(response.body)['message']);
-
+                          print(
+                              "Checkpoint 1: ${jsonDecode(response.body)['message']}");
                           // print(jsonDecode(res.body)['data']['name']);
                           if (await jsonDecode(response.body)['message'].contains(
                               'You need to input a new password. Confirm your email.')) {
@@ -226,8 +226,13 @@ class _buildCardState extends State<buildCard> {
                               ));
                             } else {
                               pop();
-                              var message =
-                                  jsonDecode(response.body)['message'];
+                              var message = "";
+                              try {
+                                message = jsonDecode(response.body)['message'];
+                              } catch (e) {
+                                print(e.toString());
+                                message = e.toString();
+                              }
                               AlertDialog alert = AlertDialog(
                                 title: const Text("Invalid Login"),
                                 content: Text(message),
@@ -257,26 +262,26 @@ class _buildCardState extends State<buildCard> {
                                       child: Text("OK"),
                                       onPressed: () async {
                                         http.Response response =
-                                            await logout.logout(
-                                          userController.text,
-                                        );
+                                            await login.login(
+                                                userController.text,
+                                                passController.text);
                                         print(jsonDecode(
                                             response.body)['message']);
                                         if (await jsonDecode(
                                                 response.body)['message']
                                             .toString()
                                             .toLowerCase()
-                                            .contains("logout")) {}
-                                        print(response.body);
-                                        Navigator.pushReplacement(context,
-                                            MaterialPageRoute(
-                                          builder: (context) {
-                                            return HomePage(
-                                              user: userController.text,
-                                              oldpass: passController.text,
-                                            );
-                                          },
-                                        ));
+                                            .contains("logout")) {
+                                          Navigator.pushReplacement(context,
+                                              MaterialPageRoute(
+                                            builder: (context) {
+                                              return HomePage(
+                                                user: userController.text,
+                                                oldpass: passController.text,
+                                              );
+                                            },
+                                          ));
+                                        }
                                       },
                                     ),
                                   ),
