@@ -222,20 +222,17 @@ class _UsermanagementState extends State<Usermanagement> {
                                       if (init
                                           .toLowerCase()
                                           .contains('inactive')) {
-                                        if (i.userLogin!.toLowerCase().contains(controller4.text.toLowerCase()) ||
-                                            i.lastName!.toLowerCase().contains(
-                                                controller3.text
-                                                    .toLowerCase()) ||
+                                        if (i.userLogin!.toLowerCase().contains(controller1.text.toLowerCase()) &&
+                                            i.givenName!.toLowerCase().contains(
+                                                controller2.text
+                                                    .toLowerCase()) &&
                                             i.middleName!
                                                 .toLowerCase()
-                                                .contains(controller2.text
-                                                    .toLowerCase()) ||
-                                            i.givenName!.toLowerCase().contains(
-                                                controller1.text
-                                                    .toLowerCase()) ||
-                                            i.checkStatus!
-                                                .toLowerCase()
-                                                .contains(init)) {
+                                                .contains(controller3.text
+                                                    .toLowerCase()) &&
+                                            i.lastName!.toLowerCase().contains(
+                                                controller4.text
+                                                    .toLowerCase())) {
                                           debugPrint(i.userLogin);
                                           setState(() {
                                             shared.user_data.add(
@@ -259,22 +256,22 @@ class _UsermanagementState extends State<Usermanagement> {
                                         if (i.userLogin!
                                                 .toLowerCase()
                                                 .contains(
-                                                    controller4
+                                                    controller1
                                                         .text
-                                                        .toLowerCase()) ||
+                                                        .toLowerCase()) &&
                                             i
                                                 .lastName!
                                                 .toLowerCase()
                                                 .contains(
-                                                    controller3
+                                                    controller2
                                                         .text
-                                                        .toLowerCase()) ||
+                                                        .toLowerCase()) &&
                                             i.middleName!
                                                 .toLowerCase()
-                                                .contains(controller2.text
-                                                    .toLowerCase()) ||
+                                                .contains(controller3.text
+                                                    .toLowerCase()) &&
                                             i.givenName!.toLowerCase().contains(
-                                                controller1.text
+                                                controller4.text
                                                     .toLowerCase())) {
                                           debugPrint(i.userLogin);
                                           setState(() {
@@ -370,12 +367,18 @@ class _UsermanagementState extends State<Usermanagement> {
                                   });
                                   shared.user_data.clear();
                                   for (var i in shared.user[0].data!) {
-                                    print(i.toJson());
-                                    print(i.userLogin?.toLowerCase().contains(
-                                        controller4.text.toLowerCase()));
+                                    // print(i.toJson());
+                                    // print(i.userLogin?.toLowerCase().contains(
+                                    //     controller4.text.toLowerCase()));
                                     if (i.toJson().isNotEmpty) {
                                       if (i.givenName!.toLowerCase().contains(
-                                          controller1.text.toLowerCase())) {
+                                              controller1.text.toLowerCase()) &&
+                                          i.middleName!.toLowerCase().contains(
+                                              controller2.text.toLowerCase()) &&
+                                          i.lastName!.toLowerCase().contains(
+                                              controller3.text.toLowerCase()) &&
+                                          i.userLogin!.toLowerCase().contains(
+                                              controller4.text.toLowerCase())) {
                                         debugPrint(i.userLogin);
                                         setState(() {
                                           shared.user_data
@@ -406,7 +409,13 @@ class _UsermanagementState extends State<Usermanagement> {
                                         controller4.text.toLowerCase()));
                                     if (i.toJson().isNotEmpty) {
                                       if (i.middleName!.toLowerCase().contains(
-                                          controller2.text.toLowerCase())) {
+                                              controller2.text.toLowerCase()) &&
+                                          i.userLogin!.toLowerCase().contains(
+                                              controller4.text.toLowerCase()) &&
+                                          i.lastName!.toLowerCase().contains(
+                                              controller3.text.toLowerCase()) &&
+                                          i.givenName!.toLowerCase().contains(
+                                              controller1.text.toLowerCase())) {
                                         debugPrint(i.userLogin);
                                         setState(() {
                                           shared.user_data
@@ -437,7 +446,13 @@ class _UsermanagementState extends State<Usermanagement> {
                                         controller4.text.toLowerCase()));
                                     if (i.toJson().isNotEmpty) {
                                       if (i.lastName!.toLowerCase().contains(
-                                          controller3.text.toLowerCase())) {
+                                              controller3.text.toLowerCase()) &&
+                                          i.userLogin!.toLowerCase().contains(
+                                              controller4.text.toLowerCase()) &&
+                                          i.middleName!.toLowerCase().contains(
+                                              controller2.text.toLowerCase()) &&
+                                          i.givenName!.toLowerCase().contains(
+                                              controller1.text.toLowerCase())) {
                                         debugPrint(i.userLogin);
                                         setState(() {
                                           shared.user_data
@@ -468,7 +483,13 @@ class _UsermanagementState extends State<Usermanagement> {
                                         controller4.text.toLowerCase()));
                                     if (i.toJson().isNotEmpty) {
                                       if (i.userLogin!.toLowerCase().contains(
-                                          controller4.text.toLowerCase())) {
+                                              controller4.text.toLowerCase()) &&
+                                          i.middleName!.toLowerCase().contains(
+                                              controller2.text.toLowerCase()) &&
+                                          i.lastName!.toLowerCase().contains(
+                                              controller3.text.toLowerCase()) &&
+                                          i.givenName!.toLowerCase().contains(
+                                              controller1.text.toLowerCase())) {
                                         debugPrint(i.userLogin);
                                         setState(() {
                                           shared.user_data
@@ -488,14 +509,7 @@ class _UsermanagementState extends State<Usermanagement> {
                                     }
                                   }
                                 }
-                                /*else if (controller4.text == '') {
-                                  shared.user_data.clear();
-                                  setState(() {
-                                    shared.user_data
-                                        .addAll(shared.user[0].data!);
-                                    isLoaded = true;
-                                  });
-                                }*/
+
                                 debugPrint(
                                     shared.user_data[0].toJson().toString());
                               } catch (e) {
@@ -531,7 +545,7 @@ class _UsermanagementState extends State<Usermanagement> {
                               controller3.clear();
                               controller4.clear();
                               shared.user_data.clear();
-                              init= res[0];
+                              init = res[0];
                               setState(() {
                                 shared.user_data.addAll(shared.user[0].data!);
                                 Future.delayed(
@@ -606,7 +620,7 @@ class _UsermanagementState extends State<Usermanagement> {
                             child: Padding(
                               padding: EdgeInsets.all(5),
                               child: DropdownButton(
-                              iconEnabledColor: Colors.black,
+                                iconEnabledColor: Colors.black,
                                 value: init,
                                 items: res.map((e) {
                                   return DropdownMenuItem(
@@ -677,7 +691,7 @@ class _UsermanagementState extends State<Usermanagement> {
                         rowsPerPage: 8,
                         showFirstLastButtons: true,
                         header: Container(
-                          height: 35,
+                            height: 35,
                             child: Text('List of User',
                                 style: kXLargeBoldTextStyle)),
                       ),
