@@ -262,12 +262,14 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                         });
                                         shared.Remittance_data.clear();
                                         for (var i in shared.RemittanceLog[0].data!) {
-                                          print(i.toJson());
-                                          print(i.senderMobileNumber?.toLowerCase().contains(
-                                              controller.text.toLowerCase()));
+                                          // print(i.toJson());
+                                          // print(i.userLogin?.toLowerCase().contains(
+                                          //     controller4.text.toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.senderMobileNumber!.toLowerCase().contains(
-                                                controller.text.toLowerCase())) {
+                                                controller.text.toLowerCase()) &&
+                                                i.sentMobileRefId!.toLowerCase().contains(
+                                                    controller1.text.toLowerCase())){
                                               debugPrint(i.senderMobileNumber);
                                               setState(() {
                                                 shared.Remittance_data
@@ -293,12 +295,14 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                         });
                                         shared.Remittance_data.clear();
                                         for (var i in shared.RemittanceLog[0].data!) {
-                                          print(i.toJson());
-                                          print(i.sentMobileRefId?.toLowerCase().contains(
-                                              controller1.text.toLowerCase()));
+                                          // print(i.toJson());
+                                          // print(i.userLogin?.toLowerCase().contains(
+                                          //     controller4.text.toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.sentMobileRefId!.toLowerCase().contains(
-                                                controller1.text.toLowerCase())) {
+                                                controller1.text.toLowerCase()) &&
+                                                i.senderMobileNumber!.toLowerCase().contains(
+                                                    controller.text.toLowerCase())){
                                               debugPrint(i.sentMobileRefId);
                                               setState(() {
                                                 shared.Remittance_data
