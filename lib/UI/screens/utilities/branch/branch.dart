@@ -170,10 +170,17 @@ class _BranchState extends State<Branch> {
                                                   .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.branchCode!
-                                                .toLowerCase()
-                                                .contains(branch_code_controller
-                                                    .text
-                                                    .toLowerCase())) {
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        branch_code_controller
+                                                            .text
+                                                            .toLowerCase()) &&
+                                                i.branchDesc!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        branch_desc_controller
+                                                            .text
+                                                            .toLowerCase())) {
                                               debugPrint(i.branchCode);
                                               setState(() {
                                                 shared.Branch_data.add(
@@ -211,10 +218,17 @@ class _BranchState extends State<Branch> {
                                                   .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.branchDesc!
-                                                .toLowerCase()
-                                                .contains(branch_desc_controller
-                                                    .text
-                                                    .toLowerCase())) {
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        branch_desc_controller
+                                                            .text
+                                                            .toLowerCase()) &&
+                                                i.branchCode!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        branch_code_controller
+                                                            .text
+                                                            .toLowerCase())) {
                                               debugPrint(i.branchDesc);
                                               setState(() {
                                                 shared.Branch_data.add(
