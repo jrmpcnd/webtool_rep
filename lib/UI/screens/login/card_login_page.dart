@@ -226,13 +226,14 @@ class _buildCardState extends State<buildCard> {
                               ));
                             } else {
                               pop();
-                              var message = "";
-                              try {
-                                message = jsonDecode(response.body)['message'];
-                              } catch (e) {
-                                print(e.toString());
-                                message = e.toString();
-                              }
+                              var message =
+                                  jsonDecode(response.body)['message'];
+                              // try {
+                              //   message = jsonDecode(response.body)['message'];
+                              // } catch (e) {
+                              //   print(e.toString());
+                              //   message = e.toString();
+                              // }
                               AlertDialog alert = AlertDialog(
                                 title: const Text("Invalid Login"),
                                 content: Text(message),
@@ -261,27 +262,24 @@ class _buildCardState extends State<buildCard> {
                                     child: TextButton(
                                       child: Text("OK"),
                                       onPressed: () async {
-                                        http.Response response =
-                                            await login.login(
-                                                userController.text,
-                                                passController.text);
+                                        http.Response response = await logout
+                                            .logout(userController.text);
                                         print(jsonDecode(
                                             response.body)['message']);
                                         if (await jsonDecode(
                                                 response.body)['message']
                                             .toString()
                                             .toLowerCase()
-                                            .contains("logout")) {
-                                          Navigator.pushReplacement(context,
-                                              MaterialPageRoute(
-                                            builder: (context) {
-                                              return HomePage(
-                                                user: userController.text,
-                                                oldpass: passController.text,
-                                              );
-                                            },
-                                          ));
-                                        }
+                                            .contains("logout")) {}
+                                        Navigator.pushReplacement(context,
+                                            MaterialPageRoute(
+                                          builder: (context) {
+                                            return HomePage(
+                                              user: userController.text,
+                                              oldpass: passController.text,
+                                            );
+                                          },
+                                        ));
                                       },
                                     ),
                                   ),

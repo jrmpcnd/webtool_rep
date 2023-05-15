@@ -151,29 +151,43 @@ class _InstitutionState extends State<Institution> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: (){
-                                    try{
-                                      if (institution_code_controller.text.isNotEmpty) {
+                                  onPressed: () {
+                                    try {
+                                      if (institution_code_controller
+                                          .text.isNotEmpty) {
                                         setState(() {
                                           isLoaded = false;
                                         });
                                         shared.Institution_data.clear();
-                                        for (var i in shared.InstitutionLog[0].data!) {
+                                        for (var i
+                                            in shared.InstitutionLog[0].data!) {
                                           print(i.toJson());
-                                          print(i.instCode?.toLowerCase().contains(
-                                              institution_code_controller.text.toLowerCase()));
+                                          print(i.instCode
+                                              ?.toLowerCase()
+                                              .contains(
+                                                  institution_code_controller
+                                                      .text
+                                                      .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.instCode!.toLowerCase().contains(
-                                                institution_code_controller.text.toLowerCase())) {
+                                                    institution_code_controller
+                                                        .text
+                                                        .toLowerCase()) &&
+                                                i.instDesc!.toLowerCase().contains(
+                                                    institution_desc_controller
+                                                        .text
+                                                        .toLowerCase())) {
                                               debugPrint(i.instCode);
                                               setState(() {
-                                                shared.Institution_data
-                                                    .add(Institution_Log.fromJson(i.toJson()));
+                                                shared.Institution_data.add(
+                                                    Institution_Log.fromJson(
+                                                        i.toJson()));
                                               });
-                                              if (shared.Institution_data.isNotEmpty) {
+                                              if (shared.Institution_data
+                                                  .isNotEmpty) {
                                                 Future.delayed(
                                                   Duration(seconds: 1),
-                                                      () {
+                                                  () {
                                                     setState(() {
                                                       isLoaded = true;
                                                     });
@@ -184,27 +198,41 @@ class _InstitutionState extends State<Institution> {
                                           }
                                         }
                                       }
-                                      if (institution_desc_controller.text.isNotEmpty) {
+                                      if (institution_desc_controller
+                                          .text.isNotEmpty) {
                                         setState(() {
                                           isLoaded = false;
                                         });
                                         shared.Institution_data.clear();
-                                        for (var i in shared.InstitutionLog[0].data!) {
+                                        for (var i
+                                            in shared.InstitutionLog[0].data!) {
                                           print(i.toJson());
-                                          print(i.instDesc?.toLowerCase().contains(
-                                              institution_desc_controller.text.toLowerCase()));
+                                          print(i.instDesc
+                                              ?.toLowerCase()
+                                              .contains(
+                                                  institution_desc_controller
+                                                      .text
+                                                      .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.instDesc!.toLowerCase().contains(
-                                                institution_desc_controller.text.toLowerCase())) {
+                                                    institution_desc_controller
+                                                        .text
+                                                        .toLowerCase()) &&
+                                                i.instCode!.toLowerCase().contains(
+                                                    institution_code_controller
+                                                        .text
+                                                        .toLowerCase())) {
                                               debugPrint(i.instCode);
                                               setState(() {
-                                                shared.Institution_data
-                                                    .add(Institution_Log.fromJson(i.toJson()));
+                                                shared.Institution_data.add(
+                                                    Institution_Log.fromJson(
+                                                        i.toJson()));
                                               });
-                                              if (shared.Institution_data.isNotEmpty) {
+                                              if (shared.Institution_data
+                                                  .isNotEmpty) {
                                                 Future.delayed(
                                                   Duration(seconds: 1),
-                                                      () {
+                                                  () {
                                                     setState(() {
                                                       isLoaded = true;
                                                     });
@@ -215,9 +243,10 @@ class _InstitutionState extends State<Institution> {
                                           }
                                         }
                                       }
-                                      debugPrint(
-                                          shared.Institution_data[0].toJson().toString());
-                                    }catch (e) {
+                                      debugPrint(shared.Institution_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
                                       shared.Institution_data.clear();
                                       isLoaded = true;
                                     }
@@ -249,10 +278,11 @@ class _InstitutionState extends State<Institution> {
                                     institution_code_controller.clear();
                                     shared.Institution_data.clear();
                                     setState(() {
-                                      shared.Institution_data.addAll(shared.InstitutionLog[0].data!);
+                                      shared.Institution_data.addAll(
+                                          shared.InstitutionLog[0].data!);
                                       Future.delayed(
                                         Duration(seconds: 1),
-                                            () {
+                                        () {
                                           setState(() {
                                             isLoaded = true;
                                           });
@@ -298,7 +328,6 @@ class _InstitutionState extends State<Institution> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-
                     Container(
                       width: double.infinity,
                       padding: kEdgeInsetsVerticalNormal,

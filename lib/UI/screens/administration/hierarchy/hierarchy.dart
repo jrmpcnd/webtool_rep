@@ -119,7 +119,7 @@ class _HierarchyState extends State<Hierarchy> {
   Widget build(BuildContext context) {
     final shared = Provider.of<H_Prov>(context);
     final DataTableSource data = MyData(shared: shared);
-    final DataTableSource data2 = MyData2();
+    final DataTableSource data2 = MyData2(shared: shared);
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
     ScrollController scrollController = ScrollController();
@@ -164,7 +164,7 @@ class _HierarchyState extends State<Hierarchy> {
                             decoration: BoxDecoration(
                               color: Colors.transparent,
                               borderRadius: BorderRadius.circular(5),
-                              border: Border.fromBorderSide(
+                              border: const Border.fromBorderSide(
                                 BorderSide(color: Color(0xFF000000), width: 1),
                               ),
                             ),
@@ -238,36 +238,43 @@ class _HierarchyState extends State<Hierarchy> {
                                     });
                                     shared.Hierarchy_data.clear();
                                     for (var i in shared.Hierarchy[0].data!) {
-                                      print(i.unitDesc?.toLowerCase().contains(
-                                          init2.toLowerCase()));
+                                      print(i.unitDesc
+                                          ?.toLowerCase()
+                                          .contains(init2.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
                                         if (i.unitDesc!
                                             .toLowerCase()
                                             .contains(init2.toLowerCase())) {
-                                          debugPrint("======>>>>>>${i.unitDesc?.toLowerCase()}");
-                                          debugPrint("========>>>>>>>>>>>>${init2.toLowerCase()}");
+                                          debugPrint(
+                                              "======>>>>>>${i.unitDesc?.toLowerCase()}");
+                                          debugPrint(
+                                              "========>>>>>>>>>>>>${init2.toLowerCase()}");
 
                                           print(i.toJson());
                                           setState(() {
-                                            shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()));
+                                            shared.Hierarchy_data.add(
+                                                H_SaveAccount.fromJson(
+                                                    i.toJson()));
                                           });
 
-                                          if (shared.Hierarchy_data.isNotEmpty) {
+                                          if (shared
+                                              .Hierarchy_data.isNotEmpty) {
                                             Future.delayed(
                                               Duration(seconds: 1),
-                                                  () {
+                                              () {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
                                               },
                                             );
-                                          } else{
+                                          } else {
                                             setState(() {
                                               isLoaded = true;
                                             });
                                           }
-                                          print("========>>>>>>>>${shared.Hierarchy_data.length}");
-                                        } else{
+                                          print(
+                                              "========>>>>>>>>${shared.Hierarchy_data.length}");
+                                        } else {
                                           setState(() {
                                             isLoaded = true;
                                           });
@@ -338,7 +345,7 @@ class _HierarchyState extends State<Hierarchy> {
                                       items: res5.map((i) {
                                         return DropdownMenuItem(
                                           value: i,
-                                          child: Text(i,  style: kText),
+                                          child: Text(i, style: kText),
                                         );
                                       }).toList(),
                                       onChanged: (value) {
@@ -583,6 +590,9 @@ class _HierarchyState extends State<Hierarchy> {
                                 DataColumn(
                                     label: Text('Center Name',
                                         style: kLargeBoldTextStyle)),
+                                // DataColumn(
+                                //     label: Text('Delete',
+                                //         style: kLargeBoldTextStyle)),
                               ],
                               source: isLoaded
                                   ? shared.Hierarchy_data.isNotEmpty
@@ -610,6 +620,7 @@ class _HierarchyState extends State<Hierarchy> {
 }
 
 class MyData extends DataTableSource {
+  bool isChecked = false;
   H_Prov shared;
   MyData({required this.shared});
 
@@ -641,15 +652,24 @@ class MyData extends DataTableSource {
       DataCell(SizedBox(
           width: 100,
           child: Text(shared.Hierarchy_data[index].centerDesc.toString()))),
+      // DataCell(SizedBox(
+      //   width: 100,
+      //   child: IconButton(icon: Icon(Icons.delete), onPressed: () {}
+      //       // _deleteRow(index),
+      //       ),
+      // )),
     ]);
   }
 }
 
 class MyData2 extends DataTableSource {
+  late H_Prov shared;
+  MyData2({required this.shared});
+
   @override
   bool get isRowCountApproximate => false;
   @override
-  int get rowCount => 1;
+  int get rowCount => shared.Hierarchy_data.length;
   @override
   int get selectedRowCount => 0;
   @override
@@ -663,6 +683,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      // DataCell(SizedBox(child: Text(''))),
     ]);
   }
 }
@@ -679,6 +700,10 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
         child: CircularProgressIndicator(),

@@ -1,3 +1,4 @@
-2023/05/10-13:21:05.241 5303 Reusing MANIFEST /private/var/folders/d9/4wmr_rjn12n53ksxf2kh6s8c0000gp/T/flutter_tools.OciJtJ/flutter_tools_chrome_device.gLGDLb/Default/Local Storage/leveldb/MANIFEST-000001
-2023/05/10-13:21:05.246 5303 Recovering log #3
-2023/05/10-13:21:05.248 5303 Reusing old log /private/var/folders/d9/4wmr_rjn12n53ksxf2kh6s8c0000gp/T/flutter_tools.OciJtJ/flutter_tools_chrome_device.gLGDLb/Default/Local Storage/leveldb/000003.log 
+2023/05/15-08:19:36.429 1b07 Reusing MANIFEST /private/var/folders/d9/4wmr_rjn12n53ksxf2kh6s8c0000gp/T/flutter_tools.U3yh8S/flutter_tools_chrome_device.POtJTN/Default/Local Storage/leveldb/MANIFEST-000001
+2023/05/15-08:19:36.431 1b07 Recovering log #6
+2023/05/15-08:19:36.432 1b07 Reusing old log /private/var/folders/d9/4wmr_rjn12n53ksxf2kh6s8c0000gp/T/flutter_tools.U3yh8S/flutter_tools_chrome_device.POtJTN/Default/Local Storage/leveldb/000006.log 
+2023/05/15-08:19:36.432 1b07 Delete type=0 #3
