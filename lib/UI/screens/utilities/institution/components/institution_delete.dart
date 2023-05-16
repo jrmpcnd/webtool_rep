@@ -16,10 +16,11 @@ class _InstitutionDeleteFunctionState extends State<InstitutionDeleteFunction> {
     final shared = Provider.of<Institution_U>(context, listen: false);
     return Checkbox(
       checkColor: Colors.green,
-      value: shared.isCheck,
-      onChanged: (bool? value) {
+      value: shared.isChecked,
+      onChanged: (value) {
         setState(() {
-          shared.isCheck = value!;
+          shared.isChecked = value!;
+          print(shared.isChecked);
         });
       },
     );

@@ -313,6 +313,7 @@ class _InstitutionState extends State<Institution> {
                                       MaterialStateProperty.all(kPrimaryColor)),
                               onPressed: () {
                                 setState(() {
+                                  shared.isChecked = false;
                                   shared.Institution_data.removeAt(0);
                                 });
                               },

@@ -170,10 +170,17 @@ class _CentersState extends State<Centers> {
                                                   .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.centerCode!
-                                                .toLowerCase()
-                                                .contains(center_code_controller
-                                                    .text
-                                                    .toLowerCase())) {
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        center_code_controller
+                                                            .text
+                                                            .toLowerCase()) &&
+                                                i.centerDesc!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        center_desc_controller
+                                                            .text
+                                                            .toLowerCase())) {
                                               debugPrint(i.centerCode);
                                               setState(() {
                                                 shared.Center_data.add(
@@ -211,10 +218,17 @@ class _CentersState extends State<Centers> {
                                                   .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.centerDesc!
-                                                .toLowerCase()
-                                                .contains(center_desc_controller
-                                                    .text
-                                                    .toLowerCase())) {
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        center_desc_controller
+                                                            .text
+                                                            .toLowerCase()) &&
+                                                i.centerCode!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        center_code_controller
+                                                            .text
+                                                            .toLowerCase())) {
                                               debugPrint(i.centerDesc);
                                               setState(() {
                                                 shared.Center_data.add(

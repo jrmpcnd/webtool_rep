@@ -720,10 +720,10 @@ class MyData3 extends DataTableSource {
           child: Center(
         child: CircularProgressIndicator(),
       ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
+      // DataCell(SizedBox(
+      //     child: Center(
+      //   child: CircularProgressIndicator(),
+      // ))),
     ]);
   }
 }

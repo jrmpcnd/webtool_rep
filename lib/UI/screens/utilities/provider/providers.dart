@@ -152,28 +152,41 @@ class _ProvidersState extends State<Providers> {
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
                                   onPressed: () {
-                                    try{
-                                      if (provider_code_controller.text.isNotEmpty) {
+                                    try {
+                                      if (provider_code_controller
+                                          .text.isNotEmpty) {
                                         setState(() {
                                           isLoaded = false;
                                         });
                                         shared.Providers_data.clear();
-                                        for (var i in shared.ProvidersLog[0].data!) {
+                                        for (var i
+                                            in shared.ProvidersLog[0].data!) {
                                           print(i.toJson());
                                           print(i.id?.toLowerCase().contains(
-                                              provider_code_controller.text.toLowerCase()));
+                                              provider_code_controller.text
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.id!.toLowerCase().contains(
-                                                provider_code_controller.text.toLowerCase())) {
+                                                    provider_code_controller
+                                                        .text
+                                                        .toLowerCase()) &&
+                                                i.providerName!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        provider_desc_controller
+                                                            .text
+                                                            .toLowerCase())) {
                                               debugPrint(i.id);
                                               setState(() {
-                                                shared.Providers_data
-                                                    .add(Providers_Log.fromJson(i.toJson()));
+                                                shared.Providers_data.add(
+                                                    Providers_Log.fromJson(
+                                                        i.toJson()));
                                               });
-                                              if (shared.Providers_data.isNotEmpty) {
+                                              if (shared
+                                                  .Providers_data.isNotEmpty) {
                                                 Future.delayed(
                                                   Duration(seconds: 1),
-                                                      () {
+                                                  () {
                                                     setState(() {
                                                       isLoaded = true;
                                                     });
@@ -184,27 +197,42 @@ class _ProvidersState extends State<Providers> {
                                           }
                                         }
                                       }
-                                      if (provider_desc_controller.text.isNotEmpty) {
+                                      if (provider_desc_controller
+                                          .text.isNotEmpty) {
                                         setState(() {
                                           isLoaded = false;
                                         });
                                         shared.Providers_data.clear();
-                                        for (var i in shared.ProvidersLog[0].data!) {
+                                        for (var i
+                                            in shared.ProvidersLog[0].data!) {
                                           print(i.toJson());
-                                          print(i.providerName?.toLowerCase().contains(
-                                              provider_desc_controller.text.toLowerCase()));
+                                          print(i.providerName
+                                              ?.toLowerCase()
+                                              .contains(provider_desc_controller
+                                                  .text
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
-                                            if (i.providerName!.toLowerCase().contains(
-                                                provider_desc_controller.text.toLowerCase())) {
+                                            if (i.providerName!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        provider_desc_controller
+                                                            .text
+                                                            .toLowerCase()) &&
+                                                i.id!.toLowerCase().contains(
+                                                    provider_code_controller
+                                                        .text
+                                                        .toLowerCase())) {
                                               debugPrint(i.providerName);
                                               setState(() {
-                                                shared.Providers_data
-                                                    .add(Providers_Log.fromJson(i.toJson()));
+                                                shared.Providers_data.add(
+                                                    Providers_Log.fromJson(
+                                                        i.toJson()));
                                               });
-                                              if (shared.Providers_data.isNotEmpty) {
+                                              if (shared
+                                                  .Providers_data.isNotEmpty) {
                                                 Future.delayed(
                                                   Duration(seconds: 1),
-                                                      () {
+                                                  () {
                                                     setState(() {
                                                       isLoaded = true;
                                                     });
@@ -215,9 +243,10 @@ class _ProvidersState extends State<Providers> {
                                           }
                                         }
                                       }
-                                      debugPrint(
-                                          shared.Providers_data[0].toJson().toString());
-                                    }catch (e) {
+                                      debugPrint(shared.Providers_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
                                       shared.Providers_data.clear();
                                       isLoaded = true;
                                     }
@@ -241,7 +270,7 @@ class _ProvidersState extends State<Providers> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: (){
+                                  onPressed: () {
                                     setState(() {
                                       isLoaded = false;
                                     });
@@ -250,10 +279,11 @@ class _ProvidersState extends State<Providers> {
                                     provider_desc_controller.clear();
                                     shared.Providers_data.clear();
                                     setState(() {
-                                      shared.Providers_data.addAll(shared.ProvidersLog[0].data!);
+                                      shared.Providers_data.addAll(
+                                          shared.ProvidersLog[0].data!);
                                       Future.delayed(
                                         Duration(seconds: 1),
-                                            () {
+                                        () {
                                           setState(() {
                                             isLoaded = true;
                                           });
@@ -299,7 +329,6 @@ class _ProvidersState extends State<Providers> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-
                     Container(
                       width: double.infinity,
                       padding: kEdgeInsetsVerticalNormal,
