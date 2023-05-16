@@ -25,6 +25,7 @@ import 'package:webtool_rep/UI/screens/utilities/banklist/bank_list.dart';
 import 'package:webtool_rep/UI/screens/utilities/banknews/addbanknews/addbank_news.dart';
 import 'package:webtool_rep/UI/screens/utilities/commissionsetup/addcommissionsetup/addcommission_setup.dart';
 import 'package:webtool_rep/UI/screens/utilities/commissionsetup/commission_setup.dart';
+import 'package:webtool_rep/UI/screens/utilities/commissionsetup/component/commissionApi.dart';
 import 'package:webtool_rep/UI/screens/utilities/dcmlocation/dcm_location.dart';
 import 'package:webtool_rep/UI/screens/utilities/feestructure/addstructure/add_structure.dart';
 import 'package:webtool_rep/UI/screens/utilities/feestructure/free_structure.dart';
@@ -121,6 +122,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   AddinstiAPI addinstitutionapi = AddinstiAPI();
   AddinstiController addinstiController = AddinstiController();
+  AddCommissionApi addcommissionapi = AddCommissionApi();
+  AddcommisionController addcommisionController = AddcommisionController();
   // Timer? _timer;
 
   // @override
@@ -2152,6 +2155,42 @@ class _HomePageState extends State<HomePage> {
                                         shared.header =
                                         "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
+                                        shared.onPress = () async {
+                                          if (addcommisionController.cbankpartnerincome.text!= null &&
+                                              addcommisionController.cbankincome.text!= null &&
+                                          addcommisionController.cagentincome.text!=null &&
+                                          addcommisionController.ccustomerincome.text!=null &&
+                                          addcommisionController.ccommissiontype.text!=null &&
+                                          addcommisionController.ctransactiontype.text!=null) {
+                                            try {
+
+                                              print(SaveCommission.GetTransactionType().toString());
+                                              print(SaveCommission.GetAgentIncome().toString());
+                                              print(SaveCommission.GetBankIncome().toString());
+                                              print(SaveCommission.GetBankpartnerIncome().toString());
+                                              print(SaveCommission.GetComissionType().toString());
+                                              print(SaveCommission.GetCustomerIncome().toString());
+                                              http.Response response =
+                                              await addcommissionapi
+                                                  .Addcommissions(
+                                                  SaveCommission.GetTransactionType().toString(),
+                                                  SaveCommission.GetAgentIncome().toString(),
+                                                  SaveCommission.GetBankIncome().toString(),
+                                                  SaveCommission.GetBankpartnerIncome().toString(),
+                                                  SaveCommission.GetComissionType().toString(),
+                                                  SaveCommission.GetCustomerIncome().toString(),
+                                              );
+                                              if(jsonDecode(response.body) ['Created Successfully'] == false){
+                                                Navigator.pop(context);
+
+                                              }
+                                            } catch (e) {
+                                              debugPrint(e.toString());
+                                            }
+                                          }else{
+                                            debugPrint('check');
+                                          }
+                                        };
                                         shared.subaddbutton =
                                         "Save Commission Setup";
                                         shared.title = "Create / Edit";
