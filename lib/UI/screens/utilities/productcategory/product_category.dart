@@ -7,8 +7,6 @@ import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/tables.dart';
-import '../../../widgets/textfield.dart';
 
 class Productcategory extends StatefulWidget {
   const Productcategory({Key? key}) : super(key: key);
@@ -18,8 +16,8 @@ class Productcategory extends StatefulWidget {
 }
 
 class _ProductcategoryState extends State<Productcategory> {
-  TextEditingController controller = TextEditingController();
   TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -147,7 +145,7 @@ class _ProductcategoryState extends State<Productcategory> {
                                 ),
                               ),
                               textInputAction: TextInputAction.go,
-                              controller: controller,
+                              controller: controller1,
                             ),
                           ),
                           verticalSpaceTiny,
@@ -170,7 +168,7 @@ class _ProductcategoryState extends State<Productcategory> {
                                 ),
                               ),
                               textInputAction: TextInputAction.go,
-                              controller: controller1,
+                              controller: controller2,
                             ),
                           ),
                           verticalSpaceSmall,
@@ -186,11 +184,7 @@ class _ProductcategoryState extends State<Productcategory> {
                                               kPrimaryColor)),
                                   onPressed: () {
                                     try {
-
-                                      if (controller.text.isNotEmpty &&
-                                      controller1.text.isNotEmpty &&
-                                      init.toString().isNotEmpty&&
-                                      init2.toString().isNotEmpty) {
+                                      if (controller1.text.isNotEmpty) {
                                         setState(() {
                                           isLoaded = false;
                                         });
@@ -200,13 +194,17 @@ class _ProductcategoryState extends State<Productcategory> {
                                           print(i.toJson());
                                           print(i.productCategoryId
                                               ?.toLowerCase()
-                                              .contains(controller.text
+                                              .contains(controller1.text
                                                   .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.productCategoryId!
-                                                .toLowerCase()
-                                                .contains(controller.text
-                                                    .toLowerCase())) {
+                                                    .toLowerCase()
+                                                    .contains(controller1.text
+                                                        .toLowerCase()) &&
+                                                i.productTypeName!
+                                                    .toLowerCase()
+                                                    .contains(controller2.text
+                                                        .toLowerCase())) {
                                               debugPrint(i.productCategoryId);
                                               setState(() {
                                                 shared.category_data.add(
@@ -228,7 +226,7 @@ class _ProductcategoryState extends State<Productcategory> {
                                           }
                                         }
                                       }
-                                      if (controller1.text.isNotEmpty) {
+                                      if (controller2.text.isNotEmpty) {
                                         setState(() {
                                           isLoaded = false;
                                         });
@@ -238,14 +236,18 @@ class _ProductcategoryState extends State<Productcategory> {
                                           print(i.toJson());
                                           print(i.productCategoryName
                                               ?.toLowerCase()
-                                              .contains(controller1.text
+                                              .contains(controller2.text
                                                   .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
-                                            if (i.productCategoryName!
-                                                .toLowerCase()
-                                                .contains(controller1.text
-                                                    .toLowerCase())) {
-                                              debugPrint(i.productCategoryName);
+                                            if (i.productTypeName!
+                                                    .toLowerCase()
+                                                    .contains(controller2.text
+                                                        .toLowerCase()) &&
+                                                i.productCategoryId!
+                                                    .toLowerCase()
+                                                    .contains(controller1.text
+                                                        .toLowerCase())) {
+                                              debugPrint(i.productTypeName);
                                               setState(() {
                                                 shared.category_data.add(
                                                     Data15.fromJson(
@@ -266,91 +268,6 @@ class _ProductcategoryState extends State<Productcategory> {
                                           }
                                         }
                                       }
-                                      if (init.isNotEmpty) {
-                                        if (init
-                                            .toLowerCase()
-                                            .contains(init.toLowerCase())) {
-                                          setState(() {
-                                            isLoaded = false;
-                                          });
-                                          shared.category_data.clear();
-                                          for (var i
-                                              in shared.category[0].data!) {
-                                            print(i.toJson());
-                                            print(i.providerName
-                                                ?.toLowerCase()
-                                                .contains(controller.text
-                                                    .toLowerCase()));
-                                            if (i.toJson().isNotEmpty) {
-                                              if (i.providerName!
-                                                  .toLowerCase()
-                                                  .contains(
-                                                      init.toLowerCase())) {
-                                                debugPrint(i.providerName);
-                                                setState(() {
-                                                  shared.category_data.add(
-                                                      Data15.fromJson(
-                                                          i.toJson()));
-                                                });
-                                                if (shared
-                                                    .category_data.isNotEmpty) {
-                                                  Future.delayed(
-                                                    Duration(seconds: 1),
-                                                    () {
-                                                      setState(() {
-                                                        isLoaded = true;
-                                                      });
-                                                    },
-                                                  );
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                      if (init2.isNotEmpty) {
-                                        if (init2
-                                            .toLowerCase()
-                                            .contains(init2.toLowerCase())) {
-                                          setState(() {
-                                            isLoaded = false;
-                                          });
-                                          shared.category_data.clear();
-                                          for (var i
-                                          in shared.category[0].data!) {
-                                            print(i.toJson());
-                                            print(i.productTypeName
-                                                ?.toLowerCase()
-                                                .contains(init2.toLowerCase()
-                                                .toLowerCase()));
-                                            if (i.toJson().isNotEmpty) {
-                                              if (i.productTypeName!
-                                                  .toLowerCase()
-                                                  .contains(
-                                                  init2.toLowerCase())) {
-                                                debugPrint(i.productTypeName);
-                                                setState(() {
-                                                  shared.category_data.add(
-                                                      Data15.fromJson(
-                                                          i.toJson()));
-                                                });
-                                                if (shared
-                                                    .category_data.isNotEmpty) {
-                                                  Future.delayed(
-                                                    Duration(seconds: 1),
-                                                        () {
-                                                      setState(() {
-                                                        isLoaded = true;
-                                                      });
-                                                    },
-                                                  );
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-
                                       debugPrint(shared.category_data[0]
                                           .toJson()
                                           .toString());
@@ -382,8 +299,8 @@ class _ProductcategoryState extends State<Productcategory> {
                                     setState(() {
                                       isLoaded = false;
                                     });
-                                    controller.clear();
                                     controller1.clear();
+                                    controller2.clear();
                                     init = res[0];
                                     init2 = res2[0];
                                     shared.category_data.clear();
