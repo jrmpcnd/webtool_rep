@@ -107,89 +107,6 @@ class _CsrhotlineState extends State<Csrhotline> {
                     ),
                     textInputAction: TextInputAction.go,
                     controller: controller1,
-                    onChanged: (value) {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      //
-                      try {
-                        if (controller1.text.isNotEmpty) {
-                          shared.hotline_data.clear();
-                          for (var i in shared.hotline[0].data!) {
-                            print(i.toJson());
-                            print(i.contactNumber
-                                ?.toLowerCase()
-                                .contains(controller1.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.contactNumber!
-                                  .toLowerCase()
-                                  .contains(controller1.text.toLowerCase())) {
-                                debugPrint(i.contactNumber);
-                                setState(() {
-                                  shared.hotline_data
-                                      .add(Data11.fromJson(i.toJson()));
-                                });
-                                if (shared.hotline_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
-                                }
-                              }
-                            }
-                          }
-                        } else if (controller1.text == '') {
-                          shared.hotline_data.clear();
-                          setState(() {
-                            shared.hotline_data.addAll(shared.hotline[0].data!);
-                            isLoaded = true;
-                          });
-                        }
-                        debugPrint(shared.hotline_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.hotline_data.clear();
-                        isLoaded = true;
-                      }
-                    },
-                    onEditingComplete: () async {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      try {
-                        if (controller1.text.isNotEmpty) {
-                          shared.hotline_data.clear();
-                          for (var i in shared.hotline[0].data!) {
-                            print(i.toJson());
-                            print(i.contactNumber
-                                ?.toLowerCase()
-                                .contains(controller1.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.contactNumber!
-                                  .toLowerCase()
-                                  .contains(controller1.text.toLowerCase())) {
-                                debugPrint(i.contactNumber);
-                                setState(() {
-                                  shared.hotline_data
-                                      .add(Data11.fromJson(i.toJson()));
-                                });
-                                if (shared.hotline_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
-                                }
-                              }
-                            }
-                          }
-                        } else if (controller1.text == '') {
-                          shared.hotline_data.clear();
-                          setState(() {
-                            shared.hotline_data.addAll(shared.hotline[0].data!);
-                          });
-                        }
-                        debugPrint(shared.hotline_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.hotline_data.clear();
-                      }
-                    },
                   ),
                 ),
                 SizedBox(height: 5),
@@ -213,89 +130,6 @@ class _CsrhotlineState extends State<Csrhotline> {
                     ),
                     textInputAction: TextInputAction.go,
                     controller: controller2,
-                    onChanged: (value) {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      //
-                      try {
-                        if (controller2.text.isNotEmpty) {
-                          shared.hotline_data.clear();
-                          for (var i in shared.hotline[0].data!) {
-                            print(i.toJson());
-                            print(i.networkProvider
-                                ?.toLowerCase()
-                                .contains(controller2.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.networkProvider!
-                                  .toLowerCase()
-                                  .contains(controller2.text.toLowerCase())) {
-                                debugPrint(i.networkProvider);
-                                setState(() {
-                                  shared.hotline_data
-                                      .add(Data11.fromJson(i.toJson()));
-                                });
-                                if (shared.hotline_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
-                                }
-                              }
-                            }
-                          }
-                        } else if (controller2.text == '') {
-                          shared.hotline_data.clear();
-                          setState(() {
-                            shared.hotline_data.addAll(shared.hotline[0].data!);
-                            isLoaded = true;
-                          });
-                        }
-                        debugPrint(shared.hotline_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.hotline_data.clear();
-                        isLoaded = true;
-                      }
-                    },
-                    onEditingComplete: () async {
-                      setState(() {
-                        isLoaded = false;
-                      });
-                      try {
-                        if (controller2.text.isNotEmpty) {
-                          shared.hotline_data.clear();
-                          for (var i in shared.hotline[0].data!) {
-                            print(i.toJson());
-                            print(i.networkProvider
-                                ?.toLowerCase()
-                                .contains(controller2.text.toLowerCase()));
-                            if (i.toJson().isNotEmpty) {
-                              if (i.networkProvider!
-                                  .toLowerCase()
-                                  .contains(controller2.text.toLowerCase())) {
-                                debugPrint(i.networkProvider);
-                                setState(() {
-                                  shared.hotline_data
-                                      .add(Data11.fromJson(i.toJson()));
-                                });
-                                if (shared.hotline_data.isNotEmpty) {
-                                  setState(() {
-                                    isLoaded = true;
-                                  });
-                                }
-                              }
-                            }
-                          }
-                        } else if (controller2.text == '') {
-                          shared.hotline_data.clear();
-                          setState(() {
-                            shared.hotline_data.addAll(shared.hotline[0].data!);
-                          });
-                        }
-                        debugPrint(shared.hotline_data[0].toJson().toString());
-                      } catch (e) {
-                        shared.hotline_data.clear();
-                      }
-                    },
                   ),
                 ),
                 verticalSpaceSmall,
@@ -311,7 +145,93 @@ class _CsrhotlineState extends State<Csrhotline> {
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all(kPrimaryColor)),
-                            onPressed: () {},
+                            onPressed: () {
+                              try {
+                                if (controller1.text.isNotEmpty) {
+                                  setState(() {
+                                    isLoaded = false;
+                                  });
+                                  shared.hotline_data.clear();
+                                  for (var i in shared.hotline[0].data!) {
+                                    print(i.toJson());
+                                    print(i.contactNumber
+                                        ?.toLowerCase()
+                                        .contains(
+                                            controller1.text.toLowerCase()));
+                                    if (i.toJson().isNotEmpty) {
+                                      if (i.contactNumber!
+                                              .toLowerCase()
+                                              .contains(controller1.text
+                                                  .toLowerCase()) &&
+                                          i.networkProvider!
+                                              .toLowerCase()
+                                              .contains(controller2.text
+                                                  .toLowerCase())) {
+                                        debugPrint(i.contactNumber);
+                                        setState(() {
+                                          shared.hotline_data
+                                              .add(Data11.fromJson(i.toJson()));
+                                        });
+                                        if (shared.hotline_data.isNotEmpty) {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                            () {
+                                              setState(() {
+                                                isLoaded = true;
+                                              });
+                                            },
+                                          );
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                                if (controller2.text.isNotEmpty) {
+                                  setState(() {
+                                    isLoaded = false;
+                                  });
+                                  shared.hotline_data.clear();
+                                  for (var i in shared.hotline[0].data!) {
+                                    print(i.toJson());
+                                    print(i.networkProvider
+                                        ?.toLowerCase()
+                                        .contains(
+                                            controller2.text.toLowerCase()));
+                                    if (i.toJson().isNotEmpty) {
+                                      if (i.networkProvider!
+                                              .toLowerCase()
+                                              .contains(controller2.text
+                                                  .toLowerCase()) &&
+                                          i.contactNumber!
+                                              .toLowerCase()
+                                              .contains(controller1.text
+                                                  .toLowerCase())) {
+                                        debugPrint(i.networkProvider);
+                                        setState(() {
+                                          shared.hotline_data
+                                              .add(Data11.fromJson(i.toJson()));
+                                        });
+                                        if (shared.hotline_data.isNotEmpty) {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                            () {
+                                              setState(() {
+                                                isLoaded = true;
+                                              });
+                                            },
+                                          );
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                                debugPrint(
+                                    shared.hotline_data[0].toJson().toString());
+                              } catch (e) {
+                                shared.hotline_data.clear();
+                                isLoaded = true;
+                              }
+                            },
                             icon: const Icon(
                               Icons.search,
                               size: 20.0,
@@ -330,7 +250,26 @@ class _CsrhotlineState extends State<Csrhotline> {
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
                                     kSecondaryColor2)),
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                isLoaded = false;
+                              });
+                              controller1.clear();
+                              controller2.clear();
+                              shared.hotline_data.clear();
+                              setState(() {
+                                shared.hotline_data
+                                    .addAll(shared.hotline[0].data!);
+                                Future.delayed(
+                                  Duration(seconds: 1),
+                                  () {
+                                    setState(() {
+                                      isLoaded = true;
+                                    });
+                                  },
+                                );
+                              });
+                            },
                             icon: const Icon(
                               Icons.refresh,
                               size: 20.0,
@@ -401,55 +340,6 @@ class _CsrhotlineState extends State<Csrhotline> {
                   )),
             ),
           ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => a.role_name
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(b.role_name.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role name ascending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => b.role_name
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(a.role_name.toString().toLowerCase()));
-          //       //print(shared.inqq.sort());
-          //     },
-          //     child: const Text('Role name descending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => a.role_desc
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(b.role_desc.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role desc ascending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => b.role_desc
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(a.role_desc.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role desc descending'),
-          //   ),
-          // )
         ],
       ),
     );

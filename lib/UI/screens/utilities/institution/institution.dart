@@ -25,6 +25,7 @@ class _InstitutionState extends State<Institution> {
   TextEditingController controller = TextEditingController();
   bool static = false;
   bool isLoaded = false;
+  bool isCheck = false;
   Future<void> wait() async {
     final shared = Provider.of<Institution_U>(context, listen: false);
     shared.Institution_data.clear();
@@ -310,7 +311,11 @@ class _InstitutionState extends State<Institution> {
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  shared.Institution_data.removeAt(0);
+                                });
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,

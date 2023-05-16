@@ -8,7 +8,6 @@ import '../../../utils/model.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 
-
 class Billerproduct extends StatefulWidget {
   const Billerproduct({Key? key}) : super(key: key);
 
@@ -17,8 +16,8 @@ class Billerproduct extends StatefulWidget {
 }
 
 class _BillerproductState extends State<Billerproduct> {
-  TextEditingController controller = TextEditingController();
   TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -147,7 +146,7 @@ class _BillerproductState extends State<Billerproduct> {
                                 ),
                               ),
                               textInputAction: TextInputAction.go,
-                              controller: controller,
+                              controller: controller1,
                             ),
                           ),
                           verticalSpaceTiny,
@@ -170,7 +169,7 @@ class _BillerproductState extends State<Billerproduct> {
                                 ),
                               ),
                               textInputAction: TextInputAction.go,
-                              controller: controller1,
+                              controller: controller2,
                             ),
                           ),
                           verticalSpaceSmall,
@@ -184,7 +183,98 @@ class _BillerproductState extends State<Billerproduct> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    try {
+                                      if (controller1.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.biller_data.clear();
+                                        for (var i in shared.biller[0].data!) {
+                                          print(i.toJson());
+                                          print(i.billerProductId
+                                              ?.toLowerCase()
+                                              .contains(controller1.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.billerProductId!
+                                                    .toLowerCase()
+                                                    .contains(controller1.text
+                                                        .toLowerCase()) &&
+                                                i.billerProductName!
+                                                    .toLowerCase()
+                                                    .contains(controller2.text
+                                                        .toLowerCase())) {
+                                              debugPrint(i.billerProductId);
+                                              setState(() {
+                                                shared.biller_data.add(
+                                                    Data16.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .biller_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (controller2.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.biller_data.clear();
+                                        for (var i in shared.biller[0].data!) {
+                                          print(i.toJson());
+                                          print(i.billerProductName
+                                              ?.toLowerCase()
+                                              .contains(controller2.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.billerProductName!
+                                                    .toLowerCase()
+                                                    .contains(controller2.text
+                                                        .toLowerCase()) &&
+                                                i.billerProductId!
+                                                    .toLowerCase()
+                                                    .contains(controller1.text
+                                                        .toLowerCase())) {
+                                              debugPrint(i.billerProductName);
+                                              setState(() {
+                                                shared.biller_data.add(
+                                                    Data16.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared
+                                                  .biller_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(shared.biller_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.biller_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -204,20 +294,21 @@ class _BillerproductState extends State<Billerproduct> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: (){
+                                  onPressed: () {
                                     setState(() {
                                       isLoaded = false;
                                     });
-                                    controller.clear();
                                     controller1.clear();
-                                    init = res [0];
-                                    init2 = res2 [0];
+                                    controller2.clear();
+                                    init = res[0];
+                                    init2 = res2[0];
                                     shared.biller_data.clear();
                                     setState(() {
-                                      shared.biller_data.addAll(shared.biller[0].data!);
+                                      shared.biller_data
+                                          .addAll(shared.biller[0].data!);
                                       Future.delayed(
                                         Duration(seconds: 1),
-                                            () {
+                                        () {
                                           setState(() {
                                             isLoaded = true;
                                           });
