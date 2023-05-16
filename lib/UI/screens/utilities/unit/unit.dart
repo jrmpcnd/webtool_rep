@@ -21,6 +21,7 @@ class Unit extends StatefulWidget {
 }
 
 class _UnitState extends State<Unit> {
+  bool isLoaded = false;
   TextEditingController unit_code_controller = TextEditingController();
   TextEditingController unit_desc_controller = TextEditingController();
   TextEditingController controller = TextEditingController();
@@ -93,14 +94,50 @@ class _UnitState extends State<Unit> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textfield(
-                        hintext: "Code",
-                        controller: unit_code_controller,
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Code',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: unit_code_controller,
+                        ),
                       ),
                       verticalSpaceTiny,
-                      textfield(
-                        hintext: "Description",
-                        controller: unit_desc_controller,
+                      SizedBox(
+                        height: 35.0,
+                        width: 400,
+                        child: TextFormField(
+                          style: kTextStyle,
+                          decoration: const InputDecoration(
+                            hintText: 'Description',
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(fontSize: 12.0),
+                            contentPadding: EdgeInsets.only(left: 10.0),
+                            hintStyle: TextStyle(color: kSecondaryColor2),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: kBlackColor),
+                            ),
+                          ),
+                          textInputAction: TextInputAction.go,
+                          controller: unit_desc_controller,
+                        ),
                       ),
                       verticalSpaceSmall,
                       Row(
@@ -117,12 +154,104 @@ class _UnitState extends State<Unit> {
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
                                   onPressed: () {
-                                    Unit_Function.unit(
-                                      unit_code: unit_code_controller.text,
-                                      unit_desc: unit_desc_controller.text,
-                                    );
-                                  },
-                                  icon: const Icon(
+                                    try {
+                                      if (unit_code_controller
+                                          .text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Unit_data.clear();
+                                        for (var i
+                                        in shared.UnitLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.unitCode
+                                              ?.toLowerCase()
+                                              .contains(
+                                              unit_code_controller
+                                                  .text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.unitCode!.toLowerCase().contains(
+                                                unit_code_controller
+                                                    .text
+                                                    .toLowerCase()) &&
+                                                i.unitDesc!.toLowerCase().contains(
+                                                    unit_desc_controller
+                                                        .text
+                                                        .toLowerCase())) {
+                                              debugPrint(i.unitCode);
+                                              setState(() {
+                                                shared.Unit_data.add(
+                                                    Unit_Log.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared.Unit_data
+                                                  .isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if (unit_desc_controller
+                                          .text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Unit_data.clear();
+                                        for (var i
+                                        in shared.UnitLog[0].data!) {
+                                          print(i.toJson());
+                                          print(i.unitDesc
+                                              ?.toLowerCase()
+                                              .contains(
+                                              unit_desc_controller
+                                                  .text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.unitDesc!.toLowerCase().contains(
+                                                unit_desc_controller.text
+                                                    .toLowerCase()) &&
+                                                i.unitCode!.toLowerCase().contains(
+                                                    unit_code_controller
+                                                        .text
+                                                        .toLowerCase())) {
+                                              debugPrint(i.unitDesc);
+                                              setState(() {
+                                                shared.Unit_data.add(
+                                                    Unit_Log.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared.Unit_data
+                                                  .isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(shared.Unit_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.Unit_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },                                  icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
                                   ),
@@ -141,7 +270,26 @@ class _UnitState extends State<Unit> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    unit_desc_controller.clear();
+                                    unit_code_controller.clear();
+                                    shared.Unit_data.clear();
+                                    setState(() {
+                                      shared.Unit_data.addAll(
+                                          shared.UnitLog[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                            () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -180,122 +328,6 @@ class _UnitState extends State<Unit> {
                 verticalSpaceRegular,
                 Column(
                   children: [
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        style: TextStyle(color: kBlackColor),
-                        decoration: const InputDecoration(
-                          hintText: 'Search',
-                          border: OutlineInputBorder(),
-                          labelStyle: TextStyle(fontSize: 12.0),
-                          contentPadding: EdgeInsets.only(left: 10.0),
-                          hintStyle: TextStyle(color: kSecondaryColor2),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: kBlackColor),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.go,
-                        controller: controller,
-                        onChanged: (value) {
-                          setState(() {
-                            shared.isLoaded = false;
-                          });
-                          //
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.Unit_data.clear();
-                              for (var i in shared.UnitLog[0].data!) {
-                                print(i.toJson());
-                                print(i.createdDate
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.createdDate!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.createdDate!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.unitDesc!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.unitCode!.toLowerCase().contains(
-                                          controller.text.toLowerCase())) {
-                                    debugPrint(i.unitCode);
-                                    setState(() {
-                                      shared.Unit_data.add(
-                                          Unit_Log.fromJson(i.toJson()));
-                                    });
-                                    if (shared.Unit_data.isNotEmpty) {
-                                      setState(() {
-                                        shared.isLoaded = true;
-                                      });
-                                    }
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.Unit_data.clear();
-                              setState(() {
-                                shared.Unit_data.addAll(
-                                    shared.UnitLog[0].data!);
-                                shared.isLoaded = true;
-                              });
-                            }
-                            debugPrint(shared.Unit_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.Unit_data.clear();
-                            shared.isLoaded = true;
-                          }
-                        },
-                        onEditingComplete: () async {
-                          setState(() {
-                            shared.isLoaded = false;
-                          });
-                          try {
-                            if (controller.text.isNotEmpty) {
-                              shared.Unit_data.clear();
-                              for (var i in shared.UnitLog[0].data!) {
-                                print(i.toJson());
-                                print(i.createdDate
-                                    ?.toLowerCase()
-                                    .contains(controller.text.toLowerCase()));
-                                if (i.toJson().isNotEmpty) {
-                                  if (i.createdDate!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.createdDate!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.unitDesc!.toLowerCase().contains(
-                                          controller.text.toLowerCase()) ||
-                                      i.unitCode!.toLowerCase().contains(
-                                          controller.text.toLowerCase()))
-                                    debugPrint(i.unitCode);
-                                  setState(() {
-                                    key.currentState?.pageTo(0);
-                                    shared.Unit_data.add(
-                                        Unit_Log.fromJson(i.toJson()));
-                                  });
-                                  if (shared.Unit_data.isNotEmpty) {
-                                    setState(() {
-                                      shared.isLoaded = true;
-                                    });
-                                  }
-                                }
-                              }
-                            } else if (controller.text == '') {
-                              shared.Unit_data.clear();
-                              setState(() {
-                                shared.Unit_data.addAll(
-                                    shared.UnitLog[0].data!);
-                              });
-                            }
-                            debugPrint(shared.Unit_data[0].toJson().toString());
-                          } catch (e) {
-                            shared.UnitLog.clear();
-                          }
-                        },
-                      ),
-                    ),
                     Container(
                       width: double.infinity,
                       padding: kEdgeInsetsVerticalNormal,
