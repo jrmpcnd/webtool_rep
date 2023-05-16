@@ -95,3 +95,57 @@ class SaveInsti{
 
 
 }
+
+class SaveCommission{
+  static String _transactiontype = '';
+  static SetTransactionType(String transactiontype){
+    _transactiontype = transactiontype;
+  }
+
+  static GetTransactionType(){
+    return _transactiontype;
+  }
+
+  static String _commissiontype = '';
+  static SetCommisionType(String commissiontype){
+    _commissiontype = commissiontype;
+  }
+
+  static GetComissionType(){
+    return _commissiontype;
+  }
+
+  static String _customerincome = '';
+  static SetCustomerIncome(String customerincome){
+    _customerincome = customerincome;
+  }
+
+  static GetCustomerIncome(){
+    return _customerincome;
+  }
+  static String _agentincome = '';
+  static SetAgentIncome(String agentincome){
+    _agentincome = agentincome;
+  }
+
+  static GetAgentIncome(){
+    return _agentincome;
+  }
+  static String _bankincome = '';
+  static SetBankIncome(String bankincome){
+    _bankincome = bankincome;
+  }
+
+  static GetBankIncome(){
+    return _bankincome;
+  }
+  static String _bankpartnerincome = '';
+  static SetBankPartnerIncome(String bankpartnerincome){
+    _bankpartnerincome = bankpartnerincome;
+  }
+
+  static GetBankpartnerIncome(){
+    return _bankpartnerincome;
+  }
+
+}
