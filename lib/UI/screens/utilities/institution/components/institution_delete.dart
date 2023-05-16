@@ -11,16 +11,15 @@ class InstitutionDeleteFunction extends StatefulWidget {
 }
 
 class _InstitutionDeleteFunctionState extends State<InstitutionDeleteFunction> {
-  bool isCheck = false;
   @override
   Widget build(BuildContext context) {
-    // final shared = Provider.of<Institution_U>(context, listen: false);
+    final shared = Provider.of<Institution_U>(context, listen: false);
     return Checkbox(
       checkColor: Colors.green,
-      value: isCheck,
-      onChanged: (value) {
+      value: shared.isCheck,
+      onChanged: (bool? value) {
         setState(() {
-          isCheck = value!;
+          shared.isCheck = value!;
         });
       },
     );

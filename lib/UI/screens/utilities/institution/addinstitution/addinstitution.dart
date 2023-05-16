@@ -2,6 +2,7 @@ import 'package:auto_size_widget/auto_size_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/core/getter_setter.dart';
 
 import '../../../../utils/constant.dart';
 import '../../../../utils/edge_insect.dart';
@@ -18,8 +19,11 @@ class Addinstitution extends StatefulWidget {
 }
 
 class _AddinstitutionState extends State<Addinstitution> {
+  TextEditingController cinsticode = TextEditingController();
+  TextEditingController cinstidesc = TextEditingController();
   @override
   Widget build(BuildContext context) {
+
     return Container(
       padding: kEdgeInsetsAllNormal,
       child: Row(
@@ -92,13 +96,59 @@ class _AddinstitutionState extends State<Addinstitution> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Institution Code :", style: kHeading2TextStyle),
-                          textfield(
-                            hintext: "",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              onChanged: (value){
+                                setState(() {
+                                  SaveInsti.SetInsticode(value);
+                                });
+                              },
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: cinsticode,
+                            ),
                           ),
                           verticalSpaceTiny,
                           Text("Description :", style: kHeading2TextStyle),
-                          textfield(
-                            hintext: "",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              onChanged: (value){
+                                setState(() {
+                                  SaveInsti.SetInstidesc(value);
+                                });
+                              },
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: cinstidesc,
+                            ),
                           ),
                           verticalSpaceXTiny,
                         ],
