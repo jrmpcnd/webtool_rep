@@ -69,6 +69,7 @@ class _buildCardState extends State<buildCard> {
                 Container(
                   width: 350,
                   child: TextFormField(
+                    textInputAction: TextInputAction.next,
                     style: const TextStyle(color: Colors.black),
                     cursorColor: Colors.green,
                     decoration: InputDecoration(
@@ -101,6 +102,142 @@ class _buildCardState extends State<buildCard> {
                 SizedBox(
                   width: 350,
                   child: TextFormField(
+                    onEditingComplete: () async {
+                      if (_formKey.currentState!.validate()) {
+                        AlertDialog loading = AlertDialog(
+                          backgroundColor: Colors.white,
+                          title: const Text(
+                            "Please Wait",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                          content: Row(children: const [
+                            CircularProgressIndicator(
+                              color: Colors.black,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              "Loading...",
+                              style: TextStyle(color: Colors.black),
+                            )
+                          ]),
+                        );
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return loading;
+                          },
+                        );
+                        http.Response response = await login.login(
+                            userController.text, passController.text);
+                        // http.Response res = await search.search(userController.text);
+                        print(
+                            "Checkpoint 1: ${jsonDecode(response.body)['message']}");
+                        // print(jsonDecode(res.body)['data']['name']);
+                        if (await jsonDecode(response.body)['message'].contains(
+                            'You need to input a new password. Confirm your email.')) {
+                          pop();
+                          Navigator.of(context).pushNamed(Pop.route);
+                          Navigator.pop(context);
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return Pop(
+                                user: userController.text,
+                                oldpass: passController.text,
+                              );
+                            },
+                          ));
+                          debugPrint('Login Failed');
+                        } else {
+                          if (jsonDecode(response.body)['message']
+                              .toString()
+                              .toLowerCase()
+                              .contains('successfully')) {
+                            pop();
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(
+                              builder: (context) {
+                                return HomePage(
+                                  user: userController.text,
+                                  oldpass: passController.text,
+                                );
+                              },
+                            ));
+                          } else {
+                            pop();
+                            var message = jsonDecode(response.body)['message'];
+                            // try {
+                            //   message = jsonDecode(response.body)['message'];
+                            // } catch (e) {
+                            //   print(e.toString());
+                            //   message = e.toString();
+                            // }
+                            AlertDialog alert = AlertDialog(
+                              title: const Text("Invalid Login"),
+                              content: Text(message),
+                              actions: [
+                                TextButton(
+                                  child: const Text("OK"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                            await showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return alert;
+                              },
+                            );
+                          }
+                          if (await jsonDecode(response.body)['message']
+                              .contains("You're already logged in.")) {
+                            AlertDialog alert = AlertDialog(
+                              title: Text("Force Login?"),
+                              actions: [
+                                Center(
+                                  child: TextButton(
+                                    child: Text("OK"),
+                                    onPressed: () async {
+                                      http.Response response = await logout
+                                          .logout(userController.text);
+                                      print(
+                                          jsonDecode(response.body)['message']);
+                                      if (await jsonDecode(
+                                              response.body)['message']
+                                          .toString()
+                                          .toLowerCase()
+                                          .contains("logout")) {}
+                                      Navigator.pushReplacement(context,
+                                          MaterialPageRoute(
+                                        builder: (context) {
+                                          return HomePage(
+                                            user: userController.text,
+                                            oldpass: passController.text,
+                                          );
+                                        },
+                                      ));
+                                    },
+                                  ),
+                                ),
+                              ],
+                            );
+                            await showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return alert;
+                              },
+                            );
+                          }
+                        }
+                      }
+                    },
+                    textInputAction: TextInputAction.go,
                     style: const TextStyle(color: Colors.black),
                     obscureText: _isObscure,
                     autocorrect: true,

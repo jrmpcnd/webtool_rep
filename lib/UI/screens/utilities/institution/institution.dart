@@ -9,6 +9,7 @@ import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/textfield.dart';
+import 'components/institution_delete.dart';
 import 'components/intitution_edit.dart';
 
 class Institution extends StatefulWidget {
@@ -348,6 +349,10 @@ class _InstitutionState extends State<Institution> {
                           DataColumn(
                               label: Text(
                             'Action',
+                          )),
+                          DataColumn(
+                              label: Text(
+                            'Delete',
                           ))
                         ],
                         source: isLoaded
@@ -438,6 +443,7 @@ class MyData extends DataTableSource {
           },
         ),
       )),
+      const DataCell(SizedBox(width: 50, child: InstitutionDeleteFunction())),
     ]);
   }
 }
@@ -458,6 +464,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
     ]);
   }
 }
@@ -474,6 +481,10 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
         child: CircularProgressIndicator(),
