@@ -16,3 +16,12 @@ class AddinstiController {
   TextEditingController cinstidesc = TextEditingController();
 
 }
+
+class AddcommisionController {
+  TextEditingController ctransactiontype = TextEditingController();
+  TextEditingController ccommissiontype = TextEditingController();
+  TextEditingController ccustomerincome = TextEditingController();
+  TextEditingController cagentincome = TextEditingController();
+  TextEditingController cbankincome = TextEditingController();
+  TextEditingController cbankpartnerincome = TextEditingController();
+}
