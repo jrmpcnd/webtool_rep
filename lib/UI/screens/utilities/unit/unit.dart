@@ -161,35 +161,36 @@ class _UnitState extends State<Unit> {
                                           isLoaded = false;
                                         });
                                         shared.Unit_data.clear();
-                                        for (var i
-                                        in shared.UnitLog[0].data!) {
+                                        for (var i in shared.UnitLog[0].data!) {
                                           print(i.toJson());
                                           print(i.unitCode
                                               ?.toLowerCase()
-                                              .contains(
-                                              unit_code_controller
+                                              .contains(unit_code_controller
                                                   .text
                                                   .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
-                                            if (i.unitCode!.toLowerCase().contains(
-                                                unit_code_controller
-                                                    .text
-                                                    .toLowerCase()) &&
-                                                i.unitDesc!.toLowerCase().contains(
-                                                    unit_desc_controller
-                                                        .text
-                                                        .toLowerCase())) {
+                                            if (i.unitCode!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        unit_code_controller
+                                                            .text
+                                                            .toLowerCase()) &&
+                                                i.unitDesc!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        unit_desc_controller
+                                                            .text
+                                                            .toLowerCase())) {
                                               debugPrint(i.unitCode);
                                               setState(() {
                                                 shared.Unit_data.add(
                                                     Unit_Log.fromJson(
                                                         i.toJson()));
                                               });
-                                              if (shared.Unit_data
-                                                  .isNotEmpty) {
+                                              if (shared.Unit_data.isNotEmpty) {
                                                 Future.delayed(
                                                   Duration(seconds: 1),
-                                                      () {
+                                                  () {
                                                     setState(() {
                                                       isLoaded = true;
                                                     });
@@ -206,34 +207,36 @@ class _UnitState extends State<Unit> {
                                           isLoaded = false;
                                         });
                                         shared.Unit_data.clear();
-                                        for (var i
-                                        in shared.UnitLog[0].data!) {
+                                        for (var i in shared.UnitLog[0].data!) {
                                           print(i.toJson());
                                           print(i.unitDesc
                                               ?.toLowerCase()
-                                              .contains(
-                                              unit_desc_controller
+                                              .contains(unit_desc_controller
                                                   .text
                                                   .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
-                                            if (i.unitDesc!.toLowerCase().contains(
-                                                unit_desc_controller.text
-                                                    .toLowerCase()) &&
-                                                i.unitCode!.toLowerCase().contains(
-                                                    unit_code_controller
-                                                        .text
-                                                        .toLowerCase())) {
+                                            if (i.unitDesc!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        unit_desc_controller
+                                                            .text
+                                                            .toLowerCase()) &&
+                                                i.unitCode!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        unit_code_controller
+                                                            .text
+                                                            .toLowerCase())) {
                                               debugPrint(i.unitDesc);
                                               setState(() {
                                                 shared.Unit_data.add(
                                                     Unit_Log.fromJson(
                                                         i.toJson()));
                                               });
-                                              if (shared.Unit_data
-                                                  .isNotEmpty) {
+                                              if (shared.Unit_data.isNotEmpty) {
                                                 Future.delayed(
                                                   Duration(seconds: 1),
-                                                      () {
+                                                  () {
                                                     setState(() {
                                                       isLoaded = true;
                                                     });
@@ -251,7 +254,8 @@ class _UnitState extends State<Unit> {
                                       shared.Unit_data.clear();
                                       isLoaded = true;
                                     }
-                                  },                                  icon: const Icon(
+                                  },
+                                  icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
                                   ),
@@ -282,7 +286,7 @@ class _UnitState extends State<Unit> {
                                           shared.UnitLog[0].data!);
                                       Future.delayed(
                                         Duration(seconds: 1),
-                                            () {
+                                        () {
                                           setState(() {
                                             isLoaded = true;
                                           });
@@ -385,8 +389,8 @@ class MyData extends DataTableSource {
     if (res.data!.isNotEmpty) {
       print(res.data!.length);
       print(res.data![0].toJson().length);
-        shared.UnitLog.add(Unit_Api.fromJson(res.toJson()));
-        shared.isLoaded = true;
+      shared.UnitLog.add(Unit_Api.fromJson(res.toJson()));
+      shared.isLoaded = true;
       for (var i in res.data!) {
         shared.Unit_data.add(Unit_Log.fromJson(i.toJson()));
       }
@@ -395,6 +399,7 @@ class MyData extends DataTableSource {
       print(i.toJson());
     }
   }
+
   MyData({required this.shared, this.dashboardContext});
   @override
   bool get isRowCountApproximate => false;
@@ -424,9 +429,11 @@ class MyData extends DataTableSource {
               context: dashboardContext!,
               builder: (ctx) => Form(
                 key: _formKey,
-                child: AlertEditFunction(code: shared.Unit_data[index].unitCode.toString(),
-                    date: shared.Unit_data[index].createdDate.toString(),
-                desc: shared.Unit_data[index].unitDesc.toString(),),
+                child: AlertEditFunction(
+                  code: shared.Unit_data[index].unitCode.toString(),
+                  date: shared.Unit_data[index].createdDate.toString(),
+                  desc: shared.Unit_data[index].unitDesc.toString(),
+                ),
               ),
             );
           },

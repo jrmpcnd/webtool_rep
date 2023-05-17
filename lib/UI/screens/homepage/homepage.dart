@@ -124,6 +124,14 @@ class _HomePageState extends State<HomePage> {
   AddinstiController addinstiController = AddinstiController();
   AddCommissionApi addcommissionapi = AddCommissionApi();
   AddcommisionController addcommisionController = AddcommisionController();
+  AddbranchAPI addbranchapi = AddbranchAPI();
+  AddbranchController addbranchController = AddbranchController();
+  AddunitAPI addunitapi = AddunitAPI();
+  AddunitController addunitController = AddunitController();
+  AddcenterAPI addcenterapi = AddcenterAPI();
+  AddcenterController addcenterController = AddcenterController();
+  AddbankAPI addbankapi = AddbankAPI();
+  AddbankController addbankController = AddbankController();
   // Timer? _timer;
 
   // @override
@@ -460,7 +468,7 @@ class _HomePageState extends State<HomePage> {
                                               shared.subuploadbutton = "";
                                               shared.addbutton = "New User";
                                               shared.subaddbutton =
-                                              "Add New User Data";
+                                                  "Add New User Data";
                                               shared.header = "Administration";
                                               shared.title = "User Management";
                                               shared.homewidget = [
@@ -471,10 +479,10 @@ class _HomePageState extends State<HomePage> {
                                           shared.icon = Icons.add_outlined;
                                           shared.addicon = Icons.save_outlined;
                                           shared.header =
-                                          "Administration  >  Create / Edit";
+                                              "Administration  >  Create / Edit";
                                           shared.addbutton = "Save";
                                           shared.subaddbutton =
-                                          "Save All User Data";
+                                              "Save All User Data";
                                           shared.title = "Create / Edit";
                                           shared.homewidget = [
                                             const Addusers()
@@ -530,7 +538,7 @@ class _HomePageState extends State<HomePage> {
                                               shared.subuploadbutton = "";
                                               shared.addbutton = "New Role";
                                               shared.subaddbutton =
-                                              "Add New Role Data";
+                                                  "Add New Role Data";
                                               shared.header = "Administration";
                                               shared.title = "Role Management";
                                               shared.homewidget = [
@@ -541,10 +549,10 @@ class _HomePageState extends State<HomePage> {
                                           shared.icon = Icons.add_outlined;
                                           shared.addicon = Icons.save_outlined;
                                           shared.header =
-                                          "Administration  >  Create / Edit";
+                                              "Administration  >  Create / Edit";
                                           shared.addbutton = "Save";
                                           shared.subaddbutton =
-                                          "Save All Roles";
+                                              "Save All Roles";
                                           shared.title = "Create / Edit";
                                           shared.homewidget = [
                                             const Addroles()
@@ -596,11 +604,11 @@ class _HomePageState extends State<HomePage> {
                                               shared.icon = Icons.lan_outlined;
                                               shared.uploadbutton = "Upload";
                                               shared.subuploadbutton =
-                                              "Upload Hierarchy Data";
+                                                  "Upload Hierarchy Data";
                                               shared.addbutton =
-                                              "New Hierarchy";
+                                                  "New Hierarchy";
                                               shared.subaddbutton =
-                                              "Add New Hierarchy Data";
+                                                  "Add New Hierarchy Data";
                                               shared.header = "Administration";
                                               shared.title = "Hierarchy";
                                               shared.homewidget = [
@@ -613,10 +621,10 @@ class _HomePageState extends State<HomePage> {
                                           shared.uploadbutton = "";
                                           shared.subuploadbutton = "";
                                           shared.header =
-                                          "Administration  >  Create / Edit";
+                                              "Administration  >  Create / Edit";
                                           shared.addbutton = "Save";
                                           shared.subaddbutton =
-                                          "Save Hierarchy";
+                                              "Save Hierarchy";
                                           shared.title = "Create / Edit";
                                           shared.homewidget = [
                                             const Addhierarchy()
@@ -627,10 +635,10 @@ class _HomePageState extends State<HomePage> {
                                       shared.icon = Icons.lan_outlined;
                                       shared.uploadbutton = "Upload";
                                       shared.subuploadbutton =
-                                      "Upload Hierarchy Data";
+                                          "Upload Hierarchy Data";
                                       shared.addbutton = "New Hierarchy";
                                       shared.subaddbutton =
-                                      "Add New Hierarchy Data";
+                                          "Add New Hierarchy Data";
                                       shared.header = "Administration";
                                       shared.title = "Hierarchy";
                                       shared.homewidget = [const Hierarchy()];
@@ -668,7 +676,7 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 decoration: BoxDecoration(
                                     color: shared.title ==
-                                        "Client List for Registration"
+                                            "Client List for Registration"
                                         ? const Color(0xFF7FA998)
                                         : Colors.transparent),
                                 child: Listtile(
@@ -695,7 +703,7 @@ class _HomePageState extends State<HomePage> {
                                       shared.subaddbutton = "";
                                       shared.header = "Enrollment";
                                       shared.title =
-                                      "Client List for Registration";
+                                          "Client List for Registration";
                                       shared.homewidget = [
                                         const Clientlistforregistration()
                                       ];
@@ -769,9 +777,9 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 decoration: BoxDecoration(
                                     color:
-                                    shared.title == "Remittance Dashboard"
-                                        ? const Color(0xFF7FA998)
-                                        : Colors.transparent),
+                                        shared.title == "Remittance Dashboard"
+                                            ? const Color(0xFF7FA998)
+                                            : Colors.transparent),
                                 child: Listtile(
                                   color: Colors.black,
                                   icon: Icons.content_copy_outlined,
@@ -806,7 +814,7 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 decoration: BoxDecoration(
                                     color: shared.title ==
-                                        "Transaction for Confirmation"
+                                            "Transaction for Confirmation"
                                         ? const Color(0xFF7FA998)
                                         : Colors.transparent),
                                 child: Listtile(
@@ -834,7 +842,7 @@ class _HomePageState extends State<HomePage> {
                                       shared.subaddbutton = "";
                                       shared.header = "Monitoring";
                                       shared.title =
-                                      "Transaction for Confirmation";
+                                          "Transaction for Confirmation";
                                       shared.homewidget = [
                                         const Transactionforconfirmation()
                                       ];
@@ -845,7 +853,7 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 decoration: BoxDecoration(
                                     color: shared.title ==
-                                        "Remittance Transaction Log"
+                                            "Remittance Transaction Log"
                                         ? const Color(0xFF7FA998)
                                         : Colors.transparent),
                                 child: Listtile(
@@ -872,7 +880,7 @@ class _HomePageState extends State<HomePage> {
                                       shared.subaddbutton = "";
                                       shared.header = "Monitoring";
                                       shared.title =
-                                      "Remittance Transaction Log";
+                                          "Remittance Transaction Log";
                                       shared.homewidget = [
                                         const Remittancetransactionlog()
                                       ];
@@ -1026,7 +1034,7 @@ class _HomePageState extends State<HomePage> {
                                     shared.subaddbutton = "";
                                     shared.header = "Monitoring";
                                     shared.title =
-                                    "Authorized Reset Password and MPIN";
+                                        "Authorized Reset Password and MPIN";
                                     shared.homewidget = [
                                       const Authorizedresetpassword()
                                     ];
@@ -1203,9 +1211,9 @@ class _HomePageState extends State<HomePage> {
                                             shared.uploadbutton = "";
                                             shared.subuploadbutton = "";
                                             shared.addbutton =
-                                            "New Fee Structure";
+                                                "New Fee Structure";
                                             shared.subaddbutton =
-                                            "Add New Fee Structure";
+                                                "Add New Fee Structure";
                                             shared.header = "Utilities";
                                             shared.title = "Fee Structure";
                                             shared.homewidget = [
@@ -1216,10 +1224,10 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton =
-                                        "Save Fee Structure";
+                                            "Save Fee Structure";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addstructure()
@@ -1233,7 +1241,7 @@ class _HomePageState extends State<HomePage> {
                                     shared.subuploadbutton = "";
                                     shared.addbutton = "New Fee Structure";
                                     shared.subaddbutton =
-                                    "Add New Fee Structure";
+                                        "Add New Fee Structure";
                                     shared.header = "Utilities";
                                     shared.title = "Fee Structure";
                                     shared.homewidget = [const Feestructure()];
@@ -1266,7 +1274,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Parameter";
                                             shared.subaddbutton =
-                                            "Add New Parameter";
+                                                "Add New Parameter";
                                             shared.header = "Utilities";
                                             shared.title = "Parameter";
                                             shared.homewidget = [
@@ -1277,7 +1285,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Parameter";
                                         shared.title = "Create / Edit";
@@ -1324,9 +1332,9 @@ class _HomePageState extends State<HomePage> {
                                             shared.uploadbutton = "";
                                             shared.subuploadbutton = "";
                                             shared.addbutton =
-                                            "New DCM Location";
+                                                "New DCM Location";
                                             shared.subaddbutton =
-                                            "Add New DCM Location";
+                                                "Add New DCM Location";
                                             shared.header = "Utilities";
                                             shared.title = "DCM Location";
                                             shared.homewidget = [
@@ -1337,10 +1345,10 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton =
-                                        "Save DCM Location";
+                                            "Save DCM Location";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Adddcmlocation()
@@ -1354,7 +1362,7 @@ class _HomePageState extends State<HomePage> {
                                     shared.subuploadbutton = "";
                                     shared.addbutton = "New DCM Location";
                                     shared.subaddbutton =
-                                    "Add New DCM Location";
+                                        "Add New DCM Location";
                                     shared.header = "Utilities";
                                     shared.title = "DCM Location";
                                     shared.homewidget = [const Dcmlocation()];
@@ -1387,7 +1395,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Bank News";
                                             shared.subaddbutton =
-                                            "Add New Bank News";
+                                                "Add New Bank News";
                                             shared.header = "Utilities";
                                             shared.title = "Bank News";
                                             shared.homewidget = [
@@ -1398,7 +1406,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Bank News";
                                         shared.title = "Create / Edit";
@@ -1446,10 +1454,10 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Product";
                                             shared.subaddbutton =
-                                            "Add New Product & Services";
+                                                "Add New Product & Services";
                                             shared.header = "Utilities";
                                             shared.title =
-                                            "Product and Services";
+                                                "Product and Services";
                                             shared.homewidget = [
                                               const Productandservices()
                                             ];
@@ -1458,10 +1466,10 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton =
-                                        "Save Product & Services";
+                                            "Save Product & Services";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addproductandservices()
@@ -1475,7 +1483,7 @@ class _HomePageState extends State<HomePage> {
                                     shared.subuploadbutton = "";
                                     shared.addbutton = "New Product";
                                     shared.subaddbutton =
-                                    "Add Product & Services";
+                                        "Add Product & Services";
                                     shared.header = "Utilities";
                                     shared.title = "Product and Services";
                                     shared.homewidget = [
@@ -1510,10 +1518,10 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Service";
                                             shared.subaddbutton =
-                                            "Add New ServiceDownTime";
+                                                "Add New ServiceDownTime";
                                             shared.header = "Utilities";
                                             shared.title =
-                                            "Product and Services";
+                                                "Product and Services";
                                             shared.homewidget = [
                                               const Productandservices()
                                             ];
@@ -1522,10 +1530,10 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton =
-                                        "Save ServiceDownTime";
+                                            "Save ServiceDownTime";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addservicedowntime()
@@ -1572,9 +1580,9 @@ class _HomePageState extends State<HomePage> {
                                             shared.uploadbutton = "";
                                             shared.subuploadbutton = "";
                                             shared.addbutton =
-                                            "New Institution";
+                                                "New Institution";
                                             shared.subaddbutton =
-                                            "Add New Institution";
+                                                "Add New Institution";
                                             shared.header = "Utilities";
                                             shared.title = "Institution";
                                             shared.homewidget = [
@@ -1585,36 +1593,43 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.onPress = () async {
-                                          if (addinstiController.cinsticode.text!= null &&
-                                              addinstiController.cinstidesc.text!= null) {
+                                          if (addinstiController
+                                                      .cinsticode.text !=
+                                                  null &&
+                                              addinstiController
+                                                      .cinstidesc.text !=
+                                                  null) {
                                             try {
-
-                                              print(SaveInsti.GetInstidesc().toString());
-                                              print(SaveInsti.GetInsticode().toString());
+                                              print(SaveInsti.GetInstidesc()
+                                                  .toString());
+                                              print(SaveInsti.GetInsticode()
+                                                  .toString());
                                               http.Response response =
-                                              await addinstitutionapi
-                                                  .addinstiapi(
-                                                  SaveInsti
-                                                      .GetInsticode().toString(),
-                                                  SaveInsti
-                                                      .GetInstidesc().toString()
-                                              );
-                                              if(jsonDecode(response.body) ['Created Successfully'] == false){
+                                                  await addinstitutionapi
+                                                      .addinstiapi(
+                                                          SaveInsti
+                                                                  .GetInsticode()
+                                                              .toString(),
+                                                          SaveInsti
+                                                                  .GetInstidesc()
+                                                              .toString());
+                                              if (jsonDecode(response.body)[
+                                                      'Created Successfully'] ==
+                                                  false) {
                                                 Navigator.pop(context);
-
                                               }
                                             } catch (e) {
                                               debugPrint(e.toString());
                                             }
-                                          }else{
+                                          } else {
                                             debugPrint('check');
                                           }
                                         };
                                         shared.subaddbutton =
-                                        "Save Institution";
+                                            "Save Institution";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addinstitution()
@@ -1656,11 +1671,11 @@ class _HomePageState extends State<HomePage> {
                                             shared.addicon = Icons.add_outlined;
                                             shared.icon = Icons.people_outline;
                                             shared.addicon = Icons.add_outlined;
-                                            shared.uploadbutton = "";
+                                            shared.uploadbutton = "Reset";
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Branch";
                                             shared.subaddbutton =
-                                            "Add New Branch";
+                                                "Add New Branch";
                                             shared.header = "Utilities";
                                             shared.title = "Branch";
                                             shared.homewidget = [
@@ -1671,8 +1686,41 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
+                                        shared.onPress = () async {
+                                          if (addbranchController
+                                                      .branch_code_controller
+                                                      .text !=
+                                                  null &&
+                                              addbranchController
+                                                      .branch_desc_controller
+                                                      .text !=
+                                                  null) {
+                                            try {
+                                              print(SaveBranch.GetBranchcode()
+                                                  .toString());
+                                              print(SaveBranch.Getbranchdesc()
+                                                  .toString());
+                                              http.Response response =
+                                                  await addbranchapi.addbranchapi(
+                                                      SaveBranch.GetBranchcode()
+                                                          .toString(),
+                                                      SaveBranch.Getbranchdesc()
+                                                          .toString());
+                                              if (jsonDecode(response.body)[
+                                                      'Created Successfully'] ==
+                                                  false) {
+                                                Navigator.pop(context);
+                                              }
+                                            } catch (e) {
+                                              debugPrint(e.toString());
+                                            }
+                                          } else {
+                                            debugPrint('check');
+                                          }
+                                        };
+                                        shared.uploadbutton = "Reset";
                                         shared.subaddbutton = "Save Branch";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [const Addbranch()];
@@ -1717,7 +1765,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Unit";
                                             shared.subaddbutton =
-                                            "Add New Unit";
+                                                "Add New Unit";
                                             shared.header = "Utilities";
                                             shared.title = "Unit";
                                             shared.homewidget = [const Unit()];
@@ -1726,8 +1774,40 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
+                                        shared.onPress = () async {
+                                          if (addunitController
+                                                      .unit_code_controller
+                                                      .text !=
+                                                  null &&
+                                              addunitController
+                                                      .unit_desc_controller
+                                                      .text !=
+                                                  null) {
+                                            try {
+                                              print(SaveUnit.GetUnitdesc()
+                                                  .toString());
+                                              print(SaveUnit.GetUnitcode()
+                                                  .toString());
+                                              http.Response response =
+                                                  await addunitapi.addunitapi(
+                                                      SaveUnit.GetUnitcode()
+                                                          .toString(),
+                                                      SaveUnit.GetUnitdesc()
+                                                          .toString());
+                                              if (jsonDecode(response.body)[
+                                                      'Created Successfully'] ==
+                                                  false) {
+                                                Navigator.pop(context);
+                                              }
+                                            } catch (e) {
+                                              debugPrint(e.toString());
+                                            }
+                                          } else {
+                                            debugPrint('check');
+                                          }
+                                        };
                                         shared.subaddbutton = "Save Unit";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [const Addunit()];
@@ -1772,7 +1852,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Center";
                                             shared.subaddbutton =
-                                            "Add New Center";
+                                                "Add New Center";
                                             shared.header = "Utilities";
                                             shared.title = "Center";
                                             shared.homewidget = [
@@ -1783,9 +1863,41 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Center";
+                                        shared.onPress = () async {
+                                          if (addcenterController
+                                                      .center_code_controller
+                                                      .text !=
+                                                  null &&
+                                              addcenterController
+                                                      .center_desc_controller
+                                                      .text !=
+                                                  null) {
+                                            try {
+                                              print(SaveCenter.GetCenterdesc()
+                                                  .toString());
+                                              print(SaveCenter.GetCentercode()
+                                                  .toString());
+                                              http.Response response =
+                                                  await addcenterapi.addcenterapi(
+                                                      SaveCenter.GetCentercode()
+                                                          .toString(),
+                                                      SaveCenter.GetCenterdesc()
+                                                          .toString());
+                                              if (jsonDecode(response.body)[
+                                                      'Created Successfully'] ==
+                                                  false) {
+                                                Navigator.pop(context);
+                                              }
+                                            } catch (e) {
+                                              debugPrint(e.toString());
+                                            }
+                                          } else {
+                                            debugPrint('check');
+                                          }
+                                        };
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addcenters()
@@ -1831,7 +1943,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Provider";
                                             shared.subaddbutton =
-                                            "Add New Provider";
+                                                "Add New Provider";
                                             shared.header = "Utilities";
                                             shared.title = "Provider";
                                             shared.homewidget = [
@@ -1842,7 +1954,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Provider";
                                         shared.title = "Create / Edit";
@@ -1889,9 +2001,9 @@ class _HomePageState extends State<HomePage> {
                                             shared.uploadbutton = "";
                                             shared.subuploadbutton = "";
                                             shared.addbutton =
-                                            "New Product Type";
+                                                "New Product Type";
                                             shared.subaddbutton =
-                                            "Add New Product Type";
+                                                "Add New Product Type";
                                             shared.header = "Utilities";
                                             shared.title = "Product Type";
                                             shared.homewidget = [
@@ -1902,10 +2014,10 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton =
-                                        "Save Product Type";
+                                            "Save Product Type";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addproducttype()
@@ -1951,7 +2063,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Product";
                                             shared.subaddbutton =
-                                            "Add Product Category";
+                                                "Add Product Category";
                                             shared.header = "Utilities";
                                             shared.title = "Product Category";
                                             shared.homewidget = [
@@ -1962,10 +2074,10 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton =
-                                        "Save Product Category";
+                                            "Save Product Category";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addproductcategory()
@@ -1979,7 +2091,7 @@ class _HomePageState extends State<HomePage> {
                                     shared.subuploadbutton = "";
                                     shared.addbutton = "New Product";
                                     shared.subaddbutton =
-                                    "Add Product Category";
+                                        "Add Product Category";
                                     shared.header = "Utilities";
                                     shared.title = "Product Category";
                                     shared.homewidget = [
@@ -2011,14 +2123,14 @@ class _HomePageState extends State<HomePage> {
                                           setState(() {
                                             shared.uploadbutton = "Download";
                                             shared.subuploadbutton =
-                                            "Download Biller Product";
+                                                "Download Biller Product";
                                             shared.addicon = Icons.add_outlined;
                                             shared.icon = Icons.people_outline;
                                             shared.addicon = Icons.add_outlined;
                                             shared.addbutton =
-                                            "New Biller Product";
+                                                "New Biller Product";
                                             shared.subaddbutton =
-                                            "Add Biller Product";
+                                                "Add Biller Product";
                                             shared.header = "Utilities";
                                             shared.title = "Biller Product";
                                             shared.homewidget = [
@@ -2031,10 +2143,10 @@ class _HomePageState extends State<HomePage> {
                                         shared.uploadbutton = "";
                                         shared.subuploadbutton = "";
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton =
-                                        "Save Biller Product";
+                                            "Save Biller Product";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addbillerproduct()
@@ -2048,7 +2160,7 @@ class _HomePageState extends State<HomePage> {
                                     shared.subaddbutton = "Add Biller Product";
                                     shared.uploadbutton = "Download";
                                     shared.subuploadbutton =
-                                    "Download Biller Product";
+                                        "Download Biller Product";
                                     shared.header = "Utilities";
                                     shared.title = "Biller Product";
                                     shared.homewidget = [const Billerproduct()];
@@ -2080,9 +2192,9 @@ class _HomePageState extends State<HomePage> {
                                             shared.uploadbutton = "";
                                             shared.subuploadbutton = "";
                                             shared.addbutton =
-                                            "New Load Product";
+                                                "New Load Product";
                                             shared.subaddbutton =
-                                            "Add Load Product";
+                                                "Add Load Product";
                                             shared.header = "Utilities";
                                             shared.title = "Load Product";
                                             shared.homewidget = [
@@ -2093,10 +2205,10 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton =
-                                        "Save Load Product";
+                                            "Save Load Product";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addloadproduct()
@@ -2142,7 +2254,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Commission";
                                             shared.subaddbutton =
-                                            "Add Commission Setup";
+                                                "Add Commission Setup";
                                             shared.header = "Utilities";
                                             shared.title = "Commission Setup";
                                             shared.homewidget = [
@@ -2153,46 +2265,80 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.onPress = () async {
-                                          if (addcommisionController.cbankpartnerincome.text!= null &&
-                                              addcommisionController.cbankincome.text!= null &&
-                                          addcommisionController.cagentincome.text!=null &&
-                                          addcommisionController.ccustomerincome.text!=null &&
-                                          addcommisionController.ccommissiontype.text!=null &&
-                                          addcommisionController.ctransactiontype.text!=null) {
+                                          if (addcommisionController
+                                                      .cbankpartnerincome
+                                                      .text !=
+                                                  null &&
+                                              addcommisionController.cbankincome.text !=
+                                                  null &&
+                                              addcommisionController
+                                                      .cagentincome.text !=
+                                                  null &&
+                                              addcommisionController
+                                                      .ccustomerincome.text !=
+                                                  null &&
+                                              addcommisionController
+                                                      .ccommissiontype.text !=
+                                                  null &&
+                                              addcommisionController
+                                                      .ctransactiontype.text !=
+                                                  null) {
                                             try {
-
-                                              print(SaveCommission.GetTransactionType().toString());
-                                              print(SaveCommission.GetAgentIncome().toString());
-                                              print(SaveCommission.GetBankIncome().toString());
-                                              print(SaveCommission.GetBankpartnerIncome().toString());
-                                              print(SaveCommission.GetComissionType().toString());
-                                              print(SaveCommission.GetCustomerIncome().toString());
+                                              print(SaveCommission
+                                                      .GetTransactionType()
+                                                  .toString());
+                                              print(SaveCommission
+                                                      .GetAgentIncome()
+                                                  .toString());
+                                              print(
+                                                  SaveCommission.GetBankIncome()
+                                                      .toString());
+                                              print(SaveCommission
+                                                      .GetBankpartnerIncome()
+                                                  .toString());
+                                              print(SaveCommission
+                                                      .GetComissionType()
+                                                  .toString());
+                                              print(SaveCommission
+                                                      .GetCustomerIncome()
+                                                  .toString());
                                               http.Response response =
-                                              await addcommissionapi
-                                                  .Addcommissions(
-                                                  SaveCommission.GetTransactionType().toString(),
-                                                  SaveCommission.GetAgentIncome().toString(),
-                                                  SaveCommission.GetBankIncome().toString(),
-                                                  SaveCommission.GetBankpartnerIncome().toString(),
-                                                  SaveCommission.GetComissionType().toString(),
-                                                  SaveCommission.GetCustomerIncome().toString(),
+                                                  await addcommissionapi
+                                                      .Addcommissions(
+                                                SaveCommission
+                                                        .GetTransactionType()
+                                                    .toString(),
+                                                SaveCommission.GetAgentIncome()
+                                                    .toString(),
+                                                SaveCommission.GetBankIncome()
+                                                    .toString(),
+                                                SaveCommission
+                                                        .GetBankpartnerIncome()
+                                                    .toString(),
+                                                SaveCommission
+                                                        .GetComissionType()
+                                                    .toString(),
+                                                SaveCommission
+                                                        .GetCustomerIncome()
+                                                    .toString(),
                                               );
-                                              if(jsonDecode(response.body) ['Created Successfully'] == false){
+                                              if (jsonDecode(response.body)[
+                                                      'Created Successfully'] ==
+                                                  false) {
                                                 Navigator.pop(context);
-
                                               }
                                             } catch (e) {
                                               debugPrint(e.toString());
                                             }
-                                          }else{
+                                          } else {
                                             debugPrint('check');
                                           }
                                         };
                                         shared.subaddbutton =
-                                        "Save Commission Setup";
+                                            "Save Commission Setup";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addcommission()
@@ -2206,7 +2352,7 @@ class _HomePageState extends State<HomePage> {
                                     shared.subuploadbutton = "";
                                     shared.addbutton = "New Commission";
                                     shared.subaddbutton =
-                                    "Add Commission Setup";
+                                        "Add Commission Setup";
                                     shared.header = "Utilities";
                                     shared.title = "Commission Setup";
                                     shared.homewidget = [
@@ -2241,7 +2387,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Bank List";
                                             shared.subaddbutton =
-                                            "Add Bank List";
+                                                "Add Bank List";
                                             shared.header = "Utilities";
                                             shared.title = "Bank List";
                                             shared.homewidget = [
@@ -2252,9 +2398,56 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Bank List";
+                                        shared.onPress = () async {
+                                          if (addbankController.bank_code_controller.text != null &&
+                                              addbankController
+                                                      .bank_name_controller
+                                                      .text !=
+                                                  null &&
+                                              addbankController
+                                                      .bank_shortname_controller
+                                                      .text !=
+                                                  null &&
+                                              addbankController
+                                                      .bank_bic_controller
+                                                      .text !=
+                                                  null) {
+                                            try {
+                                              print(SaveBanklist.GetBankcode()
+                                                  .toString());
+                                              print(SaveBanklist.GetBankname()
+                                                  .toString());
+                                              print(SaveBanklist
+                                                      .GetBankshortname()
+                                                  .toString());
+                                              print(SaveBanklist.GetBIC()
+                                                  .toString());
+                                              http.Response response =
+                                                  await addbankapi.addbankapi(
+                                                      SaveBanklist.GetBankcode()
+                                                          .toString(),
+                                                      SaveBanklist.GetBankname()
+                                                          .toString(),
+                                                      SaveBanklist
+                                                              .GetBankshortname()
+                                                          .toString(),
+                                                      SaveBanklist.GetBIC()
+                                                          .toString());
+                                              if (jsonDecode(response.body)[
+                                                      'Created Successfully'] ==
+                                                  false) {
+                                                Navigator.pop(context);
+                                              }
+                                            } catch (e) {
+                                              debugPrint(e.toString());
+                                            }
+                                          } else {
+                                            debugPrint('check');
+                                          }
+                                        };
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addbanklist()
@@ -2310,7 +2503,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Partner";
                                         shared.title = "Create / Edit";
@@ -2357,9 +2550,9 @@ class _HomePageState extends State<HomePage> {
                                             shared.uploadbutton = "";
                                             shared.subuploadbutton = "";
                                             shared.addbutton =
-                                            "New Splash Screen";
+                                                "New Splash Screen";
                                             shared.subaddbutton =
-                                            "Add Splash Screen";
+                                                "Add Splash Screen";
                                             shared.header = "Utilities";
                                             shared.title = "Splash Screen";
                                             shared.homewidget = [
@@ -2370,10 +2563,10 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Utilities  >  Create / Edit";
+                                            "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton =
-                                        "Save Splash Screen";
+                                            "Save Splash Screen";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addsplashscreen()
@@ -2440,10 +2633,10 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.add_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Customer Service  >  Create / Edit";
+                                            "Customer Service  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton =
-                                        "Save All User Data";
+                                            "Save All User Data";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
                                           const Addcsrdashboard()
@@ -2456,7 +2649,7 @@ class _HomePageState extends State<HomePage> {
                                     shared.subuploadbutton = "";
                                     shared.addbutton = "New CS Dashboard";
                                     shared.subaddbutton =
-                                    "Add New CS Dashboard";
+                                        "Add New CS Dashboard";
                                     shared.header = "Customer Service";
                                     shared.title = "CSR Dashboard";
                                     shared.homewidget = [const Csrdashboard()];
@@ -2515,7 +2708,7 @@ class _HomePageState extends State<HomePage> {
                                     shared.subuploadbutton = "";
                                     shared.addbutton = "New Concern";
                                     shared.subaddbutton =
-                                    "Add New Type Concern";
+                                        "Add New Type Concern";
                                     shared.header = "Customer Service";
                                     shared.title = "Type of Concern";
                                     shared.homewidget = [const Typeofconcern()];
@@ -2580,9 +2773,9 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 decoration: BoxDecoration(
                                     color:
-                                    shared.title == "Webtool User Listing"
-                                        ? const Color(0xFF7FA998)
-                                        : Colors.transparent),
+                                        shared.title == "Webtool User Listing"
+                                            ? const Color(0xFF7FA998)
+                                            : Colors.transparent),
                                 child: Listtile(
                                   color: Colors.black,
                                   icon: Icons.content_copy_outlined,
@@ -2592,7 +2785,7 @@ class _HomePageState extends State<HomePage> {
                                       shared.onTaps = () {
                                         setState(() {
                                           shared.header =
-                                          "Webtool User Listing";
+                                              "Webtool User Listing";
                                           shared.title = "Change Password";
                                           shared.homewidget = [
                                             const Changepassword()
@@ -2611,10 +2804,10 @@ class _HomePageState extends State<HomePage> {
                                               shared.subuploadbutton = "";
                                               shared.addbutton = "New Report";
                                               shared.subaddbutton =
-                                              "Generate Reports";
+                                                  "Generate Reports";
                                               shared.header = "Reports";
                                               shared.title =
-                                              "Webtool User Listing";
+                                                  "Webtool User Listing";
                                               shared.homewidget = [
                                                 const Webtoolusereport()
                                               ];
@@ -2623,7 +2816,7 @@ class _HomePageState extends State<HomePage> {
                                           shared.icon = Icons.report_outlined;
                                           shared.addicon = Icons.save_outlined;
                                           shared.header =
-                                          "Report  >  Create / Edit";
+                                              "Report  >  Create / Edit";
                                           shared.addbutton = "Save";
                                           shared.subaddbutton = "Save Report";
                                           shared.title = "Create / Edit";
@@ -2674,7 +2867,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "Transaction Logs";
                                             shared.homewidget = [
@@ -2685,7 +2878,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -2733,7 +2926,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "Remittance Sent";
                                             shared.homewidget = [
@@ -2744,7 +2937,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -2792,7 +2985,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "Remittance Claimed";
                                             shared.homewidget = [
@@ -2803,7 +2996,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -2851,10 +3044,10 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title =
-                                            "Remittance Cancelled";
+                                                "Remittance Cancelled";
                                             shared.homewidget = [
                                               const Remittancecancelled()
                                             ];
@@ -2863,7 +3056,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -2911,7 +3104,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "Activity History";
                                             shared.homewidget = [
@@ -2922,7 +3115,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -2952,7 +3145,7 @@ class _HomePageState extends State<HomePage> {
                                     shared.onTaps = () {
                                       setState(() {
                                         shared.header =
-                                        "MPIN Change - Password";
+                                            "MPIN Change - Password";
                                         shared.title = "Change Password";
                                         shared.homewidget = [
                                           const Changepassword()
@@ -2971,10 +3164,10 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title =
-                                            "MPIN Change - Password";
+                                                "MPIN Change - Password";
                                             shared.homewidget = [
                                               const MPINchangepassword()
                                             ];
@@ -2983,7 +3176,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3031,10 +3224,10 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title =
-                                            "Resend SMS Activation";
+                                                "Resend SMS Activation";
                                             shared.homewidget = [
                                               const Resendsmsactivation()
                                             ];
@@ -3043,7 +3236,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3091,7 +3284,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "Login - Logout";
                                             shared.homewidget = [
@@ -3102,7 +3295,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3148,7 +3341,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "User Activity Logs";
                                             shared.homewidget = [
@@ -3159,7 +3352,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3189,7 +3382,7 @@ class _HomePageState extends State<HomePage> {
                                     shared.onTaps = () {
                                       setState(() {
                                         shared.header =
-                                        "Suspicious Transaction";
+                                            "Suspicious Transaction";
                                         shared.title = "Change Password";
                                         shared.homewidget = [
                                           const Changepassword()
@@ -3208,10 +3401,10 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title =
-                                            "Suspicious Transaction";
+                                                "Suspicious Transaction";
                                             shared.homewidget = [
                                               const Suspicioustransaction()
                                             ];
@@ -3220,7 +3413,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3268,7 +3461,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "Register Clients";
                                             shared.homewidget = [
@@ -3279,7 +3472,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3327,7 +3520,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "Valid Transaction";
                                             shared.homewidget = [
@@ -3338,7 +3531,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3386,7 +3579,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "CS Dashboard";
                                             shared.homewidget = [
@@ -3397,7 +3590,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3443,7 +3636,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "Reconn CCM";
                                             shared.homewidget = [
@@ -3454,7 +3647,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3500,7 +3693,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "SMS Log Report";
                                             shared.homewidget = [
@@ -3511,7 +3704,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3557,10 +3750,10 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title =
-                                            "Account Status Report";
+                                                "Account Status Report";
                                             shared.homewidget = [
                                               const Accountstatusreport()
                                             ];
@@ -3569,7 +3762,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3617,10 +3810,10 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title =
-                                            "List of Agent Report";
+                                                "List of Agent Report";
                                             shared.homewidget = [
                                               const Listofagentreport()
                                             ];
@@ -3629,7 +3822,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3677,10 +3870,10 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title =
-                                            "Igate Recentiliation";
+                                                "Igate Recentiliation";
                                             shared.homewidget = [
                                               const Igaterecentiliation()
                                             ];
@@ -3689,7 +3882,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3736,7 +3929,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "Activated Merchant";
                                             shared.homewidget = [
@@ -3747,7 +3940,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3795,7 +3988,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "Activated Merchant";
                                             shared.homewidget = [
@@ -3806,7 +3999,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3854,7 +4047,7 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title = "Used Device ID";
                                             shared.homewidget = [
@@ -3865,7 +4058,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";
@@ -3893,7 +4086,7 @@ class _HomePageState extends State<HomePage> {
                                     shared.onTaps = () {
                                       setState(() {
                                         shared.header =
-                                        "Failed Enrollment Report";
+                                            "Failed Enrollment Report";
                                         shared.title = "Change Password";
                                         shared.homewidget = [
                                           const Changepassword()
@@ -3912,10 +4105,10 @@ class _HomePageState extends State<HomePage> {
                                             shared.subuploadbutton = "";
                                             shared.addbutton = "New Report";
                                             shared.subaddbutton =
-                                            "Generate Reports";
+                                                "Generate Reports";
                                             shared.header = "Reports";
                                             shared.title =
-                                            "Failed Enrollment Report";
+                                                "Failed Enrollment Report";
                                             shared.homewidget = [
                                               const Failedenrollmentreport()
                                             ];
@@ -3924,7 +4117,7 @@ class _HomePageState extends State<HomePage> {
                                         shared.icon = Icons.report_outlined;
                                         shared.addicon = Icons.save_outlined;
                                         shared.header =
-                                        "Report  >  Create / Edit";
+                                            "Report  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Report";
                                         shared.title = "Create / Edit";

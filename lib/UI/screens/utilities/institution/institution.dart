@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
@@ -8,7 +10,8 @@ import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/textfield.dart';
+import 'package:http/http.dart' as http;
+import 'components/instiAPI.dart';
 import 'components/institution_delete.dart';
 import 'components/intitution_edit.dart';
 
@@ -56,6 +59,7 @@ class _InstitutionState extends State<Institution> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteInstitution deleteinstitution = DeleteInstitution();
     final shared = Provider.of<Institution_U>(context);
     final DataTableSource data =
         MyData(shared: shared, dashboardContext: context);
@@ -311,11 +315,21 @@ class _InstitutionState extends State<Institution> {
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {
-                                setState(() {
-                                  shared.isChecked = false;
+                              onPressed: () async {
+                                http.Response response =
+                                    await deleteinstitution.deleteinstitution(
+                                        shared.isChecked.toString());
+                                print(jsonDecode(response.body)['message']);
+                                if (await jsonDecode(response.body)['message']
+                                    .toString()
+                                    .toLowerCase()
+                                    .contains("Updated Successfully")) {
                                   shared.Institution_data.removeAt(0);
-                                });
+                                }
+                                // setState(() {
+                                //   shared.isChecked = false;
+                                //   shared.Institution_data.removeAt(0);
+                                // });
                               },
                               icon: const Icon(
                                 Icons.delete_outline,

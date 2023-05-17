@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class AdduserController{
+class AdduserController {
   TextEditingController cusername = TextEditingController();
   TextEditingController cgiventname = TextEditingController();
   TextEditingController cmiddlename = TextEditingController();
@@ -14,7 +14,33 @@ class AdduserController{
 class AddinstiController {
   TextEditingController cinsticode = TextEditingController();
   TextEditingController cinstidesc = TextEditingController();
+}
 
+class AddbranchController {
+  TextEditingController branch_code_controller = TextEditingController();
+  TextEditingController branch_desc_controller = TextEditingController();
+}
+
+class AddunitController {
+  TextEditingController unit_code_controller = TextEditingController();
+  TextEditingController unit_desc_controller = TextEditingController();
+}
+
+class AddcenterController {
+  TextEditingController center_code_controller = TextEditingController();
+  TextEditingController center_desc_controller = TextEditingController();
+}
+
+class AddproviderController {
+  TextEditingController provider_code_controller = TextEditingController();
+  TextEditingController provider_desc_controller = TextEditingController();
+}
+
+class AddbankController {
+  TextEditingController bank_code_controller = TextEditingController();
+  TextEditingController bank_name_controller = TextEditingController();
+  TextEditingController bank_shortname_controller = TextEditingController();
+  TextEditingController bank_bic_controller = TextEditingController();
 }
 
 class AddcommisionController {

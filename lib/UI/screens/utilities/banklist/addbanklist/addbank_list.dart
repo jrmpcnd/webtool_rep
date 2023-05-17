@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/getter_setter.dart';
 import '../../../../utils/constant.dart';
 import '../../../../utils/edge_insect.dart';
 import '../../../../utils/spacing.dart';
@@ -14,6 +15,10 @@ class Addbanklist extends StatefulWidget {
 }
 
 class _AddbanklistState extends State<Addbanklist> {
+  TextEditingController bank_code_controller = TextEditingController();
+  TextEditingController bank_name_controller = TextEditingController();
+  TextEditingController bank_shortname_controller = TextEditingController();
+  TextEditingController bank_bic_controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -87,23 +92,115 @@ class _AddbanklistState extends State<Addbanklist> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Bank Code :", style: kHeading2TextStyle),
-                          textfield(
-                            hintext: "",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  SaveBanklist.SetBankcode(value);
+                                });
+                              },
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: bank_code_controller,
+                            ),
                           ),
                           verticalSpaceTiny,
                           Text("Bank Name :", style: kHeading2TextStyle),
-                          textfield(
-                            hintext: "",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  SaveBanklist.SetBankname(value);
+                                });
+                              },
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: bank_name_controller,
+                            ),
                           ),
                           verticalSpaceTiny,
                           Text("Short Name :", style: kHeading2TextStyle),
-                          textfield(
-                            hintext: "",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  SaveBanklist.SetBankshortname(value);
+                                });
+                              },
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: bank_shortname_controller,
+                            ),
                           ),
                           verticalSpaceTiny,
-                          Text("BIC :", style: kHeading2TextStyle),
-                          textfield(
-                            hintext: "",
+                          Text("CIC :", style: kHeading2TextStyle),
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  SaveBanklist.SetBIC(value);
+                                });
+                              },
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: bank_bic_controller,
+                            ),
                           ),
                           verticalSpaceXTiny,
                         ],

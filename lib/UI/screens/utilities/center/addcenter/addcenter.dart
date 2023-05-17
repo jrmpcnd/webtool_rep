@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
+import '../../../../../core/getter_setter.dart';
 import '../../../../utils/constant.dart';
 import '../../../../utils/edge_insect.dart';
 import '../../../../utils/spacing.dart';
@@ -18,6 +19,8 @@ class Addcenters extends StatefulWidget {
 }
 
 class _AddcentersState extends State<Addcenters> {
+  TextEditingController center_code_controller = TextEditingController();
+  TextEditingController center_desc_controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -90,14 +93,60 @@ class _AddcentersState extends State<Addcenters> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Institution Code :", style: kHeading2TextStyle),
-                          textfield(
-                            hintext: "",
+                          Text("Center Code :", style: kHeading2TextStyle),
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  SaveCenter.SetCentercode(value);
+                                });
+                              },
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: center_code_controller,
+                            ),
                           ),
                           verticalSpaceTiny,
                           Text("Description :", style: kHeading2TextStyle),
-                          textfield(
-                            hintext: "",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  SaveCenter.SetCenterdesc(value);
+                                });
+                              },
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: center_desc_controller,
+                            ),
                           ),
                           verticalSpaceXTiny,
                         ],

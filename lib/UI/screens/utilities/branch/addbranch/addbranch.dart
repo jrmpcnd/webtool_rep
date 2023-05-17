@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
+import '../../../../../core/getter_setter.dart';
 import '../../../../utils/constant.dart';
 import '../../../../utils/edge_insect.dart';
 import '../../../../utils/spacing.dart';
 import '../../../../utils/text_styles.dart';
 import '../../../../widgets/dropdown.dart';
-import '../../../../widgets/textfield.dart';
 
 class Addbranch extends StatefulWidget {
   const Addbranch({Key? key}) : super(key: key);
@@ -18,6 +18,8 @@ class Addbranch extends StatefulWidget {
 }
 
 class _AddbranchState extends State<Addbranch> {
+  TextEditingController branch_code_controller = TextEditingController();
+  TextEditingController branch_desc_controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -90,14 +92,60 @@ class _AddbranchState extends State<Addbranch> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Institution Code :", style: kHeading2TextStyle),
-                          textfield(
-                            hintext: "",
+                          Text("Branch Code :", style: kHeading2TextStyle),
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  SaveBranch.SetBranchcode(value);
+                                });
+                              },
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: branch_code_controller,
+                            ),
                           ),
                           verticalSpaceTiny,
                           Text("Description :", style: kHeading2TextStyle),
-                          textfield(
-                            hintext: "",
+                          SizedBox(
+                            height: 35.0,
+                            width: 400,
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  SaveBranch.Setbranchdesc(value);
+                                });
+                              },
+                              style: kTextStyle,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(fontSize: 12.0),
+                                contentPadding: EdgeInsets.only(left: 10.0),
+                                hintStyle: TextStyle(color: kSecondaryColor2),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kBlackColor),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              controller: branch_desc_controller,
+                            ),
                           ),
                           verticalSpaceXTiny,
                         ],

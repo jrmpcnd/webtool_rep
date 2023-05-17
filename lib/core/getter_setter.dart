@@ -1,151 +1,267 @@
-class SaveData{
+class SaveData {
   static String _username = '';
-  static SetUsername(String username){
+  static SetUsername(String username) {
     _username = username;
   }
 
-  static GetUsername(){
+  static GetUsername() {
     return _username;
   }
 
   static String _givenname = '';
-  static SetGivenName(String givenname){
+  static SetGivenName(String givenname) {
     _givenname = givenname;
   }
 
-  static GetGivenName(){
+  static GetGivenName() {
     return _givenname;
   }
 
   static String _middlename = '';
-  static SetMiddlename(String middlename){
+  static SetMiddlename(String middlename) {
     _middlename = middlename;
   }
 
-  static GetMiddlename(){
+  static GetMiddlename() {
     return _middlename;
   }
 
   static String _lastname = '';
-  static SetLastname(String lastname){
+  static SetLastname(String lastname) {
     _lastname = lastname;
   }
 
-  static GetLastname(){
+  static GetLastname() {
     return _lastname;
   }
 
   static String _email = '';
-  static SetEmail(String email){
+  static SetEmail(String email) {
     _email = email;
   }
 
-  static GetEmail(){
+  static GetEmail() {
     return _email;
   }
 
   static String _mobileno = '';
-  static SetMobileno(String mobileno){
+  static SetMobileno(String mobileno) {
     _mobileno = mobileno;
   }
 
-  static GetMobileno(){
+  static GetMobileno() {
     return _mobileno;
   }
 
   static String _userstatus = '';
-  static SetUserStatus(String userstatus){
+  static SetUserStatus(String userstatus) {
     _userstatus = userstatus;
   }
 
-  static GetUserStatus(){
+  static GetUserStatus() {
     return _userstatus;
   }
 
   static String _css = '';
-  static SetCSS(String css){
+  static SetCSS(String css) {
     _css = css;
   }
 
-  static GetCSS(){
+  static GetCSS() {
     return _css;
   }
-
-
 }
-class SaveInsti{
+
+class SaveInsti {
   static String _insticode = '';
-  static SetInsticode(String insticode){
+  static SetInsticode(String insticode) {
     _insticode = insticode;
   }
 
-  static GetInsticode(){
+  static GetInsticode() {
     return _insticode;
   }
 
   static String _instidesc = '';
-  static SetInstidesc(String instidesc){
+  static SetInstidesc(String instidesc) {
     _instidesc = instidesc;
   }
 
-  static GetInstidesc(){
+  static GetInstidesc() {
     return _instidesc;
   }
-
-
-
 }
 
-class SaveCommission{
+class SaveBranch {
+  static String _branchcode = '';
+  static SetBranchcode(String branchcode) {
+    _branchcode = branchcode;
+  }
+
+  static GetBranchcode() {
+    return _branchcode;
+  }
+
+  static String _branchdesc = '';
+  static Setbranchdesc(String branchdesc) {
+    _branchdesc = branchdesc;
+  }
+
+  static Getbranchdesc() {
+    return _branchdesc;
+  }
+}
+
+class SaveUnit {
+  static String _unitcode = '';
+  static SetUnitcode(String unitcode) {
+    _unitcode = unitcode;
+  }
+
+  static GetUnitcode() {
+    return _unitcode;
+  }
+
+  static String _unitdesc = '';
+  static SetUnitdesc(String unitdesc) {
+    _unitdesc = unitdesc;
+  }
+
+  static GetUnitdesc() {
+    return _unitdesc;
+  }
+}
+
+class SaveCenter {
+  static String _centercode = '';
+  static SetCentercode(String centercode) {
+    _centercode = centercode;
+  }
+
+  static GetCentercode() {
+    return _centercode;
+  }
+
+  static String _centerdesc = '';
+  static SetCenterdesc(String centerdesc) {
+    _centerdesc = centerdesc;
+  }
+
+  static GetCenterdesc() {
+    return _centerdesc;
+  }
+}
+
+class SaveProvider {
+  static String _providercode = '';
+  static SetProvidercode(String providercode) {
+    _providercode = providercode;
+  }
+
+  static GetProvidercode() {
+    return _providercode;
+  }
+
+  static String _providerdesc = '';
+  static SetProviderdesc(String providerdesc) {
+    _providerdesc = providerdesc;
+  }
+
+  static GetProviderdesc() {
+    return _providerdesc;
+  }
+}
+
+class SaveBanklist {
+  static String _bankcode = '';
+  static SetBankcode(String bankcode) {
+    _bankcode = bankcode;
+  }
+
+  static GetBankcode() {
+    return _bankcode;
+  }
+
+  static String _bankname = '';
+  static SetBankname(String bankname) {
+    _bankname = bankname;
+  }
+
+  static GetBankname() {
+    return _bankname;
+  }
+
+  static String _bank_shortname = '';
+  static SetBankshortname(String bank_shortname) {
+    _bank_shortname = bank_shortname;
+  }
+
+  static GetBankshortname() {
+    return _bank_shortname;
+  }
+
+  static String _bic = '';
+  static SetBIC(String bic) {
+    _bic = bic;
+  }
+
+  static GetBIC() {
+    return _bic;
+  }
+}
+
+class SaveCommission {
   static String _transactiontype = '';
-  static SetTransactionType(String transactiontype){
+  static SetTransactionType(String transactiontype) {
     _transactiontype = transactiontype;
   }
 
-  static GetTransactionType(){
+  static GetTransactionType() {
     return _transactiontype;
   }
 
   static String _commissiontype = '';
-  static SetCommisionType(String commissiontype){
+  static SetCommisionType(String commissiontype) {
     _commissiontype = commissiontype;
   }
 
-  static GetComissionType(){
+  static GetComissionType() {
     return _commissiontype;
   }
 
   static String _customerincome = '';
-  static SetCustomerIncome(String customerincome){
+  static SetCustomerIncome(String customerincome) {
     _customerincome = customerincome;
   }
 
-  static GetCustomerIncome(){
+  static GetCustomerIncome() {
     return _customerincome;
   }
+
   static String _agentincome = '';
-  static SetAgentIncome(String agentincome){
+  static SetAgentIncome(String agentincome) {
     _agentincome = agentincome;
   }
 
-  static GetAgentIncome(){
+  static GetAgentIncome() {
     return _agentincome;
   }
+
   static String _bankincome = '';
-  static SetBankIncome(String bankincome){
+  static SetBankIncome(String bankincome) {
     _bankincome = bankincome;
   }
 
-  static GetBankIncome(){
+  static GetBankIncome() {
     return _bankincome;
   }
+
   static String _bankpartnerincome = '';
-  static SetBankPartnerIncome(String bankpartnerincome){
+  static SetBankPartnerIncome(String bankpartnerincome) {
     _bankpartnerincome = bankpartnerincome;
   }
 
-  static GetBankpartnerIncome(){
+  static GetBankpartnerIncome() {
     return _bankpartnerincome;
   }
-
 }
