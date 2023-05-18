@@ -10,6 +10,7 @@ import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/textfield.dart';
 import '../feestructure/components/alertdialog.dart';
+import 'components/center_delete.dart';
 import 'components/center_edit.dart';
 
 class Centers extends StatefulWidget {
@@ -39,6 +40,9 @@ class _CentersState extends State<Centers> {
       });
       for (var i in res.data!) {
         shared.Center_data.add(Center_Log.fromJson(i.toJson()));
+      }
+      for (int i = 0; i < shared.Center_data.length; i++) {
+        shared.isChecked.add(false);
       }
     }
     for (var i in shared.Center_data) {
@@ -354,6 +358,9 @@ class _CentersState extends State<Centers> {
                           DataColumn(
                               label:
                                   Text('Action', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label:
+                                  Text('Delete', style: kLargeBoldTextStyle)),
                         ],
                         source: isLoaded
                             ? shared.Center_data.isNotEmpty
@@ -443,6 +450,11 @@ class MyData extends DataTableSource {
           },
         ),
       )),
+      DataCell(SizedBox(
+          width: 50,
+          child: CenterDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }

@@ -43,6 +43,9 @@ class _BranchState extends State<Branch> {
       for (var i in res.data!) {
         shared.Branch_data.add(Branch_Log.fromJson(i.toJson()));
       }
+      for (int i = 0; i < shared.Branch_data.length; i++) {
+        shared.isChecked.add(false);
+      }
     }
     for (var i in shared.Branch_data) {
       print(i.toJson());
@@ -321,19 +324,25 @@ class _BranchState extends State<Branch> {
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
                               onPressed: () async {
-                                http.Response response = await deletebranch
-                                    .deletebranch(shared.isChecked.toString());
-                                print(jsonDecode(response.body)['message']);
-                                if (await jsonDecode(response.body)['message']
-                                    .toString()
-                                    .toLowerCase()
-                                    .contains("Updated Successfully")) {
-                                  shared.Branch_data.removeAt(0);
+                                for (int i = 0;
+                                    i < shared.Branch_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response =
+                                        await deletebranch.deletebranch(
+                                            shared.Branch_data[i].branchCode);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.Branch_data.removeAt(i);
+                                      }
+                                    }
+                                  }
                                 }
-                                // setState(() {
-                                //   shared.isChecked = false;
-                                //   shared.Institution_data.removeAt(0);
-                                // });
                               },
                               icon: const Icon(
                                 Icons.delete_outline,
@@ -467,7 +476,11 @@ class MyData extends DataTableSource {
           },
         ),
       )),
-      const DataCell(SizedBox(width: 50, child: BranchDeleteFunction())),
+      DataCell(SizedBox(
+          width: 50,
+          child: BranchDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }

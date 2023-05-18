@@ -339,10 +339,6 @@ class _InstitutionState extends State<Institution> {
                                     }
                                   }
                                 }
-                                // setState(() {
-                                //   shared.isChecked = false;
-                                //   shared.Institution_data.removeAt(0);
-                                // });
                               },
                               icon: const Icon(
                                 Icons.delete_outline,

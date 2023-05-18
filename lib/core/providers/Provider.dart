@@ -51,6 +51,7 @@ class Banknews_U extends ChangeNotifier {
   String Banknews_button = 'Click here';
   List<BankNews_Api> BanknewsLog = [];
   List<BankNews_Log> Banknews_data = [];
+  List<bool> isChecked = [];
   bool search = false;
 }
 
@@ -81,7 +82,7 @@ class Branch_U extends ChangeNotifier {
   String Branch_button = 'Click here';
   List<Branch_Api> BranchLog = [];
   List<Branch_Log> Branch_data = [];
-  bool isChecked = false;
+  List<bool> isChecked = [];
   bool search = false;
   bool isLoaded = false;
 }
@@ -91,6 +92,7 @@ class Unit_U extends ChangeNotifier {
   late BuildContext dashboardContext;
   List<Unit_Api> UnitLog = [];
   List<Unit_Log> Unit_data = [];
+  List<bool> isChecked = [];
   bool search = false;
   bool isLoaded = false;
 }
@@ -99,6 +101,7 @@ class Center_U extends ChangeNotifier {
   String Center_button = 'Click here';
   List<Center_Api> CenterLog = [];
   List<Center_Log> Center_data = [];
+  List<bool> isChecked = [];
   bool search = false;
   bool isLoaded = false;
 }
@@ -107,6 +110,7 @@ class Providers_U extends ChangeNotifier {
   String Providers_button = 'Click here';
   List<Providers_Api> ProvidersLog = [];
   List<Providers_Log> Providers_data = [];
+  List<bool> isChecked = [];
   bool search = false;
   bool isLoaded = false;
 }

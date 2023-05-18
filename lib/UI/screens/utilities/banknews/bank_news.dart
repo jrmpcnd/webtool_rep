@@ -11,6 +11,7 @@ import '../../../utils/text_styles.dart';
 import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
+import 'components/banknews_delete.dart';
 
 class Banknews extends StatefulWidget {
   const Banknews({Key? key}) : super(key: key);
@@ -40,6 +41,9 @@ class _BanknewsState extends State<Banknews> {
       for (var i in res.data!) {
         // shared.inqqq.add(Data.fromJson(i.toJson()));
         shared.Banknews_data.add(BankNews_Log.fromJson(i.toJson()));
+      }
+      for (int i = 0; i < shared.Banknews_data.length; i++) {
+        shared.isChecked.add(false);
       }
     } else {
       setState(() {
@@ -282,6 +286,9 @@ class _BanknewsState extends State<Banknews> {
                                   Text('Sender', style: kLargeBoldTextStyle)),
                           DataColumn(
                               label: Text('Topic', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label:
+                                  Text('Delete', style: kLargeBoldTextStyle)),
                         ],
                         source: isLoaded
                             ? shared.Banknews_data.isNotEmpty
@@ -328,6 +335,11 @@ class MyData extends DataTableSource {
       DataCell(SizedBox(
           width: 250,
           child: Text(shared.Banknews_data[index].productName.toString()))),
+      DataCell(SizedBox(
+          width: 50,
+          child: BanknewsDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
@@ -347,6 +359,7 @@ class MyData2 extends DataTableSource {
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
     ]);
   }
 }
@@ -363,14 +376,9 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading, please wait'))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
     ]);
   }
 }

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webtool_rep/core/providers/Provider.dart';
 
-class BranchDeleteFunction extends StatefulWidget {
+class CenterDeleteFunction extends StatefulWidget {
   int? index;
-   BranchDeleteFunction({Key? key, this.index = 0}) : super(key: key);
+  CenterDeleteFunction({Key? key, this.index = 0}) : super(key: key);
 
   @override
-  State<BranchDeleteFunction> createState() => _BranchDeleteFunctionState();
+  State<CenterDeleteFunction> createState() => _CenterDeleteFunctionState();
 }
 
-class _BranchDeleteFunctionState extends State<BranchDeleteFunction> {
+class _CenterDeleteFunctionState extends State<CenterDeleteFunction> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<Branch_U>(context, listen: false);

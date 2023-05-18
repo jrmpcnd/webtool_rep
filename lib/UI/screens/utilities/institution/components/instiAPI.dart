@@ -145,7 +145,7 @@ class DeleteInstitution {
 }
 
 class DeleteBranch {
-  Future<http.Response> deletebranch(drop_branch
+  Future<http.Response> deletebranch(drop_id
       // drop_insti
       ) async {
     String url = 'https://sit-api-janus.fortress-asya.com:1234/drop_branch/';
@@ -154,7 +154,58 @@ class DeleteBranch {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, String>{
-          "drop_branch": drop_branch,
+          "drop_id": drop_id,
+          // "drop_insti": drop_insti,
+        }));
+    return response;
+  }
+}
+
+class DeleteCenter {
+  Future<http.Response> deletecenter(drop_id
+      // drop_insti
+      ) async {
+    String url = 'https://sit-api-janus.fortress-asya.com:1234/drop_center/';
+    final http.Response response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "drop_id": drop_id,
+          // "drop_insti": drop_insti,
+        }));
+    return response;
+  }
+}
+
+class DeleteUnit {
+  Future<http.Response> deleteunit(drop_id
+      // drop_insti
+      ) async {
+    String url = 'https://sit-api-janus.fortress-asya.com:1234/drop_unit/';
+    final http.Response response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "drop_id": drop_id,
+          // "drop_insti": drop_insti,
+        }));
+    return response;
+  }
+}
+
+class DeleteBanknews {
+  Future<http.Response> deletebanknews(drop_id
+      // drop_insti
+      ) async {
+    String url = 'https://sit-api-janus.fortress-asya.com:1234/drop_banknews/';
+    final http.Response response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "drop_id": drop_id,
           // "drop_insti": drop_insti,
         }));
     return response;

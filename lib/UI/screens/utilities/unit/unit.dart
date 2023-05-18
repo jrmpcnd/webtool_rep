@@ -12,6 +12,7 @@ import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/textfield.dart';
+import 'components/unit_delete.dart';
 
 class Unit extends StatefulWidget {
   const Unit({Key? key}) : super(key: key);
@@ -40,6 +41,9 @@ class _UnitState extends State<Unit> {
       });
       for (var i in res.data!) {
         shared.Unit_data.add(Unit_Log.fromJson(i.toJson()));
+      }
+      for (int i = 0; i < shared.Unit_data.length; i++) {
+        shared.isChecked.add(false);
       }
     }
     for (var i in shared.Unit_data) {
@@ -351,6 +355,9 @@ class _UnitState extends State<Unit> {
                           DataColumn(
                               label:
                                   Text('Action', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label:
+                                  Text('Delete', style: kLargeBoldTextStyle)),
                         ],
                         source: shared.isLoaded
                             ? shared.Unit_data.isNotEmpty
@@ -439,6 +446,11 @@ class MyData extends DataTableSource {
           },
         ),
       )),
+      DataCell(SizedBox(
+          width: 50,
+          child: UnitDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
