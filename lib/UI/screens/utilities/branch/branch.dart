@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webtool_rep/UI/screens/utilities/institution/components/instiAPI.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
 import 'package:webtool_rep/UI/utils/functions.dart';
 import 'package:webtool_rep/UI/utils/model2.dart';
@@ -8,8 +11,8 @@ import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/textfield.dart';
-import '../unit/components/alertdialog.dart';
+import 'package:http/http.dart' as http;
+import 'components/branch_delete.dart';
 import 'components/branch_edit.dart';
 
 class Branch extends StatefulWidget {
@@ -55,6 +58,7 @@ class _BranchState extends State<Branch> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteBranch deletebranch = DeleteBranch();
     final shared = Provider.of<Branch_U>(context);
     final DataTableSource data =
         MyData(shared: shared, dashboardContext1: context);
@@ -316,7 +320,21 @@ class _BranchState extends State<Branch> {
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                              onPressed: () async {
+                                http.Response response = await deletebranch
+                                    .deletebranch(shared.isChecked.toString());
+                                print(jsonDecode(response.body)['message']);
+                                if (await jsonDecode(response.body)['message']
+                                    .toString()
+                                    .toLowerCase()
+                                    .contains("Updated Successfully")) {
+                                  shared.Branch_data.removeAt(0);
+                                }
+                                // setState(() {
+                                //   shared.isChecked = false;
+                                //   shared.Institution_data.removeAt(0);
+                                // });
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,
@@ -355,6 +373,10 @@ class _BranchState extends State<Branch> {
                           DataColumn(
                               label: Text(
                             'Action',
+                          )),
+                          DataColumn(
+                              label: Text(
+                            'Delete',
                           ))
                         ],
                         source: isLoaded
@@ -445,6 +467,7 @@ class MyData extends DataTableSource {
           },
         ),
       )),
+      const DataCell(SizedBox(width: 50, child: BranchDeleteFunction())),
     ]);
   }
 }
@@ -465,6 +488,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
     ]);
   }
 }
@@ -481,6 +505,10 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
         child: CircularProgressIndicator(),

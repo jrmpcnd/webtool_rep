@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:webtool_rep/core/providers/Provider.dart';
 
 class InstitutionDeleteFunction extends StatefulWidget {
-  const InstitutionDeleteFunction({Key? key}) : super(key: key);
+  int? index;
+  InstitutionDeleteFunction({Key? key, this.index = 0}) : super(key: key);
 
   @override
   State<InstitutionDeleteFunction> createState() =>
@@ -16,10 +17,10 @@ class _InstitutionDeleteFunctionState extends State<InstitutionDeleteFunction> {
     final shared = Provider.of<Institution_U>(context, listen: false);
     return Checkbox(
       checkColor: Colors.green,
-      value: shared.isChecked,
+      value: shared.isChecked[widget.index!],
       onChanged: (value) {
         setState(() {
-          shared.isChecked = value!;
+          shared.isChecked[widget.index!] = value!;
           print(shared.isChecked);
         });
       },

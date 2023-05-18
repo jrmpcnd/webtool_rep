@@ -44,6 +44,9 @@ class _InstitutionState extends State<Institution> {
       for (var i in res.data!) {
         shared.Institution_data.add(Institution_Log.fromJson(i.toJson()));
       }
+      for (int i = 0; i < shared.Institution_data.length; i++) {
+        shared.isChecked.add(false);
+      }
     }
     for (var i in shared.Institution_data) {
       print(i.toJson());
@@ -316,15 +319,25 @@ class _InstitutionState extends State<Institution> {
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
                               onPressed: () async {
-                                http.Response response =
-                                    await deleteinstitution.deleteinstitution(
-                                        shared.isChecked.toString());
-                                print(jsonDecode(response.body)['message']);
-                                if (await jsonDecode(response.body)['message']
-                                    .toString()
-                                    .toLowerCase()
-                                    .contains("Updated Successfully")) {
-                                  shared.Institution_data.removeAt(0);
+                                for (int i = 0;
+                                    i < shared.Institution_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response =
+                                        await deleteinstitution
+                                            .deleteinstitution(shared
+                                                .Institution_data[i].instCode);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.Institution_data.removeAt(i);
+                                      }
+                                    }
+                                  }
                                 }
                                 // setState(() {
                                 //   shared.isChecked = false;
@@ -463,7 +476,11 @@ class MyData extends DataTableSource {
           },
         ),
       )),
-      const DataCell(SizedBox(width: 50, child: InstitutionDeleteFunction())),
+      DataCell(SizedBox(
+          width: 50,
+          child: InstitutionDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }

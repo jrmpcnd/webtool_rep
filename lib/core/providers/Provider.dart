@@ -72,7 +72,7 @@ class Institution_U extends ChangeNotifier {
   String Institution_button = 'Click here';
   List<Institution_Api> InstitutionLog = [];
   List<Institution_Log> Institution_data = [];
-  bool isChecked = false;
+  List<bool> isChecked = [];
   bool search = false;
   bool isLoaded = false;
 }
@@ -81,6 +81,7 @@ class Branch_U extends ChangeNotifier {
   String Branch_button = 'Click here';
   List<Branch_Api> BranchLog = [];
   List<Branch_Log> Branch_data = [];
+  bool isChecked = false;
   bool search = false;
   bool isLoaded = false;
 }

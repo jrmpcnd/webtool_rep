@@ -143,3 +143,20 @@ class DeleteInstitution {
     return response;
   }
 }
+
+class DeleteBranch {
+  Future<http.Response> deletebranch(drop_branch
+      // drop_insti
+      ) async {
+    String url = 'https://sit-api-janus.fortress-asya.com:1234/drop_branch/';
+    final http.Response response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "drop_branch": drop_branch,
+          // "drop_insti": drop_insti,
+        }));
+    return response;
+  }
+}
