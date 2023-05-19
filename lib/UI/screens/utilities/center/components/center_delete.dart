@@ -13,7 +13,7 @@ class CenterDeleteFunction extends StatefulWidget {
 class _CenterDeleteFunctionState extends State<CenterDeleteFunction> {
   @override
   Widget build(BuildContext context) {
-    final shared = Provider.of<Branch_U>(context, listen: false);
+    final shared = Provider.of<Center_U>(context, listen: false);
     return Checkbox(
       checkColor: Colors.green,
       value: shared.isChecked[widget.index!],

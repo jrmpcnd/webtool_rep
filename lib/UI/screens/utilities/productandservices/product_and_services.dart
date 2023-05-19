@@ -1,14 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webtool_rep/UI/screens/utilities/institution/components/instiAPI.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
-import 'package:webtool_rep/UI/utils/functions.dart';
+import 'package:http/http.dart' as http;
 import 'package:webtool_rep/UI/utils/model2.dart';
 import '../../../../core/providers/Provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/textfield.dart';
+import 'components/product_delete.dart';
 
 class Productandservices extends StatefulWidget {
   const Productandservices({Key? key}) : super(key: key);
@@ -32,15 +35,19 @@ class _ProductandservicesState extends State<Productandservices> {
     if (res.data!.isNotEmpty) {
       print(res.data!.length);
       setState(() {
-        shared.ProductandServicesLog.add(ProductandServices_Api.fromJson(res.toJson()));
+        shared.ProductandServicesLog.add(
+            ProductandServices_Api.fromJson(res.toJson()));
         isLoaded = true;
       });
       for (var i in res.data!) {
         // shared.inqqq.add(Data.fromJson(i.toJson()));
-        shared.ProductandServices_data.add(ProductandServices_Log.fromJson(i.toJson()));
-
+        shared.ProductandServices_data.add(
+            ProductandServices_Log.fromJson(i.toJson()));
       }
-    } else{
+      for (int i = 0; i < shared.ProductandServices_data.length; i++) {
+        shared.isChecked.add(false);
+      }
+    } else {
       setState(() {
         isLoaded = true;
       });
@@ -49,13 +56,16 @@ class _ProductandservicesState extends State<Productandservices> {
       print(i.toJson());
     }
   }
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     wait();
   }
+
   @override
   Widget build(BuildContext context) {
+    DeleteProduct deleteproduct = DeleteProduct();
     final shared = Provider.of<ProductandServices_U>(context);
     final DataTableSource data = MyData(shared: shared);
     final DataTableSource data2 = MyData2();
@@ -127,31 +137,38 @@ class _ProductandservicesState extends State<Productandservices> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kPrimaryColor)),
+                                          MaterialStateProperty.all(
+                                              kPrimaryColor)),
                                   onPressed: () {
-                                    try{
+                                    try {
                                       if (controller.text.isNotEmpty) {
                                         setState(() {
                                           isLoaded = false;
                                         });
                                         shared.ProductandServices_data.clear();
-                                        for (var i in shared.ProductandServicesLog[0].data!) {
+                                        for (var i in shared
+                                            .ProductandServicesLog[0].data!) {
                                           print(i.toJson());
-                                          print(i.serviceName?.toLowerCase().contains(
-                                              controller.text.toLowerCase()));
+                                          print(i.serviceName
+                                              ?.toLowerCase()
+                                              .contains(controller.text
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
-                                            if (i.serviceName!.toLowerCase().contains(
-                                                controller.text.toLowerCase())) {
+                                            if (i.serviceName!
+                                                .toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase())) {
                                               debugPrint(i.serviceName);
                                               setState(() {
                                                 shared.ProductandServices_data
-                                                    .add(ProductandServices_Log.fromJson(i.toJson()));
+                                                    .add(ProductandServices_Log
+                                                        .fromJson(i.toJson()));
                                               });
-                                              if (shared.ProductandServices_data.isNotEmpty) {
+                                              if (shared.ProductandServices_data
+                                                  .isNotEmpty) {
                                                 Future.delayed(
                                                   Duration(seconds: 1),
-                                                      () {
+                                                  () {
                                                     setState(() {
                                                       isLoaded = true;
                                                     });
@@ -162,9 +179,11 @@ class _ProductandservicesState extends State<Productandservices> {
                                           }
                                         }
                                       }
-                                      debugPrint(
-                                          shared.ProductandServices_data[0].toJson().toString());
-                                    }catch (e) {
+                                      debugPrint(shared
+                                          .ProductandServices_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
                                       shared.ProductandServices_data.clear();
                                       isLoaded = true;
                                     }
@@ -186,8 +205,8 @@ class _ProductandservicesState extends State<Productandservices> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kSecondaryColor2)),
+                                          MaterialStateProperty.all(
+                                              kSecondaryColor2)),
                                   onPressed: () {
                                     setState(() {
                                       isLoaded = false;
@@ -195,10 +214,12 @@ class _ProductandservicesState extends State<Productandservices> {
                                     controller.clear();
                                     shared.ProductandServices_data.clear();
                                     setState(() {
-                                      shared.ProductandServices_data.addAll(shared.ProductandServicesLog[0].data!);
+                                      shared.ProductandServices_data.addAll(
+                                          shared
+                                              .ProductandServicesLog[0].data!);
                                       Future.delayed(
                                         Duration(seconds: 1),
-                                            () {
+                                        () {
                                           setState(() {
                                             isLoaded = true;
                                           });
@@ -224,8 +245,30 @@ class _ProductandservicesState extends State<Productandservices> {
                             child: ElevatedButton.icon(
                               style: ButtonStyle(
                                   backgroundColor:
-                                  MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                                      MaterialStateProperty.all(kPrimaryColor)),
+                              onPressed: () async {
+                                for (int i = 0;
+                                    i < shared.ProductandServices_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response =
+                                        await deleteproduct.deleteproduct(shared
+                                            .ProductandServices_data[i]
+                                            .serviceId);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.ProductandServices_data.removeAt(
+                                            i);
+                                      }
+                                    }
+                                  }
+                                }
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,
@@ -242,28 +285,40 @@ class _ProductandservicesState extends State<Productandservices> {
                   ),
                 ),
                 verticalSpaceRegular,
-                Column(children: [ Container(
-                  width: double.infinity,
-                  padding: kEdgeInsetsVerticalNormal,
-                  child: PaginatedDataTable(
-                    dataRowHeight: 200,
-                    key: key,
-                    arrowHeadColor: kWhiteColor,
-                    columns: [
-                      DataColumn(
-                          label: Text('Name', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Description', style: kLargeBoldTextStyle)),
-                      DataColumn(
-                          label: Text('Show', style: kLargeBoldTextStyle)),
-
-                    ],
-                    source: isLoaded ? shared.ProductandServices_data.isNotEmpty ? data : data2 : data3,
-                    rowsPerPage: 8,
-                    showFirstLastButtons: true,
-                    header: Text('List of Role', style: kXLargeBoldTextStyle),
-                  ),
-                ),],)
+                Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: kEdgeInsetsVerticalNormal,
+                      child: PaginatedDataTable(
+                        dataRowHeight: 200,
+                        key: key,
+                        arrowHeadColor: kWhiteColor,
+                        columns: [
+                          DataColumn(
+                              label: Text('Name', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Description',
+                                  style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Show', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label:
+                                  Text('Delete', style: kLargeBoldTextStyle)),
+                        ],
+                        source: isLoaded
+                            ? shared.ProductandServices_data.isNotEmpty
+                                ? data
+                                : data2
+                            : data3,
+                        rowsPerPage: 8,
+                        showFirstLastButtons: true,
+                        header:
+                            Text('List of Role', style: kXLargeBoldTextStyle),
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
@@ -272,6 +327,7 @@ class _ProductandservicesState extends State<Productandservices> {
     );
   }
 }
+
 class MyData extends DataTableSource {
   ProductandServices_U shared;
   MyData({required this.shared});
@@ -287,13 +343,21 @@ class MyData extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(
-          width: 100, child: Text(shared.ProductandServices_data[index].serviceName.toString()))),
+          width: 100,
+          child: Text(
+              shared.ProductandServices_data[index].serviceName.toString()))),
       DataCell(SizedBox(
-          width: 400, child: Text(shared.ProductandServices_data[index].serviceDescription.toString()))),
+          width: 400,
+          child: Text(shared.ProductandServices_data[index].serviceDescription
+              .toString()))),
       DataCell(SizedBox(
-          width: 100, child: Text(shared.ProductandServices_data[index].show.toString()))),
-
-
+          width: 100,
+          child: Text(shared.ProductandServices_data[index].show.toString()))),
+      DataCell(SizedBox(
+          width: 50,
+          child: ProductDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
@@ -313,10 +377,7 @@ class MyData2 extends DataTableSource {
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
-
-
-
-
+      DataCell(SizedBox(child: Text(''))),
     ]);
   }
 }
@@ -332,15 +393,10 @@ class MyData3 extends DataTableSource {
   DataRow getRow(int index) {
     debugPrint(index.toString());
     return DataRow(cells: [
-      DataCell(
-          SizedBox(child: Text('Loading, please wait'))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator(),))),
-
-
-
-
+      DataCell(SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
     ]);
   }
 }
-

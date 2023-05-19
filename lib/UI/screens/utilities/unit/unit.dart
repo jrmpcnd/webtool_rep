@@ -12,6 +12,7 @@ import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/textfield.dart';
+import '../institution/components/instiAPI.dart';
 import 'components/unit_delete.dart';
 
 class Unit extends StatefulWidget {
@@ -60,6 +61,7 @@ class _UnitState extends State<Unit> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteUnit deleteunit = DeleteUnit();
     final shared = Provider.of<Unit_U>(context);
     final DataTableSource data =
         MyData(shared: shared, dashboardContext: context);
@@ -317,7 +319,27 @@ class _UnitState extends State<Unit> {
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                              onPressed: () async {
+                                for (int i = 0;
+                                    i < shared.Unit_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response =
+                                        await deleteunit.deleteunit(
+                                            shared.Unit_data[i].unitCode);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.Unit_data.removeAt(i);
+                                      }
+                                    }
+                                  }
+                                }
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,
@@ -471,6 +493,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
     ]);
   }
 }
@@ -487,6 +510,7 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading, please wait'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),

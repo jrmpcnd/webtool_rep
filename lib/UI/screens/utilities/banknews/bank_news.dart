@@ -1,16 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webtool_rep/UI/screens/utilities/institution/components/instiAPI.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
-import 'package:webtool_rep/UI/utils/functions.dart';
 import '../../../../core/providers/Provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/model2.dart';
+import 'package:http/http.dart' as http;
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
-import '../../../widgets/textfield.dart';
 import 'components/banknews_delete.dart';
 
 class Banknews extends StatefulWidget {
@@ -63,6 +63,7 @@ class _BanknewsState extends State<Banknews> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteBanknews deletebanknews = DeleteBanknews();
     final shared = Provider.of<Banknews_U>(context);
     final DataTableSource data = MyData(shared: shared);
     final DataTableSource data2 = MyData2();
@@ -253,7 +254,27 @@ class _BanknewsState extends State<Banknews> {
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                              onPressed: () async {
+                                for (int i = 0;
+                                    i < shared.Banknews_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response =
+                                        await deletebanknews.deletebanknews(
+                                            shared.Banknews_data[i].productId);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.Banknews_data.removeAt(i);
+                                      }
+                                    }
+                                  }
+                                }
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,

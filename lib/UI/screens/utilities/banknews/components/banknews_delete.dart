@@ -13,7 +13,7 @@ class BanknewsDeleteFunction extends StatefulWidget {
 class _BanknewsDeleteFunctionState extends State<BanknewsDeleteFunction> {
   @override
   Widget build(BuildContext context) {
-    final shared = Provider.of<Branch_U>(context, listen: false);
+    final shared = Provider.of<Banknews_U>(context, listen: false);
     return Checkbox(
       checkColor: Colors.green,
       value: shared.isChecked[widget.index!],

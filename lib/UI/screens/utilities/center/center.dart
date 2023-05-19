@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
@@ -8,8 +10,8 @@ import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/textfield.dart';
-import '../feestructure/components/alertdialog.dart';
+import 'package:http/http.dart' as http;
+import '../institution/components/instiAPI.dart';
 import 'components/center_delete.dart';
 import 'components/center_edit.dart';
 
@@ -59,6 +61,7 @@ class _CentersState extends State<Centers> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteCenter deletecenter = DeleteCenter();
     final shared = Provider.of<Center_U>(context);
     final DataTableSource data =
         MyData(shared: shared, dashboardContext: context);
@@ -320,7 +323,27 @@ class _CentersState extends State<Centers> {
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                              onPressed: () async {
+                                for (int i = 0;
+                                    i < shared.Center_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response =
+                                        await deletecenter.deletecenter(
+                                            shared.Center_data[i].centerCode);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.Center_data.removeAt(i);
+                                      }
+                                    }
+                                  }
+                                }
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,
@@ -474,6 +497,7 @@ class MyData2 extends DataTableSource {
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text('')))
     ]);
   }
@@ -491,18 +515,10 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading, please wait'))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      )))
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator())))
     ]);
   }
 }

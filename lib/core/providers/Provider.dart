@@ -43,6 +43,7 @@ class AtmLocation extends ChangeNotifier {
   String ATMLocation_button = 'Click here';
   List<Atm_Loc_Api> AtmLocation_Log = [];
   List<Atm_Loc_Log> AtmLocation_data = [];
+  List<bool> isChecked = [];
   bool search = false;
   bool isLoaded = false;
 }
@@ -59,6 +60,7 @@ class ProductandServices_U extends ChangeNotifier {
   String ProductandServices_button = 'Click here';
   List<ProductandServices_Api> ProductandServicesLog = [];
   List<ProductandServices_Log> ProductandServices_data = [];
+  List<bool> isChecked = [];
   bool search = false;
 }
 

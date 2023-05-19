@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webtool_rep/core/providers/Provider.dart';
 
-class BranchDeleteFunction extends StatefulWidget {
+class DcmlocationDeleteFunction extends StatefulWidget {
   int? index;
-  BranchDeleteFunction({Key? key, this.index = 0}) : super(key: key);
+  DcmlocationDeleteFunction({Key? key, this.index = 0}) : super(key: key);
 
   @override
-  State<BranchDeleteFunction> createState() => _BranchDeleteFunctionState();
+  State<DcmlocationDeleteFunction> createState() =>
+      _DcmlocationDeleteFunctionState();
 }
 
-class _BranchDeleteFunctionState extends State<BranchDeleteFunction> {
+class _DcmlocationDeleteFunctionState extends State<DcmlocationDeleteFunction> {
   @override
   Widget build(BuildContext context) {
     final shared = Provider.of<AtmLocation>(context, listen: false);

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
@@ -5,15 +7,12 @@ import '../../../../core/providers/Provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/model2.dart';
-import '../../../utils/model2.dart';
-import '../../../utils/model2.dart';
-import '../../../utils/model2.dart';
+import 'package:http/http.dart' as http;
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
-import '../../../widgets/textfield.dart';
+import '../institution/components/instiAPI.dart';
 import 'components/alertdialogdcm.dart';
+import 'components/dcmlocation_delete.dart';
 
 class Dcmlocation extends StatefulWidget {
   const Dcmlocation({Key? key}) : super(key: key);
@@ -41,6 +40,9 @@ class _DcmlocationState extends State<Dcmlocation> {
       for (var i in res.data!) {
         shared.AtmLocation_data.add(Atm_Loc_Log.fromJson(i.toJson()));
       }
+      for (int i = 0; i < shared.AtmLocation_data.length; i++) {
+        shared.isChecked.add(false);
+      }
     }
     for (var i in shared.AtmLocation_data) {
       print(i.toJson());
@@ -57,9 +59,10 @@ class _DcmlocationState extends State<Dcmlocation> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteATM deleteatm = DeleteATM();
     final shared = Provider.of<AtmLocation>(context);
     final DataTableSource data =
-    MyData(shared: shared, dashboardContext: context);
+        MyData(shared: shared, dashboardContext: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -129,8 +132,8 @@ class _DcmlocationState extends State<Dcmlocation> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kPrimaryColor)),
+                                          MaterialStateProperty.all(
+                                              kPrimaryColor)),
                                   onPressed: () {
                                     setState(() {
                                       isLoaded = false;
@@ -145,24 +148,24 @@ class _DcmlocationState extends State<Dcmlocation> {
                                           print(i.atmCity
                                               ?.toLowerCase()
                                               .contains(controller.text
-                                              .toLowerCase()));
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.atmCity!
-                                                .toLowerCase()
-                                                .contains(controller.text
-                                                .toLowerCase()) ||
+                                                    .toLowerCase()
+                                                    .contains(controller.text
+                                                        .toLowerCase()) ||
                                                 i.atmAddress!
                                                     .toLowerCase()
                                                     .contains(controller.text
-                                                    .toLowerCase()) ||
+                                                        .toLowerCase()) ||
                                                 i.atmDescription!
                                                     .toLowerCase()
                                                     .contains(controller.text
-                                                    .toLowerCase()) ||
+                                                        .toLowerCase()) ||
                                                 i.instDesc!
                                                     .toLowerCase()
                                                     .contains(controller.text
-                                                    .toLowerCase())) {
+                                                        .toLowerCase())) {
                                               debugPrint(i.instDesc);
                                               setState(() {
                                                 shared.AtmLocation_data.add(
@@ -211,8 +214,8 @@ class _DcmlocationState extends State<Dcmlocation> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kSecondaryColor2)),
+                                          MaterialStateProperty.all(
+                                              kSecondaryColor2)),
                                   onPressed: () {
                                     setState(() {
                                       isLoaded = false;
@@ -220,10 +223,11 @@ class _DcmlocationState extends State<Dcmlocation> {
                                     controller.clear();
                                     shared.AtmLocation_data.clear();
                                     setState(() {
-                                      shared.AtmLocation_data.addAll(shared.AtmLocation_Log[0].data!);
+                                      shared.AtmLocation_data.addAll(
+                                          shared.AtmLocation_Log[0].data!);
                                       Future.delayed(
                                         Duration(seconds: 1),
-                                            () {
+                                        () {
                                           setState(() {
                                             isLoaded = true;
                                           });
@@ -249,8 +253,28 @@ class _DcmlocationState extends State<Dcmlocation> {
                             child: ElevatedButton.icon(
                               style: ButtonStyle(
                                   backgroundColor:
-                                  MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                                      MaterialStateProperty.all(kPrimaryColor)),
+                              onPressed: () async {
+                                for (int i = 0;
+                                    i < shared.AtmLocation_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response =
+                                        await deleteatm.deleteatm(
+                                            shared.AtmLocation_data[i].atmId);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.AtmLocation_data.removeAt(i);
+                                      }
+                                    }
+                                  }
+                                }
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,
@@ -291,17 +315,20 @@ class _DcmlocationState extends State<Dcmlocation> {
                                   style: kLargeBoldTextStyle)),
                           DataColumn(
                               label:
-                              Text('Action', style: kLargeBoldTextStyle)),
+                                  Text('Action', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label:
+                                  Text('Delete', style: kLargeBoldTextStyle)),
                         ],
                         source: isLoaded
                             ? shared.AtmLocation_data.isNotEmpty
-                            ? data
-                            : data2
+                                ? data
+                                : data2
                             : data3,
                         rowsPerPage: 8,
                         showFirstLastButtons: true,
                         header:
-                        Text('List of Role', style: kXLargeBoldTextStyle),
+                            Text('List of Role', style: kXLargeBoldTextStyle),
                       ),
                     ),
                   ],
@@ -337,7 +364,7 @@ class MyData extends DataTableSource {
       DataCell(SizedBox(
           width: 200,
           child:
-          Text(shared.AtmLocation_data[index].atmDescription.toString()))),
+              Text(shared.AtmLocation_data[index].atmDescription.toString()))),
       DataCell(SizedBox(
           width: 200,
           child: Text(shared.AtmLocation_data[index].atmAddress.toString()))),
@@ -357,20 +384,25 @@ class MyData extends DataTableSource {
                   atmCity: shared.AtmLocation_data[index].atmCity.toString(),
                   atmId: shared.AtmLocation_data[index].atmId.toString(),
                   atmAddress:
-                  shared.AtmLocation_data[index].atmAddress.toString(),
+                      shared.AtmLocation_data[index].atmAddress.toString(),
                   atmLatitude:
-                  shared.AtmLocation_data[index].atmLatitude.toString(),
+                      shared.AtmLocation_data[index].atmLatitude.toString(),
                   atmLongitude:
-                  shared.AtmLocation_data[index].atmLongitude.toString(),
+                      shared.AtmLocation_data[index].atmLongitude.toString(),
                   instDesc: shared.AtmLocation_data[index].instDesc.toString(),
                   atmDescription:
-                  shared.AtmLocation_data[index].atmDescription.toString(),
+                      shared.AtmLocation_data[index].atmDescription.toString(),
                 ),
               ),
             );
           },
         ),
       )),
+      DataCell(SizedBox(
+          width: 50,
+          child: DcmlocationDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
@@ -388,6 +420,7 @@ class MyData2 extends DataTableSource {
     return DataRow(cells: [
       DataCell(
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
+      DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
@@ -410,20 +443,24 @@ class MyData3 extends DataTableSource {
       DataCell(SizedBox(child: Text('Loading, please wait'))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
       DataCell(SizedBox(
           child: Center(
-            child: CircularProgressIndicator(),
-          ))),
+        child: CircularProgressIndicator(),
+      ))),
+      DataCell(SizedBox(
+          child: Center(
+        child: CircularProgressIndicator(),
+      ))),
     ]);
   }
 }
