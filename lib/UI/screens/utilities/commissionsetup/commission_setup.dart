@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/providers/data_provider.dart';
@@ -6,7 +8,10 @@ import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/model.dart';
 import '../../../utils/spacing.dart';
+import 'package:http/http.dart' as http;
 import '../../../utils/text_styles.dart';
+import '../institution/components/instiAPI.dart';
+import 'component/commission_delete.dart';
 
 class Commissionsetup extends StatefulWidget {
   const Commissionsetup({Key? key}) : super(key: key);
@@ -38,6 +43,9 @@ class _CommissionsetupState extends State<Commissionsetup> {
         setState(() {});
         shared15.commission_data.add(Data18.fromJson(i.toJson()));
       }
+      for (int i = 0; i < shared15.commission_data.length; i++) {
+        shared15.isChecked.add(false);
+      }
     }
     for (var i in shared15.commission_data) {
       print(i.toJson());
@@ -52,6 +60,7 @@ class _CommissionsetupState extends State<Commissionsetup> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteCommission deletecommission = DeleteCommission();
     final shared = Provider.of<Prov18>(context);
     final DataTableSource data = MyData(shared: shared);
     final DataTableSource data2 = MyData2();
@@ -297,7 +306,28 @@ class _CommissionsetupState extends State<Commissionsetup> {
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                              onPressed: () async {
+                                for (int i = 0;
+                                    i < shared.commission_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response =
+                                        await deletecommission.deletecommission(
+                                            shared.commission_data[i].id);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.commission_data.removeAt(i);
+                                        isLoaded = false;
+                                      }
+                                    }
+                                  }
+                                }
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,
@@ -341,7 +371,10 @@ class _CommissionsetupState extends State<Commissionsetup> {
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label: Text('Bank Partner Income',
-                                    style: kLargeBoldTextStyle))
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label:
+                                    Text('Delete', style: kLargeBoldTextStyle))
                           ],
                           source: isLoaded
                               ? shared.commission_data.isNotEmpty
@@ -397,8 +430,13 @@ class MyData extends DataTableSource {
           child: Text(shared.commission_data[index].bankIncome.toString()))),
       DataCell(SizedBox(
           width: 150,
-          child:
-              Text(shared.commission_data[index].bankPartnerIncome.toString())))
+          child: Text(
+              shared.commission_data[index].bankPartnerIncome.toString()))),
+      DataCell(SizedBox(
+          width: 50,
+          child: CommissionDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
@@ -420,6 +458,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text('')))
     ]);
   }
@@ -437,6 +476,7 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),

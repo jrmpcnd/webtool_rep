@@ -1,17 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/utils/model.dart';
 import '../../../../core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
+import 'package:http/http.dart' as http;
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
-import '../../../widgets/tables.dart';
-import '../../../widgets/textfield.dart';
+import '../institution/components/instiAPI.dart';
+import 'components/loadproduct_delete.dart';
 
 class Loadproduct extends StatefulWidget {
   const Loadproduct({Key? key}) : super(key: key);
@@ -42,6 +42,9 @@ class _LoadproductState extends State<Loadproduct> {
       for (var i in res17.data!) {
         setState(() {});
         shared15.load_data.add(Data17.fromJson(i.toJson()));
+      }
+      for (int i = 0; i < shared15.load_data.length; i++) {
+        shared15.isChecked.add(false);
       }
     }
     for (var i in shared15.load_data) {
@@ -75,6 +78,7 @@ class _LoadproductState extends State<Loadproduct> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteLoadproduct deleteloadproduct = DeleteLoadproduct();
     final shared = Provider.of<Prov17>(context);
     final DataTableSource data = MyData(shared: shared);
     final DataTableSource data2 = MyData2();
@@ -354,7 +358,29 @@ class _LoadproductState extends State<Loadproduct> {
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                              onPressed: () async {
+                                for (int i = 0;
+                                    i < shared.load_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response =
+                                        await deleteloadproduct
+                                            .deleteloadproduct(shared
+                                                .load_data[i].loadProductId);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.load_data.removeAt(i);
+                                        isLoaded = false;
+                                      }
+                                    }
+                                  }
+                                }
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,
@@ -395,7 +421,10 @@ class _LoadproductState extends State<Loadproduct> {
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label:
-                                    Text('Status', style: kLargeBoldTextStyle))
+                                    Text('Status', style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label:
+                                    Text('Delete', style: kLargeBoldTextStyle))
                           ],
                           source: isLoaded
                               ? shared.load_data.isNotEmpty
@@ -445,7 +474,12 @@ class MyData extends DataTableSource {
           width: 150,
           child: Text(shared.load_data[index].description.toString()))),
       DataCell(SizedBox(
-          width: 150, child: Text(shared.load_data[index].status.toString())))
+          width: 150, child: Text(shared.load_data[index].status.toString()))),
+      DataCell(SizedBox(
+          width: 50,
+          child: LoadproductDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
@@ -466,6 +500,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text('')))
     ]);
   }
@@ -483,6 +518,7 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),

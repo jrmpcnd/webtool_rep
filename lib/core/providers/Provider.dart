@@ -53,6 +53,7 @@ class Banknews_U extends ChangeNotifier {
   List<BankNews_Api> BanknewsLog = [];
   List<BankNews_Log> Banknews_data = [];
   List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search = false;
 }
 
@@ -61,6 +62,7 @@ class ProductandServices_U extends ChangeNotifier {
   List<ProductandServices_Api> ProductandServicesLog = [];
   List<ProductandServices_Log> ProductandServices_data = [];
   List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search = false;
 }
 
@@ -68,6 +70,8 @@ class Servicedowntime_U extends ChangeNotifier {
   String Servicedowntime_button = 'Click here';
   List<Servicedowntime_Api> ServicedowntimeLog = [];
   List<Servicedowntime_Log> Servicedowntime_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search = false;
 }
 

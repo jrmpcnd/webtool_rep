@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
@@ -8,9 +10,9 @@ import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
-import '../../../widgets/textfield.dart';
+import 'package:http/http.dart' as http;
+import '../institution/components/instiAPI.dart';
+import 'components/downtime_delete.dart';
 
 class Servicedowntime extends StatefulWidget {
   const Servicedowntime({Key? key}) : super(key: key);
@@ -40,6 +42,9 @@ class _ServicedowntimeState extends State<Servicedowntime> {
         shared.Servicedowntime_data.add(
             Servicedowntime_Log.fromJson(i.toJson()));
       }
+      for (int i = 0; i < shared.Servicedowntime_data.length; i++) {
+        shared.isChecked.add(false);
+      }
     }
     for (var i in shared.Servicedowntime_data) {
       print(i.toJson());
@@ -56,6 +61,7 @@ class _ServicedowntimeState extends State<Servicedowntime> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteDowntime deletedowntime = DeleteDowntime();
     final shared = Provider.of<Servicedowntime_U>(context);
     final DataTableSource data = MyData(shared: shared);
     final DataTableSource data2 = MyData2();
@@ -144,28 +150,35 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
                                   onPressed: () {
-                                    try{
+                                    try {
                                       if (controller.text.isNotEmpty) {
                                         setState(() {
                                           isLoaded = false;
                                         });
                                         shared.Servicedowntime_data.clear();
-                                        for (var i in shared.ServicedowntimeLog[0].data!) {
+                                        for (var i in shared
+                                            .ServicedowntimeLog[0].data!) {
                                           print(i.toJson());
-                                          print(i.downtimeDesc?.toLowerCase().contains(
-                                              controller.text.toLowerCase()));
+                                          print(i.downtimeDesc
+                                              ?.toLowerCase()
+                                              .contains(controller.text
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
-                                            if (i.downtimeDesc!.toLowerCase().contains(
-                                                controller.text.toLowerCase())) {
+                                            if (i.downtimeDesc!
+                                                .toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase())) {
                                               debugPrint(i.downtimeDesc);
                                               setState(() {
-                                                shared.Servicedowntime_data
-                                                    .add(Servicedowntime_Log.fromJson(i.toJson()));
+                                                shared.Servicedowntime_data.add(
+                                                    Servicedowntime_Log
+                                                        .fromJson(i.toJson()));
                                               });
-                                              if (shared.Servicedowntime_data.isNotEmpty) {
+                                              if (shared.Servicedowntime_data
+                                                  .isNotEmpty) {
                                                 Future.delayed(
                                                   Duration(seconds: 1),
-                                                      () {
+                                                  () {
                                                     setState(() {
                                                       isLoaded = true;
                                                     });
@@ -176,9 +189,10 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                                           }
                                         }
                                       }
-                                      debugPrint(
-                                          shared.Servicedowntime_data[0].toJson().toString());
-                                    }catch (e) {
+                                      debugPrint(shared.Servicedowntime_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
                                       shared.Servicedowntime_data.clear();
                                       isLoaded = true;
                                     }
@@ -240,7 +254,29 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                              onPressed: () async {
+                                for (int i = 0;
+                                    i < shared.Servicedowntime_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response =
+                                        await deletedowntime.deletedowntime(
+                                            shared.Servicedowntime_data[i]
+                                                .downtimeId);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.Servicedowntime_data.removeAt(i);
+                                        isLoaded = false;
+                                      }
+                                    }
+                                  }
+                                }
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,
@@ -279,6 +315,9 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                           DataColumn(
                               label: Text('Client Type',
                                   style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label:
+                                  Text('Delete', style: kLargeBoldTextStyle)),
                         ],
                         source: isLoaded
                             ? shared.Servicedowntime_data.isNotEmpty
@@ -332,6 +371,11 @@ class MyData extends DataTableSource {
           width: 200,
           child:
               Text(shared.Servicedowntime_data[index].clientType.toString()))),
+      DataCell(SizedBox(
+          width: 50,
+          child: DowntimeDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
@@ -352,6 +396,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
     ]);
   }
 }
@@ -366,20 +411,12 @@ class MyData3 extends DataTableSource {
   @override
   DataRow getRow(int index) {
     debugPrint(index.toString());
-    return DataRow(cells: [
+    return const DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading, please wait'))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
     ]);
   }
 }

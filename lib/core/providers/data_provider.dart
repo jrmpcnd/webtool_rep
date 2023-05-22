@@ -107,6 +107,8 @@ class Prov16 extends ChangeNotifier {
   String biller_button = 'Click here';
   List<Biller_Product> biller = [];
   List<Data16> biller_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search16 = false;
 }
 
@@ -114,6 +116,8 @@ class Prov17 extends ChangeNotifier {
   String load_button = 'Click here';
   List<Load_Product> load = [];
   List<Data17> load_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search17 = false;
 }
 
@@ -121,6 +125,8 @@ class Prov18 extends ChangeNotifier {
   String commission_button = 'Click here';
   List<Commission_Setup> commission = [];
   List<Data18> commission_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search18 = false;
 }
 
@@ -137,6 +143,8 @@ class Prov20 extends ChangeNotifier {
   String partner_button = 'Click here';
   List<Partner_List> partner = [];
   List<Data20> partner_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search20 = false;
 }
 
@@ -144,5 +152,7 @@ class Prov21 extends ChangeNotifier {
   String splash_button = 'Click here';
   List<Splash_Screen> splash = [];
   List<Data21> splash_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search21 = false;
 }

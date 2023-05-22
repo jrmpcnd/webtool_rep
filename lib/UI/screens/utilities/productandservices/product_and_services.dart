@@ -46,6 +46,7 @@ class _ProductandservicesState extends State<Productandservices> {
       }
       for (int i = 0; i < shared.ProductandServices_data.length; i++) {
         shared.isChecked.add(false);
+        isLoaded = true;
       }
     } else {
       setState(() {
