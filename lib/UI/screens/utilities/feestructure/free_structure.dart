@@ -1,3 +1,4 @@
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,10 @@ import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
+import 'package:http/http.dart' as http;
+
+import '../institution/components/instiAPI.dart';
+import 'components/structure_delete.dart';
 
 class Feestructure extends StatefulWidget {
   const Feestructure({Key? key}) : super(key: key);
@@ -38,6 +42,9 @@ class _FeestructureState extends State<Feestructure> {
       for (var i in res2.data!) {
         setState(() {});
         shared2.fee_data.add(Data12.fromJson(i.toJson()));
+      }
+      for (int i = 0; i < shared2.fee_data.length; i++) {
+        shared2.isChecked.add(false);
       }
     }
     for (var i in shared2.fee_data) {
@@ -70,8 +77,10 @@ class _FeestructureState extends State<Feestructure> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteFee deletefee = DeleteFee();
     final shared = Provider.of<Prov12>(context);
-    final DataTableSource data = MyData(shared: shared, dashboardContext: context);
+    final DataTableSource data =
+        MyData(shared: shared, dashboardContext: context);
     final DataTableSource data2 = MyData2();
     final DataTableSource data3 = MyData3();
     final key = new GlobalKey<PaginatedDataTableState>();
@@ -176,7 +185,26 @@ class _FeestructureState extends State<Feestructure> {
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                              onPressed: () async {
+                                for (int i = 0;
+                                    i < shared.fee_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response = await deletefee
+                                        .deletefee(shared.fee_data[i].feeId);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.fee_data.removeAt(i);
+                                      }
+                                    }
+                                  }
+                                }
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,
@@ -353,7 +381,10 @@ class _FeestructureState extends State<Feestructure> {
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label:
-                                Text('Action', style: kLargeBoldTextStyle)),
+                                    Text('Action', style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label:
+                                    Text('Delete', style: kLargeBoldTextStyle))
                           ],
                           source: isLoaded
                               ? shared.fee_data.isNotEmpty
@@ -413,30 +444,40 @@ class MyData extends DataTableSource {
       DataCell(SizedBox(
           width: 100,
           child: Text(shared.fee_data[index].bancnetIncome.toString()))),
-    DataCell(SizedBox(
-    width: 50,
-    child: IconButton(
-    icon: Icon(Icons.edit),
-    onPressed: () {
-    showDialog(
-    context: dashboardContext!,
-    builder: (ctx) => Form(
-    key: _formKey,
-    child: AlertEditFunction(feeId: shared.fee_data[index].feeId.toString(),
-    transType: shared.fee_data[index].transType.toString(),
-    range: shared.fee_data[index].range.toString(),
-        totalCharge: shared.fee_data[index].totalCharge.toString(),
-        agentIncome: shared.fee_data[index].agentIncome.toString(),
-        bankIncome: shared.fee_data[index].bankIncome.toString(),
-        bancnetIncome: shared.fee_data[index].bancnetIncome.toString(),
-        agentTargetIncome: shared.fee_data[index].agentTargetIncome.toString(),
-      clientType: shared.fee_data[index].clientType,
-    ),
-    ),
-    );
-    },
-    ),
-    ),),
+      DataCell(
+        SizedBox(
+          width: 50,
+          child: IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {
+              showDialog(
+                context: dashboardContext!,
+                builder: (ctx) => Form(
+                  key: _formKey,
+                  child: AlertEditFunction(
+                    feeId: shared.fee_data[index].feeId.toString(),
+                    transType: shared.fee_data[index].transType.toString(),
+                    range: shared.fee_data[index].range.toString(),
+                    totalCharge: shared.fee_data[index].totalCharge.toString(),
+                    agentIncome: shared.fee_data[index].agentIncome.toString(),
+                    bankIncome: shared.fee_data[index].bankIncome.toString(),
+                    bancnetIncome:
+                        shared.fee_data[index].bancnetIncome.toString(),
+                    agentTargetIncome:
+                        shared.fee_data[index].agentTargetIncome.toString(),
+                    clientType: shared.fee_data[index].clientType,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+      DataCell(SizedBox(
+          width: 50,
+          child: StructureDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
@@ -451,7 +492,7 @@ class MyData2 extends DataTableSource {
   @override
   DataRow getRow(int index) {
     debugPrint(index.toString());
-    return DataRow(cells: [
+    return const DataRow(cells: [
       DataCell(
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
@@ -461,7 +502,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
-
+      DataCell(SizedBox(child: Text(''))),
     ]);
   }
 }
@@ -476,7 +517,7 @@ class MyData3 extends DataTableSource {
   @override
   DataRow getRow(int index) {
     debugPrint(index.toString());
-    return DataRow(cells: [
+    return const DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
@@ -485,6 +526,7 @@ class MyData3 extends DataTableSource {
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator())))
     ]);
   }
 }

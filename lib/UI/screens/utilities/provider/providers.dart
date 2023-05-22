@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webtool_rep/UI/screens/utilities/institution/components/instiAPI.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
 import 'package:webtool_rep/UI/utils/functions.dart';
 import 'package:webtool_rep/UI/utils/model2.dart';
@@ -8,7 +11,8 @@ import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/textfield.dart';
+import 'package:http/http.dart' as http;
+import 'components/provider_delete.dart';
 import 'components/provider_edit.dart';
 
 class Providers extends StatefulWidget {
@@ -39,6 +43,9 @@ class _ProvidersState extends State<Providers> {
       for (var i in res.data!) {
         shared.Providers_data.add(Providers_Log.fromJson(i.toJson()));
       }
+      for (int i = 0; i < shared.Providers_data.length; i++) {
+        shared.isChecked.add(false);
+      }
     }
     for (var i in shared.Providers_data) {
       print(i.toJson());
@@ -54,6 +61,7 @@ class _ProvidersState extends State<Providers> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteProvider deleteprovider = DeleteProvider();
     final shared = Provider.of<Providers_U>(context);
     final DataTableSource data =
         MyData(shared: shared, dashboardContext: context);
@@ -310,7 +318,27 @@ class _ProvidersState extends State<Providers> {
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                              onPressed: () async {
+                                for (int i = 0;
+                                    i < shared.Providers_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response =
+                                        await deleteprovider.deleteprovider(
+                                            shared.Providers_data[i].id);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.Providers_data.removeAt(i);
+                                      }
+                                    }
+                                  }
+                                }
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,
@@ -355,6 +383,8 @@ class _ProvidersState extends State<Providers> {
                           DataColumn(
                               label:
                                   Text('Action', style: kLargeBoldTextStyle)),
+                          DataColumn(
+                              label: Text('Delete', style: kLargeBoldTextStyle))
                         ],
                         source: isLoaded
                             ? shared.Providers_data.isNotEmpty
@@ -455,6 +485,11 @@ class MyData extends DataTableSource {
           },
         ),
       )),
+      DataCell(SizedBox(
+          width: 50,
+          child: ProviderDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
@@ -476,6 +511,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text('')))
     ]);
   }
@@ -493,26 +529,12 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading, please wait'))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator())))
     ]);
   }
 }

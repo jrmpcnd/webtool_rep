@@ -372,3 +372,56 @@ class DeleteProductcategory {
     return response;
   }
 }
+
+class DeleteProducttype {
+  Future<http.Response> deleteproducttype(drop_id
+      // drop_insti
+      ) async {
+    String url =
+        'https://sit-api-janus.fortress-asya.com:1234/drop_producttype/';
+    final http.Response response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "drop_id": drop_id,
+          // "drop_insti": drop_insti,
+        }));
+    return response;
+  }
+}
+
+class DeleteProvider {
+  Future<http.Response> deleteprovider(drop_id
+      // drop_insti
+      ) async {
+    String url = 'https://sit-api-janus.fortress-asya.com:1234/drop_provider/';
+    final http.Response response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "drop_id": drop_id,
+          // "drop_insti": drop_insti,
+        }));
+    return response;
+  }
+}
+
+class DeleteFee {
+  Future<http.Response> deletefee(drop_id
+      // drop_insti
+      ) async {
+    String url =
+        'https://sit-api-janus.fortress-asya.com:1234/drop_feestructure/';
+    final http.Response response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "drop_id": drop_id,
+          // "drop_insti": drop_insti,
+        }));
+    return response;
+  }
+}
