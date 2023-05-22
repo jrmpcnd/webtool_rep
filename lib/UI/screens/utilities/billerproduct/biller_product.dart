@@ -1,12 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webtool_rep/UI/screens/utilities/institution/components/instiAPI.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
 import '../../../../core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/model.dart';
 import '../../../utils/spacing.dart';
+import 'package:http/http.dart' as http;
 import '../../../utils/text_styles.dart';
+import 'components/billerproduct_delete.dart';
 
 class Billerproduct extends StatefulWidget {
   const Billerproduct({Key? key}) : super(key: key);
@@ -36,6 +41,9 @@ class _BillerproductState extends State<Billerproduct> {
       for (var i in res16.data!) {
         setState(() {});
         shared15.biller_data.add(Data16.fromJson(i.toJson()));
+      }
+      for (int i = 0; i < shared15.biller_data.length; i++) {
+        shared15.isChecked.add(false);
       }
     }
     for (var i in shared15.biller_data) {
@@ -87,6 +95,7 @@ class _BillerproductState extends State<Billerproduct> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteBillerproduct deletebillerproduct = DeleteBillerproduct();
     final shared = Provider.of<Prov16>(context);
     final DataTableSource data = MyData(shared: shared);
     final DataTableSource data2 = MyData2();
@@ -381,7 +390,32 @@ class _BillerproductState extends State<Billerproduct> {
                                           backgroundColor:
                                               MaterialStateProperty.all(
                                                   kPrimaryColor)),
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        for (int i = 0;
+                                            i < shared.biller_data.length;
+                                            i++) {
+                                          if (shared.isChecked[i] == true) {
+                                            http.Response response =
+                                                await deletebillerproduct
+                                                    .deletebillerproduct(shared
+                                                        .biller_data[i]
+                                                        .billerProductId);
+                                            print(jsonDecode(
+                                                response.body)['message']);
+                                            if (await jsonDecode(
+                                                    response.body)['message']
+                                                .toString()
+                                                .toLowerCase()
+                                                .contains(
+                                                    "Updated Successfully")) {
+                                              if (shared.isChecked[i] == true) {
+                                                shared.biller_data.removeAt(i);
+                                                isLoaded = false;
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
                                       icon: const Icon(
                                         Icons.delete_outline,
                                         size: 20.0,
@@ -435,7 +469,10 @@ class _BillerproductState extends State<Billerproduct> {
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label:
-                                    Text('Status', style: kLargeBoldTextStyle))
+                                    Text('Status', style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label:
+                                    Text('Delete', style: kLargeBoldTextStyle))
                           ],
                           source: isLoaded
                               ? shared.biller_data.isNotEmpty
@@ -495,7 +532,12 @@ class MyData extends DataTableSource {
           width: 150,
           child: Text(shared.biller_data[index].serviceFee.toString()))),
       DataCell(SizedBox(
-          width: 150, child: Text(shared.biller_data[index].status.toString())))
+          width: 50, child: Text(shared.biller_data[index].status.toString()))),
+      DataCell(SizedBox(
+          width: 50,
+          child: BillerproductDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
@@ -519,6 +561,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text('')))
     ]);
   }
@@ -536,6 +579,7 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),

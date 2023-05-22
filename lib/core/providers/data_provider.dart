@@ -35,6 +35,8 @@ class Prov6 extends ChangeNotifier {
   String agent_button = 'Click here';
   List<Agent_Dashboard> agent = [];
   List<Data6> agent_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search6 = false;
 }
 
@@ -42,6 +44,8 @@ class Prov7 extends ChangeNotifier {
   String failedenrollment_button = 'Click here';
   List<Failed_Enrollment> failed = [];
   List<Data7> failed_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search7 = false;
 }
 
@@ -49,6 +53,8 @@ class Prov8 extends ChangeNotifier {
   String listoragent_button = 'Click here';
   List<List_Agent> list_agent = [];
   List<Data8> list_agent_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search8 = false;
 }
 
@@ -56,6 +62,8 @@ class Prov9 extends ChangeNotifier {
   String broadcast_button = 'Click here';
   List<Broadcast_Message> broadcast = [];
   List<Data9> broadcast_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search9 = false;
 }
 
@@ -63,6 +71,8 @@ class Prov10 extends ChangeNotifier {
   String concern_button = 'Click here';
   List<Type_of_Concern> concern = [];
   List<Data10> concern_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search10 = false;
 }
 
@@ -70,6 +80,8 @@ class Prov11 extends ChangeNotifier {
   String hotline_button = 'Click here';
   List<CSR_Hotline> hotline = [];
   List<Data11> hotline_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search11 = false;
 }
 
@@ -77,22 +89,26 @@ class Prov12 extends ChangeNotifier {
   String fee_button = 'Click here';
   List<Fee_Structure> fee = [];
   List<Data12> fee_data = [];
-  bool search12 = false;
+  List<bool> isChecked = [];
   bool isLoaded = false;
+  bool search12 = false;
 }
 
 class Prov13 extends ChangeNotifier {
   String prov_button = 'Click here';
   List<Prov_Config> prov = [];
   List<Data13> prov_data = [];
-  bool search13 = false;
+  List<bool> isChecked = [];
   bool isLoaded = false;
+  bool search13 = false;
 }
 
 class Prov14 extends ChangeNotifier {
   String product_button = 'Click here';
   List<Product_Type> product = [];
   List<Data14> product_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search14 = false;
 }
 
@@ -100,6 +116,8 @@ class Prov15 extends ChangeNotifier {
   String category_button = 'Click here';
   List<Product_Category> category = [];
   List<Data15> category_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
   bool search15 = false;
 }
 

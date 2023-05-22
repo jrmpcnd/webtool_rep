@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
@@ -5,8 +7,11 @@ import 'package:webtool_rep/UI/utils/model.dart';
 import '../../../../core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
+import 'package:http/http.dart' as http;
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
+import '../institution/components/instiAPI.dart';
+import 'components/productcategory_delete.dart';
 
 class Productcategory extends StatefulWidget {
   const Productcategory({Key? key}) : super(key: key);
@@ -36,6 +41,9 @@ class _ProductcategoryState extends State<Productcategory> {
       for (var i in res15.data!) {
         setState(() {});
         shared15.category_data.add(Data15.fromJson(i.toJson()));
+      }
+      for (int i = 0; i < shared15.category_data.length; i++) {
+        shared15.isChecked.add(false);
       }
     }
     for (var i in shared15.category_data) {
@@ -86,6 +94,7 @@ class _ProductcategoryState extends State<Productcategory> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteProductcategory deleteproductcategory = DeleteProductcategory();
     final shared = Provider.of<Prov15>(context);
     final DataTableSource data = MyData(shared: shared);
     final DataTableSource data2 = MyData2();
@@ -382,7 +391,33 @@ class _ProductcategoryState extends State<Productcategory> {
                                           backgroundColor:
                                               MaterialStateProperty.all(
                                                   kPrimaryColor)),
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        for (int i = 0;
+                                            i < shared.category_data.length;
+                                            i++) {
+                                          if (shared.isChecked[i] == true) {
+                                            http.Response response =
+                                                await deleteproductcategory
+                                                    .deleteproductcategory(
+                                                        shared.category_data[i]
+                                                            .productCategoryId);
+                                            print(jsonDecode(
+                                                response.body)['message']);
+                                            if (await jsonDecode(
+                                                    response.body)['message']
+                                                .toString()
+                                                .toLowerCase()
+                                                .contains(
+                                                    "Updated Successfully")) {
+                                              if (shared.isChecked[i] == true) {
+                                                shared.category_data
+                                                    .removeAt(i);
+                                                isLoaded = false;
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
                                       icon: const Icon(
                                         Icons.delete_outline,
                                         size: 20.0,
@@ -427,7 +462,10 @@ class _ProductcategoryState extends State<Productcategory> {
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label:
-                                    Text('Status', style: kLargeBoldTextStyle))
+                                    Text('Status', style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label:
+                                    Text('Delete', style: kLargeBoldTextStyle))
                           ],
                           source: isLoaded
                               ? shared.category_data.isNotEmpty
@@ -479,8 +517,13 @@ class MyData extends DataTableSource {
           child: Text(
               shared.category_data[index].productCategoryName.toString()))),
       DataCell(SizedBox(
-          width: 150,
-          child: Text(shared.category_data[index].status.toString())))
+          width: 50,
+          child: Text(shared.category_data[index].status.toString()))),
+      DataCell(SizedBox(
+          width: 50,
+          child: ProductcategoryDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
@@ -501,6 +544,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text('')))
     ]);
   }
@@ -518,6 +562,7 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),

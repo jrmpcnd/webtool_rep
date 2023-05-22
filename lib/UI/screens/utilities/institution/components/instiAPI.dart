@@ -336,3 +336,39 @@ class DeleteLoadproduct {
     return response;
   }
 }
+
+class DeleteBillerproduct {
+  Future<http.Response> deletebillerproduct(drop_id
+      // drop_insti
+      ) async {
+    String url =
+        'https://sit-api-janus.fortress-asya.com:1234/drop_billerproduct/';
+    final http.Response response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "drop_id": drop_id,
+          // "drop_insti": drop_insti,
+        }));
+    return response;
+  }
+}
+
+class DeleteProductcategory {
+  Future<http.Response> deleteproductcategory(drop_id
+      // drop_insti
+      ) async {
+    String url =
+        'https://sit-api-janus.fortress-asya.com:1234/drop_productcategory/';
+    final http.Response response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "drop_id": drop_id,
+          // "drop_insti": drop_insti,
+        }));
+    return response;
+  }
+}
