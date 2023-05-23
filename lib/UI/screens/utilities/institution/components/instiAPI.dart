@@ -425,3 +425,20 @@ class DeleteFee {
     return response;
   }
 }
+
+class DeleteHierarchy {
+  Future<http.Response> deletehierarchy(drop_id
+      // drop_insti
+      ) async {
+    String url = 'https://sit-api-janus.fortress-asya.com:1234/drop_hierarchy/';
+    final http.Response response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "drop_id": drop_id,
+          // "drop_insti": drop_insti,
+        }));
+    return response;
+  }
+}

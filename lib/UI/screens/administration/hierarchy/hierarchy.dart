@@ -1,13 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webtool_rep/UI/screens/utilities/institution/components/instiAPI.dart';
 import 'package:webtool_rep/core/providers/Provider.dart';
 import '../../../utils/api.dart';
 import '../../../utils/api2.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/model2.dart';
+import 'package:http/http.dart' as http;
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
+import 'components/hierarchy_delete.dart';
 
 class Hierarchy extends StatefulWidget {
   const Hierarchy({Key? key}) : super(key: key);
@@ -48,6 +53,9 @@ class _HierarchyState extends State<Hierarchy> {
       });
       for (var i in res.data!) {
         shared.Hierarchy_data.add(H_SaveAccount.fromJson(i.toJson()));
+      }
+      for (int i = 0; i < shared.Hierarchy_data.length; i++) {
+        shared.isChecked.add(false);
       }
     }
     for (var i in shared.Hierarchy_data) {
@@ -117,6 +125,7 @@ class _HierarchyState extends State<Hierarchy> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteHierarchy deletehierarchy = DeleteHierarchy();
     final shared = Provider.of<H_Prov>(context);
     final DataTableSource data = MyData(shared: shared);
     final DataTableSource data2 = MyData2(shared: shared);
@@ -401,7 +410,32 @@ class _HierarchyState extends State<Hierarchy> {
                                           backgroundColor:
                                               MaterialStateProperty.all(
                                                   kPrimaryColor)),
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        for (int i = 0;
+                                            i < shared.Hierarchy_data.length;
+                                            i++) {
+                                          if (shared.isChecked[i] == true) {
+                                            http.Response response =
+                                                await deletehierarchy
+                                                    .deletehierarchy(shared
+                                                        .Hierarchy_data[i]
+                                                        .hierarchyId);
+                                            print(jsonDecode(
+                                                response.body)['message']);
+                                            if (await jsonDecode(
+                                                    response.body)['message']
+                                                .toString()
+                                                .toLowerCase()
+                                                .contains(
+                                                    "Updated Successfully")) {
+                                              if (shared.isChecked[i] == true) {
+                                                shared.Hierarchy_data.removeAt(
+                                                    i);
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
                                       icon: const Icon(
                                         Icons.delete,
                                         size: 20.0,
@@ -430,137 +464,6 @@ class _HierarchyState extends State<Hierarchy> {
                     ),
                     Column(
                       children: [
-                        // Container(
-                        //   width: 500,
-                        //   child: TextFormField(
-                        //     style: TextStyle(color: kBlackColor),
-                        //     decoration: const InputDecoration(
-                        //       hintText: 'Institution, Unit, Branch, Center',
-                        //       border: OutlineInputBorder(),
-                        //       labelStyle: TextStyle(fontSize: 12.0),
-                        //       contentPadding: EdgeInsets.only(left: 10.0),
-                        //       hintStyle: TextStyle(color: kSecondaryColor2),
-                        //       enabledBorder: OutlineInputBorder(
-                        //         borderSide: BorderSide(color: kBlackColor),
-                        //       ),
-                        //       focusedBorder: OutlineInputBorder(
-                        //         borderSide: BorderSide(color: kBlackColor),
-                        //       ),
-                        //     ),
-                        //     textInputAction: TextInputAction.go,
-                        //     controller: controller,
-                        //     onChanged: (value) {
-                        //       setState(() {
-                        //         isLoaded = false;
-                        //       });
-                        //       //
-                        //       try {
-                        //         if (controller.text.isNotEmpty) {
-                        //           shared.Hierarchy_data.clear();
-                        //           // debugPrint(shared.Hierarchy[0].data.toString());
-                        //           for (var i in shared.Hierarchy[0].data!) {
-                        //             print(i.toJson());
-                        //             // print(i.branchCode
-                        //             //     ?.toLowerCase()
-                        //             //     .contains(controller.text.toLowerCase()));
-                        //             if (i.toJson().isNotEmpty) {
-                        //               if (i.branchDesc!.toLowerCase().contains(
-                        //                       controller.text.toLowerCase()) ||
-                        //                   i.unitCode!.toLowerCase().contains(
-                        //                       controller.text.toLowerCase()) ||
-                        //                   i.unitDesc!.toLowerCase().contains(
-                        //                       controller.text.toLowerCase()) ||
-                        //                   i.centerCode!.toLowerCase().contains(
-                        //                       controller.text.toLowerCase()) ||
-                        //                   i.centerDesc!.toLowerCase().contains(
-                        //                       controller.text.toLowerCase()) ||
-                        //                   i.branchCode!.toLowerCase().contains(
-                        //                       controller.text.toLowerCase())) {
-                        //                 print(i.toJson());
-                        //                 //debugPrint(i.branchCode);
-                        //                 setState(() {
-                        //                   shared.Hierarchy_data.add(
-                        //                       H_SaveAccount.fromJson(
-                        //                           i.toJson()));
-                        //                 });
-                        //                 if (shared.Hierarchy_data.isNotEmpty) {
-                        //                   setState(() {
-                        //                     isLoaded = true;
-                        //                   });
-                        //                 }
-                        //               }
-                        //             }
-                        //           }
-                        //         } else if (controller.text == '') {
-                        //           shared.Hierarchy_data.clear();
-                        //           setState(() {
-                        //             shared.Hierarchy_data.addAll(
-                        //                 shared.Hierarchy[0].data!);
-                        //             isLoaded = true;
-                        //           });
-                        //         }
-                        //         debugPrint(shared.Hierarchy_data[0]
-                        //             .toJson()
-                        //             .toString());
-                        //       } catch (e) {
-                        //         shared.Hierarchy_data.clear();
-                        //         isLoaded = true;
-                        //       }
-                        //     },
-                        //     onEditingComplete: () async {
-                        //       setState(() {
-                        //         isLoaded = false;
-                        //       });
-                        //       try {
-                        //         if (controller.text.isNotEmpty) {
-                        //           shared.Hierarchy_data.clear();
-                        //           for (var i in shared.Hierarchy[0].data!) {
-                        //             print(i.branchCode?.toLowerCase().contains(
-                        //                 controller.text.toLowerCase()));
-                        //             if (i.toJson().isNotEmpty) {
-                        //               if (i.branchDesc!.toLowerCase().contains(
-                        //                       controller.text.toLowerCase()) ||
-                        //                   i.unitCode!.toLowerCase().contains(
-                        //                       controller.text.toLowerCase()) ||
-                        //                   i.unitDesc!.toLowerCase().contains(
-                        //                       controller.text.toLowerCase()) ||
-                        //                   i.centerCode!.toLowerCase().contains(
-                        //                       controller.text.toLowerCase()) ||
-                        //                   i.centerDesc!.toLowerCase().contains(
-                        //                       controller.text.toLowerCase()) ||
-                        //                   i.branchCode!.toLowerCase().contains(
-                        //                       controller.text.toLowerCase())) {
-                        //                 debugPrint(i.branchCode);
-                        //                 setState(() {
-                        //                   key.currentState?.pageTo(0);
-                        //                   shared.Hierarchy_data.add(
-                        //                       H_SaveAccount.fromJson(
-                        //                           i.toJson()));
-                        //                 });
-                        //                 if (shared.Hierarchy_data.isNotEmpty) {
-                        //                   setState(() {
-                        //                     isLoaded = true;
-                        //                   });
-                        //                 }
-                        //               }
-                        //             }
-                        //           }
-                        //         } else if (controller.text == '') {
-                        //           shared.Hierarchy_data.clear();
-                        //           setState(() {
-                        //             shared.Hierarchy_data.addAll(
-                        //                 shared.Hierarchy[0].data!);
-                        //           });
-                        //         }
-                        //         debugPrint(shared.Hierarchy_data[0]
-                        //             .toJson()
-                        //             .toString());
-                        //       } catch (e) {
-                        //         shared.Hierarchy_data.clear();
-                        //       }
-                        //     },
-                        //   ),
-                        // ),
                         Container(
                           width: double.infinity,
                           padding: kEdgeInsetsVerticalNormal,
@@ -589,6 +492,9 @@ class _HierarchyState extends State<Hierarchy> {
                                         style: kLargeBoldTextStyle)),
                                 DataColumn(
                                     label: Text('Center Name',
+                                        style: kLargeBoldTextStyle)),
+                                DataColumn(
+                                    label: Text('Delete',
                                         style: kLargeBoldTextStyle)),
                                 // DataColumn(
                                 //     label: Text('Delete',
@@ -652,12 +558,11 @@ class MyData extends DataTableSource {
       DataCell(SizedBox(
           width: 100,
           child: Text(shared.Hierarchy_data[index].centerDesc.toString()))),
-      // DataCell(SizedBox(
-      //   width: 100,
-      //   child: IconButton(icon: Icon(Icons.delete), onPressed: () {}
-      //       // _deleteRow(index),
-      //       ),
-      // )),
+      DataCell(SizedBox(
+          width: 50,
+          child: HierarchyDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
@@ -675,7 +580,7 @@ class MyData2 extends DataTableSource {
   @override
   DataRow getRow(int index) {
     debugPrint(index.toString());
-    return DataRow(cells: [
+    return const DataRow(cells: [
       DataCell(
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
@@ -683,7 +588,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
-      // DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text('')))
     ]);
   }
 }
@@ -698,32 +603,14 @@ class MyData3 extends DataTableSource {
   @override
   DataRow getRow(int index) {
     debugPrint(index.toString());
-    return DataRow(cells: [
+    return const DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading, please wait'))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      DataCell(SizedBox(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ))),
-      // DataCell(SizedBox(
-      //     child: Center(
-      //   child: CircularProgressIndicator(),
-      // ))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
     ]);
   }
 }

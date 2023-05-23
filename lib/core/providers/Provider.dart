@@ -22,7 +22,9 @@ class H_Prov extends ChangeNotifier {
   String Hierarchy_button = 'Click here';
   List<Hierarchy_Api> Hierarchy = [];
   List<H_SaveAccount> Hierarchy_data = [];
+  List<bool> isChecked = [];
   bool search = false;
+  bool isLoaded = false;
 }
 
 class Remittance_L extends ChangeNotifier {
