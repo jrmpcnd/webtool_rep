@@ -40,6 +40,7 @@ class _InstitutionState extends State<Institution> {
       setState(() {
         shared.InstitutionLog.add(Institution_Api.fromJson(res.toJson()));
         isLoaded = true;
+        shared.InstitutionLog.clear();
       });
       for (var i in res.data!) {
         shared.Institution_data.add(Institution_Log.fromJson(i.toJson()));
@@ -337,6 +338,20 @@ class _InstitutionState extends State<Institution> {
                                         shared.Institution_data.removeAt(i);
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },
