@@ -37,6 +37,7 @@ class _BanknewsState extends State<Banknews> {
       setState(() {
         shared.BanknewsLog.add(BankNews_Api.fromJson(res.toJson()));
         isLoaded = true;
+        shared.BanknewsLog.clear();
       });
       for (var i in res.data!) {
         // shared.inqqq.add(Data.fromJson(i.toJson()));
@@ -272,6 +273,20 @@ class _BanknewsState extends State<Banknews> {
                                         shared.Banknews_data.removeAt(i);
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },

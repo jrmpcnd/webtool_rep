@@ -37,6 +37,7 @@ class _ServicedowntimeState extends State<Servicedowntime> {
         shared.ServicedowntimeLog.add(
             Servicedowntime_Api.fromJson(res.toJson()));
         isLoaded = true;
+        shared.ServicedowntimeLog.clear();
       });
       for (var i in res.data!) {
         shared.Servicedowntime_data.add(
@@ -274,6 +275,20 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                                         isLoaded = false;
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },

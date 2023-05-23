@@ -37,6 +37,7 @@ class _ProductcategoryState extends State<Productcategory> {
       setState(() {
         shared15.category.add(Product_Category.fromJson(res15.toJson()));
         isLoaded = true;
+        shared15.category.clear();
       });
       for (var i in res15.data!) {
         setState(() {});
@@ -415,6 +416,21 @@ class _ProductcategoryState extends State<Productcategory> {
                                                 isLoaded = false;
                                               }
                                             }
+                                            setState(() {
+                                              isLoaded = false;
+                                            });
+                                            Future.delayed(
+                                              Duration(seconds: 1),
+                                              () {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                  if (response.statusCode ==
+                                                      200) {
+                                                    wait();
+                                                  }
+                                                });
+                                              },
+                                            );
                                           }
                                         }
                                       },

@@ -37,6 +37,7 @@ class _BillerproductState extends State<Billerproduct> {
       setState(() {
         shared15.biller.add(Biller_Product.fromJson(res16.toJson()));
         isLoaded = true;
+        shared15.biller.clear();
       });
       for (var i in res16.data!) {
         setState(() {});
@@ -413,6 +414,21 @@ class _BillerproductState extends State<Billerproduct> {
                                                 isLoaded = false;
                                               }
                                             }
+                                            setState(() {
+                                              isLoaded = false;
+                                            });
+                                            Future.delayed(
+                                              Duration(seconds: 1),
+                                              () {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                  if (response.statusCode ==
+                                                      200) {
+                                                    wait();
+                                                  }
+                                                });
+                                              },
+                                            );
                                           }
                                         }
                                       },

@@ -38,6 +38,7 @@ class _ProductandservicesState extends State<Productandservices> {
         shared.ProductandServicesLog.add(
             ProductandServices_Api.fromJson(res.toJson()));
         isLoaded = true;
+        shared.ProductandServicesLog.clear();
       });
       for (var i in res.data!) {
         // shared.inqqq.add(Data.fromJson(i.toJson()));
@@ -267,6 +268,20 @@ class _ProductandservicesState extends State<Productandservices> {
                                             i);
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },

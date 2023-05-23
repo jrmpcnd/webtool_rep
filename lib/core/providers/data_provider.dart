@@ -153,6 +153,7 @@ class Prov19 extends ChangeNotifier {
   late BuildContext dashboardContext;
   List<Bank_List> list = [];
   List<Data19> list_data = [];
+  List<bool> isChecked = [];
   bool search19 = false;
   bool isLoaded = false;
 }

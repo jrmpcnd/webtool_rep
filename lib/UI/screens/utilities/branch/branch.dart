@@ -39,6 +39,7 @@ class _BranchState extends State<Branch> {
       setState(() {
         shared.BranchLog.add(Branch_Api.fromJson(res.toJson()));
         isLoaded = true;
+        shared.BranchLog.clear();
       });
       for (var i in res.data!) {
         shared.Branch_data.add(Branch_Log.fromJson(i.toJson()));
@@ -341,6 +342,20 @@ class _BranchState extends State<Branch> {
                                         shared.Branch_data.removeAt(i);
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },

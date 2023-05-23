@@ -36,6 +36,7 @@ class _DcmlocationState extends State<Dcmlocation> {
       setState(() {
         shared.AtmLocation_Log.add(Atm_Loc_Api.fromJson(res.toJson()));
         isLoaded = true;
+        shared.AtmLocation_Log.clear();
       });
       for (var i in res.data!) {
         shared.AtmLocation_data.add(Atm_Loc_Log.fromJson(i.toJson()));
@@ -272,6 +273,20 @@ class _DcmlocationState extends State<Dcmlocation> {
                                         shared.AtmLocation_data.removeAt(i);
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },

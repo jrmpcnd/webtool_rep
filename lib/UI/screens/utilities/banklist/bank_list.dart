@@ -1,19 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/screens/utilities/institution/components/instiAPI.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/utils/model.dart';
 import '../../../../core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
-import '../../../utils/functions.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
-import '../../../widgets/tables.dart';
-import '../../../widgets/textfield.dart';
+import 'package:http/http.dart' as http;
 import 'components/bank_list_edit.dart';
+import 'components/banklist_delete.dart';
 
 class Banklist extends StatefulWidget {
   const Banklist({Key? key}) : super(key: key);
@@ -47,6 +47,9 @@ class _BanklistState extends State<Banklist> {
         setState(() {});
         shared15.list_data.add(Data19.fromJson(i.toJson()));
       }
+      for (int i = 0; i < shared15.list_data.length; i++) {
+        shared15.isChecked.add(false);
+      }
     }
     for (var i in shared15.list_data) {
       print(i.toJson());
@@ -61,6 +64,7 @@ class _BanklistState extends State<Banklist> {
 
   @override
   Widget build(BuildContext context) {
+    DeleteBanklist deletebanklist = DeleteBanklist();
     final shared = Provider.of<Prov19>(context);
     final DataTableSource data =
         MyData(shared: shared, dashboardContext: context);
@@ -333,7 +337,41 @@ class _BanklistState extends State<Banklist> {
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(kPrimaryColor)),
-                              onPressed: () {},
+                              onPressed: () async {
+                                for (int i = 0;
+                                    i < shared.list_data.length;
+                                    i++) {
+                                  if (shared.isChecked[i] == true) {
+                                    http.Response response =
+                                        await deletebanklist.deletebanklist(
+                                            shared.list_data[i].id);
+                                    print(jsonDecode(response.body)['message']);
+                                    if (await jsonDecode(
+                                            response.body)['message']
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains("Updated Successfully")) {
+                                      if (shared.isChecked[i] == true) {
+                                        shared.list_data.removeAt(i);
+                                      }
+                                    }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
+                                  }
+                                }
+                              },
                               icon: const Icon(
                                 Icons.delete_outline,
                                 size: 20.0,
@@ -373,7 +411,10 @@ class _BanklistState extends State<Banklist> {
                                 label: Text('BIC', style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label:
-                                    Text('Action', style: kLargeBoldTextStyle))
+                                    Text('Action', style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label:
+                                    Text('Delete', style: kLargeBoldTextStyle))
                           ],
                           source: isLoaded
                               ? shared.list_data.isNotEmpty
@@ -465,6 +506,11 @@ class MyData extends DataTableSource {
           },
         ),
       )),
+      DataCell(SizedBox(
+          width: 50,
+          child: BanklistDeleteFunction(
+            index: index,
+          ))),
     ]);
   }
 }
@@ -485,6 +531,7 @@ class MyData2 extends DataTableSource {
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text('')))
     ]);
   }
@@ -502,6 +549,7 @@ class MyData3 extends DataTableSource {
     debugPrint(index.toString());
     return DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),

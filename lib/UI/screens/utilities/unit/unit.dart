@@ -39,6 +39,7 @@ class _UnitState extends State<Unit> {
       setState(() {
         shared.UnitLog.add(Unit_Api.fromJson(res.toJson()));
         shared.isLoaded = true;
+        shared.UnitLog.clear();
       });
       for (var i in res.data!) {
         shared.Unit_data.add(Unit_Log.fromJson(i.toJson()));
@@ -337,6 +338,20 @@ class _UnitState extends State<Unit> {
                                         shared.Unit_data.removeAt(i);
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },

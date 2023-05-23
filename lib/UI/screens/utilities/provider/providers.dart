@@ -39,6 +39,7 @@ class _ProvidersState extends State<Providers> {
       setState(() {
         shared.ProvidersLog.add(Providers_Api.fromJson(res.toJson()));
         isLoaded = true;
+        shared.ProvidersLog.clear();
       });
       for (var i in res.data!) {
         shared.Providers_data.add(Providers_Log.fromJson(i.toJson()));
@@ -336,6 +337,20 @@ class _ProvidersState extends State<Providers> {
                                         shared.Providers_data.removeAt(i);
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },

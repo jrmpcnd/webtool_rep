@@ -38,6 +38,7 @@ class _PartnerState extends State<Partner> {
       setState(() {
         shared15.partner.add(Partner_List.fromJson(res16.toJson()));
         isLoaded = true;
+        shared15.partner.clear();
       });
       for (var i in res16.data!) {
         setState(() {});
@@ -433,6 +434,21 @@ class _PartnerState extends State<Partner> {
                                                 isLoaded = false;
                                               }
                                             }
+                                            setState(() {
+                                              isLoaded = false;
+                                            });
+                                            Future.delayed(
+                                              Duration(seconds: 1),
+                                              () {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                  if (response.statusCode ==
+                                                      200) {
+                                                    wait();
+                                                  }
+                                                });
+                                              },
+                                            );
                                           }
                                         }
                                       },

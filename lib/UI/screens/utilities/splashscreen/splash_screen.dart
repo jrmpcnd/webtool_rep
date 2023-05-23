@@ -38,6 +38,7 @@ class _SplashscreenState extends State<Splashscreen> {
       setState(() {
         shared15.splash.add(Splash_Screen.fromJson(res16.toJson()));
         isLoaded = true;
+        shared15.splash.clear();
       });
       for (var i in res16.data!) {
         setState(() {});
@@ -316,6 +317,20 @@ class _SplashscreenState extends State<Splashscreen> {
                                         isLoaded = false;
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                          () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },

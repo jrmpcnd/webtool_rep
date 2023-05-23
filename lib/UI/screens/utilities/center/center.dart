@@ -39,6 +39,7 @@ class _CentersState extends State<Centers> {
       setState(() {
         shared.CenterLog.add(Center_Api.fromJson(res.toJson()));
         isLoaded = true;
+        shared.CenterLog.clear();
       });
       for (var i in res.data!) {
         shared.Center_data.add(Center_Log.fromJson(i.toJson()));
@@ -341,6 +342,20 @@ class _CentersState extends State<Centers> {
                                         shared.Center_data.removeAt(i);
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },

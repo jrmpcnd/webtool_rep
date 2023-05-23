@@ -38,6 +38,7 @@ class _LoadproductState extends State<Loadproduct> {
       setState(() {
         shared15.load.add(Load_Product.fromJson(res17.toJson()));
         isLoaded = true;
+        shared15.load.clear();
       });
       for (var i in res17.data!) {
         setState(() {});
@@ -378,6 +379,20 @@ class _LoadproductState extends State<Loadproduct> {
                                         isLoaded = false;
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },

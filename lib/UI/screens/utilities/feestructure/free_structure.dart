@@ -38,6 +38,7 @@ class _FeestructureState extends State<Feestructure> {
       setState(() {
         shared2.fee.add(Fee_Structure.fromJson(res2.toJson()));
         isLoaded = true;
+        shared2.fee.clear();
       });
       for (var i in res2.data!) {
         setState(() {});
@@ -202,6 +203,20 @@ class _FeestructureState extends State<Feestructure> {
                                         shared.fee_data.removeAt(i);
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },
