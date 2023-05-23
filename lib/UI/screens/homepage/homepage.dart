@@ -120,6 +120,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isLoaded = false;
   AddinstiAPI addinstitutionapi = AddinstiAPI();
   AddinstiController addinstiController = AddinstiController();
   AddCommissionApi addcommissionapi = AddCommissionApi();
@@ -1596,6 +1597,29 @@ class _HomePageState extends State<HomePage> {
                                             "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.onPress = () async {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                                () {
+                                              setState(() {
+                                                shared.addicon = Icons.add_outlined;
+                                                shared.icon = Icons.people_outline;
+                                                shared.addicon = Icons.add_outlined;
+                                                shared.uploadbutton = "";
+                                                shared.subuploadbutton = "";
+                                                shared.addbutton =
+                                                "New Institution";
+                                                shared.subaddbutton =
+                                                "Add New Institution";
+                                                shared.header = "Utilities";
+                                                shared.title = "Institution";
+                                                shared.homewidget = [
+                                                  const Institution()
+                                                ];
+                                                isLoaded = true;
+                                              });
+                                            },
+                                          );
+
                                           if (addinstiController
                                                       .cinsticode.text !=
                                                   null &&
@@ -1689,6 +1713,27 @@ class _HomePageState extends State<HomePage> {
                                             "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.onPress = () async {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                                () {
+                                              setState(() {
+                                                shared.addicon = Icons.add_outlined;
+                                                shared.icon = Icons.people_outline;
+                                                shared.addicon = Icons.add_outlined;
+                                                shared.uploadbutton = "Reset";
+                                                shared.subuploadbutton = "";
+                                                shared.addbutton = "New Branch";
+                                                shared.subaddbutton =
+                                                "Add New Branch";
+                                                shared.header = "Utilities";
+                                                shared.title = "Branch";
+                                                shared.homewidget = [
+                                                  const Branch()
+                                                ];
+                                                isLoaded = true;
+                                              });
+                                            },
+                                          );
                                           if (addbranchController
                                                       .branch_code_controller
                                                       .text !=
@@ -1777,6 +1822,25 @@ class _HomePageState extends State<HomePage> {
                                             "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.onPress = () async {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                                () {
+                                              setState(() {
+                                                shared.addicon = Icons.add_outlined;
+                                                shared.icon = Icons.people_outline;
+                                                shared.addicon = Icons.add_outlined;
+                                                shared.uploadbutton = "";
+                                                shared.subuploadbutton = "";
+                                                shared.addbutton = "New Unit";
+                                                shared.subaddbutton =
+                                                "Add New Unit";
+                                                shared.header = "Utilities";
+                                                shared.title = "Unit";
+                                                shared.homewidget = [const Unit()];
+                                                isLoaded = true;
+                                              });
+                                            },
+                                          );
                                           if (addunitController
                                                       .unit_code_controller
                                                       .text !=
@@ -1867,6 +1931,26 @@ class _HomePageState extends State<HomePage> {
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Center";
                                         shared.onPress = () async {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                                () {
+                                              setState(() {
+                                                shared.addicon = Icons.add_outlined;
+                                                shared.icon = Icons.people_outline;
+                                                shared.addicon = Icons.add_outlined;
+                                                shared.uploadbutton = "";
+                                                shared.subuploadbutton = "";
+                                                shared.addbutton = "New Center";
+                                                shared.subaddbutton =
+                                                "Add New Center";
+                                                shared.header = "Utilities";
+                                                shared.title = "Center";
+                                                shared.homewidget = [
+                                                  const Centers()];
+                                                isLoaded = true;
+                                              });
+                                            },
+                                          );
                                           if (addcenterController
                                                       .center_code_controller
                                                       .text !=
@@ -2268,6 +2352,27 @@ class _HomePageState extends State<HomePage> {
                                             "Utilities  >  Create / Edit";
                                         shared.addbutton = "Save";
                                         shared.onPress = () async {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                                () {
+                                              setState(() {
+                                                shared.addicon = Icons.add_outlined;
+                                                shared.icon = Icons.people_outline;
+                                                shared.addicon = Icons.add_outlined;
+                                                shared.uploadbutton = "";
+                                                shared.subuploadbutton = "";
+                                                shared.addbutton = "New Commission";
+                                                shared.subaddbutton =
+                                                "Add Commission Setup";
+                                                shared.header = "Utilities";
+                                                shared.title = "Commission Setup";
+                                                shared.homewidget = [
+                                                  const Commissionsetup()
+                                                ];
+                                                isLoaded = true;
+                                              });
+                                            },
+                                          );
                                           if (addcommisionController
                                                       .cbankpartnerincome
                                                       .text !=
@@ -2402,6 +2507,26 @@ class _HomePageState extends State<HomePage> {
                                         shared.addbutton = "Save";
                                         shared.subaddbutton = "Save Bank List";
                                         shared.onPress = () async {
+                                          Future.delayed(
+                                            Duration(seconds: 1),
+                                                () {
+                                              setState(() {
+                                                shared.addicon = Icons.add_outlined;
+                                                shared.icon = Icons.people_outline;
+                                                shared.addicon = Icons.add_outlined;
+                                                shared.uploadbutton = "";
+                                                shared.subuploadbutton = "";
+                                                shared.addbutton = "New Bank List";
+                                                shared.subaddbutton =
+                                                "Add Bank List";
+                                                shared.header = "Utilities";
+                                                shared.title = "Bank List";
+                                                shared.homewidget = [
+                                                const Banklist()];
+                                                isLoaded = true;
+                                              });
+                                            },
+                                          );
                                           if (addbankController.bank_code_controller.text != null &&
                                               addbankController
                                                       .bank_name_controller
