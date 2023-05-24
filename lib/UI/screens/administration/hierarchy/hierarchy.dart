@@ -433,6 +433,22 @@ class _HierarchyState extends State<Hierarchy> {
                                                     i);
                                               }
                                             }
+                                            setState(() {
+                                              isLoaded = false;
+                                            });
+                                            Future.delayed(
+                                              Duration(seconds: 1),
+                                              () {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                  if (response.statusCode ==
+                                                      200) {
+                                                    wait();
+                                                    shared.isChecked.clear();
+                                                  }
+                                                });
+                                              },
+                                            );
                                           }
                                         }
                                       },

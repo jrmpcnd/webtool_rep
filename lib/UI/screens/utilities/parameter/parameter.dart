@@ -216,28 +216,35 @@ class _ParametersState extends State<Parameters> {
                                         }
                                       }
                                       if (init.isNotEmpty) {
-                                        if (init.toLowerCase().contains('web')) {
+                                        if (init
+                                            .toLowerCase()
+                                            .contains('web')) {
                                           setState(() {
                                             isLoaded = false;
                                           });
                                           shared.prov_data.clear();
                                           for (var i in shared.prov[0].data!) {
                                             print(i.toJson());
-                                            print(i.appType?.toLowerCase().contains(
-                                                controller.text.toLowerCase()));
+                                            print(i.appType
+                                                ?.toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase()));
                                             if (i.toJson().isNotEmpty) {
                                               if (i.appType!
                                                   .toLowerCase()
-                                                  .contains(init.toLowerCase())) {
+                                                  .contains(
+                                                      init.toLowerCase())) {
                                                 debugPrint(i.appType);
                                                 setState(() {
                                                   shared.prov_data.add(
-                                                      Data13.fromJson(i.toJson()));
+                                                      Data13.fromJson(
+                                                          i.toJson()));
                                                 });
-                                                if (shared.prov_data.isNotEmpty) {
+                                                if (shared
+                                                    .prov_data.isNotEmpty) {
                                                   Future.delayed(
                                                     Duration(seconds: 1),
-                                                        () {
+                                                    () {
                                                       setState(() {
                                                         isLoaded = true;
                                                       });
@@ -257,8 +264,10 @@ class _ParametersState extends State<Parameters> {
                                           shared.prov_data.clear();
                                           for (var i in shared.prov[0].data!) {
                                             print(i.toJson());
-                                            print(i.appType?.toLowerCase().contains(
-                                                controller.text.toLowerCase()));
+                                            print(i.appType
+                                                ?.toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase()));
                                             if (i.toJson().isNotEmpty) {
                                               if (i.appType!
                                                   .toLowerCase()
@@ -266,12 +275,14 @@ class _ParametersState extends State<Parameters> {
                                                 debugPrint(i.appType);
                                                 setState(() {
                                                   shared.prov_data.add(
-                                                      Data13.fromJson(i.toJson()));
+                                                      Data13.fromJson(
+                                                          i.toJson()));
                                                 });
-                                                if (shared.prov_data.isNotEmpty) {
+                                                if (shared
+                                                    .prov_data.isNotEmpty) {
                                                   Future.delayed(
                                                     Duration(seconds: 1),
-                                                        () {
+                                                    () {
                                                       setState(() {
                                                         isLoaded = true;
                                                       });
@@ -282,64 +293,36 @@ class _ParametersState extends State<Parameters> {
                                             }
                                           }
                                         }
-                                      }
-                                      else if (init.isNotEmpty) {
-                                        if (init.toLowerCase().contains('core')) {
-                                          setState(() {
-                                            isLoaded = false;
-                                          });
-                                          shared.prov_data.clear();
-                                          for (var i in shared.prov[0].data!) {
-                                            print(i.toJson());
-                                            print(i.appType?.toLowerCase().contains(
-                                                controller.text.toLowerCase()));
-                                            if (i.toJson().isNotEmpty) {
-                                              if (i.appType!
-                                                  .toLowerCase()
-                                                  .contains(init.toLowerCase())) {
-                                                debugPrint(i.appType);
-                                                setState(() {
-                                                  shared.prov_data.add(
-                                                      Data13.fromJson(i.toJson()));
-                                                });
-                                                if (shared.prov_data.isNotEmpty) {
-                                                  Future.delayed(
-                                                    Duration(seconds: 1),
-                                                        () {
-                                                      setState(() {
-                                                        isLoaded = true;
-                                                      });
-                                                    },
-                                                  );
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                        if (!init
+                                      } else if (init.isNotEmpty) {
+                                        if (init
                                             .toLowerCase()
-                                            .contains('')) {
+                                            .contains('core')) {
                                           setState(() {
                                             isLoaded = false;
                                           });
                                           shared.prov_data.clear();
                                           for (var i in shared.prov[0].data!) {
                                             print(i.toJson());
-                                            print(i.appType?.toLowerCase().contains(
-                                                controller.text.toLowerCase()));
+                                            print(i.appType
+                                                ?.toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase()));
                                             if (i.toJson().isNotEmpty) {
                                               if (i.appType!
                                                   .toLowerCase()
-                                                  .contains('')) {
+                                                  .contains(
+                                                      init.toLowerCase())) {
                                                 debugPrint(i.appType);
                                                 setState(() {
                                                   shared.prov_data.add(
-                                                      Data13.fromJson(i.toJson()));
+                                                      Data13.fromJson(
+                                                          i.toJson()));
                                                 });
-                                                if (shared.prov_data.isNotEmpty) {
+                                                if (shared
+                                                    .prov_data.isNotEmpty) {
                                                   Future.delayed(
                                                     Duration(seconds: 1),
-                                                        () {
+                                                    () {
                                                       setState(() {
                                                         isLoaded = true;
                                                       });
@@ -350,30 +333,71 @@ class _ParametersState extends State<Parameters> {
                                             }
                                           }
                                         }
-                                      }
-                                      else if (init.isNotEmpty) {
-                                        if (init.toLowerCase().contains('cust')) {
+                                        if (!init.toLowerCase().contains('')) {
                                           setState(() {
                                             isLoaded = false;
                                           });
                                           shared.prov_data.clear();
                                           for (var i in shared.prov[0].data!) {
                                             print(i.toJson());
-                                            print(i.appType?.toLowerCase().contains(
-                                                'cust'));
+                                            print(i.appType
+                                                ?.toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase()));
+                                            if (i.toJson().isNotEmpty) {
+                                              if (i.appType!
+                                                  .toLowerCase()
+                                                  .contains('')) {
+                                                debugPrint(i.appType);
+                                                setState(() {
+                                                  shared.prov_data.add(
+                                                      Data13.fromJson(
+                                                          i.toJson()));
+                                                });
+                                                if (shared
+                                                    .prov_data.isNotEmpty) {
+                                                  Future.delayed(
+                                                    Duration(seconds: 1),
+                                                    () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (init.isNotEmpty) {
+                                        if (init
+                                            .toLowerCase()
+                                            .contains('cust')) {
+                                          setState(() {
+                                            isLoaded = false;
+                                          });
+                                          shared.prov_data.clear();
+                                          for (var i in shared.prov[0].data!) {
+                                            print(i.toJson());
+                                            print(i.appType
+                                                ?.toLowerCase()
+                                                .contains('cust'));
                                             if (i.toJson().isNotEmpty) {
                                               if (i.appType!
                                                   .toLowerCase()
                                                   .contains('cust')) {
-                                                debugPrint("=======........>>>>${i.appType}");
+                                                debugPrint(
+                                                    "=======........>>>>${i.appType}");
                                                 setState(() {
                                                   shared.prov_data.add(
-                                                      Data13.fromJson(i.toJson()));
+                                                      Data13.fromJson(
+                                                          i.toJson()));
                                                 });
-                                                if (shared.prov_data.isNotEmpty) {
+                                                if (shared
+                                                    .prov_data.isNotEmpty) {
                                                   Future.delayed(
                                                     Duration(seconds: 1),
-                                                        () {
+                                                    () {
                                                       setState(() {
                                                         isLoaded = true;
                                                       });
@@ -393,8 +417,10 @@ class _ParametersState extends State<Parameters> {
                                           shared.prov_data.clear();
                                           for (var i in shared.prov[0].data!) {
                                             print(i.toJson());
-                                            print(i.appType?.toLowerCase().contains(
-                                                controller.text.toLowerCase()));
+                                            print(i.appType
+                                                ?.toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase()));
                                             if (i.toJson().isNotEmpty) {
                                               if (i.appType!
                                                   .toLowerCase()
@@ -402,12 +428,14 @@ class _ParametersState extends State<Parameters> {
                                                 debugPrint(i.appType);
                                                 setState(() {
                                                   shared.prov_data.add(
-                                                      Data13.fromJson(i.toJson()));
+                                                      Data13.fromJson(
+                                                          i.toJson()));
                                                 });
-                                                if (shared.prov_data.isNotEmpty) {
+                                                if (shared
+                                                    .prov_data.isNotEmpty) {
                                                   Future.delayed(
                                                     Duration(seconds: 1),
-                                                        () {
+                                                    () {
                                                       setState(() {
                                                         isLoaded = true;
                                                       });
@@ -592,13 +620,13 @@ class MyData2 extends DataTableSource {
   @override
   DataRow getRow(int index) {
     debugPrint(index.toString());
-    return DataRow(cells: [
+    return const DataRow(cells: [
       DataCell(
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
       DataCell(SizedBox(child: Text(''))),
-      DataCell(SizedBox(child: Text(''))),
+      DataCell(SizedBox(child: Text('')))
     ]);
   }
 }
@@ -613,12 +641,12 @@ class MyData3 extends DataTableSource {
   @override
   DataRow getRow(int index) {
     debugPrint(index.toString());
-    return DataRow(cells: [
+    return const DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
-      DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
+      DataCell(SizedBox(child: Center(child: CircularProgressIndicator())))
     ]);
   }
 }
