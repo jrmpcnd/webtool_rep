@@ -31,6 +31,7 @@ class _UnitState extends State<Unit> {
   Future<void> wait() async {
     final shared = Provider.of<Unit_U>(context, listen: false);
     shared.Unit_data.clear();
+    shared.UnitLog.clear();
     Unit_Parse unit = Unit_Parse();
     var res = await unit.profile25();
     if (res.data!.isNotEmpty) {
@@ -348,6 +349,7 @@ class _UnitState extends State<Unit> {
                                           isLoaded = true;
                                           if (response.statusCode == 200) {
                                             wait();
+                                            shared.isChecked.clear();
                                           }
                                         });
                                       },

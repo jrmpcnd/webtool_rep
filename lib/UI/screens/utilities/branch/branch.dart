@@ -31,6 +31,7 @@ class _BranchState extends State<Branch> {
   Future<void> wait() async {
     final shared = Provider.of<Branch_U>(context, listen: false);
     shared.Branch_data.clear();
+    shared.BranchLog.clear();
     Branch_Parse branch = Branch_Parse();
     var res = await branch.profile24();
     if (res.data!.isNotEmpty) {
@@ -39,7 +40,6 @@ class _BranchState extends State<Branch> {
       setState(() {
         shared.BranchLog.add(Branch_Api.fromJson(res.toJson()));
         isLoaded = true;
-        shared.BranchLog.clear();
       });
       for (var i in res.data!) {
         shared.Branch_data.add(Branch_Log.fromJson(i.toJson()));
@@ -352,6 +352,7 @@ class _BranchState extends State<Branch> {
                                           isLoaded = true;
                                           if (response.statusCode == 200) {
                                             wait();
+                                            shared.isChecked.clear();
                                           }
                                         });
                                       },

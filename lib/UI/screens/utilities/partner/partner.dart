@@ -38,7 +38,6 @@ class _PartnerState extends State<Partner> {
       setState(() {
         shared15.partner.add(Partner_List.fromJson(res16.toJson()));
         isLoaded = true;
-        shared15.partner.clear();
       });
       for (var i in res16.data!) {
         setState(() {});
@@ -445,6 +444,7 @@ class _PartnerState extends State<Partner> {
                                                   if (response.statusCode ==
                                                       200) {
                                                     wait();
+                                                    shared.isChecked.clear();
                                                   }
                                                 });
                                               },

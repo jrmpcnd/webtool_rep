@@ -28,6 +28,7 @@ class _ServicedowntimeState extends State<Servicedowntime> {
   Future<void> wait() async {
     final shared = Provider.of<Servicedowntime_U>(context, listen: false);
     shared.Servicedowntime_data.clear();
+    shared.ServicedowntimeLog.clear();
     Servicedowntime_Parse httpParse = Servicedowntime_Parse();
     var res = await httpParse.profile23();
     if (res.data!.isNotEmpty) {
@@ -37,7 +38,6 @@ class _ServicedowntimeState extends State<Servicedowntime> {
         shared.ServicedowntimeLog.add(
             Servicedowntime_Api.fromJson(res.toJson()));
         isLoaded = true;
-        shared.ServicedowntimeLog.clear();
       });
       for (var i in res.data!) {
         shared.Servicedowntime_data.add(
@@ -285,6 +285,7 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                                           isLoaded = true;
                                           if (response.statusCode == 200) {
                                             wait();
+                                            shared.isChecked.clear();
                                           }
                                         });
                                       },

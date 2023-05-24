@@ -38,7 +38,6 @@ class _ProducttypeState extends State<Producttype> {
       setState(() {
         shared14.product.add(Product_Type.fromJson(res14.toJson()));
         isLoaded = true;
-        shared14.product.clear();
       });
       for (var i in res14.data!) {
         setState(() {});
@@ -361,6 +360,21 @@ class _ProducttypeState extends State<Producttype> {
                                         isLoaded = false;
                                       }
                                     }
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    Future.delayed(
+                                      Duration(seconds: 1),
+                                      () {
+                                        setState(() {
+                                          isLoaded = true;
+                                          if (response.statusCode == 200) {
+                                            wait();
+                                            shared.isChecked.clear();
+                                          }
+                                        });
+                                      },
+                                    );
                                   }
                                 }
                               },
