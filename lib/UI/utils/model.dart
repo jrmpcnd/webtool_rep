@@ -646,13 +646,12 @@ class Data10 {
   String? concernName;
   String? concernTime;
 
-
   Data10(
       {this.concernCode,
-        this.concernDesc,
-        this.concernLevel,
-        this.concernName,
-        this.concernTime});
+      this.concernDesc,
+      this.concernLevel,
+      this.concernName,
+      this.concernTime});
 
   Data10.fromJson(Map<String, dynamic> json) {
     concernCode = json['concern_code'];
@@ -672,6 +671,7 @@ class Data10 {
     return data;
   }
 }
+
 class CSR_Hotline {
   String? retcode;
   String? message;
@@ -1369,6 +1369,7 @@ class Splash_Screen {
 }
 
 class Data21 {
+  String? id;
   String? action;
   String? title;
   String? message;
@@ -1377,7 +1378,8 @@ class Data21 {
   String? show;
 
   Data21(
-      {this.action,
+      {this.id,
+      this.action,
       this.title,
       this.message,
       this.subMessage,
@@ -1385,6 +1387,7 @@ class Data21 {
       this.show});
 
   Data21.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     action = json['action'];
     title = json['title'];
     message = json['message'];
@@ -1395,6 +1398,7 @@ class Data21 {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['action'] = this.action;
     data['title'] = this.title;
     data['message'] = this.message;

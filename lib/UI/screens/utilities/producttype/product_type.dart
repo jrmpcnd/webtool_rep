@@ -347,8 +347,8 @@ class _ProducttypeState extends State<Producttype> {
                                   if (shared.isChecked[i] == true) {
                                     http.Response response =
                                         await deleteproducttype
-                                            .deleteproducttype(
-                                                shared.product_data[i].id);
+                                            .deleteproducttype(shared
+                                                .product_data[i].productTypeId);
                                     print(jsonDecode(response.body)['message']);
                                     if (await jsonDecode(
                                             response.body)['message']

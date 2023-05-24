@@ -344,7 +344,7 @@ class _BanklistState extends State<Banklist> {
                                   if (shared.isChecked[i] == true) {
                                     http.Response response =
                                         await deletebanklist.deletebanklist(
-                                            shared.list_data[i].id);
+                                            shared.list_data[i].bankCode);
                                     print(jsonDecode(response.body)['message']);
                                     if (await jsonDecode(
                                             response.body)['message']

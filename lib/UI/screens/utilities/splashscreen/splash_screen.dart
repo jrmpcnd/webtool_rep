@@ -304,7 +304,7 @@ class _SplashscreenState extends State<Splashscreen> {
                                     http.Response response =
                                         await deletesplashscreen
                                             .deletesplashscreen(
-                                                shared.splash_data[i].action);
+                                                shared.splash_data[i].id);
                                     print(jsonDecode(response.body)['message']);
                                     if (await jsonDecode(
                                             response.body)['message']

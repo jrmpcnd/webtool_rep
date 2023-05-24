@@ -37,7 +37,6 @@ class _BillerproductState extends State<Billerproduct> {
       setState(() {
         shared15.biller.add(Biller_Product.fromJson(res16.toJson()));
         isLoaded = true;
-        shared15.biller.clear();
       });
       for (var i in res16.data!) {
         setState(() {});
@@ -425,6 +424,7 @@ class _BillerproductState extends State<Billerproduct> {
                                                   if (response.statusCode ==
                                                       200) {
                                                     wait();
+                                                    shared.isChecked.clear();
                                                   }
                                                 });
                                               },
