@@ -28,6 +28,7 @@ class _DcmlocationState extends State<Dcmlocation> {
   Future<void> wait() async {
     final shared = Provider.of<AtmLocation>(context, listen: false);
     shared.AtmLocation_data.clear();
+    shared.AtmLocation_Log.clear();
     Atm_Location_Parse httpParse = Atm_Location_Parse();
     var res = await httpParse.profile20();
     if (res.data!.isNotEmpty) {
@@ -36,7 +37,6 @@ class _DcmlocationState extends State<Dcmlocation> {
       setState(() {
         shared.AtmLocation_Log.add(Atm_Loc_Api.fromJson(res.toJson()));
         isLoaded = true;
-        shared.AtmLocation_Log.clear();
       });
       for (var i in res.data!) {
         shared.AtmLocation_data.add(Atm_Loc_Log.fromJson(i.toJson()));
@@ -283,6 +283,7 @@ class _DcmlocationState extends State<Dcmlocation> {
                                           isLoaded = true;
                                           if (response.statusCode == 200) {
                                             wait();
+                                            shared.isChecked.clear();
                                           }
                                         });
                                       },
