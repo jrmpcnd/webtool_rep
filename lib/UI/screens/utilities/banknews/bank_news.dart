@@ -37,7 +37,6 @@ class _BanknewsState extends State<Banknews> {
       setState(() {
         shared.BanknewsLog.add(BankNews_Api.fromJson(res.toJson()));
         isLoaded = true;
-        shared.BanknewsLog.clear();
       });
       for (var i in res.data!) {
         // shared.inqqq.add(Data.fromJson(i.toJson()));
@@ -283,6 +282,7 @@ class _BanknewsState extends State<Banknews> {
                                           isLoaded = true;
                                           if (response.statusCode == 200) {
                                             wait();
+                                            shared.isChecked.clear();
                                           }
                                         });
                                       },
