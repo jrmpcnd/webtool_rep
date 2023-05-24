@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-
 import 'package:http/http.dart' as http;
 import 'package:webtool_rep/UI/screens/login/components/loginapi.dart';
 import 'package:webtool_rep/UI/screens/login/login_dashboard.dart';
@@ -26,7 +25,7 @@ const botBackgroundColor = Color(0xff444654);
 
 class _PopState extends State<Pop> {
   final _formPass = GlobalKey<FormState>();
-  // TextEditingController userController = TextEditingController();
+
   TextEditingController oldpassController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   final _scrollController = ScrollController();
@@ -41,7 +40,7 @@ class _PopState extends State<Pop> {
         builder: (context) => AlertDialog(
           title: Text("Invalid"),
           content:
-          Text('You need to input a new password. Confirm your email.'),
+              Text('You need to input a new password. Confirm your email.'),
           actions: [
             TextButton(
               child: Text("OK"),
@@ -114,7 +113,7 @@ class _PopState extends State<Pop> {
                             obscureText: true,
                             readOnly: true,
                             decoration:
-                            InputDecoration(hintText: 'Old Password'),
+                                InputDecoration(hintText: 'Old Password'),
                             // validator: (value) {
                             //   if (value!.isEmpty) {
                             //     return 'Please insert Password';
@@ -203,10 +202,10 @@ class _PopState extends State<Pop> {
                                 Navigator.pop(context);
                                 Navigator.pushReplacement(context,
                                     MaterialPageRoute(
-                                      builder: (context) {
-                                        return Dashboard();
-                                      },
-                                    ));
+                                  builder: (context) {
+                                    return Dashboard();
+                                  },
+                                ));
                               },
                             ),
                           ],
@@ -238,10 +237,10 @@ class _PopState extends State<Pop> {
                                   Navigator.pop(context);
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(
-                                        builder: (context) {
-                                          return Dashboard();
-                                        },
-                                      ));
+                                    builder: (context) {
+                                      return Dashboard();
+                                    },
+                                  ));
                                 },
                               ),
                             ],

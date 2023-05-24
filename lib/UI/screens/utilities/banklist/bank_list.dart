@@ -365,6 +365,7 @@ class _BanklistState extends State<Banklist> {
                                           isLoaded = true;
                                           if (response.statusCode == 200) {
                                             wait();
+                                            shared.isChecked.clear();
                                           }
                                         });
                                       },
