@@ -2,6 +2,7 @@ import 'package:auto_size_widget/auto_size_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 
 import '../../../../utils/constant.dart';
 import '../../../../utils/edge_insect.dart';
@@ -18,6 +19,30 @@ class Addproviders extends StatefulWidget {
 }
 
 class _AddprovidersState extends State<Addproviders> {
+  List<String> res = [];
+  String init = '';
+  Partner_Api status = Partner_Api();
+
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      getCenter();
+    });
+  }
+
+  getCenter() async {
+    List<dynamic> dlist = await status.getUserstatus();
+    for (var i in dlist) {
+      setState(() {
+        res.add(i['get_p_status_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -90,7 +115,7 @@ class _AddprovidersState extends State<Addproviders> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Institution Code :", style: kHeading2TextStyle),
+                          Text("Provider Name:", style: kHeading2TextStyle),
                           textfield(
                             hintext: "",
                           ),
@@ -100,6 +125,32 @@ class _AddprovidersState extends State<Addproviders> {
                             hintext: "",
                           ),
                           verticalSpaceXTiny,
+                          Text("Provider Alias:", style: kHeading2TextStyle),
+                          textfield(
+                            hintext: "",
+                          ),
+                          verticalSpaceTiny,
+                          DropdownButtonHideUnderline(
+                            child: Padding(
+                              padding: EdgeInsets.all(5),
+                              child: DropdownButton(
+                                iconEnabledColor: Colors.black,
+                                value: init,
+                                items: res.map((e) {
+                                  return DropdownMenuItem(
+                                    value: e,
+                                    child: Text(e, style: kTextStyle),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    init = value.toString();
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                          verticalSpaceTiny,
                         ],
                       ),
                     ],
