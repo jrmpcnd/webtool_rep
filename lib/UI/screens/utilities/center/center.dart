@@ -31,6 +31,7 @@ class _CentersState extends State<Centers> {
   Future<void> wait() async {
     final shared = Provider.of<Center_U>(context, listen: false);
     shared.Center_data.clear();
+    shared.CenterLog.clear();
     Center_Parse center = Center_Parse();
     var res = await center.profile26();
     if (res.data!.isNotEmpty) {
@@ -39,7 +40,6 @@ class _CentersState extends State<Centers> {
       setState(() {
         shared.CenterLog.add(Center_Api.fromJson(res.toJson()));
         isLoaded = true;
-        shared.CenterLog.clear();
       });
       for (var i in res.data!) {
         shared.Center_data.add(Center_Log.fromJson(i.toJson()));
@@ -49,7 +49,7 @@ class _CentersState extends State<Centers> {
       }
     }
     for (var i in shared.Center_data) {
-      print(i.toJson());
+      // print(i.toJson());
     }
   }
 
