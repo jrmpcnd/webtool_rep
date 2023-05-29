@@ -383,7 +383,7 @@ class MyData2 extends DataTableSource {
   @override
   DataRow getRow(int index) {
     debugPrint(index.toString());
-    return DataRow(cells: [
+    return const DataRow(cells: [
       DataCell(
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
@@ -402,7 +402,7 @@ class MyData3 extends DataTableSource {
   @override
   DataRow getRow(int index) {
     debugPrint(index.toString());
-    return DataRow(cells: [
+    return const DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator())))

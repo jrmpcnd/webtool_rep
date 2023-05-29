@@ -86,7 +86,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
                             flex: 2,
                             child: TextField(
                               controller: searchController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 labelText: 'Search',
                                 border: OutlineInputBorder(),
                               ),
@@ -122,7 +122,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
                     Divider(),
                     ListTile(
                       title: Row(
-                        children: [
+                        children: const [
                           Expanded(
                             flex: 1,
                             child: Text(

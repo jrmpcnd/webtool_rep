@@ -119,8 +119,8 @@ class _BroadcastmessageState extends State<Broadcastmessage> {
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all(kPrimaryColor)),
-                            onPressed: (){
-                              try{
+                            onPressed: () {
+                              try {
                                 if (controller.text.isNotEmpty) {
                                   setState(() {
                                     isLoaded = false;
@@ -141,7 +141,7 @@ class _BroadcastmessageState extends State<Broadcastmessage> {
                                         if (shared.broadcast_data.isNotEmpty) {
                                           Future.delayed(
                                             Duration(seconds: 1),
-                                                () {
+                                            () {
                                               setState(() {
                                                 isLoaded = true;
                                               });
@@ -152,9 +152,10 @@ class _BroadcastmessageState extends State<Broadcastmessage> {
                                     }
                                   }
                                 }
-                                debugPrint(
-                                    shared.broadcast_data[0].toJson().toString());
-                              }catch (e) {
+                                debugPrint(shared.broadcast_data[0]
+                                    .toJson()
+                                    .toString());
+                              } catch (e) {
                                 shared.broadcast_data.clear();
                                 isLoaded = true;
                               }
@@ -188,7 +189,7 @@ class _BroadcastmessageState extends State<Broadcastmessage> {
                                     .addAll(shared.broadcast[0].data!);
                                 Future.delayed(
                                   Duration(seconds: 1),
-                                      () {
+                                  () {
                                     setState(() {
                                       isLoaded = true;
                                     });
@@ -261,55 +262,6 @@ class _BroadcastmessageState extends State<Broadcastmessage> {
                 header:
                     Text('Broadcast Message List', style: kXLargeBoldTextStyle),
               )),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => a.role_name
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(b.role_name.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role name ascending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => b.role_name
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(a.role_name.toString().toLowerCase()));
-          //       //print(shared.inqq.sort());
-          //     },
-          //     child: const Text('Role name descending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => a.role_desc
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(b.role_desc.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role desc ascending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => b.role_desc
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(a.role_desc.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role desc descending'),
-          //   ),
-          // )
         ],
       ),
     );
@@ -359,7 +311,7 @@ class MyData2 extends DataTableSource {
   @override
   DataRow getRow(int index) {
     debugPrint(index.toString());
-    return DataRow(cells: [
+    return const DataRow(cells: [
       DataCell(
           SizedBox(child: Text('No Data Found, Please Enter Valid Keyword'))),
       DataCell(SizedBox(child: Text(''))),
@@ -380,7 +332,7 @@ class MyData3 extends DataTableSource {
   @override
   DataRow getRow(int index) {
     debugPrint(index.toString());
-    return DataRow(cells: [
+    return const DataRow(cells: [
       DataCell(SizedBox(child: Text('Loading Please wait!'))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
       DataCell(SizedBox(child: Center(child: CircularProgressIndicator()))),
