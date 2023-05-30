@@ -56,8 +56,7 @@ class _ProductcategoryState extends State<Productcategory> {
   String init = '';
   String init2 = '';
   ProductCategory_Api dropdownFunction = ProductCategory_Api();
-  ProductCategory_ProductType_Api dropdownStatus =
-      ProductCategory_ProductType_Api();
+  ProductCategory_ProductType_Api dropdownStatus = ProductCategory_ProductType_Api();
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       wait();
