@@ -22,6 +22,8 @@ class Listofagent extends StatefulWidget {
 class _ListofagentState extends State<Listofagent> {
   TextEditingController controller = TextEditingController();
   TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
+  TextEditingController controller3 = TextEditingController();
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -275,7 +277,28 @@ class _ListofagentState extends State<Listofagent> {
                                       backgroundColor:
                                       MaterialStateProperty.all(
                                           kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    controller.clear();
+                                    controller1.clear();
+                                    controller2.clear();
+                                    controller3.clear();
+                                    shared.list_agent_data.clear();
+                                    setState(() {
+                                      shared.list_agent_data
+                                          .addAll(shared.list_agent[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                            () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
@@ -410,10 +433,12 @@ class _ListofagentState extends State<Listofagent> {
                               verticalSpaceTiny,
                               textfield(
                                 hintext: "Number",
+                                controller: controller2,
                               ),
                               verticalSpaceTiny,
                               textfield(
                                 hintext: "Error Message",
+                                controller: controller3,
                               ),
                               verticalSpaceMedium,
                             ],

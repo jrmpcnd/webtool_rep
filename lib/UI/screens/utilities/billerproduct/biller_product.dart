@@ -165,7 +165,7 @@ class _BillerproductState extends State<Billerproduct> {
                             child: TextFormField(
                               style: kTextStyle,
                               decoration: const InputDecoration(
-                                hintText: 'Product Product Name',
+                                hintText: 'Product Name',
                                 border: OutlineInputBorder(),
                                 labelStyle: TextStyle(fontSize: 12.0),
                                 contentPadding: EdgeInsets.only(left: 10.0),
