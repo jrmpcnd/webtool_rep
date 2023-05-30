@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import '../../../../utils/constant.dart';
 import '../../../../utils/edge_insect.dart';
 import '../../../../utils/spacing.dart';
@@ -14,6 +15,26 @@ class Addpartner extends StatefulWidget {
 }
 
 class _AddpartnerState extends State<Addpartner> {
+  List<String> res = [];
+  String init = '';
+  Partner_Api dropdownFunction = Partner_Api();
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    });
+    getList();
+  }
+  getList() async {
+    List<dynamic> dlist = await dropdownFunction.getUserstatus();
+    for (var i in dlist) {
+      setState(() {
+        res.add(i['get_p_status_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -126,8 +147,21 @@ class _AddpartnerState extends State<Addpartner> {
                           Text("MRI Group :", style: kHeading2TextStyle),
                           dropdowns(dropdown: "--MRI Group--"),
                           verticalSpaceTiny,
-                          Text("Status :", style: kHeading2TextStyle),
-                          dropdowns(dropdown: "--Status--"),
+                          DropdownButton(
+                            value: init,
+                            items: res.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e,
+                                    style: TextStyle(color: Colors.black)),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                init = value.toString();
+                              });
+                            },
+                          ),
                           verticalSpaceXTiny,
                         ],
                       ),

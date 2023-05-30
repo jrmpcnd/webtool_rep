@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import '../../../../utils/constant.dart';
 import '../../../../utils/edge_insect.dart';
 import '../../../../utils/spacing.dart';
@@ -14,6 +15,44 @@ class Addbillerproduct extends StatefulWidget {
 }
 
 class _AddbillerproductState extends State<Addbillerproduct> {
+  List<String> res = [];
+  String init = '';
+  BillerProduct_Category_Api dropdownStatus = BillerProduct_Category_Api();
+  List<String> res1 = [];
+  String init1 = '';
+  Partner_Api dropdownFunction = Partner_Api();
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    });
+    getCategory();
+    getList();
+  }
+  getCategory() async {
+    List<dynamic> dlist = await dropdownStatus.getUserstatus();
+    for (var i in dlist) {
+      setState(() {
+        res.add(i['get_bp_productcategory_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
+  getList() async {
+    List<dynamic> dlist = await dropdownFunction.getUserstatus();
+    for (var i in dlist) {
+      setState(() {
+        res1.add(i['get_p_status_dropdown']);
+      });
+    }
+    setState(() {
+      init1 = res1[0];
+    });
+    print("safgsdgsdgsdfgde $res1");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -87,8 +126,21 @@ class _AddbillerproductState extends State<Addbillerproduct> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Product Category :", style: kHeading2TextStyle),
-                          dropdowns(dropdown: "--Product Category --"),
+                          DropdownButton(
+                            value: init,
+                            items: res.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e,
+                                    style: TextStyle(color: Colors.black)),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                init = value.toString();
+                              });
+                            },
+                          ),
                           verticalSpaceTiny,
                           Text("Biller Product ID :",
                               style: kHeading2TextStyle),
@@ -117,8 +169,21 @@ class _AddbillerproductState extends State<Addbillerproduct> {
                             hintext: "",
                           ),
                           verticalSpaceTiny,
-                          Text("Status :", style: kHeading2TextStyle),
-                          dropdowns(dropdown: "--Status--"),
+                          DropdownButton(
+                            value: init1,
+                            items: res1.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e,
+                                    style: TextStyle(color: Colors.black)),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                init1 = value.toString();
+                              });
+                            },
+                          ),
                           verticalSpaceXTiny,
                         ],
                       ),
