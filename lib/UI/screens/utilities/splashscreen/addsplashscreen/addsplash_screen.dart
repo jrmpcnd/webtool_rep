@@ -1,13 +1,13 @@
 import 'package:auto_size_widget/auto_size_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:web_date_picker/web_date_picker.dart';
-
 import '../../../../utils/constant.dart';
 import '../../../../utils/edge_insect.dart';
 import '../../../../utils/spacing.dart';
 import '../../../../utils/text_styles.dart';
 import '../../../../widgets/dropdown.dart';
 import '../../../../widgets/textfield.dart';
+import 'dart:convert';
+import 'dart:typed_data';
 
 class Addsplashscreen extends StatefulWidget {
   const Addsplashscreen({Key? key}) : super(key: key);
@@ -17,7 +17,45 @@ class Addsplashscreen extends StatefulWidget {
 }
 
 class _AddsplashscreenState extends State<Addsplashscreen> {
+  String imageUrl = '';
+  Uint8List? imageBytes;
   bool value = false;
+
+  void previewImage() {
+    if (imageUrl.startsWith('http')) {
+      // Handle image URL
+      // ...
+    } else if (imageUrl.startsWith('data:image')) {
+      // Handle encoded image bytes in data URL format
+      final base64String = imageUrl.split(',').last;
+      setState(() {
+        imageBytes = base64.decode(base64String);
+      });
+    } else {
+      setState(() {
+        imageBytes = null;
+      });
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Invalid Image Source'),
+            content: Text(
+                'Please provide a direct URL to the image file or encoded image bytes in data URL format.'),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -201,7 +239,7 @@ class _AddsplashscreenState extends State<Addsplashscreen> {
                       child: Row(
                         children: [
                           const Icon(Icons.lan_outlined, color: kBlackColor),
-                          Text('Role - Menus', style: kTinyBoldTextStyle),
+                          Text('Banner', style: kTinyBoldTextStyle),
                         ],
                       ),
                     ),
@@ -225,463 +263,34 @@ class _AddsplashscreenState extends State<Addsplashscreen> {
                       ],
                     ),
                     width: 650.0,
+                    height: 400,
                     child: Padding(
                       padding: kEdgeInsetsAllNormal,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ExpansionTile(
-                            leading: Icon(Icons.add_box),
-                            iconColor: kDarkGreenColor,
-                            collapsedIconColor: kBlackColor,
-                            backgroundColor: kTertiaryColor5,
-                            collapsedBackgroundColor: kTertiaryColor5,
-                            title: Row(
-                              children: [
-                                Text("Dashboard", style: kHeading2TextStyle),
-                                const SizedBox(width: 100.0),
-                                Checkbox(
-                                  checkColor: kWhiteColor,
-                                  side: const BorderSide(color: kBlackColor),
-                                  activeColor: KLightGreenColor,
-                                  value: value,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      this.value = value!;
-                                    });
-                                  },
-                                ),
-                                Text("VIEW", style: kHeading2TextStyle),
-                              ],
-                            ),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            children: [
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text('Register Client',
-                                        style: kHeading2TextStyle),
-                                    horizontalSpaceLarge,
-                                    Checkbox(
-                                      checkColor: kWhiteColor,
-                                      side: BorderSide(color: kBlackColor),
-                                      activeColor: KLightGreenColor,
-                                      value: value,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          this.value = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("VIEW", style: kHeading2TextStyle),
-                                  ],
-                                ),
-                              ),
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text('Register Client',
-                                        style: kHeading2TextStyle),
-                                    horizontalSpaceLarge,
-                                    Checkbox(
-                                      checkColor: kWhiteColor,
-                                      side: BorderSide(color: kBlackColor),
-                                      activeColor: KLightGreenColor,
-                                      value: value,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          this.value = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("VIEW", style: kHeading2TextStyle),
-                                  ],
-                                ),
-                              ),
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text('Register Client',
-                                        style: kHeading2TextStyle),
-                                    horizontalSpaceLarge,
-                                    Checkbox(
-                                      checkColor: kWhiteColor,
-                                      side: BorderSide(color: kBlackColor),
-                                      activeColor: KLightGreenColor,
-                                      value: value,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          this.value = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("VIEW", style: kHeading2TextStyle),
-                                  ],
-                                ),
-                              ),
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text('Register Client',
-                                        style: kHeading2TextStyle),
-                                    horizontalSpaceLarge,
-                                    Checkbox(
-                                      checkColor: kWhiteColor,
-                                      side: BorderSide(color: kBlackColor),
-                                      activeColor: KLightGreenColor,
-                                      value: value,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          this.value = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("VIEW", style: kHeading2TextStyle),
-                                  ],
-                                ),
-                              ),
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text('Register Client',
-                                        style: kHeading2TextStyle),
-                                    horizontalSpaceLarge,
-                                    Checkbox(
-                                      checkColor: kWhiteColor,
-                                      side: BorderSide(color: kBlackColor),
-                                      activeColor: KLightGreenColor,
-                                      value: value,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          this.value = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("VIEW", style: kHeading2TextStyle),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          SizedBox(
+                            height: 10,
                           ),
-                          ExpansionTile(
-                            leading: Icon(Icons.add_box),
-                            iconColor: kDarkGreenColor,
-                            collapsedIconColor: kBlackColor,
-                            title: Row(
-                              children: [
-                                Text("Administration",
-                                    style: kHeading2TextStyle),
-                                const SizedBox(width: 70.0),
-                                Checkbox(
-                                  checkColor: kWhiteColor,
-                                  side: BorderSide(color: kBlackColor),
-                                  activeColor: KLightGreenColor,
-                                  value: value,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      this.value = value!;
-                                    });
-                                  },
-                                ),
-                                Text("VIEW", style: kHeading2TextStyle),
-                              ],
+                          SizedBox(
+                            height: 50.0,
+                            width: 400,
+                            child: TextFormField(
+                              onChanged: (value) => imageUrl = value,
+                              decoration: InputDecoration(
+                                  labelText: 'Enter Image URL or Encoded Bytes',labelStyle: TextStyle(color: Colors.black),
+
                             ),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            children: [
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text('Register Client',
-                                        style: kHeading2TextStyle),
-                                    horizontalSpaceLarge,
-                                    Checkbox(
-                                      checkColor: kWhiteColor,
-                                      side: BorderSide(color: kBlackColor),
-                                      activeColor: KLightGreenColor,
-                                      value: value,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          this.value = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("VIEW", style: kHeading2TextStyle),
-                                  ],
-                                ),
-                              )
-                            ],
                           ),
-                          ExpansionTile(
-                            leading: Icon(Icons.add_box),
-                            iconColor: kDarkGreenColor,
-                            collapsedIconColor: kBlackColor,
-                            title: Row(
-                              children: [
-                                Text("Enrollment", style: kHeading2TextStyle),
-                                const SizedBox(width: 103.0),
-                                Checkbox(
-                                  checkColor: kWhiteColor,
-                                  side: BorderSide(color: kBlackColor),
-                                  activeColor: KLightGreenColor,
-                                  value: value,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      this.value = value!;
-                                    });
-                                  },
-                                ),
-                                Text("VIEW", style: kHeading2TextStyle),
-                              ],
-                            ),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            children: [
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text('Register Client',
-                                        style: kHeading2TextStyle),
-                                    horizontalSpaceLarge,
-                                    Checkbox(
-                                      checkColor: kWhiteColor,
-                                      side: BorderSide(color: kBlackColor),
-                                      activeColor: KLightGreenColor,
-                                      value: value,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          this.value = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("VIEW", style: kHeading2TextStyle),
-                                  ],
-                                ),
-                              )
-                            ],
                           ),
-                          ExpansionTile(
-                            leading: Icon(Icons.add_box),
-                            iconColor: kDarkGreenColor,
-                            collapsedIconColor: kBlackColor,
-                            title: Row(
-                              children: [
-                                Text("Monitoring", style: kHeading2TextStyle),
-                                const SizedBox(width: 103.0),
-                                Checkbox(
-                                  checkColor: kWhiteColor,
-                                  side: BorderSide(color: kBlackColor),
-                                  activeColor: KLightGreenColor,
-                                  value: value,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      this.value = value!;
-                                    });
-                                  },
-                                ),
-                                Text("VIEW", style: kHeading2TextStyle),
-                              ],
-                            ),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            children: [
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text('Register Client',
-                                        style: kHeading2TextStyle),
-                                    horizontalSpaceLarge,
-                                    Checkbox(
-                                      checkColor: kWhiteColor,
-                                      side: BorderSide(color: kBlackColor),
-                                      activeColor: KLightGreenColor,
-                                      value: value,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          this.value = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("VIEW", style: kHeading2TextStyle),
-                                  ],
-                                ),
-                              )
-                            ],
+                          SizedBox(
+                            height: 20,
                           ),
-                          ExpansionTile(
-                            leading: Icon(Icons.add_box),
-                            iconColor: kDarkGreenColor,
-                            collapsedIconColor: kBlackColor,
-                            title: Row(
-                              children: [
-                                Text("Utilities", style: kHeading2TextStyle),
-                                const SizedBox(width: 132.0),
-                                Checkbox(
-                                  checkColor: kWhiteColor,
-                                  side: BorderSide(color: kBlackColor),
-                                  activeColor: KLightGreenColor,
-                                  value: value,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      this.value = value!;
-                                    });
-                                  },
-                                ),
-                                Text("VIEW", style: kHeading2TextStyle),
-                              ],
-                            ),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            children: [
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text('Register Client',
-                                        style: kHeading2TextStyle),
-                                    horizontalSpaceLarge,
-                                    Checkbox(
-                                      checkColor: kWhiteColor,
-                                      side: BorderSide(color: kBlackColor),
-                                      activeColor: KLightGreenColor,
-                                      value: value,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          this.value = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("VIEW", style: kHeading2TextStyle),
-                                  ],
-                                ),
-                              )
-                            ],
+                          ElevatedButton(
+                            onPressed: previewImage,
+                            child: Text('Preview'),
                           ),
-                          ExpansionTile(
-                            leading: Icon(Icons.add_box),
-                            iconColor: kDarkGreenColor,
-                            collapsedIconColor: kBlackColor,
-                            title: Row(
-                              children: [
-                                Text("Customer Service",
-                                    style: kHeading2TextStyle),
-                                const SizedBox(width: 48.0),
-                                Checkbox(
-                                  checkColor: kWhiteColor,
-                                  side: BorderSide(color: kBlackColor),
-                                  activeColor: KLightGreenColor,
-                                  value: value,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      this.value = value!;
-                                    });
-                                  },
-                                ),
-                                Text("VIEW", style: kHeading2TextStyle),
-                              ],
-                            ),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            children: [
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text('Register Client',
-                                        style: kHeading2TextStyle),
-                                    horizontalSpaceLarge,
-                                    Checkbox(
-                                      checkColor: kWhiteColor,
-                                      side: BorderSide(color: kBlackColor),
-                                      activeColor: KLightGreenColor,
-                                      value: value,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          this.value = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("VIEW", style: kHeading2TextStyle),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                          ExpansionTile(
-                            leading: Icon(Icons.add_box),
-                            iconColor: kDarkGreenColor,
-                            collapsedIconColor: kBlackColor,
-                            title: Row(
-                              children: [
-                                Text("Report", style: kHeading2TextStyle),
-                                const SizedBox(width: 137.0),
-                                Checkbox(
-                                  checkColor: kWhiteColor,
-                                  side: BorderSide(color: kBlackColor),
-                                  activeColor: KLightGreenColor,
-                                  value: value,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      this.value = value!;
-                                    });
-                                  },
-                                ),
-                                Text("VIEW", style: kHeading2TextStyle),
-                              ],
-                            ),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            children: [
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text('Register Client',
-                                        style: kHeading2TextStyle),
-                                    horizontalSpaceLarge,
-                                    Checkbox(
-                                      checkColor: kWhiteColor,
-                                      side: BorderSide(color: kBlackColor),
-                                      activeColor: KLightGreenColor,
-                                      value: value,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          this.value = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("VIEW", style: kHeading2TextStyle),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                          ExpansionTile(
-                            leading: Icon(Icons.add_box),
-                            iconColor: kDarkGreenColor,
-                            collapsedIconColor: kBlackColor,
-                            title: Row(
-                              children: [
-                                Text("Scheduler", style: kHeading2TextStyle),
-                              ],
-                            ),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            children: [
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text('Register Client',
-                                        style: kHeading2TextStyle),
-                                    horizontalSpaceLarge,
-                                    Checkbox(
-                                      checkColor: kWhiteColor,
-                                      side: BorderSide(color: kBlackColor),
-                                      activeColor: KLightGreenColor,
-                                      value: value,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          this.value = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("VIEW", style: kHeading2TextStyle),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                          SizedBox(height: 20),
+                          if (imageBytes != null) Image.memory(imageBytes!),
                         ],
                       ),
                     ),
