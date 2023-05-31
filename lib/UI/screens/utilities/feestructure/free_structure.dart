@@ -23,6 +23,7 @@ class Feestructure extends StatefulWidget {
 }
 
 class _FeestructureState extends State<Feestructure> {
+  String dropdown = '';
   TextEditingController controller = TextEditingController();
   bool static = false;
   bool isLoaded = false;
@@ -152,80 +153,80 @@ class _FeestructureState extends State<Feestructure> {
                                     shared.fee_data.clear();
                                     print("00000000${shared.fee}");
 
-                                    for (var i in shared.fee[0].data!) {
-                                      print(i.transType?.toLowerCase().contains(
-                                          init.toLowerCase()));
-                                      if (i.toJson().isNotEmpty) {
-                                        if (i.transType!
-                                            .toLowerCase()
-                                            .contains(init.toLowerCase())) {
-                                          print(i.toJson());
-                                          setState(() {
-                                            shared.fee_data.add(Data12.fromJson(i.toJson()));
-                                          });
 
-                                          if (shared.fee_data.isNotEmpty) {
-                                            Future.delayed(
-                                              Duration(seconds: 1),
-                                                  () {
-                                                setState(() {
-                                                  isLoaded = true;
-                                                });
-                                              },
-                                            );
-                                          } else{
-                                            setState(() {
-                                              isLoaded = true;
-                                            });
-                                          }
-                                        } else{
-                                          setState(() {
-                                            isLoaded = true;
-                                          });
-                                        }
-                                      }
-                                    }
                                     setState(() {
                                       isLoaded = false;
                                     });
                                     shared.fee_data.clear();
+                                    print("hello${init
+                                        .toLowerCase()
+                                        .contains('initiated')}");
+                                    if (init
+                                        .toLowerCase()
+                                        .contains('client')) {
+                                      print('there');
+                                      setState(() {
+                                        dropdown = 'CIP';
+                                      });
+                                    } else if(init.toLowerCase().contains('agent')){
+                                      setState(() {
+                                        dropdown = 'aip';
+                                      });
+                                    } else{
+                                      if(init.contains(" ")) {
+                                        setState(() {
+                                          dropdown =
+                                              init.toLowerCase().replaceAll(
+                                                  " ", "_");
+                                        });
+                                      }else{
+                                        setState(() {
+                                          dropdown = init;
+                                        });
+                                      }
+                                    }
+                                    print("herethere $dropdown");
                                     for (var i in shared.fee[0].data!) {
                                       print(shared.fee[0].data!.length);
-                                      print(i.transType?.toLowerCase().contains(
-                                          init.toLowerCase()));
-                                      if (i.toJson().isNotEmpty) {
-                                        if (i.transType!
-                                            .toLowerCase()
-                                            .contains(init.toLowerCase())) {
+                                      print(i.transType
+                                          ?.toLowerCase()
+                                          .contains(dropdown.toLowerCase()));
+                                      if (i
+                                          .toJson()
+                                          .isNotEmpty) {
+                                          if (i.transType!
+                                              .toLowerCase()
+                                              .contains(
+                                              dropdown
+                                                  .toLowerCase()
+                                                  .replaceAll(" ", "_"))) {
+                                            print(i.toJson());
+                                            setState(() {
+                                              shared.fee_data.add(
+                                                  Data12.fromJson(i.toJson()));
+                                            });
 
-                                          print(i.toJson());
-                                          setState(() {
-                                            shared.fee_data.add(Data12.fromJson(i.toJson()));
-                                          });
-
-                                          if (shared.fee_data.isNotEmpty) {
-                                            Future.delayed(
-                                              Duration(seconds: 1),
-                                                  () {
-                                                setState(() {
-                                                  isLoaded = true;
-                                                });
-                                              },
-                                            );
-                                          } else{
+                                            if (shared.fee_data.isNotEmpty) {
+                                              Future.delayed(
+                                                Duration(seconds: 1),
+                                                    () {
+                                                  setState(() {
+                                                    isLoaded = true;
+                                                  });
+                                                },
+                                              );
+                                            } else {
+                                              setState(() {
+                                                isLoaded = true;
+                                              });
+                                            }
+                                          } else {
                                             setState(() {
                                               isLoaded = true;
                                             });
                                           }
-
-                                        } else{
-                                          setState(() {
-                                            isLoaded = true;
-                                          });
                                         }
                                       }
-                                    }
-
                                   },
                                   icon: const Icon(
                                     Icons.search,
