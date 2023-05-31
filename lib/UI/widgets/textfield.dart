@@ -14,6 +14,7 @@ class textfield extends StatefulWidget {
   Widget? suffixIcon;
   bool? readonly;
   double? width;
+  void Function(String)? onChange;
 
   textfield({
     Key? key,
@@ -27,6 +28,7 @@ class textfield extends StatefulWidget {
     this.controller,
     this.hintext,
     this.onEditingComplete,
+    this.onChange,
   }) : super(key: key);
 
   @override
@@ -41,6 +43,7 @@ class _textfieldState extends State<textfield> {
       width: widget.width,
       child: TextFormField(
         onEditingComplete: widget.onEditingComplete,
+        onChanged: widget.onChange,
         textInputAction: widget.textInputAction,
         readOnly: widget.readonly!,
         controller: widget.controller,

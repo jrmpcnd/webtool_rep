@@ -1,4 +1,44 @@
 class SaveData {
+  static String _productType = '';
+  static String _categoryId = '';
+  static String _categoryName = '';
+  static String _status = '';
+
+
+
+
+
+  static String getProductType(){
+    return _productType;
+  }
+  static setProductType(String data){
+    _productType = data;
+  }
+
+  static String getCategoryId(){
+    return _categoryId;
+  }
+  static setCategoryId(String data){
+    _categoryId = data;
+  }
+
+  static String getCategoryName(){
+    return _categoryName;
+  }
+  static setCategoryName(String data){
+    _categoryName = data;
+  }
+
+  static String getStatus(){
+    return _status;
+  }
+  static setStatus(String data){
+    _status = data;
+  }
+
+
+////////////////created by: Albert
+
   static String _username = '';
   static SetUsername(String username) {
     _username = username;
@@ -264,4 +304,5 @@ class SaveCommission {
   static GetBankpartnerIncome() {
     return _bankpartnerincome;
   }
+  ////////// created by: Mae
 }

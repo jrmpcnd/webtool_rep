@@ -1966,7 +1966,7 @@ class _HomePageState extends State<HomePage> {
                                             "Save Product Category";
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
-                                          const Addproductcategory()
+                                          const AddProductCategory()
                                         ];
                                       });
                                     };

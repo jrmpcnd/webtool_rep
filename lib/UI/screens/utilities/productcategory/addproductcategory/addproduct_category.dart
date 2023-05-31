@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
+import '../../../../../core/getter_setter.dart';
 import '../../../../utils/constant.dart';
 import '../../../../utils/edge_insect.dart';
 import '../../../../utils/spacing.dart';
@@ -7,26 +8,29 @@ import '../../../../utils/text_styles.dart';
 import '../../../../widgets/dropdown.dart';
 import '../../../../widgets/textfield.dart';
 
-class Addproductcategory extends StatefulWidget {
-  const Addproductcategory({Key? key}) : super(key: key);
+class AddProductCategory extends StatefulWidget {
+  const AddProductCategory({Key? key}) : super(key: key);
 
   @override
-  State<Addproductcategory> createState() => _AddproductcategoryState();
+  State<AddProductCategory> createState() => _AddProductCategoryState();
 }
 
-class _AddproductcategoryState extends State<Addproductcategory> {
+class _AddProductCategoryState extends State<AddProductCategory> {
+  TextEditingController categoryId = TextEditingController();
+  TextEditingController categoryName = TextEditingController();
   List<String> res = [];
   String init = '';
-  ProductCategory_ProductType_Api dropdownStatus = ProductCategory_ProductType_Api();
+  ProductCategory_ProductType_Api dropdownStatus =
+      ProductCategory_ProductType_Api();
   List<String> res1 = [];
   String init1 = '';
   Partner_Api dropdownFunction = Partner_Api();
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
     getCategory();
     getList();
   }
+
   getCategory() async {
     List<dynamic> dlist = await dropdownStatus.getUserstatus();
     for (var i in dlist) {
@@ -39,6 +43,7 @@ class _AddproductcategoryState extends State<Addproductcategory> {
     });
     print("safgsdgsdgsdfgde $res");
   }
+
   getList() async {
     List<dynamic> dlist = await dropdownFunction.getUserstatus();
     for (var i in dlist) {
@@ -137,6 +142,7 @@ class _AddproductcategoryState extends State<Addproductcategory> {
                             onChanged: (value) {
                               setState(() {
                                 init = value.toString();
+                                SaveData.setProductType(init);
                               });
                             },
                           ),
@@ -145,12 +151,20 @@ class _AddproductcategoryState extends State<Addproductcategory> {
                               style: kHeading2TextStyle),
                           textfield(
                             hintext: "",
+                            controller: categoryId,
+                            onChange: (data){
+                              SaveData.setCategoryId(data);
+                            },
                           ),
                           verticalSpaceTiny,
                           Text("Product Category Name :",
                               style: kHeading2TextStyle),
                           textfield(
                             hintext: "",
+                            controller: categoryName,
+                            onChange: (data){
+                              SaveData.setCategoryName(data);
+                            },
                           ),
                           verticalSpaceTiny,
                           DropdownButton(
@@ -165,6 +179,7 @@ class _AddproductcategoryState extends State<Addproductcategory> {
                             onChanged: (value) {
                               setState(() {
                                 init1 = value.toString();
+                                SaveData.setStatus(init1);
                               });
                             },
                           ),

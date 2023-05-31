@@ -37,6 +37,7 @@ import 'package:webtool_rep/UI/screens/utilities/loadproduct/load_product.dart';
 import 'package:webtool_rep/UI/screens/utilities/parameter/addparameter/add_parameter.dart';
 import 'package:webtool_rep/UI/screens/utilities/parameter/parameter.dart';
 import 'package:webtool_rep/UI/screens/utilities/partner/partner.dart';
+import 'package:webtool_rep/UI/screens/utilities/productcategory/components/add_product_category.dart';
 import 'package:webtool_rep/UI/screens/utilities/productcategory/product_category.dart';
 import 'package:webtool_rep/UI/screens/utilities/producttype/product_type.dart';
 import 'package:webtool_rep/UI/screens/utilities/splashscreen/addsplashscreen/addsplash_screen.dart';
@@ -1599,17 +1600,20 @@ class _HomePageState extends State<HomePage> {
                                         shared.onPress = () async {
                                           Future.delayed(
                                             Duration(seconds: 1),
-                                                () {
+                                            () {
                                               setState(() {
-                                                shared.addicon = Icons.add_outlined;
-                                                shared.icon = Icons.people_outline;
-                                                shared.addicon = Icons.add_outlined;
+                                                shared.addicon =
+                                                    Icons.add_outlined;
+                                                shared.icon =
+                                                    Icons.people_outline;
+                                                shared.addicon =
+                                                    Icons.add_outlined;
                                                 shared.uploadbutton = "";
                                                 shared.subuploadbutton = "";
                                                 shared.addbutton =
-                                                "New Institution";
+                                                    "New Institution";
                                                 shared.subaddbutton =
-                                                "Add New Institution";
+                                                    "Add New Institution";
                                                 shared.header = "Utilities";
                                                 shared.title = "Institution";
                                                 shared.homewidget = [
@@ -1715,16 +1719,19 @@ class _HomePageState extends State<HomePage> {
                                         shared.onPress = () async {
                                           Future.delayed(
                                             Duration(seconds: 1),
-                                                () {
+                                            () {
                                               setState(() {
-                                                shared.addicon = Icons.add_outlined;
-                                                shared.icon = Icons.people_outline;
-                                                shared.addicon = Icons.add_outlined;
+                                                shared.addicon =
+                                                    Icons.add_outlined;
+                                                shared.icon =
+                                                    Icons.people_outline;
+                                                shared.addicon =
+                                                    Icons.add_outlined;
                                                 shared.uploadbutton = "Reset";
                                                 shared.subuploadbutton = "";
                                                 shared.addbutton = "New Branch";
                                                 shared.subaddbutton =
-                                                "Add New Branch";
+                                                    "Add New Branch";
                                                 shared.header = "Utilities";
                                                 shared.title = "Branch";
                                                 shared.homewidget = [
@@ -1824,19 +1831,24 @@ class _HomePageState extends State<HomePage> {
                                         shared.onPress = () async {
                                           Future.delayed(
                                             Duration(seconds: 1),
-                                                () {
+                                            () {
                                               setState(() {
-                                                shared.addicon = Icons.add_outlined;
-                                                shared.icon = Icons.people_outline;
-                                                shared.addicon = Icons.add_outlined;
+                                                shared.addicon =
+                                                    Icons.add_outlined;
+                                                shared.icon =
+                                                    Icons.people_outline;
+                                                shared.addicon =
+                                                    Icons.add_outlined;
                                                 shared.uploadbutton = "";
                                                 shared.subuploadbutton = "";
                                                 shared.addbutton = "New Unit";
                                                 shared.subaddbutton =
-                                                "Add New Unit";
+                                                    "Add New Unit";
                                                 shared.header = "Utilities";
                                                 shared.title = "Unit";
-                                                shared.homewidget = [const Unit()];
+                                                shared.homewidget = [
+                                                  const Unit()
+                                                ];
                                                 isLoaded = true;
                                               });
                                             },
@@ -1933,20 +1945,24 @@ class _HomePageState extends State<HomePage> {
                                         shared.onPress = () async {
                                           Future.delayed(
                                             Duration(seconds: 1),
-                                                () {
+                                            () {
                                               setState(() {
-                                                shared.addicon = Icons.add_outlined;
-                                                shared.icon = Icons.people_outline;
-                                                shared.addicon = Icons.add_outlined;
+                                                shared.addicon =
+                                                    Icons.add_outlined;
+                                                shared.icon =
+                                                    Icons.people_outline;
+                                                shared.addicon =
+                                                    Icons.add_outlined;
                                                 shared.uploadbutton = "";
                                                 shared.subuploadbutton = "";
                                                 shared.addbutton = "New Center";
                                                 shared.subaddbutton =
-                                                "Add New Center";
+                                                    "Add New Center";
                                                 shared.header = "Utilities";
                                                 shared.title = "Center";
                                                 shared.homewidget = [
-                                                  const Centers()];
+                                                  const Centers()
+                                                ];
                                                 isLoaded = true;
                                               });
                                             },
@@ -2162,9 +2178,15 @@ class _HomePageState extends State<HomePage> {
                                         shared.addbutton = "Save";
                                         shared.subaddbutton =
                                             "Save Product Category";
+                                        shared.onPress = () async {
+                                            AddProductFunction function = AddProductFunction();
+                                            http.Response response = await function.addFunction();
+
+                                            print(response.body);
+                                        };
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
-                                          const Addproductcategory()
+                                          const AddProductCategory()
                                         ];
                                       });
                                     };
@@ -2354,18 +2376,23 @@ class _HomePageState extends State<HomePage> {
                                         shared.onPress = () async {
                                           Future.delayed(
                                             Duration(seconds: 1),
-                                                () {
+                                            () {
                                               setState(() {
-                                                shared.addicon = Icons.add_outlined;
-                                                shared.icon = Icons.people_outline;
-                                                shared.addicon = Icons.add_outlined;
+                                                shared.addicon =
+                                                    Icons.add_outlined;
+                                                shared.icon =
+                                                    Icons.people_outline;
+                                                shared.addicon =
+                                                    Icons.add_outlined;
                                                 shared.uploadbutton = "";
                                                 shared.subuploadbutton = "";
-                                                shared.addbutton = "New Commission";
+                                                shared.addbutton =
+                                                    "New Commission";
                                                 shared.subaddbutton =
-                                                "Add Commission Setup";
+                                                    "Add Commission Setup";
                                                 shared.header = "Utilities";
-                                                shared.title = "Commission Setup";
+                                                shared.title =
+                                                    "Commission Setup";
                                                 shared.homewidget = [
                                                   const Commissionsetup()
                                                 ];
@@ -2509,20 +2536,25 @@ class _HomePageState extends State<HomePage> {
                                         shared.onPress = () async {
                                           Future.delayed(
                                             Duration(seconds: 1),
-                                                () {
+                                            () {
                                               setState(() {
-                                                shared.addicon = Icons.add_outlined;
-                                                shared.icon = Icons.people_outline;
-                                                shared.addicon = Icons.add_outlined;
+                                                shared.addicon =
+                                                    Icons.add_outlined;
+                                                shared.icon =
+                                                    Icons.people_outline;
+                                                shared.addicon =
+                                                    Icons.add_outlined;
                                                 shared.uploadbutton = "";
                                                 shared.subuploadbutton = "";
-                                                shared.addbutton = "New Bank List";
+                                                shared.addbutton =
+                                                    "New Bank List";
                                                 shared.subaddbutton =
-                                                "Add Bank List";
+                                                    "Add Bank List";
                                                 shared.header = "Utilities";
                                                 shared.title = "Bank List";
                                                 shared.homewidget = [
-                                                const Banklist()];
+                                                  const Banklist()
+                                                ];
                                                 isLoaded = true;
                                               });
                                             },
