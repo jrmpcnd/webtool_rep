@@ -7,6 +7,7 @@ import 'package:webtool_rep/UI/screens/administration/hierarchy/addhierarchy/add
 import 'package:webtool_rep/UI/screens/administration/rolemanagement/addroles/add_roles.dart';
 import 'package:webtool_rep/UI/screens/administration/rolemanagement/role_management.dart';
 import 'package:webtool_rep/UI/screens/administration/usermanagement/adduser/add_user.dart';
+import 'package:webtool_rep/UI/screens/customerservice/broadcastmessage/addbroadcastmessage/addproduct_and_services.dart';
 import 'package:webtool_rep/UI/screens/customerservice/csrdashboard/addcsrdashboard/add_csrdashboard.dart';
 import 'package:webtool_rep/UI/screens/login/change_password.dart';
 import 'package:webtool_rep/UI/screens/monitoring/agentdashboard/agent_dashboard.dart';
@@ -2179,10 +2180,12 @@ class _HomePageState extends State<HomePage> {
                                         shared.subaddbutton =
                                             "Save Product Category";
                                         shared.onPress = () async {
-                                            AddProductFunction function = AddProductFunction();
-                                            http.Response response = await function.addFunction();
+                                          AddProductFunction function =
+                                              AddProductFunction();
+                                          http.Response response =
+                                              await function.addFunction();
 
-                                            print(response.body);
+                                          print(response.body);
                                         };
                                         shared.title = "Create / Edit";
                                         shared.homewidget = [
@@ -2828,7 +2831,20 @@ class _HomePageState extends State<HomePage> {
                                         ];
                                       });
                                     };
-                                    shared.onPress = () {};
+                                    shared.onPress = () {
+                                      setState(() {
+                                        shared.icon = Icons.add_outlined;
+                                        shared.addicon = Icons.save_outlined;
+                                        shared.header =
+                                            "Broadcast Message  >  Create / Edit";
+                                        shared.addbutton = "Save";
+                                        shared.subaddbutton = "Save Broadcast";
+                                        shared.title = "Create / Edit";
+                                        shared.homewidget = [
+                                          const Addbroadcast()
+                                        ];
+                                      });
+                                    };
                                     shared.addicon = Icons.add_outlined;
                                     shared.icon = Icons.list_alt_outlined;
                                     shared.uploadbutton = "";
