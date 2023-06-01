@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import '../screens/administration/usermanagement/components/branchapi.dart';
 import '../utils/constant.dart';
 import '../utils/text_styles.dart';
+import 'package:http/http.dart' as http;
 
 class elevatedbuttonpopup extends StatefulWidget {
   String? code;
@@ -16,21 +20,24 @@ class elevatedbuttonpopup extends StatefulWidget {
 }
 
 class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
-  final List<elevatedbuttonpopup> branches = [
-    elevatedbuttonpopup(code: '467870', description: 'Palawan 3'),
-    elevatedbuttonpopup(code: '467815', description: 'Cagayan 1'),
-    elevatedbuttonpopup(code: 'PH1010063', description: 'San Carlos'),
-    elevatedbuttonpopup(code: '468023', description: 'Misamis Oriental 1'),
-    elevatedbuttonpopup(code: 'PH1010065', description: 'San Fernando City'),
-    elevatedbuttonpopup(code: '123456', description: 'Sample Branch 1'),
-    elevatedbuttonpopup(code: '789012', description: 'Sample Branch 2'),
-    elevatedbuttonpopup(code: '345678', description: 'Sample Branch 3'),
-    elevatedbuttonpopup(code: '901234', description: 'Sample Branch 4'),
-    elevatedbuttonpopup(code: '567890', description: 'Sample Branch 5'),
-    elevatedbuttonpopup(code: '234567', description: 'Sample Branch 6'),
-  ];
+  BranchApilist _branchapilist = BranchApilist();
+  BranchDrop _branchDrop = BranchDrop();
+  final List<elevatedbuttonpopup> branches = [];
+  
+  void function()async{
+    branches.clear();
+    http.Response response = await _branchapilist.getUserstatus();
 
+    _branchDrop = BranchDrop.fromJson(jsonDecode(response.body));
+    for(var i in _branchDrop.data!){
+      print(i.branchDesc);
+      print(i.branchCode);
+      branches.add(elevatedbuttonpopup(code: i.branchCode, description: i.branchDesc));
+    }
+  }
+  
   final TextEditingController searchController = TextEditingController();
+  final TextEditingController mainSearchController = TextEditingController();
   int currentPage = 0;
   final int itemsPerPage = 5;
 
@@ -55,6 +62,11 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
       });
     }
   }
+  @override
+  void initState(){
+    super.initState();
+    function();
+  }
 
   int get totalPages => (branches.length / itemsPerPage).ceil();
   @override
@@ -62,158 +74,180 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
     return SizedBox(
       height: 35.0,
       width: widget.width,
-      child: ElevatedButton.icon(
-        style: ButtonStyle(
-          alignment: Alignment.centerLeft,
-          backgroundColor: MaterialStateProperty.all(kSecondaryColor3),
-        ),
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (alert) => AlertDialog(
-              title: Text('Branch List'),
-              content: Container(
-                width: 400.0,
-                height: 400.0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Row(
+      child: TextFormField(
+        style: TextStyle(color: Colors.black),
+          controller: mainSearchController,
+          onTap:() {
+            showDialog(
+              context: context,
+              builder: (alert) =>
+                  AlertDialog(
+                    title: Text('Branch List'),
+                    content: Container(
+                      width: 400.0,
+                      height: 400.0,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            flex: 2,
-                            child: TextField(
-                              controller: searchController,
-                              decoration: const InputDecoration(
-                                labelText: 'Search',
-                                border: OutlineInputBorder(),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 8.0),
-                          ElevatedButton(
-                            onPressed: () {
-                              // Handle search button press
-                              print('Search');
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary:
-                                  Colors.red, // Set search button color to red
-                            ),
-                            child: Text('Search'),
-                          ),
-                          SizedBox(width: 8.0),
-                          ElevatedButton(
-                            onPressed: () {
-                              // Handle reset button press
-                              print('Reset');
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary:
-                                  Colors.grey, // Set reset button color to gray
-                            ),
-                            child: Text('Reset'),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Divider(),
-                    ListTile(
-                      title: Row(
-                        children: const [
-                          Expanded(
-                            flex: 1,
-                            child: Text(
-                              '#',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Text(
-                              'Page',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Text(
-                              'Code',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Text(
-                              'Description',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Divider(),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: getPaginatedBranches().length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final branch = getPaginatedBranches()[index];
-                          return ListTile(
-                            onTap: () {
-                              setState(() {
-                                searchController.text = branch.code!;
-                              });
-                            },
-                            title: Row(
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0),
+                            child: Row(
                               children: [
                                 Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                      '${index + 1 + currentPage * itemsPerPage}.'),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Text('${currentPage + 1}'),
-                                ),
-                                Expanded(
                                   flex: 2,
-                                  child: Text(branch.code!),
+                                  child: TextField(
+                                    controller: searchController,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Search',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    onChanged: (data){
+                                      mainSearchController.text = data;
+                                    },
+                                  ),
                                 ),
-                                Expanded(
-                                  flex: 3,
-                                  child: Text(branch.description!),
+                                SizedBox(width: 8.0),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Handle search button press
+                                    print(mainSearchController.text);
+                                    print('Search');
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary:
+                                    Colors
+                                        .red, // Set search button color to red
+                                  ),
+                                  child: Text('Search'),
+                                ),
+                                SizedBox(width: 8.0),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Handle reset button press
+                                    print('Reset');
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary:
+                                    Colors
+                                        .grey, // Set reset button color to gray
+                                  ),
+                                  child: Text('Reset'),
                                 ),
                               ],
                             ),
-                          );
-                        },
+                          ),
+                          Divider(),
+                          ListTile(
+                            title: Row(
+                              children: const [
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    '#',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    'Page',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    'Code',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    'Description',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Divider(),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: getPaginatedBranches().length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final branch = getPaginatedBranches()[index];
+                                return ListTile(
+                                  onTap: () {
+                                    setState(() {
+                                      searchController.text = branch.code!;
+                                      mainSearchController.text = searchController.text;
+                                      Navigator.pop(context);
+                                    });
+                                  },
+                                  title: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                            '${index + 1 + currentPage *
+                                                itemsPerPage}.'),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Text('${currentPage + 1}'),
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(branch.code!),
+                                      ),
+                                      Expanded(
+                                        flex: 3,
+                                        child: Text(branch.description!),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 16.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ElevatedButton(
+                                onPressed: previousPage,
+                                child: Text('Previous'),
+                              ),
+                              Text('Page ${currentPage + 1} of $totalPages'),
+                              ElevatedButton(
+                                onPressed: nextPage,
+                                child: Text('Next'),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(height: 16.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          onPressed: previousPage,
-                          child: Text('Previous'),
-                        ),
-                        Text('Page ${currentPage + 1} of $totalPages'),
-                        ElevatedButton(
-                          onPressed: nextPage,
-                          child: Text('Next'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-        icon: const Icon(Icons.search, color: kWhiteColor),
-        label: Text(widget.label!, style: kTinyRegularTextStyle),
+                  ),
+            );
+            // ElevatedButton.icon(
+            //   style: ButtonStyle(
+            //     alignment: Alignment.centerLeft,
+            //     backgroundColor: MaterialStateProperty.all(kSecondaryColor3),
+            //   ),
+            //   onPressed: () {
+            //
+            //   },
+            //   icon: const Icon(Icons.search, color: kWhiteColor),
+            //   label: Text(widget.label!, style: kTinyRegularTextStyle),
+            // );
+          }
       ),
     );
   }

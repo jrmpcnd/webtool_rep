@@ -545,7 +545,6 @@ class MyData extends DataTableSource {
   bool isChecked = false;
   H_Prov shared;
   MyData({required this.shared});
-
   @override
   bool get isRowCountApproximate => false;
   @override
