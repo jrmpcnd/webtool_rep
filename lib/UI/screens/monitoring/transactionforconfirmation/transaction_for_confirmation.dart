@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/utils/spacing.dart';
+import 'package:webtool_rep/UI/widgets/elevatedbuttonpopup.dart';
 import 'package:webtool_rep/core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
@@ -550,26 +551,8 @@ class _TransactionforconfirmationState
                         SizedBox(
                           height: 15,
                         ),
-                        SizedBox(
-                          height: 35.0,
-                          width: 400,
-                          child: TextFormField(
-                            style: kTextStyle,
-                            decoration: const InputDecoration(
-                              hintText: 'Branch',
-                              border: OutlineInputBorder(),
-                              labelStyle: TextStyle(fontSize: 12.0),
-                              contentPadding: EdgeInsets.only(left: 10.0),
-                              hintStyle: TextStyle(color: kSecondaryColor2),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: kBlackColor),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: kBlackColor),
-                              ),
-                            ),
-                          ),
-                        ),
+                        elevatedbuttonpopup(
+                            label: "Branch", width: 400.0),
                         verticalSpaceTiny,
                         WebDatePicker(
                           hinttext: "Enroll Date Start",

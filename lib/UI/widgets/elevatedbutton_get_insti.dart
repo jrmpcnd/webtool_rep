@@ -1,38 +1,39 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/screens/monitoring/listofagent/components/get_insti_Api.dart';
 import '../screens/administration/usermanagement/components/branchapi.dart';
 import '../utils/constant.dart';
 import '../utils/text_styles.dart';
 import 'package:http/http.dart' as http;
 
-class elevatedbuttonpopup extends StatefulWidget {
+class elevatedbuttonpopupInsti extends StatefulWidget {
   String? code;
   String? description;
   String? label = "";
   double? width;
-  elevatedbuttonpopup(
+  elevatedbuttonpopupInsti(
       {Key? key, this.label, this.width, this.code, this.description})
       : super(key: key);
 
   @override
-  State<elevatedbuttonpopup> createState() => _elevatedbuttonpopupState();
+  State<elevatedbuttonpopupInsti> createState() => _elevatedbuttonpopupInstiState();
 }
 
-class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
-  BranchApilist _branchApilist = BranchApilist();
-  BranchDrop _branchDrop = BranchDrop();
-  final List<elevatedbuttonpopup> branches = [];
+class _elevatedbuttonpopupInstiState extends State<elevatedbuttonpopupInsti> {
+  InstiApilist _instiApilist = InstiApilist();
+  get_insti__Drop _instihDrop = get_insti__Drop();
+  final List<elevatedbuttonpopupInsti> institution = [];
 
   void fetchData() async {
-    branches.clear();
-    http.Response response = await _branchApilist.getUserstatus();
+    institution.clear();
+    http.Response response = await _instiApilist.getUserstatus();
 
-    _branchDrop = BranchDrop.fromJson(jsonDecode(response.body));
-    for (var i in _branchDrop.data!) {
-      print(i.branchDesc);
-      print(i.branchCode);
-      branches.add(elevatedbuttonpopup(code: i.branchCode, description: i.branchDesc));
+    _instihDrop = get_insti__Drop.fromJson(jsonDecode(response.body));
+    for (var i in _instihDrop.data!) {
+      print(i.instDesc);
+      print(i.instCode);
+      institution.add(elevatedbuttonpopupInsti(code: i.instCode, description: i.instDesc));
     }
     setState(() {});
   }
@@ -42,10 +43,10 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
   int currentPage = 0;
   final int itemsPerPage = 5;
 
-  List<elevatedbuttonpopup> getPaginatedBranches() {
+  List<elevatedbuttonpopupInsti> getPaginatedBranches() {
     final int startIndex = currentPage * itemsPerPage;
-    final int endIndex = (startIndex + itemsPerPage).clamp(0, branches.length);
-    return branches.sublist(startIndex, endIndex);
+    final int endIndex = (startIndex + itemsPerPage).clamp(0, institution.length);
+    return institution.sublist(startIndex, endIndex);
   }
 
   @override
@@ -54,7 +55,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
     fetchData();
   }
 
-  int get totalPages => (branches.length / itemsPerPage).ceil();
+  int get totalPages => (institution.length / itemsPerPage).ceil();
 
   void previousPage() {
     setState(() {
@@ -77,7 +78,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
       child: TextFormField(
         style: TextStyle(color: Colors.black),
         decoration: const InputDecoration(
-          hintText: '--Branch--',
+          hintText: '--Institution--',
           border: OutlineInputBorder(),
           labelStyle: TextStyle(fontSize: 12.0),
           contentPadding: EdgeInsets.only(left: 10.0),
@@ -164,7 +165,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
                       ],
                       rows: getPaginatedBranches().map((branch) {
                         final index =
-                            branches.indexOf(branch) + 1 + currentPage * itemsPerPage;
+                            institution.indexOf(branch) + 1 + currentPage * itemsPerPage;
                         return DataRow(
                           cells: [
                             DataCell(Text(index.toString())),
@@ -186,11 +187,11 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ElevatedButton(
-                         onPressed: (){
-                           setState(() {
-                             previousPage;
-                           });
-                         },
+                          onPressed: (){
+                            setState(() {
+                              previousPage;
+                            });
+                          },
                           child: Text('Previous'),
                         ),
                         Text('Page ${currentPage + 1} of $totalPages'),

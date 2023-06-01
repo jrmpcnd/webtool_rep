@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/model.dart';
+import 'package:webtool_rep/UI/widgets/elevatedbuttonsourcebranch.dart';
+import 'package:webtool_rep/UI/widgets/elevatedbuttontargetbranch.dart';
 import 'package:webtool_rep/core/providers/Provider.dart';
 import '../../../utils/api.dart';
 import '../../../utils/api2.dart';
@@ -428,10 +430,10 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                 ),
                               ),
                               verticalSpaceTiny,
-                              elevatedbuttonpopup(
+                              elevatedbuttonsourcebranch(
                                   label: "Source Branch", width: 400.0),
                               verticalSpaceTiny,
-                              elevatedbuttonpopup(
+                              elevatedbuttontargetbranch(
                                   label: "Target Branch", width: 400.0),
                               verticalSpaceMedium,
                             ],

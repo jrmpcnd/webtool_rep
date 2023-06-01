@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
+import 'package:webtool_rep/UI/widgets/elevatedbutton_get_insti.dart';
 import 'package:webtool_rep/core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
@@ -226,11 +227,11 @@ class _ListofagentState extends State<Listofagent> {
                             ),
                           ),
                           verticalSpaceTiny,
-                          elevatedbuttonpopup(
-                              label: "Branch", width: 400.0),
+                          elevatedbuttonpopupInsti(
+                              label: "Insti", width: 400.0),
                           verticalSpaceTiny,
                           elevatedbuttonpopup(
-                              label: "Institution", width: 400.0),
+                              label: "branch", width: 400.0),
                           // DropdownButton(
                           //   value: init,
                           //   items: res.map((e) {

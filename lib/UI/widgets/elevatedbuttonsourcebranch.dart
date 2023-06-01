@@ -1,28 +1,28 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import '../screens/administration/usermanagement/components/branchapi.dart';
-import '../utils/constant.dart';
-import '../utils/text_styles.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/cupertino.dart';
+import 'package:webtool_rep/UI/screens/administration/usermanagement/components/branchapi.dart';
+import 'package:webtool_rep/UI/utils/constant.dart';
+import 'package:webtool_rep/UI/utils/text_styles.dart';
 
-class elevatedbuttonpopup extends StatefulWidget {
+class elevatedbuttonsourcebranch extends StatefulWidget {
   String? code;
   String? description;
   String? label = "";
   double? width;
-  elevatedbuttonpopup(
+  elevatedbuttonsourcebranch(
       {Key? key, this.label, this.width, this.code, this.description})
       : super(key: key);
 
   @override
-  State<elevatedbuttonpopup> createState() => _elevatedbuttonpopupState();
+  State<elevatedbuttonsourcebranch> createState() => _elevatedbuttonpopupState();
 }
 
-class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
+class _elevatedbuttonpopupState extends State<elevatedbuttonsourcebranch> {
   BranchApilist _branchApilist = BranchApilist();
   BranchDrop _branchDrop = BranchDrop();
-  final List<elevatedbuttonpopup> branches = [];
+  final List<elevatedbuttonsourcebranch> branches = [];
 
   void fetchData() async {
     branches.clear();
@@ -32,7 +32,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
     for (var i in _branchDrop.data!) {
       print(i.branchDesc);
       print(i.branchCode);
-      branches.add(elevatedbuttonpopup(code: i.branchCode, description: i.branchDesc));
+      branches.add(elevatedbuttonsourcebranch(code: i.branchCode, description: i.branchDesc));
     }
     setState(() {});
   }
@@ -42,7 +42,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
   int currentPage = 0;
   final int itemsPerPage = 5;
 
-  List<elevatedbuttonpopup> getPaginatedBranches() {
+  List<elevatedbuttonsourcebranch> getPaginatedBranches() {
     final int startIndex = currentPage * itemsPerPage;
     final int endIndex = (startIndex + itemsPerPage).clamp(0, branches.length);
     return branches.sublist(startIndex, endIndex);
@@ -77,7 +77,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
       child: TextFormField(
         style: TextStyle(color: Colors.black),
         decoration: const InputDecoration(
-          hintText: '--Branch--',
+          hintText: '--Source Branch--',
           border: OutlineInputBorder(),
           labelStyle: TextStyle(fontSize: 12.0),
           contentPadding: EdgeInsets.only(left: 10.0),
@@ -186,11 +186,11 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ElevatedButton(
-                         onPressed: (){
-                           setState(() {
-                             previousPage;
-                           });
-                         },
+                          onPressed: (){
+                            setState(() {
+                              previousPage;
+                            });
+                          },
                           child: Text('Previous'),
                         ),
                         Text('Page ${currentPage + 1} of $totalPages'),
