@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
+import 'package:webtool_rep/UI/widgets/date_picker.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import 'package:webtool_rep/UI/widgets/elevatedbutton_get_insti.dart';
 import 'package:webtool_rep/core/providers/data_provider.dart';
@@ -103,15 +104,7 @@ class _ListofagentState extends State<Listofagent> {
                             children: [
                               Row(
                                 children: [
-                                  WebDatePicker(
-                                    hinttext: "Start Sent Date",
-                                    onChange: (value) {},
-                                  ),
-                                  horizontalSpaceRegular,
-                                  WebDatePicker(
-                                    hinttext: "End Sent Date",
-                                    onChange: (value) {},
-                                  ),
+                                 DatePickerScreen(),
                                 ],
                               ),
                             ],

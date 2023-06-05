@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/widgets/date_picker1.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
+import '../../../widgets/date_picker.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 
 class Operationdashboard extends StatefulWidget {
@@ -55,15 +57,7 @@ class _OperationdashboardState extends State<Operationdashboard> {
                             children: [
                               Row(
                                 children: [
-                                  WebDatePicker(
-                                    hinttext: "Date Start",
-                                    onChange: (value) {},
-                                  ),
-                                  horizontalSpaceRegular,
-                                  WebDatePicker(
-                                    hinttext: "Date End",
-                                    onChange: (value) {},
-                                  ),
+                                  DatePickerScreen(),
                                 ],
                               ),
                             ],

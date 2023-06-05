@@ -168,7 +168,7 @@ class _DatePickerScreen2State extends State<DatePickerScreen2> {
                 controller: _startDateController,
                 readOnly: true,
                 decoration: InputDecoration(
-                  hintText: 'Enrolled Date Start',hintStyle: TextStyle(color: Colors.black),
+                  hintText: 'Enrolled Date Start',hintStyle: TextStyle(color: Colors.black,fontSize: 11),
                   suffixIcon: IconButton(
                     onPressed: () => _selectStartDate(context),
                     icon: Icon(Icons.calendar_today,color: Colors.black,),
@@ -185,7 +185,7 @@ class _DatePickerScreen2State extends State<DatePickerScreen2> {
                 readOnly: true,
                 decoration: InputDecoration(
                   hintText: 'Enrolled Date End',
-                  hintStyle: TextStyle(color: Colors.black),
+                  hintStyle: TextStyle(color: Colors.black,fontSize: 11),
                   suffixIcon: IconButton(
                     onPressed: () => _selectEndDate(context),
                     icon: Icon(Icons.calendar_today,color: Colors.black,),

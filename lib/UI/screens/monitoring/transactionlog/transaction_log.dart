@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
+import 'package:webtool_rep/UI/widgets/date_picker.dart';
+import 'package:webtool_rep/UI/widgets/date_picker1.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
@@ -196,17 +198,9 @@ class _TransactionlogState extends State<Transactionlog> {
                               verticalSpaceTiny,
                               Column(
                                 children: [
-                                  Row(
+                                  Column(
                                     children: [
-                                      WebDatePicker(
-                                        hinttext: "Date Start",
-                                        onChange: (value) {},
-                                      ),
-                                      horizontalSpaceRegular,
-                                      WebDatePicker(
-                                        hinttext: "Date End",
-                                        onChange: (value) {},
-                                      ),
+                                     DatePickerScreen(),
                                     ],
                                   ),
                                 ],
