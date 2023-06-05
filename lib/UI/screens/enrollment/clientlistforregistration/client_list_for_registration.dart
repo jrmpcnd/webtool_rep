@@ -4,6 +4,7 @@ import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
+import '../../../widgets/date_picker.dart';
 import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
@@ -66,37 +67,10 @@ class _ClientlistforregistrationState extends State<Clientlistforregistration> {
                             hintext: "Mobile Number",
                           ),
                           verticalSpaceTiny,
-                          Row(
-                            children: [
-                              Column(
-                                children: [
-                                  WebDatePicker(
-                                    hinttext: "Enroll Date Start",
-                                    onChange: (value) {},
-                                  ),
-                                  verticalSpaceTiny,
-                                  WebDatePicker(
-                                    hinttext: "Activate Date Start",
-                                    onChange: (value) {},
-                                  ),
-                                ],
-                              ),
-                              horizontalSpaceRegular,
-                              Column(
-                                children: [
-                                  WebDatePicker(
-                                    hinttext: "Enroll Date End",
-                                    onChange: (value) {},
-                                  ),
-                                  verticalSpaceTiny,
-                                  WebDatePicker(
-                                    hinttext: "Activate Date End",
-                                    onChange: (value) {},
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                          SizedBox(
+                              height: 40.0,
+                              width: 550.0,
+                              child: DatePickerScreen(),),
                           verticalSpaceRegular,
                           Row(
                             children: [

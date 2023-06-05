@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/utils/spacing.dart';
+import 'package:webtool_rep/UI/widgets/date_picker.dart';
+import 'package:webtool_rep/UI/widgets/date_picker1.dart';
 import 'package:webtool_rep/UI/widgets/elevatedbuttonpopup.dart';
 import 'package:webtool_rep/core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
@@ -123,7 +125,7 @@ class _TransactionforconfirmationState
                         offset: Offset(0, 3)),
                   ],
                 ),
-                height: 200.0,
+                height: 250.0,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -554,17 +556,8 @@ class _TransactionforconfirmationState
                         elevatedbuttonpopup(
                             label: "Branch", width: 400.0),
                         verticalSpaceTiny,
-                        WebDatePicker(
-                          hinttext: "Enroll Date Start",
-                          style: kText,
-                          onChange: (value) {},
-                        ),
+                        DatePickerScreen1(),
                         verticalSpaceTiny,
-                        WebDatePicker(
-                          hinttext: "Activate Date Start",
-                          style: kText,
-                          onChange: (value) {},
-                        ),
                       ],
                     ),
                   ],

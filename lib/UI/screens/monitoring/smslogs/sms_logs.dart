@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
+import 'package:webtool_rep/UI/widgets/date_picker_enrolled.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import '../../../../core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
@@ -153,20 +154,9 @@ class _SmslogsState extends State<Smslogs> {
                               textInputAction: TextInputAction.go,
                               controller: controller,
                             ),
-                          ),
-                          verticalSpaceTiny,
-                          Row(
+                          ),  Row(
                             children: [
-                              WebDatePicker(
-                                hinttext: "Enroll Date Start",
-                                onChange: (value) {},
-                              ),
-                             SizedBox(width: 17,),
-                              WebDatePicker(
-                                hinttext: "Activate Date Start",
-                                onChange: (value) {},
-                              ),
-                              horizontalSpaceRegular,
+                              DatePickerScreen2(),
                             ],
                           ),
                           verticalSpaceTiny,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/model.dart';
+import 'package:webtool_rep/UI/widgets/date_picker.dart';
 import 'package:webtool_rep/UI/widgets/elevatedbuttonsourcebranch.dart';
 import 'package:webtool_rep/UI/widgets/elevatedbuttontargetbranch.dart';
 import 'package:webtool_rep/core/providers/Provider.dart';
@@ -118,15 +119,7 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                             children: [
                               Row(
                                 children: [
-                                  WebDatePicker(
-                                    hinttext: "Date Start",
-                                    onChange: (value) {},
-                                  ),
-                                  horizontalSpaceRegular,
-                                  WebDatePicker(
-                                    hinttext: "Date End",
-                                    onChange: (value) {},
-                                  ),
+                                  DatePickerScreen(),
                                 ],
                               ),
                             ],
