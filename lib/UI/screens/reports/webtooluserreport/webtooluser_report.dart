@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/widgets/date_picker_reportScreen.dart';
 import '../../../utils/api.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/dropdown.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
 
@@ -24,9 +24,10 @@ class _WebtoolusereportState extends State<Webtoolusereport> {
   void initState() {
     getList();
   }
-  getList()async{
+
+  getList() async {
     List<dynamic> dlist = await dropdownFunction.getUserstatus();
-    for(var i in dlist){
+    for (var i in dlist) {
       setState(() {
         res.add(i['get_report_status_dropdown']);
       });
@@ -36,6 +37,7 @@ class _WebtoolusereportState extends State<Webtoolusereport> {
     });
     print("safgsdgsdgsdfgde $res");
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,15 +79,7 @@ class _WebtoolusereportState extends State<Webtoolusereport> {
                             children: [
                               Row(
                                 children: [
-                                  WebDatePicker(
-                                    hinttext: "Submitted Date Start",
-                                    onChange: (value) {},
-                                  ),
-                                  horizontalSpaceRegular,
-                                  WebDatePicker(
-                                    hinttext: "Submitted Date End",
-                                    onChange: (value) {},
-                                  ),
+                                  DatePickerReportScreen(),
                                 ],
                               ),
                               verticalSpaceTiny,
@@ -105,11 +99,21 @@ class _WebtoolusereportState extends State<Webtoolusereport> {
                             ],
                           ),
                           verticalSpaceTiny,
-                          DropdownButton(value: init,items: res.map((e) {return DropdownMenuItem(value: e,child: Text(e, style: TextStyle(color: Colors.black)),);}).toList(), onChanged: (value) {
-                            setState(() {
-                              init = value.toString();
-                            });
-                          },),
+                          DropdownButton(
+                            value: init,
+                            items: res.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e,
+                                    style: TextStyle(color: Colors.black)),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                init = value.toString();
+                              });
+                            },
+                          ),
                           verticalSpaceSmall,
                           Row(
                             children: [

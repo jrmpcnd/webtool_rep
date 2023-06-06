@@ -2191,3 +2191,48 @@ class Logout {
     return response;
   }
 }
+
+class PartnerMRI_Api {
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('$API/get_partner_mri_dropdown'),
+      );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+}
+class Splashscreen_Api {
+  Future<List> getUserstatus() async {
+    try {
+      List res = [];
+      http.Response response = await http.get(
+        Uri.parse('$API/get_splash_chose_dropdown'),
+      );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsonData = await jsonDecode(response.body)['data'];
+        res = jsonData;
+        print(jsonDecode(response.body)['data']);
+        return res;
+      } else {
+        throw 'connection error';
+      }
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+}
+
+

@@ -16,12 +16,16 @@ class Addpartner extends StatefulWidget {
 
 class _AddpartnerState extends State<Addpartner> {
   List<String> res = [];
+  List<String> res1 = [];
   String init = '';
+  String init1 = '';
   Partner_Api dropdownFunction = Partner_Api();
+  PartnerMRI_Api dropdownMRIfunction = PartnerMRI_Api();
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
     });
     getList();
+    getMRI();
   }
   getList() async {
     List<dynamic> dlist = await dropdownFunction.getUserstatus();
@@ -34,6 +38,18 @@ class _AddpartnerState extends State<Addpartner> {
       init = res[0];
     });
     print("safgsdgsdgsdfgde $res");
+  }
+  getMRI() async {
+    List<dynamic> dlist = await dropdownMRIfunction.getUserstatus();
+    for (var i in dlist) {
+      setState(() {
+        res1.add(i['get_partner_mri_dropdown']);
+      });
+    }
+    setState(() {
+      init1 = res1[0];
+    });
+    print("safgsdgsdgsdfgde $res1");
   }
   @override
   Widget build(BuildContext context) {
@@ -145,8 +161,21 @@ class _AddpartnerState extends State<Addpartner> {
                           ),
                           verticalSpaceTiny,
                           Text("MRI Group :", style: kHeading2TextStyle),
-                          dropdowns(dropdown: "--MRI Group--"),
-                          verticalSpaceTiny,
+                          DropdownButton(
+                            value: init1,
+                            items: res1.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e,
+                                    style: TextStyle(color: Colors.black)),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                init1 = value.toString();
+                              });
+                            },
+                          ),                          verticalSpaceTiny,
                           DropdownButton(
                             value: init,
                             items: res.map((e) {

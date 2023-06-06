@@ -1,5 +1,6 @@
 import 'package:auto_size_widget/auto_size_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:webtool_rep/UI/utils/api.dart';
 import '../../../../utils/constant.dart';
 import '../../../../utils/edge_insect.dart';
 import '../../../../utils/spacing.dart';
@@ -17,9 +18,29 @@ class Addsplashscreen extends StatefulWidget {
 }
 
 class _AddsplashscreenState extends State<Addsplashscreen> {
+  List<String> res = [];
+  String init = '';
+  Splashscreen_Api dropdownnfunction = Splashscreen_Api();
   String imageUrl = '';
   Uint8List? imageBytes;
   bool value = false;
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    });
+    getChose();
+  }
+  getChose() async {
+    List<dynamic> dlist = await dropdownnfunction.getUserstatus();
+    for (var i in dlist) {
+      setState(() {
+        res.add(i['get_splash_chose_dropdown']);
+      });
+    }
+    setState(() {
+      init = res[0];
+    });
+    print("safgsdgsdgsdfgde $res");
+  }
 
   void previewImage() {
     if (imageUrl.startsWith('http')) {
@@ -200,7 +221,21 @@ class _AddsplashscreenState extends State<Addsplashscreen> {
                           ),
                           verticalSpaceTiny,
                           Text("Show :", style: kHeading2TextStyle),
-                          dropdowns(dropdown: "--Choose--"),
+                          DropdownButton(
+                            value: init,
+                            items: res.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e,
+                                    style: TextStyle(color: Colors.black)),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                init = value.toString();
+                              });
+                            },
+                          ),
                         ],
                       ),
                     ],

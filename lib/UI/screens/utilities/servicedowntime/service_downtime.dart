@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
 import 'package:webtool_rep/UI/utils/model2.dart';
+import 'package:webtool_rep/UI/widgets/date_picker.dart';
 import 'package:webtool_rep/core/providers/Provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
@@ -125,15 +126,7 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                       verticalSpaceTiny,
                       Row(
                         children: [
-                          WebDatePicker(
-                            hinttext: "Date Start",
-                            onChange: (value) {},
-                          ),
-                          horizontalSpaceRegular,
-                          WebDatePicker(
-                            hinttext: "Date End",
-                            onChange: (value) {},
-                          ),
+                          DatePickerScreen(),
                         ],
                       ),
                       verticalSpaceSmall,
