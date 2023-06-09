@@ -95,7 +95,7 @@ class _elevatedbuttonpopupInstiState extends State<elevatedbuttonpopupInsti> {
           showDialog(
             context: context,
             builder: (alert) => AlertDialog(
-              title: Text('Branch List'),
+              title: Text('Institution List'),
               content: Container(
                 width: 500.0,
                 height: 500.0,
@@ -148,8 +148,7 @@ class _elevatedbuttonpopupInstiState extends State<elevatedbuttonpopupInsti> {
                               print('Reset');
                             },
                             style: ElevatedButton.styleFrom(
-                              primary:
-                              Colors.grey, // Set reset button color to gray
+                              backgroundColor: Colors.grey, // Set reset button color to gray
                             ),
                             child: Text('Reset'),
                           ),

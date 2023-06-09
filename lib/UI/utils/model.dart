@@ -157,7 +157,7 @@ class Transaction_Confirmation {
 
 class Data3 {
   String? suspiciousId;
-  String? transDate;
+  String? start_date;
   String? transDesc;
   String? clientMobileNo;
   String? cid;
@@ -170,7 +170,7 @@ class Data3 {
 
   Data3(
       {this.suspiciousId,
-      this.transDate,
+      this.start_date,
       this.transDesc,
       this.clientMobileNo,
       this.cid,
@@ -183,7 +183,7 @@ class Data3 {
 
   Data3.fromJson(Map<String, dynamic> json) {
     suspiciousId = json['suspicious_id'];
-    transDate = json['trans_date'];
+    start_date = json['start_date'];
     transDesc = json['trans_desc'];
     clientMobileNo = json['client_mobile_no'];
     cid = json['cid'];
@@ -198,7 +198,7 @@ class Data3 {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['suspicious_id'] = this.suspiciousId;
-    data['trans_date'] = this.transDate;
+    data['start_date'] = this.start_date;
     data['trans_desc'] = this.transDesc;
     data['client_mobile_no'] = this.clientMobileNo;
     data['cid'] = this.cid;
@@ -243,7 +243,8 @@ class Sms_Logs {
 
 class Data5 {
   String? msgId;
-  String? msgSentDate;
+  String? enrolledStartDate;
+  String? enrolledEndDate;
   String? msisdn;
   String? cid;
   String? name;
@@ -253,17 +254,19 @@ class Data5 {
 
   Data5(
       {this.msgId,
-      this.msgSentDate,
-      this.msisdn,
-      this.cid,
-      this.name,
-      this.msgCommand,
-      this.activity,
-      this.msgStatus});
+        this.enrolledStartDate,
+        this.enrolledEndDate,
+        this.msisdn,
+        this.cid,
+        this.name,
+        this.msgCommand,
+        this.activity,
+        this.msgStatus});
 
   Data5.fromJson(Map<String, dynamic> json) {
     msgId = json['msg_id'];
-    msgSentDate = json['msg_sent_date'];
+    enrolledStartDate = json['enrolled_start_date'];
+    enrolledEndDate = json['enrolled_end_date'];
     msisdn = json['msisdn'];
     cid = json['cid'];
     name = json['name'];
@@ -275,7 +278,8 @@ class Data5 {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['msg_id'] = this.msgId;
-    data['msg_sent_date'] = this.msgSentDate;
+    data['enrolled_start_date'] = this.enrolledStartDate;
+    data['enrolled_end_date'] = this.enrolledEndDate;
     data['msisdn'] = this.msisdn;
     data['cid'] = this.cid;
     data['name'] = this.name;

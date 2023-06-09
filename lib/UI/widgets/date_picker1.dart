@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/getter_setter.dart';
 
 class DatePickerScreen1 extends StatefulWidget {
+
+
   @override
   _DatePickerScreen1State createState() => _DatePickerScreen1State();
 }
 
 class _DatePickerScreen1State extends State<DatePickerScreen1> {
-  DateTime? startDate;
-  DateTime? endDate;
   TextEditingController _startDateController = TextEditingController();
   TextEditingController _endDateController = TextEditingController();
+
+  DateTime? startDate;
+  DateTime? endDate;
+
 
   @override
   void initState() {
@@ -36,6 +41,8 @@ class _DatePickerScreen1State extends State<DatePickerScreen1> {
       setState(() {
         startDate = picked;
         _startDateController.text = DateFormat('yyyy-MM-dd').format(startDate!);
+
+        GetDate.setStartDate(_startDateController.text);
         _updateRangeDuration();
       });
     }
@@ -57,6 +64,8 @@ class _DatePickerScreen1State extends State<DatePickerScreen1> {
       setState(() {
         endDate = picked;
         _endDateController.text = DateFormat('yyyy-MM-dd').format(endDate!);
+
+        GetDate.setEndDate(_endDateController.text);
         _updateRangeDuration();
       });
     }

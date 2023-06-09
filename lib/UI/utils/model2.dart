@@ -112,14 +112,14 @@ class Remittance_Log {
   String? receiverName;
   String? amount;
   String? senderMobileNumber;
-  String? createdDate;
   String? sourceBranch;
   String? processedByFullname;
-  String? lastUpdatedDate;
   String? targetBranch;
   String? disbursedByFullname;
   String? cancelledDate;
   String? cancelledByFullname;
+  String? startSendDate;
+  String? endSendDate;
   String? status;
   String? claimedCoreRefId;
   String? claimedMobileRefId;
@@ -133,38 +133,38 @@ class Remittance_Log {
         this.receiverName,
         this.amount,
         this.senderMobileNumber,
-        this.createdDate,
         this.sourceBranch,
         this.processedByFullname,
-        this.lastUpdatedDate,
         this.targetBranch,
         this.disbursedByFullname,
         this.cancelledDate,
         this.cancelledByFullname,
+        this.startSendDate,
+        this.endSendDate,
         this.status,
         this.claimedCoreRefId,
         this.claimedMobileRefId});
 
   Remittance_Log.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    sentMobileRefId = json['sent_mobile_ref_id'];
-    sentCoreRefId = json['sent_core_ref_id'];
-    referenceNumberRefID = json['reference_number _Ref_ID'];
-    senderName = json['sender_name'];
-    receiverName = json['Receiver_Name'];
-    amount = json['amount'];
-    senderMobileNumber = json['sender_mobile_number'];
-    createdDate = json['created_date'];
-    sourceBranch = json['source_branch'];
-    processedByFullname = json['Processed_By_Fullname'];
-    lastUpdatedDate = json['last_updated_date'];
-    targetBranch = json['target_branch'];
-    disbursedByFullname = json['Disbursed_By_Fullname'];
-    cancelledDate = json['cancelled_date'];
-    cancelledByFullname = json['Cancelled_By_Fullname'];
-    status = json['status'];
-    claimedCoreRefId = json['claimed_core_ref_id'];
-    claimedMobileRefId = json['claimed_mobile_ref_id'];
+    id = '${json['id']}';
+    sentMobileRefId = "${json['sent_mobile_ref_id']}";
+    sentCoreRefId = "${json['sent_core_ref_id']}";
+    referenceNumberRefID = "${json['reference_number _Ref_ID']}";
+    senderName = "${json['sender_name']}";
+    receiverName = "${json['Receiver_Name']}";
+    amount = "${json['amount']}";
+    senderMobileNumber = "${json['sender_mobile_number']}";
+    sourceBranch = "${json['source_branch']}";
+    processedByFullname = "${json['Processed_By_Fullname']}";
+    targetBranch = "${json['target_branch']}";
+    disbursedByFullname = "${json['Disbursed_By_Fullname']}";
+    cancelledDate = "${json['cancelled_date']}";
+    cancelledByFullname = "${json['Cancelled_By_Fullname']}";
+    startSendDate = "${json['start_send_date']}";
+    endSendDate = "${json['end_send_date']}";
+    status = "${json['status']}";
+    claimedCoreRefId = "${json['claimed_core_ref_id']}";
+    claimedMobileRefId = "${json['claimed_mobile_ref_id']}";
   }
 
   Map<String, dynamic> toJson() {
@@ -177,14 +177,14 @@ class Remittance_Log {
     data['Receiver_Name'] = this.receiverName;
     data['amount'] = this.amount;
     data['sender_mobile_number'] = this.senderMobileNumber;
-    data['created_date'] = this.createdDate;
     data['source_branch'] = this.sourceBranch;
     data['Processed_By_Fullname'] = this.processedByFullname;
-    data['last_updated_date'] = this.lastUpdatedDate;
     data['target_branch'] = this.targetBranch;
     data['Disbursed_By_Fullname'] = this.disbursedByFullname;
     data['cancelled_date'] = this.cancelledDate;
     data['Cancelled_By_Fullname'] = this.cancelledByFullname;
+    data['start_send_date'] = this.startSendDate;
+    data['end_send_date'] = this.endSendDate;
     data['status'] = this.status;
     data['claimed_core_ref_id'] = this.claimedCoreRefId;
     data['claimed_mobile_ref_id'] = this.claimedMobileRefId;

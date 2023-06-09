@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/getter_setter.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/utils/spacing.dart';
-import 'package:webtool_rep/UI/widgets/date_picker.dart';
 import 'package:webtool_rep/UI/widgets/date_picker1.dart';
 import 'package:webtool_rep/UI/widgets/elevatedbuttonpopup.dart';
 import 'package:webtool_rep/core/providers/data_provider.dart';
@@ -162,104 +161,6 @@ class _TransactionforconfirmationState
                                     ),
                                     textInputAction: TextInputAction.go,
                                     controller: controller1,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        isLoaded = false;
-                                      });
-                                      try {
-                                        if (controller1.text.isNotEmpty) {
-                                          shared.confirm_data.clear();
-                                          for (var i
-                                              in shared.confirm[0].data!) {
-                                            print(i.toJson());
-                                            print(i.cid?.toLowerCase().contains(
-                                                controller1.text
-                                                    .toLowerCase()));
-                                            if (i.toJson().isNotEmpty) {
-                                              if (i.cid!.toLowerCase().contains(
-                                                  controller1.text
-                                                      .toLowerCase())) {
-                                                debugPrint(i.cid);
-                                                setState(() {
-                                                  shared.confirm_data.add(
-                                                      Data3.fromJson(
-                                                          i.toJson()));
-                                                });
-                                                if (shared
-                                                    .confirm_data.isNotEmpty) {
-                                                  setState(() {
-                                                    isLoaded = true;
-                                                  });
-                                                }
-                                              }
-                                            }
-                                          }
-                                        } else if (controller1.text == '') {
-                                          shared.confirm_data.clear();
-                                          setState(() {
-                                            shared.confirm_data.addAll(
-                                                shared.confirm[0].data!);
-                                            isLoaded = true;
-                                          });
-                                        }
-                                        debugPrint(shared.confirm_data[0]
-                                            .toJson()
-                                            .toString());
-                                      } catch (e) {
-                                        shared.confirm_data.clear();
-                                        isLoaded = true;
-                                      }
-                                    },
-                                    onEditingComplete: () async {
-                                      setState(() {
-                                        isLoaded = false;
-                                      });
-                                      try {
-                                        if (controller1.text.isNotEmpty) {
-                                          shared.confirm_data.clear();
-                                          for (var i
-                                              in shared.confirm[0].data!) {
-                                            print(i.toJson());
-                                            print(i.cid?.toLowerCase().contains(
-                                                controller1.text
-                                                    .toLowerCase()));
-                                            if (i.toJson().isNotEmpty) {
-                                              if (i.cid!.toLowerCase().contains(
-                                                      controller1.text
-                                                          .toLowerCase()) ||
-                                                  i.cid!.toLowerCase().contains(
-                                                      controller1.text
-                                                          .toLowerCase())) {
-                                                debugPrint(i.cid);
-                                                setState(() {
-                                                  key.currentState?.pageTo(0);
-                                                  shared.confirm_data.add(
-                                                      Data3.fromJson(
-                                                          i.toJson()));
-                                                });
-                                                if (shared
-                                                    .confirm_data.isNotEmpty) {
-                                                  setState(() {
-                                                    isLoaded = true;
-                                                  });
-                                                }
-                                              }
-                                            }
-                                          }
-                                        } else if (controller1.text == '') {
-                                          shared.confirm_data.clear();
-                                          setState(() {
-                                            shared.confirm_data.addAll(
-                                                shared.confirm[0].data!);
-                                          });
-                                        }
-                                        debugPrint(shared.confirm_data[0]
-                                            .toJson()
-                                            .toString());
-                                      } catch (e) {
-                                        shared.confirm_data.clear();
-                                      }
-                                    },
                                   ),
                                 ),
                                 verticalSpaceTiny,
@@ -349,7 +250,7 @@ class _TransactionforconfirmationState
                                     print(" === $init");
                                     print(
                                         "+_+_+_+_+${init.toLowerCase().contains('cash out')}");
-                                    if (controller.text.isNotEmpty ) {
+                                    if (controller.text.isNotEmpty) {
                                       setState(() {
                                         isLoaded = false;
                                       });
@@ -484,6 +385,45 @@ class _TransactionforconfirmationState
                                         }
                                       }
                                     }
+                                    final enteredDate =
+                                        DateTime.parse(GetDate.getStartDate());
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    shared.confirm_data.clear();
+                                    final transactionDate = DateTime.parse(
+                                        GetDate.getStartDate());
+                                    print(transactionDate);
+                                    for (var i in shared.confirm[0].data!) {
+                                      if (i.toJson().isNotEmpty) {
+                                        final transactionsDate = DateTime.parse(i.start_date.toString().replaceAll('T', ' '));
+                                        print(transactionDate.year ==
+                                            transactionsDate.year &&
+                                            transactionDate.month ==
+                                                transactionsDate.month &&
+                                            transactionDate.day ==
+                                                transactionsDate.day);
+                                        if (transactionDate.year ==
+                                                transactionsDate.year &&
+                                            transactionDate.month ==
+                                                transactionsDate.month &&
+                                            transactionDate.day ==
+                                                transactionsDate.day) {
+                                          setState(() {
+                                            shared.confirm_data.add(
+                                                Data3.fromJson(i.toJson()));
+                                          });
+                                          if (shared.confirm_data.isNotEmpty) {
+                                            Future.delayed(Duration(seconds: 1),
+                                                () {
+                                              setState(() {
+                                                isLoaded = true;
+                                              });
+                                            });
+                                          }
+                                        }
+                                      }
+                                    }
                                     debugPrint(shared.confirm_data[0]
                                         .toJson()
                                         .toString());
@@ -553,8 +493,7 @@ class _TransactionforconfirmationState
                         SizedBox(
                           height: 15,
                         ),
-                        elevatedbuttonpopup(
-                            label: "Branch", width: 400.0),
+                        elevatedbuttonpopup(label: "Branch", width: 400.0),
                         verticalSpaceTiny,
                         DatePickerScreen1(),
                         verticalSpaceTiny,
@@ -638,7 +577,7 @@ class MyData extends DataTableSource {
     return DataRow(cells: [
       DataCell(SizedBox(
           width: 100,
-          child: Text(shared.confirm_data[index].transDate.toString()))),
+          child: Text(shared.confirm_data[index].start_date.toString()))),
       DataCell(SizedBox(
           width: 100,
           child: Text(shared.confirm_data[index].transDesc.toString()))),

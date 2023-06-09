@@ -1,8 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import '../../../utils/constant.dart';
-import '../../../utils/edge_insect.dart';
-import '../../../utils/spacing.dart';
-import '../../../utils/text_styles.dart';
+import 'package:http/http.dart' as http;
 
 class Remittancedashboard extends StatefulWidget {
   const Remittancedashboard({Key? key}) : super(key: key);
@@ -12,219 +10,200 @@ class Remittancedashboard extends StatefulWidget {
 }
 
 class _RemittancedashboardState extends State<Remittancedashboard> {
+  int cancelledCount = 0;
+  int claimedCount = 0;
+  int pendingCount = 0;
+  int sentCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    try {
+      final response = await http.get(
+        Uri.parse('https://sit-api-janus.fortress-asya.com:1234/get_remittancestatus'),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        setState(() {
+          final cancelledCountString = data['data'][0]['CANCELLED'].toString();
+          cancelledCount = int.parse(cancelledCountString);
+          final claimedCountString = data['data'][0]['CLAIMED'].toString();
+          claimedCount = int.parse(claimedCountString);
+          final pendingCountString = data['data'][0]['PENDING'].toString();
+          pendingCount = int.parse(pendingCountString);
+          final sentCountString = data['data'][0]['SENT'].toString();
+          sentCount = int.parse(sentCountString);
+        });
+      } else {
+        print('API request failed with status code ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error occurred while fetching counts: $e');
+    }
+  }
+
+  void navigateToDetailsScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailsScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    int totalCount = cancelledCount + claimedCount + pendingCount + sentCount;
+
     return Container(
-      padding: kEdgeInsetsVerticalNormal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: ListView(
+        shrinkWrap: true,
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: kTertiaryColor5,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3)),
-                    ],
-                  ),
-                  height: 250.0,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 190.0,
-                            width: 180.0,
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: kOrangeColor1,
-                                alignment: Alignment.center,
-                              ),
-                              onPressed: () {},
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "PENDING",
-                                    style: kBodyTextStyleDashboard.copyWith(
-                                        color: kWhiteColor),
-                                  ),
-                                  const Icon(Icons.remove_circle_outline,
-                                      color: kWhiteColor, size: 30.0),
-                                  Text("45",
-                                      style: kBodyTextStyleDashboardLarge
-                                          .copyWith(color: kWhiteColor)),
-                                  verticalSpaceTiny,
-                                  Text(
-                                    "DETAILS",
-                                    style: kBodyTextStyleDashboard.copyWith(
-                                        color: kWhiteColor),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          horizontalSpaceTiny,
-                          SizedBox(
-                            height: 190.0,
-                            width: 180.0,
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: kTertiaryColor4,
-                                alignment: Alignment.center,
-                              ),
-                              onPressed: () {},
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "SENT",
-                                    style: kBodyTextStyleDashboard.copyWith(
-                                        color: KLightGreenColor),
-                                  ),
-                                  const Icon(Icons.send_outlined,
-                                      size: 30.0, color: KLightGreenColor),
-                                  Text(
-                                    "152",
-                                    style: kBodyTextStyleDashboardLarge
-                                        .copyWith(color: KLightGreenColor),
-                                  ),
-                                  verticalSpaceTiny,
-                                  Text(
-                                    "DETAILS",
-                                    style: kBodyTextStyleDashboard.copyWith(
-                                        color: KLightGreenColor),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          horizontalSpaceTiny,
-                          SizedBox(
-                            height: 190.0,
-                            width: 180.0,
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: kTertiaryColor4,
-                                alignment: Alignment.center,
-                              ),
-                              onPressed: () {},
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "CLAIMED",
-                                    style: kBodyTextStyleDashboard.copyWith(
-                                        color: kTertiaryColor),
-                                  ),
-                                  const Icon(
-                                    Icons.inbox_outlined,
-                                    size: 30.0,
-                                    color: kTertiaryColor,
-                                  ),
-                                  Text(
-                                    "59",
-                                    style: kBodyTextStyleDashboardLarge
-                                        .copyWith(color: kTertiaryColor),
-                                  ),
-                                  verticalSpaceTiny,
-                                  Text(
-                                    "DETAILS",
-                                    style: kBodyTextStyleDashboard.copyWith(
-                                        color: kTertiaryColor),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          horizontalSpaceTiny,
-                          SizedBox(
-                            height: 190.0,
-                            width: 180.0,
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: kTertiaryColor4,
-                                alignment: Alignment.center,
-                              ),
-                              onPressed: () {},
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "CANCELLED",
-                                    style: kBodyTextStyleDashboard.copyWith(
-                                        color: kPrimaryColor),
-                                  ),
-                                  const Icon(Icons.cancel_outlined,
-                                      size: 30.0, color: kPrimaryColor),
-                                  Text(
-                                    "48",
-                                    style: kBodyTextStyleDashboardLarge
-                                        .copyWith(color: kPrimaryColor),
-                                  ),
-                                  verticalSpaceTiny,
-                                  Text(
-                                    "DETAILS",
-                                    style: kBodyTextStyleDashboard.copyWith(
-                                        color: kPrimaryColor),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          horizontalSpaceTiny,
-                          SizedBox(
-                            height: 190.0,
-                            width: 180.0,
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: kTertiaryColor4,
-                                alignment: Alignment.center,
-                              ),
-                              onPressed: () {},
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "TOTAL",
-                                    style: kBodyTextStyleDashboard.copyWith(
-                                        color: kDarkGreenColor),
-                                  ),
-                                  Text("259",
-                                      style: kBodyTextStyleDashboardLarge
-                                          .copyWith(color: kDarkGreenColor)),
-                                ],
-                              ),
-                            ),
-                          ),
-                          horizontalSpaceTiny,
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(child: buildStatusButton(context, 'PENDING', pendingCount)),
+              Container(child: buildStatusButton(context, 'CANCELLED', cancelledCount)),
+              Container(child: buildStatusButton(context, 'CLAIMED', claimedCount)),
+              Container(child: buildStatusButton(context, 'SENT', sentCount)),
+           SizedBox(
+             height: 250.0,
+             width: 180.0,
+             child:Card(
+             color: Colors.blueGrey,
+             child: InkWell(
+               child: Column(
+                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                 children: [
+                   const Text(
+                     'TOTAL',
+                     style: TextStyle(
+                       color: Colors.white,
+                     ),
+                   ),
+                   const Icon(
+                     Icons.add,
+                     color: Colors.white,
+                     size: 30.0,
+                   ),
+                   Text(
+                     '$totalCount',
+                     style: const TextStyle(
+                       color: Colors.white,fontSize: 35,fontWeight:FontWeight.w900
+                     ),
+
+                   ),
+                   const SizedBox(height: 4.0),
+                   GestureDetector(
+                     child: const Text(
+                       'All Total',
+                       style: TextStyle(
+                         color: Colors.white,
+                       ),
+                     ),
+                   ),
+                 ],
+               ),
+             ),
+           ),)
+            ],
           ),
         ],
       ),
     );
   }
+
+
+  Widget buildStatusButton(BuildContext context, String label, int count) {
+    Color cardColor;
+
+    switch (label) {
+      case 'CANCELLED':
+        cardColor = Colors.red;
+        break;
+      case 'PENDING':
+        cardColor = Colors.orange;
+        break;
+      case 'SENT':
+        cardColor = Colors.green;
+        break;
+      case 'CLAIMED':
+        cardColor = Colors.white30;
+        break;
+      default:
+        cardColor = Colors.orange;
+    }
+
+    return SizedBox(
+      height: 250.0,
+      width: 180.0,
+      child: Card(
+        color: cardColor,
+        child: InkWell(
+          onTap: () => navigateToDetailsScreen(context),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                label,
+                style: const TextStyle(
+                  color: Colors.white,fontWeight: FontWeight.w900,fontSize: 28
+                ),
+              ),
+              const Icon(
+                Icons.remove_circle_outline,
+                color: Colors.white,
+                size: 30.0,
+              ),
+              Text(
+                '$count',
+                style: const TextStyle(
+                  color: Colors.white,fontWeight: FontWeight.w900,fontSize: 35
+                ),
+              ),
+              const SizedBox(height: 4.0),
+              GestureDetector(
+                onTap: () => navigateToDetailsScreen(context),
+                child: const Text(
+                  'DETAILS',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+}
+
+class DetailsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Details Screen'),
+      ),
+      body: const Center(
+        child: Text('Details Screen Content'),
+      ),
+    );
+  }
+}
+
+void main() {
+  runApp(const MaterialApp(
+    home: Remittancedashboard(),
+  ));
 }

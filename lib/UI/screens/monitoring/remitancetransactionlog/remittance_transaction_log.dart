@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/getter_setter.dart';
 import 'package:webtool_rep/UI/utils/model.dart';
 import 'package:webtool_rep/UI/widgets/date_picker.dart';
 import 'package:webtool_rep/UI/widgets/elevatedbuttonsourcebranch.dart';
@@ -183,7 +184,7 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                               kPrimaryColor)),
                                   onPressed: () {
                                     try{
-                                      if (init.isNotEmpty) {
+                                      if (init.isNotEmpty || !init.toString().toLowerCase().contains('status')) {
                                         if (init.toLowerCase().contains('cancelled')) {
                                           setState(() {
                                             isLoaded = false;
@@ -317,9 +318,50 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                           }
                                         }
                                       }
+                                      if(GetDate.getStartDate2().isNotEmpty) {
+                                        // final enteredDate =
+                                        // DateTime.parse(GetDate.getStartDate2());
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Remittance_data.clear();
+                                        print('+++++++++++++++');
+                                        for (var i in shared.RemittanceLog[0]
+                                            .data!) {
+                                          if (i
+                                              .toJson()
+                                              .isNotEmpty) {
+                                            if (i.startSendDate.toString().split('T')[0].contains(GetDate.getStartDate2().split(' ')[0])) {
+                                              setState(() {
+                                                print('-------------');
+                                                print(i.toJson());
+                                                shared.Remittance_data.add(
+                                                    Remittance_Log.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              print('-=-=-=-=-=-=-=-=-=-=--');
+                                              print(shared.Remittance_data.length);
+                                              if (shared.Remittance_data
+                                                  .isNotEmpty) {
+                                                Future.delayed(
+                                                    Duration(seconds: 1),
+                                                        () {
+                                                      setState(() {
+                                                        isLoaded = true;
+                                                      });
+                                                    });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+
+                                      print('0000000000000');
                                       debugPrint(
                                           shared.Remittance_data[0].toJson().toString());
                                     }catch (e) {
+                                      print(e.toString());
+                                      print(shared.Remittance_data.length);
                                       shared.Remittance_data.clear();
                                       isLoaded = true;
                                     }
@@ -574,7 +616,7 @@ class MyData extends DataTableSource {
               shared.Remittance_data[index].senderMobileNumber.toString()))),
       DataCell(SizedBox(
           width: 100,
-          child: Text(shared.Remittance_data[index].createdDate.toString()))),
+          child: Text(shared.Remittance_data[index].startSendDate.toString()))),
       DataCell(SizedBox(
           width: 100,
           child: Text(shared.Remittance_data[index].sourceBranch.toString()))),
@@ -584,7 +626,7 @@ class MyData extends DataTableSource {
               shared.Remittance_data[index].processedByFullname.toString()))),
       DataCell(SizedBox(
           width: 100,
-          child: Text(shared.Remittance_data[index].createdDate.toString()))),
+          child: Text(shared.Remittance_data[index].endSendDate.toString()))),
       DataCell(SizedBox(
           width: 100,
           child: Text(shared.Remittance_data[index].targetBranch.toString()))),

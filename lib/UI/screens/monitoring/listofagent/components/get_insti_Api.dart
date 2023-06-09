@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../../../../../core/providers/data_provider.dart';
+import 'package:webtool_rep/core/providers/data_provider.dart';
 
 
 class InstiApilist {

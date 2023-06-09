@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/getter_setter.dart';
 import 'package:webtool_rep/UI/utils/constant.dart';
 
 class DatePickerScreen extends StatefulWidget {
@@ -37,6 +38,7 @@ class _DatePickerScreenState extends State<DatePickerScreen> {
       setState(() {
         startDate = picked;
         _startDateController.text = DateFormat('yyyy-MM-dd').format(startDate!);
+        GetDate.setStartDate2(_startDateController.text);
         _updateRangeDuration();
       });
     }
@@ -58,6 +60,7 @@ class _DatePickerScreenState extends State<DatePickerScreen> {
       setState(() {
         endDate = picked;
         _endDateController.text = DateFormat('yyyy-MM-dd').format(endDate!);
+        GetDate.setEndDate2(_endDateController.text);
         _updateRangeDuration();
       });
     }
@@ -168,6 +171,7 @@ class _DatePickerScreenState extends State<DatePickerScreen> {
               child: TextFormField(
                 controller: _startDateController,
                 readOnly: true,
+                style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   hintText: 'Start date',hintStyle: TextStyle(color: Colors.black),
                   suffixIcon: IconButton(
@@ -184,6 +188,7 @@ class _DatePickerScreenState extends State<DatePickerScreen> {
               child: TextFormField(
                 controller: _endDateController,
                 readOnly: true,
+                style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   hintText: 'End date',
                   hintStyle: TextStyle(color: Colors.black),

@@ -531,7 +531,7 @@ class MyData extends DataTableSource {
           width: 50, child: Text(shared.sms_data[index].msgId.toString()))),
       DataCell(SizedBox(
           width: 100,
-          child: Text(shared.sms_data[index].msgSentDate.toString()))),
+          child: Text(shared.sms_data[index].enrolledStartDate.toString()))),
       DataCell(SizedBox(
           width: 100, child: Text(shared.sms_data[index].msisdn.toString()))),
       DataCell(SizedBox(
