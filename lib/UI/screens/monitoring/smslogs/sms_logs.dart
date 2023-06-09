@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/getter_setter.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/widgets/date_picker_enrolled.dart';
 import 'package:webtool_rep/UI/widgets/dropdown.dart';
@@ -154,7 +155,8 @@ class _SmslogsState extends State<Smslogs> {
                               textInputAction: TextInputAction.go,
                               controller: controller,
                             ),
-                          ),  Row(
+                          ),
+                          Row(
                             children: [
                               DatePickerScreen2(),
                             ],
@@ -263,36 +265,41 @@ class _SmslogsState extends State<Smslogs> {
                                     });
                                     shared.sms_data.clear();
                                     for (var i in shared.sms[0].data!) {
-                                      print(i.activity?.toLowerCase().contains(
-                                          init.toLowerCase()));
+                                      print(i.activity
+                                          ?.toLowerCase()
+                                          .contains(init.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
                                         if (i.activity!
                                             .toLowerCase()
                                             .contains(init.toLowerCase())) {
-                                          debugPrint("======>>>>>>${i.activity?.toLowerCase()}");
-                                          debugPrint("========>>>>>>>>>>>>${init.toLowerCase()}");
+                                          debugPrint(
+                                              "======>>>>>>${i.activity?.toLowerCase()}");
+                                          debugPrint(
+                                              "========>>>>>>>>>>>>${init.toLowerCase()}");
 
                                           print(i.toJson());
                                           setState(() {
-                                            shared.sms_data.add(Data5.fromJson(i.toJson()));
+                                            shared.sms_data.add(
+                                                Data5.fromJson(i.toJson()));
                                           });
 
                                           if (shared.sms_data.isNotEmpty) {
                                             Future.delayed(
                                               Duration(seconds: 1),
-                                                  () {
+                                              () {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
                                               },
                                             );
-                                          } else{
+                                          } else {
                                             setState(() {
                                               isLoaded = true;
                                             });
                                           }
-                                          print("========>>>>>>>>${shared.sms_data.length}");
-                                        } else{
+                                          print(
+                                              "========>>>>>>>>${shared.sms_data.length}");
+                                        } else {
                                           setState(() {
                                             isLoaded = true;
                                           });
@@ -304,36 +311,41 @@ class _SmslogsState extends State<Smslogs> {
                                     });
                                     shared.sms_data.clear();
                                     for (var i in shared.sms[0].data!) {
-                                      print(i.msgStatus?.toLowerCase().contains(
-                                          init1.toLowerCase()));
+                                      print(i.msgStatus
+                                          ?.toLowerCase()
+                                          .contains(init1.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
                                         if (i.msgStatus!
                                             .toLowerCase()
                                             .contains(init1.toLowerCase())) {
-                                          debugPrint("======>>>>>>${i.msgStatus?.toLowerCase()}");
-                                          debugPrint("========>>>>>>>>>>>>${init1.toLowerCase()}");
+                                          debugPrint(
+                                              "======>>>>>>${i.msgStatus?.toLowerCase()}");
+                                          debugPrint(
+                                              "========>>>>>>>>>>>>${init1.toLowerCase()}");
 
                                           print(i.toJson());
                                           setState(() {
-                                            shared.sms_data.add(Data5.fromJson(i.toJson()));
+                                            shared.sms_data.add(
+                                                Data5.fromJson(i.toJson()));
                                           });
 
                                           if (shared.sms_data.isNotEmpty) {
                                             Future.delayed(
                                               Duration(seconds: 1),
-                                                  () {
+                                              () {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
                                               },
                                             );
-                                          } else{
+                                          } else {
                                             setState(() {
                                               isLoaded = true;
                                             });
                                           }
-                                          print("========>>>>>>>>${shared.sms_data.length}");
-                                        } else{
+                                          print(
+                                              "========>>>>>>>>${shared.sms_data.length}");
+                                        } else {
                                           setState(() {
                                             isLoaded = true;
                                           });
@@ -354,13 +366,13 @@ class _SmslogsState extends State<Smslogs> {
                                               controller.text.toLowerCase())) {
                                             debugPrint(i.cid);
                                             setState(() {
-                                              shared.sms_data
-                                                  .add(Data5.fromJson(i.toJson()));
+                                              shared.sms_data.add(
+                                                  Data5.fromJson(i.toJson()));
                                             });
                                             if (shared.sms_data.isNotEmpty) {
                                               Future.delayed(
                                                 Duration(seconds: 1),
-                                                    () {
+                                                () {
                                                   setState(() {
                                                     isLoaded = true;
                                                   });
@@ -385,18 +397,53 @@ class _SmslogsState extends State<Smslogs> {
                                               controller1.text.toLowerCase())) {
                                             debugPrint(i.msisdn);
                                             setState(() {
-                                              shared.sms_data
-                                                  .add(Data5.fromJson(i.toJson()));
+                                              shared.sms_data.add(
+                                                  Data5.fromJson(i.toJson()));
                                             });
                                             if (shared.sms_data.isNotEmpty) {
                                               Future.delayed(
                                                 Duration(seconds: 1),
-                                                    () {
+                                                () {
                                                   setState(() {
                                                     isLoaded = true;
                                                   });
                                                 },
                                               );
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                    if (GetDate.getStartDate2().isNotEmpty) {
+                                      // final enteredDate =
+                                      // DateTime.parse(GetDate.getStartDate2());
+                                      setState(() {
+                                        isLoaded = false;
+                                      });
+                                      shared.sms_data.clear();
+                                      print('+++++++++++++++');
+                                      for (var i in shared.sms[0].data!) {
+                                        if (i.toJson().isNotEmpty) {
+                                          if (i.enrolledStartDate
+                                              .toString()
+                                              .split('T')[0]
+                                              .contains(GetDate.getStartDate2()
+                                                  .split(' ')[0])) {
+                                            setState(() {
+                                              print('-------------');
+                                              print(i.toJson());
+                                              shared.sms_data.add(
+                                                  Data5.fromJson(i.toJson()));
+                                            });
+                                            print('-=-=-=-=-=-=-=-=-=-=--');
+                                            print(shared.sms_data.length);
+                                            if (shared.sms_data.isNotEmpty) {
+                                              Future.delayed(
+                                                  Duration(seconds: 1), () {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              });
                                             }
                                           }
                                         }
@@ -430,10 +477,11 @@ class _SmslogsState extends State<Smslogs> {
                                     controller1.clear();
                                     shared.sms_data.clear();
                                     setState(() {
-                                      shared.sms_data.addAll(shared.sms[0].data!);
+                                      shared.sms_data
+                                          .addAll(shared.sms[0].data!);
                                       Future.delayed(
                                         Duration(seconds: 1),
-                                            () {
+                                        () {
                                           setState(() {
                                             isLoaded = true;
                                           });
