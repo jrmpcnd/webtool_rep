@@ -153,33 +153,31 @@ class _FeestructureState extends State<Feestructure> {
                                     shared.fee_data.clear();
                                     print("00000000${shared.fee}");
 
-
                                     setState(() {
                                       isLoaded = false;
                                     });
                                     shared.fee_data.clear();
-                                    print("hello${init
-                                        .toLowerCase()
-                                        .contains('initiated')}");
-                                    if (init
-                                        .toLowerCase()
-                                        .contains('client')) {
+                                    print(
+                                        "hello${init.toLowerCase().contains('initiated')}");
+                                    if (init.toLowerCase().contains('client')) {
                                       print('there');
                                       setState(() {
                                         dropdown = 'CIP';
                                       });
-                                    } else if(init.toLowerCase().contains('agent')){
+                                    } else if (init
+                                        .toLowerCase()
+                                        .contains('agent')) {
                                       setState(() {
                                         dropdown = 'aip';
                                       });
-                                    } else{
-                                      if(init.contains(" ")) {
+                                    } else {
+                                      if (init.contains(" ")) {
                                         setState(() {
-                                          dropdown =
-                                              init.toLowerCase().replaceAll(
-                                                  " ", "_");
+                                          dropdown = init
+                                              .toLowerCase()
+                                              .replaceAll(" ", "_");
                                         });
-                                      }else{
+                                      } else {
                                         setState(() {
                                           dropdown = init;
                                         });
@@ -191,42 +189,38 @@ class _FeestructureState extends State<Feestructure> {
                                       print(i.transType
                                           ?.toLowerCase()
                                           .contains(dropdown.toLowerCase()));
-                                      if (i
-                                          .toJson()
-                                          .isNotEmpty) {
-                                          if (i.transType!
-                                              .toLowerCase()
-                                              .contains(
-                                              dropdown
-                                                  .toLowerCase()
-                                                  .replaceAll(" ", "_"))) {
-                                            print(i.toJson());
-                                            setState(() {
-                                              shared.fee_data.add(
-                                                  Data12.fromJson(i.toJson()));
-                                            });
+                                      if (i.toJson().isNotEmpty) {
+                                        if (i.transType!.toLowerCase().contains(
+                                            dropdown
+                                                .toLowerCase()
+                                                .replaceAll(" ", "_"))) {
+                                          print(i.toJson());
+                                          setState(() {
+                                            shared.fee_data.add(
+                                                Data12.fromJson(i.toJson()));
+                                          });
 
-                                            if (shared.fee_data.isNotEmpty) {
-                                              Future.delayed(
-                                                Duration(seconds: 1),
-                                                    () {
-                                                  setState(() {
-                                                    isLoaded = true;
-                                                  });
-                                                },
-                                              );
-                                            } else {
-                                              setState(() {
-                                                isLoaded = true;
-                                              });
-                                            }
+                                          if (shared.fee_data.isNotEmpty) {
+                                            Future.delayed(
+                                              Duration(seconds: 1),
+                                              () {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              },
+                                            );
                                           } else {
                                             setState(() {
                                               isLoaded = true;
                                             });
                                           }
+                                        } else {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
                                         }
                                       }
+                                    }
                                   },
                                   icon: const Icon(
                                     Icons.search,
@@ -247,7 +241,25 @@ class _FeestructureState extends State<Feestructure> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    controller.clear();
+                                    shared.fee_data.clear();
+                                    setState(() {
+                                      shared.fee_data
+                                          .addAll(shared.fee[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                        () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,
