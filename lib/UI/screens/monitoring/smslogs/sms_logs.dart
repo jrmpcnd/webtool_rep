@@ -30,12 +30,12 @@ class _SmslogsState extends State<Smslogs> {
   TextEditingController controller1 = TextEditingController();
   SMSLogs_Api dropdownInsti = SMSLogs_Api();
   SMSLogsStatus_Api dropdownUnit = SMSLogsStatus_Api();
-
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
     final shared5 = Provider.of<Prov5>(context, listen: false);
     shared5.sms.clear();
+    shared5.sms_data.clear();
     SmsParse httpParse5 = SmsParse();
     var res5 = await httpParse5.profile5();
     if (res5.data!.isNotEmpty) {

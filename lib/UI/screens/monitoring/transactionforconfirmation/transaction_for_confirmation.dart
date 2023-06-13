@@ -391,14 +391,17 @@ class _TransactionforconfirmationState
                                       isLoaded = false;
                                     });
                                     shared.confirm_data.clear();
-                                    final transactionDate = DateTime.parse(
-                                        GetDate.getStartDate());
+                                    final transactionDate =
+                                        DateTime.parse(GetDate.getStartDate());
                                     print(transactionDate);
                                     for (var i in shared.confirm[0].data!) {
                                       if (i.toJson().isNotEmpty) {
-                                        final transactionsDate = DateTime.parse(i.start_date.toString().replaceAll('T', ' '));
+                                        final transactionsDate = DateTime.parse(
+                                            i.start_date
+                                                .toString()
+                                                .replaceAll('T', ' '));
                                         print(transactionDate.year ==
-                                            transactionsDate.year &&
+                                                transactionsDate.year &&
                                             transactionDate.month ==
                                                 transactionsDate.month &&
                                             transactionDate.day ==

@@ -210,19 +210,6 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
                                             if (i.cid!.toLowerCase().contains(
                                                     controller1.text
                                                         .toLowerCase()) &&
-                                                i.deviceId!
-                                                    .toLowerCase()
-                                                    .contains(controller2.text
-                                                        .toLowerCase()) &&
-                                                i.mobileNumber!
-                                                    .toLowerCase()
-                                                    .contains(controller3.text
-                                                        .toLowerCase()) &&
-                                                i.clientType!
-                                                    .toLowerCase()
-                                                    .contains(init
-                                                        .toString()
-                                                        .toLowerCase()) &&
                                                 i.activatedDateStart!
                                                     .toLowerCase()
                                                     .contains(
@@ -277,13 +264,12 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
                                                     .toLowerCase()
                                                     .contains(init
                                                         .toString()
-                                                        .toLowerCase())
-                                                &&
+                                                        .toLowerCase()) &&
                                                 i.activatedDateStart!
                                                     .toLowerCase()
                                                     .contains(
-                                                    GetDate.getStartDate2()
-                                                        .toString())) {
+                                                        GetDate.getStartDate2()
+                                                            .toString())) {
                                               debugPrint(i.deviceId);
                                               setState(() {
                                                 shared.Listofuse_Device_data
@@ -333,13 +319,12 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
                                                     .toLowerCase()
                                                     .contains(init
                                                         .toString()
-                                                        .toLowerCase())
-                                                &&
+                                                        .toLowerCase()) &&
                                                 i.activatedDateStart!
                                                     .toLowerCase()
                                                     .contains(
-                                                    GetDate.getStartDate2()
-                                                        .toString())) {
+                                                        GetDate.getStartDate2()
+                                                            .toString())) {
                                               debugPrint(i.deviceId);
                                               setState(() {
                                                 shared.Listofuse_Device_data
@@ -505,11 +490,22 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
                                             .Listofuse_DeviceLog[0].data!) {
                                           if (i.toJson().isNotEmpty) {
                                             if (i.activatedDateStart
-                                                .toString()
-                                                .split('T')[0]
-                                                .contains(
-                                                    GetDate.getStartDate2()
-                                                        .split(' ')[0])) {
+                                                    .toString()
+                                                    .split('T')[0]
+                                                    .contains(
+                                                        GetDate.getStartDate2()
+                                                            .split(' ')[0]) &&
+                                                i.cid!.toLowerCase().contains(
+                                                    controller1.text
+                                                        .toLowerCase()) &&
+                                                i.deviceId!
+                                                    .toLowerCase()
+                                                    .contains(controller2.text
+                                                        .toLowerCase()) &&
+                                                i.mobileNumber!
+                                                    .toLowerCase()
+                                                    .contains(controller3.text
+                                                        .toLowerCase())) {
                                               setState(() {
                                                 print('-------------');
                                                 print(i.toJson());

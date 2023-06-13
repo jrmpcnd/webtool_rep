@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/getter_setter.dart';
 
 class DatePickerScreen2 extends StatefulWidget {
+  TextEditingController _endDateController = TextEditingController();
   @override
   _DatePickerScreen2State createState() => _DatePickerScreen2State();
 }
@@ -28,7 +29,7 @@ class _DatePickerScreen2State extends State<DatePickerScreen2> {
       firstDate: DateTime(2000),
       lastDate: endDate ?? DateTime(2100),
       selectableDayPredicate: (DateTime day) =>
-      endDate == null ||
+          endDate == null ||
           day.isBefore(endDate!) ||
           day.isAtSameMomentAs(endDate!),
     );
@@ -50,7 +51,7 @@ class _DatePickerScreen2State extends State<DatePickerScreen2> {
       firstDate: startDate ?? DateTime(2000),
       lastDate: DateTime(2100),
       selectableDayPredicate: (DateTime day) =>
-      startDate == null ||
+          startDate == null ||
           day.isAfter(startDate!) ||
           day.isAtSameMomentAs(startDate!),
     );
@@ -171,10 +172,14 @@ class _DatePickerScreen2State extends State<DatePickerScreen2> {
                 controller: _startDateController,
                 readOnly: true,
                 decoration: InputDecoration(
-                  hintText: 'Enrolled Date Start',hintStyle: TextStyle(color: Colors.black,fontSize: 11),
+                  hintText: 'Enrolled Date Start',
+                  hintStyle: TextStyle(color: Colors.black, fontSize: 11),
                   suffixIcon: IconButton(
                     onPressed: () => _selectStartDate(context),
-                    icon: Icon(Icons.calendar_today,color: Colors.black,),
+                    icon: Icon(
+                      Icons.calendar_today,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
@@ -188,10 +193,13 @@ class _DatePickerScreen2State extends State<DatePickerScreen2> {
                 readOnly: true,
                 decoration: InputDecoration(
                   hintText: 'Enrolled Date End',
-                  hintStyle: TextStyle(color: Colors.black,fontSize: 11),
+                  hintStyle: TextStyle(color: Colors.black, fontSize: 11),
                   suffixIcon: IconButton(
                     onPressed: () => _selectEndDate(context),
-                    icon: Icon(Icons.calendar_today,color: Colors.black,),
+                    icon: Icon(
+                      Icons.calendar_today,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
@@ -211,5 +219,3 @@ class _DatePickerScreen2State extends State<DatePickerScreen2> {
     );
   }
 }
-
-
