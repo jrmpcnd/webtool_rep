@@ -7,6 +7,15 @@ class GetDate {
     return _endDate;
   }
 
+  static bool _reset = false;
+
+
+  static bool get reset => _reset;
+
+  static set reset(bool value) {
+    _reset = value;
+  }
+
   static setEndDate(String value) {
     _endDate = value;
   }

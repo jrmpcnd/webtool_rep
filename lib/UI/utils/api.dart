@@ -1243,7 +1243,7 @@ class ListofUseDeviceStatus_Api {
     http.Response response =
         await http.get(Uri.parse('$API/get_lud_status_dropdown'));
     print(response.statusCode);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       var jsonData = await jsonDecode(response.body)['data'];
       res = jsonData;
       print(jsonDecode(response.body)['data']);

@@ -183,30 +183,42 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
                                   onPressed: () {
-                                    try{
-                                      if (init.isNotEmpty || !init.toString().toLowerCase().contains('status')) {
-                                        if (init.toLowerCase().contains('cancelled')) {
+                                    try {
+                                      if (init.isNotEmpty ||
+                                          !init
+                                              .toString()
+                                              .toLowerCase()
+                                              .contains('status')) {
+                                        if (init
+                                            .toLowerCase()
+                                            .contains('cancelled')) {
                                           setState(() {
                                             isLoaded = false;
                                           });
                                           shared.Remittance_data.clear();
-                                          for (var i in shared.RemittanceLog[0].data!) {
+                                          for (var i in shared
+                                              .RemittanceLog[0].data!) {
                                             print(i.toJson());
-                                            print(i.status?.toLowerCase().contains(
-                                                controller.text.toLowerCase()));
+                                            print(i.status
+                                                ?.toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase()));
                                             if (i.toJson().isNotEmpty) {
                                               if (i.status!
                                                   .toLowerCase()
-                                                  .contains(init.toLowerCase())) {
-                                                  debugPrint(i.status);
+                                                  .contains(
+                                                      init.toLowerCase())) {
+                                                debugPrint(i.status);
                                                 setState(() {
                                                   shared.Remittance_data.add(
-                                                      Remittance_Log.fromJson(i.toJson()));
+                                                      Remittance_Log.fromJson(
+                                                          i.toJson()));
                                                 });
-                                                if (shared.Remittance_data.isNotEmpty) {
+                                                if (shared.Remittance_data
+                                                    .isNotEmpty) {
                                                   Future.delayed(
                                                     Duration(seconds: 1),
-                                                        () {
+                                                    () {
                                                       setState(() {
                                                         isLoaded = true;
                                                       });
@@ -224,10 +236,13 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                             isLoaded = false;
                                           });
                                           shared.Remittance_data.clear();
-                                          for (var i in shared.RemittanceLog[0].data!) {
+                                          for (var i in shared
+                                              .RemittanceLog[0].data!) {
                                             print(i.toJson());
-                                            print(i.status?.toLowerCase().contains(
-                                                controller.text.toLowerCase()));
+                                            print(i.status
+                                                ?.toLowerCase()
+                                                .contains(controller.text
+                                                    .toLowerCase()));
                                             if (i.toJson().isNotEmpty) {
                                               if (i.status!
                                                   .toLowerCase()
@@ -235,12 +250,14 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                                 debugPrint(i.status);
                                                 setState(() {
                                                   shared.Remittance_data.add(
-                                                      Remittance_Log.fromJson(i.toJson()));
+                                                      Remittance_Log.fromJson(
+                                                          i.toJson()));
                                                 });
-                                                if (shared.Remittance_data.isNotEmpty) {
+                                                if (shared.Remittance_data
+                                                    .isNotEmpty) {
                                                   Future.delayed(
                                                     Duration(seconds: 1),
-                                                        () {
+                                                    () {
                                                       setState(() {
                                                         isLoaded = true;
                                                       });
@@ -257,24 +274,31 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                           isLoaded = false;
                                         });
                                         shared.Remittance_data.clear();
-                                        for (var i in shared.RemittanceLog[0].data!) {
+                                        for (var i
+                                            in shared.RemittanceLog[0].data!) {
                                           // print(i.toJson());
                                           // print(i.userLogin?.toLowerCase().contains(
                                           //     controller4.text.toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
-                                            if (i.senderMobileNumber!.toLowerCase().contains(
-                                                controller.text.toLowerCase()) &&
-                                                i.sentMobileRefId!.toLowerCase().contains(
-                                                    controller1.text.toLowerCase())){
+                                            if (i.senderMobileNumber!
+                                                    .toLowerCase()
+                                                    .contains(controller.text
+                                                        .toLowerCase()) &&
+                                                i.sentMobileRefId!
+                                                    .toLowerCase()
+                                                    .contains(controller1.text
+                                                        .toLowerCase())) {
                                               debugPrint(i.senderMobileNumber);
                                               setState(() {
-                                                shared.Remittance_data
-                                                    .add(Remittance_Log.fromJson(i.toJson()));
+                                                shared.Remittance_data.add(
+                                                    Remittance_Log.fromJson(
+                                                        i.toJson()));
                                               });
-                                              if (shared.Remittance_data.isNotEmpty) {
+                                              if (shared
+                                                  .Remittance_data.isNotEmpty) {
                                                 Future.delayed(
                                                   Duration(seconds: 1),
-                                                      () {
+                                                  () {
                                                     setState(() {
                                                       isLoaded = true;
                                                     });
@@ -290,24 +314,31 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                           isLoaded = false;
                                         });
                                         shared.Remittance_data.clear();
-                                        for (var i in shared.RemittanceLog[0].data!) {
+                                        for (var i
+                                            in shared.RemittanceLog[0].data!) {
                                           // print(i.toJson());
                                           // print(i.userLogin?.toLowerCase().contains(
                                           //     controller4.text.toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
-                                            if (i.sentMobileRefId!.toLowerCase().contains(
-                                                controller1.text.toLowerCase()) &&
-                                                i.senderMobileNumber!.toLowerCase().contains(
-                                                    controller.text.toLowerCase())){
+                                            if (i.sentMobileRefId!
+                                                    .toLowerCase()
+                                                    .contains(controller1.text
+                                                        .toLowerCase()) &&
+                                                i.senderMobileNumber!
+                                                    .toLowerCase()
+                                                    .contains(controller.text
+                                                        .toLowerCase())) {
                                               debugPrint(i.sentMobileRefId);
                                               setState(() {
-                                                shared.Remittance_data
-                                                    .add(Remittance_Log.fromJson(i.toJson()));
+                                                shared.Remittance_data.add(
+                                                    Remittance_Log.fromJson(
+                                                        i.toJson()));
                                               });
-                                              if (shared.Remittance_data.isNotEmpty) {
+                                              if (shared
+                                                  .Remittance_data.isNotEmpty) {
                                                 Future.delayed(
                                                   Duration(seconds: 1),
-                                                      () {
+                                                  () {
                                                     setState(() {
                                                       isLoaded = true;
                                                     });
@@ -318,7 +349,7 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                           }
                                         }
                                       }
-                                      if(GetDate.getStartDate2().isNotEmpty) {
+                                      if (GetDate.getStartDate2().isNotEmpty) {
                                         // final enteredDate =
                                         // DateTime.parse(GetDate.getStartDate2());
                                         setState(() {
@@ -326,12 +357,15 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                         });
                                         shared.Remittance_data.clear();
                                         print('+++++++++++++++');
-                                        for (var i in shared.RemittanceLog[0]
-                                            .data!) {
-                                          if (i
-                                              .toJson()
-                                              .isNotEmpty) {
-                                            if (i.startSendDate.toString().split('T')[0].contains(GetDate.getStartDate2().split(' ')[0])) {
+                                        for (var i
+                                            in shared.RemittanceLog[0].data!) {
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.startSendDate
+                                                .toString()
+                                                .split('T')[0]
+                                                .contains(
+                                                    GetDate.getStartDate2()
+                                                        .split(' ')[0])) {
                                               setState(() {
                                                 print('-------------');
                                                 print(i.toJson());
@@ -340,35 +374,33 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                                         i.toJson()));
                                               });
                                               print('-=-=-=-=-=-=-=-=-=-=--');
-                                              print(shared.Remittance_data.length);
-                                              if (shared.Remittance_data
-                                                  .isNotEmpty) {
+                                              print(shared
+                                                  .Remittance_data.length);
+                                              if (shared
+                                                  .Remittance_data.isNotEmpty) {
                                                 Future.delayed(
-                                                    Duration(seconds: 1),
-                                                        () {
-                                                      setState(() {
-                                                        isLoaded = true;
-                                                      });
-                                                    });
+                                                    Duration(seconds: 1), () {
+                                                  setState(() {
+                                                    isLoaded = true;
+                                                  });
+                                                });
                                               }
                                             }
                                           }
                                         }
                                       }
-
                                       print('0000000000000');
-                                      debugPrint(
-                                          shared.Remittance_data[0].toJson().toString());
-                                    }catch (e) {
+                                      debugPrint(shared.Remittance_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
                                       print(e.toString());
                                       print(shared.Remittance_data.length);
                                       shared.Remittance_data.clear();
                                       isLoaded = true;
                                     }
-
                                     print(shared.Remittance_data);
                                   },
-
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -394,13 +426,14 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                     });
                                     controller.clear();
                                     controller1.clear();
-                                    init= res[0];
+                                    init = res[0];
                                     shared.Remittance_data.clear();
                                     setState(() {
-                                      shared.Remittance_data.addAll(shared.RemittanceLog[0].data!);
+                                      shared.Remittance_data.addAll(
+                                          shared.RemittanceLog[0].data!);
                                       Future.delayed(
                                         Duration(seconds: 1),
-                                            () {
+                                        () {
                                           setState(() {
                                             isLoaded = true;
                                           });
@@ -450,7 +483,8 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                       items: res.map((e) {
                                         return DropdownMenuItem(
                                           value: e,
-                                          child: Text(e,
+                                          child: Text(
+                                            e,
                                             style: kText,
                                           ),
                                         );

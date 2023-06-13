@@ -5,6 +5,11 @@ import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/get
 import 'package:webtool_rep/UI/utils/constant.dart';
 
 class DatePickerScreen extends StatefulWidget {
+  TextEditingController? startDateController;
+  TextEditingController? endDateController;
+  bool? reset;
+
+  DatePickerScreen({super.key, this.reset, this.startDateController, this.endDateController});
   @override
   _DatePickerScreenState createState() => _DatePickerScreenState();
 }
@@ -12,15 +17,23 @@ class DatePickerScreen extends StatefulWidget {
 class _DatePickerScreenState extends State<DatePickerScreen> {
   DateTime? startDate;
   DateTime? endDate;
-  TextEditingController _startDateController = TextEditingController();
-  TextEditingController _endDateController = TextEditingController();
+
 
   @override
   void initState() {
     super.initState();
-    _startDateController = TextEditingController();
-    _endDateController = TextEditingController();
+    widget.startDateController = TextEditingController();
+    widget.endDateController = TextEditingController();
+    _resetState();
   }
+
+  Future<void> _resetState() async{
+    print(GetDate.reset);
+    if(GetDate.reset){
+      widget.startDateController?.text = '';
+      widget.endDateController?.text = '';
+  }
+}
 
   Future<void> _selectStartDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -37,8 +50,8 @@ class _DatePickerScreenState extends State<DatePickerScreen> {
     if (picked != null && picked != startDate) {
       setState(() {
         startDate = picked;
-        _startDateController.text = DateFormat('yyyy-MM-dd').format(startDate!);
-        GetDate.setStartDate2(_startDateController.text);
+        widget.startDateController?.text = DateFormat('yyyy-MM-dd').format(startDate!);
+        GetDate.setStartDate2(widget.startDateController!.text);
         _updateRangeDuration();
       });
     }
@@ -59,8 +72,8 @@ class _DatePickerScreenState extends State<DatePickerScreen> {
     if (picked != null && picked != endDate) {
       setState(() {
         endDate = picked;
-        _endDateController.text = DateFormat('yyyy-MM-dd').format(endDate!);
-        GetDate.setEndDate2(_endDateController.text);
+        widget.endDateController?.text = DateFormat('yyyy-MM-dd').format(endDate!);
+        GetDate.setEndDate2(widget.endDateController!.text);
         _updateRangeDuration();
       });
     }
@@ -127,7 +140,7 @@ class _DatePickerScreenState extends State<DatePickerScreen> {
 
   void _updateRangeDuration() {
     if (startDate != null && endDate != null) {
-      _endDateController.text = DateFormat('yyyy-MM-dd').format(endDate!);
+      widget.endDateController?.text = DateFormat('yyyy-MM-dd').format(endDate!);
     }
   }
 
@@ -153,8 +166,8 @@ class _DatePickerScreenState extends State<DatePickerScreen> {
 
   @override
   void dispose() {
-    _startDateController.dispose();
-    _endDateController.dispose();
+    widget.startDateController!.dispose();
+    widget.endDateController!.dispose();
     super.dispose();
   }
 
@@ -169,7 +182,7 @@ class _DatePickerScreenState extends State<DatePickerScreen> {
               height: 40.0,
               width: 150.0,
               child: TextFormField(
-                controller: _startDateController,
+                controller: widget.startDateController,
                 readOnly: true,
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
@@ -186,7 +199,7 @@ class _DatePickerScreenState extends State<DatePickerScreen> {
               height: 40.0,
               width: 150.0,
               child: TextFormField(
-                controller: _endDateController,
+                controller: widget.endDateController,
                 readOnly: true,
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(

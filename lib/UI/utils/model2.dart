@@ -223,36 +223,37 @@ class UseoflistDevice_Api {
   }
 }
 class UseoflistDevice_Log {
-  String? createdDate;
-  String? deviceId;
+  String? activatedDateStart;
+  String? activatedDateEnd;
   String? deviceModel;
   String? androidVersion;
   String? cid;
   String? branchCode;
+  String? deviceId;
   String? mobileNumber;
   String? clientName;
   String? clientType;
   String? deviceStatus;
-
   UseoflistDevice_Log(
-      {this.createdDate,
-        this.deviceId,
+      {this.activatedDateStart,
+        this.activatedDateEnd,
         this.deviceModel,
         this.androidVersion,
         this.cid,
         this.branchCode,
+        this.deviceId,
         this.mobileNumber,
         this.clientName,
         this.clientType,
         this.deviceStatus});
-
   UseoflistDevice_Log.fromJson(Map<String, dynamic> json) {
-    createdDate = json['created_date'];
-    deviceId = json['device_id'];
+    activatedDateStart = json['activated_date_start'];
+    activatedDateEnd = json['activated_date_end'];
     deviceModel = json['device_model'];
     androidVersion = json['android_version'];
     cid = json['cid'];
     branchCode = json['branch_code'];
+    deviceId = json['device_id'];
     mobileNumber = json['mobile_number'];
     clientName = json['client_name'];
     clientType = json['client_type'];
@@ -261,12 +262,13 @@ class UseoflistDevice_Log {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['created_date'] = this.createdDate;
-    data['device_id'] = this.deviceId;
+    data['activated_date_start'] = this.activatedDateStart;
+    data['activated_date_end'] = this.activatedDateEnd;
     data['device_model'] = this.deviceModel;
     data['android_version'] = this.androidVersion;
     data['cid'] = this.cid;
     data['branch_code'] = this.branchCode;
+    data['device_id'] = this.deviceId;
     data['mobile_number'] = this.mobileNumber;
     data['client_name'] = this.clientName;
     data['client_type'] = this.clientType;
@@ -274,7 +276,6 @@ class UseoflistDevice_Log {
     return data;
   }
 }
-
 
 class Atm_Loc_Api {
   String? retCode;
