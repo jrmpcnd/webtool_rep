@@ -179,42 +179,6 @@ class _ParametersState extends State<Parameters> {
                                               kPrimaryColor)),
                                   onPressed: () {
                                     try {
-                                      if (controller.text.isNotEmpty) {
-                                        setState(() {
-                                          isLoaded = false;
-                                        });
-                                        shared.prov_data.clear();
-                                        for (var i in shared.prov[0].data!) {
-                                          print(i.toJson());
-                                          print(i.paramName
-                                              ?.toLowerCase()
-                                              .contains(controller.text
-                                                  .toLowerCase()));
-                                          if (i.toJson().isNotEmpty) {
-                                            if (i.paramName!
-                                                .toLowerCase()
-                                                .contains(controller.text
-                                                    .toLowerCase())) {
-                                              debugPrint(i.paramName);
-                                              setState(() {
-                                                shared.prov_data.add(
-                                                    Data13.fromJson(
-                                                        i.toJson()));
-                                              });
-                                              if (shared.prov_data.isNotEmpty) {
-                                                Future.delayed(
-                                                  Duration(seconds: 1),
-                                                  () {
-                                                    setState(() {
-                                                      isLoaded = true;
-                                                    });
-                                                  },
-                                                );
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
                                       if (init.isNotEmpty) {
                                         if (init
                                             .toLowerCase()
@@ -446,6 +410,53 @@ class _ParametersState extends State<Parameters> {
                                             }
                                           }
                                         }
+                                      }
+                                      if (controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.prov_data.clear();
+                                        for (var i in shared.prov[0].data!) {
+                                          print(i.toJson());
+                                          print(i.paramName
+                                              ?.toLowerCase()
+                                              .contains(controller.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.paramName!
+                                                .toString()
+                                                .toLowerCase()
+                                                .split('_')[0]
+                                                .contains(controller.text
+                                                    .toString()
+                                                    .toLowerCase()
+                                                    .split(' ')[0])) {
+                                              debugPrint(i.paramName);
+                                              setState(() {
+                                                shared.prov_data.add(
+                                                    Data13.fromJson(
+                                                        i.toJson()));
+                                              });
+                                              if (shared.prov_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                  () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller.text == '') {
+                                        shared.prov_data.clear();
+                                        setState(() {
+                                          shared.prov_data
+                                              .addAll(shared.prov[0].data!);
+                                          isLoaded = true;
+                                        });
                                       }
                                       debugPrint(shared.prov_data[0]
                                           .toJson()
