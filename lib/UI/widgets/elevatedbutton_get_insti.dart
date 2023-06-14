@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:webtool_rep/UI/screens/monitoring/listofagent/components/get_insti_Api.dart';
-import '../screens/administration/usermanagement/components/branchapi.dart';
 import '../utils/constant.dart';
 import '../utils/text_styles.dart';
 import 'package:http/http.dart' as http;
@@ -31,11 +30,10 @@ class _elevatedbuttonpopupInstiState extends State<elevatedbuttonpopupInsti> {
 
     _instihDrop = get_insti__Drop.fromJson(jsonDecode(response.body));
     for (var i in _instihDrop.data!) {
-      print(i.instDesc);
-      print(i.instCode);
-      institution.add(elevatedbuttonpopupInsti(code: i.instCode, description: i.instDesc));
+      print(i.instiCode);
+      print(i.instiDesc);
+      institution.add(elevatedbuttonpopupInsti(code: i.instiDesc, description: i.instiCode));
     }
-    setState(() {});
   }
 
   final TextEditingController searchController = TextEditingController();

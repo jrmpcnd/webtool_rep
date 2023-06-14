@@ -423,7 +423,8 @@ class Failed_Enrollment {
 
 class Data7 {
   String? id;
-  String? createdDate;
+  String? enrolledDateStart;
+  String? enrolledDateEnd;
   String? accountNumber;
   String? dateOfBirth;
   String? mobileNumber;
@@ -433,19 +434,20 @@ class Data7 {
   String? errorMessage;
 
   Data7(
-      {this.id,
-      this.createdDate,
-      this.accountNumber,
-      this.dateOfBirth,
-      this.mobileNumber,
-      this.clientType,
-      this.deviceId,
-      this.deviceModel,
-      this.errorMessage});
+      {
+        this.enrolledDateStart,
+        this.enrolledDateEnd,
+        this.accountNumber,
+        this.dateOfBirth,
+        this.mobileNumber,
+        this.clientType,
+        this.deviceId,
+        this.deviceModel,
+        this.errorMessage});
 
-  Data7.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    createdDate = json['created_date'];
+  Data7.fromJson(Map<String, dynamic> json)  {
+    enrolledDateStart = json['enrolled_date_start'];
+    enrolledDateEnd = json['enrolled_date_end'];
     accountNumber = json['account_number'];
     dateOfBirth = json['date_of_birth'];
     mobileNumber = json['mobile_number'];
@@ -455,10 +457,11 @@ class Data7 {
     errorMessage = json['error_message'];
   }
 
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['created_date'] = this.createdDate;
+    data['enrolled_date_start'] = this.enrolledDateStart;
+    data['enrolled_date_end'] = this.enrolledDateEnd;
     data['account_number'] = this.accountNumber;
     data['date_of_birth'] = this.dateOfBirth;
     data['mobile_number'] = this.mobileNumber;

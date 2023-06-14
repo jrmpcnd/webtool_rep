@@ -671,7 +671,7 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                          shared.failed_data.clear();
                          for (var i in shared.failed[0].data!) {
                            print(i.toJson());
-                           print(i.createdDate
+                           print(i.enrolledDateStart
                                ?.toLowerCase()
                                .contains(controller.text.toLowerCase()));
                            if (i.toJson().isNotEmpty) {
@@ -738,7 +738,7 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                          shared.failed_data.clear();
                          for (var i in shared.failed[0].data!) {
                            print(i.toJson());
-                           print(i.createdDate
+                           print(i.enrolledDateStart
                                ?.toLowerCase()
                                .contains(controller.text.toLowerCase()));
                            if (i.toJson().isNotEmpty) {
@@ -862,7 +862,7 @@ class MyData extends DataTableSource {
     return DataRow(cells: [
       DataCell(SizedBox(
           width: 100,
-          child: Text(shared.failed_data[index].createdDate.toString()))),
+          child: Text(shared.failed_data[index].enrolledDateStart.toString()))),
       DataCell(SizedBox(
           width: 100,
           child: Text(shared.failed_data[index].accountNumber.toString()))),

@@ -7,7 +7,7 @@ class InstiApilist {
   Future<http.Response> getUserstatus() async {
     try {
       http.Response response = await http.get(
-        Uri.parse('$API/get_insti'),
+        Uri.parse('$API/get_hierarchy_insti_dropdown'),
       );
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -53,23 +53,20 @@ class get_insti__Drop {
 }
 
 class Data {
-  String? instCode;
-  String? instDesc;
-  String? createdDate;
+  String? instiCode;
+  String? instiDesc;
 
-  Data({this.instCode, this.instDesc, this.createdDate});
+  Data({this.instiCode, this.instiDesc});
 
   Data.fromJson(Map<String, dynamic> json) {
-    instCode = json['inst_code'];
-    instDesc = json['inst_desc'];
-    createdDate = json['created_date'];
+    instiCode = json['insti_code'];
+    instiDesc = json['insti_desc'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['inst_code'] = this.instCode;
-    data['inst_desc'] = this.instDesc;
-    data['created_date'] = this.createdDate;
+    data['insti_code'] = this.instiCode;
+    data['insti_desc'] = this.instiDesc;
     return data;
   }
 }
