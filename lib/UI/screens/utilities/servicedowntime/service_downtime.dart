@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/getter_setter.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
 import 'package:webtool_rep/UI/utils/model2.dart';
 import 'package:webtool_rep/UI/widgets/date_picker.dart';
@@ -24,6 +25,9 @@ class Servicedowntime extends StatefulWidget {
 
 class _ServicedowntimeState extends State<Servicedowntime> {
   TextEditingController controller = TextEditingController();
+  TextEditingController startDate = TextEditingController();
+  TextEditingController endDate = TextEditingController();
+
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -126,7 +130,7 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                       verticalSpaceTiny,
                       Row(
                         children: [
-                          DatePickerScreen(),
+                          DatePickerScreen(startDateController: startDate, endDateController: endDate),
                         ],
                       ),
                       verticalSpaceSmall,
@@ -183,6 +187,50 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                                           }
                                         }
                                       }
+                                      if (GetDate.getStartDate2().isNotEmpty) {
+                                        // final enteredDate =
+                                        // DateTime.parse(GetDate.getStartDate2());
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.Servicedowntime_data.clear();
+                                        print('+++++++++++++++');
+                                        for (var i in shared
+                                            .ServicedowntimeLog[0].data!) {
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.downtimeStart
+                                                .toString()
+                                                .split('T')[0]
+                                                .contains(
+                                                GetDate.getStartDate2()
+                                                    .split(' ')[0]) &&
+                                                i.downtimeStart!.toLowerCase().contains(
+                                                    controller.text
+                                                        .toLowerCase())){
+                                              setState(() {
+                                                print('-------------');
+                                                print(i.toJson());
+                                                shared.Servicedowntime_data
+                                                    .add(Servicedowntime_Log
+                                                    .fromJson(i.toJson()));
+                                              });
+                                              print('-=-=-=-=-=-=-=-=-=-=--');
+                                              print(shared.Servicedowntime_data
+                                                  .length);
+                                              if (shared.Servicedowntime_data
+                                                  .isNotEmpty) {
+                                                Future.delayed(
+                                                    Duration(seconds: 1), () {
+                                                  setState(() {
+                                                    isLoaded = true;
+                                                  });
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      print('0000000000000');
                                       debugPrint(shared.Servicedowntime_data[0]
                                           .toJson()
                                           .toString());
@@ -215,6 +263,11 @@ class _ServicedowntimeState extends State<Servicedowntime> {
                                       isLoaded = false;
                                     });
                                     controller.clear();
+                                    GetDate.setStartDate2('');
+                                    GetDate.setEndDate2('');
+                                    GetDate.reset = true;
+                                    startDate.text = '';
+                                    endDate.text = '';
                                     shared.Servicedowntime_data.clear();
                                     setState(() {
                                       shared.Servicedowntime_data.addAll(
