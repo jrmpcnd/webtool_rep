@@ -30,6 +30,8 @@ class _TransactionforconfirmationState
   TextEditingController controller1 = TextEditingController();
   TransactionConfirm_API dropdownInsti = TransactionConfirm_API();
   TransactionStatus_Api dropdownUnit = TransactionStatus_Api();
+  TextEditingController startDate = TextEditingController();
+  TextEditingController endDate = TextEditingController();
 
   bool static = false;
   bool isLoaded = false;
@@ -463,6 +465,11 @@ class _TransactionforconfirmationState
                                   controller1.clear();
                                   init = res[0];
                                   init1 = res1[0];
+                                  GetDate.setStartDate2('');
+                                  GetDate.setEndDate2('');
+                                  GetDate.reset = true;
+                                  startDate.text = '';
+                                  endDate.text = '';
                                   setState(() {
                                     shared.confirm_data
                                         .addAll(shared.confirm[0].data!);
@@ -498,7 +505,7 @@ class _TransactionforconfirmationState
                         ),
                         elevatedbuttonpopup(label: "Branch", width: 400.0),
                         verticalSpaceTiny,
-                        DatePickerScreen1(),
+                        DatePickerScreen1(startDateController: startDate,endDateController: endDate,),
                         verticalSpaceTiny,
                       ],
                     ),

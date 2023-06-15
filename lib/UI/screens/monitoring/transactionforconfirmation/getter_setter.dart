@@ -8,8 +8,6 @@ class GetDate {
   }
 
   static bool _reset = false;
-
-
   static bool get reset => _reset;
 
   static set reset(bool value) {

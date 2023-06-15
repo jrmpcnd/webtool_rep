@@ -50,7 +50,7 @@ class _DatePickerScreenState extends State<DatePickerScreen> {
     if (picked != null && picked != startDate) {
       setState(() {
         startDate = picked;
-        widget.startDateController?.text = DateFormat('yyyy-MM-dd').format(startDate!);
+        widget.startDateController!.text = DateFormat('yyyy-MM-dd').format(startDate!);
         GetDate.setStartDate2(widget.startDateController!.text);
         _updateRangeDuration();
       });
