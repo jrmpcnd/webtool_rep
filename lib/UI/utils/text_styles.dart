@@ -95,7 +95,6 @@ TextStyle kSmallTextStyle = GoogleFonts.poppins(
   height: 1.5,
   color: kBlackColor,
 );
-
 TextStyle kSmallRegularTextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.w500,
   fontSize: 12,

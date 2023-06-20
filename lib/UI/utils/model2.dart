@@ -1,6 +1,3 @@
-
-import 'model.dart';
-
 class Hierarchy_Api {
   String? retCode;
   String? message;
@@ -42,13 +39,13 @@ class H_SaveAccount {
 
   H_SaveAccount(
       {this.branchCode,
-        this.branchDesc,
-        this.centerCode,
-        this.centerDesc,
-        this.hierarchyId,
-        this.instDesc,
-        this.unitCode,
-        this.unitDesc});
+      this.branchDesc,
+      this.centerCode,
+      this.centerDesc,
+      this.hierarchyId,
+      this.instDesc,
+      this.unitCode,
+      this.unitDesc});
 
   H_SaveAccount.fromJson(Map<String, dynamic> json) {
     branchCode = json['branch_code'];
@@ -103,6 +100,7 @@ class RemittanceLog_Api {
     return data;
   }
 }
+
 class Remittance_Log {
   String? id;
   String? sentMobileRefId;
@@ -126,24 +124,24 @@ class Remittance_Log {
 
   Remittance_Log(
       {this.id,
-        this.sentMobileRefId,
-        this.sentCoreRefId,
-        this.referenceNumberRefID,
-        this.senderName,
-        this.receiverName,
-        this.amount,
-        this.senderMobileNumber,
-        this.sourceBranch,
-        this.processedByFullname,
-        this.targetBranch,
-        this.disbursedByFullname,
-        this.cancelledDate,
-        this.cancelledByFullname,
-        this.startSendDate,
-        this.endSendDate,
-        this.status,
-        this.claimedCoreRefId,
-        this.claimedMobileRefId});
+      this.sentMobileRefId,
+      this.sentCoreRefId,
+      this.referenceNumberRefID,
+      this.senderName,
+      this.receiverName,
+      this.amount,
+      this.senderMobileNumber,
+      this.sourceBranch,
+      this.processedByFullname,
+      this.targetBranch,
+      this.disbursedByFullname,
+      this.cancelledDate,
+      this.cancelledByFullname,
+      this.startSendDate,
+      this.endSendDate,
+      this.status,
+      this.claimedCoreRefId,
+      this.claimedMobileRefId});
 
   Remittance_Log.fromJson(Map<String, dynamic> json) {
     id = '${json['id']}';
@@ -192,8 +190,6 @@ class Remittance_Log {
   }
 }
 
-
-
 class UseoflistDevice_Api {
   String? retCode;
   String? message;
@@ -222,6 +218,7 @@ class UseoflistDevice_Api {
     return data;
   }
 }
+
 class UseoflistDevice_Log {
   String? activatedDateStart;
   String? activatedDateEnd;
@@ -236,16 +233,16 @@ class UseoflistDevice_Log {
   String? deviceStatus;
   UseoflistDevice_Log(
       {this.activatedDateStart,
-        this.activatedDateEnd,
-        this.deviceModel,
-        this.androidVersion,
-        this.cid,
-        this.branchCode,
-        this.deviceId,
-        this.mobileNumber,
-        this.clientName,
-        this.clientType,
-        this.deviceStatus});
+      this.activatedDateEnd,
+      this.deviceModel,
+      this.androidVersion,
+      this.cid,
+      this.branchCode,
+      this.deviceId,
+      this.mobileNumber,
+      this.clientName,
+      this.clientType,
+      this.deviceStatus});
   UseoflistDevice_Log.fromJson(Map<String, dynamic> json) {
     activatedDateStart = json['activated_date_start'];
     activatedDateEnd = json['activated_date_end'];
@@ -305,6 +302,7 @@ class Atm_Loc_Api {
     return data;
   }
 }
+
 class Atm_Loc_Log {
   String? atmAddress;
   String? atmCity;
@@ -314,15 +312,14 @@ class Atm_Loc_Log {
   String? atmLongitude;
   String? instDesc;
 
-
   Atm_Loc_Log(
       {this.atmAddress,
-        this.atmCity,
-        this.atmDescription,
-        this.atmId,
-        this.atmLatitude,
-        this.atmLongitude,
-        this.instDesc});
+      this.atmCity,
+      this.atmDescription,
+      this.atmId,
+      this.atmLatitude,
+      this.atmLongitude,
+      this.instDesc});
 
   Atm_Loc_Log.fromJson(Map<String, dynamic> json) {
     atmAddress = json['atm_address'];
@@ -375,6 +372,7 @@ class BankNews_Api {
     return data;
   }
 }
+
 class BankNews_Log {
   String? productId;
   String? productDate;
@@ -429,6 +427,7 @@ class ProductandServices_Api {
     return data;
   }
 }
+
 class ProductandServices_Log {
   String? serviceId;
   String? serviceName;
@@ -454,8 +453,6 @@ class ProductandServices_Log {
     return data;
   }
 }
-
-
 
 class Servicedowntime_Api {
   String? retCode;
@@ -485,6 +482,7 @@ class Servicedowntime_Api {
     return data;
   }
 }
+
 class Servicedowntime_Log {
   String? downtimeId;
   String? downtimeDesc;
@@ -494,10 +492,10 @@ class Servicedowntime_Log {
 
   Servicedowntime_Log(
       {this.downtimeId,
-        this.downtimeDesc,
-        this.downtimeStart,
-        this.downtimeEnd,
-        this.clientType});
+      this.downtimeDesc,
+      this.downtimeStart,
+      this.downtimeEnd,
+      this.clientType});
 
   Servicedowntime_Log.fromJson(Map<String, dynamic> json) {
     downtimeId = json['downtime_id'];
@@ -517,7 +515,6 @@ class Servicedowntime_Log {
     return data;
   }
 }
-
 
 class Institution_Api {
   String? retCode;
@@ -547,6 +544,7 @@ class Institution_Api {
     return data;
   }
 }
+
 class Institution_Log {
   String? instCode;
   String? instDesc;
@@ -569,13 +567,12 @@ class Institution_Log {
   }
 }
 
-
 class Branch_Api {
   String? retCode;
   String? message;
   List<Branch_Log>? data;
 
- Branch_Api({this.retCode, this.message, this.data});
+  Branch_Api({this.retCode, this.message, this.data});
 
   Branch_Api.fromJson(Map<String, dynamic> json) {
     retCode = json['retCode'];
@@ -620,7 +617,6 @@ class Branch_Log {
     return data;
   }
 }
-
 
 class Unit_Api {
   String? retCode;
@@ -672,7 +668,6 @@ class Unit_Log {
     return data;
   }
 }
-
 
 class Center_Api {
   String? retCode;
@@ -764,11 +759,11 @@ class Providers_Log {
 
   Providers_Log(
       {this.id,
-        this.providerName,
-        this.description,
-        this.providerAlias,
-        this.status,
-        this.lastSync});
+      this.providerName,
+      this.description,
+      this.providerAlias,
+      this.status,
+      this.lastSync});
 
   Providers_Log.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -790,9 +785,3 @@ class Providers_Log {
     return data;
   }
 }
-
-
-
-
-
-

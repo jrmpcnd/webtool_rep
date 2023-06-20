@@ -156,11 +156,9 @@ class _ParametersState extends State<Parameters> {
                                 contentPadding: EdgeInsets.only(left: 10.0),
                                 hintStyle: TextStyle(color: kSecondaryColor2),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: kBlackColor),
-                                ),
+                                    borderSide: BorderSide(color: kBlackColor)),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: kBlackColor),
-                                ),
+                                    borderSide: BorderSide(color: kBlackColor)),
                               ),
                               textInputAction: TextInputAction.go,
                               controller: controller,

@@ -87,6 +87,10 @@ class _buildCardState extends State<buildCard> {
                         borderSide: BorderSide(color: Colors.green),
                         borderRadius: BorderRadius.circular(15),
                       ),
+                      prefixIcon: const Icon(
+                        Icons.person_outline,
+                        color: kSecondaryColor2,
+                      ),
                     ),
                     controller: userController,
                     validator: (value) {
