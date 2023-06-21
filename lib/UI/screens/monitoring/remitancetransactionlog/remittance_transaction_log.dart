@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:web_date_picker/web_date_picker.dart';
 import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/getter_setter.dart';
-import 'package:webtool_rep/UI/utils/model.dart';
 import 'package:webtool_rep/UI/widgets/date_picker.dart';
 import 'package:webtool_rep/UI/widgets/elevatedbuttonsourcebranch.dart';
 import 'package:webtool_rep/UI/widgets/elevatedbuttontargetbranch.dart';
@@ -14,8 +12,6 @@ import '../../../utils/edge_insect.dart';
 import '../../../utils/model2.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
-import '../../../widgets/elevatedbuttonpopup.dart';
-import '../../../widgets/textfield.dart';
 
 class Remittancetransactionlog extends StatefulWidget {
   const Remittancetransactionlog({Key? key}) : super(key: key);
@@ -32,6 +28,8 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
   TextEditingController controller = TextEditingController();
   TextEditingController controller1 = TextEditingController();
   Remittancelog_Api dropdownStatus = Remittancelog_Api();
+  TextEditingController startDate = TextEditingController();
+  TextEditingController endDate = TextEditingController();
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -120,7 +118,9 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                             children: [
                               Row(
                                 children: [
-                                  DatePickerScreen(),
+                                  DatePickerScreen(
+                                      startDateController: startDate,
+                                      endDateController: endDate),
                                 ],
                               ),
                             ],
@@ -349,33 +349,38 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                           }
                                         }
                                       }
-                                      if (GetDate.getStartDate2().isNotEmpty) {
-                                        // final enteredDate =
-                                        // DateTime.parse(GetDate.getStartDate2());
-                                        setState(() {
-                                          isLoaded = false;
-                                        });
-                                        shared.Remittance_data.clear();
-                                        print('+++++++++++++++');
-                                        for (var i
-                                            in shared.RemittanceLog[0].data!) {
-                                          if (i.toJson().isNotEmpty) {
-                                            if (i.startSendDate
-                                                .toString()
-                                                .split('T')[0]
-                                                .contains(
-                                                    GetDate.getStartDate2()
-                                                        .split(' ')[0])) {
+                                      // final enteredDate = DateTime.parse(
+                                      //     GetDate.getStartDate());
+                                      setState(() {
+                                        isLoaded = false;
+                                      });
+                                      shared.Remittance_data.clear();
+                                      print(GetDate.getStartDate2());
+                                      final transactionDate = DateTime.parse(
+                                          GetDate.getStartDate2());
+                                      print(transactionDate);
+                                      for (var i
+                                          in shared.RemittanceLog[0].data!) {
+                                        if (i.toJson().isNotEmpty) {
+                                          if (i.startSendDate != '') {
+                                            final transactionsDate = DateTime
+                                                .parse(
+                                                i.startSendDate.toString()
+                                                    .replaceAll('T', ' ')
+                                                    .replaceAll('Z', ''));
+                                            print(transactionsDate);
+
+                                            if (transactionDate.year ==
+                                                transactionsDate.year &&
+                                                transactionDate.month ==
+                                                    transactionsDate.month &&
+                                                transactionDate.day ==
+                                                    transactionsDate.day) {
                                               setState(() {
-                                                print('-------------');
-                                                print(i.toJson());
                                                 shared.Remittance_data.add(
                                                     Remittance_Log.fromJson(
                                                         i.toJson()));
                                               });
-                                              print('-=-=-=-=-=-=-=-=-=-=--');
-                                              print(shared
-                                                  .Remittance_data.length);
                                               if (shared
                                                   .Remittance_data.isNotEmpty) {
                                                 Future.delayed(
@@ -389,7 +394,6 @@ class _RemittancetransactionlogState extends State<Remittancetransactionlog> {
                                           }
                                         }
                                       }
-                                      print('0000000000000');
                                       debugPrint(shared.Remittance_data[0]
                                           .toJson()
                                           .toString());

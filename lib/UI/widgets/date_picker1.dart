@@ -53,7 +53,6 @@ class _DatePickerScreen1State extends State<DatePickerScreen1> {
       setState(() {
         startDate = picked;
         widget.startDateController?.text = DateFormat('yyyy-MM-dd').format(startDate!);
-
         GetDate.setStartDate(widget.startDateController!.text);
         _updateRangeDuration();
       });
@@ -76,7 +75,6 @@ class _DatePickerScreen1State extends State<DatePickerScreen1> {
       setState(() {
         endDate = picked;
         widget.endDateController?.text = DateFormat('yyyy-MM-dd').format(endDate!);
-
         GetDate.setEndDate(widget.endDateController!.text);
         _updateRangeDuration();
       });
