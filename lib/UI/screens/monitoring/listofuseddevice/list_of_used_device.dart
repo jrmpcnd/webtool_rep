@@ -478,44 +478,37 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
                                           }
                                         }
                                       }
-                                      if (GetDate.getStartDate2().isNotEmpty) {
-                                        // final enteredDate =
-                                        // DateTime.parse(GetDate.getStartDate2());
-                                        setState(() {
-                                          isLoaded = false;
-                                        });
-                                        shared.Listofuse_Device_data.clear();
-                                        print('+++++++++++++++');
-                                        for (var i in shared
-                                            .Listofuse_DeviceLog[0].data!) {
-                                          if (i.toJson().isNotEmpty) {
-                                            if (i.activatedDateStart
+                                      setState(() {
+                                        isLoaded = false;
+                                      });
+                                      shared.Listofuse_Device_data.clear();
+                                      print(GetDate.getStartDate2());
+                                      final transactionDate = DateTime.parse(
+                                          GetDate.getStartDate2());
+                                      print(transactionDate);
+                                      for (var i in shared
+                                          .Listofuse_DeviceLog[0].data!) {
+                                        if (i.toJson().isNotEmpty) {
+                                          if (i.activatedDateStart != '') {
+                                            final transactionsDate =
+                                                DateTime.parse(i
+                                                    .activatedDateStart
                                                     .toString()
-                                                    .split('T')[0]
-                                                    .contains(
-                                                        GetDate.getStartDate2()
-                                                            .split(' ')[0]) &&
-                                                i.cid!.toLowerCase().contains(
-                                                    controller1.text
-                                                        .toLowerCase()) &&
-                                                i.deviceId!
-                                                    .toLowerCase()
-                                                    .contains(controller2.text
-                                                        .toLowerCase()) &&
-                                                i.mobileNumber!
-                                                    .toLowerCase()
-                                                    .contains(controller3.text
-                                                        .toLowerCase())) {
+                                                    .replaceAll('T', ' ')
+                                                    .replaceAll('Z', ''));
+                                            print(transactionsDate);
+
+                                            if (transactionDate.year ==
+                                                    transactionsDate.year &&
+                                                transactionDate.month ==
+                                                    transactionsDate.month &&
+                                                transactionDate.day ==
+                                                    transactionsDate.day) {
                                               setState(() {
-                                                print('-------------');
-                                                print(i.toJson());
                                                 shared.Listofuse_Device_data
                                                     .add(UseoflistDevice_Log
                                                         .fromJson(i.toJson()));
                                               });
-                                              print('-=-=-=-=-=-=-=-=-=-=--');
-                                              print(shared.Listofuse_Device_data
-                                                  .length);
                                               if (shared.Listofuse_Device_data
                                                   .isNotEmpty) {
                                                 Future.delayed(
@@ -529,8 +522,6 @@ class _ListofuseddeviceState extends State<Listofuseddevice> {
                                           }
                                         }
                                       }
-                                      print('0000000000000');
-
                                       debugPrint(shared.Listofuse_Device_data[0]
                                           .toJson()
                                           .toString());
