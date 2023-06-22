@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:web_date_picker/web_date_picker.dart';
+import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/getter_setter.dart';
 import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/widgets/date_picker.dart';
-import 'package:webtool_rep/UI/widgets/dropdown.dart';
 import 'package:webtool_rep/UI/widgets/elevatedbutton_get_insti.dart';
 import 'package:webtool_rep/core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
@@ -13,7 +12,6 @@ import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
-import '../transactionforconfirmation/getter_setter.dart';
 
 class Listofagent extends StatefulWidget {
   const Listofagent({Key? key}) : super(key: key);
@@ -34,7 +32,6 @@ class _ListofagentState extends State<Listofagent> {
   Future<void> wait() async {
     final shared = Provider.of<Prov8>(context, listen: false);
     shared.list_agent.clear();
-    shared.list_agent_data.clear();
     ListAgentParse httpParse = ListAgentParse();
     var res = await httpParse.profile8();
     if (res.data!.isNotEmpty) {
@@ -108,8 +105,7 @@ class _ListofagentState extends State<Listofagent> {
                             children: [
                               Row(
                                 children: [
-                                  DatePickerScreen(
-                                      startDateController: startDate,
+                                  DatePickerScreen( startDateController: startDate,
                                       endDateController: endDate),
                                 ],
                               ),
@@ -136,101 +132,6 @@ class _ListofagentState extends State<Listofagent> {
                               ),
                               textInputAction: TextInputAction.go,
                               controller: controller,
-                              onChanged: (value) {
-                                setState(() {
-                                  isLoaded = false;
-                                });
-                                //
-                                try {
-                                  if (controller.text.isNotEmpty) {
-                                    shared.list_agent_data.clear();
-                                    for (var i in shared.list_agent[0].data!) {
-                                      print(i.toJson());
-                                      print(i.cCid?.toLowerCase().contains(
-                                          controller.text.toLowerCase()));
-                                      if (i.toJson().isNotEmpty) {
-                                        if (i.cCid!.toLowerCase().contains(
-                                                controller.text
-                                                    .toLowerCase()) ||
-                                            i.cCid!.toLowerCase().contains(
-                                                controller.text
-                                                    .toLowerCase())) {
-                                          debugPrint(i.cCid);
-                                          setState(() {
-                                            shared.list_agent_data.add(
-                                                Data8.fromJson(i.toJson()));
-                                          });
-                                          if (shared
-                                              .list_agent_data.isNotEmpty) {
-                                            setState(() {
-                                              isLoaded = true;
-                                            });
-                                          }
-                                        }
-                                      }
-                                    }
-                                  } else if (controller.text == '') {
-                                    shared.list_agent_data.clear();
-                                    setState(() {
-                                      shared.list_agent_data
-                                          .addAll(shared.list_agent[0].data!);
-                                      isLoaded = true;
-                                    });
-                                  }
-                                  debugPrint(shared.list_agent_data[0]
-                                      .toJson()
-                                      .toString());
-                                } catch (e) {
-                                  shared.list_agent_data.clear();
-                                  isLoaded = true;
-                                }
-                              },
-                              onEditingComplete: () async {
-                                setState(() {
-                                  isLoaded = false;
-                                });
-                                try {
-                                  if (controller.text.isNotEmpty) {
-                                    shared.list_agent_data.clear();
-                                    for (var i in shared.list_agent[0].data!) {
-                                      print(i.toJson());
-                                      print(i.cCid?.toLowerCase().contains(
-                                          controller.text.toLowerCase()));
-                                      if (i.toJson().isNotEmpty) {
-                                        if (i.cCid!.toLowerCase().contains(
-                                                controller.text
-                                                    .toLowerCase()) ||
-                                            i.cCid!.toLowerCase().contains(
-                                                controller.text
-                                                    .toLowerCase())) {
-                                          debugPrint(i.cCid);
-                                          setState(() {
-                                            shared.list_agent_data.add(
-                                                Data8.fromJson(i.toJson()));
-                                          });
-                                          if (shared
-                                              .list_agent_data.isNotEmpty) {
-                                            setState(() {
-                                              isLoaded = true;
-                                            });
-                                          }
-                                        }
-                                      }
-                                    }
-                                  } else if (controller.text == '') {
-                                    shared.list_agent_data.clear();
-                                    setState(() {
-                                      shared.list_agent_data
-                                          .addAll(shared.list_agent[0].data!);
-                                    });
-                                  }
-                                  debugPrint(shared.list_agent_data[0]
-                                      .toJson()
-                                      .toString());
-                                } catch (e) {
-                                  shared.list_agent_data.clear();
-                                }
-                              },
                             ),
                           ),
                           verticalSpaceTiny,
@@ -238,21 +139,6 @@ class _ListofagentState extends State<Listofagent> {
                               label: "Insti", width: 400.0),
                           verticalSpaceTiny,
                           elevatedbuttonpopup(label: "branch", width: 400.0),
-                          // DropdownButton(
-                          //   value: init,
-                          //   items: res.map((e) {
-                          //     return DropdownMenuItem(
-                          //       value: e,
-                          //       child: Text(e,
-                          //           style: TextStyle(color: Colors.black)),
-                          //     );
-                          //   }).toList(),
-                          //   onChanged: (value) {
-                          //     setState(() {
-                          //       init = value.toString();
-                          //     });
-                          //   },
-                          // ),
                           verticalSpaceSmall,
                           Row(
                             children: [
@@ -262,45 +148,88 @@ class _ListofagentState extends State<Listofagent> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kPrimaryColor)),
+                                      MaterialStateProperty.all(
+                                          kPrimaryColor)),
                                   onPressed: () {
                                     try {
                                       if (controller.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
                                         shared.list_agent_data.clear();
                                         for (var i
-                                            in shared.list_agent[0].data!) {
-                                          print(i.toJson());
-                                          print(i.cCid?.toLowerCase().contains(
-                                              controller.text.toLowerCase()));
+                                        in shared.list_agent[0].data!) {
+                                          // print(i.toJson());
+                                          // print(i.userLogin?.toLowerCase().contains(
+                                          //     controller4.text.toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.cCid!.toLowerCase().contains(
-                                                    controller.text
-                                                        .toLowerCase()) ||
-                                                i.cCid!.toLowerCase().contains(
-                                                    controller.text
-                                                        .toLowerCase())) {
-                                              debugPrint(i.cCid);
+                                                controller.text
+                                                    .toLowerCase()) &&
+                                                i.cMobileNo!
+                                                    .toLowerCase()
+                                                    .contains(controller1.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.cMobileNo);
                                               setState(() {
                                                 shared.list_agent_data.add(
                                                     Data8.fromJson(i.toJson()));
                                               });
                                               if (shared
                                                   .list_agent_data.isNotEmpty) {
-                                                setState(() {
-                                                  isLoaded = true;
-                                                });
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
                                               }
                                             }
                                           }
                                         }
-                                      } else if (controller.text == '') {
-                                        shared.list_agent_data.clear();
-                                        setState(() {
-                                          shared.list_agent_data.addAll(
-                                              shared.list_agent[0].data!);
-                                        });
                                       }
+                                      if (controller1.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoaded = false;
+                                        });
+                                        shared.list_agent_data.clear();
+                                        for (var i
+                                        in shared.list_agent[0].data!) {
+                                          // print(i.toJson());
+                                          // print(i.userLogin?.toLowerCase().contains(
+                                          //     controller4.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.cMobileNo!
+                                                .toLowerCase()
+                                                .contains(controller1.text
+                                                .toLowerCase()) &&
+                                                i.cCid!.toLowerCase().contains(
+                                                    controller.text
+                                                        .toLowerCase())) {
+                                              debugPrint(i.cMobileNo);
+                                              setState(() {
+                                                shared.list_agent_data.add(
+                                                    Data8.fromJson(i.toJson()));
+                                              });
+                                              if (shared
+                                                  .list_agent_data.isNotEmpty) {
+                                                Future.delayed(
+                                                  Duration(seconds: 1),
+                                                      () {
+                                                    setState(() {
+                                                      isLoaded = true;
+                                                    });
+                                                  },
+                                                );
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      // final enteredDate = DateTime.parse(
+                                      //     GetDate.getStartDate());
                                       setState(() {
                                         isLoaded = false;
                                       });
@@ -310,25 +239,25 @@ class _ListofagentState extends State<Listofagent> {
                                           GetDate.getStartDate2());
                                       print(transactionDate);
                                       for (var i
-                                          in shared.list_agent[0].data!) {
+                                      in shared.list_agent[0].data!) {
                                         if (i.toJson().isNotEmpty) {
                                           if (i.cDateAndTime != '') {
-                                            final transactionsDate =
-                                                DateTime.parse(i.cDateAndTime
-                                                    .toString()
+                                            final transactionsDate = DateTime
+                                                .parse(
+                                                i.cDateAndTime.toString()
                                                     .replaceAll('T', ' ')
                                                     .replaceAll('Z', ''));
                                             print(transactionsDate);
-
                                             if (transactionDate.year ==
-                                                    transactionsDate.year &&
+                                                transactionsDate.year &&
                                                 transactionDate.month ==
                                                     transactionsDate.month &&
                                                 transactionDate.day ==
                                                     transactionsDate.day) {
                                               setState(() {
                                                 shared.list_agent_data.add(
-                                                    Data8.fromJson(i.toJson()));
+                                                    Data8.fromJson(
+                                                        i.toJson()));
                                               });
                                               if (shared
                                                   .list_agent_data.isNotEmpty) {
@@ -347,8 +276,12 @@ class _ListofagentState extends State<Listofagent> {
                                           .toJson()
                                           .toString());
                                     } catch (e) {
+                                      print(e.toString());
+                                      print(shared.list_agent_data.length);
                                       shared.list_agent_data.clear();
+                                      isLoaded = true;
                                     }
+                                    print(shared.list_agent_data);
                                   },
                                   icon: const Icon(
                                     Icons.search,
@@ -367,8 +300,8 @@ class _ListofagentState extends State<Listofagent> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              kSecondaryColor2)),
+                                      MaterialStateProperty.all(
+                                          kSecondaryColor2)),
                                   onPressed: () {
                                     setState(() {
                                       isLoaded = false;
@@ -383,7 +316,7 @@ class _ListofagentState extends State<Listofagent> {
                                           .addAll(shared.list_agent[0].data!);
                                       Future.delayed(
                                         Duration(seconds: 1),
-                                        () {
+                                            () {
                                           setState(() {
                                             isLoaded = true;
                                           });
@@ -424,133 +357,28 @@ class _ListofagentState extends State<Listofagent> {
                                     labelStyle: TextStyle(fontSize: 12.0),
                                     contentPadding: EdgeInsets.only(left: 10.0),
                                     hintStyle:
-                                        TextStyle(color: kSecondaryColor2),
+                                    TextStyle(color: kSecondaryColor2),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: kBlackColor),
+                                      BorderSide(color: kBlackColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: kBlackColor),
+                                      BorderSide(color: kBlackColor),
                                     ),
                                   ),
                                   textInputAction: TextInputAction.go,
                                   controller: controller1,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isLoaded = false;
-                                    });
-                                    //
-                                    try {
-                                      if (controller1.text.isNotEmpty) {
-                                        shared.list_agent_data.clear();
-                                        for (var i
-                                            in shared.list_agent[0].data!) {
-                                          print(i.toJson());
-                                          print(i.cMobileNo
-                                              ?.toLowerCase()
-                                              .contains(controller1.text
-                                                  .toLowerCase()));
-                                          if (i.toJson().isNotEmpty) {
-                                            if (i.cMobileNo!
-                                                    .toLowerCase()
-                                                    .contains(controller1.text
-                                                        .toLowerCase()) ||
-                                                i.cMobileNo!
-                                                    .toLowerCase()
-                                                    .contains(controller1.text
-                                                        .toLowerCase())) {
-                                              debugPrint(i.cMobileNo);
-                                              setState(() {
-                                                shared.list_agent_data.add(
-                                                    Data8.fromJson(i.toJson()));
-                                              });
-                                              if (shared
-                                                  .list_agent_data.isNotEmpty) {
-                                                setState(() {
-                                                  isLoaded = true;
-                                                });
-                                              }
-                                            }
-                                          }
-                                        }
-                                      } else if (controller1.text == '') {
-                                        shared.list_agent_data.clear();
-                                        setState(() {
-                                          shared.list_agent_data.addAll(
-                                              shared.list_agent[0].data!);
-                                          isLoaded = true;
-                                        });
-                                      }
-                                      debugPrint(shared.list_agent_data[0]
-                                          .toJson()
-                                          .toString());
-                                    } catch (e) {
-                                      shared.list_agent_data.clear();
-                                      isLoaded = true;
-                                    }
-                                  },
-                                  onEditingComplete: () async {
-                                    setState(() {
-                                      isLoaded = false;
-                                    });
-                                    try {
-                                      if (controller1.text.isNotEmpty) {
-                                        shared.list_agent_data.clear();
-                                        for (var i
-                                            in shared.list_agent[0].data!) {
-                                          print(i.toJson());
-                                          print(i.cMobileNo
-                                              ?.toLowerCase()
-                                              .contains(controller1.text
-                                                  .toLowerCase()));
-                                          if (i.toJson().isNotEmpty) {
-                                            if (i.cMobileNo!
-                                                    .toLowerCase()
-                                                    .contains(controller1.text
-                                                        .toLowerCase()) ||
-                                                i.cMobileNo!
-                                                    .toLowerCase()
-                                                    .contains(controller1.text
-                                                        .toLowerCase())) {
-                                              debugPrint(i.cMobileNo);
-                                              setState(() {
-                                                shared.list_agent_data.add(
-                                                    Data8.fromJson(i.toJson()));
-                                              });
-                                              if (shared
-                                                  .list_agent_data.isNotEmpty) {
-                                                setState(() {
-                                                  isLoaded = true;
-                                                });
-                                              }
-                                            }
-                                          }
-                                        }
-                                      } else if (controller1.text == '') {
-                                        shared.list_agent_data.clear();
-                                        setState(() {
-                                          shared.list_agent_data.addAll(
-                                              shared.list_agent[0].data!);
-                                        });
-                                      }
-                                      debugPrint(shared.list_agent_data[0]
-                                          .toJson()
-                                          .toString());
-                                    } catch (e) {
-                                      shared.list_agent_data.clear();
-                                    }
-                                  },
                                 ),
                               ),
                               verticalSpaceTiny,
                               textfield(
-                                hintext: "Number",
+                                hintext: "---Unit---",
                                 controller: controller2,
                               ),
                               verticalSpaceTiny,
                               textfield(
-                                hintext: "Error Message",
+                                hintext: "---Center---",
                                 controller: controller3,
                               ),
                               verticalSpaceMedium,
@@ -590,453 +418,32 @@ class _ListofagentState extends State<Listofagent> {
                                     style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label:
-                                    Text('Branch', style: kLargeBoldTextStyle)),
+                                Text('Branch', style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label:
-                                    Text('Unit', style: kLargeBoldTextStyle)),
+                                Text('Unit', style: kLargeBoldTextStyle)),
                             DataColumn(
                                 label:
-                                    Text('Center', style: kLargeBoldTextStyle))
+                                Text('Center', style: kLargeBoldTextStyle))
                           ],
                           source: isLoaded
                               ? shared.list_agent_data.isNotEmpty
-                                  ? data
-                                  : data2
+                              ? data
+                              : data2
                               : data3,
                           rowsPerPage: 8,
                           showFirstLastButtons: true,
                           header:
-                              Text('List of Role', style: kXLargeBoldTextStyle),
+                          Text('List of Role', style: kXLargeBoldTextStyle),
                         )),
                   ],
                 )
-                // SafeArea(
-                //   child: TextButton(
-                //     onPressed: () async {
-                //       setState(() {});
-                //       shared.inqqq.sort((a, b) => a.role_name
-                //           .toString()
-                //           .toLowerCase()
-                //           .compareTo(b.role_name.toString().toLowerCase()));
-                //     },
-                //     child: const Text('Role name ascending'),
-                //   ),
-                // ),
-                // SafeArea(
-                //   child: TextButton(
-                //     onPressed: () async {
-                //       setState(() {});
-                //       shared.inqqq.sort((a, b) => b.role_name
-                //           .toString()
-                //           .toLowerCase()
-                //           .compareTo(a.role_name.toString().toLowerCase()));
-                //       //print(shared.inqq.sort());
-                //     },
-                //     child: const Text('Role name descending'),
-                //   ),
-                // ),
-                // SafeArea(
-                //   child: TextButton(
-                //     onPressed: () async {
-                //       setState(() {});
-                //       shared.inqqq.sort((a, b) => a.role_desc
-                //           .toString()
-                //           .toLowerCase()
-                //           .compareTo(b.role_desc.toString().toLowerCase()));
-                //     },
-                //     child: const Text('Role desc ascending'),
-                //   ),
-                // ),
-                // SafeArea(
-                //   child: TextButton(
-                //     onPressed: () async {
-                //       setState(() {});
-                //       shared.inqqq.sort((a, b) => b.role_desc
-                //           .toString()
-                //           .toLowerCase()
-                //           .compareTo(a.role_desc.toString().toLowerCase()));
-                //     },
-                //     child: const Text('Role desc descending'),
-                //   ),
-                // )
               ],
             ),
           ),
         ],
       ),
     );
-    // return Container(
-    //   padding: kEdgeInsetsVerticalNormal,
-    //   child: Column(
-    //     children: [
-    //       // Row(
-    //       //   mainAxisAlignment: MainAxisAlignment.center,
-    //       //   children: [
-    //       //     Container(
-    //       //       width: 500,
-    //       //       child: TextFormField(
-    //       //         style: TextStyle(color: kBlackColor),
-    //       //         decoration: const InputDecoration(
-    //       //           hintText: 'Search',
-    //       //           border: OutlineInputBorder(),
-    //       //           labelStyle: TextStyle(fontSize: 12.0),
-    //       //           contentPadding: EdgeInsets.only(left: 10.0),
-    //       //           hintStyle: TextStyle(color: kSecondaryColor2),
-    //       //           enabledBorder: OutlineInputBorder(
-    //       //             borderSide: BorderSide(color: kBlackColor),
-    //       //           ),
-    //       //           focusedBorder: OutlineInputBorder(
-    //       //             borderSide: BorderSide(color: kBlackColor),
-    //       //           ),
-    //       //         ),
-    //       //         textInputAction: TextInputAction.go,
-    //       //         controller: controller,
-    //       //         onChanged: (value) {
-    //       //           setState(() {
-    //       //             isLoaded = false;
-    //       //           });
-    //       //           //
-    //       //           try {
-    //       //             if (controller.text.isNotEmpty) {
-    //       //               shared.role_data.clear();
-    //       //               for (var i in shared.role[0].data!) {
-    //       //                 print(i.toJson());
-    //       //                 print(i.role_name
-    //       //                     ?.toLowerCase()
-    //       //                     .contains(controller.text.toLowerCase()));
-    //       //                 if (i.toJson().isNotEmpty) {
-    //       //                   if (i.role_name!
-    //       //                           .toLowerCase()
-    //       //                           .contains(controller.text.toLowerCase()) ||
-    //       //                       i.role_desc!
-    //       //                           .toLowerCase()
-    //       //                           .contains(controller.text.toLowerCase())) {
-    //       //                     debugPrint(i.role_name);
-    //       //                     setState(() {
-    //       //                       shared.role_data.add(Data(
-    //       //                           role_name: i.role_name,
-    //       //                           role_desc: i.role_desc,
-    //       //                           role_id: i.role_id));
-    //       //                     });
-    //       //                     if (shared.role_data.isNotEmpty) {
-    //       //                       setState(() {
-    //       //                         isLoaded = true;
-    //       //                       });
-    //       //                     }
-    //       //                   }
-    //       //                 }
-    //       //               }
-    //       //             } else if (controller.text == '') {
-    //       //               shared.role_data.clear();
-    //       //               setState(() {
-    //       //                 shared.role_data.addAll(shared.role[0].data!);
-    //       //                 isLoaded = true;
-    //       //               });
-    //       //             }
-    //       //             debugPrint(shared.role_data[0].toJson().toString());
-    //       //           } catch (e) {
-    //       //             shared.role_data.clear();
-    //       //             isLoaded = true;
-    //       //           }
-    //       //         },
-    //       //         onEditingComplete: () async {
-    //       //           setState(() {
-    //       //             isLoaded = false;
-    //       //           });
-    //       //           try {
-    //       //             if (controller.text.isNotEmpty) {
-    //       //               shared.role_data.clear();
-    //       //               for (var i in shared.role[0].data!) {
-    //       //                 print(i.toJson());
-    //       //                 print(i.role_name
-    //       //                     ?.toLowerCase()
-    //       //                     .contains(controller.text.toLowerCase()));
-    //       //                 if (i.toJson().isNotEmpty) {
-    //       //                   if (i.role_name!
-    //       //                           .toLowerCase()
-    //       //                           .contains(controller.text.toLowerCase()) ||
-    //       //                       i.role_desc!
-    //       //                           .toLowerCase()
-    //       //                           .contains(controller.text.toLowerCase())) {
-    //       //                     debugPrint(i.role_name);
-    //       //                     setState(() {
-    //       //                       key.currentState?.pageTo(0);
-    //       //                       shared.role_data.add(Data(
-    //       //                           role_name: i.role_name,
-    //       //                           role_desc: i.role_desc,
-    //       //                           role_id: i.role_id));
-    //       //                     });
-    //       //                     if (shared.role_data.isNotEmpty) {
-    //       //                       setState(() {
-    //       //                         isLoaded = true;
-    //       //                       });
-    //       //                     }
-    //       //                   }
-    //       //                 }
-    //       //               }
-    //       //             } else if (controller.text == '') {
-    //       //               shared.role_data.clear();
-    //       //               setState(() {
-    //       //                 shared.role_data.addAll(shared.role[0].data!);
-    //       //               });
-    //       //             }
-    //       //             debugPrint(shared.role_data[0].toJson().toString());
-    //       //           } catch (e) {
-    //       //             shared.role_data.clear();
-    //       //           }
-    //       //         },
-    //       //       ),
-    //       //     ),
-    //       //   ],
-    //       // ),
-    //      Column(children: [Container(
-    //        width: 500,
-    //        child: TextFormField(
-    //          style: TextStyle(color: kBlackColor),
-    //          decoration: const InputDecoration(
-    //            hintText: 'Search',
-    //            border: OutlineInputBorder(),
-    //            labelStyle: TextStyle(fontSize: 12.0),
-    //            contentPadding: EdgeInsets.only(left: 10.0),
-    //            hintStyle: TextStyle(color: kSecondaryColor2),
-    //            enabledBorder: OutlineInputBorder(
-    //              borderSide: BorderSide(color: kBlackColor),
-    //            ),
-    //            focusedBorder: OutlineInputBorder(
-    //              borderSide: BorderSide(color: kBlackColor),
-    //            ),
-    //          ),
-    //          textInputAction: TextInputAction.go,
-    //          controller: controller,
-    //          onChanged: (value) {
-    //            setState(() {
-    //              isLoaded = false;
-    //            });
-    //            //
-    //            try {
-    //              if (controller.text.isNotEmpty) {
-    //                shared.list_agent_data.clear();
-    //                for (var i in shared.list_agent[0].data!) {
-    //                  print(i.toJson());
-    //                  print(i.cBranchDesc
-    //                      ?.toLowerCase()
-    //                      .contains(controller.text.toLowerCase()));
-    //                  if (i.toJson().isNotEmpty) {
-    //                    if (i.cDateAndTime!
-    //                        .toLowerCase()
-    //                        .contains(controller.text.toLowerCase()) ||
-    //                        i.iUserName!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())   ||
-    //                        i.cCid!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())    ||
-    //                        i.cFullname!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())  ||
-    //                        i.cMobileNo!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())  ||
-    //                        i.aInstDesc!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())  ||
-    //                        i.cBranchDesc!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())||
-    //                    i.cUnitDesc!
-    //                        .toLowerCase()
-    //            .contains(controller.text.toLowerCase())||
-    //                        i.cCenterDesc!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())
-    //
-    //
-    //
-    //
-    //
-    //
-    //                    ) {
-    //                      debugPrint(i.cCenterDesc);
-    //                      setState(() {
-    //                        shared.list_agent_data.add(Data8.fromJson(i.toJson()
-    //                        ));
-    //                      });
-    //                      if (shared.list_agent_data.isNotEmpty) {
-    //                        setState(() {
-    //                          isLoaded = true;
-    //                        });
-    //                      }
-    //                    }
-    //                  }
-    //                }
-    //              } else if (controller.text == '') {
-    //                shared.list_agent_data.clear();
-    //                setState(() {
-    //                  shared.list_agent_data.addAll(shared.list_agent[0].data!);
-    //                  isLoaded = true;
-    //                });
-    //              }
-    //              debugPrint(shared.list_agent_data[0].toJson().toString());
-    //            } catch (e) {
-    //              shared.list_agent_data.clear();
-    //              isLoaded = true;
-    //            }
-    //          },
-    //          onEditingComplete: () async {
-    //            setState(() {
-    //              isLoaded = false;
-    //            });
-    //            try {
-    //              if (controller.text.isNotEmpty) {
-    //                shared.list_agent_data.clear();
-    //                for (var i in shared.list_agent[0].data!) {
-    //                  print(i.toJson());
-    //                  print(i.cBranchDesc
-    //                      ?.toLowerCase()
-    //                      .contains(controller.text.toLowerCase()));
-    //                  if (i.toJson().isNotEmpty) {
-    //                    if (i.cDateAndTime!
-    //                        .toLowerCase()
-    //                        .contains(controller.text.toLowerCase()) ||
-    //                        i.iUserName!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())   ||
-    //                        i.cCid!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())    ||
-    //                        i.cFullname!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())  ||
-    //                        i.cMobileNo!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())  ||
-    //                        i.aInstDesc!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())  ||
-    //                        i.cBranchDesc!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())||
-    //                        i.cUnitDesc!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())||
-    //                        i.cCenterDesc!
-    //                            .toLowerCase()
-    //                            .contains(controller.text.toLowerCase())
-    //
-    //
-    //
-    //                    ) {
-    //                      debugPrint (i.cCenterDesc);
-    //                      setState(() {
-    //                        key.currentState?.pageTo(0);
-    //                        shared.list_agent_data.add(Data8.fromJson(i.toJson()
-    //                        ));
-    //
-    //                      });
-    //                      if (shared.list_agent_data.isNotEmpty) {
-    //                        setState(() {
-    //                          isLoaded = true;
-    //                        });
-    //                      }
-    //                    }
-    //                  }
-    //                }
-    //              } else if (controller.text == '') {
-    //                shared.list_agent_data.clear();
-    //                setState(() {
-    //                  shared.list_agent_data.addAll(shared.list_agent[0].data!);
-    //                });
-    //              }
-    //              debugPrint(shared.list_agent_data[0].toJson().toString());
-    //            } catch (e) {
-    //              shared.list_agent_data.clear();
-    //            }
-    //          },
-    //        ),
-    //      ), Container(
-    //          width: double.infinity,
-    //          padding: kEdgeInsetsVerticalNormal,
-    //          child: PaginatedDataTable(
-    //            key: key,
-    //            arrowHeadColor: kWhiteColor,
-    //            columns: [
-    //              DataColumn(
-    //                  label: Text('Date & Time Enable Agent Feature',
-    //                      style: kLargeBoldTextStyle)),
-    //              DataColumn(
-    //                  label: Text('Enable By', style: kLargeBoldTextStyle)),
-    //              DataColumn(label: Text('CID', style: kLargeBoldTextStyle)),
-    //              DataColumn(
-    //                  label: Text('Full Name', style: kLargeBoldTextStyle)),
-    //              DataColumn(
-    //                  label: Text('Mobile No', style: kLargeBoldTextStyle)),
-    //              DataColumn(
-    //                  label: Text('Institution', style: kLargeBoldTextStyle)),
-    //              DataColumn(label: Text('Branch', style: kLargeBoldTextStyle)),
-    //              DataColumn(label: Text('Unit', style: kLargeBoldTextStyle)),
-    //              DataColumn(label: Text('Center', style: kLargeBoldTextStyle))
-    //            ],
-    //            source: isLoaded
-    //                ? shared.list_agent_data.isNotEmpty
-    //                ? data
-    //                : data2
-    //                : data3,
-    //            rowsPerPage: 8,
-    //            showFirstLastButtons: true,
-    //            header: Text('List of Role', style: kXLargeBoldTextStyle),
-    //          )),],)
-    //       // SafeArea(
-    //       //   child: TextButton(
-    //       //     onPressed: () async {
-    //       //       setState(() {});
-    //       //       shared.inqqq.sort((a, b) => a.role_name
-    //       //           .toString()
-    //       //           .toLowerCase()
-    //       //           .compareTo(b.role_name.toString().toLowerCase()));
-    //       //     },
-    //       //     child: const Text('Role name ascending'),
-    //       //   ),
-    //       // ),
-    //       // SafeArea(
-    //       //   child: TextButton(
-    //       //     onPressed: () async {
-    //       //       setState(() {});
-    //       //       shared.inqqq.sort((a, b) => b.role_name
-    //       //           .toString()
-    //       //           .toLowerCase()
-    //       //           .compareTo(a.role_name.toString().toLowerCase()));
-    //       //       //print(shared.inqq.sort());
-    //       //     },
-    //       //     child: const Text('Role name descending'),
-    //       //   ),
-    //       // ),
-    //       // SafeArea(
-    //       //   child: TextButton(
-    //       //     onPressed: () async {
-    //       //       setState(() {});
-    //       //       shared.inqqq.sort((a, b) => a.role_desc
-    //       //           .toString()
-    //       //           .toLowerCase()
-    //       //           .compareTo(b.role_desc.toString().toLowerCase()));
-    //       //     },
-    //       //     child: const Text('Role desc ascending'),
-    //       //   ),
-    //       // ),
-    //       // SafeArea(
-    //       //   child: TextButton(
-    //       //     onPressed: () async {
-    //       //       setState(() {});
-    //       //       shared.inqqq.sort((a, b) => b.role_desc
-    //       //           .toString()
-    //       //           .toLowerCase()
-    //       //           .compareTo(a.role_desc.toString().toLowerCase()));
-    //       //     },
-    //       //     child: const Text('Role desc descending'),
-    //       //   ),
-    //       // )
-    //     ],
-    //   ),
-    // );
   }
 }
 
