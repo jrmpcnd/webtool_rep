@@ -13,6 +13,7 @@ import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
+import '../transactionforconfirmation/getter_setter.dart';
 
 class Listofagent extends StatefulWidget {
   const Listofagent({Key? key}) : super(key: key);
@@ -26,11 +27,14 @@ class _ListofagentState extends State<Listofagent> {
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   TextEditingController controller3 = TextEditingController();
+  TextEditingController startDate = TextEditingController();
+  TextEditingController endDate = TextEditingController();
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
     final shared = Provider.of<Prov8>(context, listen: false);
     shared.list_agent.clear();
+    shared.list_agent_data.clear();
     ListAgentParse httpParse = ListAgentParse();
     var res = await httpParse.profile8();
     if (res.data!.isNotEmpty) {
@@ -104,7 +108,9 @@ class _ListofagentState extends State<Listofagent> {
                             children: [
                               Row(
                                 children: [
-                                 DatePickerScreen(),
+                                  DatePickerScreen(
+                                      startDateController: startDate,
+                                      endDateController: endDate),
                                 ],
                               ),
                             ],
@@ -140,21 +146,22 @@ class _ListofagentState extends State<Listofagent> {
                                     shared.list_agent_data.clear();
                                     for (var i in shared.list_agent[0].data!) {
                                       print(i.toJson());
-                                      print(i.cCid
-                                          ?.toLowerCase()
-                                          .contains(controller.text.toLowerCase()));
+                                      print(i.cCid?.toLowerCase().contains(
+                                          controller.text.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
-                                        if (i.cCid!
-                                            .toLowerCase()
-                                            .contains(controller.text.toLowerCase()) ||
-                                            i.cCid!
-                                                .toLowerCase()
-                                                .contains(controller.text.toLowerCase())) {
+                                        if (i.cCid!.toLowerCase().contains(
+                                                controller.text
+                                                    .toLowerCase()) ||
+                                            i.cCid!.toLowerCase().contains(
+                                                controller.text
+                                                    .toLowerCase())) {
                                           debugPrint(i.cCid);
                                           setState(() {
-                                            shared.list_agent_data.add(Data8.fromJson(i.toJson()));
+                                            shared.list_agent_data.add(
+                                                Data8.fromJson(i.toJson()));
                                           });
-                                          if (shared.list_agent_data.isNotEmpty) {
+                                          if (shared
+                                              .list_agent_data.isNotEmpty) {
                                             setState(() {
                                               isLoaded = true;
                                             });
@@ -165,11 +172,14 @@ class _ListofagentState extends State<Listofagent> {
                                   } else if (controller.text == '') {
                                     shared.list_agent_data.clear();
                                     setState(() {
-                                      shared.list_agent_data.addAll(shared.list_agent[0].data!);
+                                      shared.list_agent_data
+                                          .addAll(shared.list_agent[0].data!);
                                       isLoaded = true;
                                     });
                                   }
-                                  debugPrint(shared.list_agent_data[0].toJson().toString());
+                                  debugPrint(shared.list_agent_data[0]
+                                      .toJson()
+                                      .toString());
                                 } catch (e) {
                                   shared.list_agent_data.clear();
                                   isLoaded = true;
@@ -184,21 +194,22 @@ class _ListofagentState extends State<Listofagent> {
                                     shared.list_agent_data.clear();
                                     for (var i in shared.list_agent[0].data!) {
                                       print(i.toJson());
-                                      print(i.cCid
-                                          ?.toLowerCase()
-                                          .contains(controller.text.toLowerCase()));
+                                      print(i.cCid?.toLowerCase().contains(
+                                          controller.text.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
-                                        if (i.cCid!
-                                            .toLowerCase()
-                                            .contains(controller.text.toLowerCase()) ||
-                                            i.cCid!
-                                                .toLowerCase()
-                                                .contains(controller.text.toLowerCase())) {
+                                        if (i.cCid!.toLowerCase().contains(
+                                                controller.text
+                                                    .toLowerCase()) ||
+                                            i.cCid!.toLowerCase().contains(
+                                                controller.text
+                                                    .toLowerCase())) {
                                           debugPrint(i.cCid);
                                           setState(() {
-                                            shared.list_agent_data.add(Data8.fromJson(i.toJson()));
+                                            shared.list_agent_data.add(
+                                                Data8.fromJson(i.toJson()));
                                           });
-                                          if (shared.list_agent_data.isNotEmpty) {
+                                          if (shared
+                                              .list_agent_data.isNotEmpty) {
                                             setState(() {
                                               isLoaded = true;
                                             });
@@ -209,10 +220,13 @@ class _ListofagentState extends State<Listofagent> {
                                   } else if (controller.text == '') {
                                     shared.list_agent_data.clear();
                                     setState(() {
-                                      shared.list_agent_data.addAll(shared.list_agent[0].data!);
+                                      shared.list_agent_data
+                                          .addAll(shared.list_agent[0].data!);
                                     });
                                   }
-                                  debugPrint(shared.list_agent_data[0].toJson().toString());
+                                  debugPrint(shared.list_agent_data[0]
+                                      .toJson()
+                                      .toString());
                                 } catch (e) {
                                   shared.list_agent_data.clear();
                                 }
@@ -223,8 +237,7 @@ class _ListofagentState extends State<Listofagent> {
                           elevatedbuttonpopupInsti(
                               label: "Insti", width: 400.0),
                           verticalSpaceTiny,
-                          elevatedbuttonpopup(
-                              label: "branch", width: 400.0),
+                          elevatedbuttonpopup(label: "branch", width: 400.0),
                           // DropdownButton(
                           //   value: init,
                           //   items: res.map((e) {
@@ -249,9 +262,94 @@ class _ListofagentState extends State<Listofagent> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kPrimaryColor)),
-                                  onPressed: () {},
+                                          MaterialStateProperty.all(
+                                              kPrimaryColor)),
+                                  onPressed: () {
+                                    try {
+                                      if (controller.text.isNotEmpty) {
+                                        shared.list_agent_data.clear();
+                                        for (var i
+                                            in shared.list_agent[0].data!) {
+                                          print(i.toJson());
+                                          print(i.cCid?.toLowerCase().contains(
+                                              controller.text.toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.cCid!.toLowerCase().contains(
+                                                    controller.text
+                                                        .toLowerCase()) ||
+                                                i.cCid!.toLowerCase().contains(
+                                                    controller.text
+                                                        .toLowerCase())) {
+                                              debugPrint(i.cCid);
+                                              setState(() {
+                                                shared.list_agent_data.add(
+                                                    Data8.fromJson(i.toJson()));
+                                              });
+                                              if (shared
+                                                  .list_agent_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller.text == '') {
+                                        shared.list_agent_data.clear();
+                                        setState(() {
+                                          shared.list_agent_data.addAll(
+                                              shared.list_agent[0].data!);
+                                        });
+                                      }
+                                      setState(() {
+                                        isLoaded = false;
+                                      });
+                                      shared.list_agent_data.clear();
+                                      print(GetDate.getStartDate2());
+                                      final transactionDate = DateTime.parse(
+                                          GetDate.getStartDate2());
+                                      print(transactionDate);
+                                      for (var i
+                                          in shared.list_agent[0].data!) {
+                                        if (i.toJson().isNotEmpty) {
+                                          if (i.cDateAndTime != '') {
+                                            final transactionsDate =
+                                                DateTime.parse(i.cDateAndTime
+                                                    .toString()
+                                                    .replaceAll('T', ' ')
+                                                    .replaceAll('Z', ''));
+                                            print(transactionsDate);
+
+                                            if (transactionDate.year ==
+                                                    transactionsDate.year &&
+                                                transactionDate.month ==
+                                                    transactionsDate.month &&
+                                                transactionDate.day ==
+                                                    transactionsDate.day) {
+                                              setState(() {
+                                                shared.list_agent_data.add(
+                                                    Data8.fromJson(i.toJson()));
+                                              });
+                                              if (shared
+                                                  .list_agent_data.isNotEmpty) {
+                                                Future.delayed(
+                                                    Duration(seconds: 1), () {
+                                                  setState(() {
+                                                    isLoaded = true;
+                                                  });
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                      debugPrint(shared.list_agent_data[0]
+                                          .toJson()
+                                          .toString());
+                                    } catch (e) {
+                                      shared.list_agent_data.clear();
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -269,8 +367,8 @@ class _ListofagentState extends State<Listofagent> {
                                 child: ElevatedButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          kSecondaryColor2)),
+                                          MaterialStateProperty.all(
+                                              kSecondaryColor2)),
                                   onPressed: () {
                                     setState(() {
                                       isLoaded = false;
@@ -285,7 +383,7 @@ class _ListofagentState extends State<Listofagent> {
                                           .addAll(shared.list_agent[0].data!);
                                       Future.delayed(
                                         Duration(seconds: 1),
-                                            () {
+                                        () {
                                           setState(() {
                                             isLoaded = true;
                                           });
@@ -325,12 +423,15 @@ class _ListofagentState extends State<Listofagent> {
                                     border: OutlineInputBorder(),
                                     labelStyle: TextStyle(fontSize: 12.0),
                                     contentPadding: EdgeInsets.only(left: 10.0),
-                                    hintStyle: TextStyle(color: kSecondaryColor2),
+                                    hintStyle:
+                                        TextStyle(color: kSecondaryColor2),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: kBlackColor),
+                                      borderSide:
+                                          BorderSide(color: kBlackColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: kBlackColor),
+                                      borderSide:
+                                          BorderSide(color: kBlackColor),
                                     ),
                                   ),
                                   textInputAction: TextInputAction.go,
@@ -343,23 +444,29 @@ class _ListofagentState extends State<Listofagent> {
                                     try {
                                       if (controller1.text.isNotEmpty) {
                                         shared.list_agent_data.clear();
-                                        for (var i in shared.list_agent[0].data!) {
+                                        for (var i
+                                            in shared.list_agent[0].data!) {
                                           print(i.toJson());
                                           print(i.cMobileNo
                                               ?.toLowerCase()
-                                              .contains(controller1.text.toLowerCase()));
+                                              .contains(controller1.text
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.cMobileNo!
-                                                .toLowerCase()
-                                                .contains(controller1.text.toLowerCase()) ||
+                                                    .toLowerCase()
+                                                    .contains(controller1.text
+                                                        .toLowerCase()) ||
                                                 i.cMobileNo!
                                                     .toLowerCase()
-                                                    .contains(controller1.text.toLowerCase())) {
+                                                    .contains(controller1.text
+                                                        .toLowerCase())) {
                                               debugPrint(i.cMobileNo);
                                               setState(() {
-                                                shared.list_agent_data.add(Data8.fromJson(i.toJson()));
+                                                shared.list_agent_data.add(
+                                                    Data8.fromJson(i.toJson()));
                                               });
-                                              if (shared.list_agent_data.isNotEmpty) {
+                                              if (shared
+                                                  .list_agent_data.isNotEmpty) {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
@@ -370,11 +477,14 @@ class _ListofagentState extends State<Listofagent> {
                                       } else if (controller1.text == '') {
                                         shared.list_agent_data.clear();
                                         setState(() {
-                                          shared.list_agent_data.addAll(shared.list_agent[0].data!);
+                                          shared.list_agent_data.addAll(
+                                              shared.list_agent[0].data!);
                                           isLoaded = true;
                                         });
                                       }
-                                      debugPrint(shared.list_agent_data[0].toJson().toString());
+                                      debugPrint(shared.list_agent_data[0]
+                                          .toJson()
+                                          .toString());
                                     } catch (e) {
                                       shared.list_agent_data.clear();
                                       isLoaded = true;
@@ -387,23 +497,29 @@ class _ListofagentState extends State<Listofagent> {
                                     try {
                                       if (controller1.text.isNotEmpty) {
                                         shared.list_agent_data.clear();
-                                        for (var i in shared.list_agent[0].data!) {
+                                        for (var i
+                                            in shared.list_agent[0].data!) {
                                           print(i.toJson());
                                           print(i.cMobileNo
                                               ?.toLowerCase()
-                                              .contains(controller1.text.toLowerCase()));
+                                              .contains(controller1.text
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.cMobileNo!
-                                                .toLowerCase()
-                                                .contains(controller1.text.toLowerCase()) ||
+                                                    .toLowerCase()
+                                                    .contains(controller1.text
+                                                        .toLowerCase()) ||
                                                 i.cMobileNo!
                                                     .toLowerCase()
-                                                    .contains(controller1.text.toLowerCase())) {
+                                                    .contains(controller1.text
+                                                        .toLowerCase())) {
                                               debugPrint(i.cMobileNo);
                                               setState(() {
-                                                shared.list_agent_data.add(Data8.fromJson(i.toJson()));
+                                                shared.list_agent_data.add(
+                                                    Data8.fromJson(i.toJson()));
                                               });
-                                              if (shared.list_agent_data.isNotEmpty) {
+                                              if (shared
+                                                  .list_agent_data.isNotEmpty) {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
@@ -414,10 +530,13 @@ class _ListofagentState extends State<Listofagent> {
                                       } else if (controller1.text == '') {
                                         shared.list_agent_data.clear();
                                         setState(() {
-                                          shared.list_agent_data.addAll(shared.list_agent[0].data!);
+                                          shared.list_agent_data.addAll(
+                                              shared.list_agent[0].data!);
                                         });
                                       }
-                                      debugPrint(shared.list_agent_data[0].toJson().toString());
+                                      debugPrint(shared.list_agent_data[0]
+                                          .toJson()
+                                          .toString());
                                     } catch (e) {
                                       shared.list_agent_data.clear();
                                     }
@@ -443,91 +562,107 @@ class _ListofagentState extends State<Listofagent> {
                   ),
                 ),
                 verticalSpaceRegular,
-                Column(children: [Container(
-             width: double.infinity,
-             padding: kEdgeInsetsVerticalNormal,
-             child: PaginatedDataTable(
-               key: key,
-               arrowHeadColor: kWhiteColor,
-               columns: [
-                 DataColumn(
-                     label: Text('Date & Time Enable Agent Feature',
-                         style: kLargeBoldTextStyle)),
-                 DataColumn(
-                     label: Text('Enable By', style: kLargeBoldTextStyle)),
-                 DataColumn(label: Text('CID', style: kLargeBoldTextStyle)),
-                 DataColumn(
-                     label: Text('Full Name', style: kLargeBoldTextStyle)),
-                 DataColumn(
-                     label: Text('Mobile No', style: kLargeBoldTextStyle)),
-                 DataColumn(
-                     label: Text('Institution', style: kLargeBoldTextStyle)),
-                 DataColumn(label: Text('Branch', style: kLargeBoldTextStyle)),
-                 DataColumn(label: Text('Unit', style: kLargeBoldTextStyle)),
-                 DataColumn(label: Text('Center', style: kLargeBoldTextStyle))
-               ],
-               source: isLoaded
-                   ? shared.list_agent_data.isNotEmpty
-                   ? data
-                   : data2
-                   : data3,
-               rowsPerPage: 8,
-               showFirstLastButtons: true,
-               header: Text('List of Role', style: kXLargeBoldTextStyle),
-             )),],)
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => a.role_name
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(b.role_name.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role name ascending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => b.role_name
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(a.role_name.toString().toLowerCase()));
-          //       //print(shared.inqq.sort());
-          //     },
-          //     child: const Text('Role name descending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => a.role_desc
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(b.role_desc.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role desc ascending'),
-          //   ),
-          // ),
-          // SafeArea(
-          //   child: TextButton(
-          //     onPressed: () async {
-          //       setState(() {});
-          //       shared.inqqq.sort((a, b) => b.role_desc
-          //           .toString()
-          //           .toLowerCase()
-          //           .compareTo(a.role_desc.toString().toLowerCase()));
-          //     },
-          //     child: const Text('Role desc descending'),
-          //   ),
-          // )
+                Column(
+                  children: [
+                    Container(
+                        width: double.infinity,
+                        padding: kEdgeInsetsVerticalNormal,
+                        child: PaginatedDataTable(
+                          key: key,
+                          arrowHeadColor: kWhiteColor,
+                          columns: [
+                            DataColumn(
+                                label: Text('Date & Time Enable Agent Feature',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Enable By',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('CID', style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Full Name',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Mobile No',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Institution',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label:
+                                    Text('Branch', style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label:
+                                    Text('Unit', style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label:
+                                    Text('Center', style: kLargeBoldTextStyle))
+                          ],
+                          source: isLoaded
+                              ? shared.list_agent_data.isNotEmpty
+                                  ? data
+                                  : data2
+                              : data3,
+                          rowsPerPage: 8,
+                          showFirstLastButtons: true,
+                          header:
+                              Text('List of Role', style: kXLargeBoldTextStyle),
+                        )),
+                  ],
+                )
+                // SafeArea(
+                //   child: TextButton(
+                //     onPressed: () async {
+                //       setState(() {});
+                //       shared.inqqq.sort((a, b) => a.role_name
+                //           .toString()
+                //           .toLowerCase()
+                //           .compareTo(b.role_name.toString().toLowerCase()));
+                //     },
+                //     child: const Text('Role name ascending'),
+                //   ),
+                // ),
+                // SafeArea(
+                //   child: TextButton(
+                //     onPressed: () async {
+                //       setState(() {});
+                //       shared.inqqq.sort((a, b) => b.role_name
+                //           .toString()
+                //           .toLowerCase()
+                //           .compareTo(a.role_name.toString().toLowerCase()));
+                //       //print(shared.inqq.sort());
+                //     },
+                //     child: const Text('Role name descending'),
+                //   ),
+                // ),
+                // SafeArea(
+                //   child: TextButton(
+                //     onPressed: () async {
+                //       setState(() {});
+                //       shared.inqqq.sort((a, b) => a.role_desc
+                //           .toString()
+                //           .toLowerCase()
+                //           .compareTo(b.role_desc.toString().toLowerCase()));
+                //     },
+                //     child: const Text('Role desc ascending'),
+                //   ),
+                // ),
+                // SafeArea(
+                //   child: TextButton(
+                //     onPressed: () async {
+                //       setState(() {});
+                //       shared.inqqq.sort((a, b) => b.role_desc
+                //           .toString()
+                //           .toLowerCase()
+                //           .compareTo(a.role_desc.toString().toLowerCase()));
+                //     },
+                //     child: const Text('Role desc descending'),
+                //   ),
+                // )
+              ],
+            ),
+          ),
         ],
-      ),
-    ),
-    ],
       ),
     );
     // return Container(
