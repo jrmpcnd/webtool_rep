@@ -4,6 +4,8 @@ import 'package:webtool_rep/UI/screens/monitoring/transactionforconfirmation/get
 import 'package:webtool_rep/UI/utils/api.dart';
 import 'package:webtool_rep/UI/widgets/date_picker.dart';
 import 'package:webtool_rep/UI/widgets/elevatedbutton_get_insti.dart';
+import 'package:webtool_rep/UI/widgets/elevatedbuttonpopup_get_center.dart';
+import 'package:webtool_rep/UI/widgets/elevatedbuttonpopup_get_unit.dart';
 import 'package:webtool_rep/core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
@@ -372,15 +374,9 @@ class _ListofagentState extends State<Listofagent> {
                                 ),
                               ),
                               verticalSpaceTiny,
-                              textfield(
-                                hintext: "---Unit---",
-                                controller: controller2,
-                              ),
+                             elevatedbuttonpopupunit(label: "Center",width: 400.0),
                               verticalSpaceTiny,
-                              textfield(
-                                hintext: "---Center---",
-                                controller: controller3,
-                              ),
+                              elevatedbuttonpopupcenter(label: "Unit", width: 400.0),
                               verticalSpaceMedium,
                             ],
                           ),

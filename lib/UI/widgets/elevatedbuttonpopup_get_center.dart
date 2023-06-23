@@ -1,39 +1,40 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import '../screens/administration/usermanagement/components/branchapi.dart';
+import 'package:webtool_rep/UI/screens/monitoring/listofagent/components/get_center_Api.dart';
+import 'package:webtool_rep/UI/screens/monitoring/listofagent/components/get_insti_Api.dart';
 import '../utils/constant.dart';
 import '../utils/text_styles.dart';
 import 'package:http/http.dart' as http;
 
-class elevatedbuttonpopup extends StatefulWidget {
+class elevatedbuttonpopupcenter extends StatefulWidget {
   String? code;
   String? description;
   String? label = "";
   double? width;
-  elevatedbuttonpopup(
+  elevatedbuttonpopupcenter(
       {Key? key, this.label, this.width, this.code, this.description})
       : super(key: key);
 
   @override
-  State<elevatedbuttonpopup> createState() => _elevatedbuttonpopupState();
+  State<elevatedbuttonpopupcenter> createState() => _elevatedbuttonpopupcenterState();
 }
 
-class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
-  BranchApilist _branchApilist = BranchApilist();
-  BranchDrop _branchDrop = BranchDrop();
-  final List<elevatedbuttonpopup> branches = [];
+class _elevatedbuttonpopupcenterState extends State<elevatedbuttonpopupcenter> {
+  CenterApiList _centerApiList = CenterApiList();
+  get_center_drop _centerdrop = get_center_drop();
+  final List<elevatedbuttonpopupcenter> institution = [];
 
   void fetchData() async {
-    branches.clear();
-    http.Response response = await _branchApilist.getUserstatus();
+    institution.clear();
+    http.Response response = await _centerApiList.getUserstatus();
 
-    _branchDrop = BranchDrop.fromJson(jsonDecode(response.body));
-    for (var i in _branchDrop.data!) {
-      print(i.branchDesc);
-      print(i.branchCode);
-      branches.add(elevatedbuttonpopup(code: i.branchCode, description: i.branchDesc));
+    _centerdrop = get_center_drop.fromJson(jsonDecode(response.body));
+    for (var i in _centerdrop.data!) {
+      print(i.centerDesc);
+      print(i.centerCode);
+      institution.add(elevatedbuttonpopupcenter(code: i.centerCode, description: i.centerDesc));
     }
-    setState(() {});
   }
 
   final TextEditingController searchController = TextEditingController();
@@ -41,10 +42,10 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
   int currentPage = 0;
   final int itemsPerPage = 5;
 
-  List<elevatedbuttonpopup> getPaginatedBranches() {
+  List<elevatedbuttonpopupcenter> getPaginatedBranches() {
     final int startIndex = currentPage * itemsPerPage;
-    final int endIndex = (startIndex + itemsPerPage).clamp(0, branches.length);
-    return branches.sublist(startIndex, endIndex);
+    final int endIndex = (startIndex + itemsPerPage).clamp(0, institution.length);
+    return institution.sublist(startIndex, endIndex);
   }
 
   @override
@@ -53,7 +54,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
     fetchData();
   }
 
-  int get totalPages => (branches.length / itemsPerPage).ceil();
+  int get totalPages => (institution.length / itemsPerPage).ceil();
 
   void previousPage() {
     setState(() {
@@ -76,7 +77,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
       child: TextFormField(
         style: TextStyle(color: Colors.black),
         decoration: const InputDecoration(
-          hintText: '--Branch--',
+          hintText: '--Center--',
           border: OutlineInputBorder(),
           labelStyle: TextStyle(fontSize: 12.0),
           contentPadding: EdgeInsets.only(left: 10.0),
@@ -93,7 +94,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
           showDialog(
             context: context,
             builder: (alert) => AlertDialog(
-              title: Text('Branch List'),
+              title: Text('Institution List'),
               content: Container(
                 width: 500.0,
                 height: 500.0,
@@ -146,8 +147,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
                               print('Reset');
                             },
                             style: ElevatedButton.styleFrom(
-                              primary:
-                              Colors.grey, // Set reset button color to gray
+                              backgroundColor: Colors.grey, // Set reset button color to gray
                             ),
                             child: Text('Reset'),
                           ),
@@ -163,7 +163,7 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
                       ],
                       rows: getPaginatedBranches().map((branch) {
                         final index =
-                            branches.indexOf(branch) + 1 + currentPage * itemsPerPage;
+                            institution.indexOf(branch) + 1 + currentPage * itemsPerPage;
                         return DataRow(
                           cells: [
                             DataCell(Text(index.toString())),
@@ -185,11 +185,11 @@ class _elevatedbuttonpopupState extends State<elevatedbuttonpopup> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ElevatedButton(
-                         onPressed: (){
-                           setState(() {
-                             previousPage;
-                           });
-                         },
+                          onPressed: (){
+                            setState(() {
+                              previousPage;
+                            });
+                          },
                           child: Text('Previous'),
                         ),
                         Text('Page ${currentPage + 1} of $totalPages'),
