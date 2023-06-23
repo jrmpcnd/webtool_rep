@@ -8,10 +8,12 @@ import '../../../../core/providers/data_provider.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/edge_insect.dart';
 import '../../../utils/model.dart';
+import '../../../utils/model.dart';
 import '../../../utils/spacing.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/elevatedbuttonpopup.dart';
 import '../../../widgets/textfield.dart';
+import '../transactionforconfirmation/getter_setter.dart';
 
 class Failedenrollment extends StatefulWidget {
   const Failedenrollment({Key? key}) : super(key: key);
@@ -28,6 +30,8 @@ class _FailedenrollmentState extends State<Failedenrollment> {
   TextEditingController controller2 = TextEditingController();
   TextEditingController controller3 = TextEditingController();
   TextEditingController controller4 = TextEditingController();
+  TextEditingController startDate = TextEditingController();
+  TextEditingController endDate = TextEditingController();
 
   Future<void> wait() async {
     final shared7 = Provider.of<Prov7>(context, listen: false);
@@ -119,7 +123,9 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                             children: [
                               Row(
                                 children: [
-                                  DatePickerScreen(),
+                                  DatePickerScreen(
+                                      startDateController: startDate,
+                                      endDateController: endDate),
                                 ],
                               ),
                             ],
@@ -157,16 +163,17 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                       print(i.toJson());
                                       print(i.dateOfBirth
                                           ?.toLowerCase()
-                                          .contains(controller1.text.toLowerCase()));
+                                          .contains(
+                                              controller1.text.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
                                         if (i.dateOfBirth!
                                             .toLowerCase()
-                                            .contains(controller1.text.toLowerCase())
-                                        ) {
+                                            .contains(controller1.text
+                                                .toLowerCase())) {
                                           debugPrint(i.dateOfBirth);
                                           setState(() {
-                                            shared.failed_data.add(Data7.fromJson(i.toJson()
-                                            ));
+                                            shared.failed_data.add(
+                                                Data7.fromJson(i.toJson()));
                                           });
                                           if (shared.failed_data.isNotEmpty) {
                                             setState(() {
@@ -179,11 +186,14 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                   } else if (controller1.text == '') {
                                     shared.failed_data.clear();
                                     setState(() {
-                                      shared.failed_data.addAll(shared.failed[0].data!);
+                                      shared.failed_data
+                                          .addAll(shared.failed[0].data!);
                                       isLoaded = true;
                                     });
                                   }
-                                  debugPrint(shared.failed_data[0].toJson().toString());
+                                  debugPrint(shared.failed_data[0]
+                                      .toJson()
+                                      .toString());
                                 } catch (e) {
                                   shared.failed_data.clear();
                                   isLoaded = true;
@@ -200,18 +210,18 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                       print(i.toJson());
                                       print(i.dateOfBirth
                                           ?.toLowerCase()
-                                          .contains(controller1.text.toLowerCase()));
+                                          .contains(
+                                              controller1.text.toLowerCase()));
                                       if (i.toJson().isNotEmpty) {
                                         if (i.dateOfBirth!
                                             .toLowerCase()
-                                            .contains(controller1.text.toLowerCase())
-                                        ) {
-                                          debugPrint (i.dateOfBirth);
+                                            .contains(controller1.text
+                                                .toLowerCase())) {
+                                          debugPrint(i.dateOfBirth);
                                           setState(() {
                                             key.currentState?.pageTo(0);
-                                            shared.failed_data.add(Data7.fromJson(i.toJson()
-                                            ));
-
+                                            shared.failed_data.add(
+                                                Data7.fromJson(i.toJson()));
                                           });
                                           if (shared.failed_data.isNotEmpty) {
                                             setState(() {
@@ -224,10 +234,13 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                   } else if (controller1.text == '') {
                                     shared.failed_data.clear();
                                     setState(() {
-                                      shared.failed_data.addAll(shared.failed[0].data!);
+                                      shared.failed_data
+                                          .addAll(shared.failed[0].data!);
                                     });
                                   }
-                                  debugPrint(shared.failed_data[0].toJson().toString());
+                                  debugPrint(shared.failed_data[0]
+                                      .toJson()
+                                      .toString());
                                 } catch (e) {
                                   shared.failed_data.clear();
                                 }
@@ -261,7 +274,98 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kPrimaryColor)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    //
+                                    try {
+                                      if (controller1.text.isNotEmpty) {
+                                        shared.failed_data.clear();
+                                        for (var i in shared.failed[0].data!) {
+                                          print(i.toJson());
+                                          print(i.dateOfBirth
+                                              ?.toLowerCase()
+                                              .contains(controller1.text
+                                                  .toLowerCase()));
+                                          if (i.toJson().isNotEmpty) {
+                                            if (i.dateOfBirth!
+                                                .toLowerCase()
+                                                .contains(controller1.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.dateOfBirth);
+                                              setState(() {
+                                                shared.failed_data.add(
+                                                    Data7.fromJson(i.toJson()));
+                                              });
+                                              if (shared
+                                                  .failed_data.isNotEmpty) {
+                                                setState(() {
+                                                  isLoaded = true;
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else if (controller1.text == '') {
+                                        shared.failed_data.clear();
+                                        setState(() {
+                                          shared.failed_data
+                                              .addAll(shared.failed[0].data!);
+                                          isLoaded = true;
+                                        });
+                                      }
+                                      debugPrint(shared.failed_data[0]
+                                          .toJson()
+                                          .toString());
+
+                                      setState(() {
+                                        isLoaded = false;
+                                      });
+                                      shared.failed_data.clear();
+                                      print(GetDate.getStartDate2());
+                                      final transactionDate = DateTime.parse(
+                                          GetDate.getStartDate2());
+                                      print(transactionDate);
+                                      for (var i in shared.failed[0].data!) {
+                                        if (i.toJson().isNotEmpty) {
+                                          if (i.enrolledDateStart != '') {
+                                            final transactionsDate =
+                                                DateTime.parse(i
+                                                    .enrolledDateStart
+                                                    .toString()
+                                                    .replaceAll('T', ' ')
+                                                    .replaceAll('Z', ''));
+                                            print(transactionsDate);
+
+                                            if (transactionDate.year ==
+                                                    transactionsDate.year &&
+                                                transactionDate.month ==
+                                                    transactionsDate.month &&
+                                                transactionDate.day ==
+                                                    transactionsDate.day) {
+                                              setState(() {
+                                                shared.failed_data.add(
+                                                    Data7.fromJson(i.toJson()));
+                                              });
+                                              if (shared
+                                                  .failed_data.isNotEmpty) {
+                                                Future.delayed(
+                                                    Duration(seconds: 1), () {
+                                                  setState(() {
+                                                    isLoaded = true;
+                                                  });
+                                                });
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    } catch (e) {
+                                      shared.failed_data.clear();
+                                      isLoaded = true;
+                                    }
+                                  },
                                   icon: const Icon(
                                     Icons.search,
                                     size: 20.0,
@@ -314,12 +418,15 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                     border: OutlineInputBorder(),
                                     labelStyle: TextStyle(fontSize: 12.0),
                                     contentPadding: EdgeInsets.only(left: 10.0),
-                                    hintStyle: TextStyle(color: kSecondaryColor2),
+                                    hintStyle:
+                                        TextStyle(color: kSecondaryColor2),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: kBlackColor),
+                                      borderSide:
+                                          BorderSide(color: kBlackColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: kBlackColor),
+                                      borderSide:
+                                          BorderSide(color: kBlackColor),
                                     ),
                                   ),
                                   textInputAction: TextInputAction.go,
@@ -336,18 +443,20 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                           print(i.toJson());
                                           print(i.accountNumber
                                               ?.toLowerCase()
-                                              .contains(controller2.text.toLowerCase()));
+                                              .contains(controller2.text
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.accountNumber!
                                                 .toLowerCase()
-                                                .contains(controller2.text.toLowerCase())
-                                            ) {
+                                                .contains(controller2.text
+                                                    .toLowerCase())) {
                                               debugPrint(i.accountNumber);
                                               setState(() {
-                                                shared.failed_data.add(Data7.fromJson(i.toJson()
-                                                ));
+                                                shared.failed_data.add(
+                                                    Data7.fromJson(i.toJson()));
                                               });
-                                              if (shared.failed_data.isNotEmpty) {
+                                              if (shared
+                                                  .failed_data.isNotEmpty) {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
@@ -358,11 +467,14 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                       } else if (controller2.text == '') {
                                         shared.failed_data.clear();
                                         setState(() {
-                                          shared.failed_data.addAll(shared.failed[0].data!);
+                                          shared.failed_data
+                                              .addAll(shared.failed[0].data!);
                                           isLoaded = true;
                                         });
                                       }
-                                      debugPrint(shared.failed_data[0].toJson().toString());
+                                      debugPrint(shared.failed_data[0]
+                                          .toJson()
+                                          .toString());
                                     } catch (e) {
                                       shared.failed_data.clear();
                                       isLoaded = true;
@@ -379,20 +491,21 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                           print(i.toJson());
                                           print(i.accountNumber
                                               ?.toLowerCase()
-                                              .contains(controller2.text.toLowerCase()));
+                                              .contains(controller2.text
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.accountNumber!
                                                 .toLowerCase()
-                                                .contains(controller2.text.toLowerCase())
-                                            ) {
-                                              debugPrint (i.accountNumber);
+                                                .contains(controller2.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.accountNumber);
                                               setState(() {
                                                 key.currentState?.pageTo(0);
-                                                shared.failed_data.add(Data7.fromJson(i.toJson()
-                                                ));
-
+                                                shared.failed_data.add(
+                                                    Data7.fromJson(i.toJson()));
                                               });
-                                              if (shared.failed_data.isNotEmpty) {
+                                              if (shared
+                                                  .failed_data.isNotEmpty) {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
@@ -403,10 +516,13 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                       } else if (controller2.text == '') {
                                         shared.failed_data.clear();
                                         setState(() {
-                                          shared.failed_data.addAll(shared.failed[0].data!);
+                                          shared.failed_data
+                                              .addAll(shared.failed[0].data!);
                                         });
                                       }
-                                      debugPrint(shared.failed_data[0].toJson().toString());
+                                      debugPrint(shared.failed_data[0]
+                                          .toJson()
+                                          .toString());
                                     } catch (e) {
                                       shared.failed_data.clear();
                                     }
@@ -424,12 +540,15 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                     border: OutlineInputBorder(),
                                     labelStyle: TextStyle(fontSize: 12.0),
                                     contentPadding: EdgeInsets.only(left: 10.0),
-                                    hintStyle: TextStyle(color: kSecondaryColor2),
+                                    hintStyle:
+                                        TextStyle(color: kSecondaryColor2),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: kBlackColor),
+                                      borderSide:
+                                          BorderSide(color: kBlackColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: kBlackColor),
+                                      borderSide:
+                                          BorderSide(color: kBlackColor),
                                     ),
                                   ),
                                   textInputAction: TextInputAction.go,
@@ -446,18 +565,20 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                           print(i.toJson());
                                           print(i.mobileNumber
                                               ?.toLowerCase()
-                                              .contains(controller3.text.toLowerCase()));
+                                              .contains(controller3.text
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.mobileNumber!
                                                 .toLowerCase()
-                                                .contains(controller3.text.toLowerCase())
-                                            ) {
+                                                .contains(controller3.text
+                                                    .toLowerCase())) {
                                               debugPrint(i.mobileNumber);
                                               setState(() {
-                                                shared.failed_data.add(Data7.fromJson(i.toJson()
-                                                ));
+                                                shared.failed_data.add(
+                                                    Data7.fromJson(i.toJson()));
                                               });
-                                              if (shared.failed_data.isNotEmpty) {
+                                              if (shared
+                                                  .failed_data.isNotEmpty) {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
@@ -468,11 +589,14 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                       } else if (controller3.text == '') {
                                         shared.failed_data.clear();
                                         setState(() {
-                                          shared.failed_data.addAll(shared.failed[0].data!);
+                                          shared.failed_data
+                                              .addAll(shared.failed[0].data!);
                                           isLoaded = true;
                                         });
                                       }
-                                      debugPrint(shared.failed_data[0].toJson().toString());
+                                      debugPrint(shared.failed_data[0]
+                                          .toJson()
+                                          .toString());
                                     } catch (e) {
                                       shared.failed_data.clear();
                                       isLoaded = true;
@@ -489,20 +613,21 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                           print(i.toJson());
                                           print(i.mobileNumber
                                               ?.toLowerCase()
-                                              .contains(controller3.text.toLowerCase()));
+                                              .contains(controller3.text
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.mobileNumber!
                                                 .toLowerCase()
-                                                .contains(controller3.text.toLowerCase())
-                                            ) {
-                                              debugPrint (i.mobileNumber);
+                                                .contains(controller3.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.mobileNumber);
                                               setState(() {
                                                 key.currentState?.pageTo(0);
-                                                shared.failed_data.add(Data7.fromJson(i.toJson()
-                                                ));
-
+                                                shared.failed_data.add(
+                                                    Data7.fromJson(i.toJson()));
                                               });
-                                              if (shared.failed_data.isNotEmpty) {
+                                              if (shared
+                                                  .failed_data.isNotEmpty) {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
@@ -513,10 +638,13 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                       } else if (controller3.text == '') {
                                         shared.failed_data.clear();
                                         setState(() {
-                                          shared.failed_data.addAll(shared.failed[0].data!);
+                                          shared.failed_data
+                                              .addAll(shared.failed[0].data!);
                                         });
                                       }
-                                      debugPrint(shared.failed_data[0].toJson().toString());
+                                      debugPrint(shared.failed_data[0]
+                                          .toJson()
+                                          .toString());
                                     } catch (e) {
                                       shared.failed_data.clear();
                                     }
@@ -534,12 +662,15 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                     border: OutlineInputBorder(),
                                     labelStyle: TextStyle(fontSize: 12.0),
                                     contentPadding: EdgeInsets.only(left: 10.0),
-                                    hintStyle: TextStyle(color: kSecondaryColor2),
+                                    hintStyle:
+                                        TextStyle(color: kSecondaryColor2),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: kBlackColor),
+                                      borderSide:
+                                          BorderSide(color: kBlackColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: kBlackColor),
+                                      borderSide:
+                                          BorderSide(color: kBlackColor),
                                     ),
                                   ),
                                   textInputAction: TextInputAction.go,
@@ -556,18 +687,20 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                           print(i.toJson());
                                           print(i.errorMessage
                                               ?.toLowerCase()
-                                              .contains(controller4.text.toLowerCase()));
+                                              .contains(controller4.text
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.errorMessage!
                                                 .toLowerCase()
-                                                .contains(controller4.text.toLowerCase())
-                                            ) {
+                                                .contains(controller4.text
+                                                    .toLowerCase())) {
                                               debugPrint(i.errorMessage);
                                               setState(() {
-                                                shared.failed_data.add(Data7.fromJson(i.toJson()
-                                                ));
+                                                shared.failed_data.add(
+                                                    Data7.fromJson(i.toJson()));
                                               });
-                                              if (shared.failed_data.isNotEmpty) {
+                                              if (shared
+                                                  .failed_data.isNotEmpty) {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
@@ -578,11 +711,14 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                       } else if (controller4.text == '') {
                                         shared.failed_data.clear();
                                         setState(() {
-                                          shared.failed_data.addAll(shared.failed[0].data!);
+                                          shared.failed_data
+                                              .addAll(shared.failed[0].data!);
                                           isLoaded = true;
                                         });
                                       }
-                                      debugPrint(shared.failed_data[0].toJson().toString());
+                                      debugPrint(shared.failed_data[0]
+                                          .toJson()
+                                          .toString());
                                     } catch (e) {
                                       shared.failed_data.clear();
                                       isLoaded = true;
@@ -599,20 +735,21 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                           print(i.toJson());
                                           print(i.errorMessage
                                               ?.toLowerCase()
-                                              .contains(controller4.text.toLowerCase()));
+                                              .contains(controller4.text
+                                                  .toLowerCase()));
                                           if (i.toJson().isNotEmpty) {
                                             if (i.errorMessage!
                                                 .toLowerCase()
-                                                .contains(controller4.text.toLowerCase())
-                                            ) {
-                                              debugPrint (i.errorMessage);
+                                                .contains(controller4.text
+                                                    .toLowerCase())) {
+                                              debugPrint(i.errorMessage);
                                               setState(() {
                                                 key.currentState?.pageTo(0);
-                                                shared.failed_data.add(Data7.fromJson(i.toJson()
-                                                ));
-
+                                                shared.failed_data.add(
+                                                    Data7.fromJson(i.toJson()));
                                               });
-                                              if (shared.failed_data.isNotEmpty) {
+                                              if (shared
+                                                  .failed_data.isNotEmpty) {
                                                 setState(() {
                                                   isLoaded = true;
                                                 });
@@ -623,10 +760,13 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                                       } else if (controller4.text == '') {
                                         shared.failed_data.clear();
                                         setState(() {
-                                          shared.failed_data.addAll(shared.failed[0].data!);
+                                          shared.failed_data
+                                              .addAll(shared.failed[0].data!);
                                         });
                                       }
-                                      debugPrint(shared.failed_data[0].toJson().toString());
+                                      debugPrint(shared.failed_data[0]
+                                          .toJson()
+                                          .toString());
                                     } catch (e) {
                                       shared.failed_data.clear();
                                     }
@@ -642,201 +782,183 @@ class _FailedenrollmentState extends State<Failedenrollment> {
                   ),
                 ),
                 verticalSpaceRegular,
-               Column(children: [ Container(
-                 width: 500,
-                 child: TextFormField(
-                   style: TextStyle(color: kBlackColor),
-                   decoration: const InputDecoration(
-                     hintText: 'Search',
-                     border: OutlineInputBorder(),
-                     labelStyle: TextStyle(fontSize: 12.0),
-                     contentPadding: EdgeInsets.only(left: 10.0),
-                     hintStyle: TextStyle(color: kSecondaryColor2),
-                     enabledBorder: OutlineInputBorder(
-                       borderSide: BorderSide(color: kBlackColor),
-                     ),
-                     focusedBorder: OutlineInputBorder(
-                       borderSide: BorderSide(color: kBlackColor),
-                     ),
-                   ),
-                   textInputAction: TextInputAction.go,
-                   controller: controller,
-                   onChanged: (value) {
-                     setState(() {
-                       isLoaded = false;
-                     });
-                     //
-                     try {
-                       if (controller.text.isNotEmpty) {
-                         shared.failed_data.clear();
-                         for (var i in shared.failed[0].data!) {
-                           print(i.toJson());
-                           print(i.enrolledDateStart
-                               ?.toLowerCase()
-                               .contains(controller.text.toLowerCase()));
-                           if (i.toJson().isNotEmpty) {
-                             if (i.accountNumber!
-                                 .toLowerCase()
-                                 .contains(controller.text.toLowerCase()) ||
-                                 i.dateOfBirth!
-                                     .toLowerCase()
-                                     .contains(controller.text.toLowerCase())   ||
-                                 i.mobileNumber!
-                                     .toLowerCase()
-                                     .contains(controller.text.toLowerCase())    ||
-                                 i.clientType!
-                                     .toLowerCase()
-                                     .contains(controller.text.toLowerCase())  ||
-                                 i.deviceId!
-                                     .toLowerCase()
-                                     .contains(controller.text.toLowerCase())  ||
-                                 i.deviceModel!
-                                     .toLowerCase()
-                                     .contains(controller.text.toLowerCase())  ||
-                                 i.errorMessage!
-                                     .toLowerCase()
-                                     .contains(controller.text.toLowerCase())
-
-
-
-
-
-
-                             ) {
-                               debugPrint(i.accountNumber);
-                               setState(() {
-                                 shared.failed_data.add(Data7.fromJson(i.toJson()
-                                 ));
-                               });
-                               if (shared.failed_data.isNotEmpty) {
-                                 setState(() {
-                                   isLoaded = true;
-                                 });
-                               }
-                             }
-                           }
-                         }
-                       } else if (controller.text == '') {
-                         shared.failed_data.clear();
-                         setState(() {
-                           shared.failed_data.addAll(shared.failed[0].data!);
-                           isLoaded = true;
-                         });
-                       }
-                       debugPrint(shared.failed_data[0].toJson().toString());
-                     } catch (e) {
-                       shared.failed_data.clear();
-                       isLoaded = true;
-                     }
-                   },
-                   onEditingComplete: () async {
-                     setState(() {
-                       isLoaded = false;
-                     });
-                     try {
-                       if (controller.text.isNotEmpty) {
-                         shared.failed_data.clear();
-                         for (var i in shared.failed[0].data!) {
-                           print(i.toJson());
-                           print(i.enrolledDateStart
-                               ?.toLowerCase()
-                               .contains(controller.text.toLowerCase()));
-                           if (i.toJson().isNotEmpty) {
-                             if (i.accountNumber!
-                                 .toLowerCase()
-                                 .contains(controller.text.toLowerCase()) ||
-                                 i.dateOfBirth!
-                                     .toLowerCase()
-                                     .contains(controller.text.toLowerCase())   ||
-                                 i.mobileNumber!
-                                     .toLowerCase()
-                                     .contains(controller.text.toLowerCase())    ||
-                                 i.clientType!
-                                     .toLowerCase()
-                                     .contains(controller.text.toLowerCase())  ||
-                                 i.deviceId!
-                                     .toLowerCase()
-                                     .contains(controller.text.toLowerCase())  ||
-                                 i.deviceModel!
-                                     .toLowerCase()
-                                     .contains(controller.text.toLowerCase())  ||
-                                 i.errorMessage!
-                                     .toLowerCase()
-                                     .contains(controller.text.toLowerCase())
-
-
-
-
-                             ) {
-                               debugPrint (i.accountNumber);
-                               setState(() {
-                                 key.currentState?.pageTo(0);
-                                 shared.failed_data.add(Data7.fromJson(i.toJson()
-                                 ));
-
-                               });
-                               if (shared.failed_data.isNotEmpty) {
-                                 setState(() {
-                                   isLoaded = true;
-                                 });
-                               }
-                             }
-                           }
-                         }
-                       } else if (controller.text == '') {
-                         shared.failed_data.clear();
-                         setState(() {
-                           shared.failed_data.addAll(shared.failed[0].data!);
-                         });
-                       }
-                       debugPrint(shared.failed_data[0].toJson().toString());
-                     } catch (e) {
-                       shared.failed_data.clear();
-                     }
-                   },
-                 ),
-               ),Container(
-                   width: double.infinity,
-                   padding: kEdgeInsetsVerticalNormal,
-                   child: PaginatedDataTable(
-                     key: key,
-                     arrowHeadColor: kWhiteColor,
-                     columns: [
-                       DataColumn(
-                           label: Text('Date & Time',
-                               style: kLargeBoldTextStyle)),
-                       DataColumn(
-                           label: Text('Account Number',
-                               style: kLargeBoldTextStyle)),
-                       DataColumn(
-                           label: Text('Date of Birth',
-                               style: kLargeBoldTextStyle)),
-                       DataColumn(
-                           label: Text('Mobile Number',
-                               style: kLargeBoldTextStyle)),
-                       DataColumn(
-                           label: Text('Client Type',
-                               style: kLargeBoldTextStyle)),
-                       DataColumn(
-                           label:
-                           Text('Device ID', style: kLargeBoldTextStyle)),
-                       DataColumn(
-                           label: Text('Device Model',
-                               style: kLargeBoldTextStyle)),
-                       DataColumn(
-                           label: Text('Error Message',
-                               style: kLargeBoldTextStyle))
-                     ],
-                     source: isLoaded
-                         ? shared.failed_data.isNotEmpty
-                         ? data
-                         : data2
-                         : data3,
-                     rowsPerPage: 8,
-                     showFirstLastButtons: true,
-                     header: Text('Failed Enrollment List',
-                         style: kXLargeBoldTextStyle),
-                   )),],)
+                Column(
+                  children: [
+                    Container(
+                      width: 500,
+                      child: TextFormField(
+                        style: TextStyle(color: kBlackColor),
+                        decoration: const InputDecoration(
+                          hintText: 'Search',
+                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(fontSize: 12.0),
+                          contentPadding: EdgeInsets.only(left: 10.0),
+                          hintStyle: TextStyle(color: kSecondaryColor2),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: kBlackColor),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: kBlackColor),
+                          ),
+                        ),
+                        textInputAction: TextInputAction.go,
+                        controller: controller,
+                        onChanged: (value) {
+                          setState(() {
+                            isLoaded = false;
+                          });
+                          //
+                          try {
+                            if (controller.text.isNotEmpty) {
+                              shared.failed_data.clear();
+                              for (var i in shared.failed[0].data!) {
+                                print(i.toJson());
+                                print(i.enrolledDateStart
+                                    ?.toLowerCase()
+                                    .contains(controller.text.toLowerCase()));
+                                if (i.toJson().isNotEmpty) {
+                                  if (i.accountNumber!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.dateOfBirth!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.mobileNumber!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.clientType!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.deviceId!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.deviceModel!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.errorMessage!.toLowerCase().contains(
+                                          controller.text.toLowerCase())) {
+                                    debugPrint(i.accountNumber);
+                                    setState(() {
+                                      shared.failed_data
+                                          .add(Data7.fromJson(i.toJson()));
+                                    });
+                                    if (shared.failed_data.isNotEmpty) {
+                                      setState(() {
+                                        isLoaded = true;
+                                      });
+                                    }
+                                  }
+                                }
+                              }
+                            } else if (controller.text == '') {
+                              shared.failed_data.clear();
+                              setState(() {
+                                shared.failed_data
+                                    .addAll(shared.failed[0].data!);
+                                isLoaded = true;
+                              });
+                            }
+                            debugPrint(
+                                shared.failed_data[0].toJson().toString());
+                          } catch (e) {
+                            shared.failed_data.clear();
+                            isLoaded = true;
+                          }
+                        },
+                        onEditingComplete: () async {
+                          setState(() {
+                            isLoaded = false;
+                          });
+                          try {
+                            if (controller.text.isNotEmpty) {
+                              shared.failed_data.clear();
+                              for (var i in shared.failed[0].data!) {
+                                print(i.toJson());
+                                print(i.enrolledDateStart
+                                    ?.toLowerCase()
+                                    .contains(controller.text.toLowerCase()));
+                                if (i.toJson().isNotEmpty) {
+                                  if (i.accountNumber!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.dateOfBirth!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.mobileNumber!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.clientType!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.deviceId!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.deviceModel!.toLowerCase().contains(
+                                          controller.text.toLowerCase()) ||
+                                      i.errorMessage!.toLowerCase().contains(
+                                          controller.text.toLowerCase())) {
+                                    debugPrint(i.accountNumber);
+                                    setState(() {
+                                      key.currentState?.pageTo(0);
+                                      shared.failed_data
+                                          .add(Data7.fromJson(i.toJson()));
+                                    });
+                                    if (shared.failed_data.isNotEmpty) {
+                                      setState(() {
+                                        isLoaded = true;
+                                      });
+                                    }
+                                  }
+                                }
+                              }
+                            } else if (controller.text == '') {
+                              shared.failed_data.clear();
+                              setState(() {
+                                shared.failed_data
+                                    .addAll(shared.failed[0].data!);
+                              });
+                            }
+                            debugPrint(
+                                shared.failed_data[0].toJson().toString());
+                          } catch (e) {
+                            shared.failed_data.clear();
+                          }
+                        },
+                      ),
+                    ),
+                    Container(
+                        width: double.infinity,
+                        padding: kEdgeInsetsVerticalNormal,
+                        child: PaginatedDataTable(
+                          key: key,
+                          arrowHeadColor: kWhiteColor,
+                          columns: [
+                            DataColumn(
+                                label: Text('Date & Time',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Account Number',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Date of Birth',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Mobile Number',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Client Type',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Device ID',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Device Model',
+                                    style: kLargeBoldTextStyle)),
+                            DataColumn(
+                                label: Text('Error Message',
+                                    style: kLargeBoldTextStyle))
+                          ],
+                          source: isLoaded
+                              ? shared.failed_data.isNotEmpty
+                                  ? data
+                                  : data2
+                              : data3,
+                          rowsPerPage: 8,
+                          showFirstLastButtons: true,
+                          header: Text('Failed Enrollment List',
+                              style: kXLargeBoldTextStyle),
+                        )),
+                  ],
+                )
               ],
             ),
           ),
