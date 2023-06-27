@@ -1,18 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:webtool_rep/UI/screens/homepage/homepage.dart';
 import 'package:webtool_rep/UI/screens/login/change_password.dart';
 import 'package:webtool_rep/UI/screens/utilities/branch/addbranch/addbranch.dart';
-
 import '../../../../../core/providers/Provider.dart';
 import 'package:webtool_rep/UI/utils/api2.dart';
-
 import 'package:webtool_rep/UI/utils/model2.dart';
-
 import '../../branch/branch.dart';
+
+
 
 class BranchEditFunction extends StatefulWidget {
   String? code1;
@@ -36,11 +34,9 @@ class _BranchEditFunctionState extends State<BranchEditFunction> {
     final shared = Provider.of<Branch_U>(context, listen: false);
     void close() {
       Navigator.pop(context);
-      Navigator.pop(context);
-      Navigator.push(
-          context,
+      Navigator.pop(context,
           MaterialPageRoute(
-            builder: (context) => HomePage(),
+            builder: (context) =>  HomePage(),
           ));
     }
 
