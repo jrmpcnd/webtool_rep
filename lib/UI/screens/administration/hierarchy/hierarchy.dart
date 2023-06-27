@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webtool_rep/UI/screens/utilities/institution/components/instiAPI.dart';
@@ -310,7 +309,27 @@ class _HierarchyState extends State<Hierarchy> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               kSecondaryColor2)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+
+                                    init = res[0];
+                                    init2 = res2[0];
+                                    init4 = res4[0];
+                                    init5 = res5[0];
+                                    setState(() {
+                                      shared.Hierarchy_data.addAll(shared.Hierarchy[0].data!);
+                                      Future.delayed(
+                                        Duration(seconds: 1),
+                                            () {
+                                          setState(() {
+                                            isLoaded = true;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  },
                                   icon: const Icon(
                                     Icons.refresh,
                                     size: 20.0,

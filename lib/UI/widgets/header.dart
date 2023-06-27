@@ -295,9 +295,9 @@ class _HeaderState extends State<Header> {
                       horizontalSpaceSmall,
                       widget.uploadbutton! != "" ||
                               widget.subuploadbutton! != ""
-                          ? Uploadbutton(
-                              uploadbutton: widget.uploadbutton,
-                              subuploadbutton: widget.subuploadbutton,
+                          ? UploadButton(
+                        uploadButton: widget.uploadbutton,
+                        subUploadButton: widget.subuploadbutton,
                             )
                           : Container(),
                     ],
