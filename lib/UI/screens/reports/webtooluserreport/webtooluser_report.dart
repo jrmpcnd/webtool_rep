@@ -32,7 +32,7 @@ class _WebtoolusereportState extends State<Webtoolusereport> {
   Future<void> wait() async {
     final shared6 = Provider.of<Webtool_User_Listing>(context, listen: false);
     shared6.webtool_listing.clear();
-    Report_Claim_Parse httpParse = Report_Claim_Parse();
+    Webtool_User_Report_Parse httpParse = Webtool_User_Report_Parse();
     var res6 = await httpParse.profile6();
     if (res6.data!.isNotEmpty) {
       print(res6.data!.length);

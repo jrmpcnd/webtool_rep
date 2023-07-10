@@ -2323,4 +2323,91 @@ class Report_Cancel_Parse {
   }
 }
 
+class Webtool_User_Report_Push {
+  Future<http.Response> pushHttp6() async {
+    http.Response response6 = await http.post(
+      Uri.parse('$API/get_webreport/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "reportId" : "",
+          "reportParam" : "",
+          "userName" : "",
+          "branchDesc" : "",
+          "submitedDate" : "",
+          "completedDate" : "",
+          "reportStatus" : "",
+          "fileType" : "",
+          "remark" : "",
+        },
+      ),
+    );
+    if (response6.statusCode == 200) {
+      print(response6.statusCode);
+      print(response6.body);
+      return response6;
+    } else {
+      return response6;
+    }
+  }
+}
+
+class Webtool_User_Report_Parse {
+  Future<Webtool_User_Listing_Api> profile6() async {
+    Webtool_User_Report_Push httptranslog = Webtool_User_Report_Push();
+    http.Response res6 = await httptranslog.pushHttp6();
+    print("-------->>>>>>>>>>${jsonDecode(res6.body).length}");
+    var webtool_listing = Webtool_User_Listing_Api.fromJson(jsonDecode(res6.body));
+    return webtool_listing;
+  }
+}
+
+
+class Transaction_Logs_Push {
+  Future<http.Response> pushHttp6() async {
+    http.Response response6 = await http.post(
+      Uri.parse('$API/get_transreport/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+       "reportId" : "",
+       "reportParam" : "",
+       "userName" : "",
+       "branchDesc" : "",
+       "submitedDate" : "",
+     "completedDate" : "",
+       "reportStatus" : "",
+       "fileType" : "",
+       "remark" : "",
+        },
+      ),
+    );
+    if (response6.statusCode == 200) {
+      print(response6.statusCode);
+      print(response6.body);
+      return response6;
+    } else {
+      return response6;
+    }
+  }
+}
+
+class Transaction_Logs_Parse {
+  Future<Transaction_log_Api> profile6() async {
+    Transaction_Logs_Push httptranslog = Transaction_Logs_Push();
+    http.Response res6 = await httptranslog.pushHttp6();
+    print("-------->>>>>>>>>>${jsonDecode(res6.body).length}");
+    var transaction_report = Transaction_log_Api.fromJson(jsonDecode(res6.body));
+    return transaction_report;
+  }
+}
+
 

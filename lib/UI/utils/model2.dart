@@ -1024,3 +1024,81 @@ class Webtool_User_Listing_Logs {
     return data;
   }
 }
+
+
+class Transaction_log_Api {
+  String? retCode;
+  String? message;
+  List<Transaction_Logs>? data;
+
+  Transaction_log_Api({this.retCode, this.message, this.data});
+
+  Transaction_log_Api.fromJson(Map<String, dynamic> json) {
+    retCode = json['retCode'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Transaction_Logs>[];
+      json['data'].forEach((v) {
+        data!.add(new Transaction_Logs.fromJson(v));
+      });
+    }
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['retCode'] = this.retCode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Transaction_Logs {
+  String? reportId;
+  String? reportParam;
+  String? userName;
+  String? branchDesc;
+  String? submitedDate;
+  String? completedDate;
+  String? reportStatus;
+  String? fileType;
+  String? remark;
+
+  Transaction_Logs(
+      {this.reportId,
+        this.reportParam,
+        this.userName,
+        this.branchDesc,
+        this.submitedDate,
+        this.completedDate,
+        this.reportStatus,
+        this.fileType,
+        this.remark});
+
+  Transaction_Logs.fromJson(Map<String, dynamic> json) {
+    reportId = json['report_id'];
+    reportParam = json['report_param'];
+    userName = json['user_name'];
+    branchDesc = json['branch_desc'];
+    submitedDate = json['submited_date'];
+    completedDate = json['completed_date'];
+    reportStatus = json['report_status'];
+    fileType = json['file_type'];
+    remark = json['remark'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['report_id'] = this.reportId;
+    data['report_param'] = this.reportParam;
+    data['user_name'] = this.userName;
+    data['branch_desc'] = this.branchDesc;
+    data['submited_date'] = this.submitedDate;
+    data['completed_date'] = this.completedDate;
+    data['report_status'] = this.reportStatus;
+    data['file_type'] = this.fileType;
+    data['remark'] = this.remark;
+    return data;
+  }
+}

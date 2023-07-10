@@ -170,3 +170,14 @@ class Webtool_User_Listing extends ChangeNotifier {
   bool isLoaded = false;
 
 }
+
+class Transaction_Log extends ChangeNotifier {
+  String Transaction_Log_button = 'Click here';
+  List<Transaction_log_Api> transactionlogs = [];
+  List<Transaction_Log> transaclogs = [];
+  List<Transaction_Logs> transac_data = [];
+  List<bool> isChecked = [];
+  bool search = false;
+  bool isLoaded = false;
+
+}
