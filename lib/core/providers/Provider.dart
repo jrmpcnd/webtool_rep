@@ -159,3 +159,14 @@ class Remittance_Cancel_Report extends ChangeNotifier {
   bool isLoaded = false;
 
 }
+
+class Webtool_User_Listing extends ChangeNotifier {
+  String webtool_user_listing_button = 'Click here';
+  List<Webtool_User_Listing_Api> webtool_listing = [];
+  List<Webtool_User_Listing> Webtool_User_Listing_logs = [];
+  List<Webtool_User_Listing_Logs> Webtool_Listing_Data = [];
+  List<bool> isChecked = [];
+  bool search = false;
+  bool isLoaded = false;
+
+}
