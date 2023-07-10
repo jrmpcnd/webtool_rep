@@ -27,6 +27,7 @@ import 'package:webtool_rep/UI/screens/utilities/banknews/addbanknews/addbank_ne
 import 'package:webtool_rep/UI/screens/utilities/commissionsetup/addcommissionsetup/addcommission_setup.dart';
 import 'package:webtool_rep/UI/screens/utilities/commissionsetup/commission_setup.dart';
 import 'package:webtool_rep/UI/screens/utilities/commissionsetup/component/commissionApi.dart';
+import 'package:webtool_rep/UI/screens/utilities/dcmlocation/adddcmlocation/add_dcm_api.dart';
 import 'package:webtool_rep/UI/screens/utilities/dcmlocation/dcm_location.dart';
 import 'package:webtool_rep/UI/screens/utilities/feestructure/addstructure/add_structure.dart';
 import 'package:webtool_rep/UI/screens/utilities/feestructure/free_structure.dart';
@@ -36,6 +37,7 @@ import 'package:webtool_rep/UI/screens/utilities/institution/institution.dart';
 import 'package:webtool_rep/UI/screens/utilities/loadproduct/addloadproduct/addload_product.dart';
 import 'package:webtool_rep/UI/screens/utilities/loadproduct/load_product.dart';
 import 'package:webtool_rep/UI/screens/utilities/parameter/addparameter/add_parameter.dart';
+import 'package:webtool_rep/UI/screens/utilities/parameter/addparameter/add_parameter_api.dart';
 import 'package:webtool_rep/UI/screens/utilities/parameter/parameter.dart';
 import 'package:webtool_rep/UI/screens/utilities/partner/partner.dart';
 import 'package:webtool_rep/UI/screens/utilities/productcategory/components/add_product_category.dart';
@@ -115,7 +117,7 @@ class HomePage extends StatefulWidget {
   static const String route = '/HomePage';
   String? user;
   String? oldpass;
-  HomePage({Key? key, this.user, this.oldpass}) : super(key: key);
+  HomePage({Key? key, this.user ='', this.oldpass =''}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -1350,6 +1352,14 @@ class _HomePageState extends State<HomePage> {
                                               "Utilities  >  Create / Edit";
                                           shared.addbutton = "Save";
                                           shared.subaddbutton = "Save Parameter";
+                                          shared.onPress = () async {
+                                            AddParameterFunction function =
+                                            AddParameterFunction();
+                                            http.Response response =
+                                            await function.addFunction();
+
+                                            print(response.body);
+                                          };
                                           shared.title = "Create / Edit";
                                           shared.homewidget = [
                                             const Addparameters()
@@ -1417,6 +1427,14 @@ class _HomePageState extends State<HomePage> {
                                           shared.addbutton = "Save";
                                           shared.subaddbutton =
                                               "Save DCM Location";
+                                          shared.onPress = () async {
+                                            AddDCMFunction function =
+                                            AddDCMFunction();
+                                            http.Response response =
+                                            await function.addFunction();
+
+                                            print(response.body);
+                                          };
                                           shared.title = "Create / Edit";
                                           shared.homewidget = [
                                             const Adddcmlocation()

@@ -46,8 +46,6 @@ class _AlertEditFunctionState extends State<AlertEditFunction> {
     final home = Provider.of<HomePageProvider>(context, listen: false);
     final shared = Provider.of<AtmLocation>(context, listen: false);
     void close() {
-      Navigator.pop(context);
-      Navigator.pop(context);
       Navigator.push(
           context,
           MaterialPageRoute(

@@ -1,9 +1,5 @@
-
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-
-
 import '../../../../../core/getter_setter.dart';
 
 class AddProductFunction{
@@ -16,8 +12,8 @@ class AddProductFunction{
     },
       body: jsonEncode(<String, dynamic>{
         "set_created_by": 0,
-        "set_created_date": "string",
-        "set_description": "string",
+        "set_created_date": "",
+        "set_description": "",
         "set_product_category_id": int.parse(SaveData.getCategoryId()),
         "set_product_category_name": SaveData.getCategoryName(),
         "set_product_type_name": SaveData.getProductType(),

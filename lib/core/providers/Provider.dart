@@ -136,3 +136,26 @@ class HomePageProvider extends ChangeNotifier {
   VoidCallback? onPress;
   VoidCallback? onTaps;
 }
+
+
+class Remittance_Claim_Report extends ChangeNotifier {
+  String remittance_claim_button = 'Click here';
+  List<Remittance_Claim_Api> report_Claim = [];
+  List<Remittance_Claim_Report> Remittance_Claim_Logs = [];
+  List<Remittance_Claim_Report_Log> Remittance_Claim_Data = [];
+  List<bool> isChecked = [];
+  bool search = false;
+  bool isLoaded = false;
+
+}
+
+class Remittance_Cancel_Report extends ChangeNotifier {
+  String remittance_cancel_button = 'Click here';
+  List<Remittance_Cancel_Api> report_cancel = [];
+  List<Remittance_Cancel_Report> Remittance_Cancel_Logs = [];
+  List<Remittance_Cancel_Report_Logs> Remittance_Cancel_Data = [];
+  List<bool> isChecked = [];
+  bool search = false;
+  bool isLoaded = false;
+
+}

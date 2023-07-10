@@ -2,6 +2,7 @@ import 'package:auto_size_widget/auto_size_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:webtool_rep/core/getter_setter.dart';
 
 import '../../../../../core/providers/data_provider.dart';
 import '../../../../utils/api.dart';
@@ -21,6 +22,10 @@ class Addparameters extends StatefulWidget {
 }
 
 class _AddparametersState extends State<Addparameters> {
+  TextEditingController paramname = TextEditingController();
+  TextEditingController paramvalue = TextEditingController();
+  TextEditingController paramdesc = TextEditingController();
+
   bool static = false;
   bool isLoaded = false;
   Future<void> wait() async {
@@ -168,6 +173,7 @@ class _AddparametersState extends State<Addparameters> {
                                   onChanged: (value) {
                                     setState(() {
                                       init = value.toString();
+                                      SaveData.setParamstatus(init);
                                     });
                                   },
                                 ),
@@ -177,13 +183,22 @@ class _AddparametersState extends State<Addparameters> {
                           verticalSpaceTiny,
                           Text("Parameter Name :", style: kHeading2TextStyle),
                           textfield(
-                            hintext: "",
+                            hintext: "Parameter Name",
+                            controller: paramname,
+                            onChange: (data){
+                              SaveData.setParamname(data);
+                            },
                           ),
                           verticalSpaceTiny,
                           Text("Parameter Value :", style: kHeading2TextStyle),
                           textfield(
                             hintext: "Parameter Value",
+                            controller: paramvalue,
+                            onChange: (data){
+                              SaveData.setParamvalue(data);
+                            },
                           ),
+
                           verticalSpaceTiny,
                           Text("Description :", style: kHeading2TextStyle),
                           AutoSizeWidget(
@@ -194,7 +209,12 @@ class _AddparametersState extends State<Addparameters> {
                             boxDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5)),
                             showIcon: true,
-                            child: const TextField(
+                            child:  TextField(
+                              controller: paramdesc,
+                              onChanged: (data){
+                                SaveData.setParamdcs(data);
+                              },
+
                               style: TextStyle(color: kBlackColor),
                               maxLines: 3 * 120,
                               textAlign: TextAlign.start,

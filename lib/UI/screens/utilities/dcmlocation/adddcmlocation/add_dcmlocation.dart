@@ -1,6 +1,7 @@
 import 'package:auto_size_widget/auto_size_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:webtool_rep/core/getter_setter.dart';
 
 import '../../../../utils/constant.dart';
 import '../../../../utils/edge_insect.dart';
@@ -17,6 +18,12 @@ class Adddcmlocation extends StatefulWidget {
 }
 
 class _AdddcmlocationState extends State<Adddcmlocation> {
+  TextEditingController dcmd = TextEditingController();
+  TextEditingController dcmstreet = TextEditingController();
+  TextEditingController dcmprovince = TextEditingController();
+  TextEditingController dcmlongitude = TextEditingController();
+  TextEditingController dcmlatitude = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -99,7 +106,11 @@ class _AdddcmlocationState extends State<Adddcmlocation> {
                             boxDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5)),
                             showIcon: true,
-                            child: const TextField(
+                            child:  TextField(
+                              controller: dcmd,
+                              onChanged: (data){
+                                SaveData.setdcmd(data);
+                              },
                               style: TextStyle(color: kBlackColor),
                               maxLines: 3 * 120,
                               textAlign: TextAlign.start,
@@ -118,26 +129,43 @@ class _AdddcmlocationState extends State<Adddcmlocation> {
                                   borderSide: BorderSide(color: kBlackColor),
                                 ),
                               ),
+
                             ),
                           ),
                           verticalSpaceTiny,
                           Text("Street / Brgy :", style: kHeading2TextStyle),
                           textfield(
+                            controller: dcmstreet,
+                            onChange: (data){
+                             SaveData.setstreet(data);
+                            },
                             hintext: "",
                           ),
                           verticalSpaceTiny,
                           Text("City / Province :", style: kHeading2TextStyle),
                           textfield(
+                            controller: dcmprovince,
+                            onChange: (data){
+                              SaveData.setdcmprovince(data);
+                            },
                             hintext: "",
                           ),
                           verticalSpaceTiny,
                           Text("Longitude :", style: kHeading2TextStyle),
                           textfield(
+                            controller: dcmlongitude,
+                            onChange: (data){
+                              SaveData.setlongitude(data);
+                            },
                             hintext: "",
                           ),
                           verticalSpaceTiny,
                           Text("Latitude :", style: kHeading2TextStyle),
                           textfield(
+                            controller: dcmlatitude,
+                            onChange: (data){
+                              SaveData.setlatitude(data);
+                            },
                             hintext: "",
                           ),
                           verticalSpaceXTiny,

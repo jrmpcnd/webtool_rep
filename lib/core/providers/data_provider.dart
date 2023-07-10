@@ -175,3 +175,12 @@ class Prov21 extends ChangeNotifier {
   bool isLoaded = false;
   bool search21 = false;
 }
+
+class Prov22 extends ChangeNotifier {
+  String agent_button = 'Click here';
+  List<Agent_Dashboard> agent = [];
+  List<Data6> agent_data = [];
+  List<bool> isChecked = [];
+  bool isLoaded = false;
+  bool search6 = false;
+}

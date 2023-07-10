@@ -528,7 +528,6 @@ class _AddusersState extends State<Addusers> {
                       ),
                     ],
                   ),
-                  verticalSpaceSmall,
                   Container(
                     decoration: BoxDecoration(
                       color: kTertiaryColor5,

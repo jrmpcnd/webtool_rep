@@ -3,6 +3,15 @@ class SaveData {
   static String _categoryId = '';
   static String _categoryName = '';
   static String _status = '';
+  static String _paramstatus = '';
+  static String _paramname = '';
+  static String _paramvalue = '';
+  static String _paramdcs = '';
+  static String _dcmd = '';
+  static String _dcmstreet = '';
+  static String _dcmdprovince = '';
+  static String _dcmdlongitude = '';
+  static String _dcmdlatitude = '';
 
 
 
@@ -36,8 +45,69 @@ class SaveData {
     _status = data;
   }
 
+  ////////////////created by: Albert
 
-////////////////created by: Albert
+  static String getParamstatus(){
+    return _paramstatus;
+  }
+  static setParamstatus(String data){
+    _paramstatus = data;
+  }
+
+  static String getParamname(){
+    return _paramname;
+  }
+  static setParamname(String data){
+    _paramname = data;
+  }
+  static String getParamvalue(){
+    return _paramvalue;
+  }
+  static setParamvalue(String data){
+    _paramvalue = data;
+  }
+  static String getParamdsc(){
+    return _paramdcs;
+  }
+  static setParamdcs(String data){
+    _paramdcs = data;
+  }
+  static String getdcmd(){
+    return _dcmd;
+  }
+  static setdcmd(String data){
+    _dcmd = data;
+  }
+  static String getstreet(){
+    return _dcmstreet;
+  }
+  static setstreet(String data){
+    _dcmstreet = data;
+  }
+  static String getdcmprovince(){
+    return _dcmdprovince;
+  }
+  static setdcmprovince(String data){
+    _dcmdprovince = data;
+  }
+  static String getlongitude(){
+    return _dcmdlongitude;
+  }
+  static setlongitude(String data){
+    _dcmdlongitude = data;
+  }
+  static String getlatitude(){
+    return _dcmdlatitude;
+  }
+  static setlatitude(String data){
+    _dcmdlatitude = data;
+  }
+
+
+  ///Geryle
+
+
+
 
   static String _username = '';
   static SetUsername(String username) {
