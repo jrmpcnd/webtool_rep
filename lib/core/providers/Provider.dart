@@ -192,3 +192,14 @@ class Remittance_Sent extends ChangeNotifier {
   bool isLoaded = false;
 
 }
+
+class Active_History extends ChangeNotifier {
+  String Remittance_Sent_button = 'Click here';
+  List<Active_History_Api> active_history = [];
+  List<Active_History> remittance_sent_logs = [];
+  List<Active_History_Log> active_history_data = [];
+  List<bool> isChecked = [];
+  bool search = false;
+  bool isLoaded = false;
+
+}
