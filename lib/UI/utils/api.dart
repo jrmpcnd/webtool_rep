@@ -2410,4 +2410,47 @@ class Transaction_Logs_Parse {
   }
 }
 
+class Remittance_Sent_Push {
+  Future<http.Response> pushHttp6() async {
+    http.Response response6 = await http.post(
+      Uri.parse('$API/get_remittancesentreport/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "reportId" : "",
+          "reportParam" : "",
+          "userName" : "",
+          "branchDesc" : "",
+          "submitedDate" : "",
+          "completedDate" : "",
+          "reportStatus" : "",
+          "fileType" : "",
+          "remark" : "",
+        },
+      ),
+    );
+    if (response6.statusCode == 200) {
+      print(response6.statusCode);
+      print(response6.body);
+      return response6;
+    } else {
+      return response6;
+    }
+  }
+}
+
+class Remittance_Sent_Parse {
+  Future<Remittance_Sent_Api> profile6() async {
+    Remittance_Sent_Push httptranslog = Remittance_Sent_Push();
+    http.Response res6 = await httptranslog.pushHttp6();
+    print("-------->>>>>>>>>>${jsonDecode(res6.body).length}");
+    var remittance_sent = Remittance_Sent_Api.fromJson(jsonDecode(res6.body));
+    return remittance_sent;
+  }
+}
+
 
