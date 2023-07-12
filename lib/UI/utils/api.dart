@@ -2496,4 +2496,47 @@ class Active_History_Parse {
   }
 }
 
+class Mpin_Change_Password_Push {
+  Future<http.Response> pushHttp6() async {
+    http.Response response6 = await http.post(
+      Uri.parse('$API/get_mpinchangereport/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "reportId" : "",
+          "reportParam" : "",
+          "userName" : "",
+          "branchDesc" : "",
+          "submitedDate" : "",
+          "completedDate" : "",
+          "reportStatus" : "",
+          "fileType" : "",
+          "remark" : "",
+        },
+      ),
+    );
+    if (response6.statusCode == 200) {
+      print(response6.statusCode);
+      print(response6.body);
+      return response6;
+    } else {
+      return response6;
+    }
+  }
+}
+
+class Mpin_Change_Password_Parse {
+  Future<Mpin_Change_Password_Api> profile6() async {
+    Mpin_Change_Password_Push httptranslog = Mpin_Change_Password_Push();
+    http.Response res6 = await httptranslog.pushHttp6();
+    print("-------->>>>>>>>>>${jsonDecode(res6.body).length}");
+    var mpin_change_password = Mpin_Change_Password_Api.fromJson(jsonDecode(res6.body));
+    return mpin_change_password;
+  }
+}
+
 

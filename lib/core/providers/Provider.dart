@@ -203,3 +203,14 @@ class Active_History extends ChangeNotifier {
   bool isLoaded = false;
 
 }
+
+class Mpin_Change_Password extends ChangeNotifier {
+  String mpin_change_password = 'Click here';
+  List<Mpin_Change_Password_Api> mpin_change_pass = [];
+  List<Mpin_Change_Password> mpin_change_pass_logs = [];
+  List<Mpin_Change_Password_Logs> mpin_change_password_data = [];
+  List<bool> isChecked = [];
+  bool search = false;
+  bool isLoaded = false;
+
+}

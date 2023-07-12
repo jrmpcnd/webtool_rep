@@ -61,6 +61,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Transaction_Log()),
         ChangeNotifierProvider(create: (context) => Remittance_Sent()),
         ChangeNotifierProvider(create: (context) => Active_History()),
+        ChangeNotifierProvider(create: (context) => Mpin_Change_Password()),
       ],
       child: MaterialApp(
         title: 'Konek2CARD PLUS Webtool',
