@@ -2539,4 +2539,47 @@ class Mpin_Change_Password_Parse {
   }
 }
 
+class Resend_SMS_Activated_Push {
+  Future<http.Response> pushHttp6() async {
+    http.Response response6 = await http.post(
+      Uri.parse('$API/get_smsactivationreport/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NDQ0NjAsImlzQWRtaW4iOnRydWUsInVzZXIiOnsiY2lkIjpudWxsLCJtb2JpbGUiOm51bGwsInVzZXJuYW1lIjpudWxsfX0.uzPKB5VQ_Ru_Z0LdA49cz4QUT8pOCVCeiX8LVSV2AHE'
+      },
+      body: jsonEncode(
+        <String, String>{
+          "reportId" : "",
+          "reportParam" : "",
+          "userName" : "",
+          "branchDesc" : "",
+          "submitedDate" : "",
+          "completedDate" : "",
+          "reportStatus" : "",
+          "fileType" : "",
+          "remark" : "",
+        },
+      ),
+    );
+    if (response6.statusCode == 200) {
+      print(response6.statusCode);
+      print(response6.body);
+      return response6;
+    } else {
+      return response6;
+    }
+  }
+}
+
+class Resend_SMS_Activated_Parse {
+  Future<Resend_Sms_Activation_Api> profile6() async {
+    Resend_SMS_Activated_Push httptranslog = Resend_SMS_Activated_Push();
+    http.Response res6 = await httptranslog.pushHttp6();
+    print("-------->>>>>>>>>>${jsonDecode(res6.body).length}");
+    var resend_sms = Resend_Sms_Activation_Api.fromJson(jsonDecode(res6.body));
+    return resend_sms;
+  }
+}
+
 

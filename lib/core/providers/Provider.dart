@@ -214,3 +214,15 @@ class Mpin_Change_Password extends ChangeNotifier {
   bool isLoaded = false;
 
 }
+
+
+class Resend_SMS_Activation extends ChangeNotifier {
+  String resend_sms_activation = 'Click here';
+  List<Resend_Sms_Activation_Api> resend_sms_activate = [];
+  List<Resend_SMS_Activation> resend_sms_log = [];
+  List<Resend_SMS_Logs> resend_sms_activate_data = [];
+  List<bool> isChecked = [];
+  bool search = false;
+  bool isLoaded = false;
+
+}
